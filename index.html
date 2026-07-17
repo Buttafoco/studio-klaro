@@ -357,7 +357,7 @@
     <!-- Mobil: bildkort ovanpå, text under (förslag 2a) -->
     <div data-rshow style="display:none;">
       <div style="font-size:11px;font-weight:700;color:#146EF5;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px;">Utvalt konceptprojekt</div>
-      <div id="case-track-m" style="position:relative;min-height:460px;"></div>
+      <div id="case-track-m" style="position:relative;"></div>
       <div id="case-dots-m" style="display:flex;justify-content:center;gap:8px;margin-top:16px;"></div>
     </div>
     <div data-rhide data-reveal style="background:#fff;border-radius:22px;padding:32px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
@@ -489,7 +489,7 @@
     <div style="background:#0C1424;">
       <div data-rgrid style="max-width:1140px;margin:0 auto;padding:44px 20px 28px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;">
         <div>
-          <div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:14px;">Studio Klaro</div>
+          <div style="font-size:18px;color:#fff;margin-bottom:14px;"><span style="font-weight:300;">Studio</span> <span style="font-weight:800;">Klaro</span></div>
           <p style="font-size:13px;color:#8FA6C2;line-height:1.6;max-width:280px;margin:0;">Digitala helhetslösningar för småföretag som vill synas professionellt online.</p>
         </div>
         <div>
@@ -650,7 +650,7 @@
         return '<span style="background:#EAF2FE;color:#146EF5;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;">' + esc(t) + '</span>';
       }).join('');
       return '' +
-        '<div class="case-slide-m" style="position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 0.7s ease;background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 26px rgba(15,23,42,0.06);">' +
+        '<div class="case-slide-m" style="display:none;opacity:0;transition:opacity 0.5s ease;background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 26px rgba(15,23,42,0.06);">' +
           '<div style="border-radius:14px;overflow:hidden;margin-bottom:18px;height:180px;background:' + p.pattern + ';display:flex;align-items:center;justify-content:center;">' +
             mediaForMobile(p) +
           '</div>' +
@@ -673,12 +673,18 @@
   var dotsM = dotsWrapM.querySelectorAll('.case-dot');
 
   function renderCase() {
-    [slides, slidesM].forEach(function (set) {
-      set.forEach(function (s, i) {
-        var active = i === caseIndex;
-        s.style.opacity = active ? '1' : '0';
-        s.style.pointerEvents = active ? 'auto' : 'none';
-      });
+    // Desktop: slides ligger ovanpå varandra och korsfadar.
+    slides.forEach(function (s, i) {
+      var active = i === caseIndex;
+      s.style.opacity = active ? '1' : '0';
+      s.style.pointerEvents = active ? 'auto' : 'none';
+    });
+    // Mobil: bara aktiv slide visas, så höjden följer innehållet.
+    slidesM.forEach(function (s, i) {
+      var active = i === caseIndex;
+      s.style.display = active ? 'block' : 'none';
+      if (active) requestAnimationFrame(function () { s.style.opacity = '1'; });
+      else s.style.opacity = '0';
     });
     [dots, dotsM].forEach(function (set) {
       set.forEach(function (d, i) {
