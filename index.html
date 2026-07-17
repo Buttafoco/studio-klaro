@@ -647,7 +647,7 @@
         return '<span style="background:#EAF2FE;color:#146EF5;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;">' + esc(t) + '</span>';
       }).join('');
       return '' +
-        '<div class="case-slide" data-rrow style="position:absolute;inset:0;display:flex;gap:36px;align-items:center;opacity:0;pointer-events:none;transition:opacity 0.7s ease;">' +
+        '<div class="case-slide" data-rrow style="position:absolute;inset:0;display:flex;gap:36px;align-items:center;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .65s cubic-bezier(0.22,1,0.36,1),transform .65s cubic-bezier(0.22,1,0.36,1);">' +
           '<div data-rimg style="flex:none;width:340px;height:220px;border-radius:16px;background:' + p.pattern + ';display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden;">' +
             mediaFor(p) +
           '</div>' +
@@ -667,7 +667,7 @@
         return '<span style="background:#EAF2FE;color:#146EF5;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;">' + esc(t) + '</span>';
       }).join('');
       return '' +
-        '<div class="case-slide-m" style="display:none;opacity:0;transition:opacity 0.5s ease;background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 26px rgba(15,23,42,0.06);">' +
+        '<div class="case-slide-m" style="display:none;opacity:0;transform:translateY(12px);transition:opacity .5s cubic-bezier(0.22,1,0.36,1),transform .5s cubic-bezier(0.22,1,0.36,1);background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 26px rgba(15,23,42,0.06);">' +
           '<div style="border-radius:14px;overflow:hidden;margin-bottom:18px;height:180px;background:' + p.pattern + ';display:flex;align-items:center;justify-content:center;">' +
             mediaForMobile(p) +
           '</div>' +
@@ -690,18 +690,27 @@
   var dotsM = dotsWrapM.querySelectorAll('.case-dot');
 
   function renderCase() {
-    // Desktop: slides ligger ovanpå varandra och korsfadar.
+    // Desktop: slides ligger ovanpå varandra och korsfadar mjukt uppåt.
     slides.forEach(function (s, i) {
       var active = i === caseIndex;
       s.style.opacity = active ? '1' : '0';
+      s.style.transform = active ? 'translateY(0)' : 'translateY(12px)';
       s.style.pointerEvents = active ? 'auto' : 'none';
     });
     // Mobil: bara aktiv slide visas, så höjden följer innehållet.
     slidesM.forEach(function (s, i) {
       var active = i === caseIndex;
-      s.style.display = active ? 'block' : 'none';
-      if (active) requestAnimationFrame(function () { s.style.opacity = '1'; });
-      else s.style.opacity = '0';
+      if (active) {
+        s.style.display = 'block';
+        requestAnimationFrame(function () {
+          s.style.opacity = '1';
+          s.style.transform = 'translateY(0)';
+        });
+      } else {
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(12px)';
+        s.style.display = 'none';
+      }
     });
     [dots, dotsM].forEach(function (set) {
       set.forEach(function (d, i) {
