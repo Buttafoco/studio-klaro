@@ -110,7 +110,7 @@
   <div class="nav-wrap">
     <div class="nav-capsule">
       <a href="index.html" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
-        <img src="logo-klaro.png" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
+        <img src="/assets/logo-klaro-DugtkXAq.png" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
       </a>
       <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
         <a href="#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänsten</a>
@@ -512,7 +512,7 @@
         </div>
       </div>
       <div style="max-width:1140px;margin:0 auto;padding:18px 20px 28px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-        <div style="font-size:12px;color:#6B84A6;">© 2026 Studio Klaro</div>
+        <div style="font-size:12px;color:#6B84A6;">© 2026 Studio Klaro · Org.nr XXXXXX-XXXX</div>
         <a href="#" style="font-size:12px;color:#6B84A6;text-decoration:none;">Integritetspolicy</a>
       </div>
     </div>
@@ -770,10 +770,6 @@
   renderFaq();
 
   /* ---------- Contact wizard ---------- */
-  // Klistra in din access key från web3forms.com (mejlas till hej@studioklaro.se).
-  // Så länge den är tom skickas inget – formuläret visar då ett tydligt felmeddelande.
-  var WEB3FORMS_KEY = '3e1c55ed-82c4-435f-8126-33f86c5d4a92';
-
   var wz = { step: 0, submitting: false, name: '', company: '', email: '', industry: '', message: '', goal: '', website: '', style: '', inspiration: '', preferences: '' };
   var goalOptions = ['Få fler förfrågningar','Få fler bokningar','Sälja produkter','Presentera företaget','Visa tidigare arbeten','Annat'];
   var styleOptions = ['Modern och minimalistisk','Professionell och trygg','Exklusiv och elegant','Personlig och varm','Lekfull och färgstark','Mörk och kraftfull','Vi är öppna för förslag'];
@@ -854,70 +850,20 @@
     }
     errorBox.style.display = 'none';
     if (wz.step === 2) {
-      submitWizard();
+      wz.submitting = true;
+      renderWizard();
+      setTimeout(function () {
+        wz.submitting = false;
+        document.getElementById('wz-succ-company').textContent = wz.company || 'ditt företag';
+        document.getElementById('wz-succ-email').textContent = wz.email || 'din e-post';
+        formEl.style.display = 'none';
+        successEl.style.display = 'block';
+      }, 900);
       return;
     }
     wz.step = Math.min(2, wz.step + 1);
     renderWizard();
   });
-
-  function showSuccess() {
-    document.getElementById('wz-succ-company').textContent = wz.company || 'ditt företag';
-    document.getElementById('wz-succ-email').textContent = wz.email || 'din e-post';
-    formEl.style.display = 'none';
-    successEl.style.display = 'block';
-  }
-
-  function submitWizard() {
-    if (!WEB3FORMS_KEY) {
-      errorBox.textContent = 'Formuläret är inte kopplat än (access key saknas). Mejla oss på hej@studioklaro.se så länge.';
-      errorBox.style.display = 'block';
-      return;
-    }
-    wz.submitting = true;
-    renderWizard();
-
-    var payload = {
-      access_key: WEB3FORMS_KEY,
-      subject: 'Ny mockup-förfrågan – ' + (wz.company || 'okänt företag'),
-      from_name: 'Studio Klaro – webbformulär',
-      replyto: wz.email,
-      'Namn': wz.name,
-      'Företag': wz.company,
-      'E-post': wz.email,
-      'Bransch': wz.industry,
-      'Om verksamheten': wz.message,
-      'Viktigaste mål': wz.goal,
-      'Nuvarande hemsida': wz.website || '—',
-      'Önskad känsla': wz.style || '—',
-      'Inspiration': wz.inspiration || '—',
-      'Färger/önskemål': wz.preferences || '—',
-      'Bifogad fil': (fileInput.files && fileInput.files[0]) ? fileInput.files[0].name + ' (skickades inte med – be kunden mejla filen)' : '—'
-    };
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
-      .then(function (res) {
-        wz.submitting = false;
-        if (res.ok && res.data.success) {
-          showSuccess();
-        } else {
-          renderWizard();
-          errorBox.textContent = 'Något gick fel när förfrågan skulle skickas. Försök igen eller mejla hej@studioklaro.se.';
-          errorBox.style.display = 'block';
-        }
-      })
-      .catch(function () {
-        wz.submitting = false;
-        renderWizard();
-        errorBox.textContent = 'Kunde inte nå servern. Kontrollera din uppkoppling eller mejla hej@studioklaro.se.';
-        errorBox.style.display = 'block';
-      });
-  }
   backBtn.addEventListener('click', function () {
     errorBox.style.display = 'none';
     wz.step = Math.max(0, wz.step - 1);
