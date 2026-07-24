@@ -132,7 +132,6 @@
       <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
         <a href="#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänsten</a>
         <a href="#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Processen</a>
-        <a href="#referenser" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Referenser</a>
         <a href="om.html" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Om</a>
       </div>
       <a data-rhide href="#kontakt" class="btn-lift lift-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få ett kostnadsfritt förslag</a>
@@ -146,7 +145,6 @@
       <div style="background:#fff;border-radius:18px;box-shadow:0 12px 30px rgba(15,23,42,0.12);overflow:hidden;">
         <a href="#tjansten" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänsten</a>
         <a href="#processen" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Processen</a>
-        <a href="#referenser" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Referenser</a>
         <a href="om.html" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
         <div style="padding:16px 20px;">
           <a href="#kontakt" data-mnav-close style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få ett kostnadsfritt förslag</a>
@@ -369,19 +367,6 @@
     </div>
   </div>
 
-  <!-- CASE (carousel) -->
-  <div id="referenser" style="max-width:1140px;margin:80px auto 0;padding:0 20px;">
-    <!-- Mobil: bildkort ovanpå, text under (förslag 2a) -->
-    <div data-rshow style="display:none;">
-      <div style="font-size:11px;font-weight:700;color:#146EF5;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px;">Utvalt konceptprojekt</div>
-      <div id="case-track-m" style="position:relative;"></div>
-      <div id="case-dots-m" style="display:flex;justify-content:center;gap:8px;margin-top:16px;"></div>
-    </div>
-    <div data-rhide data-reveal style="background:#fff;border-radius:22px;padding:32px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
-      <div id="case-track" data-rcasewrap style="position:relative;min-height:260px;"></div>
-      <div id="case-dots" style="display:flex;justify-content:center;gap:8px;margin-top:20px;"></div>
-    </div>
-  </div>
 
   <!-- FAQ -->
   <div id="faq" style="max-width:800px;margin:100px auto 0;padding:0 20px;">
@@ -514,7 +499,6 @@
           <div style="display:flex;flex-direction:column;gap:10px;">
             <a href="#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
             <a href="#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
-            <a href="#referenser" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Referenser</a>
             <a href="om.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
             <a href="#kontakt" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Kontakt</a>
           </div>
@@ -604,158 +588,6 @@
     revealEls.forEach(function (el) { io.observe(el); });
     setTimeout(function () { revealEls.forEach(function (el) { el.classList.add('is-visible'); }); }, 1800);
   }
-
-  /* ---------- Case carousel ---------- */
-  var caseData = [
-    { title: "The Chairman Barber – klassisk barbershop med bokningsbar tidsbokning", desc: "Ett konceptcase som visar hur en barbershop kan förmedla hantverk och stil med en mörk, premiumkänsla och tydlig väg till bokning.", tags: ["Bokningsflöde", "Varumärkeskänsla", "Behandlingsmeny"], mock: "The Chairman Barber", pattern: "repeating-linear-gradient(135deg,#F6EFDD,#F6EFDD 10px,#F1E7CD 10px,#F1E7CD 20px)", image: "uploads/Screenshot 2026-07-12 at 14.09.16.png" },
-    { title: "Itreon Market – från B2B-lager till en tydlig digital marknadsplats", desc: "Ett konceptcase som visar hur en grossist inom mobiltillbehör kan presentera lager, deals och grading med ett rent, förtroendeingivande gränssnitt.", tags: ["Marknadsplats", "B2B", "Produktpresentation"], mock: "Itreon Market", pattern: "repeating-linear-gradient(135deg,#EDF3FC,#EDF3FC 10px,#E4ECF9 10px,#E4ECF9 20px)", image: "uploads/Screenshot 2026-07-12 at 14.20.41.png" },
-    { title: "Ljusgården Café – från lapptäcke av menyer till en tydlig digital meny", desc: "Ett konceptcase som visar hur ett café kan samla meny, öppettider och plats på ett ställe som känns lika mysigt som lokalen.", tags: ["Digital meny", "Lokal SEO", "Fotogalleri"], mock: "Menyn, äntligen på ett ställe.", pattern: "repeating-linear-gradient(135deg,#EAF6EE,#EAF6EE 10px,#E2F1E7 10px,#E2F1E7 20px)" },
-    { title: "Nordic Bygg AB – från visitkort till en trovärdig projektportfolio", desc: "Ett konceptcase som visar hur en byggfirma kan visa upp referensprojekt och göra det enkelt för kunder att begära offert.", tags: ["Projektportfolio", "Offertformulär", "Trovärdighet"], mock: "Projekt som talar för sig själva.", pattern: "repeating-linear-gradient(135deg,#EDF3FC,#EDF3FC 10px,#E4ECF9 10px,#E4ECF9 20px)" },
-    { title: "Klara Juridik – från anonym konsult till en tydlig expertprofil", desc: "Ett konceptcase som visar hur en enskild konsult kan bygga förtroende med en tydlig profil, specialområden och enkel bokning.", tags: ["Expertprofil", "Bokningslänk", "Förtroende"], mock: "En profil som känns trygg.", pattern: "repeating-linear-gradient(135deg,#FBF3E1,#FBF3E1 10px,#F6ECD8 10px,#F6ECD8 20px)" },
-    { title: "GrönYta Trädgård – från ordermejl till bokningsbar offertförfrågan", desc: "Ett konceptcase som visar hur ett trädgårdsföretag kan gå från mejltrådar till ett strukturerat offertflöde online.", tags: ["Offertflöde", "Tjänstesidor", "Säsongserbjudanden"], mock: "Enklare väg till en offert.", pattern: "repeating-linear-gradient(135deg,#EFEFF6,#EFEFF6 10px,#E6E8F2 10px,#E6E8F2 20px)" },
-    { title: "Vital Massage – från pappersbokning till självbetjänt tidsbokning", desc: "Ett konceptcase som visar hur en massagemottagning kan minska administration genom tydlig digital tidsbokning.", tags: ["Tidsbokning", "Behandlingsöversikt", "Mobilanpassat"], mock: "Boka tid utan att ringa.", pattern: "repeating-linear-gradient(135deg,#E6F4EF,#E6F4EF 10px,#DDEEE7 10px,#DDEEE7 20px)" }
-  ];
-  // Only treat an image as usable if the local file is actually present.
-  var availableImages = {};
-
-  var track = document.getElementById('case-track');
-  var dotsWrap = document.getElementById('case-dots');
-  var trackM = document.getElementById('case-track-m');
-  var dotsWrapM = document.getElementById('case-dots-m');
-  var caseIndex = 0;
-
-  function mediaFor(p) {
-    if (p.image && availableImages[p.image]) {
-      return '<img src="' + esc(p.image) + '" alt="' + esc(p.mock) + '" loading="lazy" onerror="this.style.visibility=\'hidden\'" style="width:100%;height:100%;object-fit:contain;object-position:top center;border-radius:12px;box-shadow:0 8px 20px rgba(15,23,42,0.08);background:#fff;">';
-    }
-    return '<div style="background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 8px 20px rgba(15,23,42,0.08);width:100%;">' +
-      '<div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:4px;">' + esc(p.mock) + '</div>' +
-      '<div style="font-size:10px;color:#9AA5B4;font-family:ui-monospace,monospace;">skärmdump-placeholder</div>' +
-    '</div>';
-  }
-
-  function mediaForMobile(p) {
-    if (p.image && availableImages[p.image]) {
-      return '<img src="' + esc(p.image) + '" alt="' + esc(p.mock) + '" loading="lazy" onerror="this.style.visibility=\'hidden\'" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">';
-    }
-    return '<div style="font-size:14px;font-weight:800;color:#0F172A;">' + esc(p.mock) + '</div>';
-  }
-
-  function buildTrack() {
-    track.innerHTML = caseData.map(function (p) {
-      var tags = p.tags.map(function (t) {
-        return '<span style="background:#EAF2FE;color:#146EF5;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;">' + esc(t) + '</span>';
-      }).join('');
-      return '' +
-        '<div class="case-slide" data-rrow style="position:absolute;inset:0;display:flex;gap:36px;align-items:center;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .65s cubic-bezier(0.22,1,0.36,1),transform .65s cubic-bezier(0.22,1,0.36,1);">' +
-          '<div data-rimg style="flex:none;width:340px;height:220px;border-radius:16px;background:' + p.pattern + ';display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden;">' +
-            mediaFor(p) +
-          '</div>' +
-          '<div style="flex:1;">' +
-            '<div style="font-size:11px;font-weight:700;color:#146EF5;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">Utvalt konceptprojekt</div>' +
-            '<div style="font-size:22px;font-weight:800;color:#0F172A;margin-bottom:12px;line-height:1.3;">' + esc(p.title) + '</div>' +
-            '<p style="font-size:14px;color:#52657A;line-height:1.6;margin-bottom:16px;">' + esc(p.desc) + '</p>' +
-            '<div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">' + tags + '</div>' +
-            '<a href="case-studionord.html" class="btn-lift lift-case" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:14px;text-decoration:none;display:inline-block;">Se hela projektet</a>' +
-          '</div>' +
-        '</div>';
-    }).join('');
-    slides = track.querySelectorAll('.case-slide');
-
-    trackM.innerHTML = caseData.map(function (p) {
-      var tags = p.tags.map(function (t) {
-        return '<span style="background:#EAF2FE;color:#146EF5;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;">' + esc(t) + '</span>';
-      }).join('');
-      return '' +
-        '<div class="case-slide-m" style="display:none;opacity:0;transform:translateY(12px);transition:opacity .5s cubic-bezier(0.22,1,0.36,1),transform .5s cubic-bezier(0.22,1,0.36,1);background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 26px rgba(15,23,42,0.06);">' +
-          '<div style="border-radius:14px;overflow:hidden;margin-bottom:18px;height:180px;background:' + p.pattern + ';display:flex;align-items:center;justify-content:center;">' +
-            mediaForMobile(p) +
-          '</div>' +
-          '<div style="font-size:19px;font-weight:800;color:#0F172A;margin-bottom:10px;line-height:1.3;">' + esc(p.title) + '</div>' +
-          '<p style="font-size:13px;color:#52657A;line-height:1.6;margin:0 0 14px;">' + esc(p.desc) + '</p>' +
-          '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">' + tags + '</div>' +
-          '<a href="case-studionord.html" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 20px;border-radius:14px;text-decoration:none;display:block;text-align:center;">Se hela projektet</a>' +
-        '</div>';
-    }).join('');
-    slidesM = trackM.querySelectorAll('.case-slide-m');
-  }
-
-  var slides, slidesM;
-  var dotsHtml = caseData.map(function (_, i) {
-    return '<div class="case-dot" data-i="' + i + '" style="width:8px;height:8px;border-radius:4px;background:rgba(20,110,245,0.2);cursor:pointer;transition:all 0.3s;"></div>';
-  }).join('');
-  dotsWrap.innerHTML = dotsHtml;
-  dotsWrapM.innerHTML = dotsHtml;
-  var dots = dotsWrap.querySelectorAll('.case-dot');
-  var dotsM = dotsWrapM.querySelectorAll('.case-dot');
-
-  function renderCase() {
-    // Desktop: slides ligger ovanpå varandra och korsfadar mjukt uppåt.
-    slides.forEach(function (s, i) {
-      var active = i === caseIndex;
-      s.style.opacity = active ? '1' : '0';
-      s.style.transform = active ? 'translateY(0)' : 'translateY(12px)';
-      s.style.pointerEvents = active ? 'auto' : 'none';
-    });
-    // Mobil: bara aktiv slide visas, så höjden följer innehållet.
-    slidesM.forEach(function (s, i) {
-      var active = i === caseIndex;
-      if (active) {
-        s.style.display = 'block';
-        requestAnimationFrame(function () {
-          s.style.opacity = '1';
-          s.style.transform = 'translateY(0)';
-        });
-      } else {
-        s.style.opacity = '0';
-        s.style.transform = 'translateY(12px)';
-        s.style.display = 'none';
-      }
-    });
-    [dots, dotsM].forEach(function (set) {
-      set.forEach(function (d, i) {
-        var active = i === caseIndex;
-        d.style.width = active ? '22px' : '8px';
-        d.style.background = active ? '#146EF5' : 'rgba(20,110,245,0.2)';
-      });
-    });
-  }
-
-  var caseTimer;
-  function startCaseTimer() {
-    clearInterval(caseTimer);
-    caseTimer = setInterval(function () {
-      caseIndex = (caseIndex + 1) % caseData.length;
-      renderCase();
-    }, 4200);
-  }
-  [dots, dotsM].forEach(function (set) {
-    set.forEach(function (d) {
-      d.addEventListener('click', function () {
-        caseIndex = parseInt(d.getAttribute('data-i'), 10);
-        renderCase();
-        startCaseTimer();
-      });
-    });
-  });
-
-  buildTrack();
-  renderCase();
-  startCaseTimer();
-
-  // Probe each referenced image; rebuild with real screenshots if they load.
-  caseData.forEach(function (p) {
-    if (!p.image) return;
-    var img = new Image();
-    img.onload = function () {
-      if (img.naturalWidth > 0) {
-        availableImages[p.image] = true;
-        buildTrack();
-        renderCase();
-      }
-    };
-    img.src = p.image;
-  });
 
   /* ---------- FAQ accordion (smooth expand) ---------- */
   var faq = [
