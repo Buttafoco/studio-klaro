@@ -92,6 +92,11 @@
     [data-rcard-w]{width:100%!important;height:auto!important;min-height:260px!important;}
     [data-rmt]{margin-top:56px!important;}
     [data-rbtnfull] a, [data-rbtnfull] button{width:100%!important;box-sizing:border-box!important;text-align:center!important;}
+    /* Wizard-knappar: långa, staplade och centrerade i mobilläge */
+    #wz-btnrow{flex-direction:column!important;align-items:stretch!important;gap:12px!important;}
+    #wz-btngroup{flex-direction:column!important;align-items:stretch!important;width:100%!important;gap:12px!important;}
+    #wz-btnrow button{width:100%!important;box-sizing:border-box!important;text-align:center!important;justify-content:center!important;}
+    #wz-back[style*="hidden"]{display:none!important;}
     [data-rimg]{flex:none!important;width:100%!important;height:200px!important;}
     [data-rpanelpad]{padding:26px!important;}
     [data-rmini]{margin-top:0!important;}
@@ -426,7 +431,7 @@
   <div id="faq" style="max-width:800px;margin:100px auto 0;padding:0 20px;">
     <div style="text-align:center;margin-bottom:44px;">
       <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Vanliga frågor innan vi sätter igång</h2>
-      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Här hittar du svar på det vanligaste kring pris, leverans och hur samarbetet fungerar.</p>
+      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Här hittar du svar på de vanligaste frågorna om pris, material, leverans och vad som händer efter lanseringen.</p>
     </div>
     <div data-reveal id="faq-list"></div>
   </div>
@@ -515,20 +520,30 @@
         </div>
 
         <div id="wz-error" style="font-size:13px;color:#D64545;font-weight:600;margin-bottom:14px;display:none;"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px;">
+        <div id="wz-btnrow" style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px;">
           <button id="wz-back" class="btn-back" style="visibility:hidden;background:transparent;color:#52657A;font-size:14px;font-weight:700;padding:14px 8px;border:none;cursor:pointer;font-family:inherit;">← Tillbaka</button>
-          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
-            <button type="button" id="wz-callback-toggle" style="display:none;background:transparent;border:1.5px solid rgba(15,23,42,0.15);color:#0F172A;font-size:13px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;font-family:inherit;">☎ Bli uppringd istället</button>
+          <div id="wz-btngroup" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
+            <button type="button" id="wz-callback-toggle" style="display:none;background:transparent;border:1.5px solid rgba(15,23,42,0.15);color:#0F172A;font-size:13px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;font-family:inherit;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Bli kontaktad istället</button>
             <button id="wz-next" class="btn-next" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 24px rgba(20,110,245,0.3);font-family:inherit;">Fortsätt →</button>
           </div>
         </div>
         <div id="wz-callback-panel" style="display:none;overflow:hidden;max-height:0;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1);">
-          <div style="background:#0F172A;border-radius:16px;padding:24px;margin-top:16px;">
-            <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:6px;">Vill du bli uppringd istället?</div>
-            <div style="font-size:13px;color:#B8C6DC;margin-bottom:16px;">Lämna ditt nummer, vi ringer inom en timme under vardagar 09–17.</div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <input id="wz-callback-phone" type="tel" placeholder="Ditt telefonnummer" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;flex:1;min-width:160px;">
-              <button type="button" id="wz-callback-submit" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:12px;border:none;white-space:nowrap;cursor:pointer;">Ring mig</button>
+          <div id="wz-callback-success" style="display:none;background:#0F172A;border-radius:16px;padding:36px;margin-top:16px;text-align:center;">
+            <div style="width:52px;height:52px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px;">✓</div>
+            <div style="font-size:19px;font-weight:800;color:#fff;margin-bottom:8px;">Tack, <span id="wz-callback-succ-name"></span>!</div>
+            <div style="font-size:14px;color:#B8C6DC;line-height:1.6;">Vi har tagit emot din förfrågan och kontaktar dig inom en timme under vardagar 09–17.</div>
+          </div>
+          <div id="wz-callback-body" style="background:#0F172A;border-radius:16px;padding:24px;margin-top:16px;">
+            <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:6px;">Bli kontaktad istället?</div>
+            <div style="font-size:13px;color:#B8C6DC;margin-bottom:16px;">Lämna dina uppgifter, vi kontaktar dig inom en timme under vardagar 09–17.</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <input id="wz-cb-name" type="text" placeholder="Namn *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+              <input id="wz-cb-email" type="email" placeholder="Email *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+              <input id="wz-cb-phone" type="tel" placeholder="Telefonnummer *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+              <input id="wz-cb-company" type="text" placeholder="Företag (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+              <input id="wz-cb-website" type="url" placeholder="Hemsida (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+              <div id="wz-callback-error" style="font-size:13px;color:#FF8A8A;font-weight:600;display:none;">Fyll i namn, e-post och telefonnummer.</div>
+              <button type="button" id="wz-callback-submit" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:12px;border:none;white-space:nowrap;cursor:pointer;align-self:flex-start;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Skicka</button>
             </div>
           </div>
         </div>
@@ -701,13 +716,16 @@
 
   /* ---------- FAQ accordion (smooth expand) ---------- */
   var faq = [
-    { q: "Vad behöver jag skicka in?", a: "Du får ett enkelt formulär där du fyller i information om företaget, tjänster, priser, öppettider och kontaktuppgifter. Du skickar även bilder och eventuell befintlig logotyp." },
-    { q: "Hur lång tid tar projektet?", a: "Ett vanligt projekt blir normalt klart inom 7–10 arbetsdagar efter att allt material har skickats in." },
-    { q: "Ingår domän och webbplattform?", a: "Vi hjälper dig att välja, registrera och koppla allt. Kostnader för domän, webbplattform, mejl och andra externa abonnemang tillkommer." },
-    { q: "Kan mitt befintliga bokningssystem användas?", a: "Ja. Hemsidan kan kopplas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem." },
-    { q: "Vad händer om jag inte har en logotyp?", a: "En enkel visuell uppfräschning kan ingå. En helt ny och mer omfattande logotyp tas fram som ett separat tillägg." },
-    { q: "Kan jag ändra hemsidan efter lansering?", a: "Ja. Ändringar kan beställas vid behov eller hanteras genom ett löpande supportpaket." },
-    { q: "Hur fungerar betalningen?", a: "50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras." }
+    { q: "Vad behöver jag skicka in?", a: "Du får ett enkelt formulär där du fyller i information om företaget, tjänster, priser, öppettider och kontaktuppgifter. Du skickar även de bilder och den logotyp du vill använda. Saknar du färdigt material hjälper jag dig att reda ut vad som behövs." },
+    { q: "Kan du hjälpa mig med texter och innehåll?", a: "Ja. Jag hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig, professionell och anpassad efter dina kunder. Du behöver inte ha alla texter färdigskrivna innan projektet börjar." },
+    { q: "Hur lång tid tar det att få hemsidan klar?", a: "Ett vanligt projekt blir normalt klart inom 7–10 arbetsdagar efter att allt material har skickats in. Tidsplanen kan påverkas om projektet kräver extra funktioner eller om material saknas." },
+    { q: "Hur många ändringar får jag göra?", a: "Antalet korrekturrundor beror på vilket paket du väljer. Du samlar din feedback inför varje runda, och jag genomför ändringarna innan hemsidan publiceras. Större förändringar av design, struktur eller funktion kan offereras separat." },
+    { q: "Ingår domän och webbplattform?", a: "Jag hjälper dig att välja, registrera och koppla domän, webbplattform och eventuell professionell mejladress. Kostnader för domän, hosting, mejl och andra externa tjänster tillkommer och betalas av dig som kund." },
+    { q: "Äger jag min domän och hemsida?", a: "Ja. Domänen registreras i ditt namn och du får tillgång till de konton och tjänster som hör till hemsidan. Du ska inte vara beroende av Studio Klaro för att äga eller kontrollera din digitala närvaro." },
+    { q: "Kan mitt befintliga bokningssystem användas?", a: "Ja. Hemsidan kan länkas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. En mer avancerad eller specialbyggd bokningsfunktion offereras separat." },
+    { q: "Vad händer om jag inte har en logotyp?", a: "Jag kan skapa ett tydligt visuellt uttryck med färger, typsnitt och en enkel uppfräschning av en befintlig logotyp. En helt ny logotyp kan läggas till som en separat tjänst." },
+    { q: "Kan jag ändra hemsidan efter lanseringen?", a: "Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care, mitt löpande abonnemang för drift, support och uppdateringar. Större förändringar och nya funktioner offereras separat." },
+    { q: "Hur fungerar betalningen?", a: "50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Eventuella externa kostnader för exempelvis domän, hosting och mejl betalas separat." }
   ];
   var faqOpen = { 0: true };
   var faqList = document.getElementById('faq-list');
@@ -767,31 +785,59 @@
   var formEl = document.getElementById('wz-form');
   var successEl = document.getElementById('wz-success');
 
-  // "Bli uppringd istället" – fällbar panel på steg 1
+  // "Bli kontaktad istället" – fällbar panel på steg 1
   var callbackToggle = document.getElementById('wz-callback-toggle');
   var callbackPanel = document.getElementById('wz-callback-panel');
-  var callbackPhone = document.getElementById('wz-callback-phone');
+  var callbackBody = document.getElementById('wz-callback-body');
+  var callbackSuccess = document.getElementById('wz-callback-success');
+  var callbackSuccName = document.getElementById('wz-callback-succ-name');
+  var callbackError = document.getElementById('wz-callback-error');
   var callbackSubmit = document.getElementById('wz-callback-submit');
+  var cbName = document.getElementById('wz-cb-name');
+  var cbEmail = document.getElementById('wz-cb-email');
+  var cbPhone = document.getElementById('wz-cb-phone');
+  var cbCompany = document.getElementById('wz-cb-company');
+  var cbWebsite = document.getElementById('wz-cb-website');
+  var CALLBACK_MAX = '540px';
   var callbackOpen = false;
+
+  function resetCallbackView() {
+    callbackSuccess.style.display = 'none';
+    callbackBody.style.display = 'block';
+    callbackError.style.display = 'none';
+  }
   callbackToggle.addEventListener('click', function () {
     callbackOpen = !callbackOpen;
-    callbackPanel.style.maxHeight = callbackOpen ? '220px' : '0';
+    if (callbackOpen) resetCallbackView();
+    callbackPanel.style.maxHeight = callbackOpen ? CALLBACK_MAX : '0';
   });
   callbackSubmit.addEventListener('click', function () {
-    var phone = callbackPhone.value.trim();
-    if (!phone || callbackSubmit.disabled) return;
+    if (callbackSubmit.disabled) return;
+    var name = cbName.value.trim(), email = cbEmail.value.trim(), phone = cbPhone.value.trim();
+    if (!name || !email || !phone) { callbackError.style.display = 'block'; return; }
+    callbackError.style.display = 'none';
     callbackSubmit.disabled = true;
     callbackSubmit.textContent = 'Skickar …';
-    var ok = function () { callbackSubmit.textContent = 'Tack, vi ringer dig!'; };
+    var ok = function () {
+      callbackSuccName.textContent = name;
+      callbackSuccess.style.display = 'block';
+      callbackBody.style.display = 'none';
+      callbackPanel.style.maxHeight = CALLBACK_MAX;
+    };
     if (!WEB3FORMS_KEY) { ok(); return; }
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
         access_key: WEB3FORMS_KEY,
-        subject: 'Bli uppringd – begäran från webbplatsen',
-        from_name: 'Studio Klaro – uppringningsförfrågan',
-        'Telefonnummer': phone
+        subject: 'Bli kontaktad – begäran från webbplatsen',
+        from_name: 'Studio Klaro – kontaktförfrågan',
+        replyto: email,
+        'Namn': name,
+        'E-post': email,
+        'Telefonnummer': phone,
+        'Företag': cbCompany.value.trim() || '—',
+        'Hemsida': cbWebsite.value.trim() || '—'
       })
     })
       .then(function () { ok(); })
@@ -847,7 +893,7 @@
     callbackToggle.style.display = wz.step === 0 ? 'inline-block' : 'none';
     callbackPanel.style.display = wz.step === 0 ? 'block' : 'none';
     if (wz.step !== 0) callbackOpen = false;
-    callbackPanel.style.maxHeight = callbackOpen ? '220px' : '0';
+    callbackPanel.style.maxHeight = callbackOpen ? CALLBACK_MAX : '0';
     nextBtn.textContent = wz.submitting ? 'Skickar …' : (wz.step === 2 ? 'Skapa min kostnadsfria mockup' : 'Fortsätt →');
     nextBtn.disabled = wz.submitting;
     nextBtn.style.opacity = wz.submitting ? '0.75' : '1';
