@@ -517,7 +517,20 @@
         <div id="wz-error" style="font-size:13px;color:#D64545;font-weight:600;margin-bottom:14px;display:none;"></div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px;">
           <button id="wz-back" class="btn-back" style="visibility:hidden;background:transparent;color:#52657A;font-size:14px;font-weight:700;padding:14px 8px;border:none;cursor:pointer;font-family:inherit;">← Tillbaka</button>
-          <button id="wz-next" class="btn-next" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 24px rgba(20,110,245,0.3);font-family:inherit;">Fortsätt →</button>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
+            <button type="button" id="wz-callback-toggle" style="display:none;background:transparent;border:1.5px solid rgba(15,23,42,0.15);color:#0F172A;font-size:13px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;font-family:inherit;">☎ Bli uppringd istället</button>
+            <button id="wz-next" class="btn-next" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 24px rgba(20,110,245,0.3);font-family:inherit;">Fortsätt →</button>
+          </div>
+        </div>
+        <div id="wz-callback-panel" style="display:none;overflow:hidden;max-height:0;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1);">
+          <div style="background:#0F172A;border-radius:16px;padding:24px;margin-top:16px;">
+            <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:6px;">Vill du bli uppringd istället?</div>
+            <div style="font-size:13px;color:#B8C6DC;margin-bottom:16px;">Lämna ditt nummer, vi ringer inom en timme under vardagar 09–17.</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <input id="wz-callback-phone" type="tel" placeholder="Ditt telefonnummer" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;flex:1;min-width:160px;">
+              <button type="button" id="wz-callback-submit" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:12px;border:none;white-space:nowrap;cursor:pointer;">Ring mig</button>
+            </div>
+          </div>
         </div>
         <div id="wz-step2-note" style="display:none;">
           <div style="text-align:center;font-size:12px;color:#52657A;line-height:1.5;">Kostnadsfritt, utan köpkrav. Din första startsidesmockup skickas till din e-post inom 1–2 timmar under vardagar.</div>
@@ -754,6 +767,37 @@
   var formEl = document.getElementById('wz-form');
   var successEl = document.getElementById('wz-success');
 
+  // "Bli uppringd istället" – fällbar panel på steg 1
+  var callbackToggle = document.getElementById('wz-callback-toggle');
+  var callbackPanel = document.getElementById('wz-callback-panel');
+  var callbackPhone = document.getElementById('wz-callback-phone');
+  var callbackSubmit = document.getElementById('wz-callback-submit');
+  var callbackOpen = false;
+  callbackToggle.addEventListener('click', function () {
+    callbackOpen = !callbackOpen;
+    callbackPanel.style.maxHeight = callbackOpen ? '220px' : '0';
+  });
+  callbackSubmit.addEventListener('click', function () {
+    var phone = callbackPhone.value.trim();
+    if (!phone || callbackSubmit.disabled) return;
+    callbackSubmit.disabled = true;
+    callbackSubmit.textContent = 'Skickar …';
+    var ok = function () { callbackSubmit.textContent = 'Tack, vi ringer dig!'; };
+    if (!WEB3FORMS_KEY) { ok(); return; }
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: 'Bli uppringd – begäran från webbplatsen',
+        from_name: 'Studio Klaro – uppringningsförfrågan',
+        'Telefonnummer': phone
+      })
+    })
+      .then(function () { ok(); })
+      .catch(function () { ok(); });
+  });
+
   progressWrap.innerHTML = [0,1,2].map(function () {
     return '<div class="wz-seg" style="flex:1;height:4px;border-radius:4px;background:rgba(20,110,245,0.15);transition:background 0.4s;"></div>';
   }).join('');
@@ -800,6 +844,10 @@
     });
     stepLabel.textContent = wz.step + 1;
     backBtn.style.visibility = wz.step === 0 ? 'hidden' : 'visible';
+    callbackToggle.style.display = wz.step === 0 ? 'inline-block' : 'none';
+    callbackPanel.style.display = wz.step === 0 ? 'block' : 'none';
+    if (wz.step !== 0) callbackOpen = false;
+    callbackPanel.style.maxHeight = callbackOpen ? '220px' : '0';
     nextBtn.textContent = wz.submitting ? 'Skickar …' : (wz.step === 2 ? 'Skapa min kostnadsfria mockup' : 'Fortsätt →');
     nextBtn.disabled = wz.submitting;
     nextBtn.style.opacity = wz.submitting ? '0.75' : '1';
