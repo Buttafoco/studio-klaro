@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         om: resolve(__dirname, 'om.html'),
+        frisor: resolve(__dirname, 'hemsida-frisor-stockholm.html'),
       },
     },
   },
