@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Portfolio för designers, fotografer och kreatörer | Studio Klaro</title>
+<meta name="description" content="Vi bygger moderna portfolios för designers, fotografer, kreatörer och studenter – redo att skickas till nästa arbetsgivare, kund eller uppdrag. Från 2 995 kr.">
+<link rel="canonical" href="https://studioklaro.se/portfolio">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Studio Klaro">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Portfolio för designers, fotografer och kreatörer | Studio Klaro">
+<meta property="og:description" content="Moderna portfolios för designers, fotografer, kreatörer och studenter. Från 2 995 kr.">
+<meta property="og:url" content="https://studioklaro.se/portfolio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Portfolio för designers, fotografer och kreatörer | Studio Klaro">
+<meta name="twitter:description" content="Moderna portfolios för designers, fotografer, kreatörer och studenter. Från 2 995 kr.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#DCEEFF;font-family:'Manrope',system-ui,sans-serif;}
+  a{color:#146EF5;}
+  a:hover{color:#0F5AD1;}
+  ::selection{background:#146EF5;color:#fff;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes floaty{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-10px) rotate(var(--r,0deg));}}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;}
+  }
+
+  /* Sticky shrinking nav capsule */
+  .nav-wrap{position:sticky;top:0;z-index:50;padding:0px 0px 0;transition:padding .5s cubic-bezier(0.22,1,0.36,1);}
+  .nav-capsule{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:28px 20px;border-radius:0px;background:rgba(255,255,255,0);box-shadow:0 0 0 rgba(0,0,0,0);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);transition:max-width .5s cubic-bezier(0.22,1,0.36,1),padding .5s cubic-bezier(0.22,1,0.36,1),border-radius .5s cubic-bezier(0.22,1,0.36,1),background .5s cubic-bezier(0.22,1,0.36,1),box-shadow .5s cubic-bezier(0.22,1,0.36,1);opacity:0;transform:translateY(-18px);animation:fadeUp .6s cubic-bezier(0.22,1,0.36,1) 0.05s forwards;}
+  .nav-wrap.scrolled{padding:14px 20px 0;}
+  .nav-wrap.scrolled .nav-capsule{max-width:880px;padding:14px 28px;border-radius:18px;background:rgba(255,255,255,0.9);box-shadow:0 12px 30px rgba(15,23,42,0.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+
+  /* Hover-lyfteffekter */
+  .btn-lift{transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s cubic-bezier(0.22,1,0.36,1);}
+  .lift-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,110,245,0.4);}
+  .lift-primary:active{transform:translateY(0px) scale(0.98);}
+  .lift-nav:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,110,245,0.4);}
+  .lift-ghost:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(15,23,42,0.1);}
+  a:focus-visible,button:focus-visible{outline:2px solid #0F172A;outline-offset:2px;}
+
+  /* FAQ accordion */
+  .faq-item{border-bottom:1px solid rgba(15,23,42,0.1);padding:20px 0;}
+  .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;padding:0;margin:0;cursor:pointer;font-family:inherit;text-align:left;font-size:16px;font-weight:700;color:#0F172A;}
+  .faq-icon{font-size:20px;color:#146EF5;transition:transform 0.25s ease;flex:none;}
+  .faq-q[aria-expanded="true"] .faq-icon{transform:rotate(45deg);}
+  .faq-rows{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.35s cubic-bezier(0.22,1,0.36,1);}
+  .faq-rows > div{overflow:hidden;}
+  .faq-a{font-size:14px;color:#52657A;line-height:1.6;padding-top:12px;}
+
+  /* Scroll-reveal */
+  [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1);}
+  [data-reveal].is-visible{opacity:1;transform:translateY(0);}
+
+  /* Responsiv mobilanpassning */
+  @media (max-width:900px){
+    [data-rgrid2]{grid-template-columns:1fr!important;}
+    [data-rgrid3]{grid-template-columns:1fr!important;}
+    [data-rgrid6]{grid-template-columns:1fr!important;}
+    [data-rhero]{font-size:38px!important;}
+    [data-rfloat]{display:none!important;}
+    [data-rprocess]{flex-direction:column!important;}
+    [data-rprocess-line]{display:none!important;}
+    [data-rba]{grid-template-columns:1fr!important;}
+    [data-rba-arrow]{transform:rotate(90deg)!important;}
+    [data-rpad]{padding-left:18px!important;padding-right:18px!important;}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Portfolio-webbdesign för kreatörer",
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": "Studio Klaro",
+    "url": "https://studioklaro.se"
+  },
+  "areaServed": { "@type": "Country", "name": "Sverige" },
+  "url": "https://studioklaro.se/portfolio",
+  "offers": {
+    "@type": "Offer",
+    "price": "2995",
+    "priceCurrency": "SEK"
+  }
+}
+</script>
+</head>
+<body>
+
+<div style="max-width:1320px;width:100%;margin:0 auto;position:relative;">
+
+  <!-- NAV -->
+  <header class="nav-wrap">
+    <nav class="nav-capsule" aria-label="Huvudmeny">
+      <a href="index.html" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
+        <img src="logo-klaro.png" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
+      </a>
+      <a href="#kontakt" class="btn-lift lift-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Skapa min portfolio</a>
+    </nav>
+  </header>
+
+  <main>
+
+  <!-- HERO -->
+  <section data-rpad style="max-width:1140px;margin:40px auto 0;padding:0 20px;position:relative;">
+    <div style="text-align:center;">
+      <p style="display:inline-block;font-size:12px;font-weight:700;color:#B8622C;background:#FBEADD;padding:8px 16px;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase;margin:0 0 24px;opacity:0;animation:fadeUp .6s cubic-bezier(0.22,1,0.36,1) 0.05s forwards;">Portfolio by Studio Klaro</p>
+      <h1 data-rhero style="font-size:52px;line-height:1.12;font-weight:800;color:#0F172A;margin:0 0 22px;letter-spacing:-0.01em;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">Ditt arbete förtjänar mer än en PDF.</h1>
+      <p style="max-width:600px;margin:0 auto 34px;font-size:17px;line-height:1.6;color:#52657A;font-weight:500;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;">Vi bygger moderna portfolios för designers, fotografer, kreatörer och studenter – redo att skickas till nästa arbetsgivare, kund eller uppdrag.</p>
+      <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:14px;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.32s forwards;">
+        <a href="#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Skapa min portfolio</a>
+        <a href="#ingar" class="btn-lift lift-ghost" style="background:#fff;color:#0F172A;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;border:1px solid rgba(15,23,42,0.12);">Se vad som ingår</a>
+      </div>
+    </div>
+
+    <!-- floating preview cards -->
+    <div data-rfloat style="display:flex;flex-wrap:nowrap;justify-content:center;align-items:flex-start;gap:16px;margin-top:66px;padding:0 20px;">
+      <div style="--r:-6deg;width:270px;flex:0 0 270px;background:#fff;border-radius:18px;box-shadow:0 20px 40px rgba(15,23,42,0.12);padding:24px;margin-top:30px;opacity:0;transform:rotate(-6deg);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.5s forwards, floaty 6s ease-in-out 1.2s infinite;z-index:1;">
+        <img src="/ux-designer.webp" alt="Exempel på portfolio för UX-designer" loading="lazy" style="width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:18px;display:block;">
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">UX Designer</div>
+        <div style="font-size:12px;color:#8296B0;">Case studies &amp; process</div>
+      </div>
+      <div style="--r:2deg;width:290px;flex:0 0 290px;background:#fff;border-radius:18px;box-shadow:0 24px 48px rgba(15,23,42,0.14);padding:26px;opacity:0;transform:rotate(2deg);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.6s forwards, floaty 7s ease-in-out 1.4s infinite;z-index:2;">
+        <img src="/photografer.webp" alt="Exempel på portfolio för fotograf" loading="lazy" style="width:100%;height:190px;object-fit:cover;border-radius:12px;margin-bottom:20px;display:block;">
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Photographer</div>
+        <div style="font-size:12px;color:#8296B0;">Bilddriven portfolio</div>
+      </div>
+      <div style="--r:5deg;width:270px;flex:0 0 270px;background:#fff;border-radius:18px;box-shadow:0 20px 40px rgba(15,23,42,0.12);padding:24px;margin-top:36px;opacity:0;transform:rotate(5deg);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.7s forwards, floaty 6.5s ease-in-out 1.6s infinite;z-index:1;">
+        <img src="/creator.webp" alt="Exempel på portfolio för kreatör" loading="lazy" style="width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:18px;display:block;">
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Creator</div>
+        <div style="font-size:12px;color:#8296B0;">Din stil, dina idéer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section data-rpad style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+    <div data-reveal data-rgrid2 style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+      <div>
+        <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 18px;">Din portfolio är ofta ditt första intryck.</h2>
+        <p style="font-size:16px;line-height:1.7;color:#52657A;margin:0;">Du kan vara fantastisk på det du gör – men om dina projekt ligger utspridda i PDF:er, Google Drive-mappar eller gamla mallar blir det svårare för andra att förstå det. Studio Klaro hjälper dig samla ditt arbete i en portfolio som känns genomtänkt, professionell och personlig.</p>
+      </div>
+      <div style="position:relative;height:420px;">
+        <div style="position:absolute;left:0;top:0;width:52%;background:#fff;border-radius:18px;padding:22px;box-shadow:0 14px 30px rgba(15,23,42,0.08);transform:rotate(-2deg);">
+          <div style="font-size:17px;font-weight:800;color:#146EF5;margin-bottom:8px;">Visa vad du kan</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.6;">Projekt och case presenteras tydligt och visuellt.</div>
+        </div>
+        <div style="position:absolute;right:0;top:150px;width:48%;background:#EAF6EE;border-radius:18px;padding:22px;box-shadow:0 14px 30px rgba(15,23,42,0.08);transform:rotate(2deg);">
+          <div style="font-size:17px;font-weight:800;color:#2F7A4F;margin-bottom:8px;">Berätta vem du är</div>
+          <div style="font-size:13px;color:#3E5B4A;line-height:1.6;">Din personlighet och kompetens får ta plats.</div>
+        </div>
+        <div style="position:absolute;left:6%;bottom:0;width:55%;background:#FBEADD;border-radius:18px;padding:22px;box-shadow:0 14px 30px rgba(15,23,42,0.08);transform:rotate(-1deg);">
+          <div style="font-size:17px;font-weight:800;color:#B8622C;margin-bottom:8px;">Enkelt att kontakta dig</div>
+          <div style="font-size:13px;color:#8A5A32;line-height:1.6;">Portfolio → kontakt → nästa möjlighet.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VEM -->
+  <section data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
+    <h2 data-reveal style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 40px;text-align:center;">Byggd för människor som skapar.</h2>
+    <div data-reveal data-rgrid6 style="display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:auto auto;gap:20px;">
+      <div style="grid-row:span 2;background:linear-gradient(160deg,#EDF3FC,#E4ECF9);border-radius:22px;padding:32px;display:flex;flex-direction:column;justify-content:flex-end;min-height:280px;">
+        <div style="font-size:20px;font-weight:800;color:#0F172A;margin-bottom:8px;">UX &amp; UI Designers</div>
+        <div style="font-size:14px;color:#3F5170;line-height:1.6;">Case studies, process, research, prototyper och resultat.</div>
+      </div>
+      <div style="background:#0F172A;border-radius:22px;padding:28px;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div style="font-size:18px;font-weight:800;color:#fff;margin-bottom:6px;">Fotografer</div>
+        <div style="font-size:13px;color:#B8C6DC;line-height:1.6;">Stora bilder, projekt, kategorier och tydlig kontakt.</div>
+      </div>
+      <div style="background:linear-gradient(160deg,#FBF3E1,#F6ECD8);border-radius:22px;padding:28px;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:6px;">Studenter</div>
+        <div style="font-size:13px;color:#6B5A34;line-height:1.6;">Professionell portfolio inför praktik eller första jobbet.</div>
+      </div>
+      <div style="background:linear-gradient(160deg,#EAF6EE,#E2F1E7);border-radius:22px;padding:28px;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:6px;">Grafiska designers</div>
+        <div style="font-size:13px;color:#3E5B4A;line-height:1.6;">Branding, illustration, identitet och visuella projekt.</div>
+      </div>
+      <div style="background:linear-gradient(160deg,#EFEFF6,#E6E8F2);border-radius:22px;padding:28px;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:6px;">Frilansare</div>
+        <div style="font-size:13px;color:#4B4B67;line-height:1.6;">Visa tidigare arbete och få nya kunder enklare.</div>
+      </div>
+    </div>
+    <div style="margin-top:20px;background:#FBEADD;border-radius:22px;padding:28px;text-align:center;">
+      <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:6px;">Kreatörer</div>
+      <div style="font-size:13px;color:#8A5A32;line-height:1.6;">En personlig plats för ditt arbete, din stil och dina idéer.</div>
+    </div>
+  </section>
+
+  <!-- INGÅR -->
+  <section id="ingar" data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
+    <div data-reveal data-rgrid2 style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+      <div>
+        <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 16px;">Allt du behöver för att komma igång.</h2>
+        <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0;">Du skickar materialet. Vi gör det presentabelt.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+        <span style="background:#EDF3FC;color:#146EF5;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Personlig portfolio-design</span>
+        <span style="background:#FBEADD;color:#B8622C;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Mobilanpassning</span>
+        <span style="background:#EAF6EE;color:#2F7A4F;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Startsida</span>
+        <span style="background:#EFEFF6;color:#5B4FA6;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Om mig</span>
+        <span style="background:#EDF3FC;color:#146EF5;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Projekt / case</span>
+        <span style="background:#FBEADD;color:#B8622C;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Kontaktsektion</span>
+        <span style="background:#EAF6EE;color:#2F7A4F;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Sociala länkar</span>
+        <span style="background:#EFEFF6;color:#5B4FA6;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Enkel SEO</span>
+        <span style="background:#EDF3FC;color:#146EF5;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Domänkoppling</span>
+        <span style="background:#FBEADD;color:#B8622C;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Grundläggande animationer</span>
+        <span style="background:#EAF6EE;color:#2F7A4F;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Hjälp med struktur</span>
+        <span style="background:#EFEFF6;color:#5B4FA6;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">1 korrigeringsrunda</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STILAR -->
+  <section data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 12px;">Din stil. Inte ännu en mall.</h2>
+      <p style="font-size:15px;color:#52657A;margin:0;">Du väljer en riktning – varje portfolio anpassas fortfarande efter dig.</p>
+    </div>
+    <div data-reveal style="background:#fff;border-radius:20px;box-shadow:0 20px 40px rgba(15,23,42,0.1);overflow:hidden;">
+      <div style="background:#F3F1EC;padding:10px 14px;display:flex;align-items:center;gap:8px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#28C840;"></div>
+        <a href="https://www.danilobuttafoco.se" target="_blank" rel="noopener noreferrer" style="flex:1;text-align:center;font-size:11px;color:#0F172A;font-family:ui-monospace,monospace;text-decoration:none;">danilobuttafoco.se</a>
+      </div>
+      <img src="/portfolio-preview.png" alt="Exempel på en färdig portfolio-webbplats" loading="lazy" style="width:100%;height:640px;object-fit:cover;object-position:top center;display:block;">
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
+    <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 48px;text-align:center;">Från material till portfolio.</h2>
+    <div data-reveal data-rprocess style="display:flex;gap:0;position:relative;">
+      <div data-rprocess-line aria-hidden="true" style="position:absolute;top:22px;left:5%;right:5%;height:2px;background:rgba(20,110,245,0.2);"></div>
+      <div style="flex:1;text-align:center;position:relative;padding:0 10px;margin-bottom:24px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:#146EF5;color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;z-index:1;">01</div>
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Berätta om dig</div>
+        <div style="font-size:13px;color:#52657A;line-height:1.5;max-width:180px;margin:0 auto;">Kort formulär om dig och din stil.</div>
+      </div>
+      <div style="flex:1;text-align:center;position:relative;padding:0 10px;margin-bottom:24px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:#146EF5;color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;z-index:1;">02</div>
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Skicka dina projekt</div>
+        <div style="font-size:13px;color:#52657A;line-height:1.5;max-width:180px;margin:0 auto;">Bilder, texter, case och länkar.</div>
+      </div>
+      <div style="flex:1;text-align:center;position:relative;padding:0 10px;margin-bottom:24px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:#146EF5;color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;z-index:1;">03</div>
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Vi designar</div>
+        <div style="font-size:13px;color:#52657A;line-height:1.5;max-width:180px;margin:0 auto;">Struktur, design och presentation.</div>
+      </div>
+      <div style="flex:1;text-align:center;position:relative;padding:0 10px;margin-bottom:24px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:#146EF5;color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;z-index:1;">04</div>
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Du granskar</div>
+        <div style="font-size:13px;color:#52657A;line-height:1.5;max-width:180px;margin:0 auto;">Du ser portfolion och ger feedback.</div>
+      </div>
+      <div style="flex:1;text-align:center;position:relative;padding:0 10px;margin-bottom:24px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:#146EF5;color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;z-index:1;">05</div>
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Publicering</div>
+        <div style="font-size:13px;color:#52657A;line-height:1.5;max-width:180px;margin:0 auto;">Vi kopplar domän och går live.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIS -->
+  <section data-rpad style="max-width:900px;margin:110px auto 0;padding:0 20px;">
+    <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 40px;text-align:center;">En professionell portfolio utan byråpris.</h2>
+    <div data-reveal style="background:#0F172A;border-radius:28px;padding:48px;text-align:center;position:relative;overflow:hidden;">
+      <div aria-hidden="true" style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(20,110,245,0.25);"></div>
+      <div style="position:relative;">
+        <div style="font-size:13px;font-weight:800;color:#5FA8FF;text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;">Portfolio</div>
+        <div style="font-size:34px;font-weight:800;color:#fff;margin-bottom:10px;">Från 2 995 kr</div>
+        <p style="font-size:14px;color:#B8C6DC;max-width:440px;margin:0 auto 28px;line-height:1.6;">Passar dig som vill ha en professionell och modern portfolio utan att bygga allt själv.</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 24px;margin-bottom:32px;">
+          <div style="font-size:13px;color:#fff;font-weight:600;">✓ 1–3 sidor</div>
+          <div style="font-size:13px;color:#fff;font-weight:600;">✓ Projekt / case</div>
+          <div style="font-size:13px;color:#fff;font-weight:600;">✓ Om mig</div>
+          <div style="font-size:13px;color:#fff;font-weight:600;">✓ Kontakt</div>
+          <div style="font-size:13px;color:#fff;font-weight:600;">✓ Mobilanpassning</div>
+          <div style="font-size:13px;color:#fff;font-weight:600;">✓ SEO basics</div>
+          <div style="font-size:13px;color:#fff;font-weight:600;">✓ Domänkoppling</div>
+          <div style="font-size:13px;color:#fff;font-weight:600;">✓ 1 korrigeringsrunda</div>
+        </div>
+        <a href="#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Skapa min portfolio</a>
+        <div style="font-size:12px;color:#8296B0;margin-top:22px;">Behöver du något mer avancerat? Vi bygger även större, helt skräddarsydda portfolios från 4 995 kr.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FÖRE/EFTER -->
+  <section data-rpad style="max-width:1000px;margin:110px auto 0;padding:0 20px;">
+    <div data-reveal data-rba style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;">
+      <div style="background:#F3F1EC;border-radius:20px;padding:28px;">
+        <div style="font-size:12px;font-weight:700;color:#8296B0;text-transform:uppercase;letter-spacing:.04em;margin-bottom:16px;">Innan</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;color:#52657A;font-weight:600;">
+          <div>📄 PDF</div><div>📁 Google Drive</div><div>🔗 Behance</div><div>✂️ Utspridda projekt</div>
+        </div>
+      </div>
+      <div data-rba-arrow style="font-size:24px;color:#146EF5;text-align:center;">→</div>
+      <div style="background:#0F172A;border-radius:20px;padding:28px;">
+        <div style="font-size:12px;font-weight:700;color:#5FA8FF;text-transform:uppercase;letter-spacing:.04em;margin-bottom:16px;">Efter</div>
+        <div style="font-size:18px;font-weight:800;color:#fff;margin-bottom:8px;">dittnamn.se</div>
+        <div style="font-size:13px;color:#B8C6DC;line-height:1.6;">En personlig portfolio som samlar allt.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section data-rpad style="max-width:760px;margin:110px auto 0;padding:0 20px;">
+    <h2 data-reveal style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 36px;text-align:center;">Vanliga frågor</h2>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" aria-controls="pf-faq-1">Behöver jag ha en egen domän?<span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-rows"><div><div id="pf-faq-1" role="region" class="faq-a">Nej. Vi hjälper dig gärna med det.</div></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" aria-controls="pf-faq-2">Måste mina projekt vara färdiga?<span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-rows"><div><div id="pf-faq-2" role="region" class="faq-a">Nej. Vi hjälper dig strukturera materialet du redan har.</div></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" aria-controls="pf-faq-3">Kan ni hjälpa mig med texter?<span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-rows"><div><div id="pf-faq-3" role="region" class="faq-a">Ja. Vi hjälper dig förbättra och strukturera texten, men du behöver ge oss grunden kring dina projekt.</div></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" aria-controls="pf-faq-4">Kan jag uppdatera portfolion senare?<span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-rows"><div><div id="pf-faq-4" role="region" class="faq-a">Ja. Vi kan bygga lösningen så att projekt kan uppdateras senare eller hjälpa dig när något nytt ska läggas till.</div></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" aria-controls="pf-faq-5">Hur många projekt kan jag ha?<span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-rows"><div><div id="pf-faq-5" role="region" class="faq-a">Grundpaketet är tänkt för en mindre portfolio. Behöver du många projekt eller mer avancerade case bygger vi en större lösning.</div></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" aria-controls="pf-faq-6">Är detta bara för designers?<span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-rows"><div><div id="pf-faq-6" role="region" class="faq-a">Nej. Tjänsten passar alla som behöver visa sitt arbete visuellt och professionellt.</div></div></div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="kontakt" data-rpad style="max-width:1000px;margin:110px auto 0;padding:0 20px;text-align:center;scroll-margin-top:40px;">
+    <h2 style="font-size:30px;font-weight:800;color:#0F172A;margin:0 0 16px;">Redo att visa vad du faktiskt kan?</h2>
+    <p style="font-size:16px;color:#52657A;max-width:520px;margin:0 auto 30px;line-height:1.6;">Skicka ditt material till oss så bygger vi en portfolio du kan vara stolt över att dela.</p>
+
+    <div id="pf-form-success" style="display:none;background:#fff;border-radius:20px;padding:40px;box-shadow:0 12px 30px rgba(15,23,42,0.06);max-width:480px;margin:0 auto;">
+      <div style="width:52px;height:52px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px;">✓</div>
+      <div style="font-size:18px;font-weight:800;color:#0F172A;">Tack! Vi hör av oss inom kort.</div>
+    </div>
+
+    <form id="pf-form" data-reveal style="background:#fff;border-radius:20px;padding:32px;box-shadow:0 12px 30px rgba(15,23,42,0.06);max-width:480px;margin:0 auto;text-align:left;">
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
+        <input type="text" name="name" required placeholder="Namn *" style="border:none;border-bottom:2px solid rgba(15,23,42,0.15);padding:10px 2px;font-size:16px;font-family:inherit;outline:none;background:transparent;">
+        <input type="email" name="email" required placeholder="E-post *" style="border:none;border-bottom:2px solid rgba(15,23,42,0.15);padding:10px 2px;font-size:16px;font-family:inherit;outline:none;background:transparent;">
+        <textarea name="message" placeholder="Berätta kort om dig och ditt arbete" rows="3" style="border:none;border-bottom:2px solid rgba(15,23,42,0.15);padding:10px 2px;font-size:16px;font-family:inherit;outline:none;background:transparent;resize:vertical;"></textarea>
+      </div>
+      <button type="submit" class="btn-lift lift-primary" style="width:100%;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Skapa min portfolio</button>
+    </form>
+  </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer data-rpad style="margin-top:100px;padding:36px 20px;border-top:1px solid rgba(15,23,42,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <div style="font-size:14px;color:#8296B0;">© 2026 Studio Klaro</div>
+    <a href="index.html" style="font-size:14px;color:#146EF5;text-decoration:none;font-weight:600;">← Tillbaka till startsidan</a>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  /* Sticky nav shrink */
+  var navWrap = document.querySelector('.nav-wrap');
+  var onScroll = function () {
+    if (window.scrollY > 24) navWrap.classList.add('scrolled');
+    else navWrap.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Scroll-reveal (+ fail-safe) */
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  var reveal = function (el) { el.classList.add('is-visible'); };
+  if (!('IntersectionObserver' in window)) {
+    revealEls.forEach(reveal);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { reveal(entry.target); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+    setTimeout(function () { revealEls.forEach(reveal); }, 1800);
+  }
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-q').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      var rows = btn.parentElement.querySelector('.faq-rows');
+      rows.style.gridTemplateRows = open ? '0fr' : '1fr';
+    });
+  });
+
+  /* Kontaktformulär */
+  var form = document.getElementById('pf-form');
+  var success = document.getElementById('pf-form-success');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      form.style.display = 'none';
+      success.style.display = 'block';
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
