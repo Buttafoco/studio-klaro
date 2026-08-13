@@ -36,7 +36,7 @@
   }
 
   /* Section scroll offset for sticky nav */
-  #processen,#tjansten,#referenser,#faq,#kontakt,#portfolio{scroll-margin-top:110px;}
+  #processen,#tjansten,#referenser,#faq,#kontakt,#portfolio,#priser{scroll-margin-top:110px;}
 
   /* Sticky shrinking nav capsule */
   .nav-wrap{position:sticky;top:0;z-index:50;padding:0px 0px 0;transition:padding .5s cubic-bezier(0.22,1,0.36,1);}
@@ -149,9 +149,10 @@
         <img src="logo-klaro.png" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
       </a>
       <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
-        <a href="#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänsten</a>
-        <a href="#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Saker vi har gjort</a>
-        <a href="#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Processen</a>
+        <a href="#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänster</a>
+        <a href="#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
+        <a href="#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
+        <a href="#priser" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
         <a href="om.html" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Om</a>
       </div>
       <a data-rhide href="#kontakt" class="btn-lift lift-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få ett kostnadsfritt förslag</a>
@@ -163,9 +164,10 @@
     </div>
     <div data-rshow id="mnav-panel" class="mnav-panel" style="display:none;">
       <div style="background:#fff;border-radius:18px;box-shadow:0 12px 30px rgba(15,23,42,0.12);overflow:hidden;">
-        <a href="#tjansten" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänsten</a>
-        <a href="#portfolio" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Saker vi har gjort</a>
-        <a href="#processen" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Processen</a>
+        <a href="#tjansten" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänster</a>
+        <a href="#portfolio" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
+        <a href="#processen" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
+        <a href="#priser" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
         <a href="om.html" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
         <div style="padding:16px 20px;">
           <a href="#kontakt" data-mnav-close style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få ett kostnadsfritt förslag</a>
@@ -379,7 +381,7 @@
   </div>
 
   <!-- TRE KUNDPAKET -->
-  <div style="max-width:1140px;margin:80px auto 0;padding:0 20px;" data-rpad>
+  <div id="priser" style="max-width:1140px;margin:80px auto 0;padding:0 20px;" data-rpad>
     <div data-reveal data-rgrid3 style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
 
       <div style="background:#fff;border-radius:20px;padding:36px 28px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
