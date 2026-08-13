@@ -355,21 +355,21 @@
 
   <!-- PORTFOLIO -->
   <div style="max-width:1140px;margin:80px auto 0;padding:0 20px;">
-    <div data-reveal data-rpanelpad style="background:#F7FAFF;border-radius:24px;padding:40px;">
-      <div style="text-align:center;margin-bottom:28px;">
-        <div style="font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Portfolio</div>
-        <div data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;">Saker vi har gjort</div>
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Portfolio</div>
+      <div data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;">Saker vi har gjort</div>
+    </div>
+    <div id="pf-tabs" style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;"></div>
+    <div data-reveal data-rgrid data-rpanelpad style="background:#0F172A;border-radius:24px;padding:56px;display:grid;grid-template-columns:1fr 1.1fr;gap:36px;align-items:center;">
+      <div>
+        <div id="pf-cat" style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8fa3bd;margin-bottom:16px;"></div>
+        <h3 id="pf-name" style="font-size:36px;font-weight:800;color:#fff;margin:0 0 18px;line-height:1.1;min-height:41px;"></h3>
+        <p id="pf-desc" style="font-size:14px;color:#B7C6DB;line-height:1.65;margin:0 0 22px;height:112px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;"></p>
+        <div id="pf-tags" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;min-height:31px;"></div>
+        <a id="pf-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-lift" style="display:inline-block;margin-top:14px;background:#C8663D;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:26px;text-decoration:none;">Besök hemsidan</a>
       </div>
-      <div id="pf-tabs" style="display:flex;gap:8px;justify-content:center;margin-bottom:20px;flex-wrap:wrap;"></div>
-      <div style="border-radius:16px;overflow:hidden;box-shadow:0 20px 40px rgba(15,23,42,0.15);">
-        <div id="pf-chrome" style="background:#fff;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(15,23,42,0.08);">
-          <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:#28C840;"></div>
-          <div id="pf-url" style="flex:1;text-align:center;font-size:11px;color:#0F172A;font-family:ui-monospace,monospace;"></div>
-          <div style="width:46px;flex:none;" aria-hidden="true"></div>
-        </div>
-        <div id="pf-stage" style="position:relative;height:400px;"></div>
+      <div data-rimg style="height:400px;">
+        <img id="pf-img" src="" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;">
       </div>
     </div>
   </div>
@@ -685,28 +685,32 @@
 
   /* ---------- Portfolio showcase ("Saker vi har gjort") ---------- */
   var pfProjects = [
-    { mock: "The Chairman Barber", image: "work-chairman.png", url: "https://www.thechairmanbarber.se", pattern: "repeating-linear-gradient(135deg,#F6EFDD,#F6EFDD 10px,#F1E7CD 10px,#F1E7CD 20px)" },
-    { mock: "Itreon Market", image: "work-itreon.png", url: "https://market.itreon.eu", pattern: "repeating-linear-gradient(135deg,#EDF3FC,#EDF3FC 10px,#E4ECF9 10px,#E4ECF9 20px)" }
+    {
+      mock: "The Chairman Barber",
+      category: "Kundcase · Webbdesign & Utveckling",
+      desc: "Vi tog fram en ny digital identitet och hemsida för The Chairman Barber i Vasastan — med fokus på en exklusiv känsla, tydlig struktur och en smidig väg från första intryck till bokning. Designen bygger vidare på barbershopens mörka och klassiska uttryck, samtidigt som sidan har optimerats för mobil, prestanda och synlighet på Google.",
+      tags: ["Webdesign", "Responsiv", "SEO", "Bokningsflöde"],
+      image: "/thechairman.png",
+      url: "https://www.thechairmanbarber.se"
+    },
+    {
+      mock: "Itreon Market",
+      category: "Kundcase · UX/UI & Webbutveckling",
+      desc: "Vi designade och utvecklade Itreon Market — en digital B2B-marknadsplats för att presentera lager, deals och produktgradering på ett tydligt och förtroendeingivande sätt. Fokus låg på att göra stora mängder produktinformation enkel att navigera, skapa tydliga vägar till rätt erbjudanden och bygga ett gränssnitt som fungerar sömlöst på både desktop och mobil.",
+      tags: ["UX/UI", "B2B", "Responsiv", "Marknadsplats"],
+      image: "/itreon-market.png",
+      url: "https://market.itreon.eu"
+    }
   ];
   var pfIndex = 0;
   var pfTabs = document.getElementById('pf-tabs');
-  var pfStage = document.getElementById('pf-stage');
-  var pfChrome = document.getElementById('pf-chrome');
-  var pfUrl = document.getElementById('pf-url');
+  var pfCat = document.getElementById('pf-cat');
+  var pfName = document.getElementById('pf-name');
+  var pfDesc = document.getElementById('pf-desc');
+  var pfTagsWrap = document.getElementById('pf-tags');
+  var pfLink = document.getElementById('pf-link');
+  var pfImg = document.getElementById('pf-img');
 
-  function pfUrlLabel(p) {
-    if (p.url) return p.url.replace(/^https?:\/\//, '');
-    return (p.mock || '').toLowerCase().replace(/[^a-z0-9]+/g, '') + '.se';
-  }
-  function pfMedia(p) {
-    var inner = p.image
-      ? '<img src="' + esc(p.image) + '" alt="' + esc(p.mock) + '" loading="lazy" onerror="this.style.visibility=\'hidden\'" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">'
-      : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#0F172A;">' + esc(p.mock) + '</div>';
-    if (p.url) {
-      return '<a href="' + esc(p.url) + '" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;background:' + p.pattern + ';cursor:pointer;">' + inner + '</a>';
-    }
-    return '<div style="width:100%;height:100%;background:' + p.pattern + ';">' + inner + '</div>';
-  }
   function pfRender() {
     pfTabs.querySelectorAll('.pf-tab').forEach(function (t, i) {
       var active = i === pfIndex;
@@ -715,10 +719,20 @@
       t.style.borderColor = active ? '#146EF5' : 'rgba(15,23,42,0.1)';
     });
     var p = pfProjects[pfIndex];
-    pfChrome.style.display = p.url ? 'flex' : 'none';
-    pfUrl.textContent = pfUrlLabel(p);
-    pfStage.style.height = p.url ? '400px' : '440px';
-    pfStage.innerHTML = pfMedia(p);
+    pfCat.textContent = p.category || '';
+    pfName.textContent = p.mock || '';
+    pfDesc.textContent = p.desc || '';
+    pfTagsWrap.innerHTML = (p.tags || []).map(function (tag) {
+      return '<div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">' + esc(tag) + '</div>';
+    }).join('');
+    if (p.url) {
+      pfLink.href = p.url;
+      pfLink.style.display = 'inline-block';
+    } else {
+      pfLink.style.display = 'none';
+    }
+    pfImg.src = p.image;
+    pfImg.alt = 'Hemsida designad för ' + (p.mock || '');
   }
   pfTabs.innerHTML = pfProjects.map(function (p, i) {
     return '<div class="pf-tab" data-i="' + i + '" style="font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">' + esc(p.mock) + '</div>';
