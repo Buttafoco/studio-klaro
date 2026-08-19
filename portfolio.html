@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="/test3.png">
-<link rel="apple-touch-icon" href="/test3.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <title>Portfolio för designers, fotografer och kreatörer | Studio Klaro</title>
 <meta name="description" content="Vi bygger moderna portfolios för designers, fotografer, kreatörer och studenter – redo att skickas till nästa arbetsgivare, kund eller uppdrag. Från 2 995 kr.">
 <link rel="canonical" href="https://studioklaro.se/portfolio">
@@ -86,6 +88,7 @@
   "serviceType": "Portfolio-webbdesign för kreatörer",
   "provider": {
     "@type": "ProfessionalService",
+    "@id": "https://studioklaro.se/#business",
     "name": "Studio Klaro",
     "url": "https://studioklaro.se"
   },
@@ -112,6 +115,16 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://studioklaro.se/" },
+    { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://studioklaro.se/portfolio" }
+  ]
+}
+</script>
 <script type="module" src="/src/speed-insights.js"></script>
 </head>
 <body>
@@ -121,14 +134,19 @@
   <!-- NAV -->
   <header class="nav-wrap">
     <nav class="nav-capsule" aria-label="Huvudmeny">
-      <a href="index.html" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
-        <img src="logo-klaro.png" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
+      <a href="/" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
+        <img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
       </a>
       <a href="#kontakt" class="btn-lift lift-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Skapa min portfolio</a>
     </nav>
   </header>
 
   <main>
+
+  <!-- BREADCRUMB -->
+  <nav aria-label="Brödsmulor" style="max-width:1140px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:#8296B0;">
+    <a href="/" style="color:#8296B0;text-decoration:none;">Hem</a><span style="margin:0 6px;color:#C3CEDD;">/</span><span style="color:#52657A;font-weight:600;">Portfolio</span>
+  </nav>
 
   <!-- HERO -->
   <section data-rpad style="max-width:1140px;margin:40px auto 0;padding:0 20px;position:relative;">
@@ -260,7 +278,7 @@
         <a href="https://www.danilobuttafoco.se" target="_blank" rel="noopener noreferrer" class="btn-lift lift-primary" style="display:inline-block;margin-top:14px;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:26px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Besök hemsidan</a>
       </div>
       <div data-rimg style="height:560px;margin:-56px -56px -56px 0;">
-        <img src="/db-portfolio.png" alt="Exempel på en portfolio-webbplats byggd av Studio Klaro" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:transparent;">
+        <img src="/db-portfolio.webp" alt="Exempel på en portfolio-webbplats byggd av Studio Klaro" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:transparent;">
       </div>
     </div>
   </section>
@@ -341,6 +359,34 @@
     </div>
   </section>
 
+  <!-- UTVALDA ARBETEN -->
+  <section data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Utvalda arbeten</div>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0;">Ett par exempel på vad vi bygger</h2>
+    </div>
+    <div data-rgrid2 style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div data-reveal style="background:#0F172A;border-radius:20px;overflow:hidden;box-shadow:0 16px 36px rgba(15,23,42,0.15);">
+        <img src="/thechairman.webp" alt="Hemsida designad för The Chairman Barber i Stockholm" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:200px;object-fit:cover;object-position:top;display:block;">
+        <div style="padding:28px;">
+          <div style="font-size:11px;font-weight:700;color:#8FC0FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Kundcase · Webbdesign &amp; utveckling</div>
+          <h3 style="font-size:19px;font-weight:800;color:#fff;margin:0 0 10px;">The Chairman Barber</h3>
+          <p style="font-size:13px;color:#B7C6DB;line-height:1.6;margin:0 0 18px;">En ny digital identitet och hemsida för en barbershop i Vasastan — med fokus på en exklusiv känsla, tydlig struktur och en enkel väg till bokning.</p>
+          <a href="https://www.thechairmanbarber.se" target="_blank" rel="noopener noreferrer" style="font-size:14px;font-weight:700;color:#fff;text-decoration:none;">Besök hemsidan →</a>
+        </div>
+      </div>
+      <div data-reveal style="background:#0F172A;border-radius:20px;overflow:hidden;box-shadow:0 16px 36px rgba(15,23,42,0.15);">
+        <img src="/itreon-market.png" alt="Hemsida designad för Itreon Market" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:200px;object-fit:cover;object-position:top;display:block;">
+        <div style="padding:28px;">
+          <div style="font-size:11px;font-weight:700;color:#8FC0FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Kundcase · UX/UI &amp; webbutveckling</div>
+          <h3 style="font-size:19px;font-weight:800;color:#fff;margin:0 0 10px;">Itreon Market</h3>
+          <p style="font-size:13px;color:#B7C6DB;line-height:1.6;margin:0 0 18px;">En digital B2B-marknadsplats för lager, deals och produktgradering — byggd för att göra stora mängder produktinformation enkel att navigera.</p>
+          <a href="https://market.itreon.eu" target="_blank" rel="noopener noreferrer" style="font-size:14px;font-weight:700;color:#fff;text-decoration:none;">Besök hemsidan →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section data-rpad style="max-width:760px;margin:110px auto 0;padding:0 20px;">
     <h2 data-reveal style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 36px;text-align:center;">Vanliga frågor</h2>
@@ -397,8 +443,9 @@
   <footer data-rpad style="margin-top:100px;padding:36px 20px;border-top:1px solid rgba(15,23,42,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
     <div style="font-size:14px;color:#8296B0;">© 2026 Studio Klaro</div>
     <div style="display:flex;align-items:center;gap:18px;">
-      <a href="mallar.html" style="font-size:14px;color:#146EF5;text-decoration:none;font-weight:600;">Mallar</a>
-      <a href="index.html" style="font-size:14px;color:#146EF5;text-decoration:none;font-weight:600;">← Tillbaka till startsidan</a>
+      <a href="/hemsida-fotograf" style="font-size:14px;color:#146EF5;text-decoration:none;font-weight:600;">Hemsida för fotografer</a>
+      <a href="/mallar" style="font-size:14px;color:#146EF5;text-decoration:none;font-weight:600;">Mallar</a>
+      <a href="/" style="font-size:14px;color:#146EF5;text-decoration:none;font-weight:600;">← Tillbaka till startsidan</a>
       <a href="https://www.instagram.com/studioklaro/" target="_blank" rel="noopener" aria-label="Instagram" style="color:#8296B0;display:inline-flex;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line></svg>
       </a>

@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="/test3.png">
-<link rel="apple-touch-icon" href="/test3.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <title>Om oss – Studio Klaro | Webbdesign Stockholm</title>
-<meta name="description" content="Lär känna Studio Klaro – designern bakom hemsidorna. Jag hjälper småföretag i Stockholm att få en professionell webbplats utan krångel, från idé till lansering.">
+<meta name="description" content="Lär känna Studio Klaro – designern bakom hemsidorna. Jag hjälper småföretag i Stockholm att få en professionell webbplats utan krångel.">
 <link rel="canonical" href="https://studioklaro.se/om">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Studio Klaro">
@@ -14,11 +16,11 @@
 <meta property="og:title" content="Om oss – Studio Klaro | Webbdesign Stockholm">
 <meta property="og:description" content="Lär känna Studio Klaro – designern bakom hemsidorna. Professionella webbplatser för småföretag i Stockholm, utan krångel.">
 <meta property="og:url" content="https://studioklaro.se/om">
-<meta property="og:image" content="https://studioklaro.se/work-chairman.png">
+<meta property="og:image" content="https://studioklaro.se/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Om oss – Studio Klaro | Webbdesign Stockholm">
 <meta name="twitter:description" content="Lär känna Studio Klaro – designern bakom hemsidorna. Professionella webbplatser för småföretag i Stockholm, utan krångel.">
-<meta name="twitter:image" content="https://studioklaro.se/work-chairman.png">
+<meta name="twitter:image" content="https://studioklaro.se/og-cover.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -26,14 +28,19 @@
   "url": "https://studioklaro.se/om",
   "mainEntity": {
     "@type": "ProfessionalService",
+    "@id": "https://studioklaro.se/#business",
     "name": "Studio Klaro",
     "url": "https://studioklaro.se",
-    "description": "Studio Klaro bygger snygga, snabba hemsidor för småföretag i Stockholm.",
+    "logo": "https://studioklaro.se/logo.webp",
+    "description": "Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen.",
     "areaServed": {
       "@type": "City",
       "name": "Stockholm"
     },
-    "priceRange": "$$"
+    "sameAs": [
+      "https://www.instagram.com/studioklaro/"
+    ],
+    "priceRange": "2995-19900 SEK"
   }
 }
 </script>
@@ -87,6 +94,16 @@
     [data-rbtnfull] a{width:100%!important;box-sizing:border-box!important;text-align:center!important;}
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://studioklaro.se/" },
+    { "@type": "ListItem", "position": 2, "name": "Om Studio Klaro", "item": "https://studioklaro.se/om" }
+  ]
+}
+</script>
 <script type="module" src="/src/speed-insights.js"></script>
 </head>
 <body>
@@ -96,17 +113,17 @@
   <!-- NAV -->
   <div class="nav-wrap">
     <div class="nav-capsule">
-      <a href="index.html" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
-        <img src="logo-klaro.png" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
+      <a href="/" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
+        <img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
       </a>
       <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
-        <a href="index.html#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänster</a>
-        <a href="index.html#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
-        <a href="index.html#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
-        <a href="priser.html" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
-        <a href="om.html" style="color:#146EF5;text-decoration:none;transition:color 0.2s ease;">Om</a>
+        <a href="/#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänster</a>
+        <a href="/#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
+        <a href="/#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
+        <a href="/priser" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
+        <a href="/om" style="color:#146EF5;text-decoration:none;transition:color 0.2s ease;">Om</a>
       </div>
-      <a data-rhide href="index.html#kontakt" class="btn-lift cta-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få ett kostnadsfritt förslag</a>
+      <a data-rhide href="/#kontakt" class="btn-lift cta-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få ett kostnadsfritt förslag</a>
       <div data-rshow style="display:none;">
         <button id="mnav-toggle" aria-label="Meny" aria-expanded="false" style="width:40px;height:40px;border-radius:10px;background:#146EF5;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
           <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div></div>
@@ -115,17 +132,22 @@
     </div>
     <div data-rshow id="mnav-panel" class="mnav-panel" style="display:none;">
       <div style="background:#fff;border-radius:18px;box-shadow:0 12px 30px rgba(15,23,42,0.12);overflow:hidden;">
-        <a href="index.html#tjansten" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänster</a>
-        <a href="index.html#portfolio" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
-        <a href="index.html#processen" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
-        <a href="priser.html" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
-        <a href="om.html" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#146EF5;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
+        <a href="/#tjansten" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänster</a>
+        <a href="/#portfolio" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
+        <a href="/#processen" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
+        <a href="/priser" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
+        <a href="/om" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#146EF5;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
         <div style="padding:16px 20px;">
-          <a href="index.html#kontakt" style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få ett kostnadsfritt förslag</a>
+          <a href="/#kontakt" style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få ett kostnadsfritt förslag</a>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- BREADCRUMB -->
+  <nav aria-label="Brödsmulor" style="max-width:1140px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:#8296B0;">
+    <a href="/" style="color:#8296B0;text-decoration:none;">Hem</a><span style="margin:0 6px;color:#C3CEDD;">/</span><span style="color:#52657A;font-weight:600;">Om Studio Klaro</span>
+  </nav>
 
   <!-- HERO -->
   <div style="max-width:760px;margin:60px auto 0;text-align:center;padding:0 20px;">
@@ -171,6 +193,37 @@
     </div>
   </div>
 
+  <!-- SÅ GÅR ETT PROJEKT TILL -->
+  <div style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Så går ett projekt till</div>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Från första kontakt till lanserad hemsida</h2>
+      <p style="font-size:15px;color:#52657A;margin:0 auto;font-weight:500;max-width:600px;">Samma tydliga upplägg oavsett bransch — så att du alltid vet vad som händer härnäst.</p>
+    </div>
+    <div data-rgrid style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+      <div data-reveal style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
+        <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:10px;">01 — Kontakt</div>
+        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Du berättar om företaget</div>
+        <div style="font-size:14px;color:#52657A;line-height:1.6;">Kort formulär om verksamheten och vad hemsidan behöver göra. Du får ett personligt förslag och fast pris — helt utan köpkrav.</div>
+      </div>
+      <div data-reveal style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
+        <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:10px;">02 — Material</div>
+        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Vi samlar in underlaget</div>
+        <div style="font-size:14px;color:#52657A;line-height:1.6;">Texter, bilder och eventuell logotyp skickas in. Saknas material hjälper vi dig reda ut vad som faktiskt behövs innan bygget börjar.</div>
+      </div>
+      <div data-reveal style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
+        <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:10px;">03 — Design &amp; korrektur</div>
+        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Hemsidan tar form</div>
+        <div style="font-size:14px;color:#52657A;line-height:1.6;">Du går igenom sidan i korrekturrundor tillsammans med mig, tills allt känns rätt. Inga överraskningar, inga dolda tillägg.</div>
+      </div>
+      <div data-reveal style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
+        <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:10px;">04 — Lansering</div>
+        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Sidan går live</div>
+        <div style="font-size:14px;color:#52657A;line-height:1.6;">Hemsidan publiceras på din domän och blir din. Vill du ha fortsatt hjälp finns Klaro Care som ett valfritt abonnemang för drift och mindre ändringar.</div>
+      </div>
+    </div>
+  </div>
+
   <!-- KORT OM STUDION -->
   <div style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
     <div data-reveal data-rgrid data-rgap data-rpanelpad style="background:#fff;border-radius:22px;padding:48px;box-shadow:0 10px 26px rgba(15,23,42,0.05);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
@@ -201,7 +254,7 @@
     <div data-reveal data-rpanelpad data-rbtnfull style="background:#fff;border-radius:28px;padding:64px 40px;text-align:center;box-shadow:0 20px 50px rgba(15,23,42,0.08);border-top:6px solid #146EF5;">
       <h2 data-rcta-h2 style="font-size:32px;font-weight:800;color:#0F172A;margin:0 0 16px;line-height:1.3;max-width:560px;margin-left:auto;margin-right:auto;">Redo att se lika bra ut online som du gör i verkligheten?</h2>
       <p style="font-size:15px;color:#52657A;margin:0 0 30px;font-weight:500;">Berätta om ditt företag — vi återkommer med ett kostnadsfritt förslag.</p>
-      <a href="index.html#kontakt" class="btn-lift cta-main" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få ett kostnadsfritt förslag</a>
+      <a href="/#kontakt" class="btn-lift cta-main" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få ett kostnadsfritt förslag</a>
     </div>
   </div>
 
@@ -216,13 +269,16 @@
         <div>
           <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Navigation</div>
           <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="index.html#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
-            <a href="index.html#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
-            <a href="priser.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Priser</a>
-            <a href="om.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
-            <a href="hemsida-frisor-stockholm.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för frisör</a>
-            <a href="portfolio.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Portfolio</a>
-            <a href="index.html#kontakt" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Kontakt</a>
+            <a href="/#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
+            <a href="/#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
+            <a href="/priser" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Priser</a>
+            <a href="/om" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
+            <a href="/hemsida-frisor-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för frisör</a>
+            <a href="/hemsida-restaurang-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för restaurang</a>
+            <a href="/hemsida-skonhetssalong-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för skönhetssalong</a>
+            <a href="/hemsida-fotograf" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för fotografer</a>
+            <a href="/portfolio" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Portfolio</a>
+            <a href="/#kontakt" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Kontakt</a>
           </div>
         </div>
         <div>

@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="/test3.png">
-<link rel="apple-touch-icon" href="/test3.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <title>Färdiga hemsidemallar – Studio Klaro | Webbdesign Stockholm</title>
-<meta name="description" content="Välj en färdig hemsidemall och få den anpassad efter ditt företag – färger, logotyp, bilder och text. Fast pris 4 900 kr, publicerad och redo att uppdatera själv.">
+<meta name="description" content="Välj en färdig hemsidemall och få den anpassad efter ditt företag – färger, logotyp, bilder och text. Fast pris 4 900 kr.">
 <link rel="canonical" href="https://studioklaro.se/mallar">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Studio Klaro">
@@ -14,11 +16,11 @@
 <meta property="og:title" content="Färdiga hemsidemallar – Studio Klaro">
 <meta property="og:description" content="Välj en färdig hemsidemall och få den anpassad efter ditt företag – färger, logotyp, bilder och text. Fast pris 4 900 kr.">
 <meta property="og:url" content="https://studioklaro.se/mallar">
-<meta property="og:image" content="https://studioklaro.se/work-chairman.png">
+<meta property="og:image" content="https://studioklaro.se/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Färdiga hemsidemallar – Studio Klaro">
 <meta name="twitter:description" content="Välj en färdig hemsidemall och få den anpassad efter ditt företag – färger, logotyp, bilder och text. Fast pris 4 900 kr.">
-<meta name="twitter:image" content="https://studioklaro.se/work-chairman.png">
+<meta name="twitter:image" content="https://studioklaro.se/og-cover.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -27,14 +29,19 @@
   "name": "Färdiga hemsidemallar – Studio Klaro",
   "mainEntity": {
     "@type": "ProfessionalService",
+    "@id": "https://studioklaro.se/#business",
     "name": "Studio Klaro",
     "url": "https://studioklaro.se",
-    "description": "Studio Klaro bygger snygga, snabba hemsidor för småföretag i Stockholm.",
+    "logo": "https://studioklaro.se/logo.webp",
+    "description": "Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen.",
     "areaServed": {
       "@type": "City",
       "name": "Stockholm"
     },
-    "priceRange": "$$"
+    "sameAs": [
+      "https://www.instagram.com/studioklaro/"
+    ],
+    "priceRange": "2995-19900 SEK"
   }
 }
 </script>
@@ -115,6 +122,16 @@
     [data-rgrid4]{grid-template-columns:1fr!important;}
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://studioklaro.se/" },
+    { "@type": "ListItem", "position": 2, "name": "Mallar", "item": "https://studioklaro.se/mallar" }
+  ]
+}
+</script>
 <script type="module" src="/src/speed-insights.js"></script>
 </head>
 <body>
@@ -124,17 +141,17 @@
   <!-- NAV -->
   <div class="nav-wrap">
     <div class="nav-capsule">
-      <a href="index.html" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
-        <img src="logo-klaro.png" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
+      <a href="/" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
+        <img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
       </a>
       <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
-        <a href="index.html#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänster</a>
-        <a href="index.html#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
-        <a href="index.html#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
-        <a href="priser.html" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
-        <a href="om.html" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Om</a>
+        <a href="/#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänster</a>
+        <a href="/#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
+        <a href="/#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
+        <a href="/priser" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
+        <a href="/om" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Om</a>
       </div>
-      <a data-rhide href="index.html#kontakt" class="btn-lift cta-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få ett kostnadsfritt förslag</a>
+      <a data-rhide href="/#kontakt" class="btn-lift cta-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få ett kostnadsfritt förslag</a>
       <div data-rshow style="display:none;">
         <button id="mnav-toggle" aria-label="Meny" aria-expanded="false" style="width:40px;height:40px;border-radius:10px;background:#146EF5;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
           <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div></div>
@@ -143,17 +160,22 @@
     </div>
     <div data-rshow id="mnav-panel" class="mnav-panel" style="display:none;">
       <div style="background:#fff;border-radius:18px;box-shadow:0 12px 30px rgba(15,23,42,0.12);overflow:hidden;">
-        <a href="index.html#tjansten" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänster</a>
-        <a href="index.html#portfolio" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
-        <a href="index.html#processen" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
-        <a href="priser.html" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
-        <a href="om.html" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
+        <a href="/#tjansten" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänster</a>
+        <a href="/#portfolio" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
+        <a href="/#processen" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
+        <a href="/priser" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
+        <a href="/om" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
         <div style="padding:16px 20px;">
-          <a href="index.html#kontakt" style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få ett kostnadsfritt förslag</a>
+          <a href="/#kontakt" style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få ett kostnadsfritt förslag</a>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- BREADCRUMB -->
+  <nav aria-label="Brödsmulor" style="max-width:1140px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:#8296B0;">
+    <a href="/" style="color:#8296B0;text-decoration:none;">Hem</a><span style="margin:0 6px;color:#C3CEDD;">/</span><span style="color:#52657A;font-weight:600;">Mallar</span>
+  </nav>
 
   <!-- HERO -->
   <div style="max-width:720px;margin:60px auto 0;text-align:center;padding:0 20px;">
@@ -173,7 +195,139 @@
       <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Välj en design som redan känns klar</h2>
       <p style="font-size:15px;color:#52657A;margin:0 auto;font-weight:500;max-width:560px;">Varje mall är byggd för en specifik typ av verksamhet. Hitta den som passar er bäst — resten anpassar vi tillsammans.</p>
     </div>
-    <div id="tpl-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;"></div>
+    <div id="tpl-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+
+      <div class="card-tpl" data-reveal style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(15,23,42,0.05);display:flex;flex-direction:column;">
+        <div class="tpl-imgwrap" style="border-radius:20px 20px 0 0;">
+          <div class="tpl-img" style="background:linear-gradient(160deg,#EAF6EE,#E2F1E7);padding:22px;height:210px;display:flex;flex-direction:column;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:auto;">
+              <div style="width:60px;height:10px;border-radius:6px;background:rgba(15,23,42,0.18);"></div>
+              <div style="display:flex;gap:6px;"><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="width:65%;height:14px;border-radius:6px;background:rgba(255,255,255,0.8);"></div>
+              <div style="width:45%;height:9px;border-radius:5px;background:rgba(255,255,255,0.55);"></div>
+              <div style="width:92px;height:26px;border-radius:8px;background:#146EF5;margin-top:8px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:26px;display:flex;flex-direction:column;flex:1;">
+          <div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Konst &amp; kultur</div>
+          <div style="font-size:19px;font-weight:800;color:#0F172A;margin-bottom:10px;">Galleri</div>
+          <div style="font-size:14px;color:#52657A;line-height:1.55;margin-bottom:20px;flex:1;">En bildfokuserad mall för konstnärer, fotografer, gallerier och andra kreatörer. Stora bildytor, projektsidor och en ren struktur som låter arbetet tala för sig själv — med plats för utställningar, samarbeten och kontaktuppgifter.</div>
+          <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:18px;">4 900 kr</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="/hemsida-fotograf" target="_blank" rel="noopener" class="btn-lift cta-preview" style="text-align:center;background:#fff;color:#0F172A;font-size:14px;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(15,23,42,0.1);">Live preview</a>
+            <a href="/#kontakt" class="choose-link" style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;color:#146EF5;text-decoration:none;padding:4px;">Välj den här mallen <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-tpl" data-reveal style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(15,23,42,0.05);display:flex;flex-direction:column;">
+        <div class="tpl-imgwrap" style="border-radius:20px 20px 0 0;">
+          <div class="tpl-img" style="background:linear-gradient(160deg,#EDF3FC,#E4ECF9);padding:22px;height:210px;display:flex;flex-direction:column;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:auto;">
+              <div style="width:60px;height:10px;border-radius:6px;background:rgba(15,23,42,0.18);"></div>
+              <div style="display:flex;gap:6px;"><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="width:65%;height:14px;border-radius:6px;background:rgba(255,255,255,0.8);"></div>
+              <div style="width:45%;height:9px;border-radius:5px;background:rgba(255,255,255,0.55);"></div>
+              <div style="width:92px;height:26px;border-radius:8px;background:#146EF5;margin-top:8px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:26px;display:flex;flex-direction:column;flex:1;">
+          <div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Skönhet &amp; styling</div>
+          <div style="font-size:19px;font-weight:800;color:#0F172A;margin-bottom:10px;">Frisör &amp; Barberare</div>
+          <div style="font-size:14px;color:#52657A;line-height:1.55;margin-bottom:20px;flex:1;">Byggd för salonger och barberare, med tydlig bokningsväg som första prioritet. Inkluderar tjänster och priser per kategori, galleri, öppettider och koppling till ert befintliga bokningssystem.</div>
+          <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:18px;">4 900 kr</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="/hemsida-frisor-stockholm" target="_blank" rel="noopener" class="btn-lift cta-preview" style="text-align:center;background:#fff;color:#0F172A;font-size:14px;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(15,23,42,0.1);">Live preview</a>
+            <a href="/#kontakt" class="choose-link" style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;color:#146EF5;text-decoration:none;padding:4px;">Välj den här mallen <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-tpl" data-reveal style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(15,23,42,0.05);display:flex;flex-direction:column;">
+        <div class="tpl-imgwrap" style="border-radius:20px 20px 0 0;">
+          <div class="tpl-img" style="background:linear-gradient(160deg,#FBF3E1,#F6ECD8);padding:22px;height:210px;display:flex;flex-direction:column;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:auto;">
+              <div style="width:60px;height:10px;border-radius:6px;background:rgba(15,23,42,0.18);"></div>
+              <div style="display:flex;gap:6px;"><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="width:65%;height:14px;border-radius:6px;background:rgba(255,255,255,0.8);"></div>
+              <div style="width:45%;height:9px;border-radius:5px;background:rgba(255,255,255,0.55);"></div>
+              <div style="width:92px;height:26px;border-radius:8px;background:#146EF5;margin-top:8px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:26px;display:flex;flex-direction:column;flex:1;">
+          <div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Hälsa &amp; träning</div>
+          <div style="font-size:19px;font-weight:800;color:#0F172A;margin-bottom:10px;">PT &amp; Tränare</div>
+          <div style="font-size:14px;color:#52657A;line-height:1.55;margin-bottom:20px;flex:1;">En mall för personliga tränare, coacher och mindre träningsstudior. Visar upp paket, priser och resultat tydligt, med en enkel väg för nya kunder att boka in ett första möte.</div>
+          <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:18px;">4 900 kr</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#" class="btn-lift cta-preview" style="text-align:center;background:#fff;color:#0F172A;font-size:14px;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(15,23,42,0.1);">Live preview</a>
+            <a href="/#kontakt" class="choose-link" style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;color:#146EF5;text-decoration:none;padding:4px;">Välj den här mallen <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-tpl" data-reveal style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(15,23,42,0.05);display:flex;flex-direction:column;">
+        <div class="tpl-imgwrap" style="border-radius:20px 20px 0 0;">
+          <div class="tpl-img" style="background:linear-gradient(160deg,#EFEFF6,#E6E8F2);padding:22px;height:210px;display:flex;flex-direction:column;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:auto;">
+              <div style="width:60px;height:10px;border-radius:6px;background:rgba(15,23,42,0.18);"></div>
+              <div style="display:flex;gap:6px;"><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="width:65%;height:14px;border-radius:6px;background:rgba(255,255,255,0.8);"></div>
+              <div style="width:45%;height:9px;border-radius:5px;background:rgba(255,255,255,0.55);"></div>
+              <div style="width:92px;height:26px;border-radius:8px;background:#146EF5;margin-top:8px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:26px;display:flex;flex-direction:column;flex:1;">
+          <div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Rådgivning &amp; tjänster</div>
+          <div style="font-size:19px;font-weight:800;color:#0F172A;margin-bottom:10px;">Konsult</div>
+          <div style="font-size:14px;color:#52657A;line-height:1.55;margin-bottom:20px;flex:1;">En förtroendeingivande mall för konsulter, rådgivare och frilansare inom tjänstesektorn. Fokus på kompetens, tidigare uppdrag och referenser, med en tydlig kontaktväg för nya förfrågningar.</div>
+          <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:18px;">4 900 kr</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#" class="btn-lift cta-preview" style="text-align:center;background:#fff;color:#0F172A;font-size:14px;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(15,23,42,0.1);">Live preview</a>
+            <a href="/#kontakt" class="choose-link" style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;color:#146EF5;text-decoration:none;padding:4px;">Välj den här mallen <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-tpl" data-reveal style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(15,23,42,0.05);display:flex;flex-direction:column;">
+        <div class="tpl-imgwrap" style="border-radius:20px 20px 0 0;">
+          <div class="tpl-img" style="background:linear-gradient(160deg,#FBEDE7,#F6E2D8);padding:22px;height:210px;display:flex;flex-direction:column;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:auto;">
+              <div style="width:60px;height:10px;border-radius:6px;background:rgba(15,23,42,0.18);"></div>
+              <div style="display:flex;gap:6px;"><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div><div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="width:65%;height:14px;border-radius:6px;background:rgba(255,255,255,0.8);"></div>
+              <div style="width:45%;height:9px;border-radius:5px;background:rgba(255,255,255,0.55);"></div>
+              <div style="width:92px;height:26px;border-radius:8px;background:#146EF5;margin-top:8px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:26px;display:flex;flex-direction:column;flex:1;">
+          <div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Mat &amp; dryck</div>
+          <div style="font-size:19px;font-weight:800;color:#0F172A;margin-bottom:10px;">Restaurang &amp; Café</div>
+          <div style="font-size:14px;color:#52657A;line-height:1.55;margin-bottom:20px;flex:1;">En aptitretande mall för restauranger, caféer och andra matställen. Meny, öppettider, läge och stämning i fokus, med plats för bilder på maten och lokalen samt länk till bordsbokning.</div>
+          <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:18px;">4 900 kr</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="/hemsida-restaurang-stockholm" target="_blank" rel="noopener" class="btn-lift cta-preview" style="text-align:center;background:#fff;color:#0F172A;font-size:14px;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(15,23,42,0.1);">Live preview</a>
+            <a href="/#kontakt" class="choose-link" style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;color:#146EF5;text-decoration:none;padding:4px;">Välj den här mallen <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- SÅ FUNGERAR DET -->
@@ -236,7 +390,7 @@
         <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#0F172A;font-weight:600;"><span style="width:22px;height:22px;flex:none;border-radius:7px;background:rgba(20,110,245,0.1);color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:12px;">✓</span>Publicering</div>
         <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#0F172A;font-weight:600;"><span style="width:22px;height:22px;flex:none;border-radius:7px;background:rgba(20,110,245,0.1);color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:12px;">✓</span>CMS för text och bilder</div>
       </div>
-      <div style="margin-top:28px;padding-top:22px;border-top:1px solid rgba(15,23,42,0.08);font-size:13px;color:#52657A;line-height:1.6;">Vill du förändra struktur eller funktioner? Då passar <a href="priser.html" style="color:#146EF5;font-weight:700;text-decoration:none;">Startklar</a> bättre.</div>
+      <div style="margin-top:28px;padding-top:22px;border-top:1px solid rgba(15,23,42,0.08);font-size:13px;color:#52657A;line-height:1.6;">Vill du förändra struktur eller funktioner? Då passar <a href="/priser" style="color:#146EF5;font-weight:700;text-decoration:none;">Startklar</a> bättre.</div>
     </div>
   </div>
 
@@ -300,7 +454,7 @@
       <p style="font-size:15px;color:#52657A;margin:0 0 30px;font-weight:500;">Välj din mall så tar Studio Klaro hand om resten.</p>
       <div data-rrow style="display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap;">
         <a href="#mallar" class="btn-lift cta-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Välj en mall</a>
-        <a href="priser.html" style="font-size:14px;font-weight:700;color:#52657A;text-decoration:none;">Behöver du något mer unikt? Se Startklar</a>
+        <a href="/priser" style="font-size:14px;font-weight:700;color:#52657A;text-decoration:none;">Behöver du något mer unikt? Se Startklar</a>
       </div>
     </div>
   </div>
@@ -309,7 +463,7 @@
   <div style="margin-top:80px;width:100vw;margin-left:calc(50% - 50vw);">
     <div style="background:#146EF5;padding:26px 20px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
       <div style="font-size:16px;font-weight:800;color:#fff;">Redo att synas online? Låt oss ta första steget tillsammans.</div>
-      <a href="index.html#kontakt" class="btn-lift cta-footer" style="background:#fff;color:#146EF5;font-size:13px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;white-space:nowrap;">Få ett kostnadsfritt förslag</a>
+      <a href="/#kontakt" class="btn-lift cta-footer" style="background:#fff;color:#146EF5;font-size:13px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;white-space:nowrap;">Få ett kostnadsfritt förslag</a>
     </div>
     <div style="background:#0C1424;">
       <div data-rgrid data-rgap style="max-width:1140px;margin:0 auto;padding:44px 20px 28px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;">
@@ -320,13 +474,16 @@
         <div>
           <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Navigation</div>
           <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="index.html#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
-            <a href="index.html#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
-            <a href="priser.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Priser</a>
-            <a href="om.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
-            <a href="hemsida-frisor-stockholm.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för frisör</a>
-            <a href="portfolio.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Portfolio</a>
-            <a href="index.html#kontakt" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Kontakt</a>
+            <a href="/#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
+            <a href="/#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
+            <a href="/priser" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Priser</a>
+            <a href="/om" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
+            <a href="/hemsida-frisor-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för frisör</a>
+            <a href="/hemsida-restaurang-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för restaurang</a>
+            <a href="/hemsida-skonhetssalong-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för skönhetssalong</a>
+            <a href="/hemsida-fotograf" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för fotografer</a>
+            <a href="/portfolio" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Portfolio</a>
+            <a href="/#kontakt" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Kontakt</a>
           </div>
         </div>
         <div>
@@ -350,15 +507,6 @@
 
 <script>
 (function () {
-  var esc = function (s) {
-    return String(s).replace(/[&<>"]/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
-    });
-  };
-  var priceFmt = function (n) {
-    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' kr';
-  };
-
   /* ---------- Sticky nav shrink ---------- */
   var navWrap = document.querySelector('.nav-wrap');
   var onScroll = function () {
@@ -391,93 +539,6 @@
       });
     }
   }
-
-  /* ---------- Mallgalleri (mockdata – koppla senare mot Supabase) ---------- */
-  var templates = [
-    {
-      id: "gallery",
-      name: "Galleri",
-      category: "Konst & kultur",
-      price: 4900,
-      description: "En bildfokuserad mall för konstnärer, fotografer och kreatörer som vill visa upp sitt arbete på ett rent och stilsäkert sätt.",
-      gradient: ["#EAF6EE", "#E2F1E7"],
-      previewUrl: "#"
-    },
-    {
-      id: "frisor",
-      name: "Frisör & Barberare",
-      category: "Skönhet & styling",
-      price: 4900,
-      description: "En mall byggd för salonger och barberare — tydlig bokningsväg, tjänster och priser i fokus.",
-      gradient: ["#EDF3FC", "#E4ECF9"],
-      previewUrl: "hemsida-frisor-stockholm.html"
-    },
-    {
-      id: "pt",
-      name: "PT & Tränare",
-      category: "Hälsa & träning",
-      price: 4900,
-      description: "En mall för personliga tränare och coacher som vill visa resultat, paket och göra det enkelt att boka in kunder.",
-      gradient: ["#FBF3E1", "#F6ECD8"],
-      previewUrl: "#"
-    },
-    {
-      id: "konsult",
-      name: "Konsult",
-      category: "Rådgivning & tjänster",
-      price: 4900,
-      description: "En förtroendeingivande mall för konsulter och rådgivare, med fokus på kompetens, referenser och kontakt.",
-      gradient: ["#EFEFF6", "#E6E8F2"],
-      previewUrl: "#"
-    },
-    {
-      id: "restaurang",
-      name: "Restaurang & Café",
-      category: "Mat & dryck",
-      price: 4900,
-      description: "En aptitretande mall för restauranger och caféer, med meny, öppettider och stämning i fokus.",
-      gradient: ["#FBEDE7", "#F6E2D8"],
-      previewUrl: "#"
-    }
-  ];
-
-  var tplPreview = function (t) {
-    return '<div class="tpl-imgwrap" style="border-radius:20px 20px 0 0;">' +
-      '<div class="tpl-img" style="background:linear-gradient(160deg,' + t.gradient[0] + ',' + t.gradient[1] + ');padding:22px;height:210px;display:flex;flex-direction:column;">' +
-        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:auto;">' +
-          '<div style="width:60px;height:10px;border-radius:6px;background:rgba(15,23,42,0.18);"></div>' +
-          '<div style="display:flex;gap:6px;">' +
-            '<div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div>' +
-            '<div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div>' +
-            '<div style="width:22px;height:8px;border-radius:4px;background:rgba(15,23,42,0.12);"></div>' +
-          '</div>' +
-        '</div>' +
-        '<div style="display:flex;flex-direction:column;gap:10px;">' +
-          '<div style="width:65%;height:14px;border-radius:6px;background:rgba(255,255,255,0.8);"></div>' +
-          '<div style="width:45%;height:9px;border-radius:5px;background:rgba(255,255,255,0.55);"></div>' +
-          '<div style="width:92px;height:26px;border-radius:8px;background:#146EF5;margin-top:8px;"></div>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-  };
-
-  var grid = document.getElementById('tpl-grid');
-  grid.innerHTML = templates.map(function (t) {
-    var hasRealPreview = t.previewUrl && t.previewUrl !== '#';
-    return '<div class="card-tpl" data-reveal style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(15,23,42,0.05);display:flex;flex-direction:column;">' +
-      tplPreview(t) +
-      '<div style="padding:26px;display:flex;flex-direction:column;flex:1;">' +
-        '<div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">' + esc(t.category) + '</div>' +
-        '<div style="font-size:19px;font-weight:800;color:#0F172A;margin-bottom:10px;">' + esc(t.name) + '</div>' +
-        '<div style="font-size:14px;color:#52657A;line-height:1.55;margin-bottom:20px;flex:1;">' + esc(t.description) + '</div>' +
-        '<div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:18px;">' + priceFmt(t.price) + '</div>' +
-        '<div style="display:flex;flex-direction:column;gap:10px;">' +
-          '<a href="' + esc(t.previewUrl) + '"' + (hasRealPreview ? ' target="_blank" rel="noopener"' : '') + ' class="btn-lift cta-preview" style="text-align:center;background:#fff;color:#0F172A;font-size:14px;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(15,23,42,0.1);">Live preview</a>' +
-          '<a href="index.html#kontakt" class="choose-link" style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;color:#146EF5;text-decoration:none;padding:4px;">Välj den här mallen <span aria-hidden="true">→</span></a>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
 
   /* ---------- Scroll-reveal ---------- */
   var revealEls = document.querySelectorAll('[data-reveal]');
