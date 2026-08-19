@@ -134,6 +134,34 @@
     .rmock-result{padding:13px;gap:12px;}
     .rmap-tile{width:46px;height:46px;border-radius:12px;}
   }
+
+  /* Sektion: SERA live-demo */
+  .rsera-section{background:#171310;width:100vw;margin-left:calc(50% - 50vw);margin-top:100px;padding:100px 0;position:relative;overflow:hidden;}
+  .rsera-section::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 45% at 50% 0%,rgba(217,146,58,0.10),transparent 70%);pointer-events:none;}
+  .rsera-inner{max-width:1140px;margin:0 auto;padding:0 20px;position:relative;}
+  .rsera-stage{display:block;position:relative;aspect-ratio:16/9;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);background:linear-gradient(160deg,#241C15 0%,#15100C 65%,#0F0B08 100%);box-shadow:0 30px 70px rgba(0,0,0,0.35);transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1),border-color .4s cubic-bezier(0.22,1,0.36,1),box-shadow .4s cubic-bezier(0.22,1,0.36,1);}
+  .rsera-shot{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1);transition:transform .6s cubic-bezier(0.22,1,0.36,1);}
+  .rsera-stage:hover{border-color:rgba(255,255,255,0.18);box-shadow:0 36px 80px rgba(0,0,0,0.45);}
+  .rsera-stage:hover .rsera-shot{transform:scale(1.02);}
+  .rsera-stage:focus-visible{outline:2px solid #146EF5;outline-offset:4px;}
+  .rsera-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;background:radial-gradient(55% 55% at 50% 50%,rgba(0,0,0,0.34),rgba(0,0,0,0.04));transition:background .4s cubic-bezier(0.22,1,0.36,1);}
+  .rsera-stage:hover .rsera-content{background:radial-gradient(55% 55% at 50% 50%,rgba(0,0,0,0.4),rgba(0,0,0,0.08));}
+  .rsera-cta{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:700;color:#fff;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.28);border-radius:100px;padding:14px 26px;user-select:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .3s cubic-bezier(0.22,1,0.36,1),border-color .3s cubic-bezier(0.22,1,0.36,1);}
+  .rsera-cta span{transition:transform .3s cubic-bezier(0.22,1,0.36,1);}
+  .rsera-stage:hover .rsera-cta{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.45);}
+  .rsera-stage:hover .rsera-cta span{transform:translateX(3px);}
+  .rsera-meta{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:32px;flex-wrap:wrap;}
+  .rsera-title{font-size:22px;font-weight:800;color:#fff;margin:0 0 6px;}
+  .rsera-desc{font-size:14px;color:rgba(255,255,255,0.55);margin:0;}
+  .rsera-badge{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.14);border-radius:100px;padding:8px 14px;white-space:nowrap;}
+  .rsera-themes{display:flex;align-items:center;gap:20px;margin-top:28px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;}
+  .rsera-swatches{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .rsera-swatch{display:flex;align-items:center;gap:7px;font-size:13px;color:rgba(255,255,255,0.6);}
+  .rsera-swatch i{width:10px;height:10px;border-radius:50%;display:inline-block;}
+  .rsera-caption{font-size:12px;color:rgba(255,255,255,0.4);}
+  @media (max-width:600px){
+    .rsera-cta{padding:12px 20px;font-size:13px;}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -342,6 +370,46 @@
             Mobiloptimerat
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERA LIVE-DEMO -->
+  <section class="rsera-section">
+    <div class="rsera-inner">
+      <div data-reveal style="max-width:620px;margin:0 auto 56px;text-align:center;">
+        <p style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 16px;">Live-demo</p>
+        <h2 data-rsection-h2 style="font-size:30px;line-height:1.25;font-weight:800;color:#fff;margin:0 0 20px;letter-spacing:-0.01em;">Se hur en restauranghemsida kan kännas på riktigt.</h2>
+        <p style="font-size:16px;color:rgba(255,255,255,0.65);line-height:1.7;margin:0;">Möt SERA — en fiktiv italiensk restaurang på Södermalm, skapad för att visa hur en modern restauranghemsida kan se ut, kännas och fungera.</p>
+      </div>
+
+      <a class="rsera-stage" href="/demo/sera" data-reveal aria-label="Utforska SERA – koncepthemsida för restaurang">
+        <img class="rsera-shot"
+             src="/demo/sera-media/sera-preview-1100.webp"
+             srcset="/demo/sera-media/sera-preview-700.webp 700w, /demo/sera-media/sera-preview-1100.webp 1100w, /demo/sera-media/sera-preview-1650.webp 1650w, /demo/sera-media/sera-preview-2200.webp 2200w"
+             sizes="(max-width: 1180px) calc(100vw - 40px), 1100px"
+             width="2200" height="1238" loading="lazy" decoding="async"
+             alt="SERA:s startsida: kvällsbild av en italiensk restaurang med rubriken ”SERA — italiensk restaurang på Södermalm”.">
+        <div class="rsera-content">
+          <div class="rsera-cta">Utforska SERA <span aria-hidden="true">→</span></div>
+        </div>
+      </a>
+
+      <div class="rsera-meta" data-reveal style="transition-delay:.08s;">
+        <div>
+          <h3 class="rsera-title">SERA</h3>
+          <p class="rsera-desc">Italiensk restaurang på Södermalm</p>
+        </div>
+        <div class="rsera-badge">Koncepthemsida · Fiktiv restaurang</div>
+      </div>
+
+      <div class="rsera-themes" data-reveal style="transition-delay:.14s;">
+        <div class="rsera-swatches">
+          <span class="rsera-swatch"><i style="background:#F1E9DD;"></i>Light</span>
+          <span class="rsera-swatch"><i style="background:#8B5A2B;"></i>Brown</span>
+          <span class="rsera-swatch"><i style="background:#111111;border:1px solid rgba(255,255,255,0.2);"></i>Black</span>
+        </div>
+        <span class="rsera-caption">Tre uttryck. Samma hemsida.</span>
       </div>
     </div>
   </section>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="sv" data-sera-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<title>SERA — koncepthemsida för restaurang | Studio Klaro</title>
+<meta name="description" content="SERA är en fiktiv italiensk restaurang på Södermalm – en koncepthemsida skapad av Studio Klaro för att visa hur en restaurangsajt kan se ut.">
+
+<!-- Demo, inte en riktig verksamhet: ska aldrig indexeras som restaurang. -->
+<meta name="robots" content="noindex, follow">
+<meta name="googlebot" content="noindex, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="preload" as="image" href="/demo/sera-media/hero-1536.webp"
+      imagesrcset="/demo/sera-media/hero-768.webp 768w, /demo/sera-media/hero-1152.webp 1152w, /demo/sera-media/hero-1536.webp 1536w, /demo/sera-media/hero-2048.webp 2048w, /demo/sera-media/hero-2560.webp 2560w"
+      imagesizes="100vw" fetchpriority="high">
+
+<link rel="stylesheet" href="./sera.css">
+<script>
+  // Tema före första målningen, så sidan aldrig blinkar om.
+  (function () {
+    var r = document.documentElement;
+    try {
+      var t = localStorage.getItem('sera-theme');
+      if (t === 'light' || t === 'brown' || t === 'black') r.setAttribute('data-sera-theme', t);
+    } catch (e) { /* private mode */ }
+    r.classList.add('sera-js', 'sera-js-pending');
+    // Om modulen aldrig startar ska inget innehåll bli hängande dolt.
+    setTimeout(function () {
+      if (r.classList.contains('sera-js-pending')) r.classList.remove('sera-js');
+    }, 3000);
+  })();
+</script>
+<script type="module" src="./sera.js"></script>
+</head>
+
+<body class="sera">
+
+<!-- ── Studio Klaro demo-kontroller ─────────────────────────────────────── -->
+<a class="sera-chrome sera-chrome--back" href="/hemsida-restaurang-stockholm">← Tillbaka till Studio Klaro</a>
+<p class="sera-chrome sera-chrome--label">Koncepthemsida · Fiktiv restaurang</p>
+
+<!-- ── Mobilmeny ────────────────────────────────────────────────────────── -->
+<div class="sera-mnav" data-sera-mnav hidden>
+  <button class="sera-mnav__close" type="button" data-sera-mnav-close aria-label="Stäng menyn">×</button>
+  <a class="sera-mnav__link" href="#meny">Meny</a>
+  <a class="sera-mnav__link" href="#om">Om SERA</a>
+  <a class="sera-mnav__link" href="#besok">Besök oss</a>
+  <a class="sera-btn" href="#kontakt">Boka bord</a>
+</div>
+
+<!-- ── Hero ─────────────────────────────────────────────────────────────── -->
+<section class="sera-hero" id="top">
+  <div class="sera-hero__media">
+    <div class="sera-par" data-sera-parallax="hero">
+      <img class="sera-img"
+           src="/demo/sera-media/hero-1536.webp"
+           srcset="/demo/sera-media/hero-768.webp 768w, /demo/sera-media/hero-1152.webp 1152w, /demo/sera-media/hero-1536.webp 1536w, /demo/sera-media/hero-2048.webp 2048w, /demo/sera-media/hero-2560.webp 2560w"
+           sizes="100vw" width="2560" height="1707" alt="" fetchpriority="high" decoding="async">
+    </div>
+  </div>
+  <div class="sera-hero__scrim"></div>
+
+  <nav class="sera-nav" aria-label="Huvudmeny">
+    <div class="sera-nav__group sera-nav__group--links">
+      <a class="sera-nav__link" href="#meny">Meny</a>
+      <a class="sera-nav__link" href="#om">Om SERA</a>
+    </div>
+
+    <a class="sera-nav__logo" href="#top" aria-label="SERA — till toppen">
+      <img src="/demo/sera-media/sera-logo-116.webp"
+           srcset="/demo/sera-media/sera-logo-116.webp 116w, /demo/sera-media/sera-logo-174.webp 174w, /demo/sera-media/sera-logo-232.webp 232w"
+           sizes="58px" width="58" height="58" alt="SERA">
+    </a>
+
+    <div class="sera-nav__group sera-nav__group--end">
+      <a class="sera-nav__link sera-nav__link--hide-sm" href="#besok">Besök oss</a>
+      <a class="sera-nav__link sera-nav__link--hide-sm" href="#kontakt">Boka bord</a>
+
+      <div class="sera-themes" role="group" aria-label="Färgtema">
+        <button class="sera-theme-dot sera-theme-dot--light" type="button"
+                data-sera-theme-btn="light" aria-pressed="true" aria-label="Ljust tema"></button>
+        <button class="sera-theme-dot sera-theme-dot--brown" type="button"
+                data-sera-theme-btn="brown" aria-pressed="false" aria-label="Brunt tema"></button>
+        <button class="sera-theme-dot sera-theme-dot--black" type="button"
+                data-sera-theme-btn="black" aria-pressed="false" aria-label="Svart tema"></button>
+      </div>
+
+      <button class="sera-burger" type="button" data-sera-burger
+              aria-expanded="false" aria-label="Öppna menyn">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="sera-hero__body">
+    <h1 class="sera-hero__title">SERA — italiensk restaurang på Södermalm</h1>
+    <p class="sera-hero__lead">Klassiska smaker, bra vin och en varm kvarterskänsla.</p>
+    <div class="sera-hero__actions">
+      <a class="sera-btn" href="#kontakt">Boka bord</a>
+      <a class="sera-link-ul" href="#meny">Se menyn</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Linjens sträcka: hero-botten → kartsektionens överkant ═══════════════ -->
+<div class="sera-flow-wrap" data-sera-flow-wrap>
+
+  <div class="sera-flow" data-sera-flow aria-hidden="true">
+    <svg viewBox="0 0 100 1000" preserveAspectRatio="none" focusable="false">
+      <path d="M50,0"></path>
+      <circle cx="0" cy="0" r="4"></circle>
+    </svg>
+  </div>
+
+  <!-- ── Intro ──────────────────────────────────────────────────────────── -->
+  <section class="sera-intro">
+    <div class="sera-intro__lead sera-reveal">
+      <p class="sera-eyebrow">SERA / STOCKHOLM</p>
+      <h2 class="sera-h2">Italien behöver inte ligga långt bort.</h2>
+    </div>
+    <div class="sera-intro__text sera-reveal">
+      <p class="sera-body">SERA är en kvartersrestaurang inspirerad av italienska middagar hemma hos vänner — färsk pasta rullad för hand, råvaror i säsong, ett glas naturvin och kvällar som blir längre än planerat. Ingen show, bara mat man kommer tillbaka för.</p>
+    </div>
+  </section>
+
+  <!-- ── Filosofi ───────────────────────────────────────────────────────── -->
+  <section class="sera-philo">
+    <div class="sera-philo__text sera-reveal">
+      <p class="sera-eyebrow">FILOSOFI</p>
+      <h2 class="sera-h2">En enkel idé. Bra råvaror, bra vin.</h2>
+      <p class="sera-body sera-body--sm">Vi krånglar inte till det. Pastan görs för hand varje dag, grönsakerna byts efter säsong och vinlistan är byggd kring små producenter vi själva vill dricka av. Resten är rätt ljus, rätt musik och tid att stanna.</p>
+    </div>
+    <div class="sera-philo__media sera-frame sera-reveal">
+      <img class="sera-img"
+           src="/demo/sera-media/pasta-1024.webp"
+           srcset="/demo/sera-media/pasta-480.webp 480w, /demo/sera-media/pasta-768.webp 768w, /demo/sera-media/pasta-1024.webp 1024w, /demo/sera-media/pasta-1440.webp 1440w, /demo/sera-media/pasta-1920.webp 1920w"
+           sizes="(max-width: 760px) 100vw, 66vw" width="1920" height="1281" loading="lazy" decoding="async"
+           alt="Kavlad pastadeg på ett mjölat arbetsbord i köket.">
+    </div>
+  </section>
+
+  <!-- ── Utvalda rätter ─────────────────────────────────────────────────── -->
+  <section class="sera-dishes" id="ratter">
+    <div class="sera-dishes__head">
+      <h2 class="sera-h2">Utvalda rätter</h2>
+      <span class="sera-dishes__count">FYRA FAVORITER</span>
+    </div>
+
+    <article class="sera-dish sera-dish--fwd sera-reveal">
+      <div class="sera-dish__media sera-frame">
+        <img class="sera-img"
+             src="/demo/sera-media/dish-burrata-1024.webp"
+             srcset="/demo/sera-media/dish-burrata-480.webp 480w, /demo/sera-media/dish-burrata-768.webp 768w, /demo/sera-media/dish-burrata-1024.webp 1024w, /demo/sera-media/dish-burrata-1440.webp 1440w, /demo/sera-media/dish-burrata-1920.webp 1920w"
+             sizes="(max-width: 760px) 100vw, 58vw" width="1920" height="1791" loading="lazy" decoding="async"
+             alt="Burrata på rödbetscarpaccio med ruccola och granatäpple.">
+      </div>
+      <div class="sera-dish__text">
+        <h3 class="sera-dish__name">Burrata</h3>
+        <p class="sera-dish__desc">tomat · basilika · olivolja</p>
+      </div>
+    </article>
+
+    <article class="sera-dish sera-dish--rev sera-reveal">
+      <div class="sera-dish__media sera-frame">
+        <img class="sera-img"
+             src="/demo/sera-media/dish-rigatoni-1024.webp"
+             srcset="/demo/sera-media/dish-rigatoni-480.webp 480w, /demo/sera-media/dish-rigatoni-768.webp 768w, /demo/sera-media/dish-rigatoni-1024.webp 1024w, /demo/sera-media/dish-rigatoni-1440.webp 1440w, /demo/sera-media/dish-rigatoni-1920.webp 1920w"
+             sizes="(max-width: 760px) 100vw, 58vw" width="1920" height="1281" loading="lazy" decoding="async"
+             alt="Rigatoni i krämig tomatsås med basilika och parmesan.">
+      </div>
+      <div class="sera-dish__text">
+        <h3 class="sera-dish__name">Rigatoni alla vodka</h3>
+        <p class="sera-dish__desc">tomat · chili · parmesan</p>
+      </div>
+    </article>
+
+    <article class="sera-dish sera-dish--fwd sera-reveal">
+      <div class="sera-dish__media sera-frame">
+        <img class="sera-img"
+             src="/demo/sera-media/dish-ragu-1024.webp"
+             srcset="/demo/sera-media/dish-ragu-480.webp 480w, /demo/sera-media/dish-ragu-768.webp 768w, /demo/sera-media/dish-ragu-1024.webp 1024w, /demo/sera-media/dish-ragu-1440.webp 1440w, /demo/sera-media/dish-ragu-1920.webp 1920w"
+             sizes="(max-width: 760px) 100vw, 58vw" width="1920" height="1125" loading="lazy" decoding="async"
+             alt="Tagliatelle med långkokt ragù på en vit tallrik.">
+      </div>
+      <div class="sera-dish__text">
+        <h3 class="sera-dish__name">Tagliatelle al ragù</h3>
+        <p class="sera-dish__desc">långkokt nötkött · rött vin · parmigiano</p>
+      </div>
+    </article>
+
+    <article class="sera-dish sera-dish--rev sera-reveal">
+      <div class="sera-dish__media sera-frame">
+        <img class="sera-img"
+             src="/demo/sera-media/dish-tiramisu-1024.webp"
+             srcset="/demo/sera-media/dish-tiramisu-480.webp 480w, /demo/sera-media/dish-tiramisu-768.webp 768w, /demo/sera-media/dish-tiramisu-1024.webp 1024w, /demo/sera-media/dish-tiramisu-1440.webp 1440w, /demo/sera-media/dish-tiramisu-1920.webp 1920w"
+             sizes="(max-width: 760px) 100vw, 58vw" width="1920" height="1449" loading="lazy" decoding="async"
+             alt="Tiramisu serverad på en grön keramiktallrik.">
+      </div>
+      <div class="sera-dish__text">
+        <h3 class="sera-dish__name">Tiramisu</h3>
+        <p class="sera-dish__desc">mascarpone · espresso · kakao</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ── Andningspaus ───────────────────────────────────────────────────── -->
+  <div class="sera-pause sera-reveal">
+    <div class="sera-par" data-sera-parallax="pause">
+      <img class="sera-img"
+           src="/demo/sera-media/pause-1536.webp"
+           srcset="/demo/sera-media/pause-768.webp 768w, /demo/sera-media/pause-1152.webp 1152w, /demo/sera-media/pause-1536.webp 1536w, /demo/sera-media/pause-2048.webp 2048w, /demo/sera-media/pause-2560.webp 2560w"
+           sizes="100vw" width="2560" height="1707" loading="lazy" decoding="async" alt="">
+    </div>
+    <div class="sera-pause__scrim"></div>
+  </div>
+
+  <!-- ── Meny ───────────────────────────────────────────────────────────── -->
+  <section class="sera-menu" id="meny">
+    <h2 class="sera-h2">Menyn</h2>
+    <div class="sera-menu__grid">
+
+      <div class="sera-menu__cat sera-reveal">
+        <h3 class="sera-eyebrow sera-eyebrow--accent">ANTIPASTI</h3>
+        <div class="sera-menu__item">
+          <p class="sera-menu__row"><span class="sera-menu__name">Burrata</span><span class="sera-menu__leader" aria-hidden="true"></span><span class="sera-menu__price">145</span></p>
+          <p class="sera-menu__desc">Tomat · basilika · olivolja</p>
+        </div>
+        <div class="sera-menu__item">
+          <p class="sera-menu__row"><span class="sera-menu__name">Crudo di tonno</span><span class="sera-menu__leader" aria-hidden="true"></span><span class="sera-menu__price">165</span></p>
+          <p class="sera-menu__desc">Tonfisk · citrus · kapris</p>
+        </div>
+        <div class="sera-menu__item">
+          <p class="sera-menu__row"><span class="sera-menu__name">Carciofi</span><span class="sera-menu__leader" aria-hidden="true"></span><span class="sera-menu__price">135</span></p>
+          <p class="sera-menu__desc">Kronärtskocka · citron · pecorino</p>
+        </div>
+      </div>
+
+      <div class="sera-menu__cat sera-reveal">
+        <h3 class="sera-eyebrow sera-eyebrow--accent">PASTA</h3>
+        <div class="sera-menu__item">
+          <p class="sera-menu__row"><span class="sera-menu__name">Rigatoni alla vodka</span><span class="sera-menu__leader" aria-hidden="true"></span><span class="sera-menu__price">225</span></p>
+          <p class="sera-menu__desc">Tomat · chili · parmesan</p>
+        </div>
+        <div class="sera-menu__item">
+          <p class="sera-menu__row"><span class="sera-menu__name">Tagliatelle al ragù</span><span class="sera-menu__leader" aria-hidden="true"></span><span class="sera-menu__price">245</span></p>
+          <p class="sera-menu__desc">Nötkött · rött vin · parmigiano</p>
+        </div>
+        <div class="sera-menu__item">
+          <p class="sera-menu__row"><span class="sera-menu__name">Cacio e pepe</span><span class="sera-menu__leader" aria-hidden="true"></span><span class="sera-menu__price">215</span></p>
+          <p class="sera-menu__desc">Pecorino · svartpeppar</p>
+        </div>
+      </div>
+
+      <div class="sera-menu__cat sera-reveal">
+        <h3 class="sera-eyebrow sera-eyebrow--accent">DOLCI</h3>
+        <div class="sera-menu__item">
+          <p class="sera-menu__row"><span class="sera-menu__name">Tiramisu</span><span class="sera-menu__leader" aria-hidden="true"></span><span class="sera-menu__price">115</span></p>
+        </div>
+        <div class="sera-menu__item">
+          <p class="sera-menu__row"><span class="sera-menu__name">Affogato</span><span class="sera-menu__leader" aria-hidden="true"></span><span class="sera-menu__price">85</span></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Om SERA ────────────────────────────────────────────────────────── -->
+  <section class="sera-about" id="om">
+    <div class="sera-about__media sera-frame sera-reveal">
+      <img class="sera-img"
+           src="/demo/sera-media/om-portrait-1024.webp"
+           srcset="/demo/sera-media/om-portrait-480.webp 480w, /demo/sera-media/om-portrait-768.webp 768w, /demo/sera-media/om-portrait-1024.webp 1024w, /demo/sera-media/om-portrait-1440.webp 1440w, /demo/sera-media/om-portrait-1920.webp 1920w"
+           sizes="(max-width: 760px) 100vw, 50vw" width="1920" height="2880" loading="lazy" decoding="async"
+           alt="Kock som hänger upp nyskuren färsk pasta vid pastamaskinen.">
+    </div>
+    <div class="sera-about__text sera-reveal">
+      <p class="sera-eyebrow">OM SERA</p>
+      <h2 class="sera-h2">Ett litet Italien på Södermalm.</h2>
+      <p class="sera-body sera-body--sm">Tanken var enkel: en plats där man kan svänga förbi för en snabb tallrik pasta och ett glas vin — men lika gärna stanna hela kvällen. Inget krav på att beställa förrätt, huvudrätt och dessert. Bara bra mat, serverad utan krångel, i ett rum som känns som ditt eget vardagsrum.</p>
+    </div>
+  </section>
+
+  <!-- ── Galleri ────────────────────────────────────────────────────────── -->
+  <section class="sera-gallery" aria-label="Bilder från SERA">
+    <div class="sera-gallery__grid">
+      <div class="sera-gallery__cell sera-gallery__cell--w2 sera-gallery__cell--h2 sera-frame sera-reveal">
+        <img class="sera-img" src="/demo/sera-media/gal-pasta-station-1024.webp"
+             srcset="/demo/sera-media/gal-pasta-station-480.webp 480w, /demo/sera-media/gal-pasta-station-768.webp 768w, /demo/sera-media/gal-pasta-station-1024.webp 1024w, /demo/sera-media/gal-pasta-station-1440.webp 1440w, /demo/sera-media/gal-pasta-station-1920.webp 1920w"
+             sizes="(max-width: 760px) 100vw, 50vw" width="1920" height="1442" loading="lazy" decoding="async"
+             alt="Pastastation med två kopparpannor färsk pasta.">
+      </div>
+      <div class="sera-gallery__cell sera-frame sera-reveal">
+        <img class="sera-img" src="/demo/sera-media/gal-vinglas-480.webp"
+             srcset="/demo/sera-media/gal-vinglas-320.webp 320w, /demo/sera-media/gal-vinglas-480.webp 480w, /demo/sera-media/gal-vinglas-720.webp 720w, /demo/sera-media/gal-vinglas-960.webp 960w"
+             sizes="(max-width: 760px) 50vw, 25vw" width="960" height="639" loading="lazy" decoding="async"
+             alt="Uppradade vinglas med rödvin på bardisken.">
+      </div>
+      <div class="sera-gallery__cell sera-frame sera-reveal">
+        <img class="sera-img" src="/demo/sera-media/gal-kok-480.webp"
+             srcset="/demo/sera-media/gal-kok-320.webp 320w, /demo/sera-media/gal-kok-480.webp 480w, /demo/sera-media/gal-kok-720.webp 720w, /demo/sera-media/gal-kok-960.webp 960w"
+             sizes="(max-width: 760px) 50vw, 25vw" width="960" height="639" loading="lazy" decoding="async"
+             alt="Kock som lägger upp pasta i det öppna köket.">
+      </div>
+      <div class="sera-gallery__cell sera-gallery__cell--h2 sera-frame sera-reveal">
+        <img class="sera-img" src="/demo/sera-media/gal-bardisk-480.webp"
+             srcset="/demo/sera-media/gal-bardisk-320.webp 320w, /demo/sera-media/gal-bardisk-480.webp 480w, /demo/sera-media/gal-bardisk-720.webp 720w, /demo/sera-media/gal-bardisk-960.webp 960w"
+             sizes="(max-width: 760px) 50vw, 25vw" width="960" height="669" loading="lazy" decoding="async"
+             alt="Bardisken en kväll, med upplyst vinhylla i bakgrunden.">
+      </div>
+      <div class="sera-gallery__cell sera-frame sera-reveal">
+        <img class="sera-img" src="/demo/sera-media/gal-gaster-480.webp"
+             srcset="/demo/sera-media/gal-gaster-320.webp 320w, /demo/sera-media/gal-gaster-480.webp 480w, /demo/sera-media/gal-gaster-720.webp 720w, /demo/sera-media/gal-gaster-960.webp 960w"
+             sizes="(max-width: 760px) 50vw, 25vw" width="960" height="639" loading="lazy" decoding="async"
+             alt="Två gäster som skålar i rödvin vid ett bord.">
+      </div>
+      <div class="sera-gallery__cell sera-frame sera-reveal">
+        <img class="sera-img" src="/demo/sera-media/gal-detalj-480.webp"
+             srcset="/demo/sera-media/gal-detalj-320.webp 320w, /demo/sera-media/gal-detalj-480.webp 480w, /demo/sera-media/gal-detalj-720.webp 720w, /demo/sera-media/gal-detalj-960.webp 960w"
+             sizes="(max-width: 760px) 50vw, 25vw" width="960" height="1440" loading="lazy" decoding="async"
+             alt="Närbild på händer som skålar över ett dukat bord.">
+      </div>
+      <div class="sera-gallery__cell sera-gallery__cell--w2 sera-frame sera-reveal">
+        <img class="sera-img" src="/demo/sera-media/gal-matbord-1024.webp"
+             srcset="/demo/sera-media/gal-matbord-480.webp 480w, /demo/sera-media/gal-matbord-768.webp 768w, /demo/sera-media/gal-matbord-1024.webp 1024w, /demo/sera-media/gal-matbord-1440.webp 1440w, /demo/sera-media/gal-matbord-1920.webp 1920w"
+             sizes="(max-width: 760px) 100vw, 50vw" width="1920" height="1275" loading="lazy" decoding="async"
+             alt="Dukade bord med rutiga dukar utanför en trattoria.">
+      </div>
+    </div>
+  </section>
+
+</div><!-- /sera-flow-wrap — linjen slutar exakt här -->
+
+<!-- ── Besök oss ────────────────────────────────────────────────────────── -->
+<section class="sera-visit" id="besok">
+  <div class="sera-visit__map">
+    <iframe title="Karta — Skånegatan, Södermalm"
+            src="https://www.google.com/maps?q=Sk%C3%A5negatan,Stockholm&amp;output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+  <div class="sera-visit__scrim"></div>
+  <div class="sera-visit__body sera-reveal">
+    <h2 class="sera-h2">Besök oss på Södermalm.</h2>
+    <p class="sera-visit__addr">Skånegatan 00, 116 00 Stockholm</p>
+    <p class="sera-hours">
+      <span>Tis–Tors 17–23</span><span>Fre–Lör 17–00:30</span><span>Söndag 16–22</span><span>Måndag stängt</span>
+    </p>
+    <button class="sera-btn sera-btn--sm" type="button"
+            data-sera-demo="SERA är en fiktiv restaurang — adressen finns bara i det här konceptet.">Visa på karta</button>
+  </div>
+</section>
+
+<!-- ── Slut-CTA ─────────────────────────────────────────────────────────── -->
+<section class="sera-cta" id="kontakt">
+  <div class="sera-cta__media sera-frame sera-frame--sharp">
+    <img class="sera-img"
+         src="/demo/sera-media/cta-1536.webp"
+         srcset="/demo/sera-media/cta-768.webp 768w, /demo/sera-media/cta-1152.webp 1152w, /demo/sera-media/cta-1536.webp 1536w, /demo/sera-media/cta-2048.webp 2048w"
+         sizes="100vw" width="2048" height="1356" loading="lazy" decoding="async" alt="">
+  </div>
+  <div class="sera-cta__body sera-reveal">
+    <h2 class="sera-h2">Vi ses ikväll?</h2>
+    <p class="sera-body">Boka ett bord, beställ något gott och stanna lite längre än planerat.</p>
+    <button class="sera-btn sera-btn--lg" type="button"
+            data-sera-demo="Det här är en koncepthemsida — bokningen är inte kopplad till någon riktig restaurang.">Boka bord</button>
+  </div>
+</section>
+
+<!-- ── Footer ───────────────────────────────────────────────────────────── -->
+<footer class="sera-footer">
+  <div class="sera-footer__inner">
+    <span class="sera-footer__ghost" aria-hidden="true">SERA</span>
+    <div class="sera-footer__row">
+      <div>
+        <p class="sera-footer__addr">Skånegatan 00<br>116 00 Stockholm</p>
+        <div class="sera-footer__links">
+          <a href="#meny">Meny</a>
+          <a href="#kontakt">Boka bord</a>
+          <button type="button" data-sera-demo="Konceptkonto — SERA finns bara som demo för Studio Klaro.">Instagram</button>
+        </div>
+      </div>
+      <p class="sera-footer__hours">Tis–Tors 17–23<br>Fre–Lör 17–00:30<br>Sön 16–22</p>
+    </div>
+  </div>
+  <div class="sera-footer__bar">
+    <span>Koncepthemsida · Fiktiv restaurang skapad för Studio Klaro</span>
+    <a href="/hemsida-restaurang-stockholm">← Tillbaka till Studio Klaro</a>
+  </div>
+</footer>
+
+<p class="sera-note" data-sera-note role="status" aria-live="polite"></p>
+
+</body>
+</html>

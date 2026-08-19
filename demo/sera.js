@@ -118,21 +118,34 @@ function initReveal() {
    och en rund punkt — till skillnad från en utsträckt viewBox.
    -------------------------------------------------------------------------- */
 
-const FLOW_PATHS = {
-  // Skriven i designens komposition: vandrar genom mittfältet och viker ut åt höger.
-  desktop: 'M50,0 C42,60 58,110 50,170 C40,230 60,290 50,350 C38,410 62,470 48,530 '
-         + 'C35,590 60,650 50,710 C42,760 58,800 50,850 C60,900 72,960 78,1000',
-  // Mobil: samma organiska rytm, förenklad och lagd i vänstermarginalen så att
-  // den aldrig korsar text eller foto.
-  mobile: 'M4,0 C2.5,70 5.5,140 4,210 C2.5,280 5.5,350 4,420 C2.5,490 5.5,560 4,630 '
-        + 'C2.5,700 5.5,770 4,840 C4.5,900 5.5,960 5.5,1000',
+/* Linjen som en följd av ankarpunkter i ett normaliserat rutnät
+   (x: 0–100 av sidbredden, y: 0–1000 av sträckans höjd).
+   Kontrollpunkterna sätts lodrätt från varje ankare, vilket ger lodräta
+   tangenter i varje punkt — kurvan blir därmed helt mjuk (G1-kontinuerlig)
+   och aldrig knyckig, vilket annars syns tydligt vid hårfin linjebredd. */
+
+const FLOW_ANCHORS = {
+  // Desktop: vandrar genom mittfältet och viker ut åt höger mot slutet.
+  desktop: [[50, 0], [40, 110], [61, 250], [38, 390], [62, 530], [40, 670], [58, 800], [78, 1000]],
+  // Mobil: samma rytm, förenklad och lagd i vänstermarginalen så att linjen
+  // aldrig korsar text eller foto.
+  mobile: [[4, 0], [2.6, 130], [5.6, 280], [2.6, 430], [5.6, 580], [2.8, 730], [5.2, 870], [5.5, 1000]],
 };
 
 const PIN_R = 4;
 
-function scalePath(d, w, h) {
-  return d.replace(/(-?\d*\.?\d+),(-?\d*\.?\d+)/g, (_m, x, y) =>
-    `${((parseFloat(x) / 100) * w).toFixed(2)},${((parseFloat(y) / 1000) * h).toFixed(2)}`);
+function buildPath(anchors, w, h) {
+  const px = (x) => ((x / 100) * w).toFixed(2);
+  const py = (y) => ((y / 1000) * h).toFixed(2);
+
+  let d = `M${px(anchors[0][0])},${py(anchors[0][1])}`;
+  for (let i = 1; i < anchors.length; i += 1) {
+    const [x0, y0] = anchors[i - 1];
+    const [x1, y1] = anchors[i];
+    const k = (y1 - y0) * 0.5;
+    d += ` C${px(x0)},${py(y0 + k)} ${px(x1)},${py(y1 - k)} ${px(x1)},${py(y1)}`;
+  }
+  return d;
 }
 
 function initFlow() {
@@ -151,10 +164,10 @@ function initFlow() {
 
     // Lämna plats för punktens radie så den inte klipps vid kartsektionens kant.
     const usable = Math.max(h - PIN_R * 2, 1);
-    const source = mobileMQ.matches ? FLOW_PATHS.mobile : FLOW_PATHS.desktop;
+    const anchors = mobileMQ.matches ? FLOW_ANCHORS.mobile : FLOW_ANCHORS.desktop;
 
     svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-    path.setAttribute('d', scalePath(source, w, usable));
+    path.setAttribute('d', buildPath(anchors, w, usable));
 
     length = path.getTotalLength();
     path.style.strokeDasharray = `${length}`;

@@ -526,9 +526,15 @@ html[data-sera-theme] {
 }
 .sera-visit__map { position: absolute; inset: 0; filter: var(--sera-map-filter); transition: filter var(--sera-theme-t); }
 .sera-visit__map iframe { width: 100%; height: 100%; border: 0; display: block; }
+/* Designens lodräta slöja, plus en vågrät över textspalten. Den vågräta
+   behövs för läsbarhet: i ljust tema filtreras kartan inte, och den ljusa
+   kartbilden ger annars för låg kontrast mot den krämvita texten. */
 .sera-visit__scrim {
   position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.85) 100%);
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.74) 26%,
+                           rgba(0, 0, 0, 0.28) 48%, rgba(0, 0, 0, 0) 66%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.85) 100%);
 }
 .sera-visit__body {
   position: relative;
@@ -635,7 +641,7 @@ html[data-sera-theme] {
   font-size: 34px;
   color: var(--sera-text);
 }
-.sera-mnav .sera-btn { margin-top: 14px; font-size: 16px; padding: 15px 34px; }
+.sera-mnav .sera-btn { margin-top: 14px; font-size: 16px; padding: 15px 34px; box-shadow: none; }
 
 /* --- Konceptnotis (demo-interaktion) -------------------------------------- */
 
@@ -645,9 +651,9 @@ html[data-sera-theme] {
   bottom: 26px;
   transform: translate(-50%, 14px);
   z-index: 950;
-  max-width: min(420px, calc(100vw - 40px));
-  padding: 13px 20px;
-  border-radius: 100px;
+  max-width: min(460px, calc(100vw - 40px));
+  padding: 13px 22px;
+  border-radius: 20px;
   background: var(--sera-nav-bg);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
@@ -705,18 +711,30 @@ html:not(.sera-js) .sera-reveal { opacity: 1; transform: none; }
 
 /* Mobil — samma komposition, staplad och luftig */
 @media (max-width: 760px) {
-  .sera-nav { padding-top: 74px; gap: 0; }
+  /* Tre spalter håller loggan exakt centrerad även när länkarna är dolda.
+     Toppmarginalen lämnar plats för Studio Klaros två demo-etiketter. */
+  .sera-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding-top: 104px;
+    gap: 0;
+  }
   .sera-nav__group--links { display: none; }
-  .sera-nav__group--end { flex: 1; gap: 18px; }
-  .sera-nav__logo { margin-inline: auto; }
+  .sera-nav__link--hide-sm { display: none; }
+  .sera-nav__logo { grid-column: 2; }
+  .sera-nav__group--end { grid-column: 3; justify-content: flex-end; gap: 18px; }
   .sera-nav__logo img { height: 46px; width: 46px; }
   .sera-burger { display: flex; }
-  .sera-themes { gap: 14px; }
+  .sera-themes { gap: 14px; margin-left: 0; }
   .sera-theme-dot { width: 15px; height: 15px; }
   .sera-theme-dot::after { inset: -8px; }
 
   /* Demo-kontrollerna får varsin rad så båda ryms */
   .sera-chrome--label { right: auto; left: 18px; top: 60px; font-size: 10px; padding: 7px 12px; }
+
+  /* Ankarhopp ska inte landa bakom de fasta demo-etiketterna */
+  [id] { scroll-margin-top: 104px; }
 
   .sera-hero__title { font-size: clamp(2.1rem, 9.5vw, 3rem); }
   .sera-hero__lead { font-size: 15px; }
@@ -751,6 +769,11 @@ html:not(.sera-js) .sera-reveal { opacity: 1; transform: none; }
   .sera-gallery__grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; gap: 12px; }
 
   .sera-visit { min-height: 560px; }
+  .sera-visit__scrim {
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.86) 0%, rgba(0, 0, 0, 0.78) 68%, rgba(0, 0, 0, 0.6) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.85) 100%);
+  }
   .sera-hours { gap: 8px 20px; }
 
   .sera-footer__row { padding-top: clamp(72px, 20vw, 96px); }
