@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Priser – Studio Klaro | Webbdesign Stockholm</title>
+<meta name="description" content="Tydliga paket och fasta priser för hemsidor till småföretag i Stockholm. Från 7 900 kr, inga överraskningar – du får alltid en fast offert innan projektet börjar.">
+<link rel="canonical" href="https://studioklaro.se/priser">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Studio Klaro">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Priser – Studio Klaro | Webbdesign Stockholm">
+<meta property="og:description" content="Tydliga paket och fasta priser för hemsidor till småföretag i Stockholm. Från 7 900 kr, inga överraskningar.">
+<meta property="og:url" content="https://studioklaro.se/priser">
+<meta property="og:image" content="https://studioklaro.se/work-chairman.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Priser – Studio Klaro | Webbdesign Stockholm">
+<meta name="twitter:description" content="Tydliga paket och fasta priser för hemsidor till småföretag i Stockholm. Från 7 900 kr, inga överraskningar.">
+<meta name="twitter:image" content="https://studioklaro.se/work-chairman.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "url": "https://studioklaro.se/priser",
+  "mainEntity": {
+    "@type": "ProfessionalService",
+    "name": "Studio Klaro",
+    "url": "https://studioklaro.se",
+    "description": "Studio Klaro bygger snygga, snabba hemsidor för småföretag i Stockholm.",
+    "areaServed": {
+      "@type": "City",
+      "name": "Stockholm"
+    },
+    "priceRange": "$$"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#DCEEFF;font-family:'Manrope',system-ui,sans-serif;}
+  a{color:#146EF5;}
+  a:hover{color:#0F5AD1;}
+  ::selection{background:#146EF5;color:#fff;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
+
+  /* Sticky shrinking nav capsule */
+  .nav-wrap{position:sticky;top:0;z-index:50;padding:0px 0px 0;transition:padding .5s cubic-bezier(0.22,1,0.36,1);}
+  .nav-capsule{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:28px 20px;border-radius:0px;background:rgba(255,255,255,0);box-shadow:0 0 0 rgba(0,0,0,0);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);transition:max-width .5s cubic-bezier(0.22,1,0.36,1),padding .5s cubic-bezier(0.22,1,0.36,1),border-radius .5s cubic-bezier(0.22,1,0.36,1),background .5s cubic-bezier(0.22,1,0.36,1),box-shadow .5s cubic-bezier(0.22,1,0.36,1);opacity:0;transform:translateY(-18px);animation:fadeUp .6s cubic-bezier(0.22,1,0.36,1) 0.05s forwards;}
+  .nav-wrap.scrolled{padding:14px 20px 0;}
+  .nav-wrap.scrolled .nav-capsule{max-width:880px;padding:14px 28px;border-radius:18px;background:rgba(255,255,255,0.9);box-shadow:0 12px 30px rgba(15,23,42,0.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+  a:focus-visible{outline:2px solid #0F172A;outline-offset:2px;}
+
+  /* Hover-lyfteffekter (ersätter style-hover) */
+  .btn-lift{transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s cubic-bezier(0.22,1,0.36,1);}
+  .cta-nav:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,110,245,0.4);}
+  .cta-nav:active{transform:translateY(0px) scale(0.98);}
+  .cta-main:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,110,245,0.4);}
+  .cta-footer:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,0.15);}
+
+  /* Mobil nedfällbar meny */
+  .mnav-panel{max-width:1140px;margin:8px auto 0;overflow:hidden;max-height:0;transition:max-height 0.35s cubic-bezier(0.22,1,0.36,1);border-radius:18px;}
+  .nav-wrap.scrolled .mnav-panel{max-width:880px;}
+  .mnav-panel.open{max-height:400px;}
+
+  /* Scroll-reveal */
+  [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,.8,.24,1),transform .8s cubic-bezier(.16,.8,.24,1);}
+  [data-reveal].is-visible{opacity:1;transform:translateY(0);}
+
+  /* Paketguide: tunna kolumnseparatorer på desktop, staplat med luft på mobil */
+  .paket-guide-col{padding:0 40px;border-left:1px solid rgba(15,23,42,0.08);overflow:visible;height:auto;max-height:none;}
+  .paket-guide-col:first-child{border-left:none;}
+  .paket-guide-subtitle{display:block;height:auto;max-height:none;overflow:visible;white-space:normal;-webkit-line-clamp:unset;-webkit-box-orient:unset;text-overflow:clip;clip-path:none;transform:none;animation:none;}
+
+  /* Jämförelsetabell */
+  .cmp-row{display:grid;grid-template-columns:1.4fr repeat(3,1fr);align-items:center;column-gap:16px;padding:16px 0;border-bottom:1px solid rgba(15,23,42,0.07);}
+  .cmp-row:last-child{border-bottom:none;}
+  .cmp-head{padding-top:0;padding-bottom:20px;}
+  .cmp-label{font-size:14px;font-weight:700;color:#0F172A;text-align:left;}
+  .cmp-col-name{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#8296B0;text-align:center;}
+  .cmp-cell{font-size:14px;font-weight:600;color:#0F172A;text-align:center;padding:6px 8px;border-radius:10px;}
+  .cmp-check{font-size:16px;font-weight:800;color:#146EF5;}
+  .cmp-dash{font-size:16px;font-weight:600;color:#8296B0;}
+  .cmp-pro{color:#146EF5;}
+  .cmp-cell.cmp-pro{background:rgba(20,110,245,0.045);}
+  .cmp-mobile-label{display:none;}
+
+  /* Betalningsalternativ */
+  .pay-card{background:#fff;border-radius:20px;padding:40px 36px;border:1px solid rgba(15,23,42,0.08);box-shadow:0 10px 26px rgba(15,23,42,0.05);}
+  .pay-card-flex{border:1.5px solid #146EF5;box-shadow:0 20px 44px rgba(20,110,245,0.16);}
+  .pay-badge{display:inline-block;font-size:11px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.1);padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:18px;}
+  .pay-title{font-size:19px;font-weight:800;color:#0F172A;margin-bottom:16px;}
+  .pay-price{font-size:32px;font-weight:800;color:#0F172A;margin-bottom:20px;line-height:1.2;}
+  .pay-price-sub{display:block;margin-top:6px;font-size:17px;font-weight:700;color:#146EF5;}
+  .pay-desc{font-size:14px;color:#52657A;line-height:1.65;margin:0 0 28px;}
+  .pay-bullets{display:flex;flex-direction:column;gap:14px;margin:0 0 28px;}
+  .pay-bullet{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:#0F172A;font-weight:600;line-height:1.4;}
+  .pay-bullet-chip{flex:none;width:22px;height:22px;border-radius:7px;background:rgba(20,110,245,0.1);color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px;}
+  .pay-card-flex .pay-bullet-chip{background:#146EF5;color:#fff;}
+  .pay-footnote{font-size:12px;color:#8296B0;margin-top:24px;line-height:1.6;}
+  .pay-note-flex{font-size:13px;font-weight:600;color:#0F172A;line-height:1.65;margin-top:28px;padding-top:22px;border-top:1px solid rgba(15,23,42,0.08);}
+
+  .flex-acc-btn{background:none;border:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;color:#146EF5;padding:0;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s ease;}
+  .flex-acc-btn:hover{color:#0F5AD1;}
+  .flex-acc-chevron{transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);flex:none;}
+  .flex-acc-btn[aria-expanded="true"] .flex-acc-chevron{transform:rotate(180deg);}
+  .flex-acc-panel{overflow:hidden;max-height:0;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1);}
+  .flex-acc-panel.open{max-height:460px;}
+
+  .flex-row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;column-gap:12px;padding:13px 0;border-bottom:1px solid rgba(15,23,42,0.07);}
+  .flex-row:last-child{border-bottom:none;}
+  .flex-row-head .flex-cell{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#8296B0;}
+  .flex-label{font-size:14px;font-weight:700;color:#0F172A;text-align:left;}
+  .flex-cell{font-size:14px;font-weight:600;color:#0F172A;text-align:right;}
+
+  /* Klaro Care */
+  .care-band{padding:100px 0;}
+  .care-item{padding:20px 0;border-bottom:1px solid rgba(15,23,42,0.07);}
+  .care-item:first-child{padding-top:0;}
+  .care-item:last-child{border-bottom:none;padding-bottom:0;}
+  .care-item-title{font-size:16px;font-weight:800;color:#0F172A;margin-bottom:6px;}
+  .care-item-desc{font-size:14px;color:#52657A;line-height:1.6;}
+
+  /* Tillägg */
+  .addon-item{padding:24px 0;}
+  .addon-item:nth-child(1),.addon-item:nth-child(2){padding-top:0;}
+  .addon-item:nth-child(n+3){border-top:1px solid rgba(15,23,42,0.07);}
+  .addon-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+  .addon-name{font-size:16px;font-weight:800;color:#0F172A;}
+  .addon-price{font-size:14px;font-weight:700;color:#0F172A;white-space:nowrap;}
+  .addon-desc{font-size:14px;color:#52657A;line-height:1.6;}
+
+  /* FAQ – tillgänglig accordion (behåller chattbubbel-uttrycket) */
+  .faq-q-btn{background:#0F172A;color:#fff;font-size:15px;font-weight:700;padding:12px 18px;border-radius:16px 16px 4px 16px;max-width:75%;border:none;cursor:pointer;font-family:inherit;text-align:left;line-height:1.4;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);}
+  .faq-q-btn:hover{transform:translateY(-2px);}
+  .faq-rows{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.4s cubic-bezier(0.22,1,0.36,1);}
+  .faq-ans{display:flex;justify-content:flex-start;opacity:0;transition:opacity 0.35s cubic-bezier(0.22,1,0.36,1) 0.05s;}
+
+  /* Responsiv mobilanpassning */
+  @media (max-width:820px){
+    [data-rnav]{display:none!important;}
+    [data-rgrid]{grid-template-columns:1fr!important;}
+    [data-rgrid2]{grid-template-columns:1fr!important;}
+    [data-rgrid3]{grid-template-columns:1fr!important;}
+    [data-rgap]{gap:20px!important;}
+    [data-rpad]{padding-left:16px!important;padding-right:16px!important;}
+    [data-rhide]{display:none!important;}
+    [data-rshow]{display:block!important;}
+    [data-rhero-h1]{font-size:30px!important;}
+    [data-rsection-h2]{font-size:23px!important;}
+    [data-rcta-h2]{font-size:24px!important;}
+    [data-rpanelpad]{padding:26px!important;}
+    [data-rmt]{margin-top:56px!important;}
+    [data-rbtnfull] a{width:100%!important;box-sizing:border-box!important;text-align:center!important;}
+    .paket-guide-col{padding:0!important;border-left:none!important;margin-top:32px;}
+    .paket-guide-col:first-child{margin-top:0;}
+    .cmp-head{display:none;}
+    .cmp-row{grid-template-columns:1fr;row-gap:10px;padding:20px 0;}
+    .cmp-cell{display:flex;justify-content:space-between;align-items:center;text-align:left;padding:6px 10px;}
+    .cmp-mobile-label{display:inline-block;font-size:13px;font-weight:700;color:#8296B0;}
+    .cmp-mobile-label.cmp-pro{color:#146EF5;}
+    .pay-card{padding:32px 28px;}
+    .pay-price{font-size:28px;}
+    .flex-row{grid-template-columns:1.2fr 0.9fr 1fr 0.7fr;column-gap:6px;padding:12px 0;}
+    .flex-cell,.flex-label{font-size:12px;}
+    .flex-row-head .flex-cell{font-size:10px;}
+    .care-band{padding:64px 0;}
+    .care-price{font-size:36px!important;}
+    .addon-item{padding:24px 0!important;border-top:1px solid rgba(15,23,42,0.07);}
+    .addon-item:first-child{padding-top:0!important;border-top:none;}
+    .faq-q-btn{max-width:88%!important;}
+    .faq-ans > div{max-width:88%!important;}
+  }
+</style>
+</head>
+<body>
+
+<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
+
+  <!-- NAV -->
+  <div class="nav-wrap">
+    <div class="nav-capsule">
+      <a href="index.html" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
+        <img src="logo-klaro.png" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
+      </a>
+      <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
+        <a href="index.html#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänster</a>
+        <a href="index.html#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
+        <a href="index.html#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
+        <a href="priser.html" style="color:#146EF5;text-decoration:none;transition:color 0.2s ease;">Priser</a>
+        <a href="om.html" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Om</a>
+      </div>
+      <a data-rhide href="index.html#kontakt" class="btn-lift cta-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få ett kostnadsfritt förslag</a>
+      <div data-rshow style="display:none;">
+        <button id="mnav-toggle" aria-label="Meny" aria-expanded="false" style="width:40px;height:40px;border-radius:10px;background:#146EF5;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+          <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div></div>
+        </button>
+      </div>
+    </div>
+    <div data-rshow id="mnav-panel" class="mnav-panel" style="display:none;">
+      <div style="background:#fff;border-radius:18px;box-shadow:0 12px 30px rgba(15,23,42,0.12);overflow:hidden;">
+        <a href="index.html#tjansten" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänster</a>
+        <a href="index.html#portfolio" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
+        <a href="index.html#processen" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
+        <a href="priser.html" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#146EF5;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
+        <a href="om.html" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
+        <div style="padding:16px 20px;">
+          <a href="index.html#kontakt" style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få ett kostnadsfritt förslag</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="max-width:760px;margin:60px auto 0;text-align:center;padding:0 20px;">
+    <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px;">Priser</div>
+    <h1 data-rhero-h1 style="font-size:42px;line-height:1.15;font-weight:800;color:#0F172A;margin:0 0 20px;letter-spacing:-0.01em;">En tydlig investering från start</h1>
+    <p style="font-size:17px;line-height:1.6;color:#52657A;margin:0;font-weight:500;">Välj en lösning som passar verksamhetens behov. Samtliga paket har ett tydligt grundpris och du får alltid en fast offert innan projektet börjar.</p>
+  </div>
+
+  <!-- TRE KUNDPAKET -->
+  <div style="max-width:1140px;margin:80px auto 0;padding:0 20px;" data-rpad>
+    <div data-reveal data-rgrid3 style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+      <div style="background:#fff;border-radius:20px;padding:36px 28px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
+        <div style="font-size:13px;font-weight:800;color:#146EF5;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;">Startklar</div>
+        <div style="font-size:30px;font-weight:800;color:#0F172A;margin-bottom:6px;"><span style="font-size:15px;font-weight:600;color:#52657A;margin-right:5px;">Från</span>7 900 kr</div>
+        <p style="font-size:13px;color:#52657A;line-height:1.6;margin:0 0 22px;">För frisörer, barberare, terapeuter och mindre lokala företag.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:13px;color:#0F172A;">✓ One-page-hemsida</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Mobilanpassning</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Tjänster och priser</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Kontakt och öppettider</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Bokningslänk</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Bildgalleri</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Grundläggande SEO</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Publicering</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Två korrekturrundor</div>
+        </div>
+      </div>
+
+      <div style="background:#0F172A;border-radius:20px;padding:36px 28px;box-shadow:0 16px 36px rgba(15,23,42,0.18);position:relative;">
+        <div style="position:absolute;top:-14px;left:28px;background:#146EF5;color:#fff;font-size:11px;font-weight:800;padding:5px 12px;border-radius:20px;">REKOMMENDERAD</div>
+        <div style="font-size:13px;font-weight:800;color:#5FA8FF;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;">Professionell</div>
+        <div style="font-size:30px;font-weight:800;color:#fff;margin-bottom:6px;"><span style="font-size:15px;font-weight:600;color:#B8C6DC;margin-right:5px;">Från</span>13 900 kr</div>
+        <p style="font-size:13px;color:#B8C6DC;line-height:1.6;margin:0 0 22px;">För företag som behöver en komplett webbplats med flera sidor och en professionell digital grund.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:13px;color:#fff;">✓ Upp till fem sidor</div>
+          <div style="font-size:13px;color:#fff;">✓ Unik design anpassad efter verksamheten</div>
+          <div style="font-size:13px;color:#fff;">✓ Färgpalett och typsnitt</div>
+          <div style="font-size:13px;color:#fff;">✓ Kontaktformulär</div>
+          <div style="font-size:13px;color:#fff;">✓ Domänkoppling</div>
+          <div style="font-size:13px;color:#fff;">✓ Grundläggande SEO</div>
+          <div style="font-size:13px;color:#fff;">✓ Google Företagsprofil</div>
+          <div style="font-size:13px;color:#fff;">✓ Analytics</div>
+          <div style="font-size:13px;color:#fff;">✓ Publicering</div>
+          <div style="font-size:13px;color:#fff;">✓ Två korrekturrundor</div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:20px;padding:36px 28px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
+        <div style="font-size:13px;font-weight:800;color:#146EF5;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;">Komplett närvaro</div>
+        <div style="font-size:30px;font-weight:800;color:#0F172A;margin-bottom:6px;"><span style="font-size:15px;font-weight:600;color:#52657A;margin-right:5px;">Från</span>19 900 kr</div>
+        <p style="font-size:13px;color:#52657A;line-height:1.6;margin:0 0 22px;">För kunden som vill att du löser hela den digitala närvaron.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:13px;color:#0F172A;">✓ Upp till åtta sidor</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Miniidentitet</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Enkel uppfräschning av logotyp</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Domän och teknisk konfiguration</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Professionell mejladress</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Google Företagsprofil</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Lokal SEO-start</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Analytics</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Favicon och profilbilder</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Publicering</div>
+          <div style="font-size:13px;color:#0F172A;">✓ Tre korrekturrundor</div>
+        </div>
+        <div style="font-size:12px;color:#8296B0;margin-top:18px;">Ny logotyp kan läggas till för ca 3 000 kr extra.</div>
+      </div>
+
+    </div>
+    <p style="font-size:13px;color:#8296B0;line-height:1.7;font-weight:500;margin:20px auto 0;max-width:640px;text-align:center;">Priserna anges exkl. moms. Domän, hosting, e-post och externa tjänster tillkommer. Admin, integrationer och andra anpassningar offereras separat – kontakta <a href="mailto:studioklarose@gmail.com" style="color:#8296B0;text-decoration:underline;">studioklarose@gmail.com</a>.</p>
+  </div>
+
+  <!-- VILKET PAKET PASSAR DIG -->
+  <div style="max-width:1200px;margin:100px auto 0;padding:0 20px;" data-rpad>
+    <div style="text-align:center;margin-bottom:56px;">
+      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Hjälp att välja</div>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 12px;">Vilket paket passar dig?</h2>
+      <p style="font-size:15px;color:#52657A;margin:0 auto;font-weight:500;max-width:560px;">Tre olika nivåer beroende på hur mycket ditt företag behöver. Här är det enklaste sättet att välja rätt.</p>
+    </div>
+    <div data-rgrid3 style="display:grid;grid-template-columns:repeat(3,1fr);align-items:start;">
+
+      <div class="paket-guide-col">
+        <div style="font-size:18px;font-weight:800;color:#0F172A;line-height:1.3;margin-bottom:10px;">Startklar</div>
+        <div class="paket-guide-subtitle" style="font-size:15px;font-weight:700;color:#0F172A;line-height:1.55;margin-bottom:16px;">För dig som behöver komma online snabbt.</div>
+        <p style="font-size:14px;color:#52657A;line-height:1.65;margin:0 0 24px;">Passar mindre lokala företag som behöver en professionell one-page-hemsida med tjänster, priser, kontaktuppgifter och tydlig väg till bokning eller kontakt.</p>
+        <div style="font-size:13px;color:#8296B0;line-height:1.65;"><span style="font-weight:700;color:#0F172A;">Bra för:</span> Frisörer, barberare, terapeuter, PT:s och mindre lokala företag.</div>
+      </div>
+
+      <div class="paket-guide-col">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+          <div style="font-size:18px;font-weight:800;color:#0F172A;line-height:1.3;">Professionell</div>
+          <span style="font-size:11px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.1);padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;">Mest vald</span>
+        </div>
+        <div class="paket-guide-subtitle" style="font-size:15px;font-weight:700;color:#0F172A;line-height:1.55;margin-bottom:16px;">För dig som har mer att berätta.</div>
+        <p style="font-size:14px;color:#52657A;line-height:1.65;margin:0 0 24px;">Passar företag med flera tjänster, mer innehåll eller behov av separata sidor för exempelvis tjänster, om företaget, case och kontakt.</p>
+        <div style="font-size:13px;color:#8296B0;line-height:1.65;"><span style="font-weight:700;color:#0F172A;">Bra för:</span> Konsulter, rekryteringsföretag, byggföretag, byråer och växande verksamheter.</div>
+      </div>
+
+      <div class="paket-guide-col">
+        <div style="font-size:18px;font-weight:800;color:#0F172A;line-height:1.3;margin-bottom:10px;">Komplett närvaro</div>
+        <div class="paket-guide-subtitle" style="font-size:15px;font-weight:700;color:#0F172A;line-height:1.55;margin-bottom:16px;">För dig som vill att vi tar hand om helheten.</div>
+        <p style="font-size:14px;color:#52657A;line-height:1.65;margin:0 0 24px;">Passar företag som inte bara behöver en ny webbplats utan även hjälp med den digitala grunden runt omkring – identitet, Google Företagsprofil, lokal SEO och teknisk uppsättning.</p>
+        <div style="font-size:13px;color:#8296B0;line-height:1.65;"><span style="font-weight:700;color:#0F172A;">Bra för:</span> Företag som vill bygga upp eller göra om hela sin digitala närvaro.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JÄMFÖR PAKETEN -->
+  <div style="max-width:1140px;margin:100px auto 0;padding:0 20px;" data-rpad>
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Jämför</div>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 12px;">Vad skiljer paketen åt?</h2>
+      <p style="font-size:15px;color:#52657A;margin:0 auto;font-weight:500;max-width:600px;">Alla paket ger dig en professionell och mobilanpassad webbplats. Skillnaden ligger främst i omfattning och hur mycket vi hjälper till runt omkring.</p>
+    </div>
+
+    <div data-rpanelpad style="background:#fff;border-radius:24px;padding:48px 40px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
+
+      <div class="cmp-row cmp-head">
+        <div class="cmp-label"></div>
+        <div class="cmp-col-name">Startklar</div>
+        <div class="cmp-col-name cmp-pro">
+          Professionell
+          <span style="display:block;margin-top:6px;font-size:10px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.1);padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;">Mest vald</span>
+        </div>
+        <div class="cmp-col-name">Komplett närvaro</div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-label">Omfattning</div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Startklar</span><span>One-page</span></div>
+        <div class="cmp-cell cmp-pro"><span class="cmp-mobile-label cmp-pro">Professionell</span><span>Upp till 5 sidor</span></div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Komplett närvaro</span><span>Upp till 8 sidor</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-label">Google Företagsprofil</div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Startklar</span><span class="cmp-dash">—</span></div>
+        <div class="cmp-cell cmp-pro"><span class="cmp-mobile-label cmp-pro">Professionell</span><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Komplett närvaro</span><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-label">Analytics</div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Startklar</span><span class="cmp-dash">—</span></div>
+        <div class="cmp-cell cmp-pro"><span class="cmp-mobile-label cmp-pro">Professionell</span><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Komplett närvaro</span><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-label">Miniidentitet</div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Startklar</span><span class="cmp-dash">—</span></div>
+        <div class="cmp-cell cmp-pro"><span class="cmp-mobile-label cmp-pro">Professionell</span><span class="cmp-dash">—</span></div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Komplett närvaro</span><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-label">Lokal SEO-start</div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Startklar</span><span class="cmp-dash">—</span></div>
+        <div class="cmp-cell cmp-pro"><span class="cmp-mobile-label cmp-pro">Professionell</span><span class="cmp-dash">—</span></div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Komplett närvaro</span><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-label">Professionell e-post</div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Startklar</span><span class="cmp-dash">—</span></div>
+        <div class="cmp-cell cmp-pro"><span class="cmp-mobile-label cmp-pro">Professionell</span><span class="cmp-dash">—</span></div>
+        <div class="cmp-cell"><span class="cmp-mobile-label">Komplett närvaro</span><span class="cmp-check">✓</span></div>
+      </div>
+
+    </div>
+
+    <p style="font-size:13px;color:#8296B0;line-height:1.7;font-weight:500;margin:20px auto 0;max-width:640px;text-align:center;">Alla paket inkluderar mobilanpassning, grundläggande SEO, publicering och korrekturrundor.</p>
+  </div>
+
+  <!-- BETALNINGSALTERNATIV -->
+  <div style="max-width:1140px;margin:100px auto 0;padding:0 20px;" data-rpad>
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Betalningsalternativ</div>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 12px;">Välj hur du vill betala</h2>
+      <p style="font-size:15px;color:#52657A;margin:0 auto;font-weight:500;max-width:600px;">Samma hemsida, två olika sätt att betala. Betala hela projektet direkt eller dela upp investeringen över 12 månader.</p>
+    </div>
+
+    <div data-rgrid2 data-rgap style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+      <div class="pay-card">
+        <div class="pay-title">Köp direkt</div>
+        <div class="pay-price"><span style="font-size:15px;font-weight:600;color:#52657A;margin-right:5px;">Från</span>7 900 kr</div>
+        <p class="pay-desc">Betala hela projektpriset och äg webbplatsen från start.</p>
+        <div class="pay-bullets">
+          <div class="pay-bullet"><span class="pay-bullet-chip">✓</span>Ingen bindningstid</div>
+          <div class="pay-bullet"><span class="pay-bullet-chip">✓</span>Du äger webbplatsen från start</div>
+          <div class="pay-bullet"><span class="pay-bullet-chip">✓</span>Möjlighet att lägga till Klaro Care efter lansering</div>
+        </div>
+        <div class="pay-footnote">Klaro Care kan läggas till för 499 kr/mån.</div>
+      </div>
+
+      <div class="pay-card pay-card-flex">
+        <div class="pay-badge">Lägre startkostnad</div>
+        <div class="pay-title">Klaro Flex</div>
+        <div class="pay-price">
+          <span style="font-size:15px;font-weight:600;color:#52657A;margin-right:5px;">Från</span>1 990 kr
+          <span class="pay-price-sub">+ 995 kr/mån</span>
+        </div>
+        <p class="pay-desc">Dela upp investeringen över 12 månader och få Klaro Care inkluderat under hela perioden.</p>
+        <div class="pay-bullets">
+          <div class="pay-bullet"><span class="pay-bullet-chip">✓</span>12 månaders avtalstid</div>
+          <div class="pay-bullet"><span class="pay-bullet-chip">✓</span>Hosting och teknisk drift ingår</div>
+          <div class="pay-bullet"><span class="pay-bullet-chip">✓</span>Backup och support ingår</div>
+          <div class="pay-bullet"><span class="pay-bullet-chip">✓</span>Mindre innehållsändringar ingår</div>
+          <div class="pay-bullet"><span class="pay-bullet-chip">✓</span>Webbplatsen är färdigbetald efter 12 månader</div>
+        </div>
+        <div class="pay-note-flex">Efter 12 månader är webbplatsen din. Därefter väljer du själv om du vill fortsätta med Klaro Care för 499 kr/mån eller avsluta utan fortsatt månadsavgift.</div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:40px;padding-top:32px;border-top:1px solid rgba(15,23,42,0.08);text-align:center;">
+      <button id="flex-acc-toggle" class="flex-acc-btn" aria-expanded="false" aria-controls="flex-acc-panel">
+        Se Klaro Flex-priser för alla paket
+        <svg class="flex-acc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div id="flex-acc-panel" class="flex-acc-panel">
+        <div style="max-width:640px;margin:24px auto 0;text-align:left;">
+          <div class="flex-row flex-row-head">
+            <div class="flex-label"></div>
+            <div class="flex-cell">Startavgift</div>
+            <div class="flex-cell">Per månad</div>
+            <div class="flex-cell">Avtalstid</div>
+          </div>
+          <div class="flex-row">
+            <div class="flex-label">Startklar</div>
+            <div class="flex-cell">1 990 kr</div>
+            <div class="flex-cell">995 kr/mån</div>
+            <div class="flex-cell">12 mån</div>
+          </div>
+          <div class="flex-row">
+            <div class="flex-label">Professionell</div>
+            <div class="flex-cell">2 990 kr</div>
+            <div class="flex-cell">1 395 kr/mån</div>
+            <div class="flex-cell">12 mån</div>
+          </div>
+          <div class="flex-row">
+            <div class="flex-label">Komplett närvaro</div>
+            <div class="flex-cell">3 990 kr</div>
+            <div class="flex-cell">1 795 kr/mån</div>
+            <div class="flex-cell">12 mån</div>
+          </div>
+          <p style="font-size:13px;color:#8296B0;line-height:1.7;font-weight:500;margin:16px 0 0;text-align:center;">Klaro Care ingår under hela 12-månadersperioden. Alla priser anges exkl. moms.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KLARO CARE -->
+  <div class="care-band" style="margin-top:100px;width:100vw;margin-left:calc(50% - 50vw);background:#fff;">
+    <div style="max-width:1140px;margin:0 auto;padding:0 20px;" data-rpad>
+
+      <div data-rgrid2 data-rgap style="display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:start;">
+
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Efter lansering</div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+            <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0;line-height:1.3;">Vi kan fortsätta ta hand om hemsidan.</h2>
+            <span style="font-size:11px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.1);padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;">Valfritt</span>
+          </div>
+          <p style="font-size:15px;color:#52657A;line-height:1.65;margin:0 0 32px;font-weight:500;">Din hemsida är klar – men den behöver inte bli ditt ansvar. Med Klaro Care tar vi hand om det tekniska och hjälper till med mindre ändringar när det behövs.</p>
+
+          <div class="care-price" style="font-size:46px;font-weight:800;color:#0F172A;margin-bottom:8px;line-height:1.1;">499 kr<span style="font-size:19px;font-weight:600;color:#52657A;">/mån</span></div>
+          <div style="font-size:13px;color:#8296B0;">Ingen bindningstid efter eventuell Klaro Flex-period.</div>
+        </div>
+
+        <div>
+          <div class="care-item">
+            <div class="care-item-title">Hosting &amp; drift</div>
+            <div class="care-item-desc">Vi ser till att webbplatsen fortsätter vara online och fungerar som den ska.</div>
+          </div>
+          <div class="care-item">
+            <div class="care-item-title">Tekniskt underhåll</div>
+            <div class="care-item-desc">Vi tar hand om tekniska uppdateringar och mindre problem som kan uppstå.</div>
+          </div>
+          <div class="care-item">
+            <div class="care-item-title">Backup</div>
+            <div class="care-item-desc">Webbplatsen säkerhetskopieras så att det finns en trygg väg tillbaka om något händer.</div>
+          </div>
+          <div class="care-item">
+            <div class="care-item-title">Mindre ändringar</div>
+            <div class="care-item-desc">Behöver du ändra en text, bild, öppettid eller liknande hjälper vi till.</div>
+          </div>
+          <div class="care-item">
+            <div class="care-item-title">Support</div>
+            <div class="care-item-desc">Du har någon att kontakta när du behöver hjälp med webbplatsen.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:56px;padding-top:32px;border-top:1px solid rgba(15,23,42,0.08);max-width:820px;">
+        <p style="font-size:14px;color:#52657A;line-height:1.7;font-weight:500;margin:0 0 12px;">Klaro Care är helt valfritt. Köper du webbplatsen direkt kan Care läggas till efter lansering. Väljer du Klaro Flex ingår Care under hela den första 12-månadersperioden.</p>
+        <p style="font-size:13px;color:#8296B0;line-height:1.6;margin:0;">Större redesign, nya sidor, nya funktioner och integrationer ingår inte i Klaro Care och offereras separat.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TILLÄGG -->
+  <div style="max-width:1140px;margin:100px auto 0;padding:0 20px;" data-rpad>
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Tillägg</div>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 12px;">Behöver du något mer?</h2>
+      <p style="font-size:15px;color:#52657A;margin:0 auto;font-weight:500;max-width:560px;">Alla företag behöver olika saker. Här är några vanliga tillägg som kan kombineras med våra webbpaket.</p>
+    </div>
+
+    <div class="addon-grid" data-rgrid2 style="display:grid;grid-template-columns:1fr 1fr;column-gap:48px;">
+
+      <div class="addon-item">
+        <div class="addon-head">
+          <div class="addon-name">Ny logotyp</div>
+          <div class="addon-price">Från 3 000 kr</div>
+        </div>
+        <div class="addon-desc">En ny enkel logotyp anpassad efter företagets visuella uttryck.</div>
+      </div>
+
+      <div class="addon-item">
+        <div class="addon-head">
+          <div class="addon-name">Extra sida</div>
+          <div class="addon-price">Från 1 500 kr</div>
+        </div>
+        <div class="addon-desc">För exempelvis ytterligare tjänst, case, team, FAQ eller annan separat innehållssida.</div>
+      </div>
+
+      <div class="addon-item">
+        <div class="addon-head">
+          <div class="addon-name">CMS / admin</div>
+          <div class="addon-price">Från 3 500 kr</div>
+        </div>
+        <div class="addon-desc">Ett enkelt administrationsläge där kunden själv kan uppdatera exempelvis bilder, texter eller annat utvalt innehåll.</div>
+      </div>
+
+      <div class="addon-item">
+        <div class="addon-head">
+          <div class="addon-name">Extra korrekturrunda</div>
+          <div class="addon-price">750 kr</div>
+        </div>
+        <div class="addon-desc">Om projektet behöver fler korrekturrundor än de som ingår i valt paket.</div>
+      </div>
+
+      <div class="addon-item">
+        <div class="addon-head">
+          <div class="addon-name">Copywriting</div>
+          <div class="addon-price">Från 1 500 kr</div>
+        </div>
+        <div class="addon-desc">Hjälp med att skriva eller strukturera innehåll och texter till webbplatsen.</div>
+      </div>
+
+      <div class="addon-item">
+        <div class="addon-head">
+          <div class="addon-name">Specialintegrationer</div>
+          <div class="addon-price">Offert</div>
+        </div>
+        <div class="addon-desc">Exempelvis externa system, API:er, avancerade formulär eller annan specialfunktionalitet.</div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:48px;text-align:center;max-width:640px;margin-left:auto;margin-right:auto;">
+      <p style="font-size:14px;color:#52657A;line-height:1.7;font-weight:500;margin:0 0 6px;">Har du behov som inte finns med här? Berätta vad du vill göra så får du alltid ett tydligt pris innan arbetet påbörjas.</p>
+      <p style="font-size:13px;color:#8296B0;line-height:1.6;margin:0;">Alla priser anges exkl. moms.</p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="max-width:800px;margin:100px auto 0;padding:0 20px;">
+    <div style="text-align:center;margin-bottom:44px;">
+      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Vanliga frågor</div>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0;">Bra att veta innan vi börjar</h2>
+    </div>
+    <div data-reveal>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-1">Äger jag hemsidan?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-1" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Köper du hemsidan direkt äger du den från start. Väljer du Klaro Flex är webbplatsen färdigbetald efter den första 12-månadersperioden och blir därefter din fullt ut.</div></div></div></div>
+      </div>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-2">Hur fungerar Klaro Flex?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-2" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Klaro Flex innebär att du betalar en lägre startkostnad och delar upp resten över 12 månader. Klaro Care ingår under hela perioden. Efter 12 månader väljer du själv om du vill fortsätta med Care eller avsluta.</div></div></div></div>
+      </div>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-3">Måste jag ha Klaro Care?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-3" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Nej. Klaro Care är helt valfritt. Det finns för dig som vill att Studio Klaro fortsätter ta hand om hosting, tekniskt underhåll, backup, mindre ändringar och support efter lansering.</div></div></div></div>
+      </div>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-4">Vad händer efter 12 månader med Klaro Flex?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-4" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Webbplatsen är då färdigbetald. Du kan fortsätta med Klaro Care för 499 kr/mån eller avsluta utan någon fortsatt månadsavgift.</div></div></div></div>
+      </div>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-5">Ingår domän och hosting?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-5" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Domän och externa tjänster ingår inte automatiskt i projektpriset om inget annat anges. Studio Klaro hjälper till med konfiguration och kan sköta hosting genom Klaro Care.</div></div></div></div>
+      </div>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-6">Kan jag ändra hemsidan själv?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-6" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det beror på upplägget. Ett CMS/adminläge kan läggas till som tillägg om du vill kunna ändra utvalt innehåll som bilder och texter själv.</div></div></div></div>
+      </div>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-7">Hur lång tid tar det att bygga en hemsida?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-7" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det beror på projektets omfattning och hur snabbt material och feedback finns tillgängligt. Du får alltid en uppskattad tidsplan innan projektet startar.</div></div></div></div>
+      </div>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-8">Vad händer om jag behöver fler sidor eller funktioner senare?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-8" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det går bra att bygga vidare på webbplatsen även efter lansering. Nya sidor, större förändringar, funktioner och integrationer offereras separat innan arbetet påbörjas.</div></div></div></div>
+      </div>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-9">Hur många korrekturrundor ingår?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-9" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det beror på vilket paket du väljer. Antalet som ingår framgår tydligt i respektive paket. Ytterligare korrekturrundor kan läggas till för 750 kr per runda.</div></div></div></div>
+      </div>
+
+      <div class="faq-item" style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-10">Är priserna inklusive moms?</button>
+        </div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-10" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Nej. Samtliga priser på prissidan anges exklusive moms.</div></div></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AVSLUTANDE CTA -->
+  <div style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+    <div data-reveal data-rpanelpad data-rbtnfull style="background:#fff;border-radius:28px;padding:64px 40px;text-align:center;box-shadow:0 20px 50px rgba(15,23,42,0.08);border-top:6px solid #146EF5;">
+      <h2 data-rcta-h2 style="font-size:32px;font-weight:800;color:#0F172A;margin:0 0 16px;line-height:1.3;max-width:560px;margin-left:auto;margin-right:auto;">Redo att se lika bra ut online som du gör i verkligheten?</h2>
+      <p style="font-size:15px;color:#52657A;margin:0 0 30px;font-weight:500;">Berätta om ditt företag — vi återkommer med ett kostnadsfritt förslag.</p>
+      <a href="index.html#kontakt" class="btn-lift cta-main" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få ett kostnadsfritt förslag</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="margin-top:80px;width:100vw;margin-left:calc(50% - 50vw);">
+    <div style="background:#146EF5;padding:26px 20px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
+      <div style="font-size:16px;font-weight:800;color:#fff;">Redo att synas online? Låt oss ta första steget tillsammans.</div>
+      <a href="index.html#kontakt" class="btn-lift cta-footer" style="background:#fff;color:#146EF5;font-size:13px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;white-space:nowrap;">Få ett kostnadsfritt förslag</a>
+    </div>
+    <div style="background:#0C1424;">
+      <div data-rgrid data-rgap style="max-width:1140px;margin:0 auto;padding:44px 20px 28px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;">
+        <div>
+          <div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:14px;">Studio Klaro</div>
+          <p style="font-size:13px;color:#8FA6C2;line-height:1.6;max-width:280px;margin:0;">Digitala helhetslösningar för småföretag som vill synas professionellt online.</p>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Navigation</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="index.html#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
+            <a href="index.html#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
+            <a href="priser.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Priser</a>
+            <a href="om.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
+            <a href="hemsida-frisor-stockholm.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för frisör</a>
+            <a href="portfolio.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Portfolio</a>
+            <a href="index.html#kontakt" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Kontakt</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Kontakt</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="mailto:studioklarose@gmail.com" style="font-size:14px;color:#AFC6E8;text-decoration:none;">studioklarose@gmail.com</a>
+            <div style="font-size:14px;color:#AFC6E8;">Stockholm</div>
+          </div>
+        </div>
+      </div>
+      <div style="max-width:1140px;margin:0 auto;padding:18px 20px 28px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div style="font-size:12px;color:#6B84A6;">© 2026 Studio Klaro</div>
+        <div style="display:flex;align-items:center;gap:18px;">
+          <a href="#" style="font-size:12px;color:#6B84A6;text-decoration:none;">Integritetspolicy</a>
+          <a href="https://www.instagram.com/studioklaro/" target="_blank" rel="noopener" aria-label="Instagram" style="color:#6B84A6;display:inline-flex;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    /* Sticky nav shrink */
+    var navWrap = document.querySelector('.nav-wrap');
+    var onScroll = function () {
+      if (window.scrollY > 24) navWrap.classList.add('scrolled');
+      else navWrap.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* Mobil nedfällbar meny */
+    var mnavToggle = document.getElementById('mnav-toggle');
+    var mnavPanel = document.getElementById('mnav-panel');
+    var setMnav = function (open) {
+      mnavPanel.classList.toggle('open', open);
+      mnavToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    mnavToggle.addEventListener('click', function () {
+      setMnav(!mnavPanel.classList.contains('open'));
+    });
+    mnavPanel.querySelectorAll('[data-mnav-close]').forEach(function (a) {
+      a.addEventListener('click', function () { setMnav(false); });
+    });
+
+    /* Klaro Flex-priser accordion */
+    var flexAccToggle = document.getElementById('flex-acc-toggle');
+    var flexAccPanel = document.getElementById('flex-acc-panel');
+    if (flexAccToggle && flexAccPanel) {
+      flexAccToggle.addEventListener('click', function () {
+        var open = flexAccToggle.getAttribute('aria-expanded') === 'true';
+        flexAccToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+        flexAccPanel.classList.toggle('open', !open);
+      });
+    }
+
+    /* FAQ accordion (tillgänglig) */
+    document.querySelectorAll('.faq-q-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+        var item = btn.closest('.faq-item');
+        var rows = item.querySelector('.faq-rows');
+        var ans = item.querySelector('.faq-ans');
+        rows.style.gridTemplateRows = open ? '0fr' : '1fr';
+        ans.style.opacity = open ? '0' : '1';
+      });
+    });
+
+    var els = document.querySelectorAll('[data-reveal]');
+    var reveal = function (el) { el.classList.add('is-visible'); };
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(reveal);
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          reveal(entry.target);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+    // Fail-safe: reveal everything if the observer never fires.
+    setTimeout(function () { els.forEach(reveal); }, 1500);
+  })();
+</script>
+
+</body>
+</html>

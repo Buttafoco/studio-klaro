@@ -36,7 +36,7 @@
   }
 
   /* Section scroll offset for sticky nav */
-  #processen,#tjansten,#referenser,#faq,#kontakt,#portfolio,#priser{scroll-margin-top:110px;}
+  #processen,#tjansten,#referenser,#faq,#kontakt,#portfolio{scroll-margin-top:110px;}
 
   /* Sticky shrinking nav capsule */
   .nav-wrap{position:sticky;top:0;z-index:50;padding:0px 0px 0;transition:padding .5s cubic-bezier(0.22,1,0.36,1);}
@@ -86,6 +86,16 @@
   .btn-back:hover{transform:translateY(-2px);}
   .faq-q{transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);}
   .faq-item:hover .faq-q{transform:translateY(-2px);}
+
+  /* Pris-teaser: minimalistiska paketrader */
+  .price-teaser-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 6px;text-decoration:none;border-radius:12px;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),background-color 0.2s ease,border-color 0.2s ease;border-top:1px solid transparent;}
+  .price-teaser-row + .price-teaser-row{border-top-color:rgba(15,23,42,0.08);}
+  .price-teaser-row:hover{transform:translateX(3px);background-color:rgba(15,23,42,0.025);}
+  .price-teaser-row.price-teaser-pro:hover{background-color:rgba(20,110,245,0.05);}
+  .price-teaser-name{font-size:14px;font-weight:700;color:#0F172A;display:inline-flex;align-items:center;gap:8px;}
+  .price-teaser-price{font-size:16px;font-weight:800;color:#0F172A;white-space:nowrap;}
+  .price-teaser-pro .price-teaser-price{color:#146EF5;}
+  .price-teaser-badge{font-size:10px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.1);padding:2px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;}
 
   /* Scroll-reveal */
   [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1);}
@@ -152,7 +162,7 @@
         <a href="#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänster</a>
         <a href="#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
         <a href="#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
-        <a href="#priser" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
+        <a href="priser.html" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
         <a href="om.html" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Om</a>
       </div>
       <a data-rhide href="#kontakt" class="btn-lift lift-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få ett kostnadsfritt förslag</a>
@@ -167,7 +177,7 @@
         <a href="#tjansten" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänster</a>
         <a href="#portfolio" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
         <a href="#processen" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
-        <a href="#priser" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
+        <a href="priser.html" data-mnav-close style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
         <a href="om.html" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
         <div style="padding:16px 20px;">
           <a href="#kontakt" data-mnav-close style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få ett kostnadsfritt förslag</a>
@@ -380,72 +390,35 @@
     </div>
   </div>
 
-  <!-- TRE KUNDPAKET -->
-  <div id="priser" style="max-width:1140px;margin:80px auto 0;padding:0 20px;" data-rpad>
-    <div data-reveal style="text-align:center;margin-bottom:44px;">
-      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">En tydlig investering från start</h2>
-      <p style="font-size:15px;color:#52657A;margin:0 auto;font-weight:500;max-width:640px;">Välj en lösning som passar verksamhetens behov. Samtliga paket har ett tydligt grundpris och du får alltid en fast offert innan projektet börjar.</p>
+  <!-- PRISER TEASER -->
+  <div style="max-width:1140px;margin:80px auto 0;padding:0 20px;" data-rpad>
+    <div data-reveal data-rpanelpad style="background:#fff;border-radius:28px;padding:56px 48px;box-shadow:0 20px 50px rgba(15,23,42,0.08);border-top:6px solid #146EF5;">
+      <div data-rgrid data-rgap style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:64px;align-items:center;">
+
+        <div data-rbtnfull>
+          <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Tydliga priser från start</div>
+          <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 12px;line-height:1.3;">Hitta nivån som passar ditt företag.</h2>
+          <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 28px;font-weight:500;">Se exakt vad som ingår och välj mellan direktbetalning eller Klaro Flex.</p>
+          <a href="priser.html" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Se priser &amp; paket →</a>
+        </div>
+
+        <div>
+          <a href="priser.html" class="price-teaser-row">
+            <span class="price-teaser-name">Startklar</span>
+            <span class="price-teaser-price">7 900 kr</span>
+          </a>
+          <a href="priser.html" class="price-teaser-row price-teaser-pro">
+            <span class="price-teaser-name">Professionell<span class="price-teaser-badge">Mest vald</span></span>
+            <span class="price-teaser-price">13 900 kr</span>
+          </a>
+          <a href="priser.html" class="price-teaser-row">
+            <span class="price-teaser-name">Komplett närvaro</span>
+            <span class="price-teaser-price">19 900 kr</span>
+          </a>
+        </div>
+
+      </div>
     </div>
-    <div data-reveal data-rgrid3 style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
-
-      <div style="background:#fff;border-radius:20px;padding:36px 28px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
-        <div style="font-size:13px;font-weight:800;color:#146EF5;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;">Startklar</div>
-        <div style="font-size:30px;font-weight:800;color:#0F172A;margin-bottom:6px;"><span style="font-size:15px;font-weight:600;color:#52657A;margin-right:5px;">Från</span>7 900 kr</div>
-        <p style="font-size:13px;color:#52657A;line-height:1.6;margin:0 0 22px;">För frisörer, barberare, terapeuter och mindre lokala företag.</p>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div style="font-size:13px;color:#0F172A;">✓ One-page-hemsida</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Mobilanpassning</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Tjänster och priser</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Kontakt och öppettider</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Bokningslänk</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Bildgalleri</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Grundläggande SEO</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Publicering</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Två korrekturrundor</div>
-        </div>
-      </div>
-
-      <div style="background:#0F172A;border-radius:20px;padding:36px 28px;box-shadow:0 16px 36px rgba(15,23,42,0.18);position:relative;">
-        <div style="position:absolute;top:-14px;left:28px;background:#146EF5;color:#fff;font-size:11px;font-weight:800;padding:5px 12px;border-radius:20px;">REKOMMENDERAD</div>
-        <div style="font-size:13px;font-weight:800;color:#5FA8FF;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;">Professionell</div>
-        <div style="font-size:30px;font-weight:800;color:#fff;margin-bottom:6px;"><span style="font-size:15px;font-weight:600;color:#B8C6DC;margin-right:5px;">Från</span>13 900 kr</div>
-        <p style="font-size:13px;color:#B8C6DC;line-height:1.6;margin:0 0 22px;">För företag som behöver en komplett webbplats med flera sidor och en professionell digital grund.</p>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div style="font-size:13px;color:#fff;">✓ Upp till fem sidor</div>
-          <div style="font-size:13px;color:#fff;">✓ Unik design anpassad efter verksamheten</div>
-          <div style="font-size:13px;color:#fff;">✓ Färgpalett och typsnitt</div>
-          <div style="font-size:13px;color:#fff;">✓ Kontaktformulär</div>
-          <div style="font-size:13px;color:#fff;">✓ Domänkoppling</div>
-          <div style="font-size:13px;color:#fff;">✓ Grundläggande SEO</div>
-          <div style="font-size:13px;color:#fff;">✓ Google Företagsprofil</div>
-          <div style="font-size:13px;color:#fff;">✓ Analytics</div>
-          <div style="font-size:13px;color:#fff;">✓ Publicering</div>
-          <div style="font-size:13px;color:#fff;">✓ Två korrekturrundor</div>
-        </div>
-      </div>
-
-      <div style="background:#fff;border-radius:20px;padding:36px 28px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
-        <div style="font-size:13px;font-weight:800;color:#146EF5;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;">Komplett närvaro</div>
-        <div style="font-size:30px;font-weight:800;color:#0F172A;margin-bottom:6px;"><span style="font-size:15px;font-weight:600;color:#52657A;margin-right:5px;">Från</span>19 900 kr</div>
-        <p style="font-size:13px;color:#52657A;line-height:1.6;margin:0 0 22px;">För kunden som vill att du löser hela den digitala närvaron.</p>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div style="font-size:13px;color:#0F172A;">✓ Upp till åtta sidor</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Miniidentitet</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Enkel uppfräschning av logotyp</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Domän och teknisk konfiguration</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Professionell mejladress</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Google Företagsprofil</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Lokal SEO-start</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Analytics</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Favicon och profilbilder</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Publicering</div>
-          <div style="font-size:13px;color:#0F172A;">✓ Tre korrekturrundor</div>
-        </div>
-        <div style="font-size:12px;color:#8296B0;margin-top:18px;">Ny logotyp kan läggas till för ca 3 000 kr extra.</div>
-      </div>
-
-    </div>
-    <p style="font-size:13px;color:#8296B0;line-height:1.7;font-weight:500;margin:20px auto 0;max-width:640px;text-align:center;">Priserna anges exkl. moms. Domän, hosting, e-post och externa tjänster tillkommer. Admin, integrationer och andra anpassningar offereras separat – kontakta <a href="mailto:studioklarose@gmail.com" style="color:#8296B0;text-decoration:underline;">studioklarose@gmail.com</a>.</p>
   </div>
 
 
@@ -603,6 +576,7 @@
           <div style="display:flex;flex-direction:column;gap:10px;">
             <a href="#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
             <a href="#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
+            <a href="priser.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Priser</a>
             <a href="om.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
             <a href="hemsida-frisor-stockholm.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för frisör</a>
             <a href="portfolio.html" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Portfolio</a>
@@ -619,6 +593,9 @@
       </div>
       <div style="max-width:1140px;margin:0 auto;padding:18px 20px 28px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
         <div style="font-size:12px;color:#6B84A6;">© 2026 Studio Klaro</div>
+        <a href="https://www.instagram.com/studioklaro/" target="_blank" rel="noopener" aria-label="Instagram" style="color:#6B84A6;display:inline-flex;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line></svg>
+        </a>
       </div>
     </div>
   </div>
