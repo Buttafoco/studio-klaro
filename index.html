@@ -67,10 +67,56 @@
   a:focus-visible,button:focus-visible{outline:2px solid #0F172A;outline-offset:2px;}
 
   /* Card hover */
-  .card-proc{border:1px solid transparent;transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1),box-shadow .3s cubic-bezier(0.22,1,0.36,1),border-color .3s cubic-bezier(0.22,1,0.36,1);}
-  .card-proc.is-visible:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(15,23,42,0.12);border-color:rgba(20,110,245,0.15);}
   .card-serv{border:1px solid transparent;transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1),box-shadow .3s cubic-bezier(0.22,1,0.36,1),border-color .3s cubic-bezier(0.22,1,0.36,1);}
   .card-serv.is-visible:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 18px 34px rgba(15,23,42,0.1);border-color:rgba(20,110,245,0.15);}
+
+  /* Process – zigzag journey */
+  .proc-track{position:relative;max-width:840px;margin:0 auto;}
+  .proc-line-base{position:absolute;top:6px;bottom:6px;left:50%;width:2px;transform:translateX(-50%);background-image:repeating-linear-gradient(to bottom, rgba(20,110,245,0.35) 0 6px, transparent 6px 14px);}
+  .proc-line-progress{position:absolute;top:6px;left:50%;width:2px;height:calc(100% - 12px);transform:translateX(-50%) scaleY(0);transform-origin:top;background:#146EF5;will-change:transform;}
+  .proc-row{position:relative;display:flex;margin-bottom:60px;}
+  .proc-row:last-child{margin-bottom:0;}
+  .proc-row.proc-r{justify-content:flex-end;}
+  .proc-row.proc-l{justify-content:flex-start;}
+  .proc-dot{position:absolute;top:34px;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#fff;border:2.5px solid #146EF5;z-index:2;display:flex;align-items:center;justify-content:center;}
+  .proc-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff;opacity:0;}
+  .proc-dot-end{width:24px;height:24px;transform:translate(-50%,-50%) scale(0.9);}
+  .proc-dot-end::after{display:none;}
+  .proc-check{color:#fff;font-size:11px;font-weight:800;line-height:1;opacity:0;}
+  .proc-card{width:45%;border-radius:20px;padding:28px 26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);}
+  .proc-card-lg{padding:34px 30px;border:1px solid rgba(20,110,245,0.14);}
+  .proc-eyebrow{font-size:12px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin:0 0 10px;}
+  .proc-title{font-size:18px;font-weight:800;color:#0F172A;margin:0 0 8px;line-height:1.3;}
+  .proc-title-lg{font-size:21px;}
+  .proc-desc{font-size:14px;color:#52657A;line-height:1.6;margin:0;}
+
+  /* Mobil tidslinje – prickar/kort */
+  .proc-m-track{position:relative;padding-left:28px;}
+  .proc-m-line-base{position:absolute;left:9px;top:6px;bottom:6px;width:2px;background-image:repeating-linear-gradient(to bottom, rgba(20,110,245,0.35) 0 5px, transparent 5px 11px);}
+  .proc-m-line-progress{position:absolute;left:9px;top:6px;width:2px;height:calc(100% - 12px);background:#146EF5;transform:scaleY(0);transform-origin:top;will-change:transform;}
+  .proc-m-step{position:relative;margin-bottom:26px;}
+  .proc-m-step:last-child{margin-bottom:0;}
+  .proc-m-dot{position:absolute;left:-28px;top:2px;width:20px;height:20px;border-radius:50%;background:#fff;border:2.5px solid #146EF5;box-shadow:0 0 0 4px #DCEEFF;display:flex;align-items:center;justify-content:center;}
+  .proc-m-dot::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff;opacity:0;}
+  .proc-m-end::after{display:none;}
+  .proc-m-end .proc-check{font-size:10px;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .proc-dot,.proc-m-dot{transition:background-color .3s ease,border-color .3s ease,box-shadow .3s ease;}
+    .proc-dot::after,.proc-m-dot::after{transition:opacity .3s ease;}
+    .proc-row.is-active .proc-dot,.proc-m-step.is-active .proc-m-dot{background:#146EF5;border-color:#146EF5;box-shadow:0 0 0 6px rgba(20,110,245,0.12);}
+    .proc-m-step.is-active .proc-m-dot{box-shadow:0 0 0 4px #DCEEFF,0 0 0 8px rgba(20,110,245,0.12);}
+    .proc-row.is-active .proc-dot::after,.proc-m-step.is-active .proc-m-dot::after{opacity:1;}
+    .proc-dot-end{transition:background-color .35s cubic-bezier(0.22,1,0.36,1),border-color .35s cubic-bezier(0.22,1,0.36,1),box-shadow .35s cubic-bezier(0.22,1,0.36,1),transform .35s cubic-bezier(0.22,1,0.36,1);}
+    .proc-row.is-active .proc-dot-end{box-shadow:0 0 0 8px rgba(20,110,245,0.14);transform:translate(-50%,-50%) scale(1);}
+    .proc-check{transition:opacity .3s ease;}
+    .proc-row.is-active .proc-check,.proc-m-step.is-active .proc-check{opacity:1;}
+    .proc-card{opacity:.8;transform:translateY(6px);transition:opacity .4s cubic-bezier(0.22,1,0.36,1),transform .4s cubic-bezier(0.22,1,0.36,1);}
+    .proc-row.is-active .proc-card{opacity:1;transform:translateY(0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .proc-line-progress,.proc-m-line-progress{display:none;}
+  }
 
   /* Formulärfält */
   .wz-input{border:none;border-bottom:2px solid rgba(15,23,42,0.15);padding:10px 2px;font-size:17px;font-family:inherit;outline:none;background:transparent;transition:border-color 0.25s cubic-bezier(0.22,1,0.36,1);width:100%;box-sizing:border-box;}
@@ -113,7 +159,6 @@
     [data-rsection-h2]{font-size:23px!important;}
     [data-rpad]{padding-left:16px!important;padding-right:16px!important;}
     [data-rgap]{gap:16px!important;}
-    [data-rcard-w]{width:100%!important;height:auto!important;min-height:260px!important;}
     [data-rmt]{margin-top:56px!important;}
     [data-rbtnfull] a, [data-rbtnfull] button{width:100%!important;box-sizing:border-box!important;text-align:center!important;}
     /* Wizard-knappar: långa, staplade och centrerade i mobilläge */
@@ -123,7 +168,6 @@
     #wz-back[style*="hidden"]{display:none!important;}
     [data-rimg]{flex:none!important;width:100%!important;height:260px!important;margin:0!important;}
     [data-rpanelpad]{padding:26px!important;}
-    [data-rmini]{margin-top:0!important;}
     [data-rhide]{display:none!important;}
     [data-rshow]{display:block!important;}
     [data-rcta-h2]{font-size:24px!important;}
@@ -188,8 +232,8 @@
 
   <!-- HERO -->
   <div style="max-width:820px;margin:60px auto 0;text-align:center;padding:0 20px;">
-    <h1 data-rhero-h1 style="font-size:44px;line-height:1.15;font-weight:800;color:#0F172A;margin:0 0 20px;letter-spacing:-0.01em;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">Få ditt företag att se lika professionellt ut online som i verkligheten.</h1>
-    <p style="font-size:17px;line-height:1.6;color:#52657A;margin:0 0 32px;font-weight:500;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;">Berätta kort om ditt företag så tar vi fram en personlig mockup av din nya startsida. Kostnadsfritt, utan köpkrav och levererad inom 1–2 timmar under vardagar.</p>
+    <h1 data-rhero-h1 style="font-size:44px;line-height:1.15;font-weight:800;color:#0F172A;margin:0 0 20px;letter-spacing:-0.01em;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">En hemsida som känns lika professionell som ditt företag.</h1>
+    <p style="font-size:17px;line-height:1.6;color:#52657A;margin:0 0 32px;font-weight:500;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;">Berätta kort om ditt företag så tar vi fram ett personligt förslag på hur din nya startsida kan se ut. Kostnadsfritt och helt utan köpkrav.</p>
     <div data-rrow data-rbtnfull style="display:flex;justify-content:center;gap:14px;margin-bottom:16px;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.32s forwards;">
       <a href="#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få ett kostnadsfritt förslag</a>
       <a href="#tjansten" class="btn-lift lift-ghost" style="background:#fff;color:#0F172A;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;border:1px solid rgba(15,23,42,0.08);">Se vad som ingår</a>
@@ -200,101 +244,100 @@
   <!-- PROCESS -->
   <div id="processen" style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
     <div data-rhide style="text-align:center;margin-bottom:56px;">
-      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Från första samtal till färdig hemsida</h2>
-      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">En enkel process där jag tar hand om design, struktur och teknik – du levererar bara det som behövs.</p>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Från idé till färdig hemsida</h2>
+      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">En enkel process där vi samlar material, feedback och beslut på ett ställe – så att inget faller mellan stolarna.</p>
     </div>
 
-    <!-- Mobil: vertikal tidslinje (förslag 1a) -->
+    <!-- Mobil: vertikal tidslinje -->
     <div data-rshow style="display:none;">
-      <h2 style="font-size:24px;font-weight:800;color:#0F172A;margin:0 0 8px;line-height:1.2;">Från första samtal till färdig hemsida</h2>
-      <p style="font-size:13px;color:#52657A;margin:0 0 24px;font-weight:500;">En enkel process där jag tar hand om design, struktur och teknik – du levererar bara det som behövs.</p>
-      <div style="position:relative;padding-left:28px;">
-        <div style="position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:rgba(20,110,245,0.25);"></div>
-        <div data-reveal style="position:relative;margin-bottom:26px;">
-          <div style="position:absolute;left:-28px;top:2px;width:20px;height:20px;border-radius:50%;background:#146EF5;box-shadow:0 0 0 4px #DCEEFF;"></div>
-          <div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;margin-bottom:4px;">Dag 1 · 30 min</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi lär känna företaget</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi går igenom verksamheten, kunderna och vad du vill förbättra.</div>
+      <h2 style="font-size:24px;font-weight:800;color:#0F172A;margin:0 0 8px;line-height:1.2;">Från idé till färdig hemsida</h2>
+      <p style="font-size:13px;color:#52657A;margin:0 0 24px;font-weight:500;">En enkel process där vi samlar material, feedback och beslut på ett ställe – så att inget faller mellan stolarna.</p>
+      <div class="proc-m-track">
+        <div class="proc-m-line-base"></div>
+        <div class="proc-m-line-progress"></div>
+        <div data-reveal class="proc-m-step">
+          <div class="proc-m-dot"></div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">01 — Brief</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Berätta om företaget</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">Ett kort formulär hjälper oss förstå verksamheten, målen och vad sidan behöver göra.</div>
         </div>
-        <div data-reveal style="position:relative;margin-bottom:26px;">
-          <div style="position:absolute;left:-28px;top:2px;width:20px;height:20px;border-radius:50%;background:#146EF5;box-shadow:0 0 0 4px #DCEEFF;"></div>
-          <div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;margin-bottom:4px;">Dag 1–2</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Du skickar materialet</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Tjänster, priser, bilder och öppettider i ett enkelt formulär.</div>
+        <div data-reveal class="proc-m-step">
+          <div class="proc-m-dot"></div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">02 — Material</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Skicka material &amp; inspiration</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">Bilder, logotyp, texter och sidor du gillar ger oss rätt riktning från start.</div>
         </div>
-        <div data-reveal style="position:relative;margin-bottom:26px;">
-          <div style="position:absolute;left:-28px;top:2px;width:20px;height:20px;border-radius:50%;background:#146EF5;box-shadow:0 0 0 4px #DCEEFF;"></div>
-          <div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;margin-bottom:4px;">Dag 3–7</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi designar och bygger</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Struktur, copy och design i ett komplett första förslag.</div>
+        <div data-reveal class="proc-m-step">
+          <div class="proc-m-dot"></div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">03 — Design &amp; bygge</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi tar fram hemsidan</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi kombinerar materialet med vår design och bygger den första versionen.</div>
         </div>
-        <div data-reveal style="position:relative;">
-          <div style="position:absolute;left:-28px;top:2px;width:20px;height:20px;border-radius:50%;background:#146EF5;box-shadow:0 0 0 4px #DCEEFF;"></div>
-          <div style="font-size:11px;font-weight:700;color:#146EF5;text-transform:uppercase;margin-bottom:4px;">Dag 8–10</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Feedback och publicering</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi genomför två samlade korrekturrundor och publicerar sedan sidan på din domän.</div>
+        <div data-reveal class="proc-m-step">
+          <div class="proc-m-dot"></div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">04 — Feedback</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi finslipar tillsammans</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">Du går igenom sidan via en länk och skickar feedback inför nästa version.</div>
+        </div>
+        <div data-reveal class="proc-m-step">
+          <div class="proc-m-dot proc-m-end"><span class="proc-check">✓</span></div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">05 — Live</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Dags att lansera</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">När allt känns rätt gör vi slutkontrollen, kopplar domänen och publicerar.</div>
         </div>
       </div>
     </div>
 
-    <div data-rhide style="position:relative;">
-      <svg viewBox="0 0 1140 850" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;">
-        <path d="M 270 160 C 550 160 590 300 870 308 C 590 320 550 540 270 554 C 550 560 590 670 870 684" fill="none" stroke="#146EF5" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="6 8" stroke-linecap="round"></path>
-        <circle cx="270" cy="160" r="5" fill="#146EF5" fill-opacity="0.5"></circle>
-        <circle cx="870" cy="308" r="5" fill="#146EF5" fill-opacity="0.5"></circle>
-        <circle cx="270" cy="554" r="5" fill="#146EF5" fill-opacity="0.5"></circle>
-        <circle cx="870" cy="684" r="5" fill="#146EF5" fill-opacity="0.5"></circle>
-      </svg>
-    <div data-rrow data-rgap style="display:flex;gap:60px;align-items:flex-start;position:relative;z-index:1;">
-      <div style="display:flex;flex-direction:column;gap:60px;flex:1;align-items:center;">
-        <div data-reveal data-rcard-w class="card-proc" style="background:linear-gradient(160deg,#EAF6EE,#E2F1E7);border-radius:20px;padding:28px;min-height:280px;display:flex;flex-direction:column;box-shadow:0 12px 30px rgba(15,23,42,0.05);width:337px;height:366px;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:auto;">
-            <span style="font-size:13px;font-weight:700;color:#0F172A;">Dag 1 · 30 min</span>
-            <span style="background:#146EF5;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;">Uppstartssamtal</span>
-          </div>
-          <div style="margin-top:40px;">
-            <svg width="36" height="36" viewBox="0 0 40 40" style="margin-bottom:14px;"><circle cx="15" cy="20" r="11" fill="#146EF5" opacity="0.55"></circle><circle cx="25" cy="20" r="11" fill="#146EF5"></circle></svg>
-            <div style="font-size:19px;font-weight:700;color:#0F172A;margin-bottom:8px;">Vi lär känna företaget</div>
-            <div style="font-size:14px;color:#52657A;line-height:1.5;">Vi går igenom verksamheten, kunderna, tjänsterna och vad du vill förbättra.</div>
-          </div>
-        </div>
-        <div data-reveal data-rcard-w class="card-proc" style="background:linear-gradient(160deg,#FBF3E1,#F6ECD8);border-radius:20px;padding:28px;min-height:280px;display:flex;flex-direction:column;box-shadow:0 12px 30px rgba(15,23,42,0.05);width:337px;height:366px;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:auto;">
-            <span style="font-size:13px;font-weight:700;color:#0F172A;">Dag 3–7</span>
-            <span style="background:#146EF5;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;">Design &amp; utveckling</span>
-          </div>
-          <div style="margin-top:40px;">
-            <svg width="36" height="36" viewBox="0 0 40 40" style="margin-bottom:14px;"><circle cx="15" cy="20" r="11" fill="#146EF5" opacity="0.55"></circle><circle cx="25" cy="20" r="11" fill="#146EF5"></circle></svg>
-            <div style="font-size:19px;font-weight:700;color:#0F172A;margin-bottom:8px;">Vi designar och bygger</div>
-            <div style="font-size:14px;color:#52657A;line-height:1.5;">Jag tar fram struktur, copy och design och bygger ett komplett första förslag.</div>
-          </div>
+    <!-- Desktop: sicksack-resa med prickad kopplingslinje -->
+    <div data-rhide class="proc-track">
+      <div class="proc-line-base"></div>
+      <div class="proc-line-progress"></div>
+
+      <div data-reveal class="proc-row proc-l">
+        <div class="proc-dot"></div>
+        <div class="proc-card" style="background:linear-gradient(160deg,#EAF6EE,#E2F1E7);">
+          <div class="proc-eyebrow">01 — Brief</div>
+          <div class="proc-title">Berätta om företaget</div>
+          <p class="proc-desc">Ett kort formulär hjälper oss förstå verksamheten, målen och vad sidan behöver göra.</p>
         </div>
       </div>
-      <div data-rmini style="display:flex;flex-direction:column;gap:60px;flex:1;margin-top:150px;align-items:center;">
-        <div data-reveal data-rcard-w class="card-proc" style="background:linear-gradient(160deg,#EDF3FC,#E4ECF9);border-radius:20px;padding:28px;min-height:280px;display:flex;flex-direction:column;box-shadow:0 12px 30px rgba(15,23,42,0.05);width:337px;height:366px;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:auto;">
-            <span style="font-size:13px;font-weight:700;color:#0F172A;">Dag 1–2</span>
-            <span style="background:#146EF5;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;">Materialinsamling</span>
-          </div>
-          <div style="margin-top:40px;">
-            <svg width="36" height="36" viewBox="0 0 40 40" style="margin-bottom:14px;"><circle cx="15" cy="20" r="11" fill="#146EF5" opacity="0.55"></circle><circle cx="25" cy="20" r="11" fill="#146EF5"></circle></svg>
-            <div style="font-size:19px;font-weight:700;color:#0F172A;margin-bottom:8px;">Du skickar materialet</div>
-            <div style="font-size:14px;color:#52657A;line-height:1.5;">Du fyller i ett enkelt formulär med tjänster, priser, bilder, öppettider och bokningslänkar.</div>
-          </div>
-        </div>
-        <div data-reveal data-rcard-w class="card-proc" style="background:linear-gradient(160deg,#EFEFF6,#E6E8F2);border-radius:20px;padding:28px;min-height:280px;display:flex;flex-direction:column;box-shadow:0 12px 30px rgba(15,23,42,0.05);width:337px;height:366px;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:auto;">
-            <span style="font-size:13px;font-weight:700;color:#0F172A;">Dag 8–10</span>
-            <span style="background:#146EF5;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;">Lansering</span>
-          </div>
-          <div style="margin-top:40px;">
-            <svg width="36" height="36" viewBox="0 0 40 40" style="margin-bottom:14px;"><circle cx="15" cy="20" r="11" fill="#146EF5" opacity="0.55"></circle><circle cx="25" cy="20" r="11" fill="#146EF5"></circle></svg>
-            <div style="font-size:19px;font-weight:700;color:#0F172A;margin-bottom:8px;">Feedback och publicering</div>
-            <div style="font-size:14px;color:#52657A;line-height:1.5;">Vi genomför två samlade korrekturrundor och publicerar sedan sidan på din domän.</div>
-          </div>
+
+      <div data-reveal class="proc-row proc-r" style="margin-top:-16px;">
+        <div class="proc-dot"></div>
+        <div class="proc-card" style="background:linear-gradient(160deg,#FBF3E1,#F6ECD8);">
+          <div class="proc-eyebrow">02 — Material</div>
+          <div class="proc-title">Skicka material &amp; inspiration</div>
+          <p class="proc-desc">Bilder, logotyp, texter och sidor du gillar ger oss rätt riktning från start.</p>
         </div>
       </div>
-    </div>
+
+      <div data-reveal class="proc-row proc-l" style="margin-top:8px;">
+        <div class="proc-dot"></div>
+        <div class="proc-card proc-card-lg" style="background:linear-gradient(160deg,#EDF3FC,#E4ECF9);">
+          <div class="proc-eyebrow">03 — Design &amp; bygge</div>
+          <div class="proc-title proc-title-lg">Vi tar fram hemsidan</div>
+          <p class="proc-desc">Vi kombinerar materialet med vår design och bygger den första versionen.</p>
+        </div>
+      </div>
+
+      <div data-reveal class="proc-row proc-r" style="margin-top:-16px;">
+        <div class="proc-dot"></div>
+        <div class="proc-card" style="background:linear-gradient(160deg,#EFEFF6,#E6E8F2);">
+          <div class="proc-eyebrow">04 — Feedback</div>
+          <div class="proc-title">Vi finslipar tillsammans</div>
+          <p class="proc-desc">Du går igenom sidan via en länk och skickar feedback inför nästa version.</p>
+        </div>
+      </div>
+
+      <div data-reveal class="proc-row proc-l" style="margin-top:8px;">
+        <div class="proc-dot proc-dot-end"><span class="proc-check">✓</span></div>
+        <div class="proc-card" style="background:linear-gradient(160deg,#EAF4FF,#DCEEFF);">
+          <div class="proc-eyebrow">05 — Live</div>
+          <div class="proc-title">Dags att lansera</div>
+          <p class="proc-desc">När allt känns rätt gör vi slutkontrollen, kopplar domänen och publicerar.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -421,16 +464,6 @@
     </div>
   </div>
 
-
-  <!-- FAQ -->
-  <div id="faq" style="max-width:800px;margin:100px auto 0;padding:0 20px;">
-    <div style="text-align:center;margin-bottom:44px;">
-      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Vanliga frågor innan vi sätter igång</h2>
-      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Här hittar du svar på de vanligaste frågorna om pris, material, leverans och vad som händer efter lanseringen.</p>
-    </div>
-    <div data-reveal id="faq-list"></div>
-  </div>
-
   <!-- CONTACT (3-step wizard + success) -->
   <div id="kontakt" data-rgrid style="max-width:1140px;margin:110px auto 0;padding:0 20px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:40px;align-items:start;">
     <div data-reveal style="padding-top:12px;">
@@ -550,13 +583,13 @@
     </div>
   </div>
 
-  <!-- FINAL CTA -->
-  <div style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
-    <div data-reveal style="background:#fff;border-radius:28px;padding:64px 40px;text-align:center;box-shadow:0 20px 50px rgba(15,23,42,0.08);border-top:6px solid #146EF5;">
-      <h2 data-rcta-h2 style="font-size:32px;font-weight:800;color:#0F172A;margin:0 0 16px;line-height:1.3;max-width:640px;margin-left:auto;margin-right:auto;">Ditt företag förtjänar att synas lika bra som det levererar.</h2>
-      <p style="font-size:15px;color:#52657A;margin:0 0 30px;font-weight:500;">Hemsida, identitet och digital närvaro – samlat i en tydlig lösning för småföretag.</p>
-      <a href="#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få ett kostnadsfritt förslag</a>
+  <!-- FAQ -->
+  <div id="faq" style="max-width:800px;margin:100px auto 0;padding:0 20px;">
+    <div style="text-align:center;margin-bottom:44px;">
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Vanliga frågor innan vi sätter igång</h2>
+      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Här hittar du svar på de vanligaste frågorna om pris, material, leverans och vad som händer efter lanseringen.</p>
     </div>
+    <div data-reveal id="faq-list"></div>
   </div>
 
   <!-- FOOTER -->
@@ -669,6 +702,84 @@
     revealEls.forEach(function (el) { io.observe(el); });
     setTimeout(function () { revealEls.forEach(function (el) { el.classList.add('is-visible'); }); }, 1800);
   }
+
+  /* ---------- Process-tidslinje: scroll-driven progress ---------- */
+  (function () {
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function buildTrack(trackEl, lineEl, rowSelector, dotTopOffset, transformPrefix) {
+      if (!trackEl || !lineEl) return null;
+      return {
+        track: trackEl,
+        line: lineEl,
+        rows: Array.prototype.slice.call(trackEl.querySelectorAll(rowSelector)),
+        dotTopOffset: dotTopOffset,
+        transformPrefix: transformPrefix,
+        nodeFractions: []
+      };
+    }
+
+    var tracks = [
+      buildTrack(document.querySelector('.proc-track'), document.querySelector('.proc-line-progress'), '.proc-row', 34, 'translateX(-50%) '),
+      buildTrack(document.querySelector('.proc-m-track'), document.querySelector('.proc-m-line-progress'), '.proc-m-step', 2, '')
+    ].filter(Boolean);
+
+    if (!tracks.length) return;
+
+    if (reduceMotion) {
+      tracks.forEach(function (t) {
+        t.rows.forEach(function (row) { row.classList.add('is-active'); });
+      });
+      return;
+    }
+
+    function measure() {
+      tracks.forEach(function (t) {
+        var trackHeight = t.track.offsetHeight || 1;
+        t.nodeFractions = t.rows.map(function (row) {
+          var y = row.offsetTop + t.dotTopOffset;
+          return Math.max(0, Math.min(1, y / trackHeight));
+        });
+      });
+    }
+    measure();
+
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var progresses = tracks.map(function (t) {
+        var rect = t.track.getBoundingClientRect();
+        var vh = window.innerHeight;
+        var startY = vh * 0.85;
+        var endY = vh * 0.55;
+        var denom = rect.height + startY - endY;
+        var p = denom > 0 ? (startY - rect.top) / denom : 0;
+        return Math.max(0, Math.min(1, p));
+      });
+      tracks.forEach(function (t, idx) {
+        var progress = progresses[idx];
+        t.line.style.transform = t.transformPrefix + 'scaleY(' + progress.toFixed(4) + ')';
+        t.rows.forEach(function (row, i) {
+          var active = progress >= (t.nodeFractions[i] - 0.015);
+          row.classList.toggle('is-active', active);
+        });
+      });
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { measure(); onScroll(); }, { passive: true });
+    update();
+    // Fail-safe: ensure steps are visible even if something prevents scroll updates.
+    setTimeout(function () {
+      tracks.forEach(function (t) {
+        if (!t.rows.some(function (row) { return row.classList.contains('is-active'); })) {
+          onScroll();
+        }
+      });
+    }, 2000);
+  })();
 
   /* ---------- Portfolio showcase ("Saker vi har gjort") ---------- */
   var pfProjects = [
