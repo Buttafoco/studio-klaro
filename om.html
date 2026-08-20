@@ -95,7 +95,7 @@
   /* 1. Varför Studio Klaro finns — vertikal editorial komposition */
   .why-wrap{max-width:1140px;margin:0 auto;padding:0 20px;}
   .why-h2{font-size:clamp(36px,5vw,60px);line-height:1.12;font-weight:800;color:#0F172A;margin:0;max-width:850px;letter-spacing:-0.01em;}
-  .why-text{max-width:680px;margin:56px 0 0 auto;}
+  .why-text{max-width:680px;margin:8px 0 0 auto;}
   .why-text p{font-size:18px;line-height:1.75;color:#52657A;margin:0 0 20px;}
   .why-text p:last-child{margin-bottom:0;}
   .why-section{width:100vw;margin-left:calc(50% - 50vw);background:#0F172A;}
@@ -126,15 +126,6 @@
   .principles-section .principle-title{color:#fff;}
   .principles-section .principle-desc{color:#AFC6E8;}
 
-  /* 4. Hur vi tänker kring ett projekt */
-  .think-wrap{max-width:1140px;margin:0 auto;padding:0 20px;}
-  .think-intro-h2{font-size:clamp(32px,4.4vw,52px);line-height:1.15;font-weight:800;color:#0F172A;margin:0 0 24px;max-width:700px;letter-spacing:-0.01em;}
-  .think-intro-text{font-size:18px;line-height:1.75;color:#52657A;max-width:640px;margin:0;}
-  .think-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:80px;}
-  .think-num{font-size:12px;font-weight:800;color:#146EF5;letter-spacing:0.05em;margin-bottom:16px;}
-  .think-tick{width:32px;height:1px;background:#146EF5;margin-bottom:18px;}
-  .think-title{font-size:19px;font-weight:800;color:#0F172A;text-transform:uppercase;letter-spacing:0.02em;margin:0 0 10px;}
-  .think-desc{font-size:15px;color:#52657A;line-height:1.65;margin:0;}
 
   /* 6. Studio Klaro i korthet — ren typografi */
   .brief-wrap{max-width:1140px;margin:0 auto;padding:0 20px;}
@@ -151,8 +142,35 @@
   .brief-card .brief-fact-label{color:#AFC6E8;}
   .brief-card .brief-fact:not(:first-child){border-left-color:rgba(255,255,255,0.15);}
 
+  /* 0. VAD VI GÖR — poster-grid (visuellt experiment) */
+  .areas-wrap{max-width:1140px;margin:0 auto;padding:0 20px;}
+  .areas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px;}
+  .area-card{position:relative;border-radius:16px;padding:32px;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:transform .4s cubic-bezier(.16,.8,.24,1),box-shadow .4s cubic-bezier(.16,.8,.24,1);}
+  .area-card--light{background:#fff;color:#0F172A;}
+  .area-card--dark{background:#0F172A;color:#fff;}
+  .area-card--accent{background:#146EF5;color:#fff;}
+  .area-card::before{content:"";position:absolute;inset:0;background:rgba(20,110,245,0.05);opacity:0;transition:opacity .4s cubic-bezier(.16,.8,.24,1);pointer-events:none;}
+  .area-card--dark::before,.area-card--accent::before{background:rgba(255,255,255,0.05);}
+  .area-symbol{position:relative;width:44px;height:44px;color:#146EF5;}
+  .area-card--dark .area-symbol{color:#8FC0FF;}
+  .area-card--accent .area-symbol{color:rgba(255,255,255,0.85);}
+  .area-symbol svg{display:block;width:100%;height:100%;transform-origin:50% 50%;transition:transform .7s cubic-bezier(.16,.8,.24,1);}
+  .area-bottom{position:relative;display:flex;flex-direction:column;gap:8px;}
+  .area-title{font-size:clamp(23px,2.1vw,29px);font-weight:800;letter-spacing:-0.01em;line-height:1.15;margin:0;}
+  .area-desc{font-size:14px;font-weight:500;line-height:1.55;margin:0;max-width:32ch;opacity:.85;transform:translateY(0);transition:opacity .4s cubic-bezier(.16,.8,.24,1),transform .4s cubic-bezier(.16,.8,.24,1);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .area-card--light .area-desc{color:#52657A;}
+  .area-card--dark .area-desc{color:#AFC6E8;}
+  .area-card--accent .area-desc{color:rgba(255,255,255,0.8);}
+  @media (hover:hover) and (prefers-reduced-motion: no-preference){
+    .area-card:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(15,23,42,0.14);}
+    .area-card:hover::before{opacity:1;}
+    .area-card:hover .area-symbol svg{transform:rotate(300deg);}
+    .area-card:hover .area-desc{opacity:1;transform:translateY(-2px);}
+  }
+
   @media (prefers-reduced-motion: reduce){
     [data-reveal]{transition:none;}
+    .area-card,.area-symbol svg,.area-desc,.area-card::before{transition:none;}
   }
 
   /* Tablet: Studio Klaro i korthet blir 2×2 */
@@ -181,16 +199,19 @@
     .hero-lead{max-width:100%;margin-top:4px;}
     .hero-meta{margin-top:40px;padding-top:22px;flex-wrap:wrap;}
     .why-h2{max-width:100%;}
-    .why-text{margin:36px 0 0 0;max-width:100%;}
+    .why-text{margin:0 0 0 0;max-width:100%;}
     .why-section .why-wrap{padding-top:64px;padding-bottom:64px;}
     .principles-section .principles-wrap{padding-top:64px;padding-bottom:64px;}
     .principle-row{grid-template-columns:1fr;gap:8px;padding:28px 0;}
     .principle-desc{max-width:100%;}
-    .think-steps{grid-template-columns:1fr;gap:36px;margin-top:48px;}
     .brief-intro{margin-bottom:32px;}
     .brief-facts{grid-template-columns:1fr;gap:28px;}
     .brief-fact{border-left:none!important;padding-left:0!important;}
     .brief-card{padding:40px 26px;border-radius:22px;}
+    .areas-grid{grid-template-columns:1fr!important;gap:16px!important;margin-top:36px!important;}
+    .area-card{min-height:230px!important;padding:26px!important;}
+    .area-title{font-size:22px!important;}
+    .area-desc{font-size:14px!important;max-width:38ch!important;opacity:1!important;}
   }
 </style>
 <script type="application/ld+json">
@@ -243,6 +264,11 @@
     </div>
   </div>
 
+  <!-- BREADCRUMB -->
+  <nav aria-label="Brödsmulor" style="max-width:1140px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:#8296B0;">
+    <a href="/" style="color:#8296B0;text-decoration:none;">Hem</a><span style="margin:0 6px;color:#C3CEDD;">/</span><span style="color:#52657A;font-weight:600;">Om</span>
+  </nav>
+
   <!-- HERO: stor typografisk komposition, vänsterställd -->
   <section class="about-hero">
     <div class="hero-glow" aria-hidden="true"></div>
@@ -254,10 +280,72 @@
       </div>
       <div class="hero-meta" data-reveal style="transition-delay:.3s;">
         <span class="hero-meta-tick" aria-hidden="true"></span>
-        Webbdesign · Utveckling · Stockholm
+        Design · Webb · Digitalt
       </div>
     </div>
   </section>
+
+  <!-- 0. VAD VI GÖR — poster-grid (visuellt experiment) -->
+  <div class="areas-wrap" data-rmt style="margin-top:160px;">
+    <div class="section-label" data-reveal>Vad vi gör</div>
+    <h2 class="why-h2" data-reveal style="transition-delay:.08s;max-width:760px;">Sex områden. Ett sätt att tänka.</h2>
+    <div class="areas-grid">
+      <div class="area-card area-card--light" data-reveal style="transition-delay:.05s;">
+        <div class="area-symbol" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><circle cx="11" cy="11" r="3.5" fill="currentColor"/><circle cx="27" cy="11" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="11" cy="27" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="5" fill="currentColor"/></svg>
+        </div>
+        <div class="area-bottom">
+          <div class="area-title">Webbdesign</div>
+          <p class="area-desc">Skapar moderna hemsidor som är snygga, tydliga och byggda för att konvertera.</p>
+        </div>
+      </div>
+      <div class="area-card area-card--dark" data-reveal style="transition-delay:.1s;">
+        <div class="area-symbol" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><circle cx="17" cy="24" r="12" stroke="currentColor" stroke-width="1.5"/><circle cx="30" cy="24" r="12" fill="currentColor" opacity="0.85"/></svg>
+        </div>
+        <div class="area-bottom">
+          <div class="area-title">UX &amp; UI</div>
+          <p class="area-desc">Vi formar gränssnitt som känns enkla att använda och starka visuellt.</p>
+        </div>
+      </div>
+      <div class="area-card area-card--light" data-reveal style="transition-delay:.15s;">
+        <div class="area-symbol" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><circle cx="8" cy="36" r="2.5" fill="currentColor"/><circle cx="19" cy="27" r="3.5" fill="currentColor"/><circle cx="30" cy="18" r="4.5" fill="currentColor"/><circle cx="41" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="area-bottom">
+          <div class="area-title">Utveckling</div>
+          <p class="area-desc">Från design till färdig sajt med ren kod, responsivitet och smart struktur.</p>
+        </div>
+      </div>
+      <div class="area-card area-card--dark" data-reveal style="transition-delay:.2s;">
+        <div class="area-symbol" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="4" fill="currentColor"/><circle cx="24" cy="24" r="11" stroke="currentColor" stroke-width="1.5" opacity="0.55"/><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5" opacity="0.25"/></svg>
+        </div>
+        <div class="area-bottom">
+          <div class="area-title">SEO &amp; struktur</div>
+          <p class="area-desc">Vi bygger sidor med tydlig struktur som hjälper både användare och sökmotorer.</p>
+        </div>
+      </div>
+      <div class="area-card area-card--accent" data-reveal style="transition-delay:.25s;">
+        <div class="area-symbol" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><circle cx="18" cy="27" r="11" fill="currentColor" opacity="0.9"/><circle cx="35" cy="13" r="4" fill="currentColor"/></svg>
+        </div>
+        <div class="area-bottom">
+          <div class="area-title">Visuell identitet</div>
+          <p class="area-desc">Färg, typografi och detaljer som får varumärket att kännas genomtänkt och starkt.</p>
+        </div>
+      </div>
+      <div class="area-card area-card--dark" data-reveal style="transition-delay:.3s;">
+        <div class="area-symbol" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><circle cx="10" cy="13" r="2" fill="currentColor"/><circle cx="23" cy="8" r="1.6" fill="currentColor"/><circle cx="32" cy="21" r="3" fill="currentColor"/><circle cx="14" cy="29" r="1.6" fill="currentColor"/><circle cx="38" cy="35" r="2.5" fill="currentColor"/><circle cx="23" cy="39" r="1.8" fill="currentColor"/></svg>
+        </div>
+        <div class="area-bottom">
+          <div class="area-title">AI &amp; smarta lösningar</div>
+          <p class="area-desc">Vi använder AI där det skapar snabbare flöden, bättre innehåll och smartare arbetssätt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- 1. VARFÖR STUDIO KLARO FINNS -->
   <div class="why-section" data-rmt style="margin-top:160px;">
@@ -272,13 +360,13 @@
   </div>
 
   <!-- 2. STORT STATEMENT -->
-  <div class="statement-wrap" data-rmt style="margin-top:200px;">
+  <div class="statement-wrap" data-rmt style="margin-top:170px;">
     <div class="statement-tick" aria-hidden="true"></div>
     <p class="statement-text" data-reveal>Bra design ska göra ett företag enklare att förstå — inte bara snyggare att titta på.</p>
   </div>
 
   <!-- 3. PRINCIPER -->
-  <div class="principles-section" data-rmt style="margin-top:200px;">
+  <div class="principles-section" data-rmt style="margin-top:170px;">
     <div class="principles-wrap">
       <div class="section-label" data-reveal>Vår syn på bra webbdesign</div>
       <h2 class="why-h2" data-reveal style="transition-delay:.08s;margin-bottom:56px;">Tre principer räcker ganska långt.</h2>
@@ -300,35 +388,8 @@
     </div>
   </div>
 
-  <!-- 4. HUR VI TÄNKER KRING ETT PROJEKT -->
-  <div class="think-wrap" data-rmt style="margin-top:200px;">
-    <div class="section-label" data-reveal>Från verksamhet till hemsida</div>
-    <h2 class="think-intro-h2" data-reveal style="transition-delay:.08s;">Förstå först. Designa sen.</h2>
-    <p class="think-intro-text" data-reveal style="transition-delay:.16s;">En bra hemsida börjar inte med färger eller animationer. Den börjar med att förstå vad företaget säljer, vem sidan ska prata med och vilket nästa steg besökaren ska ta.</p>
-    <div class="think-steps">
-      <div data-reveal style="transition-delay:.05s;">
-        <div class="think-num">01</div>
-        <div class="think-tick" aria-hidden="true"></div>
-        <div class="think-title">Förstå</div>
-        <p class="think-desc">Vad behöver besökaren förstå direkt?</p>
-      </div>
-      <div data-reveal style="transition-delay:.15s;">
-        <div class="think-num">02</div>
-        <div class="think-tick" aria-hidden="true"></div>
-        <div class="think-title">Forma</div>
-        <p class="think-desc">Hur ska verksamheten kännas digitalt?</p>
-      </div>
-      <div data-reveal style="transition-delay:.25s;">
-        <div class="think-num">03</div>
-        <div class="think-tick" aria-hidden="true"></div>
-        <div class="think-title">Förenkla</div>
-        <p class="think-desc">Vad kan tas bort för att göra upplevelsen tydligare?</p>
-      </div>
-    </div>
-  </div>
-
   <!-- 6. STUDIO KLARO I KORTHET -->
-  <div class="brief-wrap" data-rmt style="margin-top:200px;">
+  <div class="brief-wrap" data-rmt style="margin-top:132px;">
     <div class="brief-card" data-reveal>
       <div class="brief-intro">
         <div class="section-label" data-reveal>Studio Klaro i korthet</div>
