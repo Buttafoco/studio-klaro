@@ -351,7 +351,7 @@ html[data-sera-theme] {
   overflow: hidden;
 }
 .sera-flow svg { width: 100%; height: 100%; display: block; }
-.sera-flow path { fill: none; stroke: var(--sera-flow); stroke-width: 1.4;
+.sera-flow path { fill: none; stroke: var(--sera-flow); stroke-width: 2;
                   stroke-linecap: round; stroke-linejoin: round; }
 .sera-flow circle { fill: var(--sera-flow); opacity: 0; transition: opacity 0.6s ease; }
 
