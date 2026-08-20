@@ -182,6 +182,51 @@
     .faq-q-btn{max-width:88%!important;}
     .faq-ans > div{max-width:88%!important;}
   }
+
+  /* Sektion: Utvalda arbeten – editorial bento-grid */
+  .rwork-grid{display:grid;gap:28px;grid-template-columns:1fr 1fr;grid-template-areas:"featured featured" "chairman itreon";}
+  .rwork-card{position:relative;background:#0F172A;border-radius:20px;overflow:hidden;box-shadow:0 16px 36px rgba(15,23,42,0.15);display:flex;flex-direction:column;transition:transform .5s cubic-bezier(0.22,0.61,0.36,1),box-shadow .5s cubic-bezier(0.22,0.61,0.36,1);}
+  .rwork-card:hover{transform:translateY(-5px);box-shadow:0 26px 50px rgba(15,23,42,0.22),0 16px 40px rgba(var(--accent),0.16);}
+  .rwork-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(to top,rgba(var(--accent),0.12),transparent);opacity:0;transition:opacity .5s cubic-bezier(0.22,0.61,0.36,1);pointer-events:none;}
+  .rwork-card:hover::after{opacity:1;}
+  .rwork-media{flex-shrink:0;overflow:hidden;}
+  .rwork-media img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s cubic-bezier(0.22,0.61,0.36,1);}
+  .rwork-card:hover .rwork-media img{transform:scale(1.03);}
+  .rwork-body{position:relative;padding:24px;display:flex;flex-direction:column;flex:1;}
+  .rwork-label{font-size:11px;font-weight:700;color:#8FC0FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;}
+  .rwork-title{font-weight:800;color:#fff;margin:0 0 10px;}
+  .rwork-desc{color:#B7C6DB;line-height:1.6;margin:0 0 18px;}
+  .rwork-tags{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;}
+  .rwork-tag{font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:rgba(143,192,255,0.9);border:1px solid rgba(143,192,255,0.3);background:rgba(143,192,255,0.06);border-radius:100px;padding:7px 12px;white-space:nowrap;line-height:1;}
+  .rwork-cta{position:relative;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:#fff;text-decoration:none;margin-top:auto;}
+  .rwork-arrow{display:inline-block;transition:transform .4s cubic-bezier(0.22,0.61,0.36,1);}
+  .rwork-card:hover .rwork-arrow{transform:translateX(4px);}
+
+  .rwork-card.is-chairman .rwork-media,.rwork-card.is-itreon .rwork-media{height:170px;}
+  .rwork-card.is-chairman .rwork-title,.rwork-card.is-itreon .rwork-title{font-size:18px;}
+  .rwork-card.is-chairman .rwork-desc,.rwork-card.is-itreon .rwork-desc{font-size:13px;margin-bottom:16px;}
+
+  .rwork-card.is-featured{grid-area:featured;}
+  .rwork-card.is-chairman{grid-area:chairman;}
+  .rwork-card.is-itreon{grid-area:itreon;}
+  .rwork-card.is-featured .rwork-media{min-height:260px;background:#0b0a08;}
+  .rwork-card.is-featured .rwork-media img{object-fit:contain;object-position:center;}
+  .rwork-card.is-featured .rwork-title{font-size:26px;}
+  .rwork-card.is-featured .rwork-desc{font-size:15px;max-width:460px;}
+  .rwork-card.is-featured .rwork-body{padding:32px 36px 36px;}
+
+  @media (min-width:1025px){
+    .rwork-grid{grid-template-columns:1.5fr 1fr;grid-template-rows:repeat(2,1fr);grid-template-areas:"featured chairman" "featured itreon";}
+    .rwork-card.is-featured .rwork-media{flex:1;min-height:300px;}
+  }
+  @media (max-width:820px){
+    .rwork-grid{grid-template-columns:1fr;grid-template-areas:"featured" "chairman" "itreon";}
+    .rwork-card.is-featured .rwork-media{min-height:220px;}
+    .rwork-card.is-featured .rwork-body{padding:28px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .rwork-card,.rwork-media img,.rwork-arrow{transition:none;}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -610,27 +655,61 @@
 
   <!-- UTVALDA ARBETEN -->
   <div style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
-    <div style="text-align:center;margin-bottom:40px;">
+    <div style="text-align:center;margin-bottom:64px;">
       <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Utvalda arbeten</div>
-      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0;">Ett par exempel på vad priset köper</h2>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0;">Några exempel på vad priset köper</h2>
     </div>
-    <div data-rgrid2 data-rgap style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-      <div data-reveal style="background:#0F172A;border-radius:20px;overflow:hidden;box-shadow:0 16px 36px rgba(15,23,42,0.15);">
-        <img src="/thechairman.webp" alt="Hemsida designad för The Chairman Barber i Stockholm" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:200px;object-fit:cover;object-position:top;display:block;">
-        <div style="padding:28px;">
-          <div style="font-size:11px;font-weight:700;color:#8FC0FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Kundcase · Webbdesign &amp; utveckling</div>
-          <h3 style="font-size:19px;font-weight:800;color:#fff;margin:0 0 10px;">The Chairman Barber</h3>
-          <p style="font-size:13px;color:#B7C6DB;line-height:1.6;margin:0 0 18px;">En ny digital identitet och hemsida för en barbershop i Vasastan — med fokus på en exklusiv känsla, tydlig struktur och en enkel väg till bokning.</p>
-          <a href="https://www.thechairmanbarber.se" target="_blank" rel="noopener noreferrer" style="font-size:14px;font-weight:700;color:#fff;text-decoration:none;">Besök hemsidan →</a>
+    <div class="rwork-grid">
+      <div data-reveal class="rwork-card is-featured" style="--accent:217,154,85;">
+        <div class="rwork-media">
+          <img src="/demo/sera-media/sera-preview-1100.webp" alt="Hemsida designad för Sera, ett fiktivt restaurangkoncept" width="1100" height="619" loading="lazy" decoding="async">
+        </div>
+        <div class="rwork-body">
+          <div class="rwork-label">Konceptcase · Webbdesign &amp; varumärke</div>
+          <h3 class="rwork-title">Sera</h3>
+          <p class="rwork-desc">Sera är ett fiktivt restaurangkoncept skapat för att utforska hur en varm, klassisk italiensk identitet kan möta ett modernt digitalt uttryck. Fokus ligger på att låta atmosfären, maten och känslan av en kvartersrestaurang på Södermalm ta stor plats genom generösa bilder, elegant typografi och en lugn visuell rytm.</p>
+          <p class="rwork-desc">Webbplatsen är byggd för att snabbt förmedla restaurangens karaktär samtidigt som besökaren enkelt kan hitta meny, boka bord och få en känsla för Sera redan innan första besöket.</p>
+          <div class="rwork-tags">
+            <span class="rwork-tag">Webbdesign</span>
+            <span class="rwork-tag">Responsiv</span>
+            <span class="rwork-tag">Varumärke</span>
+            <span class="rwork-tag">Bokningsflöde</span>
+          </div>
+          <a href="/demo/sera" class="rwork-cta">Besök hemsidan <span class="rwork-arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
-      <div data-reveal style="background:#0F172A;border-radius:20px;overflow:hidden;box-shadow:0 16px 36px rgba(15,23,42,0.15);">
-        <img src="/itreon-market.png" alt="Hemsida designad för Itreon Market" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:200px;object-fit:cover;object-position:top;display:block;">
-        <div style="padding:28px;">
-          <div style="font-size:11px;font-weight:700;color:#8FC0FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Kundcase · UX/UI &amp; webbutveckling</div>
-          <h3 style="font-size:19px;font-weight:800;color:#fff;margin:0 0 10px;">Itreon Market</h3>
-          <p style="font-size:13px;color:#B7C6DB;line-height:1.6;margin:0 0 18px;">En digital B2B-marknadsplats för lager, deals och produktgradering — byggd för att göra stora mängder produktinformation enkel att navigera.</p>
-          <a href="https://market.itreon.eu" target="_blank" rel="noopener noreferrer" style="font-size:14px;font-weight:700;color:#fff;text-decoration:none;">Besök hemsidan →</a>
+      <div data-reveal class="rwork-card is-chairman" style="--accent:196,155,74;">
+        <div class="rwork-media">
+          <img src="/thechairman.webp" alt="Hemsida designad för The Chairman Barber i Stockholm" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="rwork-body">
+          <div class="rwork-label">Kundcase · Webbdesign &amp; utveckling</div>
+          <h3 class="rwork-title">The Chairman Barber</h3>
+          <p class="rwork-desc">En ny digital identitet och hemsida för en barbershop i Vasastan — med fokus på en exklusiv känsla, tydlig struktur och en enkel väg till bokning.</p>
+          <div class="rwork-tags">
+            <span class="rwork-tag">Webbdesign</span>
+            <span class="rwork-tag">Responsiv</span>
+            <span class="rwork-tag">SEO</span>
+            <span class="rwork-tag">Bokningsflöde</span>
+          </div>
+          <a href="https://www.thechairmanbarber.se" target="_blank" rel="noopener noreferrer" class="rwork-cta">Besök hemsidan <span class="rwork-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div data-reveal class="rwork-card is-itreon" style="--accent:45,168,158;">
+        <div class="rwork-media">
+          <img src="/itreon-market.png" alt="Hemsida designad för Itreon Market" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="rwork-body">
+          <div class="rwork-label">Kundcase · UX/UI &amp; webbutveckling</div>
+          <h3 class="rwork-title">Itreon Market</h3>
+          <p class="rwork-desc">En digital B2B-marknadsplats för lager, deals och produktgradering — byggd för att göra stora mängder produktinformation enkel att navigera.</p>
+          <div class="rwork-tags">
+            <span class="rwork-tag">UX/UI</span>
+            <span class="rwork-tag">Webbdesign</span>
+            <span class="rwork-tag">Produktdesign</span>
+            <span class="rwork-tag">Responsiv</span>
+          </div>
+          <a href="https://market.itreon.eu" target="_blank" rel="noopener noreferrer" class="rwork-cta">Besök hemsidan <span class="rwork-arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
