@@ -480,6 +480,7 @@
       </div>
       <div data-rimg style="height:500px;margin:0 -56px 0 0;">
         <img id="pf-img" src="" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;">
+        <div id="pf-imgph" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;text-align:center;background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.2);border-radius:16px;color:#8fa3bd;font-size:14px;font-weight:600;padding:24px;box-sizing:border-box;"></div>
       </div>
     </div>
   </div>
@@ -928,6 +929,14 @@
       tags: ["UX/UI", "B2B", "Responsiv", "Marknadsplats"],
       image: "/itreon-market.png",
       url: "https://market.itreon.eu"
+    },
+    {
+      mock: "Galleri 86",
+      category: "Kundcase · Webbdesign, UX/UI & CMS",
+      desc: "Vi gjorde om Galleri86 på Södermalm från en enkel informationssida till en modern digital utställningsyta — med konsten i centrum och ett eget administrationssystem så galleriet kan uppdatera bilder, texter och utställningar helt utan kod.",
+      tags: ["Webdesign", "UX/UI", "Utveckling", "CMS"],
+      image: "",
+      url: "https://galleri86.vercel.app/"
     }
   ];
   var pfIndex = 0;
@@ -938,6 +947,7 @@
   var pfTagsWrap = document.getElementById('pf-tags');
   var pfLink = document.getElementById('pf-link');
   var pfImg = document.getElementById('pf-img');
+  var pfImgPh = document.getElementById('pf-imgph');
 
   function pfRender() {
     pfTabs.querySelectorAll('.pf-tab').forEach(function (t, i) {
@@ -959,8 +969,17 @@
     } else {
       pfLink.style.display = 'none';
     }
-    pfImg.src = p.image;
-    pfImg.alt = 'Hemsida designad för ' + (p.mock || '');
+    if (p.image) {
+      pfImg.src = p.image;
+      pfImg.alt = 'Hemsida designad för ' + (p.mock || '');
+      pfImg.style.display = 'block';
+      pfImgPh.style.display = 'none';
+    } else {
+      pfImg.removeAttribute('src');
+      pfImg.style.display = 'none';
+      pfImgPh.textContent = (p.mock || '') + ' — bild läggs till inom kort';
+      pfImgPh.style.display = 'flex';
+    }
   }
   pfTabs.innerHTML = pfProjects.map(function (p, i) {
     return '<div class="pf-tab" data-i="' + i + '" style="font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">' + esc(p.mock) + '</div>';

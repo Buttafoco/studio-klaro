@@ -9,6 +9,7 @@ export default defineConfig({
         om: resolve(__dirname, 'om.html'),
         frisor: resolve(__dirname, 'hemsida-frisor-stockholm.html'),
         portfolio: resolve(__dirname, 'portfolio.html'),
+        caseGalleri86: resolve(__dirname, 'case-galleri86.html'),
         mallar: resolve(__dirname, 'mallar.html'),
         priser: resolve(__dirname, 'priser.html'),
         restaurang: resolve(__dirname, 'hemsida-restaurang-stockholm.html'),
