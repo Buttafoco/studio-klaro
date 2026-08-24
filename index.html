@@ -481,6 +481,16 @@
       <div data-rimg style="height:500px;margin:0 -56px 0 0;">
         <img id="pf-img" src="" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;">
         <div id="pf-imgph" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;text-align:center;background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.2);border-radius:16px;color:#8fa3bd;font-size:14px;font-weight:600;padding:24px;box-sizing:border-box;"></div>
+        <a id="pf-embed" href="#" target="_blank" rel="noopener noreferrer" style="display:none;flex-direction:column;width:100%;height:100%;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.4);text-decoration:none;">
+          <div style="background:#0F172A;padding:10px 14px;display:flex;align-items:center;gap:8px;flex:none;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#22C55E;"></div>
+          </div>
+          <div style="flex:1;position:relative;background:#fff;">
+            <iframe id="pf-iframe" title="Live-förhandsvisning" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;"></iframe>
+          </div>
+        </a>
       </div>
     </div>
   </div>
@@ -936,6 +946,7 @@
       desc: "Vi gjorde om Galleri86 på Södermalm från en enkel informationssida till en modern digital utställningsyta — med konsten i centrum och ett eget administrationssystem så galleriet kan uppdatera bilder, texter och utställningar helt utan kod.",
       tags: ["Webdesign", "UX/UI", "Utveckling", "CMS"],
       image: "",
+      embed: "https://galleri86.vercel.app/",
       url: "https://galleri86.vercel.app/"
     }
   ];
@@ -948,6 +959,8 @@
   var pfLink = document.getElementById('pf-link');
   var pfImg = document.getElementById('pf-img');
   var pfImgPh = document.getElementById('pf-imgph');
+  var pfEmbed = document.getElementById('pf-embed');
+  var pfIframe = document.getElementById('pf-iframe');
 
   function pfRender() {
     pfTabs.querySelectorAll('.pf-tab').forEach(function (t, i) {
@@ -969,14 +982,22 @@
     } else {
       pfLink.style.display = 'none';
     }
-    if (p.image) {
+    if (p.embed) {
+      if (pfIframe.getAttribute('src') !== p.embed) pfIframe.src = p.embed;
+      pfEmbed.href = p.url || p.embed;
+      pfEmbed.style.display = 'flex';
+      pfImg.style.display = 'none';
+      pfImgPh.style.display = 'none';
+    } else if (p.image) {
       pfImg.src = p.image;
       pfImg.alt = 'Hemsida designad för ' + (p.mock || '');
       pfImg.style.display = 'block';
+      pfEmbed.style.display = 'none';
       pfImgPh.style.display = 'none';
     } else {
       pfImg.removeAttribute('src');
       pfImg.style.display = 'none';
+      pfEmbed.style.display = 'none';
       pfImgPh.textContent = (p.mock || '') + ' — bild läggs till inom kort';
       pfImgPh.style.display = 'flex';
     }
