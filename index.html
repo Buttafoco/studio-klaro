@@ -947,7 +947,9 @@
       tags: ["Webdesign", "UX/UI", "Utveckling", "CMS"],
       image: "",
       embed: "https://galleri86.vercel.app/",
-      url: "https://galleri86.vercel.app/"
+      url: "https://galleri86.vercel.app/",
+      linkLabel: "Visa case",
+      linkUrl: "case-galleri86.html"
     }
   ];
   var pfIndex = 0;
@@ -976,8 +978,17 @@
     pfTagsWrap.innerHTML = (p.tags || []).map(function (tag) {
       return '<div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">' + esc(tag) + '</div>';
     }).join('');
-    if (p.url) {
-      pfLink.href = p.url;
+    var linkUrl = p.linkUrl || p.url;
+    if (linkUrl) {
+      pfLink.href = linkUrl;
+      pfLink.textContent = p.linkLabel || 'Besök hemsidan';
+      if (/^https?:\/\//.test(linkUrl)) {
+        pfLink.target = '_blank';
+        pfLink.rel = 'noopener noreferrer';
+      } else {
+        pfLink.removeAttribute('target');
+        pfLink.removeAttribute('rel');
+      }
       pfLink.style.display = 'inline-block';
     } else {
       pfLink.style.display = 'none';
