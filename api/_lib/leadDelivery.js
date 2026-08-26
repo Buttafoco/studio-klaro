@@ -2,14 +2,9 @@ const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const TIMEOUT_MS = 10000;
 
 // Shared by /api/seo-lead and /api/seo-interest — both reuse the same
-// delivery mechanism as the existing contact form (index.html's wizard +
-// "bli kontaktad"-panel): Web3Forms. This is the same access key already
-// public in that page's client-side source — Web3Forms access keys are
-// designed to be safe to expose, since they only authorize delivery to the
-// pre-registered destination inbox, nothing more. WEB3FORMS_ACCESS_KEY lets
-// this be overridden via an environment variable without touching code.
-const DEFAULT_WEB3FORMS_ACCESS_KEY = "3e1c55ed-82c4-435f-8126-33f86c5d4a92";
-
+// Web3Forms delivery mechanism. The access key lives only in the
+// WEB3FORMS_ACCESS_KEY environment variable (Vercel Production) — no
+// fallback key is kept in source.
 const MAX_EMAIL_LENGTH = 254;
 const MAX_URL_LENGTH = 2048;
 const MAX_LABEL_LENGTH = 50;
@@ -91,8 +86,13 @@ function isHoneypotTriggered(body) {
 }
 
 async function sendToWeb3Forms(fields) {
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+  // No key configured: never attempt delivery, never reveal why —
+  // callers treat a `false` return as a generic, safe-to-show failure.
+  if (!accessKey) return false;
+
   const payload = {
-    access_key: process.env.WEB3FORMS_ACCESS_KEY || DEFAULT_WEB3FORMS_ACCESS_KEY,
+    access_key: accessKey,
     ...fields,
   };
 
