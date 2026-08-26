@@ -230,6 +230,15 @@
   .sk-interest-success h2,.sk-interest-success p{color:#fff;}
   .sk-interest-success{outline:none;}
 
+  /* ---------- Varför SEO är viktigt ---------- */
+  .sk-why-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:start;}
+  .sk-why-points{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;}
+  .sk-why-point{display:flex;gap:14px;padding-top:24px;border-top:1px solid rgba(15,23,42,0.07);}
+  .sk-why-point:nth-child(-n+2){padding-top:0;border-top:none;}
+  .sk-why-icon{flex:none;width:24px;height:24px;border-radius:8px;background:rgba(20,110,245,0.1);color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:2px;}
+  .sk-why-title{font-size:15px;font-weight:800;color:#0F172A;margin:0 0 4px;}
+  .sk-why-text{font-size:13px;color:#52657A;line-height:1.55;margin:0;}
+
   @media (max-width:820px){
     [data-rnav]{display:none!important;}
     [data-rhide]{display:none!important;}
@@ -239,8 +248,11 @@
     .sk-hero-overview{justify-content:center;}
     .sk-hero-overview-total{text-align:center;}
     .sk-cat-breakdown{text-align:left;width:100%;order:3;}
+    .sk-why-grid{grid-template-columns:1fr;gap:28px;}
   }
   @media (max-width:600px){
+    .sk-why-points{grid-template-columns:1fr;}
+    .sk-why-point:nth-child(2){padding-top:24px;border-top:1px solid rgba(15,23,42,0.07);}
     .sk-input-group{flex-direction:column;background:transparent;box-shadow:none;border:none;padding:0;gap:12px;}
     .sk-input{background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(15,23,42,0.08);border:1px solid rgba(15,23,42,0.06);}
     .sk-submit-btn{width:100%;text-align:center;}
@@ -339,6 +351,54 @@
 
   <!-- RAPPORT -->
   <div id="sk-report" class="sk-report" style="display:none;"></div>
+
+  <!-- VARFÖR SEO ÄR VIKTIGT -->
+  <div style="max-width:1140px;margin:64px auto 0;padding:0 20px 64px;">
+    <div class="sk-why-grid">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Varför SEO är viktigt</div>
+        <h2 style="font-size:26px;font-weight:800;color:#0F172A;margin:0 0 14px;line-height:1.3;">Varför är det viktigt med bra SEO?</h2>
+        <p style="font-size:15px;line-height:1.6;color:#52657A;margin:0;font-weight:500;">Bra SEO gör det enklare för både Google och dina kunder att förstå vad din hemsida handlar om.</p>
+      </div>
+      <div class="sk-why-points">
+        <div class="sk-why-point">
+          <span class="sk-why-icon" aria-hidden="true">✓</span>
+          <div>
+            <div class="sk-why-title">Bli lättare att hitta</div>
+            <p class="sk-why-text">En tydlig och välstrukturerad hemsida ger bättre förutsättningar att synas när kunder söker efter det du erbjuder.</p>
+          </div>
+        </div>
+        <div class="sk-why-point">
+          <span class="sk-why-icon" aria-hidden="true">✓</span>
+          <div>
+            <div class="sk-why-title">Skapa en bättre användarupplevelse</div>
+            <p class="sk-why-text">Snabba sidor, tydliga rubriker och bra struktur gör hemsidan enklare att använda.</p>
+          </div>
+        </div>
+        <div class="sk-why-point">
+          <span class="sk-why-icon" aria-hidden="true">✓</span>
+          <div>
+            <div class="sk-why-title">Hjälp Google förstå innehållet</div>
+            <p class="sk-why-text">Rätt titlar, beskrivningar och struktur gör det enklare för sökmotorer att tolka din hemsida.</p>
+          </div>
+        </div>
+        <div class="sk-why-point">
+          <span class="sk-why-icon" aria-hidden="true">✓</span>
+          <div>
+            <div class="sk-why-title">Stärk din lokala synlighet</div>
+            <p class="sk-why-text">För lokala företag kan tydlig kontaktinformation och lokal SEO göra det enklare att nå kunder i rätt område.</p>
+          </div>
+        </div>
+        <div class="sk-why-point">
+          <span class="sk-why-icon" aria-hidden="true">✓</span>
+          <div>
+            <div class="sk-why-title">Upptäck problem tidigt</div>
+            <p class="sk-why-text">Små tekniska fel eller saknad information kan påverka hur väl hemsidan fungerar och syns.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   </main>
 
