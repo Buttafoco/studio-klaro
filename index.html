@@ -207,7 +207,7 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "ProfessionalService",
+      "@type": "Organization",
       "@id": "https://studioklaro.se/#business",
       "name": "Studio Klaro",
       "url": "https://studioklaro.se",
@@ -222,7 +222,24 @@
       "sameAs": [
         "https://www.instagram.com/studioklaro/"
       ],
-      "priceRange": "2995-19900 SEK"
+      "priceRange": "2995-19900 SEK",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "studioklarose@gmail.com",
+          "areaServed": "SE",
+          "availableLanguage": "Swedish",
+          "hoursAvailable": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "08:00",
+              "closes": "17:00"
+            }
+          ]
+        }
+      ]
     },
     {
       "@type": "WebSite",
@@ -821,6 +838,10 @@
           <div style="display:flex;flex-direction:column;gap:10px;">
             <a href="mailto:studioklarose@gmail.com" style="font-size:14px;color:#AFC6E8;text-decoration:none;">studioklarose@gmail.com</a>
             <div style="font-size:14px;color:#AFC6E8;">Stockholm</div>
+          </div>
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px;">Tillgänglighet</div>
+            <div style="font-size:13px;color:#AFC6E8;line-height:1.6;">Mån–fre 08:00–17:00<br>Lör–sön Stängt</div>
           </div>
         </div>
       </div>

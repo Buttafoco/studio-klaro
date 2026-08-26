@@ -420,12 +420,16 @@ function checkLocalBusinessSchema(structuredData, localSeoRelevant) {
   }
 
   if (structuredData.organization.detected) {
+    // A site can be entirely legitimate without a physical LocalBusiness
+    // entity — a service company with no public customer premises should
+    // use Organization instead, and that's a correct, positive result here,
+    // not a gap. See localSeoRelevance.js for how that distinction is made.
     return {
       id,
       label,
-      status: "info",
+      status: "pass",
       importance: "medium",
-      message: "Organization structured data hittades, men ingen tydlig LocalBusiness-entitet.",
+      message: "Sidan har korrekt Organization structured data.",
       details: "",
       scoreEligible: false,
     };
@@ -573,6 +577,25 @@ function checkLocalBusinessOpeningHours(localBusiness) {
     status: "warning",
     importance: "low",
     message: "LocalBusiness structured data innehåller inga öppettider.",
+    details: "",
+    scoreEligible: false,
+  };
+}
+
+// Only fires as a positive result when contact hours are actually found —
+// a service company without a physical premise shouldn't be nudged to add
+// LocalBusiness-style opening hours it doesn't have, so there's no "missing"
+// branch here (mirrors how the other Organization-only signals work).
+function checkOrganizationContactHours(structuredData) {
+  if (!structuredData.organization.detected || !structuredData.organization.hasContactHours) {
+    return null;
+  }
+  return {
+    id: "organizationContactHours",
+    label: "Kontakttider",
+    status: "pass",
+    importance: "low",
+    message: "Tydliga kontakttider hittades.",
     details: "",
     scoreEligible: false,
   };
@@ -855,6 +878,7 @@ function buildSeoChecks(seo, technicalSeo = {}, pageSpeed = null, contentSignals
     checkLocalBusinessAddress(seo.structuredData.localBusiness, localSeoRelevant),
     checkLocalBusinessPhone(seo.structuredData.localBusiness, localSeoRelevant),
     checkLocalBusinessOpeningHours(seo.structuredData.localBusiness),
+    checkOrganizationContactHours(seo.structuredData),
     checkPageSpeedPerformance(pageSpeed),
     checkLighthouseSeo(pageSpeed),
     checkVisiblePhone(contentSignals, localSeoRelevant),

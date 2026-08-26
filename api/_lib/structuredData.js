@@ -117,6 +117,23 @@ function normalizeAddress(rawAddress) {
   };
 }
 
+// A ContactPoint's hoursAvailable is only a meaningful "contact hours"
+// signal when it names a day and gives real opens/closes times — an empty
+// or malformed OpeningHoursSpecification shouldn't count.
+function isValidOpeningHoursSpec(spec) {
+  if (!spec || typeof spec !== "object") return false;
+  const types = normalizeTypes(spec);
+  if (types.length > 0 && !types.includes("OpeningHoursSpecification")) return false;
+  return Boolean(spec.dayOfWeek) && typeof spec.opens === "string" && typeof spec.closes === "string";
+}
+
+function organizationHasContactHours(node) {
+  return toArray(node.contactPoint).some((cp) => {
+    if (!cp || typeof cp !== "object") return false;
+    return toArray(cp.hoursAvailable).some(isValidOpeningHoursSpec);
+  });
+}
+
 function extractLocalBusinessEntity(node) {
   const hasOpeningHours = Boolean(node.openingHours) || Boolean(node.openingHoursSpecification);
   const image = node.image;
@@ -175,6 +192,11 @@ function analyzeStructuredData($) {
     organization: {
       detected: organizationNodes.length > 0,
       count: organizationNodes.length,
+      // Organization → ContactPoint → hoursAvailable: the correct way for a
+      // service company without a public physical location to declare
+      // contact hours (as opposed to LocalBusiness openingHours, which
+      // implies a physical premise customers can visit).
+      hasContactHours: organizationNodes.some(organizationHasContactHours),
     },
     localBusiness: {
       detected: localBusinessNodes.length > 0,
