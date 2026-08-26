@@ -510,6 +510,11 @@
   var currentReportData = null;
   var leadUnlocked = false;
   var leadEmail = '';
+  /* Skiljer sig från leadUnlocked: gäller den anonyma audit-notisen som
+     skickas per genomförd analys, oavsett om besökaren någonsin lämnar
+     e-post. Sätts tillbaka till false varje gång en ny analys startar
+     (setLoading(true)) så en ny sajt fortfarande genererar ett nytt mejl. */
+  var auditNotificationSent = false;
 
   var STEP_LABELS = ['Teknik', 'Innehåll', 'Prestanda'];
   var stepTimer = null;
@@ -565,6 +570,7 @@
       currentReportData = null;
       leadUnlocked = false;
       leadEmail = '';
+      auditNotificationSent = false;
       loadingEl.style.display = 'block';
       startStepAnimation();
     } else {
@@ -1144,11 +1150,43 @@
     if (numberEl) animateScoreNumber(numberEl, value);
   }
 
+  /* ---------- Audit-notis: anonymt internt mejl per genomförd analys ----------
+     Skickas automatiskt för varje lyckad analys, oavsett om besökaren
+     någonsin lämnar e-post — helt separat från lead-upplåsningen nedan.
+     Best effort: submitToWeb3Forms sväljer redan alla fel och timeouts och
+     resolvear till false, så anropet görs fire-and-forget här och kan
+     aldrig blockera eller störa rapportvisningen. Innehåller bara
+     webbadress + analysresultat, ingen persondata (ingen e-post/namn/
+     telefon skickas eftersom besökaren inte har lämnat något än). */
+  function sendAuditNotification(data) {
+    if (auditNotificationSent) return;
+    auditNotificationSent = true;
+
+    var t = tallyChecks(data.checks);
+    var auditedUrl = data.finalUrl || data.url || '';
+    var score = data.score && typeof data.score.value === 'number' ? data.score.value : null;
+    var scoreLabelValue = (data.score && data.score.label) || '';
+    var improvementIssues = buildLeadImprovementIssues(data.checks);
+
+    submitToWeb3Forms({
+      subject: 'SEO-koll genomförd – ' + urlHostname(auditedUrl),
+      from_name: 'Studio Klaro – SEO-koll',
+      'ANALYSERAD HEMSIDA': auditedUrl,
+      'SEO HEALTH': scoreLine(score, scoreLabelValue),
+      KONTROLLER: String(t.total),
+      PROBLEM: String(t.fail),
+      'KAN FÖRBÄTTRAS': String(t.warning),
+      'BEHÖVER FÖRBÄTTRAS': formatImprovementSection(improvementIssues),
+      SOURCE: 'SEO-koll – endast analys'
+    });
+  }
+
   /* ---------- Rapport: visa (preview, låst tills e-post skickats) ---------- */
   function showResult(data) {
     hideAllStates();
     currentReportData = data;
     leadUnlocked = false;
+    sendAuditNotification(data);
     reportEl.innerHTML = buildPreviewHtml(data);
     reportEl.style.display = 'block';
 
