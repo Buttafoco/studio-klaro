@@ -145,6 +145,19 @@
   .price-teaser-pro .price-teaser-price{color:#146EF5;}
   .price-teaser-badge{font-size:10px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.1);padding:2px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;}
 
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* SEO-koll-teaser (startsida) */
+  .hp-seo-group{display:flex;align-items:stretch;gap:10px;background:#F3F7FC;border-radius:16px;padding:8px;border:1px solid rgba(15,23,42,0.06);}
+  .hp-seo-input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:#0F172A;padding:14px 16px;}
+  .hp-seo-input::placeholder{color:#8296B0;}
+  .hp-seo-btn{flex:none;font-size:15px;font-weight:700;padding:14px 24px;border-radius:12px;border:none;cursor:pointer;font-family:inherit;white-space:nowrap;}
+  @media (max-width:600px){
+    .hp-seo-group{flex-direction:column;background:transparent;border:none;padding:0;gap:12px;}
+    .hp-seo-input{background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(15,23,42,0.08);border:1px solid rgba(15,23,42,0.06);}
+    .hp-seo-btn{width:100%;text-align:center;}
+  }
+
   /* Scroll-reveal */
   [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1);}
   [data-reveal].is-visible{opacity:1;transform:translateY(0);}
@@ -287,6 +300,9 @@
     <div data-rrow data-rbtnfull style="display:flex;justify-content:center;gap:14px;margin-bottom:16px;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.32s forwards;">
       <a href="#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få ett kostnadsfritt förslag</a>
       <a href="#tjansten" class="btn-lift lift-ghost" style="background:#fff;color:#0F172A;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;border:1px solid rgba(15,23,42,0.08);">Se vad som ingår</a>
+    </div>
+    <div style="margin-bottom:16px;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.36s forwards;">
+      <a href="/seo-koll" style="display:inline-flex;align-items:center;gap:6px;color:#146EF5;font-size:14px;font-weight:700;text-decoration:none;">Testa din SEO gratis →</a>
     </div>
     <div style="font-size:13px;color:#52657A;font-weight:600;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;">Fast pris &nbsp;·&nbsp; Personlig hjälp &nbsp;·&nbsp; Klart inom 7–10 arbetsdagar</div>
     <p style="font-size:14px;color:#7C8CA3;font-weight:500;margin:18px 0 0;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.48s forwards;">Studio Klaro är en webbyrå i Stockholm för småföretag som vill synas professionellt online – utan att betala för en stor byrås omkostnader.</p>
@@ -514,6 +530,23 @@
           </a>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- SEO-KOLL TEASER -->
+  <div style="max-width:1140px;margin:80px auto 0;padding:0 20px;" data-rpad>
+    <div data-reveal data-rpanelpad style="background:#fff;border-radius:28px;padding:56px 48px;box-shadow:0 20px 50px rgba(15,23,42,0.08);text-align:center;">
+      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;">Kostnadsfri SEO-koll</div>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 12px;">Hur mår din SEO?</h2>
+      <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 32px;font-weight:500;max-width:440px;margin-left:auto;margin-right:auto;">Se vad som fungerar på din hemsida – och vad som kan förbättras.</p>
+      <form id="home-seo-form" novalidate style="max-width:460px;margin:0 auto;">
+        <label for="home-seo-url" class="sr-only">Webbadress</label>
+        <div class="hp-seo-group">
+          <input id="home-seo-url" class="hp-seo-input" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://dittforetag.se">
+          <button type="submit" class="btn-lift lift-primary hp-seo-btn" style="background:#146EF5;color:#fff;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Analysera gratis</button>
+        </div>
+        <div id="home-seo-error" role="alert" style="display:none;color:#D64545;font-size:14px;font-weight:600;margin-top:14px;"></div>
+      </form>
     </div>
   </div>
 
@@ -1273,6 +1306,46 @@
     renderWizard();
   });
   renderWizard();
+
+  /* ---------- SEO-koll-teaser: validera, normalisera och skicka vidare till /seo-koll ----------
+     Kör aldrig analysen här — bara navigerar med URL:en som query-parameter så
+     att /seo-koll kan förifylla sitt eget fält. */
+  var homeSeoForm = document.getElementById('home-seo-form');
+  if (homeSeoForm) {
+    var homeSeoInput = document.getElementById('home-seo-url');
+    var homeSeoError = document.getElementById('home-seo-error');
+
+    var normalizeHomeSeoUrl = function (raw) {
+      var value = (raw || '').trim();
+      if (!value) return null;
+      if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(value)) {
+        value = 'https://' + value;
+      }
+      try {
+        var parsed = new URL(value);
+        if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
+        return parsed.toString();
+      } catch (e) {
+        return null;
+      }
+    };
+
+    homeSeoForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var normalized = normalizeHomeSeoUrl(homeSeoInput.value);
+      if (!normalized) {
+        homeSeoError.textContent = 'Skriv in en giltig webbadress.';
+        homeSeoError.style.display = 'block';
+        return;
+      }
+      homeSeoError.style.display = 'none';
+      window.location.href = '/seo-koll?url=' + encodeURIComponent(normalized);
+    });
+
+    homeSeoInput.addEventListener('input', function () {
+      if (homeSeoError.style.display !== 'none') homeSeoError.style.display = 'none';
+    });
+  }
 })();
 </script>
 

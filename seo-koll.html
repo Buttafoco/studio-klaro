@@ -1397,6 +1397,20 @@
     }
   }
 
+  /* ---------- Förifyll URL från startsidans SEO-koll-teaser (?url=...) ----------
+     Fyller bara i fältet — kör aldrig analysen automatiskt. Användaren klickar
+     fortfarande själv på "Analysera min hemsida". */
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var prefill = params.get('url');
+    if (!prefill) return;
+    var normalized = normalizeUrl(prefill);
+    if (normalized) input.value = normalized;
+    var cleanUrl = new URL(window.location.href);
+    cleanUrl.searchParams.delete('url');
+    window.history.replaceState({}, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
+  })();
+
   function runAnalysis(url) {
     setLoading(true);
     fetch('/api/seo-audit', {
