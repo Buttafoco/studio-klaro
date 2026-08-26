@@ -585,7 +585,7 @@
   }
 
   /* ---------- Rapport: status/prioritet-ordbok och kategori-mappning ---------- */
-  var STATUS_LABELS = { pass: 'Bra', warning: 'Kan förbättras', fail: 'Behöver åtgärdas', info: 'Information' };
+  var STATUS_LABELS = { pass: 'Bra', warning: 'Kan förbättras', fail: 'Behöver åtgärdas', info: 'Kunde inte kontrolleras' };
   var IMPORTANCE_LABELS = { high: 'Hög prioritet', medium: 'Medel', low: 'Låg' };
   var STATUS_SORT_ORDER = { fail: 0, warning: 1, info: 2, pass: 3 };
   var IMPORTANCE_SORT_ORDER = { high: 0, medium: 1, low: 2 };
@@ -825,7 +825,7 @@
       { n: t.pass, text: 'bra', color: '#1FAA59' },
       { n: t.warning, text: 'kan förbättras', color: '#E2A030' },
       { n: t.fail, text: 'behöver åtgärdas', color: '#D64545' },
-      { n: t.info, text: 'information', color: '#8296B0' }
+      { n: t.info, text: 'kunde inte kontrolleras', color: '#8296B0' }
     ];
     var overviewHtml = overviewRows.map(function (row) {
       return '<div class="sk-overview-row"><span class="sk-overview-dot" style="background:' + row.color + ';"></span>' + row.n + ' ' + esc(row.text) + '</div>';
@@ -977,7 +977,7 @@
 
   function buildPerformanceExtraHtml(pageSpeed) {
     if (!pageSpeed || !pageSpeed.available) {
-      return '<div class="sk-notice">Prestandamätningen kunde inte hämtas den här gången. Övriga SEO-resultat påverkas inte.</div>';
+      return '<div class="sk-notice">Prestanda kunde inte kontrolleras den här gången. Övriga delar av SEO-analysen påverkas inte.</div>';
     }
 
     var scoresHtml = '<div class="sk-perf-scores">';
@@ -1018,7 +1018,7 @@
     if (t.pass) parts.push(t.pass + ' bra');
     if (t.warning) parts.push(t.warning + ' kan förbättras');
     if (t.fail) parts.push(t.fail + ' problem');
-    if (t.info) parts.push(t.info + ' information');
+    if (t.info) parts.push(t.info + ' kunde inte kontrolleras');
     return parts;
   }
 
@@ -1043,7 +1043,14 @@
     var breakdown = buildCategoryBreakdownParts(t).join(' · ');
 
     var extraHtml = '';
-    if (group.def.id === 'performance') extraHtml = buildPerformanceExtraHtml(data.pageSpeed);
+    if (group.def.id === 'performance') {
+      extraHtml = buildPerformanceExtraHtml(data.pageSpeed);
+      if (!data.pageSpeed || !data.pageSpeed.available) {
+        // The notice above already explains why — don't also show two
+        // separate "kunde inte kontrolleras" rows saying the same thing.
+        sorted = sorted.filter(function (c) { return c.id !== 'pageSpeedPerformance' && c.id !== 'lighthouseSeo'; });
+      }
+    }
     if (group.def.id === 'local') extraHtml = buildLocalExtraHtml(data.seo && data.seo.structuredData);
 
     return (

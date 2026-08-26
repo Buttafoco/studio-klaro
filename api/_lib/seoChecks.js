@@ -198,18 +198,23 @@ function checkRobots(robots) {
       label,
       status: "pass",
       importance: "high",
-      message: "Sidan är inte markerad med noindex.",
+      message: "Sidan verkar kunna indexeras av sökmotorer.",
       details: robots.value,
     };
   }
 
+  // No robots-meta at all also means "not blocked from indexing" — a real
+  // positive result, not just background info. Kept scoreEligible:false
+  // so this reclassification (was "info", excluded from scoring either
+  // way) doesn't start affecting SEO Health.
   return {
     id,
     label,
-    status: "info",
-    importance: "low",
-    message: "Ingen robots-meta hittades. En sida behöver inte ha en robots-meta för att kunna indexeras.",
+    status: "pass",
+    importance: "high",
+    message: "Sidan verkar kunna indexeras av sökmotorer.",
     details: "",
+    scoreEligible: false,
   };
 }
 
@@ -261,13 +266,17 @@ function checkStructuredData(structuredData) {
   const label = "Structured data (JSON-LD)";
 
   if (structuredData.jsonLdCount === 0) {
+    // Was "info" (and implicitly scoreEligible, since info is excluded from
+    // scoring regardless). Now a real "kan förbättras" result for the
+    // customer, but scoreEligible:false keeps SEO Health unchanged.
     return {
       id,
       label,
-      status: "info",
+      status: "warning",
       importance: "low",
-      message: "Ingen JSON-LD structured data hittades.",
+      message: "Ingen strukturerad data hittades på sidan.",
       details: "",
+      scoreEligible: false,
     };
   }
 
@@ -300,7 +309,7 @@ function checkRobotsTxt(robotsTxt) {
   return {
     id,
     label,
-    status: "info",
+    status: "warning",
     importance: "low",
     message: "Ingen robots.txt-fil hittades.",
     details: "",
@@ -327,7 +336,7 @@ function checkSitemap(sitemap) {
   return {
     id,
     label,
-    status: "info",
+    status: "warning",
     importance: "low",
     message: "Ingen XML-sitemap hittades.",
     details: "",
@@ -340,12 +349,14 @@ function checkStructuredDataValidity(structuredData) {
   const label = "Structured data";
 
   if (structuredData.jsonLdCount === 0) {
+    // Same underlying fact as checkStructuredData's "inga hittades" — worded
+    // differently here so the two check rows don't show identical text.
     return {
       id,
       label,
-      status: "info",
+      status: "warning",
       importance: "low",
-      message: "Ingen JSON-LD structured data hittades.",
+      message: "Det finns ingen structured data att kontrollera giltigheten på.",
       details: "",
       scoreEligible: false,
     };
@@ -559,7 +570,7 @@ function checkLocalBusinessOpeningHours(localBusiness) {
   return {
     id: "localBusinessOpeningHours",
     label: "Öppettider (structured data)",
-    status: "info",
+    status: "warning",
     importance: "low",
     message: "LocalBusiness structured data innehåller inga öppettider.",
     details: "",
