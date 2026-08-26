@@ -392,13 +392,27 @@
 
 </div>
 
-<script>
+<script type="module">
 (function () {
   var esc = function (s) {
     return String(s).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
     });
   };
+
+  /* Same escaping as esc(), but also covers ' — used only for values sent
+     to Web3Forms (never for on-page HTML), matching the escaping the old
+     server-side /api/seo-interest applied before this was moved client-side. */
+  var escapeForEmail = function (s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+
+  function clampText(value, maxLength) {
+    if (typeof value !== 'string') return '';
+    return value.trim().slice(0, maxLength);
+  }
 
   /* ---------- Sticky nav shrink ---------- */
   var navWrap = document.querySelector('.nav-wrap');
@@ -533,20 +547,35 @@
   });
 
   /* ---------- Intresseformulär: begränsad, normaliserad issue-lista ----------
-     Endast checks Studio Klaro faktiskt kan hjälpa till med skickas med till
-     /api/seo-interest — aldrig hela audit-svaret. Backend validerar samma
-     sak igen (klienten är opålitlig), men filtrering här håller nere
-     payloaden och gör avsikten tydlig. */
-  var INTEREST_RELEVANT_INFO_IDS = {
+     Endast checks Studio Klaro faktiskt kan hjälpa till med skickas med i
+     mejlet till Studio Klaro — aldrig hela audit-svaret. Denna logik satt
+     tidigare i /api/seo-interest; flyttad hit oförändrad i sak, eftersom
+     Web3Forms-anropet nu görs direkt från browsern. */
+  var TECHNICAL_OPPORTUNITY_IDS = { robotsTxt: true, sitemap: true };
+  var LOCAL_OPPORTUNITY_IDS = {
     localBusinessSchema: true,
     localBusinessOpeningHours: true,
-    robotsTxt: true,
-    sitemap: true,
     visiblePhone: true,
     visibleAddress: true,
     visibleLocality: true
   };
+  var INTEREST_RELEVANT_INFO_IDS = {};
+  Object.keys(TECHNICAL_OPPORTUNITY_IDS).forEach(function (id) { INTEREST_RELEVANT_INFO_IDS[id] = true; });
+  Object.keys(LOCAL_OPPORTUNITY_IDS).forEach(function (id) { INTEREST_RELEVANT_INFO_IDS[id] = true; });
   var MAX_INTEREST_ISSUES = 30;
+  var MAX_ISSUE_LABEL_LENGTH = 80;
+  var MAX_ISSUE_MESSAGE_LENGTH = 300;
+  var MAX_ISSUE_DETAILS_LENGTH = 300;
+
+  /* Sorteringsordning för mejlet till Studio Klaro (skiljer sig från
+     TOP_ISSUE_PRIORITY ovan genom att även relevant info sorteras sist,
+     inte utelämnas) — samma ordning som tidigare i /api/seo-interest. */
+  var ISSUE_SORT_RANK = {
+    'fail-high': 0, 'fail-medium': 1, 'fail-low': 2,
+    'warning-high': 3, 'warning-medium': 4, 'warning-low': 5
+  };
+  var EMAIL_STATUS_LABELS = { fail: 'Behöver åtgärdas', warning: 'Kan förbättras', info: 'Möjlighet / observation' };
+  var EMAIL_IMPORTANCE_LABELS = { high: 'Hög', medium: 'Medel', low: 'Låg' };
 
   function buildInterestIssues(checks) {
     var issues = [];
@@ -560,12 +589,80 @@
         id: c.id,
         status: c.status,
         importance: c.importance,
-        label: c.label || c.id,
-        message: c.message || '',
-        details: c.details || ''
+        label: escapeForEmail(clampText(c.label || c.id, MAX_ISSUE_LABEL_LENGTH)),
+        message: escapeForEmail(clampText(c.message || '', MAX_ISSUE_MESSAGE_LENGTH)),
+        details: escapeForEmail(clampText(c.details || '', MAX_ISSUE_DETAILS_LENGTH))
       });
     });
+    /* fail high → fail medium → fail low → warning high → warning medium →
+       warning low → relevant info. Array#sort is stable, so ties (incl. all
+       info items) keep their original relative order. */
+    issues.sort(function (a, b) {
+      var rankA = a.status === 'info' ? 6 : (ISSUE_SORT_RANK.hasOwnProperty(a.status + '-' + a.importance) ? ISSUE_SORT_RANK[a.status + '-' + a.importance] : 5.5);
+      var rankB = b.status === 'info' ? 6 : (ISSUE_SORT_RANK.hasOwnProperty(b.status + '-' + b.importance) ? ISSUE_SORT_RANK[b.status + '-' + b.importance] : 5.5);
+      return rankA - rankB;
+    });
     return issues;
+  }
+
+  /* Samma format som tidigare i /api/seo-interest: numrerad lista med
+     Status/Prioritet/meddelande, ev. Detalj-block, separerade med "---". */
+  function formatFollowUpSection(issues) {
+    if (!issues.length) return 'Inga akuta punkter identifierade i denna analys.';
+    return issues.map(function (issue, index) {
+      var lines = [
+        (index + 1) + '. ' + issue.label,
+        'Status: ' + EMAIL_STATUS_LABELS[issue.status],
+        'Prioritet: ' + EMAIL_IMPORTANCE_LABELS[issue.importance],
+        '',
+        issue.message || ''
+      ];
+      if (issue.details) lines.push('', 'Detalj:', issue.details);
+      return lines.join('\n');
+    }).join('\n\n---\n\n');
+  }
+
+  function formatOpportunitySection(issues) {
+    return issues.map(function (issue) { return '• ' + (issue.message || issue.label); }).join('\n');
+  }
+
+  /* ---------- Web3Forms: direkt client-side leverans ----------
+     Web3Forms access keys är enligt deras dokumentation avsedda att
+     användas publikt client-side (de auktoriserar bara leverans till en
+     förregistrerad inkorg, inget annat). Nyckeln hålls ändå utanför repot
+     via Vites env-system — den kommer in i byggartefakten från
+     VITE_WEB3FORMS_ACCESS_KEY vid build-tid, aldrig hårdkodad här.
+     Detta är det enda stället i frontend där access key-värdet läses. */
+  var WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+  var WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+
+  function submitToWeb3Forms(fields) {
+    if (!WEB3FORMS_ACCESS_KEY) return Promise.resolve(false);
+    var payload = Object.assign({ access_key: WEB3FORMS_ACCESS_KEY, botcheck: false }, fields);
+    return fetch(WEB3FORMS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (res) {
+      return res.json().catch(function () { return null; });
+    }).then(function (data) {
+      return Boolean(data && data.success === true);
+    }).catch(function () {
+      return false;
+    });
+  }
+
+  function scoreLine(score, scoreLabel) {
+    var display = typeof score === 'number' ? (score + '/100') : 'Ej tillgänglig';
+    return scoreLabel ? (display + ' – ' + scoreLabel) : display;
+  }
+
+  function formatBlock(pairs) {
+    return pairs.map(function (p) { return p[0] + ':\n' + p[1]; }).join('\n\n');
+  }
+
+  function urlHostname(value) {
+    try { return new URL(value).hostname; } catch (e) { return value; }
   }
 
   var METRIC_DEFS = [
@@ -1001,6 +1098,17 @@
     }
   }
 
+  var MAX_EMAIL_LENGTH = 254;
+  var MAX_HONEYPOT_LENGTH = 500;
+
+  /* Samma princip som tidigare i /api/_lib/leadDelivery.js: en ifylld
+     honeypot avslöjas aldrig för avsändaren — anropet till Web3Forms
+     hoppas bara tyst över och flödet fortsätter som om det lyckats. */
+  function isHoneypotTriggered(value) {
+    var v = clampText(value, MAX_HONEYPOT_LENGTH + 1);
+    return Boolean(v) && v.length <= MAX_HONEYPOT_LENGTH;
+  }
+
   function handleLeadSubmit(leadForm) {
     var emailInput = leadForm.querySelector('#sk-lead-email');
     var leadSubmitBtn = leadForm.querySelector('#sk-lead-submit');
@@ -1009,7 +1117,7 @@
 
     if (!emailInput || !leadSubmitBtn || leadSubmitBtn.disabled) return;
 
-    var email = emailInput.value.trim();
+    var email = clampText(emailInput.value, MAX_EMAIL_LENGTH);
     if (!isValidEmailClient(email)) {
       leadErrorEl.textContent = 'Skriv in en giltig e-postadress.';
       leadErrorEl.style.display = 'block';
@@ -1021,35 +1129,32 @@
     leadSubmitBtn.disabled = true;
     leadSubmitBtn.textContent = 'Öppnar rapporten …';
 
+    if (isHoneypotTriggered(honeypotInput ? honeypotInput.value : '')) {
+      leadEmail = email;
+      unlockFullReport();
+      return;
+    }
+
     var data = currentReportData || {};
     var t = tallyChecks(data.checks);
+    var auditedUrl = data.finalUrl || data.url || '';
+    var score = data.score && typeof data.score.value === 'number' ? data.score.value : null;
+    var scoreLabelValue = (data.score && data.score.label) || '';
 
-    var payload = {
-      email: email,
-      auditedUrl: data.finalUrl || data.url || '',
-      score: data.score && typeof data.score.value === 'number' ? data.score.value : null,
-      scoreLabel: (data.score && data.score.label) || '',
-      totalChecks: t.total,
-      failedChecks: t.fail,
-      warningChecks: t.warning,
-      source: 'seo-koll',
-      website: honeypotInput ? honeypotInput.value : ''
-    };
-
-    fetch('/api/seo-lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+    submitToWeb3Forms({
+      subject: 'SEO-koll lead – ' + auditedUrl,
+      from_name: 'Studio Klaro – SEO-koll',
+      replyto: email,
+      Email: email,
+      'Analyserad hemsida': auditedUrl,
+      'SEO Health': scoreLine(score, scoreLabelValue),
+      Kontroller: String(t.total),
+      Problem: String(t.fail),
+      'Kan förbättras': String(t.warning),
+      Source: 'SEO-koll'
     })
-      .then(function (res) {
-        return res.json()
-          .catch(function () { return null; })
-          .then(function (json) { return { ok: res.ok, data: json }; });
-      })
-      .then(function (result) {
-        if (!result.ok || !result.data || result.data.success !== true) {
-          throw new Error('lead-failed');
-        }
+      .then(function (sent) {
+        if (!sent) throw new Error('lead-failed');
         leadEmail = email;
         unlockFullReport();
       })
@@ -1121,6 +1226,10 @@
     }
   }
 
+  var MAX_NAME_LENGTH = 100;
+  var MAX_PHONE_LENGTH = 40;
+  var MAX_MESSAGE_LENGTH = 500;
+
   function handleInterestSubmit(interestForm) {
     var nameInput = interestForm.querySelector('#sk-interest-name');
     var emailInput = interestForm.querySelector('#sk-interest-email');
@@ -1132,8 +1241,8 @@
 
     if (!interestSubmitBtn || interestSubmitBtn.disabled) return;
 
-    var name = nameInput.value.trim();
-    var email = emailInput.value.trim();
+    var name = clampText(nameInput.value, MAX_NAME_LENGTH);
+    var email = clampText(emailInput.value, MAX_EMAIL_LENGTH);
 
     if (!name) {
       interestErrorEl.textContent = 'Skriv in ditt namn.';
@@ -1156,39 +1265,50 @@
     interestSubmitBtn.disabled = true;
     interestSubmitBtn.textContent = 'Skickar …';
 
+    if (isHoneypotTriggered(honeypotInput ? honeypotInput.value : '')) {
+      showInterestSuccess();
+      return;
+    }
+
+    var phone = clampText(phoneInput.value, MAX_PHONE_LENGTH);
+    var message = clampText(messageInput.value, MAX_MESSAGE_LENGTH);
     var data = currentReportData || {};
     var t = tallyChecks(data.checks);
+    var auditedUrl = data.finalUrl || data.url || '';
+    var score = data.score && typeof data.score.value === 'number' ? data.score.value : null;
+    var scoreLabelValue = (data.score && data.score.label) || '';
 
-    var payload = {
-      name: name,
-      email: email,
-      phone: phoneInput.value.trim(),
-      message: messageInput.value.trim(),
-      auditedUrl: data.finalUrl || data.url || '',
-      score: data.score && typeof data.score.value === 'number' ? data.score.value : null,
-      scoreLabel: (data.score && data.score.label) || '',
-      totalChecks: t.total,
-      failedChecks: t.fail,
-      warningChecks: t.warning,
-      source: 'seo-koll-interest',
-      issues: buildInterestIssues(data.checks),
-      website: honeypotInput ? honeypotInput.value : ''
+    var issues = buildInterestIssues(data.checks);
+    var followUpIssues = issues.filter(function (i) { return i.status !== 'info'; });
+    var technicalOpportunityIssues = issues.filter(function (i) { return i.status === 'info' && TECHNICAL_OPPORTUNITY_IDS[i.id]; });
+    var localOpportunityIssues = issues.filter(function (i) { return i.status === 'info' && LOCAL_OPPORTUNITY_IDS[i.id]; });
+
+    var fields = {
+      subject: 'SEO-koll: ' + urlHostname(auditedUrl) + ' vill ha hjälp',
+      from_name: 'Studio Klaro – SEO-koll (intresse)',
+      replyto: email,
+      KUND: formatBlock([
+        ['Namn', escapeForEmail(name)],
+        ['Email', escapeForEmail(email)],
+        ['Telefon', escapeForEmail(phone) || '–'],
+        ['Meddelande', escapeForEmail(message) || '–']
+      ]),
+      HEMSIDA: formatBlock([
+        ['Analyserad hemsida', auditedUrl],
+        ['SEO Health', scoreLine(score, scoreLabelValue)],
+        ['Kontroller', String(t.total)],
+        ['Problem', String(t.fail)],
+        ['Kan förbättras', String(t.warning)]
+      ]),
+      'PUNKTER ATT FÖLJA UPP': formatFollowUpSection(followUpIssues)
     };
+    if (technicalOpportunityIssues.length) fields['TEKNISK SEO / MÖJLIGHETER'] = formatOpportunitySection(technicalOpportunityIssues);
+    if (localOpportunityIssues.length) fields['LOKAL SEO / MÖJLIGHETER'] = formatOpportunitySection(localOpportunityIssues);
+    fields.Source = 'SEO-koll – Intresserad av hjälp';
 
-    fetch('/api/seo-interest', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-      .then(function (res) {
-        return res.json()
-          .catch(function () { return null; })
-          .then(function (json) { return { ok: res.ok, data: json }; });
-      })
-      .then(function (result) {
-        if (!result.ok || !result.data || result.data.success !== true) {
-          throw new Error('interest-failed');
-        }
+    submitToWeb3Forms(fields)
+      .then(function (sent) {
+        if (!sent) throw new Error('interest-failed');
         showInterestSuccess();
       })
       .catch(function () {
