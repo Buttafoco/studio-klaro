@@ -686,6 +686,26 @@
     return issues.map(function (issue) { return '• ' + (issue.message || issue.label); }).join('\n');
   }
 
+  /* ---------- Lead-mejl: "BEHÖVER FÖRBÄTTRAS" ----------
+     Återanvänder buildInterestIssues (samma sortering: fail före warning,
+     hög före medel före låg) men filtrerar bort "info" helt — lead-mejlet
+     ska bara visa Kan förbättras/Behöver åtgärdas, aldrig Bra eller
+     Kunde inte kontrolleras. */
+  function buildLeadImprovementIssues(checks) {
+    return buildInterestIssues(checks).filter(function (issue) {
+      return issue.status === 'fail' || issue.status === 'warning';
+    });
+  }
+
+  function formatImprovementSection(issues) {
+    if (!issues.length) return 'Inga tydliga förbättringspunkter hittades.';
+    return issues.map(function (issue) {
+      var lines = [issue.label, 'Status: ' + EMAIL_STATUS_LABELS[issue.status], issue.message || ''];
+      if (issue.details) lines.push('', 'Detalj:', issue.details);
+      return lines.join('\n');
+    }).join('\n\n');
+  }
+
   /* ---------- Web3Forms: direkt client-side leverans ----------
      Web3Forms access keys är enligt deras dokumentation avsedda att
      användas publikt client-side (de auktoriserar bara leverans till en
@@ -1207,6 +1227,7 @@
     var auditedUrl = data.finalUrl || data.url || '';
     var score = data.score && typeof data.score.value === 'number' ? data.score.value : null;
     var scoreLabelValue = (data.score && data.score.label) || '';
+    var improvementIssues = buildLeadImprovementIssues(data.checks);
 
     submitToWeb3Forms({
       subject: 'SEO-koll lead – ' + auditedUrl,
@@ -1218,7 +1239,8 @@
       Kontroller: String(t.total),
       Problem: String(t.fail),
       'Kan förbättras': String(t.warning),
-      Source: 'SEO-koll'
+      Source: 'SEO-koll',
+      'BEHÖVER FÖRBÄTTRAS': formatImprovementSection(improvementIssues)
     })
       .then(function (sent) {
         if (!sent) throw new Error('lead-failed');
