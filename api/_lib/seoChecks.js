@@ -387,7 +387,7 @@ function checkStructuredDataValidity(structuredData) {
 
 function checkLocalBusinessSchema(structuredData, localSeoRelevant) {
   const id = "localBusinessSchema";
-  const label = "LocalBusiness structured data";
+  const label = "Strukturerad företagsinformation";
 
   if (structuredData.localBusiness.detected) {
     return {
@@ -413,8 +413,8 @@ function checkLocalBusinessSchema(structuredData, localSeoRelevant) {
       label,
       status: "warning",
       importance: "medium",
-      message: "Ingen LocalBusiness structured data hittades för en sida som verkar representera en lokal verksamhet.",
-      details: "",
+      message: "Ingen strukturerad företagsinformation hittades.",
+      details: "Sidan verkar tillhöra ett lokalt företag, men saknar strukturerad data som hjälper Google att förstå verksamheten.",
       scoreEligible: true,
     };
   }
@@ -436,7 +436,7 @@ function checkLocalBusinessSchema(structuredData, localSeoRelevant) {
     label,
     status: "info",
     importance: "medium",
-    message: "Ingen LocalBusiness structured data hittades.",
+    message: "Ingen strukturerad företagsinformation hittades.",
     details: "",
     scoreEligible: false,
   };
