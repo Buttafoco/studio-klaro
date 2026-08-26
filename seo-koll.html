@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<title>Gratis SEO-koll – Studio Klaro | Webbdesign Stockholm</title>
+<meta name="description" content="Skriv in din hemsida och få en kostnadsfri, snabb analys av teknik, innehåll och lokal SEO från Studio Klaro.">
+<link rel="canonical" href="https://studioklaro.se/seo-koll">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Studio Klaro">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Gratis SEO-koll – Studio Klaro">
+<meta property="og:description" content="Skriv in din hemsida och få en kostnadsfri, snabb analys av teknik, innehåll och lokal SEO.">
+<meta property="og:url" content="https://studioklaro.se/seo-koll">
+<meta property="og:image" content="https://studioklaro.se/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gratis SEO-koll – Studio Klaro">
+<meta name="twitter:description" content="Skriv in din hemsida och få en kostnadsfri, snabb analys av teknik, innehåll och lokal SEO.">
+<meta name="twitter:image" content="https://studioklaro.se/og-cover.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "url": "https://studioklaro.se/seo-koll",
+  "name": "Gratis SEO-koll – Studio Klaro",
+  "mainEntity": {
+    "@type": "ProfessionalService",
+    "@id": "https://studioklaro.se/#business",
+    "name": "Studio Klaro",
+    "url": "https://studioklaro.se",
+    "logo": "https://studioklaro.se/logo.webp",
+    "description": "Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen.",
+    "areaServed": {
+      "@type": "City",
+      "name": "Stockholm"
+    },
+    "sameAs": [
+      "https://www.instagram.com/studioklaro/"
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://studioklaro.se/" },
+    { "@type": "ListItem", "position": 2, "name": "SEO-koll", "item": "https://studioklaro.se/seo-koll" }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#DCEEFF;font-family:'Manrope',system-ui,sans-serif;}
+  a{color:#146EF5;}
+  a:hover{color:#0F5AD1;}
+  ::selection{background:#146EF5;color:#fff;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
+
+  /* Sticky shrinking nav capsule */
+  .nav-wrap{position:sticky;top:0;z-index:50;padding:0px 0px 0;transition:padding .5s cubic-bezier(0.22,1,0.36,1);}
+  .nav-capsule{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:28px 20px;border-radius:0px;background:rgba(255,255,255,0);box-shadow:0 0 0 rgba(0,0,0,0);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);transition:max-width .5s cubic-bezier(0.22,1,0.36,1),padding .5s cubic-bezier(0.22,1,0.36,1),border-radius .5s cubic-bezier(0.22,1,0.36,1),background .5s cubic-bezier(0.22,1,0.36,1),box-shadow .5s cubic-bezier(0.22,1,0.36,1);opacity:0;transform:translateY(-18px);animation:fadeUp .6s cubic-bezier(0.22,1,0.36,1) 0.05s forwards;}
+  .nav-wrap.scrolled{padding:14px 20px 0;}
+  .nav-wrap.scrolled .nav-capsule{max-width:880px;padding:14px 28px;border-radius:18px;background:rgba(255,255,255,0.9);box-shadow:0 12px 30px rgba(15,23,42,0.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0F172A;outline-offset:2px;}
+
+  .btn-lift{transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s cubic-bezier(0.22,1,0.36,1);}
+  .cta-nav:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,110,245,0.4);}
+  .cta-nav:active{transform:translateY(0px) scale(0.98);}
+  .cta-footer:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,0.15);}
+
+  /* Mobil nedfällbar meny */
+  .mnav-panel{max-width:1140px;margin:8px auto 0;overflow:hidden;max-height:0;transition:max-height 0.35s cubic-bezier(0.22,1,0.36,1);border-radius:18px;}
+  .nav-wrap.scrolled .mnav-panel{max-width:880px;}
+  .mnav-panel.open{max-height:400px;}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* SEO-koll formulär */
+  .sk-input-group{display:flex;align-items:stretch;gap:10px;background:#fff;border-radius:16px;padding:8px;box-shadow:0 10px 26px rgba(15,23,42,0.08);border:1px solid rgba(15,23,42,0.06);}
+  .sk-input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:#0F172A;padding:14px 16px;}
+  .sk-input::placeholder{color:#8296B0;}
+  .sk-input:disabled{opacity:.6;}
+  .sk-submit-btn{flex:none;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 24px;border-radius:12px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 8px 20px rgba(20,110,245,0.28);white-space:nowrap;}
+  .sk-submit-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,110,245,0.4);}
+  .sk-submit-btn:active:not(:disabled){transform:translateY(0) scale(0.98);}
+  .sk-submit-btn:disabled{opacity:.65;cursor:not-allowed;}
+  .sk-field-error{color:#D64545;font-size:14px;font-weight:600;margin-top:14px;}
+
+  .sk-loading{margin-top:32px;}
+  .sk-loading-text{font-size:14px;font-weight:600;color:#52657A;margin-bottom:16px;}
+  .sk-steps{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+  .sk-step{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#8296B0;padding:9px 16px;border-radius:20px;background:rgba(20,110,245,0.06);transition:color .3s ease,background .3s ease;}
+  .sk-step-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none;}
+  .sk-step.is-active{color:#146EF5;background:rgba(20,110,245,0.12);}
+  .sk-step.is-active .sk-step-dot{animation:skPulse 1s ease-in-out infinite;}
+  @keyframes skPulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+  .sk-error-box{margin-top:32px;background:#fff;border:1px solid rgba(214,69,69,0.25);border-radius:16px;padding:20px 22px;color:#D64545;font-size:14px;font-weight:600;text-align:left;}
+
+  /* ---------- Rapport ---------- */
+  .sk-report{max-width:900px;margin:0 auto;padding:0 20px 100px;text-align:left;opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease;}
+  .sk-report.is-visible{opacity:1;transform:translateY(0);}
+
+  .sk-hero-card{background:#fff;border-radius:24px;padding:40px;box-shadow:0 14px 34px rgba(15,23,42,0.08);margin-top:40px;}
+  .sk-hero-grid{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;}
+  .sk-hero-score{display:flex;justify-content:center;}
+  .sk-hero-body h2{font-size:22px;font-weight:800;color:#0F172A;margin:0 0 6px;outline:none;}
+  .sk-hero-label{font-size:15px;font-weight:800;margin-bottom:10px;}
+  .sk-hero-url{font-size:13px;color:#8296B0;word-break:break-word;margin-bottom:18px;}
+  .sk-hero-summary{font-size:15px;line-height:1.6;color:#52657A;margin:0 0 22px;font-weight:500;}
+  .sk-hero-overview{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;padding:18px 0;border-top:1px solid rgba(15,23,42,0.08);border-bottom:1px solid rgba(15,23,42,0.08);margin-bottom:18px;}
+  .sk-hero-overview-total{font-size:13px;font-weight:700;color:#0F172A;width:100%;}
+  .sk-overview-row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#0F172A;}
+  .sk-overview-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+
+  .sk-score-ring{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;}
+  .sk-score-ring-progress{transition:stroke-dashoffset 1s cubic-bezier(0.22,1,0.36,1);}
+  .sk-score-ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+  .sk-score-value{font-size:38px;font-weight:800;color:#0F172A;line-height:1;}
+  .sk-score-max{display:block;font-size:13px;font-weight:700;color:#8296B0;margin-top:2px;}
+
+  .sk-score-info{margin-top:4px;}
+  .sk-score-info summary{cursor:pointer;font-size:13px;font-weight:700;color:#146EF5;list-style:none;}
+  .sk-score-info summary::-webkit-details-marker{display:none;}
+  .sk-score-info summary:hover{color:#0F5AD1;}
+  .sk-score-info-body{margin-top:10px;font-size:13px;line-height:1.6;color:#52657A;}
+  .sk-score-info-body p{margin:0 0 6px;}
+  .sk-score-method{color:#B5C2D6!important;font-size:12px!important;}
+
+  .sk-section{margin-top:40px;}
+  .sk-section h2{font-size:20px;font-weight:800;color:#0F172A;margin:0 0 6px;}
+  .sk-section-sub{font-size:14px;color:#8296B0;margin:0 0 20px;}
+
+  .sk-empty-state{background:#fff;border-radius:16px;padding:22px;font-size:14px;color:#52657A;font-weight:600;box-shadow:0 8px 20px rgba(15,23,42,0.05);}
+
+  .sk-issues{display:flex;flex-direction:column;gap:14px;}
+  .sk-issue-card{background:#fff;border-radius:16px;padding:22px 24px;box-shadow:0 8px 20px rgba(15,23,42,0.05);}
+  .sk-issue-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;flex-wrap:wrap;}
+  .sk-issue-title{font-size:16px;font-weight:800;color:#0F172A;margin:0;}
+  .sk-issue-message{font-size:14px;line-height:1.55;color:#52657A;margin:0 0 10px;}
+  .sk-issue-details{font-size:13px;color:#8296B0;margin-bottom:10px;}
+  .sk-priority-pill{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;padding:4px 10px;border-radius:20px;}
+  .sk-priority-high{color:#C13333;background:rgba(214,69,69,0.1);}
+  .sk-priority-medium{color:#B9791F;background:rgba(226,160,48,0.14);}
+  .sk-priority-low{color:#52657A;background:rgba(82,101,122,0.1);}
+
+  .sk-pill{display:inline-flex;align-items:center;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;white-space:nowrap;flex:none;}
+  .sk-pill-pass{color:#1C8F4D;background:rgba(31,170,89,0.12);}
+  .sk-pill-warning{color:#B9791F;background:rgba(226,160,48,0.16);}
+  .sk-pill-fail{color:#C13333;background:rgba(214,69,69,0.12);}
+  .sk-pill-info{color:#52657A;background:rgba(82,101,122,0.12);}
+
+  .sk-categories{display:flex;flex-direction:column;gap:14px;}
+  .sk-cat-card{background:#fff;border-radius:16px;box-shadow:0 8px 20px rgba(15,23,42,0.05);overflow:hidden;}
+  .sk-cat-toggle{width:100%;display:flex;align-items:center;gap:16px;justify-content:space-between;background:none;border:none;cursor:pointer;font-family:inherit;text-align:left;padding:20px 24px;}
+  .sk-cat-toggle:hover .sk-cat-name{color:#146EF5;}
+  .sk-cat-toggle-main{display:flex;flex-direction:column;gap:4px;flex:none;min-width:150px;}
+  .sk-cat-name{font-size:16px;font-weight:800;color:#0F172A;transition:color .2s ease;}
+  .sk-cat-count{font-size:12px;font-weight:600;color:#8296B0;}
+  .sk-cat-breakdown{flex:1;font-size:13px;font-weight:600;color:#52657A;text-align:right;}
+  .sk-cat-chevron{flex:none;color:#8296B0;transition:transform .3s cubic-bezier(0.22,1,0.36,1);}
+  .sk-cat-toggle[aria-expanded="true"] .sk-cat-chevron{transform:rotate(180deg);}
+  .sk-cat-rows{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(0.22,1,0.36,1);}
+  .sk-cat-rows.open{grid-template-rows:1fr;}
+  .sk-cat-rows-inner{overflow:hidden;}
+  .sk-cat-panel-content{padding:0 24px 22px;border-top:1px solid rgba(15,23,42,0.06);}
+
+  .sk-notice{background:rgba(20,110,245,0.05);border-radius:12px;padding:14px 16px;font-size:13px;color:#52657A;font-weight:600;margin:18px 0;}
+  .sk-notice-positive{background:rgba(31,170,89,0.08);color:#166B3B;}
+  .sk-notice-sub{font-size:12px;font-weight:600;color:#3E8A5C;margin-top:4px;}
+
+  .sk-perf-extra{margin:18px 0;}
+  .sk-perf-scores{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:14px;}
+  .sk-perf-score-label{font-size:12px;font-weight:700;color:#8296B0;text-transform:uppercase;letter-spacing:.03em;}
+  .sk-perf-score-value{font-size:22px;font-weight:800;color:#0F172A;margin-top:2px;}
+  .sk-metrics{display:flex;flex-direction:column;gap:8px;background:rgba(15,23,42,0.02);border-radius:12px;padding:14px 16px;}
+  .sk-metric-row{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:600;color:#0F172A;}
+  .sk-metric-value{color:#146EF5;font-weight:700;text-align:right;}
+
+  .sk-check-row{padding:16px 0;border-bottom:1px solid rgba(15,23,42,0.06);}
+  .sk-check-row:last-child{border-bottom:none;}
+  .sk-check-row-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;flex-wrap:wrap;}
+  .sk-check-label{font-size:14px;font-weight:700;color:#0F172A;}
+  .sk-check-message{font-size:13px;line-height:1.55;color:#52657A;margin:0;}
+  .sk-check-details{font-size:12px;color:#8296B0;margin-top:4px;}
+
+  /* ---------- Lead card + upplåsning ---------- */
+  .sk-lead-card{background:rgba(20,110,245,0.045);border:1.5px solid rgba(20,110,245,0.22);border-radius:24px;padding:40px;margin-top:24px;text-align:center;}
+  .sk-lead-card h2{font-size:21px;font-weight:800;color:#0F172A;margin:0 0 8px;}
+  .sk-lead-text{font-size:14px;color:#52657A;line-height:1.6;margin:0 0 24px;max-width:440px;margin-left:auto;margin-right:auto;}
+  .sk-lead-card .sk-input-group{max-width:460px;margin:0 auto;}
+  .sk-lead-card .sk-field-error{text-align:center;}
+  .sk-lead-disclaimer{font-size:12px;color:#8296B0;line-height:1.55;margin:18px auto 0;max-width:420px;}
+  .sk-hp-field{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;}
+
+  .sk-locked-teaser{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px;}
+  .sk-locked-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#8296B0;background:rgba(15,23,42,0.045);padding:8px 14px;border-radius:20px;}
+
+  .sk-unlock-notice{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(31,170,89,0.1);color:#166B3B;font-size:13px;font-weight:700;padding:12px 18px;border-radius:12px;margin-top:40px;text-align:center;}
+
+  /* ---------- Intresse-CTA (högintentslead) ---------- */
+  .sk-interest-card{background:#146EF5;border-radius:24px;padding:44px 40px;margin-top:40px;text-align:center;color:#fff;}
+  .sk-interest-eyebrow{font-size:12px;font-weight:700;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;}
+  .sk-interest-card h2{font-size:23px;font-weight:800;color:#fff;margin:0 0 10px;}
+  .sk-interest-card > div > p{font-size:15px;line-height:1.6;color:rgba(255,255,255,0.85);margin:0 auto 26px;max-width:460px;}
+  .sk-interest-actions{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;}
+  .sk-interest-yes-btn{background:#fff;color:#146EF5;font-size:15px;font-weight:700;padding:14px 26px;border-radius:12px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(0,0,0,0.15);transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);}
+  .sk-interest-yes-btn:hover{transform:translateY(-2px);}
+  .sk-interest-dismiss-btn{background:none;border:none;color:rgba(255,255,255,0.85);font-size:14px;font-weight:700;text-decoration:underline;cursor:pointer;font-family:inherit;padding:8px;}
+  .sk-interest-dismiss-btn:hover{color:#fff;}
+
+  .sk-interest-form-wrap{max-width:440px;margin:0 auto;text-align:left;}
+  .sk-interest-form-wrap h2,.sk-interest-form-wrap>p{text-align:center;}
+  .sk-interest-field{margin-bottom:16px;}
+  .sk-interest-field label{display:block;font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:6px;}
+  .sk-interest-input{width:100%;border:none;border-radius:12px;padding:13px 16px;font-family:inherit;font-size:15px;color:#0F172A;background:#fff;outline:none;box-sizing:border-box;}
+  .sk-interest-textarea{resize:vertical;min-height:80px;font-family:inherit;}
+  .sk-interest-submit-btn{width:100%;background:#0F172A;color:#fff;box-shadow:none;}
+  .sk-interest-submit-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,0.25);}
+  .sk-interest-card .sk-field-error{color:#FFE9E9;background:rgba(0,0,0,0.18);border-radius:10px;padding:10px 14px;margin:0 0 14px;text-align:left;}
+  .sk-interest-success h2,.sk-interest-success p{color:#fff;}
+  .sk-interest-success{outline:none;}
+
+  @media (max-width:820px){
+    [data-rnav]{display:none!important;}
+    [data-rhide]{display:none!important;}
+    [data-rshow]{display:block!important;}
+    [data-rhero-h1]{font-size:30px!important;}
+    .sk-hero-grid{grid-template-columns:1fr;text-align:center;}
+    .sk-hero-overview{justify-content:center;}
+    .sk-hero-overview-total{text-align:center;}
+    .sk-cat-breakdown{text-align:left;width:100%;order:3;}
+  }
+  @media (max-width:600px){
+    .sk-input-group{flex-direction:column;background:transparent;box-shadow:none;border:none;padding:0;gap:12px;}
+    .sk-input{background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(15,23,42,0.08);border:1px solid rgba(15,23,42,0.06);}
+    .sk-submit-btn{width:100%;text-align:center;}
+    .sk-hero-card{padding:28px 22px;}
+    .sk-issue-card{padding:18px 18px;}
+    .sk-cat-toggle{padding:18px;flex-wrap:wrap;}
+    .sk-cat-panel-content{padding:0 18px 20px;}
+    .sk-perf-scores{gap:18px;}
+    .sk-lead-card{padding:28px 20px;}
+    .sk-locked-teaser{display:none;}
+    .sk-interest-card{padding:32px 22px;}
+    .sk-interest-actions{flex-direction:column;width:100%;}
+    .sk-interest-yes-btn{width:100%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .sk-step-dot{animation:none;}
+    .btn-lift,.sk-submit-btn{transition:none;}
+    .sk-report,.sk-score-ring-progress,.sk-cat-chevron,.sk-cat-rows{transition:none;}
+  }
+</style>
+<script type="module" src="/src/speed-insights.js"></script>
+</head>
+<body>
+
+<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
+
+  <!-- NAV -->
+  <header class="nav-wrap">
+    <nav class="nav-capsule" aria-label="Huvudmeny">
+      <a href="/" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
+        <img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
+      </a>
+      <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
+        <a href="/#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
+        <a href="/#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänster</a>
+        <a href="/#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
+        <a href="/priser" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
+        <a href="/om" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Om</a>
+      </div>
+      <a data-rhide href="/#kontakt" class="btn-lift cta-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få ett kostnadsfritt förslag</a>
+      <div data-rshow style="display:none;">
+        <button id="mnav-toggle" aria-label="Meny" aria-expanded="false" aria-controls="mnav-panel" style="width:40px;height:40px;border-radius:10px;background:#146EF5;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+          <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div></div>
+        </button>
+      </div>
+    </nav>
+    <div data-rshow id="mnav-panel" class="mnav-panel" style="display:none;">
+      <div style="background:#fff;border-radius:18px;box-shadow:0 12px 30px rgba(15,23,42,0.12);overflow:hidden;">
+        <a href="/#processen" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
+        <a href="/#tjansten" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänster</a>
+        <a href="/#portfolio" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
+        <a href="/priser" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
+        <a href="/om" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
+        <div style="padding:16px 20px;">
+          <a href="/#kontakt" data-mnav-close style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få ett kostnadsfritt förslag</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+  <!-- BREADCRUMB -->
+  <nav aria-label="Brödsmulor" style="max-width:1140px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:#8296B0;">
+    <a href="/" style="color:#8296B0;text-decoration:none;">Hem</a><span style="margin:0 6px;color:#C3CEDD;">/</span><span style="color:#52657A;font-weight:600;">SEO-koll</span>
+  </nav>
+
+  <!-- HERO + FORMULÄR -->
+  <div style="max-width:640px;margin:56px auto 0;text-align:center;padding:0 20px 40px;">
+    <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px;">Kostnadsfri SEO-koll</div>
+    <h1 data-rhero-h1 style="font-size:42px;line-height:1.15;font-weight:800;color:#0F172A;margin:0 0 20px;letter-spacing:-0.01em;">Hur mår din SEO?</h1>
+    <p style="font-size:17px;line-height:1.6;color:#52657A;margin:0 0 32px;font-weight:500;">Skriv in din hemsida och få en snabb analys av teknik, innehåll och lokal SEO.</p>
+
+    <form id="sk-form" novalidate>
+      <label for="sk-url-input" class="sr-only">Webbadress</label>
+      <div class="sk-input-group">
+        <input id="sk-url-input" name="url" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://dittforetag.se" class="sk-input">
+        <button type="submit" id="sk-submit-btn" class="btn-lift sk-submit-btn">Analysera min hemsida</button>
+      </div>
+      <div id="sk-field-error" class="sk-field-error" role="alert" style="display:none;"></div>
+    </form>
+
+    <div id="sk-live-region" aria-live="polite" role="status">
+      <div id="sk-loading" class="sk-loading" style="display:none;">
+        <div class="sk-loading-text">Vi går igenom din hemsida …</div>
+        <div class="sk-steps">
+          <span class="sk-step" data-step="0"><span class="sk-step-dot"></span>Teknik</span>
+          <span class="sk-step" data-step="1"><span class="sk-step-dot"></span>Innehåll</span>
+          <span class="sk-step" data-step="2"><span class="sk-step-dot"></span>Prestanda</span>
+        </div>
+      </div>
+
+      <div id="sk-error" class="sk-error-box" tabindex="-1" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- RAPPORT -->
+  <div id="sk-report" class="sk-report" style="display:none;"></div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:0;width:100vw;margin-left:calc(50% - 50vw);">
+    <div style="background:#146EF5;padding:26px 20px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
+      <div style="font-size:16px;font-weight:800;color:#fff;">Redo att synas online? Låt oss ta första steget tillsammans.</div>
+      <a href="/#kontakt" class="btn-lift cta-footer" style="background:#fff;color:#146EF5;font-size:13px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;white-space:nowrap;">Få ett kostnadsfritt förslag</a>
+    </div>
+    <div style="background:#0C1424;">
+      <div data-rgrid style="max-width:1140px;margin:0 auto;padding:44px 20px 28px;display:grid;grid-template-columns:1.2fr 0.85fr 0.85fr 0.85fr;gap:40px;">
+        <div>
+          <div style="font-size:18px;color:#fff;margin-bottom:14px;"><span style="font-weight:300;">Studio</span> <span style="font-weight:800;">Klaro</span></div>
+          <p style="font-size:13px;color:#8FA6C2;line-height:1.6;max-width:280px;margin:0;">Digitala helhetslösningar för småföretag som vill synas professionellt online.</p>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Navigation</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="/#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
+            <a href="/#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
+            <a href="/priser" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Priser</a>
+            <a href="/om" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Sidor</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="/hemsida-frisor-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för frisörer</a>
+            <a href="/hemsida-restaurang-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för restaurang</a>
+            <a href="/hemsida-skonhetssalong-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för salong</a>
+            <a href="/hemsida-fotograf" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för fotograf</a>
+            <a href="/portfolio" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Portfolio</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Kontakt</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="mailto:studioklarose@gmail.com" style="font-size:14px;color:#AFC6E8;text-decoration:none;">studioklarose@gmail.com</a>
+            <div style="font-size:14px;color:#AFC6E8;">Stockholm</div>
+          </div>
+        </div>
+      </div>
+      <div style="max-width:1140px;margin:0 auto;padding:18px 20px 28px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div style="font-size:12px;color:#6B84A6;">© 2026 Studio Klaro</div>
+        <a href="https://www.instagram.com/studioklaro/" target="_blank" rel="noopener" aria-label="Instagram" style="color:#6B84A6;display:inline-flex;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var esc = function (s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  };
+
+  /* ---------- Sticky nav shrink ---------- */
+  var navWrap = document.querySelector('.nav-wrap');
+  var onScroll = function () {
+    if (window.scrollY > 24) navWrap.classList.add('scrolled');
+    else navWrap.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Mobil nedfällbar meny ---------- */
+  var mnavToggle = document.getElementById('mnav-toggle');
+  var mnavPanel = document.getElementById('mnav-panel');
+  var setMnav = function (open) {
+    mnavPanel.classList.toggle('open', open);
+    mnavToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  mnavToggle.addEventListener('click', function () {
+    setMnav(!mnavPanel.classList.contains('open'));
+  });
+  mnavPanel.querySelectorAll('[data-mnav-close]').forEach(function (a) {
+    a.addEventListener('click', function () { setMnav(false); });
+  });
+
+  /* ---------- SEO-koll: formulär, validering, request, resultat ---------- */
+  var form = document.getElementById('sk-form');
+  var input = document.getElementById('sk-url-input');
+  var submitBtn = document.getElementById('sk-submit-btn');
+  var fieldError = document.getElementById('sk-field-error');
+  var loadingEl = document.getElementById('sk-loading');
+  var errorEl = document.getElementById('sk-error');
+  var reportEl = document.getElementById('sk-report');
+  var stepEls = loadingEl.querySelectorAll('.sk-step');
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var currentReportData = null;
+  var leadUnlocked = false;
+  var leadEmail = '';
+
+  var STEP_LABELS = ['Teknik', 'Innehåll', 'Prestanda'];
+  var stepTimer = null;
+  var activeStep = 0;
+
+  function setActiveStep(index) {
+    activeStep = index;
+    stepEls.forEach(function (el, i) {
+      el.classList.toggle('is-active', i === index);
+    });
+  }
+
+  function startStepAnimation() {
+    setActiveStep(0);
+    stepTimer = window.setInterval(function () {
+      setActiveStep((activeStep + 1) % STEP_LABELS.length);
+    }, 1800);
+  }
+
+  function stopStepAnimation() {
+    if (stepTimer) {
+      window.clearInterval(stepTimer);
+      stepTimer = null;
+    }
+  }
+
+  function hideAllStates() {
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'none';
+    reportEl.style.display = 'none';
+    reportEl.classList.remove('is-visible');
+  }
+
+  function setFieldError(message) {
+    if (message) {
+      fieldError.textContent = message;
+      fieldError.style.display = 'block';
+    } else {
+      fieldError.textContent = '';
+      fieldError.style.display = 'none';
+    }
+  }
+
+  function setLoading(isLoading) {
+    input.disabled = isLoading;
+    submitBtn.disabled = isLoading;
+    submitBtn.textContent = isLoading ? 'Analyserar …' : 'Analysera min hemsida';
+    if (isLoading) {
+      hideAllStates();
+      /* Gammal rapportdata ska aldrig kunna ligga kvar och se aktuell ut.
+         En ny analys startar alltid låst — tidigare upplåsning gäller inte. */
+      reportEl.innerHTML = '';
+      currentReportData = null;
+      leadUnlocked = false;
+      leadEmail = '';
+      loadingEl.style.display = 'block';
+      startStepAnimation();
+    } else {
+      stopStepAnimation();
+      loadingEl.style.display = 'none';
+    }
+  }
+
+  function showError(message) {
+    hideAllStates();
+    errorEl.textContent = message;
+    errorEl.style.display = 'block';
+    errorEl.focus();
+  }
+
+  function pluralize(count, singular, plural) {
+    return count === 1 ? singular : plural;
+  }
+
+  /* ---------- Rapport: status/prioritet-ordbok och kategori-mappning ---------- */
+  var STATUS_LABELS = { pass: 'Bra', warning: 'Kan förbättras', fail: 'Behöver åtgärdas', info: 'Information' };
+  var IMPORTANCE_LABELS = { high: 'Hög prioritet', medium: 'Medel', low: 'Låg' };
+  var STATUS_SORT_ORDER = { fail: 0, warning: 1, info: 2, pass: 3 };
+  var IMPORTANCE_SORT_ORDER = { high: 0, medium: 1, low: 2 };
+  var TOP_ISSUE_PRIORITY = {
+    'fail-high': 0, 'fail-medium': 1, 'fail-low': 2,
+    'warning-high': 3, 'warning-medium': 4, 'warning-low': 5
+  };
+
+  var CATEGORY_DEFS = [
+    { id: 'content', label: 'Innehåll', ids: ['title', 'metaDescription', 'h1', 'h2', 'images', 'lang'] },
+    { id: 'technical', label: 'Teknisk SEO', ids: ['canonical', 'robots', 'viewport', 'structuredData', 'structuredDataValidity', 'robotsTxt', 'sitemap'] },
+    { id: 'local', label: 'Lokal SEO', ids: ['localBusinessSchema', 'localBusinessName', 'localBusinessAddress', 'localBusinessPhone', 'localBusinessOpeningHours', 'visiblePhone', 'visibleAddress', 'visibleLocality', 'localBusinessPhoneConsistency', 'localBusinessAddressConsistency'] },
+    { id: 'performance', label: 'Prestanda', ids: ['pageSpeedPerformance', 'lighthouseSeo'] }
+  ];
+  var OTHER_CATEGORY = { id: 'other', label: 'Övrigt' };
+  var CATEGORY_BY_CHECK_ID = {};
+  CATEGORY_DEFS.forEach(function (cat) {
+    cat.ids.forEach(function (id) { CATEGORY_BY_CHECK_ID[id] = cat; });
+  });
+
+  /* ---------- Intresseformulär: begränsad, normaliserad issue-lista ----------
+     Endast checks Studio Klaro faktiskt kan hjälpa till med skickas med till
+     /api/seo-interest — aldrig hela audit-svaret. Backend validerar samma
+     sak igen (klienten är opålitlig), men filtrering här håller nere
+     payloaden och gör avsikten tydlig. */
+  var INTEREST_RELEVANT_INFO_IDS = {
+    localBusinessSchema: true,
+    localBusinessOpeningHours: true,
+    robotsTxt: true,
+    sitemap: true,
+    visiblePhone: true,
+    visibleAddress: true,
+    visibleLocality: true
+  };
+  var MAX_INTEREST_ISSUES = 30;
+
+  function buildInterestIssues(checks) {
+    var issues = [];
+    (checks || []).forEach(function (c) {
+      if (issues.length >= MAX_INTEREST_ISSUES) return;
+      if (!Object.prototype.hasOwnProperty.call(CATEGORY_BY_CHECK_ID, c.id)) return;
+      var relevant = c.status === 'fail' || c.status === 'warning' ||
+        (c.status === 'info' && INTEREST_RELEVANT_INFO_IDS[c.id]);
+      if (!relevant) return;
+      issues.push({
+        id: c.id,
+        status: c.status,
+        importance: c.importance,
+        label: c.label || c.id,
+        message: c.message || '',
+        details: c.details || ''
+      });
+    });
+    return issues;
+  }
+
+  var METRIC_DEFS = [
+    ['firstContentfulPaint', 'Första innehållet visas'],
+    ['largestContentfulPaint', 'Största innehållet visas'],
+    ['totalBlockingTime', 'Blockeringstid'],
+    ['cumulativeLayoutShift', 'Layoutförskjutning'],
+    ['speedIndex', 'Speed Index']
+  ];
+
+  function statusLabel(status) { return STATUS_LABELS[status] || status; }
+  function importanceLabel(importance) { return IMPORTANCE_LABELS[importance] || importance; }
+
+  function tallyChecks(checks) {
+    var counts = { total: 0, pass: 0, warning: 0, fail: 0, info: 0 };
+    (checks || []).forEach(function (check) {
+      counts.total += 1;
+      if (Object.prototype.hasOwnProperty.call(counts, check.status)) {
+        counts[check.status] += 1;
+      }
+    });
+    return counts;
+  }
+
+  function sortChecksForDisplay(checks) {
+    return checks.slice().sort(function (a, b) {
+      var sa = Object.prototype.hasOwnProperty.call(STATUS_SORT_ORDER, a.status) ? STATUS_SORT_ORDER[a.status] : 4;
+      var sb = Object.prototype.hasOwnProperty.call(STATUS_SORT_ORDER, b.status) ? STATUS_SORT_ORDER[b.status] : 4;
+      if (sa !== sb) return sa - sb;
+      var ia = Object.prototype.hasOwnProperty.call(IMPORTANCE_SORT_ORDER, a.importance) ? IMPORTANCE_SORT_ORDER[a.importance] : 3;
+      var ib = Object.prototype.hasOwnProperty.call(IMPORTANCE_SORT_ORDER, b.importance) ? IMPORTANCE_SORT_ORDER[b.importance] : 3;
+      return ia - ib;
+    });
+  }
+
+  function groupChecksByCategory(checks) {
+    var groups = {};
+    CATEGORY_DEFS.forEach(function (cat) { groups[cat.id] = { def: cat, checks: [] }; });
+    (checks || []).forEach(function (check) {
+      var cat = CATEGORY_BY_CHECK_ID[check.id] || OTHER_CATEGORY;
+      if (!groups[cat.id]) groups[cat.id] = { def: cat, checks: [] };
+      groups[cat.id].checks.push(check);
+    });
+    var ordered = CATEGORY_DEFS.map(function (cat) { return groups[cat.id]; });
+    if (groups.other && groups.other.checks.length) ordered.push(groups.other);
+    return ordered.filter(function (g) { return g.checks.length > 0; });
+  }
+
+  function scoreTierColor(value) {
+    if (value >= 90) return '#1FAA59';
+    if (value >= 75) return '#6FBE44';
+    if (value >= 50) return '#E2A030';
+    if (value >= 25) return '#E8703A';
+    return '#D64545';
+  }
+
+  function summaryText(value) {
+    if (typeof value !== 'number') {
+      return 'Vi kunde inte räkna fram ett SEO Health-värde utifrån de kontroller som gick att genomföra den här gången.';
+    }
+    if (value >= 90) return 'Din hemsida har en stark SEO-grund. Vi hittade några mindre förbättringar som kan göra strukturen ännu tydligare.';
+    if (value >= 75) return 'Din hemsida har en bra SEO-grund, men det finns fortfarande några saker som är värda att förbättra.';
+    if (value >= 50) return 'Din hemsida har en fungerande grund, men flera viktiga SEO-delar kan förbättras.';
+    if (value >= 25) return 'Vi hittade flera tydliga SEO-problem som är värda att åtgärda.';
+    return 'Din hemsida saknar flera viktiga SEO-grunder och bör ses över.';
+  }
+
+  function pillHtml(status) {
+    return '<span class="sk-pill sk-pill-' + esc(status) + '">' + esc(statusLabel(status)) + '</span>';
+  }
+
+  /* ---------- Rapport: byggblock (HTML-strängar) ---------- */
+  function buildScoreRingHtml(value) {
+    var size = 168, stroke = 12, radius = (size - stroke) / 2;
+    var circumference = 2 * Math.PI * radius;
+    var color = value !== null ? scoreTierColor(value) : '#C3CEDD';
+    var offset = value !== null ? circumference * (1 - Math.max(0, Math.min(100, value)) / 100) : circumference;
+    return (
+      '<div class="sk-score-ring" style="width:' + size + 'px;height:' + size + 'px;">' +
+        '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '" aria-hidden="true">' +
+          '<circle cx="' + (size / 2) + '" cy="' + (size / 2) + '" r="' + radius + '" fill="none" stroke="rgba(15,23,42,0.08)" stroke-width="' + stroke + '"></circle>' +
+          '<circle class="sk-score-ring-progress" cx="' + (size / 2) + '" cy="' + (size / 2) + '" r="' + radius + '" fill="none" stroke="' + color + '" stroke-width="' + stroke + '" stroke-linecap="round" stroke-dasharray="' + circumference + '" stroke-dashoffset="' + circumference + '" data-final-offset="' + offset + '" transform="rotate(-90 ' + (size / 2) + ' ' + (size / 2) + ')"></circle>' +
+        '</svg>' +
+        '<div class="sk-score-ring-center">' +
+          '<span class="sk-score-value" id="sk-score-number">' + (value !== null ? '0' : '–') + '</span>' +
+          (value !== null ? '<span class="sk-score-max">/100</span>' : '') +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function buildScoreHeroHtml(data) {
+    var value = data.score && typeof data.score.value === 'number' ? data.score.value : null;
+    var label = (data.score && data.score.label) || (value === null ? 'Ej tillräckligt med data' : '');
+    var displayUrl = data.finalUrl || data.url || '';
+    var method = (data.score && data.score.method) || 'studio-klaro-seo-health-v1';
+    var t = tallyChecks(data.checks);
+
+    var overviewRows = [
+      { n: t.pass, text: 'bra', color: '#1FAA59' },
+      { n: t.warning, text: 'kan förbättras', color: '#E2A030' },
+      { n: t.fail, text: 'behöver åtgärdas', color: '#D64545' },
+      { n: t.info, text: 'information', color: '#8296B0' }
+    ];
+    var overviewHtml = overviewRows.map(function (row) {
+      return '<div class="sk-overview-row"><span class="sk-overview-dot" style="background:' + row.color + ';"></span>' + row.n + ' ' + esc(row.text) + '</div>';
+    }).join('');
+
+    return (
+      '<section class="sk-hero-card">' +
+        '<div class="sk-hero-grid">' +
+          '<div class="sk-hero-score">' + buildScoreRingHtml(value) + '</div>' +
+          '<div class="sk-hero-body">' +
+            '<h2 id="sk-report-heading" tabindex="-1">Din SEO Health</h2>' +
+            '<div class="sk-hero-label" style="color:' + (value !== null ? scoreTierColor(value) : '#52657A') + ';">' + esc(label) + '</div>' +
+            '<div class="sk-hero-url">' + esc(displayUrl) + '</div>' +
+            '<p class="sk-hero-summary">' + esc(summaryText(value)) + '</p>' +
+            '<div class="sk-hero-overview">' +
+              '<div class="sk-hero-overview-total">' + t.total + ' ' + (t.total === 1 ? 'kontroll genomförd' : 'kontroller genomförda') + '</div>' +
+              overviewHtml +
+            '</div>' +
+            '<details class="sk-score-info">' +
+              '<summary>Hur räknas poängen?</summary>' +
+              '<div class="sk-score-info-body">' +
+                '<p>SEO Health är Studio Klaros egen tekniska bedömning av utvalda SEO-grunder. Den är inte ett Google-score och garanterar inte en viss placering i sökresultatet.</p>' +
+                '<p class="sk-score-method">Metod: ' + esc(method) + '</p>' +
+              '</div>' +
+            '</details>' +
+          '</div>' +
+        '</div>' +
+      '</section>'
+    );
+  }
+
+  /* ---------- Preview (innan e-post) ---------- */
+  function previewSummaryText(value, total) {
+    var countPhrase = total + ' ' + (total === 1 ? 'kontroll' : 'kontroller');
+    if (typeof value !== 'number') {
+      return 'Vi hittade ' + countPhrase + ', men kunde inte räkna fram ett fullständigt SEO Health-värde den här gången.';
+    }
+    if (value >= 90) return 'Vi hittade ' + countPhrase + ' och en stark SEO-grund.';
+    if (value >= 75) return 'Vi hittade ' + countPhrase + ' och en bra SEO-grund med några saker att förbättra.';
+    if (value >= 50) return 'Vi hittade ' + countPhrase + ' och flera saker som kan förbättras.';
+    if (value >= 25) return 'Vi hittade ' + countPhrase + ' och flera tydliga SEO-problem.';
+    return 'Vi hittade ' + countPhrase + ' och flera viktiga SEO-grunder som saknas.';
+  }
+
+  function buildPreviewHeroHtml(data) {
+    var value = data.score && typeof data.score.value === 'number' ? data.score.value : null;
+    var label = (data.score && data.score.label) || (value === null ? 'Ej tillräckligt med data' : '');
+    var displayUrl = data.finalUrl || data.url || '';
+    var method = (data.score && data.score.method) || 'studio-klaro-seo-health-v1';
+    var t = tallyChecks(data.checks);
+
+    return (
+      '<section class="sk-hero-card">' +
+        '<div class="sk-hero-grid">' +
+          '<div class="sk-hero-score">' + buildScoreRingHtml(value) + '</div>' +
+          '<div class="sk-hero-body">' +
+            '<h2 id="sk-report-heading" tabindex="-1">Din SEO Health</h2>' +
+            '<div class="sk-hero-label" style="color:' + (value !== null ? scoreTierColor(value) : '#52657A') + ';">' + esc(label) + '</div>' +
+            '<div class="sk-hero-url">' + esc(displayUrl) + '</div>' +
+            '<p class="sk-hero-summary">' + esc(previewSummaryText(value, t.total)) + '</p>' +
+            '<details class="sk-score-info">' +
+              '<summary>Hur räknas poängen?</summary>' +
+              '<div class="sk-score-info-body">' +
+                '<p>SEO Health är Studio Klaros egen tekniska bedömning av utvalda SEO-grunder. Den är inte ett Google-score och garanterar inte en viss placering i sökresultatet.</p>' +
+                '<p class="sk-score-method">Metod: ' + esc(method) + '</p>' +
+              '</div>' +
+            '</details>' +
+          '</div>' +
+        '</div>' +
+      '</section>'
+    );
+  }
+
+  function buildLeadCardHtml() {
+    return (
+      '<section class="sk-lead-card" aria-labelledby="sk-lead-heading">' +
+        '<h2 id="sk-lead-heading">Se hela din SEO-rapport</h2>' +
+        '<p class="sk-lead-text">Lås upp alla kontroller inom innehåll, teknisk SEO, lokal SEO och prestanda.</p>' +
+        '<form id="sk-lead-form" novalidate>' +
+          '<label for="sk-lead-email" class="sr-only">E-postadress</label>' +
+          '<div class="sk-input-group">' +
+            '<input id="sk-lead-email" name="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="din@email.se" class="sk-input">' +
+            '<button type="submit" id="sk-lead-submit" class="btn-lift sk-submit-btn">Visa hela rapporten</button>' +
+          '</div>' +
+          '<div class="sk-hp-field" aria-hidden="true">' +
+            '<label for="sk-lead-website">Webbplats</label>' +
+            '<input id="sk-lead-website" name="website" type="text" tabindex="-1" autocomplete="off">' +
+          '</div>' +
+          '<div id="sk-lead-error" class="sk-field-error" role="alert" style="display:none;"></div>' +
+        '</form>' +
+        '<p class="sk-lead-disclaimer">Genom att fortsätta godkänner du att Studio Klaro får kontakta dig om din SEO-analys.</p>' +
+      '</section>'
+    );
+  }
+
+  function buildLockedTeaserHtml() {
+    var lockIcon = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>';
+    var labels = ['Innehåll', 'Teknisk SEO', 'Lokal SEO', 'Prestanda'];
+    return (
+      '<div class="sk-locked-teaser" aria-hidden="true">' +
+        labels.map(function (label) {
+          return '<span class="sk-locked-chip">' + lockIcon + esc(label) + '</span>';
+        }).join('') +
+      '</div>'
+    );
+  }
+
+  function buildPreviewHtml(data) {
+    return (
+      buildPreviewHeroHtml(data) +
+      '<section class="sk-section">' +
+        '<h2>Viktigast</h2>' +
+        buildTopIssuesHtml(data.checks, 3) +
+      '</section>' +
+      buildLeadCardHtml() +
+      buildLockedTeaserHtml()
+    );
+  }
+
+  function buildTopIssuesHtml(checks, limit) {
+    limit = limit || 5;
+    var issues = (checks || []).filter(function (c) { return c.status === 'fail' || c.status === 'warning'; });
+    issues.sort(function (a, b) {
+      var ra = TOP_ISSUE_PRIORITY.hasOwnProperty(a.status + '-' + a.importance) ? TOP_ISSUE_PRIORITY[a.status + '-' + a.importance] : 99;
+      var rb = TOP_ISSUE_PRIORITY.hasOwnProperty(b.status + '-' + b.importance) ? TOP_ISSUE_PRIORITY[b.status + '-' + b.importance] : 99;
+      return ra - rb;
+    });
+    issues = issues.slice(0, limit);
+
+    if (!issues.length) {
+      return '<p class="sk-empty-state">Vi hittade inga tydliga problem i de kontroller som ingår i denna analys.</p>';
+    }
+
+    return '<div class="sk-issues">' + issues.map(function (c) {
+      var details = c.details ? '<div class="sk-issue-details">' + esc(c.details) + '</div>' : '';
+      return (
+        '<div class="sk-issue-card">' +
+          '<div class="sk-issue-head">' +
+            '<h3 class="sk-issue-title">' + esc(c.label || c.id) + '</h3>' +
+            pillHtml(c.status) +
+          '</div>' +
+          '<p class="sk-issue-message">' + esc(c.message || '') + '</p>' +
+          details +
+          '<span class="sk-priority-pill sk-priority-' + esc(c.importance) + '">' + esc(importanceLabel(c.importance)) + '</span>' +
+        '</div>'
+      );
+    }).join('') + '</div>';
+  }
+
+  function buildPerformanceExtraHtml(pageSpeed) {
+    if (!pageSpeed || !pageSpeed.available) {
+      return '<div class="sk-notice">Prestandamätningen kunde inte hämtas den här gången. Övriga SEO-resultat påverkas inte.</div>';
+    }
+
+    var scoresHtml = '<div class="sk-perf-scores">';
+    if (typeof pageSpeed.performanceScore === 'number') {
+      scoresHtml += '<div class="sk-perf-score"><div class="sk-perf-score-label">Mobilprestanda</div><div class="sk-perf-score-value">' + esc(pageSpeed.performanceScore) + '/100</div></div>';
+    }
+    if (typeof pageSpeed.lighthouseSeoScore === 'number') {
+      scoresHtml += '<div class="sk-perf-score"><div class="sk-perf-score-label">Lighthouse SEO</div><div class="sk-perf-score-value">' + esc(pageSpeed.lighthouseSeoScore) + '/100</div></div>';
+    }
+    scoresHtml += '</div>';
+
+    var metrics = pageSpeed.metrics || {};
+    var metricRows = METRIC_DEFS.map(function (def) {
+      var metric = metrics[def[0]];
+      if (!metric || !metric.displayValue) return '';
+      return '<div class="sk-metric-row"><span class="sk-metric-label">' + esc(def[1]) + '</span><span class="sk-metric-value">' + esc(metric.displayValue) + '</span></div>';
+    }).join('');
+
+    return '<div class="sk-perf-extra">' + scoresHtml + (metricRows ? '<div class="sk-metrics">' + metricRows + '</div>' : '') + '</div>';
+  }
+
+  function buildLocalExtraHtml(structuredData) {
+    var localBusiness = structuredData && structuredData.localBusiness;
+    if (localBusiness && localBusiness.detected) {
+      var types = (localBusiness.types || []).join(', ');
+      return (
+        '<div class="sk-notice sk-notice-positive">' +
+          '<div>Lokal verksamhet identifierad</div>' +
+          (types ? '<div class="sk-notice-sub">Typ: ' + esc(types) + '</div>' : '') +
+        '</div>'
+      );
+    }
+    return '<div class="sk-notice">Ingen tydlig LocalBusiness structured data identifierades.</div>';
+  }
+
+  function buildCategoryBreakdownParts(t) {
+    var parts = [];
+    if (t.pass) parts.push(t.pass + ' bra');
+    if (t.warning) parts.push(t.warning + ' kan förbättras');
+    if (t.fail) parts.push(t.fail + ' problem');
+    if (t.info) parts.push(t.info + ' information');
+    return parts;
+  }
+
+  function checkRowHtml(check) {
+    var details = check.details ? '<div class="sk-check-details">' + esc(check.details) + '</div>' : '';
+    return (
+      '<div class="sk-check-row">' +
+        '<div class="sk-check-row-head">' +
+          '<span class="sk-check-label">' + esc(check.label || check.id) + '</span>' +
+          pillHtml(check.status) +
+        '</div>' +
+        '<p class="sk-check-message">' + esc(check.message || '') + '</p>' +
+        details +
+      '</div>'
+    );
+  }
+
+  function buildCategoryCardHtml(group, data) {
+    var t = tallyChecks(group.checks);
+    var sorted = sortChecksForDisplay(group.checks);
+    var panelId = 'sk-cat-panel-' + group.def.id;
+    var breakdown = buildCategoryBreakdownParts(t).join(' · ');
+
+    var extraHtml = '';
+    if (group.def.id === 'performance') extraHtml = buildPerformanceExtraHtml(data.pageSpeed);
+    if (group.def.id === 'local') extraHtml = buildLocalExtraHtml(data.seo && data.seo.structuredData);
+
+    return (
+      '<div class="sk-cat-card">' +
+        '<button type="button" class="sk-cat-toggle" aria-expanded="false" aria-controls="' + panelId + '" data-cat-toggle>' +
+          '<span class="sk-cat-toggle-main">' +
+            '<span class="sk-cat-name">' + esc(group.def.label) + '</span>' +
+            '<span class="sk-cat-count">' + t.total + ' ' + (t.total === 1 ? 'kontroll' : 'kontroller') + '</span>' +
+          '</span>' +
+          '<span class="sk-cat-breakdown">' + esc(breakdown) + '</span>' +
+          '<svg class="sk-cat-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>' +
+        '</button>' +
+        '<div class="sk-cat-rows" id="' + panelId + '">' +
+          '<div class="sk-cat-rows-inner">' +
+            '<div class="sk-cat-panel-content">' +
+              extraHtml +
+              sorted.map(checkRowHtml).join('') +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function buildReportHtml(data) {
+    var groups = groupChecksByCategory(data.checks);
+    var categoriesHtml = groups.map(function (g) { return buildCategoryCardHtml(g, data); }).join('');
+
+    return (
+      buildScoreHeroHtml(data) +
+      '<section class="sk-section">' +
+        '<h2>Viktigast att fixa</h2>' +
+        buildTopIssuesHtml(data.checks) +
+      '</section>' +
+      '<section class="sk-section">' +
+        '<h2>Kategorier</h2>' +
+        '<p class="sk-section-sub">Alla kontroller är sorterade i fyra kategorier — öppna en kategori för att se varje enskild kontroll.</p>' +
+        '<div class="sk-categories">' + categoriesHtml + '</div>' +
+      '</section>'
+    );
+  }
+
+  /* ---------- Rapport: animation ---------- */
+  function animateScoreNumber(el, target) {
+    if (prefersReducedMotion || typeof target !== 'number') {
+      el.textContent = typeof target === 'number' ? target : '–';
+      return;
+    }
+    var start = null;
+    var duration = 900;
+    function step(ts) {
+      if (start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased);
+      if (progress < 1) window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  function animateScoreReveal(data) {
+    var progressEl = reportEl.querySelector('.sk-score-ring-progress');
+    var numberEl = document.getElementById('sk-score-number');
+    var value = data.score && typeof data.score.value === 'number' ? data.score.value : null;
+
+    if (progressEl) {
+      var finalOffset = progressEl.getAttribute('data-final-offset');
+      progressEl.getBoundingClientRect(); /* force layout så startvärdet hinner målas innan vi ändrar det */
+      progressEl.style.strokeDashoffset = finalOffset;
+    }
+    if (numberEl) animateScoreNumber(numberEl, value);
+  }
+
+  /* ---------- Rapport: visa (preview, låst tills e-post skickats) ---------- */
+  function showResult(data) {
+    hideAllStates();
+    currentReportData = data;
+    leadUnlocked = false;
+    reportEl.innerHTML = buildPreviewHtml(data);
+    reportEl.style.display = 'block';
+
+    window.requestAnimationFrame(function () {
+      reportEl.classList.add('is-visible');
+      animateScoreReveal(data);
+    });
+
+    var heading = document.getElementById('sk-report-heading');
+    if (heading) heading.focus();
+  }
+
+  /* ---------- Lead-upplåsning ---------- */
+  function isValidEmailClient(value) {
+    var v = (value || '').trim();
+    if (!v) return false;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  function unlockFullReport() {
+    if (!currentReportData || leadUnlocked) return;
+    leadUnlocked = true;
+    reportEl.innerHTML =
+      '<div class="sk-unlock-notice">Din fullständiga SEO-rapport är upplåst.</div>' +
+      buildReportHtml(currentReportData) +
+      buildInterestCtaHtml();
+
+    animateScoreReveal(currentReportData);
+
+    var heading = document.getElementById('sk-report-heading');
+    if (heading) {
+      heading.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+      heading.focus({ preventScroll: true });
+    }
+  }
+
+  function handleLeadSubmit(leadForm) {
+    var emailInput = leadForm.querySelector('#sk-lead-email');
+    var leadSubmitBtn = leadForm.querySelector('#sk-lead-submit');
+    var leadErrorEl = leadForm.querySelector('#sk-lead-error');
+    var honeypotInput = leadForm.querySelector('#sk-lead-website');
+
+    if (!emailInput || !leadSubmitBtn || leadSubmitBtn.disabled) return;
+
+    var email = emailInput.value.trim();
+    if (!isValidEmailClient(email)) {
+      leadErrorEl.textContent = 'Skriv in en giltig e-postadress.';
+      leadErrorEl.style.display = 'block';
+      return;
+    }
+    leadErrorEl.style.display = 'none';
+
+    emailInput.disabled = true;
+    leadSubmitBtn.disabled = true;
+    leadSubmitBtn.textContent = 'Öppnar rapporten …';
+
+    var data = currentReportData || {};
+    var t = tallyChecks(data.checks);
+
+    var payload = {
+      email: email,
+      auditedUrl: data.finalUrl || data.url || '',
+      score: data.score && typeof data.score.value === 'number' ? data.score.value : null,
+      scoreLabel: (data.score && data.score.label) || '',
+      totalChecks: t.total,
+      failedChecks: t.fail,
+      warningChecks: t.warning,
+      source: 'seo-koll',
+      website: honeypotInput ? honeypotInput.value : ''
+    };
+
+    fetch('/api/seo-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) {
+        return res.json()
+          .catch(function () { return null; })
+          .then(function (json) { return { ok: res.ok, data: json }; });
+      })
+      .then(function (result) {
+        if (!result.ok || !result.data || result.data.success !== true) {
+          throw new Error('lead-failed');
+        }
+        leadEmail = email;
+        unlockFullReport();
+      })
+      .catch(function () {
+        emailInput.disabled = false;
+        leadSubmitBtn.disabled = false;
+        leadSubmitBtn.textContent = 'Visa hela rapporten';
+        leadErrorEl.textContent = 'Vi kunde inte öppna rapporten just nu. Försök igen.';
+        leadErrorEl.style.display = 'block';
+      });
+  }
+
+  /* ---------- Intresse-CTA (högintentslead, efter upplåst rapport) ---------- */
+  function buildInterestCtaHtml() {
+    return (
+      '<section class="sk-interest-card" id="sk-interest-card">' +
+        '<div id="sk-interest-initial">' +
+          '<div class="sk-interest-eyebrow">Nästa steg</div>' +
+          '<h2>Är du intresserad av att få hjälp med detta?</h2>' +
+          '<p>Studio Klaro kan gå igenom problemen i rapporten och hjälpa dig att genomföra förbättringarna på din hemsida.</p>' +
+          '<div class="sk-interest-actions">' +
+            '<button type="button" id="sk-interest-yes" class="sk-interest-yes-btn">Ja, jag vill ha hjälp</button>' +
+            '<button type="button" id="sk-interest-dismiss" class="sk-interest-dismiss-btn">Inte just nu</button>' +
+          '</div>' +
+        '</div>' +
+        '<div id="sk-interest-form-wrap" class="sk-interest-form-wrap" style="display:none;">' +
+          '<h2>Toppen – hur når vi dig?</h2>' +
+          '<p>Vi tittar på din SEO-rapport och återkommer om hur vi kan hjälpa dig.</p>' +
+          '<form id="sk-interest-form" novalidate>' +
+            '<div class="sk-interest-field">' +
+              '<label for="sk-interest-name">Namn</label>' +
+              '<input id="sk-interest-name" name="name" type="text" autocomplete="name" placeholder="Ditt namn" class="sk-interest-input">' +
+            '</div>' +
+            '<div class="sk-interest-field">' +
+              '<label for="sk-interest-email">E-post</label>' +
+              '<input id="sk-interest-email" name="email" type="email" autocomplete="email" inputmode="email" class="sk-interest-input" value="' + esc(leadEmail) + '">' +
+            '</div>' +
+            '<div class="sk-interest-field">' +
+              '<label for="sk-interest-phone">Telefon (valfritt)</label>' +
+              '<input id="sk-interest-phone" name="phone" type="tel" autocomplete="tel" placeholder="070 123 45 67" class="sk-interest-input">' +
+            '</div>' +
+            '<div class="sk-interest-field">' +
+              '<label for="sk-interest-message">Något du vill lägga till? (valfritt)</label>' +
+              '<textarea id="sk-interest-message" name="message" rows="3" maxlength="500" placeholder="Skriv något kort om du vill." class="sk-interest-input sk-interest-textarea"></textarea>' +
+            '</div>' +
+            '<div class="sk-hp-field" aria-hidden="true">' +
+              '<label for="sk-interest-website">Webbplats</label>' +
+              '<input id="sk-interest-website" name="website" type="text" tabindex="-1" autocomplete="off">' +
+            '</div>' +
+            '<div id="sk-interest-error" class="sk-field-error" role="alert" style="display:none;"></div>' +
+            '<button type="submit" id="sk-interest-submit" class="btn-lift sk-submit-btn sk-interest-submit-btn">Skicka intresse</button>' +
+          '</form>' +
+        '</div>' +
+        '<div id="sk-interest-success" class="sk-interest-success" role="status" tabindex="-1" style="display:none;">' +
+          '<h2>Tack – vi hör av oss.</h2>' +
+          '<p>Vi har fått din SEO-rapport och din intresseförfrågan. Studio Klaro återkommer till dig via e-post.</p>' +
+        '</div>' +
+      '</section>'
+    );
+  }
+
+  function showInterestSuccess() {
+    var formWrap = document.getElementById('sk-interest-form-wrap');
+    var successEl = document.getElementById('sk-interest-success');
+    if (formWrap) formWrap.style.display = 'none';
+    if (successEl) {
+      successEl.style.display = 'block';
+      successEl.focus();
+    }
+  }
+
+  function handleInterestSubmit(interestForm) {
+    var nameInput = interestForm.querySelector('#sk-interest-name');
+    var emailInput = interestForm.querySelector('#sk-interest-email');
+    var phoneInput = interestForm.querySelector('#sk-interest-phone');
+    var messageInput = interestForm.querySelector('#sk-interest-message');
+    var honeypotInput = interestForm.querySelector('#sk-interest-website');
+    var interestSubmitBtn = interestForm.querySelector('#sk-interest-submit');
+    var interestErrorEl = interestForm.querySelector('#sk-interest-error');
+
+    if (!interestSubmitBtn || interestSubmitBtn.disabled) return;
+
+    var name = nameInput.value.trim();
+    var email = emailInput.value.trim();
+
+    if (!name) {
+      interestErrorEl.textContent = 'Skriv in ditt namn.';
+      interestErrorEl.style.display = 'block';
+      nameInput.focus();
+      return;
+    }
+    if (!isValidEmailClient(email)) {
+      interestErrorEl.textContent = 'Skriv in en giltig e-postadress.';
+      interestErrorEl.style.display = 'block';
+      emailInput.focus();
+      return;
+    }
+    interestErrorEl.style.display = 'none';
+
+    nameInput.disabled = true;
+    emailInput.disabled = true;
+    phoneInput.disabled = true;
+    messageInput.disabled = true;
+    interestSubmitBtn.disabled = true;
+    interestSubmitBtn.textContent = 'Skickar …';
+
+    var data = currentReportData || {};
+    var t = tallyChecks(data.checks);
+
+    var payload = {
+      name: name,
+      email: email,
+      phone: phoneInput.value.trim(),
+      message: messageInput.value.trim(),
+      auditedUrl: data.finalUrl || data.url || '',
+      score: data.score && typeof data.score.value === 'number' ? data.score.value : null,
+      scoreLabel: (data.score && data.score.label) || '',
+      totalChecks: t.total,
+      failedChecks: t.fail,
+      warningChecks: t.warning,
+      source: 'seo-koll-interest',
+      issues: buildInterestIssues(data.checks),
+      website: honeypotInput ? honeypotInput.value : ''
+    };
+
+    fetch('/api/seo-interest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) {
+        return res.json()
+          .catch(function () { return null; })
+          .then(function (json) { return { ok: res.ok, data: json }; });
+      })
+      .then(function (result) {
+        if (!result.ok || !result.data || result.data.success !== true) {
+          throw new Error('interest-failed');
+        }
+        showInterestSuccess();
+      })
+      .catch(function () {
+        nameInput.disabled = false;
+        emailInput.disabled = false;
+        phoneInput.disabled = false;
+        messageInput.disabled = false;
+        interestSubmitBtn.disabled = false;
+        interestSubmitBtn.textContent = 'Skicka intresse';
+        interestErrorEl.textContent = 'Vi kunde inte skicka din förfrågan just nu. Försök igen.';
+        interestErrorEl.style.display = 'block';
+      });
+  }
+
+  /* Expand/kollaps av kategorikort, lead-formulär samt intresse-CTA
+     (händelsedelegering, eftersom innehållet i #sk-report byts ut helt
+     vid varje ny analys) */
+  reportEl.addEventListener('click', function (event) {
+    var catBtn = event.target.closest('[data-cat-toggle]');
+    if (catBtn) {
+      var expanded = catBtn.getAttribute('aria-expanded') === 'true';
+      catBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      var panel = document.getElementById(catBtn.getAttribute('aria-controls'));
+      if (panel) panel.classList.toggle('open', !expanded);
+      return;
+    }
+
+    var yesBtn = event.target.closest('#sk-interest-yes');
+    if (yesBtn) {
+      var initialEl = document.getElementById('sk-interest-initial');
+      var formWrapEl = document.getElementById('sk-interest-form-wrap');
+      if (initialEl) initialEl.style.display = 'none';
+      if (formWrapEl) {
+        formWrapEl.style.display = 'block';
+        var nameField = document.getElementById('sk-interest-name');
+        if (nameField) nameField.focus();
+      }
+      return;
+    }
+
+    var dismissBtn = event.target.closest('#sk-interest-dismiss');
+    if (dismissBtn) {
+      var interestCard = document.getElementById('sk-interest-card');
+      if (interestCard) interestCard.style.display = 'none';
+      return;
+    }
+  });
+
+  reportEl.addEventListener('submit', function (event) {
+    var leadForm = event.target.closest('#sk-lead-form');
+    if (leadForm) {
+      event.preventDefault();
+      handleLeadSubmit(leadForm);
+      return;
+    }
+
+    var interestForm = event.target.closest('#sk-interest-form');
+    if (interestForm) {
+      event.preventDefault();
+      handleInterestSubmit(interestForm);
+    }
+  });
+
+  function mapErrorMessage(status) {
+    if (status === 400) {
+      return 'Kontrollera webbadressen och försök igen.';
+    }
+    if (status === 422 || status === 413 || status === 502 || status === 504) {
+      return 'Vi kunde inte nå hemsidan. Kontrollera adressen och försök igen.';
+    }
+    return 'Något gick fel under analysen. Försök igen.';
+  }
+
+  function normalizeUrl(raw) {
+    var value = (raw || '').trim();
+    if (!value) return null;
+    if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(value)) {
+      value = 'https://' + value;
+    }
+    try {
+      var parsed = new URL(value);
+      if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
+      return parsed.toString();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function runAnalysis(url) {
+    setLoading(true);
+    fetch('/api/seo-audit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: url })
+    })
+      .then(function (res) {
+        return res.json()
+          .catch(function () { return null; })
+          .then(function (data) { return { ok: res.ok, status: res.status, data: data }; });
+      })
+      .then(function (result) {
+        setLoading(false);
+        if (!result.ok || !result.data || result.data.success !== true) {
+          showError(mapErrorMessage(result.status));
+          return;
+        }
+        showResult(result.data);
+      })
+      .catch(function () {
+        setLoading(false);
+        showError('Något gick fel under analysen. Försök igen.');
+      });
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (submitBtn.disabled) return;
+
+    var normalized = normalizeUrl(input.value);
+    if (!normalized) {
+      setFieldError('Skriv in en giltig webbadress.');
+      return;
+    }
+    setFieldError(null);
+    runAnalysis(normalized);
+  });
+
+  input.addEventListener('input', function () {
+    if (fieldError.style.display !== 'none') setFieldError(null);
+  });
+})();
+</script>
+
+</body>
+</html>

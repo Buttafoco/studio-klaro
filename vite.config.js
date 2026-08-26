@@ -15,6 +15,7 @@ export default defineConfig({
         restaurang: resolve(__dirname, 'hemsida-restaurang-stockholm.html'),
         fotograf: resolve(__dirname, 'hemsida-fotograf.html'),
         skonhetssalong: resolve(__dirname, 'hemsida-skonhetssalong-stockholm.html'),
+        seoKoll: resolve(__dirname, 'seo-koll.html'),
         seraDemo: resolve(__dirname, 'demo/sera.html'),
       },
     },
