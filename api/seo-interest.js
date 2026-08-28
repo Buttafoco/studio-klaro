@@ -15,11 +15,11 @@ const {
 } = require("./_lib/leadDelivery");
 
 // Recipient is fixed server-side. Web3Forms delivers to whatever inbox is
-// configured for ACCESS_KEY in the Web3Forms dashboard (studioklarose@gmail.com,
+// configured for ACCESS_KEY in the Web3Forms dashboard (hej@studioklaro.se,
 // the same one the main contact form and /api/seo-lead already use) — there is
 // no "to" field in the outgoing payload, so nothing the client sends can ever
 // change where this mail is delivered.
-const INTEREST_RECIPIENT_EMAIL = "studioklarose@gmail.com";
+const INTEREST_RECIPIENT_EMAIL = "hej@studioklaro.se";
 
 const MAX_ISSUE_LABEL_LENGTH = 80;
 const MAX_ISSUE_MESSAGE_LENGTH = 300;

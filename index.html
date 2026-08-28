@@ -213,7 +213,7 @@
       "url": "https://studioklaro.se",
       "logo": "https://studioklaro.se/logo.webp",
       "image": "https://studioklaro.se/og-cover.jpg",
-      "email": "studioklarose@gmail.com",
+      "email": "hej@studioklaro.se",
       "description": "Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen.",
       "areaServed": {
         "@type": "City",
@@ -227,7 +227,7 @@
         {
           "@type": "ContactPoint",
           "contactType": "customer service",
-          "email": "studioklarose@gmail.com",
+          "email": "hej@studioklaro.se",
           "areaServed": "SE",
           "availableLanguage": "Swedish",
           "hoursAvailable": [
@@ -838,7 +838,7 @@
         <div>
           <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Kontakt</div>
           <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="mailto:studioklarose@gmail.com" style="font-size:14px;color:#AFC6E8;text-decoration:none;">studioklarose@gmail.com</a>
+            <a href="mailto:hej@studioklaro.se" style="font-size:14px;color:#AFC6E8;text-decoration:none;">hej@studioklaro.se</a>
             <div style="font-size:14px;color:#AFC6E8;">Stockholm</div>
           </div>
           <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">
@@ -1116,7 +1116,7 @@
   });
 
   /* ---------- Contact wizard ---------- */
-  // Klistra in din access key från web3forms.com (mejlas till studioklarose@gmail.com).
+  // Klistra in din access key från web3forms.com (mejlas till hej@studioklaro.se).
   // Så länge den är tom skickas inget – formuläret visar då ett tydligt felmeddelande.
   var WEB3FORMS_KEY = '3e1c55ed-82c4-435f-8126-33f86c5d4a92';
 
@@ -1279,7 +1279,7 @@
 
   function submitWizard() {
     if (!WEB3FORMS_KEY) {
-      errorBox.textContent = 'Formuläret är inte kopplat än (access key saknas). Mejla oss på studioklarose@gmail.com så länge.';
+      errorBox.textContent = 'Formuläret är inte kopplat än (access key saknas). Mejla oss på hej@studioklaro.se så länge.';
       errorBox.style.display = 'block';
       return;
     }
@@ -1316,14 +1316,14 @@
           showSuccess();
         } else {
           renderWizard();
-          errorBox.textContent = 'Något gick fel när förfrågan skulle skickas. Försök igen eller mejla studioklarose@gmail.com.';
+          errorBox.textContent = 'Något gick fel när förfrågan skulle skickas. Försök igen eller mejla hej@studioklaro.se.';
           errorBox.style.display = 'block';
         }
       })
       .catch(function () {
         wz.submitting = false;
         renderWizard();
-        errorBox.textContent = 'Kunde inte nå servern. Kontrollera din uppkoppling eller mejla studioklarose@gmail.com.';
+        errorBox.textContent = 'Kunde inte nå servern. Kontrollera din uppkoppling eller mejla hej@studioklaro.se.';
         errorBox.style.display = 'block';
       });
   }
