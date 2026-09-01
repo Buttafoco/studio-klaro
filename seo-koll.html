@@ -1509,7 +1509,10 @@
     if (status === 400) {
       return 'Kontrollera webbadressen och försök igen.';
     }
-    if (status === 422 || status === 413 || status === 502 || status === 504) {
+    if (status === 413) {
+      return 'Hemsidan är för stor för att kunna analyseras just nu.';
+    }
+    if (status === 422 || status === 502 || status === 504) {
       return 'Vi kunde inte nå hemsidan. Kontrollera adressen och försök igen.';
     }
     return 'Något gick fel under analysen. Försök igen.';

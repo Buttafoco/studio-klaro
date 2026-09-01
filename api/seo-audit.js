@@ -8,7 +8,12 @@ const { determineLocalSeoRelevance } = require("./_lib/localSeoRelevance");
 const { buildSeoChecks } = require("./_lib/seoChecks");
 const { calculateSeoScore } = require("./_lib/seoScore");
 
-const MAX_HTML_BYTES = 2 * 1024 * 1024; // 2 MB
+// Some site builders (notably Wix) return several megabytes of server-rendered
+// HTML. Read enough to cover those pages, but keep a hard memory/network cap.
+// If the cap is reached, safeFetch returns the bytes collected so far instead
+// of failing the entire audit; the document head and early body still contain
+// the SEO signals this endpoint needs.
+const MAX_HTML_BYTES = 5 * 1024 * 1024; // 5 MB
 
 function findMetaTag($, name) {
   let node = null;
@@ -139,7 +144,11 @@ module.exports = (req, res) => {
     return;
   }
 
-  fetchSafely(url, { maxBytes: MAX_HTML_BYTES, requiredContentType: "text/html" })
+  fetchSafely(url, {
+    maxBytes: MAX_HTML_BYTES,
+    onLimitExceeded: "truncate",
+    requiredContentType: "text/html",
+  })
     .then(async ({ body, truncated, ...result }) => {
       const html = body.toString("utf8");
       const $ = cheerio.load(html);
@@ -159,6 +168,7 @@ module.exports = (req, res) => {
         url,
         ...result,
         htmlLength: html.length,
+        truncated,
         score,
         pageSpeed,
         seo,
