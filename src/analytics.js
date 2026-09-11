@@ -142,6 +142,16 @@ function init() {
     });
   });
 
+  // Spåra klick på e-postlänkar utan att skicka e-postadressen till GA4.
+  document.addEventListener('click', (event) => {
+    const emailLink = event.target.closest && event.target.closest('a[href^="mailto:"]');
+    if (!emailLink) return;
+
+    gtag('event', 'email_click', {
+      link_location: location.pathname,
+    });
+  });
+
   // Öppnar bannern igen, t.ex. från en framtida "Cookie-inställningar"-länk.
   window.klaroCookieSettings = showBanner;
   document.addEventListener('click', (event) => {
