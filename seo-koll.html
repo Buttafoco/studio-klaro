@@ -1589,6 +1589,11 @@
       return;
     }
     setFieldError(null);
+
+    if (window.gtag) {
+      window.gtag('event', 'seo_check_start');
+    }
+
     runAnalysis(normalized);
   });
 
