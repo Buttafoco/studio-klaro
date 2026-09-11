@@ -147,9 +147,25 @@ function init() {
     const emailLink = event.target.closest && event.target.closest('a[href^="mailto:"]');
     if (!emailLink) return;
 
+    event.preventDefault();
+
+    const href = emailLink.getAttribute('href');
+    let opened = false;
+
+    const openMail = () => {
+      if (opened) return;
+      opened = true;
+      window.location.href = href;
+    };
+
     gtag('event', 'email_click', {
       link_location: location.pathname,
+      transport_type: 'beacon',
+      event_callback: openMail,
+      event_timeout: 500,
     });
+
+    window.setTimeout(openMail, 700);
   });
 
   // Öppnar bannern igen, t.ex. från en framtida "Cookie-inställningar"-länk.
