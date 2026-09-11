@@ -276,6 +276,7 @@
   ]
 }
 </script>
+<script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
 </head>
 <body>
@@ -1228,6 +1229,11 @@
         'Hemsida': cbWebsite.value.trim() || '—'
       })
     })
+      .then(function (r) {
+        return r.json().then(function (d) {
+          if (r.ok && d && d.success && window.klaroTrackLead) window.klaroTrackLead('bli_kontaktad');
+        }, function () {});
+      })
       .then(function () { ok(); })
       .catch(function () { ok(); });
   });
@@ -1326,6 +1332,7 @@
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
       .then(function (res) {
         if (res.ok && res.data.success) {
+          if (window.klaroTrackLead) window.klaroTrackLead('kontakt_genomgang');
           showSuccess();
         } else {
           resetSubmitBtn();

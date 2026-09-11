@@ -273,6 +273,7 @@
     .sk-report,.sk-score-ring-progress,.sk-cat-chevron,.sk-cat-rows{transition:none;}
   }
 </style>
+<script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
 </head>
 <body>
@@ -1288,6 +1289,7 @@
     })
       .then(function (sent) {
         if (!sent) throw new Error('lead-failed');
+        if (window.klaroTrackLead) window.klaroTrackLead('seo_koll_rapport');
         leadEmail = email;
         unlockFullReport();
       })
@@ -1442,6 +1444,7 @@
     submitToWeb3Forms(fields)
       .then(function (sent) {
         if (!sent) throw new Error('interest-failed');
+        if (window.klaroTrackLead) window.klaroTrackLead('seo_koll_intresse');
         showInterestSuccess();
       })
       .catch(function () {
