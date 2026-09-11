@@ -115,6 +115,14 @@ function init() {
     gtag('event', 'generate_lead', { form_name: String(formName || 'kontaktformular').slice(0, 40) });
   };
 
+  // Spåra visningar av kundcase.
+  const caseMatch = location.pathname.match(/\/case-([^/]+?)(?:\.html)?$/);
+  if (caseMatch) {
+    gtag('event', 'case_view', {
+      case_name: caseMatch[1],
+    });
+  }
+
   // Spåra klick på huvud-CTA:n "Få en gratis genomgång".
   document.addEventListener('click', (event) => {
     const cta = event.target.closest && event.target.closest('a, button');
