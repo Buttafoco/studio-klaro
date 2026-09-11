@@ -115,6 +115,25 @@ function init() {
     gtag('event', 'generate_lead', { form_name: String(formName || 'kontaktformular').slice(0, 40) });
   };
 
+  // Spåra klick på huvud-CTA:n "Få en gratis genomgång".
+  document.addEventListener('click', (event) => {
+    const cta = event.target.closest && event.target.closest('a, button');
+    if (!cta) return;
+    if (cta.textContent.trim() !== 'Få en gratis genomgång') return;
+
+    let ctaLocation = 'other';
+    const className = String(cta.className || '');
+
+    if (/nav/i.test(className)) ctaLocation = 'nav';
+    else if (/footer/i.test(className)) ctaLocation = 'footer';
+    else if (/primary|main|dark/i.test(className)) ctaLocation = 'main';
+
+    gtag('event', 'cta_click', {
+      cta_name: 'gratis_genomgang',
+      cta_location: ctaLocation,
+    });
+  });
+
   // Öppnar bannern igen, t.ex. från en framtida "Cookie-inställningar"-länk.
   window.klaroCookieSettings = showBanner;
   document.addEventListener('click', (event) => {
