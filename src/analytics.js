@@ -11,6 +11,25 @@
      /seo-koll?url=… som innehåller det besökaren skrev i ett formulär). */
 
 const MEASUREMENT_ID = 'G-LF04L4G9WG';
+
+const INTERNAL_STORAGE_KEY = 'klaro_internal';
+
+const analyticsParams = new URLSearchParams(window.location.search);
+
+if (analyticsParams.get('klaro_internal') === '1') {
+  localStorage.setItem(INTERNAL_STORAGE_KEY, '1');
+}
+
+if (analyticsParams.get('klaro_internal') === '0') {
+  localStorage.removeItem(INTERNAL_STORAGE_KEY);
+}
+
+const isInternalUser =
+  localStorage.getItem(INTERNAL_STORAGE_KEY) === '1';
+
+if (isInternalUser) {
+  console.info('[Klaro Analytics] Internal user – tracking disabled');
+}
 const CONSENT_KEY = 'sk_consent_v1';
 const CONSENT_MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000;
 // Taggen skickar bara data från produktionsdomänen, så lokala tester och
@@ -69,6 +88,12 @@ function clearGaCookies() {
 }
 
 function init() {
+  // Danilo / interna enheter ska aldrig laddas eller skicka GA4-data.
+  if (isInternalUser) {
+    clearGaCookies();
+    return;
+  }
+
   // Skydd mot dubbla Google-taggar (om modulen skulle köras två gånger).
   if (window.__klaroAnalytics) return;
   window.__klaroAnalytics = true;
