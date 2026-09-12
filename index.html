@@ -166,6 +166,41 @@
     .hp-seo-btn{width:100%;text-align:center;}
   }
 
+  /* Projektportal – statisk förhandsvisning (startsida) */
+  .pp-benefits{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .pp-benefit{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0F172A;}
+  .pp-benefit-ic{width:22px;height:22px;border-radius:7px;background:#fff;color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 10px rgba(15,23,42,0.06);flex:none;}
+  .pp-mock{background:#fff;border-radius:22px;border:1px solid rgba(15,23,42,0.05);box-shadow:0 14px 36px rgba(15,23,42,0.08);overflow:hidden;}
+  .pp-bar{background:#0F172A;padding:11px 16px;display:flex;align-items:center;gap:7px;}
+  .pp-bar-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .pp-bar-label{margin-left:8px;font-size:11px;font-weight:700;color:#8FA6C2;letter-spacing:.04em;}
+  .pp-body{background:#F7FAFE;padding:20px;display:flex;flex-direction:column;gap:14px;}
+  .pp-card{background:#fff;border:1px solid rgba(15,23,42,0.06);border-radius:16px;padding:16px;}
+  .pp-eyebrow{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8296B0;margin-bottom:6px;}
+  .pp-phase{font-size:17px;font-weight:800;color:#0F172A;line-height:1.2;}
+  .pp-track{display:flex;gap:5px;margin-top:14px;}
+  .pp-seg{flex:1;height:6px;border-radius:999px;background:rgba(15,23,42,0.09);}
+  .pp-seg.is-done{background:#146EF5;}
+  .pp-seg.is-active{background:linear-gradient(90deg,#146EF5 0 60%,rgba(20,110,245,0.18) 60% 100%);}
+  .pp-meta{margin-top:9px;font-size:11px;font-weight:700;color:#8296B0;}
+  .pp-steps{display:flex;flex-direction:column;gap:10px;}
+  .pp-step{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#8296B0;}
+  .pp-step.is-done{color:#0F172A;}
+  .pp-step.is-active{color:#0F172A;font-weight:800;}
+  .pp-mark{width:20px;height:20px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;background:rgba(15,23,42,0.07);color:#8296B0;}
+  .pp-step.is-done .pp-mark{background:#146EF5;color:#fff;}
+  .pp-step.is-active .pp-mark{background:#fff;border:2.5px solid #146EF5;box-shadow:0 0 0 4px rgba(20,110,245,0.12);}
+  .pp-pill{margin-left:auto;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#146EF5;background:rgba(20,110,245,0.1);padding:3px 9px;border-radius:999px;}
+  .pp-next{font-size:14px;font-weight:700;color:#0F172A;line-height:1.45;}
+  .pp-files{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+  .pp-file{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;color:#52657A;background:#F3F7FC;border-radius:10px;padding:9px 11px;}
+  .pp-file-ic{width:18px;height:18px;border-radius:5px;background:#DCEEFF;flex:none;}
+  .pp-file-meta{margin-left:auto;font-size:11px;font-weight:700;color:#8296B0;}
+  .pp-bridge{display:flex;flex-direction:column;align-items:center;text-align:center;margin:44px 0 40px;}
+  .pp-bridge-line{width:2px;height:26px;flex:none;background-image:repeating-linear-gradient(to bottom, rgba(20,110,245,0.35) 0 6px, transparent 6px 14px);}
+  .pp-bridge-text{margin:12px 0;max-width:560px;background:#fff;border:1px solid rgba(20,110,245,0.14);border-radius:999px;padding:11px 24px;font-size:14px;font-weight:700;color:#0F172A;line-height:1.5;box-shadow:0 6px 18px rgba(15,23,42,0.05);}
+  .pp-bridge-arrow{margin-top:10px;width:26px;height:26px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;line-height:1;box-shadow:0 6px 16px rgba(20,110,245,0.28);}
+
   /* Scroll-reveal */
   [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1);}
   [data-reveal].is-visible{opacity:1;transform:translateY(0);}
@@ -267,10 +302,10 @@
     { "@type": "Question", "name": "Kan du hjälpa mig med texter och innehåll?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Jag hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig, professionell och anpassad efter dina kunder. Du behöver inte ha alla texter färdigskrivna innan projektet börjar." } },
     { "@type": "Question", "name": "Hur lång tid tar det att få hemsidan klar?", "acceptedAnswer": { "@type": "Answer", "text": "Ett vanligt projekt blir normalt klart inom 7–10 arbetsdagar efter att allt material har skickats in. Tidsplanen kan påverkas om projektet kräver extra funktioner eller om material saknas." } },
     { "@type": "Question", "name": "Hur många ändringar får jag göra?", "acceptedAnswer": { "@type": "Answer", "text": "Jag jobbar inte med ett fast antal korrekturrundor. Projektet sker i nära samarbete med löpande feedback och avstämningar, så att lösningen blir rätt innan hemsidan publiceras. Nya sidor, funktioner eller en helt ny riktning räknas som förändrad omfattning och kan offereras separat." } },
-    { "@type": "Question", "name": "Ingår domän och webbplattform?", "acceptedAnswer": { "@type": "Answer", "text": "Jag hjälper dig att välja, registrera och koppla domän, webbplattform och eventuell professionell mejladress. Kostnader för domän, hosting, mejl och andra externa tjänster tillkommer och betalas av dig som kund." } },
+    { "@type": "Question", "name": "Ingår domän och webbplattform?", "acceptedAnswer": { "@type": "Answer", "text": "Jag hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst för företaget. Domän, hosting, e-post och andra externa tjänster tecknas och betalas av dig som kund. Kontona står i ditt namn." } },
     { "@type": "Question", "name": "Äger jag min domän och hemsida?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Domänen registreras i ditt namn och du får tillgång till de konton och tjänster som hör till hemsidan. Du ska inte vara beroende av Studio Klaro för att äga eller kontrollera din digitala närvaro." } },
     { "@type": "Question", "name": "Kan mitt befintliga bokningssystem användas?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Hemsidan kan länkas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. En mer avancerad eller specialbyggd bokningsfunktion offereras separat." } },
-    { "@type": "Question", "name": "Vad händer om jag inte har en logotyp?", "acceptedAnswer": { "@type": "Answer", "text": "Jag kan skapa ett tydligt visuellt uttryck med färger, typsnitt och en enkel uppfräschning av en befintlig logotyp. En helt ny logotyp kan läggas till som en separat tjänst." } },
+    { "@type": "Question", "name": "Vad händer om jag inte har en logotyp?", "acceptedAnswer": { "@type": "Answer", "text": "Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Jag kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du även vill ta fram en logotyp pratar vi om behovet separat och ser vilken lösning som passar." } },
     { "@type": "Question", "name": "Kan jag ändra hemsidan efter lanseringen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care, mitt löpande abonnemang för drift, support och uppdateringar. Större förändringar och nya funktioner offereras separat." } },
     { "@type": "Question", "name": "Hur fungerar betalningen?", "acceptedAnswer": { "@type": "Answer", "text": "50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Eventuella externa kostnader för exempelvis domän, hosting och mejl betalas separat." } }
   ]
@@ -372,40 +407,40 @@
   <!-- TJÄNSTEN -->
   <div id="tjansten" style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
     <div style="text-align:center;margin-bottom:48px;">
-      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Allt som krävs för ett professionellt första intryck online</h2>
-      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Som webbyrå i Stockholm samlar jag hemsida, visuell identitet, domän och Google på ett och samma ställe – förutsägbara delar av arbetet med hög professionell nivå.</p>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Allt du behöver för att synas professionellt online</h2>
+      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Hos Studio Klaro får du hemsida, visuell identitet och teknisk uppsättning samlat på ett ställe. En genomtänkt helhet som gör företaget lättare att hitta, förstå och välja.</p>
     </div>
     <div data-rgrid4 style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
       <div data-reveal class="card-serv" style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
         <svg width="32" height="32" viewBox="0 0 40 40" style="margin-bottom:16px;"><circle cx="15" cy="20" r="11" fill="#146EF5" opacity="0.55"></circle><circle cx="25" cy="20" r="11" fill="#146EF5"></circle></svg>
         <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Hemsida</div>
-        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">En modern hemsida design för ditt innehåll och ditt varumärke.</div>
+        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">En genomtänkt hemsida som kombinerar design, innehåll och funktion – byggd kring ditt företag och det du vill uppnå.</div>
         <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#0F172A;font-weight:600;">
-          <div>✓ Mobilanpassad design</div><div>✓ Tjänster och priser</div><div>✓ Kontakt och öppettider</div><div>✓ Bokningsflöde till befintligt bokningssystem</div><div>✓ Fotogalleri</div>
+          <div>✓ Design och struktur anpassad efter företaget</div><div>✓ Tydliga kundresor och vägar till kontakt</div><div>✓ Innehåll som presenterar erbjudandet övertygande</div><div>✓ Bokning, formulär och integrationer efter behov</div><div>✓ Snabb, responsiv och byggd för att kunna utvecklas</div>
         </div>
       </div>
       <div data-reveal class="card-serv" style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
         <svg width="32" height="32" viewBox="0 0 40 40" style="margin-bottom:16px;"><circle cx="20" cy="13" r="9" fill="#146EF5"></circle><circle cx="20" cy="28" r="9" fill="#146EF5" opacity="0.55"></circle></svg>
-        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Visuell identitet</div>
-        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">Ett tydligt visuellt uttryck som känns samstämmigt och professionellt.</div>
+        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Visuellt uttryck</div>
+        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">Vi formar färger, typografi och bildval så att hemsidan känns enhetlig och professionell.</div>
         <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#0F172A;font-weight:600;">
-          <div>✓ Färgpalett</div><div>✓ Typsnitt</div><div>✓ Enkel uppfräschning av befintlig logotyp</div><div>✓ Ny logotyp som tillägg vid behov</div><div>✓ Enhetligt bilduttryck för webb</div>
+          <div>✓ Färgpalett för webben</div><div>✓ Typsnitt och typografi</div><div>✓ Sammanhållet bilduttryck</div><div>✓ Anpassning av befintligt visuellt material</div><div>✓ Rådgivning kring logotyp vid behov</div>
         </div>
       </div>
       <div data-reveal class="card-serv" style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
         <svg width="32" height="32" viewBox="0 0 40 40" style="margin-bottom:16px;"><circle cx="14" cy="14" r="9" fill="#146EF5" opacity="0.55"></circle><circle cx="26" cy="26" r="9" fill="#146EF5"></circle></svg>
         <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Domän och teknik</div>
-        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">Allt teknisk uppsättning som krävs för att sidan ska vara klar att köra.</div>
+        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">Den tekniska grunden som behövs för att hemsidan ska fungera och vara redo att lanseras.</div>
         <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#0F172A;font-weight:600;">
-          <div>✓ Hjälp att välja och koppla domän</div><div>✓ Koppling till mejladress</div><div>✓ Professionell mejladress</div><div>✓ Grundläggande sökmotoroptimering</div>
+          <div>✓ Hjälp att välja och koppla domän</div><div>✓ Koppling till webbplattform</div><div>✓ Hjälp att koppla företagsmejl</div><div>✓ Grundläggande teknisk uppsättning</div><div>✓ Slutkontroll och publicering</div>
         </div>
       </div>
       <div data-reveal class="card-serv" style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
         <svg width="32" height="32" viewBox="0 0 40 40" style="margin-bottom:16px;"><circle cx="14" cy="26" r="9" fill="#146EF5" opacity="0.55"></circle><circle cx="26" cy="14" r="9" fill="#146EF5"></circle></svg>
         <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Google och synlighet</div>
-        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">Vi ser till att kunder hittar er lättare online och i sökmotorer.</div>
+        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">En tydlig grund som hjälper fler lokala kunder att hitta företaget.</div>
         <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#0F172A;font-weight:600;">
-          <div>✓ Google Business-profil</div><div>✓ Google Maps</div><div>✓ Öppettider och kontaktinformation</div><div>✓ Överskådlig lokal SEO</div>
+          <div>✓ Hjälp med företagets Google-profil</div><div>✓ Optimering av information, kategorier och öppettider</div><div>✓ Lokal SEO på hemsidan</div><div>✓ Bättre grund för synlighet på Google och Maps</div>
         </div>
       </div>
     </div>
@@ -481,49 +516,135 @@
     </div>
   </div>
 
-  <!-- PROCESS -->
+  <!-- PROJEKTPORTAL + PROCESS (sammanhängande avsnitt) -->
   <div id="processen" style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+
+    <!-- Portalen -->
+    <section id="projektportal" aria-labelledby="pp-title" style="scroll-margin-top:110px;">
+      <div data-reveal data-rgrid data-rgap style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Din projektportal</div>
+          <h2 id="pp-title" data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 14px;line-height:1.3;">Full koll från projektstart till lansering</h2>
+          <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 28px;font-weight:500;">När projektet startar får du tillgång till en personlig projektportal. Där kan du följa arbetet, se den senaste versionen av hemsidan och ha material, godkännanden och dokument samlade på ett ställe.</p>
+          <ul class="pp-benefits">
+            <li class="pp-benefit"><span class="pp-benefit-ic" aria-hidden="true">✓</span>Se aktuell fas och nästa steg</li>
+            <li class="pp-benefit"><span class="pp-benefit-ic" aria-hidden="true">✓</span>Följ hemsidan medan den utvecklas</li>
+            <li class="pp-benefit"><span class="pp-benefit-ic" aria-hidden="true">✓</span>Ladda upp material och projektdokument</li>
+            <li class="pp-benefit"><span class="pp-benefit-ic" aria-hidden="true">✓</span>Granska och godkänn på ett ställe</li>
+          </ul>
+        </div>
+
+        <!-- Statisk illustration av portalen (exempeldata) -->
+        <div class="pp-mock" role="img" aria-label="Illustration av projektportalen: aktuell fas Utveckling, steg 4 av 6, processteg, nästa steg och uppladdat material.">
+          <div class="pp-bar" aria-hidden="true">
+            <span class="pp-bar-dot" style="background:#EF4444;"></span>
+            <span class="pp-bar-dot" style="background:#F59E0B;"></span>
+            <span class="pp-bar-dot" style="background:#22C55E;"></span>
+            <span class="pp-bar-label">PROJEKTPORTAL</span>
+          </div>
+          <div class="pp-body" aria-hidden="true">
+
+            <div class="pp-card">
+              <div class="pp-eyebrow">Aktuell fas</div>
+              <div class="pp-phase">Utveckling</div>
+              <div class="pp-track">
+                <span class="pp-seg is-done"></span>
+                <span class="pp-seg is-done"></span>
+                <span class="pp-seg is-done"></span>
+                <span class="pp-seg is-active"></span>
+                <span class="pp-seg"></span>
+                <span class="pp-seg"></span>
+              </div>
+              <div class="pp-meta">Steg 4 av 6</div>
+            </div>
+
+            <div class="pp-card">
+              <div class="pp-steps">
+                <div class="pp-step is-done"><span class="pp-mark">✓</span>Projektstart</div>
+                <div class="pp-step is-done"><span class="pp-mark">✓</span>Material</div>
+                <div class="pp-step is-done"><span class="pp-mark">✓</span>Design</div>
+                <div class="pp-step is-active"><span class="pp-mark"></span>Utveckling<span class="pp-pill">Pågår</span></div>
+                <div class="pp-step"><span class="pp-mark"></span>Granskning</div>
+                <div class="pp-step"><span class="pp-mark"></span>Lansering</div>
+              </div>
+            </div>
+
+            <div class="pp-card">
+              <div class="pp-eyebrow">Nästa steg</div>
+              <div class="pp-next">Granska utkast av startsidan</div>
+            </div>
+
+            <div class="pp-card">
+              <div class="pp-eyebrow">Material</div>
+              <div class="pp-files">
+                <div class="pp-file"><span class="pp-file-ic"></span>Bilder<span class="pp-file-meta">12 filer</span></div>
+                <div class="pp-file"><span class="pp-file-ic"></span>Texter<span class="pp-file-meta">Uppladdat</span></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Övergång portal → process -->
+    <div data-reveal class="pp-bridge">
+      <span class="pp-bridge-line" aria-hidden="true"></span>
+      <p class="pp-bridge-text">Portalen följer samma tydliga process – från projektstart till lansering.</p>
+      <span class="pp-bridge-line" aria-hidden="true"></span>
+      <span class="pp-bridge-arrow" aria-hidden="true">↓</span>
+    </div>
+
+    <!-- Processen -->
     <div data-rhide style="text-align:center;margin-bottom:56px;">
       <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Från idé till färdig hemsida</h2>
-      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">En enkel process där vi samlar material, feedback och beslut på ett ställe – så att inget faller mellan stolarna.</p>
+      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Du följer varje steg i portalen och ser alltid vad som är klart, vad som pågår och vad som händer härnäst.</p>
     </div>
 
     <!-- Mobil: vertikal tidslinje -->
     <div data-rshow style="display:none;">
       <h2 style="font-size:24px;font-weight:800;color:#0F172A;margin:0 0 8px;line-height:1.2;">Från idé till färdig hemsida</h2>
-      <p style="font-size:13px;color:#52657A;margin:0 0 24px;font-weight:500;">En enkel process där vi samlar material, feedback och beslut på ett ställe – så att inget faller mellan stolarna.</p>
+      <p style="font-size:13px;color:#52657A;margin:0 0 24px;font-weight:500;">Du följer varje steg i portalen och ser alltid vad som är klart, vad som pågår och vad som händer härnäst.</p>
       <div class="proc-m-track">
         <div class="proc-m-line-base"></div>
         <div class="proc-m-line-progress"></div>
         <div data-reveal class="proc-m-step">
           <div class="proc-m-dot"></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">01 — Brief</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Berätta om företaget</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Ett kort formulär hjälper oss förstå verksamheten, målen och vad sidan behöver göra.</div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">01 — Projektstart</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi lär känna företaget</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi går igenom verksamheten, målen och vad hemsidan behöver göra.</div>
         </div>
         <div data-reveal class="proc-m-step">
           <div class="proc-m-dot"></div>
           <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">02 — Material</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Skicka material &amp; inspiration</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Bilder, logotyp, texter och sidor du gillar ger oss rätt riktning från start.</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Samla innehåll och inspiration</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">Du laddar upp bilder, texter, logotyp och inspiration direkt i projektportalen.</div>
         </div>
         <div data-reveal class="proc-m-step">
           <div class="proc-m-dot"></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">03 — Design &amp; bygge</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi tar fram hemsidan</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi kombinerar materialet med vår design och bygger den första versionen.</div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">03 — Design</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi sätter det visuella uttrycket</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi tar fram sidans struktur och design utifrån företaget, innehållet och målgruppen.</div>
         </div>
         <div data-reveal class="proc-m-step">
           <div class="proc-m-dot"></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">04 — Feedback</div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">04 — Utveckling</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Hemsidan tar form</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi bygger hemsidan och du kan följa utvecklingen medan arbetet pågår.</div>
+        </div>
+        <div data-reveal class="proc-m-step">
+          <div class="proc-m-dot"></div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">05 — Granskning</div>
           <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi finslipar tillsammans</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi utvecklar hemsidan tillsammans. Du får se arbetet längs vägen, lämna feedback och hjälpa oss finjustera lösningen i rätt riktning.</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">Du granskar resultatet, lämnar feedback och godkänner nästa steg i portalen.</div>
         </div>
         <div data-reveal class="proc-m-step">
           <div class="proc-m-dot proc-m-end"><span class="proc-check">✓</span></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">05 — Live</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Dags att lansera</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">När allt känns rätt gör vi slutkontrollen, kopplar domänen och publicerar.</div>
+          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">06 — Lansering</div>
+          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Dags att gå live</div>
+          <div style="font-size:13px;color:#52657A;line-height:1.5;">När allt känns rätt gör vi slutkontrollen, kopplar domänen och publicerar hemsidan.</div>
         </div>
       </div>
     </div>
@@ -536,9 +657,9 @@
       <div data-reveal class="proc-row proc-l">
         <div class="proc-dot"></div>
         <div class="proc-card" style="background:linear-gradient(160deg,#EAF6EE,#E2F1E7);">
-          <div class="proc-eyebrow">01 — Brief</div>
-          <div class="proc-title">Berätta om företaget</div>
-          <p class="proc-desc">Ett kort formulär hjälper oss förstå verksamheten, målen och vad sidan behöver göra.</p>
+          <div class="proc-eyebrow">01 — Projektstart</div>
+          <div class="proc-title">Vi lär känna företaget</div>
+          <p class="proc-desc">Vi går igenom verksamheten, målen och vad hemsidan behöver göra.</p>
         </div>
       </div>
 
@@ -546,35 +667,44 @@
         <div class="proc-dot"></div>
         <div class="proc-card" style="background:linear-gradient(160deg,#FBF3E1,#F6ECD8);">
           <div class="proc-eyebrow">02 — Material</div>
-          <div class="proc-title">Skicka material &amp; inspiration</div>
-          <p class="proc-desc">Bilder, logotyp, texter och sidor du gillar ger oss rätt riktning från start.</p>
+          <div class="proc-title">Samla innehåll och inspiration</div>
+          <p class="proc-desc">Du laddar upp bilder, texter, logotyp och inspiration direkt i projektportalen.</p>
         </div>
       </div>
 
       <div data-reveal class="proc-row proc-l" style="margin-top:8px;">
         <div class="proc-dot"></div>
         <div class="proc-card proc-card-lg" style="background:linear-gradient(160deg,#EDF3FC,#E4ECF9);">
-          <div class="proc-eyebrow">03 — Design &amp; bygge</div>
-          <div class="proc-title proc-title-lg">Vi tar fram hemsidan</div>
-          <p class="proc-desc">Vi kombinerar materialet med vår design och bygger den första versionen.</p>
+          <div class="proc-eyebrow">03 — Design</div>
+          <div class="proc-title proc-title-lg">Vi sätter det visuella uttrycket</div>
+          <p class="proc-desc">Vi tar fram sidans struktur och design utifrån företaget, innehållet och målgruppen.</p>
         </div>
       </div>
 
       <div data-reveal class="proc-row proc-r" style="margin-top:-16px;">
         <div class="proc-dot"></div>
         <div class="proc-card" style="background:linear-gradient(160deg,#EFEFF6,#E6E8F2);">
-          <div class="proc-eyebrow">04 — Feedback</div>
-          <div class="proc-title">Vi finslipar tillsammans</div>
-          <p class="proc-desc">Vi utvecklar hemsidan tillsammans. Du får se arbetet längs vägen, lämna feedback och hjälpa oss finjustera lösningen i rätt riktning.</p>
+          <div class="proc-eyebrow">04 — Utveckling</div>
+          <div class="proc-title">Hemsidan tar form</div>
+          <p class="proc-desc">Vi bygger hemsidan och du kan följa utvecklingen medan arbetet pågår.</p>
         </div>
       </div>
 
       <div data-reveal class="proc-row proc-l" style="margin-top:8px;">
+        <div class="proc-dot"></div>
+        <div class="proc-card" style="background:linear-gradient(160deg,#F2EEF9,#E9E3F4);">
+          <div class="proc-eyebrow">05 — Granskning</div>
+          <div class="proc-title">Vi finslipar tillsammans</div>
+          <p class="proc-desc">Du granskar resultatet, lämnar feedback och godkänner nästa steg i portalen.</p>
+        </div>
+      </div>
+
+      <div data-reveal class="proc-row proc-r" style="margin-top:-16px;">
         <div class="proc-dot proc-dot-end"><span class="proc-check">✓</span></div>
         <div class="proc-card" style="background:linear-gradient(160deg,#EAF4FF,#DCEEFF);">
-          <div class="proc-eyebrow">05 — Live</div>
-          <div class="proc-title">Dags att lansera</div>
-          <p class="proc-desc">När allt känns rätt gör vi slutkontrollen, kopplar domänen och publicerar.</p>
+          <div class="proc-eyebrow">06 — Lansering</div>
+          <div class="proc-title">Dags att gå live</div>
+          <p class="proc-desc">När allt känns rätt gör vi slutkontrollen, kopplar domänen och publicerar hemsidan.</p>
         </div>
       </div>
 
@@ -621,7 +751,7 @@
       <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
         <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0F172A;"><span style="width:22px;height:22px;border-radius:7px;background:#fff;color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 10px rgba(15,23,42,0.06);">✓</span>Anpassat efter ditt företag</div>
         <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0F172A;"><span style="width:22px;height:22px;border-radius:7px;background:#fff;color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 10px rgba(15,23,42,0.06);">✓</span>Personlig återkoppling</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0F172A;"><span style="width:22px;height:22px;border-radius:7px;background:#fff;color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 10px rgba(15,23,42,0.06);">✓</span>Kostnadsfritt och utan köptvång</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0F172A;"><span style="width:22px;height:22px;border-radius:7px;background:#fff;color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 10px rgba(15,23,42,0.06);">✓</span>Du väljer själv om du vill gå vidare</div>
       </div>
     </div>
     <div data-reveal data-rpanelpad style="background:#fff;border-radius:22px;padding:36px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
@@ -752,7 +882,7 @@
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-5">Ingår domän och webbplattform?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-5" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Jag hjälper dig att välja, registrera och koppla domän, webbplattform och eventuell professionell mejladress. Kostnader för domän, hosting, mejl och andra externa tjänster tillkommer och betalas av dig som kund.</div></div></div></div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-5" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Jag hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst för företaget. Domän, hosting, e-post och andra externa tjänster tecknas och betalas av dig som kund. Kontona står i ditt namn.</div></div></div></div>
       </div>
 
       <div class="faq-item" style="margin-bottom:22px;">
@@ -773,7 +903,7 @@
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-8">Vad händer om jag inte har en logotyp?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-8" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Jag kan skapa ett tydligt visuellt uttryck med färger, typsnitt och en enkel uppfräschning av en befintlig logotyp. En helt ny logotyp kan läggas till som en separat tjänst.</div></div></div></div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-8" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Jag kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du även vill ta fram en logotyp pratar vi om behovet separat och ser vilken lösning som passar.</div></div></div></div>
       </div>
 
       <div class="faq-item" style="margin-bottom:22px;">
