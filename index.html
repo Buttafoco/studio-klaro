@@ -210,6 +210,18 @@
   .faq-q-btn:hover{transform:translateY(-2px);}
   .faq-rows{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.4s cubic-bezier(0.22,1,0.36,1);}
   .faq-ans{display:flex;justify-content:flex-start;opacity:0;transition:opacity 0.35s cubic-bezier(0.22,1,0.36,1) 0.05s;}
+  /* FAQ – "Visa fler frågor" (innehållet finns alltid i DOM, döljs bara visuellt) */
+  .faq-more{height:0;overflow:hidden;visibility:hidden;transition:height 0.45s cubic-bezier(0.22,1,0.36,1),visibility 0s linear 0.45s;}
+  .faq-more.is-open{visibility:visible;transition:height 0.45s cubic-bezier(0.22,1,0.36,1),visibility 0s linear 0s;}
+  .faq-more-inner{display:flow-root;}
+  .faq-more-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(20,110,245,0.16);border-radius:999px;padding:12px 22px;font-family:inherit;font-size:14px;font-weight:700;color:#146EF5;cursor:pointer;box-shadow:0 6px 18px rgba(15,23,42,0.05);transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s ease;}
+  .faq-more-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,0.08);}
+  .faq-more-btn:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
+  .faq-more-ic{flex:none;display:block;transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);}
+  .faq-more-btn[aria-expanded="true"] .faq-more-ic{transform:rotate(180deg);}
+  @media (prefers-reduced-motion: reduce){
+    .faq-more{transition:visibility 0s;}
+  }
 
   /* Responsiv mobilanpassning */
   @media (max-width:820px){
@@ -300,17 +312,16 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Vad behöver jag skicka in?", "acceptedAnswer": { "@type": "Answer", "text": "Du får ett enkelt formulär där du fyller i information om företaget, tjänster, priser, öppettider och kontaktuppgifter. Du skickar även de bilder och den logotyp du vill använda. Saknar du färdigt material hjälper jag dig att reda ut vad som behövs." } },
-    { "@type": "Question", "name": "Kan du hjälpa mig med texter och innehåll?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Jag hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig, professionell och anpassad efter dina kunder. Du behöver inte ha alla texter färdigskrivna innan projektet börjar." } },
-    { "@type": "Question", "name": "Hur lång tid tar det att få hemsidan klar?", "acceptedAnswer": { "@type": "Answer", "text": "Ett vanligt projekt blir normalt klart inom 7–10 arbetsdagar efter att allt material har skickats in. Tidsplanen kan påverkas om projektet kräver extra funktioner eller om material saknas." } },
-    { "@type": "Question", "name": "Hur kan jag följa projektet?", "acceptedAnswer": { "@type": "Answer", "text": "När projektet startar får du tillgång till en personlig projektportal. Där ser du aktuell fas, nästa steg och den senaste versionen av hemsidan. Du kan även ladda upp material, granska och godkänna samt hitta avtal, fakturor och projektdokument samlade på ett ställe." } },
-    { "@type": "Question", "name": "Hur många ändringar får jag göra?", "acceptedAnswer": { "@type": "Answer", "text": "Jag jobbar inte med ett fast antal korrekturrundor. Projektet sker i nära samarbete med löpande feedback och avstämningar, så att lösningen blir rätt innan hemsidan publiceras. Nya sidor, funktioner eller en helt ny riktning räknas som förändrad omfattning och kan offereras separat." } },
-    { "@type": "Question", "name": "Ingår domän och webbplattform?", "acceptedAnswer": { "@type": "Answer", "text": "Jag hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst för företaget. Domän, hosting, e-post och andra externa tjänster tecknas och betalas av dig som kund. Kontona står i ditt namn." } },
-    { "@type": "Question", "name": "Äger jag min domän och hemsida?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Domänen registreras i ditt namn och du får tillgång till de konton och tjänster som hör till hemsidan. Du ska inte vara beroende av Studio Klaro för att äga eller kontrollera din digitala närvaro." } },
-    { "@type": "Question", "name": "Kan mitt befintliga bokningssystem användas?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Hemsidan kan länkas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. En mer avancerad eller specialbyggd bokningsfunktion offereras separat." } },
-    { "@type": "Question", "name": "Vad händer om jag inte har en logotyp?", "acceptedAnswer": { "@type": "Answer", "text": "Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Jag kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du även vill ta fram en logotyp pratar vi om behovet separat och ser vilken lösning som passar." } },
-    { "@type": "Question", "name": "Kan jag ändra hemsidan efter lanseringen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care, mitt löpande abonnemang för drift, support och uppdateringar. Större förändringar och nya funktioner offereras separat." } },
-    { "@type": "Question", "name": "Hur fungerar betalningen?", "acceptedAnswer": { "@type": "Answer", "text": "50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Eventuella externa kostnader för exempelvis domän, hosting och mejl betalas separat." } }
+    { "@type": "Question", "name": "Vad behöver jag skicka in?", "acceptedAnswer": { "@type": "Answer", "text": "Du får ett enkelt formulär där du fyller i information om företaget och vad hemsidan behöver innehålla. Där kan du även ladda upp bilder, logotyp och annat material. Saknas något hjälper jag dig att reda ut vad som behövs." } },
+    { "@type": "Question", "name": "Kan du hjälpa mig med texter och innehåll?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Jag hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig och anpassad efter dina kunder. Du behöver inte ha alla texter färdiga när projektet startar." } },
+    { "@type": "Question", "name": "Hur lång tid tar det att få hemsidan klar?", "acceptedAnswer": { "@type": "Answer", "text": "Ett vanligt projekt blir normalt klart inom 7–10 arbetsdagar efter att materialet har skickats in. Tidsplanen kan påverkas av extra funktioner eller material som saknas." } },
+    { "@type": "Question", "name": "Hur kan jag följa projektet?", "acceptedAnswer": { "@type": "Answer", "text": "När projektet startar får du tillgång till en personlig projektportal. Där ser du aktuell fas, nästa steg och den senaste versionen av hemsidan. Du kan även ladda upp material, granska och godkänna samt hitta projektets dokument." } },
+    { "@type": "Question", "name": "Hur många ändringar får jag göra?", "acceptedAnswer": { "@type": "Answer", "text": "Vi arbetar med löpande feedback i stället för ett fast antal korrekturrundor. Nya sidor, funktioner eller en helt ny riktning kan räknas som förändrad omfattning och offereras separat." } },
+    { "@type": "Question", "name": "Hur fungerar betalningen?", "acceptedAnswer": { "@type": "Answer", "text": "50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Externa kostnader för exempelvis domän, hosting och e-post betalas separat." } },
+    { "@type": "Question", "name": "Ingår domän och webbplattform, och vem äger kontona?", "acceptedAnswer": { "@type": "Answer", "text": "Jag hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst. Externa tjänster tecknas och betalas av dig, och domänen samt tillhörande konton står i ditt namn. Du behåller tillgången och kontrollen över din digitala närvaro." } },
+    { "@type": "Question", "name": "Kan mitt befintliga bokningssystem användas?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Hemsidan kan kopplas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. Mer avancerade eller specialbyggda bokningsfunktioner offereras separat." } },
+    { "@type": "Question", "name": "Vad händer om jag inte har en logotyp?", "acceptedAnswer": { "@type": "Answer", "text": "Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Jag kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du vill ta fram en ny logotyp pratar vi om behovet separat." } },
+    { "@type": "Question", "name": "Kan jag ändra hemsidan efter lanseringen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care för löpande support och uppdateringar. Större förändringar och nya funktioner offereras separat." } }
   ]
 }
 </script>
@@ -855,77 +866,84 @@
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-1">Vad behöver jag skicka in?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-1" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Du får ett enkelt formulär där du fyller i information om företaget, tjänster, priser, öppettider och kontaktuppgifter. Du skickar även de bilder och den logotyp du vill använda. Saknar du färdigt material hjälper jag dig att reda ut vad som behövs.</div></div></div></div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-1" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Du får ett enkelt formulär där du fyller i information om företaget och vad hemsidan behöver innehålla. Där kan du även ladda upp bilder, logotyp och annat material. Saknas något hjälper jag dig att reda ut vad som behövs.</div></div></div></div>
       </div>
 
       <div class="faq-item" style="margin-bottom:22px;">
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-2">Kan du hjälpa mig med texter och innehåll?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-2" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Jag hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig, professionell och anpassad efter dina kunder. Du behöver inte ha alla texter färdigskrivna innan projektet börjar.</div></div></div></div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-2" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Jag hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig och anpassad efter dina kunder. Du behöver inte ha alla texter färdiga när projektet startar.</div></div></div></div>
       </div>
 
       <div class="faq-item" style="margin-bottom:22px;">
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-3">Hur lång tid tar det att få hemsidan klar?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-3" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ett vanligt projekt blir normalt klart inom 7–10 arbetsdagar efter att allt material har skickats in. Tidsplanen kan påverkas om projektet kräver extra funktioner eller om material saknas.</div></div></div></div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-3" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ett vanligt projekt blir normalt klart inom 7–10 arbetsdagar efter att materialet har skickats in. Tidsplanen kan påverkas av extra funktioner eller material som saknas.</div></div></div></div>
       </div>
 
       <div class="faq-item" style="margin-bottom:22px;">
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-portal">Hur kan jag följa projektet?</button>
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-4">Hur kan jag följa projektet?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-portal" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">När projektet startar får du tillgång till en personlig projektportal. Där ser du aktuell fas, nästa steg och den senaste versionen av hemsidan. Du kan även ladda upp material, granska och godkänna samt hitta avtal, fakturor och projektdokument samlade på ett ställe.</div></div></div></div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-4" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">När projektet startar får du tillgång till en personlig projektportal. Där ser du aktuell fas, nästa steg och den senaste versionen av hemsidan. Du kan även ladda upp material, granska och godkänna samt hitta projektets dokument.</div></div></div></div>
       </div>
 
       <div class="faq-item" style="margin-bottom:22px;">
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-4">Hur många ändringar får jag göra?</button>
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-5">Hur många ändringar får jag göra?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-4" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Jag jobbar inte med ett fast antal korrekturrundor. Projektet sker i nära samarbete med löpande feedback och avstämningar, så att lösningen blir rätt innan hemsidan publiceras. Nya sidor, funktioner eller en helt ny riktning räknas som förändrad omfattning och kan offereras separat.</div></div></div></div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-5" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Vi arbetar med löpande feedback i stället för ett fast antal korrekturrundor. Nya sidor, funktioner eller en helt ny riktning kan räknas som förändrad omfattning och offereras separat.</div></div></div></div>
       </div>
 
       <div class="faq-item" style="margin-bottom:22px;">
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-5">Ingår domän och webbplattform?</button>
+          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-6">Hur fungerar betalningen?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-5" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Jag hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst för företaget. Domän, hosting, e-post och andra externa tjänster tecknas och betalas av dig som kund. Kontona står i ditt namn.</div></div></div></div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-6" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Externa kostnader för exempelvis domän, hosting och e-post betalas separat.</div></div></div></div>
       </div>
 
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-6">Äger jag min domän och hemsida?</button>
+      <!-- Resterande frågor: alltid i DOM, endast visuellt dolda tills knappen klickas -->
+      <div id="faq-more" class="faq-more">
+        <div class="faq-more-inner">
+
+        <div class="faq-item" style="margin-bottom:22px;">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+              <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-7">Ingår domän och webbplattform, och vem äger kontona?</button>
+            </div>
+            <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-7" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Jag hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst. Externa tjänster tecknas och betalas av dig, och domänen samt tillhörande konton står i ditt namn. Du behåller tillgången och kontrollen över din digitala närvaro.</div></div></div></div>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-6" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Domänen registreras i ditt namn och du får tillgång till de konton och tjänster som hör till hemsidan. Du ska inte vara beroende av Studio Klaro för att äga eller kontrollera din digitala närvaro.</div></div></div></div>
+
+        <div class="faq-item" style="margin-bottom:22px;">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+              <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-8">Kan mitt befintliga bokningssystem användas?</button>
+            </div>
+            <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-8" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Hemsidan kan kopplas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. Mer avancerade eller specialbyggda bokningsfunktioner offereras separat.</div></div></div></div>
+        </div>
+
+        <div class="faq-item" style="margin-bottom:22px;">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+              <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-9">Vad händer om jag inte har en logotyp?</button>
+            </div>
+            <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-9" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Jag kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du vill ta fram en ny logotyp pratar vi om behovet separat.</div></div></div></div>
+        </div>
+
+        <div class="faq-item" style="margin-bottom:22px;">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+              <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-10">Kan jag ändra hemsidan efter lanseringen?</button>
+            </div>
+            <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-10" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care för löpande support och uppdateringar. Större förändringar och nya funktioner offereras separat.</div></div></div></div>
+        </div>
+
+        </div>
       </div>
 
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-7">Kan mitt befintliga bokningssystem användas?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-7" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Hemsidan kan länkas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. En mer avancerad eller specialbyggd bokningsfunktion offereras separat.</div></div></div></div>
-      </div>
-
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-8">Vad händer om jag inte har en logotyp?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-8" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Jag kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du även vill ta fram en logotyp pratar vi om behovet separat och ser vilken lösning som passar.</div></div></div></div>
-      </div>
-
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-9">Kan jag ändra hemsidan efter lanseringen?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-9" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care, mitt löpande abonnemang för drift, support och uppdateringar. Större förändringar och nya funktioner offereras separat.</div></div></div></div>
-      </div>
-
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-10">Hur fungerar betalningen?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-10" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Eventuella externa kostnader för exempelvis domän, hosting och mejl betalas separat.</div></div></div></div>
+      <div style="display:flex;justify-content:center;margin-top:10px;">
+        <button type="button" id="faq-more-btn" class="faq-more-btn" aria-expanded="false" aria-controls="faq-more">
+          <span class="faq-more-label">Visa fler frågor</span>
+          <svg class="faq-more-ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5 12 15.5 18 9.5"/></svg>
+        </button>
       </div>
 
     </div>
@@ -1275,6 +1293,31 @@
       ans.style.opacity = open ? '0' : '1';
     });
   });
+
+  /* "Visa fler frågor" – styr endast synligheten, allt innehåll finns i DOM */
+  var faqMoreTimer;
+  var faqMoreBtn = document.getElementById('faq-more-btn');
+  var faqMoreWrap = document.getElementById('faq-more');
+  if (faqMoreBtn && faqMoreWrap) {
+    faqMoreBtn.addEventListener('click', function () {
+      var open = faqMoreBtn.getAttribute('aria-expanded') === 'true';
+      faqMoreBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      var inner = faqMoreWrap.querySelector('.faq-more-inner');
+      clearTimeout(faqMoreTimer);
+      if (open) {
+        faqMoreWrap.style.height = inner.offsetHeight + 'px';
+        void faqMoreWrap.offsetHeight;
+        faqMoreWrap.classList.remove('is-open');
+        faqMoreWrap.style.height = '0px';
+      } else {
+        faqMoreWrap.classList.add('is-open');
+        faqMoreWrap.style.height = inner.offsetHeight + 'px';
+        /* Släpp höjden efteråt så att svar som fälls ut inte klipps */
+        faqMoreTimer = setTimeout(function () { faqMoreWrap.style.height = 'auto'; }, 480);
+      }
+      faqMoreBtn.querySelector('.faq-more-label').textContent = open ? 'Visa fler frågor' : 'Visa färre frågor';
+    });
+  }
 
   /* ---------- Contact form ---------- */
   // Klistra in din access key från web3forms.com (mejlas till hej@studioklaro.se).
