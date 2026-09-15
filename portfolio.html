@@ -96,49 +96,206 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Portfolio-webbdesign för kreatörer",
-  "provider": {
-    "@type": "ProfessionalService",
-    "@id": "https://studioklaro.se/#business",
-    "name": "Studio Klaro",
-    "url": "https://studioklaro.se"
-  },
-  "areaServed": { "@type": "Country", "name": "Sverige" },
-  "url": "https://studioklaro.se/portfolio",
-  "offers": {
-    "@type": "Offer",
-    "price": "2995",
-    "priceCurrency": "SEK"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Behöver jag ha en egen domän?", "acceptedAnswer": { "@type": "Answer", "text": "Nej. Vi hjälper dig gärna med det." } },
-    { "@type": "Question", "name": "Måste mina projekt vara färdiga?", "acceptedAnswer": { "@type": "Answer", "text": "Nej. Vi hjälper dig strukturera materialet du redan har." } },
-    { "@type": "Question", "name": "Kan ni hjälpa mig med texter?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Vi hjälper dig förbättra och strukturera texten, men du behöver ge oss grunden kring dina projekt." } },
-    { "@type": "Question", "name": "Kan jag uppdatera portfolion senare?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Vi kan bygga lösningen så att projekt kan uppdateras senare eller hjälpa dig när något nytt ska läggas till." } },
-    { "@type": "Question", "name": "Hur många projekt kan jag ha?", "acceptedAnswer": { "@type": "Answer", "text": "Grundpaketet är tänkt för en mindre portfolio. Behöver du många projekt eller mer avancerade case bygger vi en större lösning." } },
-    { "@type": "Question", "name": "Är detta bara för designers?", "acceptedAnswer": { "@type": "Answer", "text": "Nej. Tjänsten passar alla som behöver visa sitt arbete visuellt och professionellt." } }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://studioklaro.se/" },
-    { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://studioklaro.se/portfolio" }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://studioklaro.se/#business",
+      "name": "Studio Klaro",
+      "url": "https://studioklaro.se/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://studioklaro.se/logo.webp",
+        "width": 630,
+        "height": 166
+      },
+      "image": "https://studioklaro.se/og-cover.jpg",
+      "email": "hej@studioklaro.se",
+      "description": "Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen. Varje kund får en personlig projektportal där hela projektet följs från projektstart till lansering.",
+      "areaServed": {
+        "@type": "City",
+        "name": "Stockholm"
+      },
+      "knowsAbout": [
+        "Webbdesign",
+        "UX/UI-design",
+        "Webbutveckling",
+        "SEO",
+        "Lokal SEO",
+        "Visuell identitet"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/studioklaro/"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "hej@studioklaro.se",
+          "areaServed": "SE",
+          "availableLanguage": "Swedish",
+          "hoursAvailable": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://studioklaro.se/#website",
+      "url": "https://studioklaro.se/",
+      "name": "Studio Klaro",
+      "inLanguage": "sv-SE",
+      "publisher": {
+        "@id": "https://studioklaro.se/#business"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://studioklaro.se/portfolio#webpage",
+      "url": "https://studioklaro.se/portfolio",
+      "name": "Portfolio för designers, fotografer och kreatörer | Studio Klaro",
+      "description": "Vi bygger moderna portfolios för designers, fotografer, kreatörer och studenter – redo att skickas till nästa arbetsgivare, kund eller uppdrag. Från 2 995 kr.",
+      "inLanguage": "sv-SE",
+      "isPartOf": {
+        "@id": "https://studioklaro.se/#website"
+      },
+      "about": {
+        "@id": "https://studioklaro.se/#business"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://studioklaro.se/portfolio-preview.jpg"
+      },
+      "breadcrumb": {
+        "@id": "https://studioklaro.se/portfolio#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://studioklaro.se/portfolio#service"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://studioklaro.se/portfolio#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Hem",
+          "item": "https://studioklaro.se/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Portfolio",
+          "item": "https://studioklaro.se/portfolio"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://studioklaro.se/portfolio#service",
+      "name": "Portfolio-hemsidor",
+      "serviceType": "Portfolio-webbdesign för kreatörer",
+      "description": "Vi bygger moderna portfolios för designers, fotografer, kreatörer och studenter – redo att skickas till nästa arbetsgivare, kund eller uppdrag.",
+      "provider": {
+        "@id": "https://studioklaro.se/#business"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Sverige"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Designers, fotografer, kreatörer, frilansare och studenter"
+      },
+      "url": "https://studioklaro.se/portfolio",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://studioklaro.se/portfolio",
+        "priceCurrency": "SEK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 2995,
+          "priceCurrency": "SEK"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://studioklaro.se/portfolio#faq",
+      "url": "https://studioklaro.se/portfolio",
+      "isPartOf": {
+        "@id": "https://studioklaro.se/portfolio#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Behöver jag ha en egen domän?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nej. Vi hjälper dig gärna med det."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Måste mina projekt vara färdiga?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nej. Vi hjälper dig strukturera materialet du redan har."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan ni hjälpa mig med texter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Vi hjälper dig förbättra och strukturera texten, men du behöver ge oss grunden kring dina projekt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan jag uppdatera portfolion senare?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Vi kan bygga lösningen så att projekt kan uppdateras senare eller hjälpa dig när något nytt ska läggas till."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur många projekt kan jag ha?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Grundpaketet är tänkt för en mindre portfolio. Behöver du många projekt eller mer avancerade case bygger vi en större lösning."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Är detta bara för designers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nej. Tjänsten passar alla som behöver visa sitt arbete visuellt och professionellt."
+          }
+        }
+      ]
+    }
   ]
 }
 </script>
 <script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
+<!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
+<noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-ans{opacity:1!important;}.faq-more{height:auto!important;visibility:visible!important;}.faq-more-btn,.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
 </head>
 <body>
 
@@ -293,7 +450,7 @@
         <span style="background:#EDF3FC;color:#146EF5;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Domänkoppling</span>
         <span style="background:#FBEADD;color:#B8622C;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Grundläggande animationer</span>
         <span style="background:#EAF6EE;color:#2F7A4F;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Hjälp med struktur</span>
-        <span style="background:#EFEFF6;color:#5B4FA6;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">1 korrigeringsrunda</span>
+        <span style="background:#EFEFF6;color:#5B4FA6;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Löpande feedback och gemensamma avstämningar inom avtalad omfattning</span>
       </div>
     </div>
   </section>
@@ -372,7 +529,7 @@
           <div style="font-size:13px;color:#fff;font-weight:600;">✓ Mobilanpassning</div>
           <div style="font-size:13px;color:#fff;font-weight:600;">✓ SEO basics</div>
           <div style="font-size:13px;color:#fff;font-weight:600;">✓ Domänkoppling</div>
-          <div style="font-size:13px;color:#fff;font-weight:600;">✓ 1 korrigeringsrunda</div>
+          <div style="font-size:13px;color:#fff;font-weight:600;">✓ Löpande feedback och gemensamma avstämningar inom avtalad omfattning</div>
         </div>
         <a href="#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Skapa min portfolio</a>
         <div style="font-size:12px;color:#8296B0;margin-top:22px;">Behöver du något mer avancerat? Vi bygger även större, helt skräddarsydda portfolios från 4 995 kr.</div>
@@ -482,7 +639,7 @@
   <footer data-rpad style="margin-top:100px;padding:36px 20px;border-top:1px solid rgba(15,23,42,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
     <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
       <div style="font-size:14px;color:#8296B0;">© 2026 Studio Klaro</div>
-      <div style="font-size:13px;color:#8296B0;">Mån–Fre 08:00–17:00 · Lör–Sön Stängt</div>
+      <div style="font-size:13px;color:#8296B0;">Vardagar 09:00–17:00 · Lör–Sön Stängt</div>
       <a href="#" data-cookie-settings style="font-size:13px;color:#8296B0;text-decoration:none;">Cookie-inställningar</a>
     </div>
     <div style="display:flex;align-items:center;gap:18px;">

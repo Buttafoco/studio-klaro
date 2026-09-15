@@ -87,6 +87,53 @@ function clearGaCookies() {
   });
 }
 
+// Besök som kommer från AI-assistenter. Matchas på referrer-domän och på
+// utm_source (ChatGPT lägger t.ex. till utm_source=chatgpt.com på länkar).
+// Se docs/ai-trafik-analytics.md för hur händelsen används i GA4.
+const AI_SOURCES = [
+  { name: 'chatgpt', hosts: ['chatgpt.com', 'chat.openai.com'] },
+  { name: 'perplexity', hosts: ['perplexity.ai'] },
+  { name: 'gemini', hosts: ['gemini.google.com', 'bard.google.com'] },
+  { name: 'claude', hosts: ['claude.ai'] },
+  { name: 'copilot', hosts: ['copilot.microsoft.com', 'copilot.cloud.microsoft'] },
+];
+const AI_SESSION_KEY = 'sk_ai_referral';
+
+function matchAiSource(value) {
+  const needle = String(value || '').toLowerCase();
+  if (!needle) return null;
+  const source = AI_SOURCES.find((s) =>
+    s.name === needle || s.hosts.some((host) => needle === host || needle.endsWith('.' + host))
+  );
+  return source ? source.name : null;
+}
+
+function trackAiReferral(gtag) {
+  let referrerHost = '';
+  try {
+    referrerHost = document.referrer ? new URL(document.referrer).hostname : '';
+  } catch (e) {
+    referrerHost = '';
+  }
+  const referrerSource = matchAiSource(referrerHost);
+  const source = referrerSource || matchAiSource(analyticsParams.get('utm_source'));
+  if (!source) return;
+
+  // En gång per session räcker; interna navigeringar har egen domän som referrer.
+  try {
+    if (sessionStorage.getItem(AI_SESSION_KEY)) return;
+    sessionStorage.setItem(AI_SESSION_KEY, source);
+  } catch (e) {
+    // sessionStorage otillgängligt – skicka ändå.
+  }
+
+  gtag('event', 'ai_referral', {
+    ai_source: source,
+    ai_match: referrerSource ? 'referrer' : 'utm_source',
+    landing_page: location.pathname,
+  });
+}
+
 function init() {
   // Danilo / interna enheter ska aldrig laddas eller skicka GA4-data.
   if (isInternalUser) {
@@ -133,6 +180,8 @@ function init() {
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
     document.head.appendChild(script);
   }
+
+  trackAiReferral(gtag);
 
   // Anropas av sidornas formulärkod först när en förfrågan har tagits emot.
   // Tar bara ett formulärnamn – aldrig några fältvärden.
