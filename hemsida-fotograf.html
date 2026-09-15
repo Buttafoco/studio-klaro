@@ -17,6 +17,9 @@
 <meta property="og:description" content="Professionella portfolio-hemsidor för fotografer – visa upp bilder och projekt på ett stilrent, snabbladdat sätt. Fast pris från 2 995 kr.">
 <meta property="og:url" content="https://studioklaro.se/hemsida-fotograf">
 <meta property="og:image" content="https://studioklaro.se/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hemsida som Studio Klaro har byggt för The Chairman Barber i Vasastan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Hemsida för fotografer | Studio Klaro">
 <meta name="twitter:description" content="Professionella portfolio-hemsidor för fotografer – bilder och projekt på ett stilrent, snabbladdat sätt. Fast pris från 2 995 kr.">
@@ -186,49 +189,206 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Portfolio-webbdesign för fotografer",
-  "provider": {
-    "@type": "ProfessionalService",
-    "@id": "https://studioklaro.se/#business",
-    "name": "Studio Klaro",
-    "url": "https://studioklaro.se"
-  },
-  "areaServed": { "@type": "Country", "name": "Sverige" },
-  "url": "https://studioklaro.se/hemsida-fotograf",
-  "offers": {
-    "@type": "Offer",
-    "price": "2995",
-    "priceCurrency": "SEK"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Måste jag ha ett eget domännamn?", "acceptedAnswer": { "@type": "Answer", "text": "Nej. Vi hjälper dig gärna registrera och koppla en domän om du inte redan har en." } },
-    { "@type": "Question", "name": "Kan jag lägga till nya bilder och projekt senare?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Vi kan bygga lösningen så att du enkelt kan lägga till nya projekt när de är klara, eller hjälpa dig när något nytt ska in." } },
-    { "@type": "Question", "name": "Hur många bilder och projekt får plats?", "acceptedAnswer": { "@type": "Answer", "text": "Grundpaketet är tänkt för en fokuserad portfolio. Har du ett stort arkiv eller flera kategorier bygger vi en större, skräddarsydd lösning." } },
-    { "@type": "Question", "name": "Kan hemsidan länka till Instagram och andra kanaler?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Vi länkar gärna till dina sociala kanaler, men hemsidan byggs för att stå på egna ben oavsett vad som händer där." } },
-    { "@type": "Question", "name": "Kan ni hjälpa till att välja ut vilka bilder som ska visas?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Vi ger gärna input på urval och ordning så att portfolion blir så stark som möjligt, men du känner ditt eget arbete bäst." } },
-    { "@type": "Question", "name": "Hur snabbt kan hemsidan bli klar?", "acceptedAnswer": { "@type": "Answer", "text": "Ett vanligt portfolioprojekt blir normalt klart inom 7–10 arbetsdagar efter att materialet skickats in." } }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://studioklaro.se/" },
-    { "@type": "ListItem", "position": 2, "name": "Hemsida för fotografer", "item": "https://studioklaro.se/hemsida-fotograf" }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://studioklaro.se/#business",
+      "name": "Studio Klaro",
+      "url": "https://studioklaro.se/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://studioklaro.se/logo.webp",
+        "width": 630,
+        "height": 166
+      },
+      "image": "https://studioklaro.se/og-cover.jpg",
+      "email": "hej@studioklaro.se",
+      "description": "Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen. Varje kund får en personlig projektportal där hela projektet följs från projektstart till lansering.",
+      "areaServed": {
+        "@type": "City",
+        "name": "Stockholm"
+      },
+      "knowsAbout": [
+        "Webbdesign",
+        "UX/UI-design",
+        "Webbutveckling",
+        "SEO",
+        "Lokal SEO",
+        "Visuell identitet"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/studioklaro/"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "hej@studioklaro.se",
+          "areaServed": "SE",
+          "availableLanguage": "Swedish",
+          "hoursAvailable": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://studioklaro.se/#website",
+      "url": "https://studioklaro.se/",
+      "name": "Studio Klaro",
+      "inLanguage": "sv-SE",
+      "publisher": {
+        "@id": "https://studioklaro.se/#business"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://studioklaro.se/hemsida-fotograf#webpage",
+      "url": "https://studioklaro.se/hemsida-fotograf",
+      "name": "Hemsida för fotografer | Studio Klaro",
+      "description": "Professionella portfolio-hemsidor för fotografer – visa upp bilder och projekt på ett stilrent, snabbladdat sätt. Fast pris från 2 995 kr.",
+      "inLanguage": "sv-SE",
+      "isPartOf": {
+        "@id": "https://studioklaro.se/#website"
+      },
+      "about": {
+        "@id": "https://studioklaro.se/#business"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://studioklaro.se/og-cover.jpg"
+      },
+      "breadcrumb": {
+        "@id": "https://studioklaro.se/hemsida-fotograf#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://studioklaro.se/hemsida-fotograf#service"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://studioklaro.se/hemsida-fotograf#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Hem",
+          "item": "https://studioklaro.se/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Hemsida för fotografer",
+          "item": "https://studioklaro.se/hemsida-fotograf"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://studioklaro.se/hemsida-fotograf#service",
+      "name": "Hemsidor och portfolios för fotografer",
+      "serviceType": "Portfolio-webbdesign för fotografer",
+      "description": "En bildfokuserad hemsida som gör rättvisa åt ditt arbete — med stora bildytor, tydliga projekt och en enkel väg för nya uppdrag att hitta dig.",
+      "provider": {
+        "@id": "https://studioklaro.se/#business"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Sverige"
+      },
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Fotografer"
+      },
+      "url": "https://studioklaro.se/hemsida-fotograf",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://studioklaro.se/hemsida-fotograf",
+        "priceCurrency": "SEK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 2995,
+          "priceCurrency": "SEK"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://studioklaro.se/hemsida-fotograf#faq",
+      "url": "https://studioklaro.se/hemsida-fotograf",
+      "isPartOf": {
+        "@id": "https://studioklaro.se/hemsida-fotograf#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Måste jag ha ett eget domännamn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nej. Vi hjälper dig gärna registrera och koppla en domän om du inte redan har en."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan jag lägga till nya bilder och projekt senare?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Vi kan bygga lösningen så att du enkelt kan lägga till nya projekt när de är klara, eller hjälpa dig när något nytt ska in."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur många bilder och projekt får plats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Grundpaketet är tänkt för en fokuserad portfolio. Har du ett stort arkiv eller flera kategorier bygger vi en större, skräddarsydd lösning."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan hemsidan länka till Instagram och andra kanaler?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Vi länkar gärna till dina sociala kanaler, men hemsidan byggs för att stå på egna ben oavsett vad som händer där."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan ni hjälpa till att välja ut vilka bilder som ska visas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Vi ger gärna input på urval och ordning så att portfolion blir så stark som möjligt, men du känner ditt eget arbete bäst."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur snabbt kan hemsidan bli klar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ett vanligt portfolioprojekt blir normalt klart inom 7–10 arbetsdagar efter att materialet skickats in."
+          }
+        }
+      ]
+    }
   ]
 }
 </script>
 <script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
+<!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
+<noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-ans{opacity:1!important;}.faq-more{height:auto!important;visibility:visible!important;}.faq-more-btn,.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
 </head>
 <body>
 
@@ -355,6 +515,7 @@
 
       <div class="rport-panel" data-reveal style="transition-delay:.12s;">
         <div class="rport-label">Din portfolio</div>
+        <p class="demo-label" style="display:inline-block;margin:0 0 14px;font-size:11px;font-weight:700;color:#52657A;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.1);padding:5px 11px;border-radius:999px;letter-spacing:0.02em;">Illustrativt exempel – fiktiv verksamhet</p>
         <div class="rport-main">
           <img class="rport-img" src="/photografer.webp" alt="Exempel på fotografiskt projekt presenterat i en egen portfolio-hemsida" loading="lazy">
         </div>
@@ -502,7 +663,7 @@
         <div style="font-size:14px;color:#fff;">✓ Mobilanpassning</div>
         <div style="font-size:14px;color:#fff;">✓ Grundläggande SEO</div>
         <div style="font-size:14px;color:#fff;">✓ Domänkoppling</div>
-        <div style="font-size:14px;color:#fff;">✓ En korrigeringsrunda</div>
+        <div style="font-size:14px;color:#fff;">✓ Löpande feedback och gemensamma avstämningar inom avtalad omfattning</div>
       </div>
       <a href="/portfolio#kontakt" class="btn-lift lift-dark" style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.35);">Skapa min portfolio</a>
     </div>
@@ -613,7 +774,7 @@
           <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">
             <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Tillgänglighet</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
-              <div style="font-size:13px;color:#AFC6E8;">Mån–Fre 08:00–17:00</div>
+              <div style="font-size:13px;color:#AFC6E8;">Vardagar 09:00–17:00</div>
               <div style="font-size:13px;color:#AFC6E8;">Lör–Sön Stängt</div>
             </div>
           </div>

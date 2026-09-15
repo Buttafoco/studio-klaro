@@ -1,0 +1,44 @@
+# Studio Klaro
+
+> Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen. Varje kund får en personlig projektportal där projektet följs från projektstart till lansering.
+
+Studio Klaro samlar hemsida, visuellt uttryck, domän och teknik samt Google och lokal synlighet på ett ställe. Fokus ligger på småföretag, bland annat frisörer, barberare, skönhetssalonger, restauranger och caféer i Stockholm, samt portfolios för fotografer, designers och andra kreatörer.
+
+Fakta från webbplatsen:
+
+- Kontakt: hej@studioklaro.se. Tillgänglighet vardagar 09:00–17:00.
+- Plats: Stockholm. Instagram: https://www.instagram.com/studioklaro/
+- Process i sex steg: projektstart, material, design, utveckling, granskning och lansering. Kunden följer varje steg i en personlig projektportal.
+- Arbetssätt: löpande feedback och gemensamma avstämningar inom avtalad omfattning. Nya sidor, funktioner eller en helt ny riktning kan räknas som förändrad omfattning och offereras separat.
+- Paket med fasta grundpriser exkl. moms och fast offert innan projektet börjar:
+  - Startklar – från 7 900 kr. One-page-hemsida. Vanlig leveranstid cirka 1–2 veckor (7–10 arbetsdagar).
+  - Professionell – från 13 900 kr. Upp till fem sidor. Vanlig leveranstid cirka 2–4 veckor.
+  - Komplett närvaro – från 22 900 kr. Upp till åtta sidor. Tidsplanen anpassas efter projektets omfattning.
+- Exempel på kundcase på webbplatsen: The Chairman Barber (barbershop i Vasastan), Galleri86 (galleri på Södermalm) och Itreon Market (digital B2B-marknadsplats). Övriga exempel på branschsidorna, till exempel SERA, Trattoria Nord och ELIN STUDIO, är fiktiva verksamheter som bara illustrerar hur en hemsida kan se ut.
+- Portfolio-hemsidor från 2 995 kr; större, skräddarsydda portfolios från 4 995 kr.
+- Klaro Flex: lägre startkostnad och resten fördelat över 12 månader, med Klaro Care inkluderat under perioden.
+- Klaro Care: valfri service efter lansering för 499 kr/mån exkl. moms – hosting, teknisk drift, mindre uppdateringar och support via mejl. Ingen inlåsning.
+- Kunden äger den kundunika webbplatsen när projektet är fullt betalt, och domänen registreras i kundens företags namn.
+- Hemsidor kan kopplas till befintliga bokningssystem, till exempel Bokadirekt, Timma eller Fresha.
+
+## Tjänster och priser
+
+- [Startsida](https://studioklaro.se/): Översikt över tjänsten, process, projektportal, kundcase och vanliga frågor
+- [Priser](https://studioklaro.se/priser): Paketen Startklar, Professionell och Komplett närvaro, Klaro Flex, Klaro Care och frågor om ägande
+- [Gratis SEO-koll](https://studioklaro.se/seo-koll): Kostnadsfri analys av en hemsidas teknik, innehåll och lokala SEO
+
+## Branscher
+
+- [Hemsida för frisör i Stockholm](https://studioklaro.se/hemsida-frisor-stockholm): Hemsidor för frisörer, barberare och salonger med prislista, bokningslänk och lokal SEO
+- [Hemsida för restaurang i Stockholm](https://studioklaro.se/hemsida-restaurang-stockholm): Hemsidor för restauranger och caféer med meny, öppettider, bordsbokning och lokal SEO
+- [Hemsida för skönhetssalong i Stockholm](https://studioklaro.se/hemsida-skonhetssalong-stockholm): Hemsidor för skönhetssalonger med behandlingar, priser och bokningslänk
+- [Hemsida för fotografer](https://studioklaro.se/hemsida-fotograf): Bildfokuserade hemsidor och portfolios för fotografer
+- [Portfolio](https://studioklaro.se/portfolio): Portfolios för designers, fotografer, kreatörer, frilansare och studenter
+
+## Om Studio Klaro
+
+- [Om oss](https://studioklaro.se/om): Arbetssätt, principer och kompetensområden – webbdesign, UX/UI, utveckling, SEO, visuell identitet och AI-stödda arbetssätt
+
+## Optional
+
+- [Sitemap](https://studioklaro.se/sitemap.xml)

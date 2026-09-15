@@ -17,6 +17,9 @@
 <meta property="og:description" content="Skriv in din hemsida och få en kostnadsfri, snabb analys av teknik, innehåll och lokal SEO.">
 <meta property="og:url" content="https://studioklaro.se/seo-koll">
 <meta property="og:image" content="https://studioklaro.se/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hemsida som Studio Klaro har byggt för The Chairman Barber i Vasastan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Gratis SEO-koll – Studio Klaro">
 <meta name="twitter:description" content="Skriv in din hemsida och få en kostnadsfri, snabb analys av teknik, innehåll och lokal SEO.">
@@ -24,33 +27,129 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "url": "https://studioklaro.se/seo-koll",
-  "name": "Gratis SEO-koll – Studio Klaro",
-  "mainEntity": {
-    "@type": "ProfessionalService",
-    "@id": "https://studioklaro.se/#business",
-    "name": "Studio Klaro",
-    "url": "https://studioklaro.se",
-    "logo": "https://studioklaro.se/logo.webp",
-    "description": "Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen.",
-    "areaServed": {
-      "@type": "City",
-      "name": "Stockholm"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://studioklaro.se/#business",
+      "name": "Studio Klaro",
+      "url": "https://studioklaro.se/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://studioklaro.se/logo.webp",
+        "width": 630,
+        "height": 166
+      },
+      "image": "https://studioklaro.se/og-cover.jpg",
+      "email": "hej@studioklaro.se",
+      "description": "Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen. Varje kund får en personlig projektportal där hela projektet följs från projektstart till lansering.",
+      "areaServed": {
+        "@type": "City",
+        "name": "Stockholm"
+      },
+      "knowsAbout": [
+        "Webbdesign",
+        "UX/UI-design",
+        "Webbutveckling",
+        "SEO",
+        "Lokal SEO",
+        "Visuell identitet"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/studioklaro/"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "hej@studioklaro.se",
+          "areaServed": "SE",
+          "availableLanguage": "Swedish",
+          "hoursAvailable": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            }
+          ]
+        }
+      ]
     },
-    "sameAs": [
-      "https://www.instagram.com/studioklaro/"
-    ]
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://studioklaro.se/" },
-    { "@type": "ListItem", "position": 2, "name": "SEO-koll", "item": "https://studioklaro.se/seo-koll" }
+    {
+      "@type": "WebSite",
+      "@id": "https://studioklaro.se/#website",
+      "url": "https://studioklaro.se/",
+      "name": "Studio Klaro",
+      "inLanguage": "sv-SE",
+      "publisher": {
+        "@id": "https://studioklaro.se/#business"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://studioklaro.se/seo-koll#webpage",
+      "url": "https://studioklaro.se/seo-koll",
+      "name": "Gratis SEO-koll – Studio Klaro | Webbdesign Stockholm",
+      "description": "Skriv in din hemsida och få en kostnadsfri, snabb analys av teknik, innehåll och lokal SEO från Studio Klaro.",
+      "inLanguage": "sv-SE",
+      "isPartOf": {
+        "@id": "https://studioklaro.se/#website"
+      },
+      "about": {
+        "@id": "https://studioklaro.se/#business"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://studioklaro.se/og-cover.jpg"
+      },
+      "breadcrumb": {
+        "@id": "https://studioklaro.se/seo-koll#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://studioklaro.se/seo-koll#service"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://studioklaro.se/seo-koll#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Hem",
+          "item": "https://studioklaro.se/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "SEO-koll",
+          "item": "https://studioklaro.se/seo-koll"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://studioklaro.se/seo-koll#service",
+      "name": "Gratis SEO-koll",
+      "serviceType": "SEO-analys",
+      "description": "Kostnadsfri, snabb analys av en hemsidas teknik, innehåll och lokala SEO.",
+      "provider": {
+        "@id": "https://studioklaro.se/#business"
+      },
+      "url": "https://studioklaro.se/seo-koll",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "SEK",
+        "url": "https://studioklaro.se/seo-koll"
+      }
+    }
   ]
 }
 </script>
@@ -276,6 +375,8 @@
 </style>
 <script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
+<!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
+<noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-ans{opacity:1!important;}.faq-more{height:auto!important;visibility:visible!important;}.faq-more-btn,.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
 </head>
 <body>
 
@@ -447,7 +548,7 @@
           <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">
             <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Tillgänglighet</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
-              <div style="font-size:13px;color:#AFC6E8;">Mån–Fre 08:00–17:00</div>
+              <div style="font-size:13px;color:#AFC6E8;">Vardagar 09:00–17:00</div>
               <div style="font-size:13px;color:#AFC6E8;">Lör–Sön Stängt</div>
             </div>
           </div>

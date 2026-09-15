@@ -17,6 +17,9 @@
 <meta property="og:description" content="Webbyrå i Stockholm för småföretag – moderna hemsidor till fast pris. Följ hela projektet i din egen projektportal, från projektstart till lansering.">
 <meta property="og:url" content="https://studioklaro.se/">
 <meta property="og:image" content="https://studioklaro.se/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hemsida som Studio Klaro har byggt för The Chairman Barber i Vasastan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Webbyrå Stockholm för småföretag | Studio Klaro">
 <meta name="twitter:description" content="Webbyrå i Stockholm för småföretag – moderna hemsidor till fast pris. Följ hela projektet i din egen projektportal, från projektstart till lansering.">
@@ -217,6 +220,7 @@
   .faq-more-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(20,110,245,0.16);border-radius:999px;padding:12px 22px;font-family:inherit;font-size:14px;font-weight:700;color:#146EF5;cursor:pointer;box-shadow:0 6px 18px rgba(15,23,42,0.05);transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s ease;}
   .faq-more-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,0.08);}
   .faq-more-btn:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
+  .pf-tab:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
   .faq-more-ic{flex:none;display:block;transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);}
   .faq-more-btn[aria-expanded="true"] .faq-more-ic{transform:rotate(180deg);}
   @media (prefers-reduced-motion: reduce){
@@ -265,8 +269,13 @@
       "@type": "Organization",
       "@id": "https://studioklaro.se/#business",
       "name": "Studio Klaro",
-      "url": "https://studioklaro.se",
-      "logo": "https://studioklaro.se/logo.webp",
+      "url": "https://studioklaro.se/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://studioklaro.se/logo.webp",
+        "width": 630,
+        "height": 166
+      },
       "image": "https://studioklaro.se/og-cover.jpg",
       "email": "hej@studioklaro.se",
       "description": "Studio Klaro är en webbyrå i Stockholm som bygger moderna hemsidor för småföretag – till fast pris och med personlig hjälp genom hela processen. Varje kund får en personlig projektportal där hela projektet följs från projektstart till lansering.",
@@ -274,10 +283,17 @@
         "@type": "City",
         "name": "Stockholm"
       },
+      "knowsAbout": [
+        "Webbdesign",
+        "UX/UI-design",
+        "Webbutveckling",
+        "SEO",
+        "Lokal SEO",
+        "Visuell identitet"
+      ],
       "sameAs": [
         "https://www.instagram.com/studioklaro/"
       ],
-      "priceRange": "2995-19900 SEK",
       "contactPoint": [
         {
           "@type": "ContactPoint",
@@ -288,8 +304,14 @@
           "hoursAvailable": [
             {
               "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              "opens": "08:00",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
               "closes": "17:00"
             }
           ]
@@ -299,34 +321,191 @@
     {
       "@type": "WebSite",
       "@id": "https://studioklaro.se/#website",
-      "url": "https://studioklaro.se",
+      "url": "https://studioklaro.se/",
       "name": "Studio Klaro",
       "inLanguage": "sv-SE",
-      "publisher": { "@id": "https://studioklaro.se/#business" }
+      "publisher": {
+        "@id": "https://studioklaro.se/#business"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://studioklaro.se/#webpage",
+      "url": "https://studioklaro.se/",
+      "name": "Webbyrå Stockholm för småföretag | Studio Klaro",
+      "description": "Webbyrå i Stockholm som bygger moderna, snabba hemsidor för småföretag – till fast pris. Följ projektet från start till lansering i din projektportal.",
+      "inLanguage": "sv-SE",
+      "isPartOf": {
+        "@id": "https://studioklaro.se/#website"
+      },
+      "about": {
+        "@id": "https://studioklaro.se/#business"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://studioklaro.se/og-cover.jpg"
+      },
+      "mainEntity": {
+        "@id": "https://studioklaro.se/#service"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://studioklaro.se/#service",
+      "name": "Hemsidor för småföretag",
+      "serviceType": "Webbdesign och webbutveckling",
+      "description": "Moderna, snabba hemsidor för småföretag till fast pris. Hemsida, visuellt uttryck, domän och teknik samt Google och lokal synlighet samlat på ett ställe – med en personlig projektportal från projektstart till lansering.",
+      "provider": {
+        "@id": "https://studioklaro.se/#business"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Stockholm"
+      },
+      "url": "https://studioklaro.se/",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Det här ingår",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hemsida"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Visuellt uttryck"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Domän och teknik"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Google och synlighet"
+            }
+          }
+        ]
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://studioklaro.se/priser",
+        "priceCurrency": "SEK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 7900,
+          "priceCurrency": "SEK",
+          "valueAddedTaxIncluded": false
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://studioklaro.se/#faq",
+      "url": "https://studioklaro.se/",
+      "isPartOf": {
+        "@id": "https://studioklaro.se/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Vad behöver jag skicka in?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Du får ett enkelt formulär där du fyller i information om företaget och vad hemsidan behöver innehålla. Där kan du även ladda upp bilder, logotyp och annat material. Saknas något hjälper jag dig att reda ut vad som behövs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan du hjälpa mig med texter och innehåll?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Jag hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig och anpassad efter dina kunder. Du behöver inte ha alla texter färdiga när projektet startar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur lång tid tar det att få hemsidan klar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Det beror på upplägget. Startklar blir normalt klar inom 7–10 arbetsdagar (cirka 1–2 veckor), Professionell tar cirka 2–4 veckor och för Komplett närvaro anpassas tidsplanen efter projektets omfattning. Tiden påverkas också av hur snabbt material och feedback finns tillgängligt, och du får alltid en uppskattad tidsplan innan projektet startar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur kan jag följa projektet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "När projektet startar får du tillgång till en personlig projektportal. Där ser du aktuell fas, nästa steg och den senaste versionen av hemsidan. Du kan även ladda upp material, granska och godkänna samt hitta projektets dokument."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur många ändringar får jag göra?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vi arbetar med löpande feedback i stället för ett fast antal korrekturrundor. Nya sidor, funktioner eller en helt ny riktning kan räknas som förändrad omfattning och offereras separat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur fungerar betalningen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Externa kostnader för exempelvis domän, hosting och e-post betalas separat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ingår domän och webbplattform, och vem äger kontona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jag hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst. Externa tjänster tecknas och betalas av dig, och domänen samt tillhörande konton står i ditt namn. Du behåller tillgången och kontrollen över din digitala närvaro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan mitt befintliga bokningssystem användas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Hemsidan kan kopplas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. Mer avancerade eller specialbyggda bokningsfunktioner offereras separat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vad händer om jag inte har en logotyp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Jag kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du vill ta fram en ny logotyp pratar vi om behovet separat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan jag ändra hemsidan efter lanseringen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care för löpande support och uppdateringar. Större förändringar och nya funktioner offereras separat."
+          }
+        }
+      ]
     }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Vad behöver jag skicka in?", "acceptedAnswer": { "@type": "Answer", "text": "Du får ett enkelt formulär där du fyller i information om företaget och vad hemsidan behöver innehålla. Där kan du även ladda upp bilder, logotyp och annat material. Saknas något hjälper jag dig att reda ut vad som behövs." } },
-    { "@type": "Question", "name": "Kan du hjälpa mig med texter och innehåll?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Jag hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig och anpassad efter dina kunder. Du behöver inte ha alla texter färdiga när projektet startar." } },
-    { "@type": "Question", "name": "Hur lång tid tar det att få hemsidan klar?", "acceptedAnswer": { "@type": "Answer", "text": "Ett vanligt projekt blir normalt klart inom 7–10 arbetsdagar efter att materialet har skickats in. Tidsplanen kan påverkas av extra funktioner eller material som saknas." } },
-    { "@type": "Question", "name": "Hur kan jag följa projektet?", "acceptedAnswer": { "@type": "Answer", "text": "När projektet startar får du tillgång till en personlig projektportal. Där ser du aktuell fas, nästa steg och den senaste versionen av hemsidan. Du kan även ladda upp material, granska och godkänna samt hitta projektets dokument." } },
-    { "@type": "Question", "name": "Hur många ändringar får jag göra?", "acceptedAnswer": { "@type": "Answer", "text": "Vi arbetar med löpande feedback i stället för ett fast antal korrekturrundor. Nya sidor, funktioner eller en helt ny riktning kan räknas som förändrad omfattning och offereras separat." } },
-    { "@type": "Question", "name": "Hur fungerar betalningen?", "acceptedAnswer": { "@type": "Answer", "text": "50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Externa kostnader för exempelvis domän, hosting och e-post betalas separat." } },
-    { "@type": "Question", "name": "Ingår domän och webbplattform, och vem äger kontona?", "acceptedAnswer": { "@type": "Answer", "text": "Jag hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst. Externa tjänster tecknas och betalas av dig, och domänen samt tillhörande konton står i ditt namn. Du behåller tillgången och kontrollen över din digitala närvaro." } },
-    { "@type": "Question", "name": "Kan mitt befintliga bokningssystem användas?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Hemsidan kan kopplas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. Mer avancerade eller specialbyggda bokningsfunktioner offereras separat." } },
-    { "@type": "Question", "name": "Vad händer om jag inte har en logotyp?", "acceptedAnswer": { "@type": "Answer", "text": "Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Jag kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du vill ta fram en ny logotyp pratar vi om behovet separat." } },
-    { "@type": "Question", "name": "Kan jag ändra hemsidan efter lanseringen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care för löpande support och uppdateringar. Större förändringar och nya funktioner offereras separat." } }
   ]
 }
 </script>
 <script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
+<!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
+<noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-ans{opacity:1!important;}.faq-more{height:auto!important;visibility:visible!important;}.faq-more-btn,.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
 </head>
 <body>
 
@@ -379,7 +558,7 @@
     <div style="margin-bottom:16px;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.36s forwards;">
       <a href="/seo-koll" style="display:inline-flex;align-items:center;gap:6px;color:#146EF5;font-size:14px;font-weight:700;text-decoration:none;">Se hur din hemsida syns på Google →</a>
     </div>
-    <div style="font-size:13px;color:#52657A;font-weight:600;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;">Fast pris &nbsp;·&nbsp; Personlig hjälp &nbsp;·&nbsp; Klart inom 7–10 arbetsdagar</div>
+    <div style="font-size:13px;color:#52657A;font-weight:600;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;">Fast pris &nbsp;·&nbsp; Personlig hjälp &nbsp;·&nbsp; Tidsplan innan projektstart</div>
     <p style="font-size:14px;color:#7C8CA3;font-weight:500;margin:18px 0 0;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.48s forwards;">Studio Klaro är en webbyrå i Stockholm för småföretag som vill synas professionellt online – utan att betala för en stor byrås omkostnader.</p>
   </div>
 
@@ -466,17 +645,18 @@
       <div style="font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Portfolio</div>
       <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0;">Saker vi har gjort</h2>
     </div>
-    <div id="pf-tabs" style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;"></div>
-    <div data-reveal data-rgrid data-rpanelpad style="background:#0F172A;border-radius:24px;padding:56px;display:grid;grid-template-columns:0.72fr 1.5fr;gap:28px;align-items:center;overflow:hidden;">
+    <!-- Första caset är förrenderat så att innehållet finns i HTML:en även utan JavaScript; skriptet längre ner tar över och ritar samma sak. -->
+    <div id="pf-tabs" role="tablist" aria-label="Utvalda projekt" style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;"><button type="button" class="pf-tab" id="pf-tab-0" role="tab" aria-selected="true" aria-controls="pf-panel" tabindex="0" data-i="0" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid #146EF5;cursor:pointer;transition:all 0.2s ease;background:#146EF5;color:#fff;">The Chairman Barber</button><button type="button" class="pf-tab" id="pf-tab-1" role="tab" aria-selected="false" aria-controls="pf-panel" tabindex="-1" data-i="1" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">Galleri86</button><button type="button" class="pf-tab" id="pf-tab-2" role="tab" aria-selected="false" aria-controls="pf-panel" tabindex="-1" data-i="2" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">SERA</button><button type="button" class="pf-tab" id="pf-tab-3" role="tab" aria-selected="false" aria-controls="pf-panel" tabindex="-1" data-i="3" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">Itreon Market</button></div>
+    <div id="pf-panel" role="tabpanel" aria-labelledby="pf-tab-0" data-reveal data-rgrid data-rpanelpad style="background:#0F172A;border-radius:24px;padding:56px;display:grid;grid-template-columns:0.72fr 1.5fr;gap:28px;align-items:center;overflow:hidden;">
       <div>
-        <div id="pf-cat" style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8fa3bd;margin-bottom:16px;"></div>
-        <h3 id="pf-name" style="font-size:28px;font-weight:800;color:#fff;margin:0 0 18px;line-height:1.2;height:40px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></h3>
-        <p id="pf-desc" style="font-size:14px;color:#B7C6DB;line-height:1.65;margin:0 0 22px;"></p>
-        <div id="pf-tags" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;min-height:31px;"></div>
-        <a id="pf-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-lift lift-orange" style="display:inline-block;margin-top:14px;background:#C8663D;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;">Besök hemsidan</a>
+        <div id="pf-cat" style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8fa3bd;margin-bottom:16px;">Kundcase · Webbdesign &amp; Utveckling</div>
+        <h3 id="pf-name" style="font-size:28px;font-weight:800;color:#fff;margin:0 0 18px;line-height:1.2;height:40px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">The Chairman Barber</h3>
+        <p id="pf-desc" style="font-size:14px;color:#B7C6DB;line-height:1.65;margin:0 0 22px;">Vi tog fram en ny digital identitet och hemsida för The Chairman Barber i Vasastan — med fokus på en exklusiv känsla, tydlig struktur och en enkel väg till bokning. Designen kombinerar barbershopens klassiska karaktär med ett modernt digitalt uttryck.</p>
+        <div id="pf-tags" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;min-height:31px;"><div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">Webdesign</div><div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">Responsiv</div><div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">SEO</div><div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">Bokningsflöde</div></div>
+        <a id="pf-link" href="https://www.thechairmanbarber.se" target="_blank" rel="noopener noreferrer" class="btn-lift lift-orange" style="display:inline-block;margin-top:14px;background:#C8663D;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;">Besök hemsidan</a>
       </div>
       <div data-rimg style="height:500px;margin:0 -56px 0 0;">
-        <img id="pf-img" src="" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;">
+        <img id="pf-img" src="/thechairman.webp" alt="Hemsida designad för The Chairman Barber" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;">
         <div id="pf-imgph" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;text-align:center;background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.2);border-radius:16px;color:#8fa3bd;font-size:14px;font-weight:600;padding:24px;box-sizing:border-box;"></div>
         <a id="pf-embed" href="#" target="_blank" rel="noopener noreferrer" style="display:none;flex-direction:column;width:100%;height:100%;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.4);text-decoration:none;">
           <div style="background:#0F172A;padding:10px 14px;display:flex;align-items:center;gap:8px;flex:none;">
@@ -490,6 +670,13 @@
         </a>
       </div>
     </div>
+    <noscript>
+      <ul style="list-style:none;margin:24px 0 0;padding:0;display:grid;gap:16px;">
+        <li style="background:#fff;border-radius:16px;padding:22px 26px;"><strong style="color:#0F172A;">Galleri86</strong> – Kundcase · Webbdesign, UX/UI &amp; CMS. Vi gjorde om Galleri86 på Södermalm från en enkel informationssida till en modern digital utställningsyta — med konsten i centrum och ett eget administrationssystem så galleriet kan uppdatera bilder, texter och utställningar helt utan kod. <a href="/case-galleri86" style="color:#146EF5;font-weight:700;">Visa case</a></li>
+        <li style="background:#fff;border-radius:16px;padding:22px 26px;"><strong style="color:#0F172A;">SERA</strong> – Koncepthemsida · Webbdesign &amp; UX/UI. SERA är en fiktiv italiensk restaurang på Södermalm som vi skapat för att visa hur en modern restauranghemsida kan se ut, kännas och fungera — med stämningsfull bildsättning, tydlig meny och en enkel väg till bordsbokning. <a href="/demo/sera" style="color:#146EF5;font-weight:700;">Utforska SERA</a></li>
+        <li style="background:#fff;border-radius:16px;padding:22px 26px;"><strong style="color:#0F172A;">Itreon Market</strong> – Kundcase · UX/UI &amp; Webbutveckling. Vi designade och utvecklade Itreon Market — en digital B2B-marknadsplats för att presentera lager, deals och produktgradering på ett tydligt och förtroendeingivande sätt. <a href="https://market.itreon.eu" style="color:#146EF5;font-weight:700;">Besök hemsidan</a></li>
+      </ul>
+    </noscript>
   </div>
 
   <!-- TESTIMONIALS -->
@@ -738,16 +925,17 @@
         <div>
           <a href="/priser" class="price-teaser-row">
             <span class="price-teaser-name">Startklar</span>
-            <span class="price-teaser-price">7 900 kr</span>
+            <span class="price-teaser-price">från 7 900 kr</span>
           </a>
           <a href="/priser" class="price-teaser-row price-teaser-pro">
             <span class="price-teaser-name">Professionell<span class="price-teaser-badge">Mest vald</span></span>
-            <span class="price-teaser-price">13 900 kr</span>
+            <span class="price-teaser-price">från 13 900 kr</span>
           </a>
           <a href="/priser" class="price-teaser-row">
             <span class="price-teaser-name">Komplett närvaro</span>
-            <span class="price-teaser-price">19 900 kr</span>
+            <span class="price-teaser-price">från 22 900 kr</span>
           </a>
+          <p style="font-size:12px;color:#52657A;margin:12px 6px 0;">Alla priser anges exkl. moms.</p>
         </div>
 
       </div>
@@ -880,7 +1068,7 @@
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-3">Hur lång tid tar det att få hemsidan klar?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-3" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ett vanligt projekt blir normalt klart inom 7–10 arbetsdagar efter att materialet har skickats in. Tidsplanen kan påverkas av extra funktioner eller material som saknas.</div></div></div></div>
+        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-3" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det beror på upplägget. Startklar blir normalt klar inom 7–10 arbetsdagar (cirka 1–2 veckor), Professionell tar cirka 2–4 veckor och för Komplett närvaro anpassas tidsplanen efter projektets omfattning. Tiden påverkas också av hur snabbt material och feedback finns tillgängligt, och du får alltid en uppskattad tidsplan innan projektet startar.</div></div></div></div>
       </div>
 
       <div class="faq-item" style="margin-bottom:22px;">
@@ -1011,7 +1199,7 @@
           <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">
             <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Tillgänglighet</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
-              <div style="font-size:13px;color:#AFC6E8;">Mån–Fre 08:00–17:00</div>
+              <div style="font-size:13px;color:#AFC6E8;">Vardagar 09:00–17:00</div>
               <div style="font-size:13px;color:#AFC6E8;">Lör–Sön Stängt</div>
             </div>
           </div>
@@ -1227,13 +1415,18 @@
   var pfEmbed = document.getElementById('pf-embed');
   var pfIframe = document.getElementById('pf-iframe');
 
+  var pfPanel = document.getElementById('pf-panel');
+
   function pfRender() {
     pfTabs.querySelectorAll('.pf-tab').forEach(function (t, i) {
       var active = i === pfIndex;
       t.style.background = active ? '#146EF5' : '#fff';
       t.style.color = active ? '#fff' : '#52657A';
       t.style.borderColor = active ? '#146EF5' : 'rgba(15,23,42,0.1)';
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+      t.tabIndex = active ? 0 : -1;
     });
+    pfPanel.setAttribute('aria-labelledby', 'pf-tab-' + pfIndex);
     var p = pfProjects[pfIndex];
     pfCat.textContent = p.category || '';
     pfName.textContent = p.mock || '';
@@ -1277,10 +1470,32 @@
     }
   }
   pfTabs.innerHTML = pfProjects.map(function (p, i) {
-    return '<div class="pf-tab" data-i="' + i + '" style="font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">' + esc(p.mock) + '</div>';
+    return '<button type="button" class="pf-tab" id="pf-tab-' + i + '" role="tab" aria-selected="false" aria-controls="pf-panel" tabindex="-1" data-i="' + i + '" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">' + esc(p.mock) + '</button>';
   }).join('');
-  pfTabs.querySelectorAll('.pf-tab').forEach(function (t) {
-    t.addEventListener('click', function () { pfIndex = +t.getAttribute('data-i'); pfRender(); });
+  var pfTabEls = pfTabs.querySelectorAll('.pf-tab');
+  function pfSelect(i, moveFocus) {
+    pfIndex = i;
+    pfRender();
+    if (moveFocus) pfTabEls[i].focus();
+  }
+  // Klick täcker även Enter och Space, eftersom flikarna är riktiga knappar.
+  pfTabEls.forEach(function (t) {
+    t.addEventListener('click', function () { pfSelect(+t.getAttribute('data-i'), false); });
+  });
+  // ARIA tabs-mönstret med automatisk aktivering: pilar flyttar och väljer, Home/End går till första/sista.
+  pfTabs.addEventListener('keydown', function (e) {
+    var tab = e.target.closest && e.target.closest('.pf-tab');
+    if (!tab) return;
+    var current = +tab.getAttribute('data-i');
+    var last = pfTabEls.length - 1;
+    var next;
+    if (e.key === 'ArrowRight') next = current === last ? 0 : current + 1;
+    else if (e.key === 'ArrowLeft') next = current === 0 ? last : current - 1;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = last;
+    else return;
+    e.preventDefault();
+    pfSelect(next, true);
   });
   pfRender();
 
