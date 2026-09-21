@@ -1,9 +1,12 @@
-/* Google Analytics 4 med Google Consent Mode v2 och cookie-banner.
+/* Google Analytics 4 med Google Consent Mode v2, Meta Pixel och cookie-banner.
    Laddas som modul på varje sida (se <head>), så all logik finns på ett ställe.
 
    - Standard: analytics_storage (och alla annonsrelaterade signaler) = denied.
-   - Besökaren väljer "Godkänn statistik" eller "Endast nödvändiga"; valet sparas
-     i localStorage i 12 månader så bannern inte visas vid varje besök.
+   - Två kategorier utöver nödvändiga: Statistik (GA4) och Marknadsföring (Meta
+     Pixel). Valet sparas i localStorage i 12 månader så bannern inte visas vid
+     varje besök.
+   - Meta Pixel laddas, initieras och skickar PageView först när Marknadsföring
+     är godkänd. Ingen <noscript>-bild används, eftersom den skulle kringgå samtycket.
    - Sajten är flersidig (ingen klient-routing), så varje navigering är en ny
      sidladdning och config-anropet nedan registrerar sidvisningen.
    - Inga formulärvärden, namn, e-post eller telefonnummer skickas någonsin.
@@ -11,6 +14,7 @@
      /seo-koll?url=… som innehåller det besökaren skrev i ett formulär). */
 
 const MEASUREMENT_ID = 'G-LF04L4G9WG';
+const META_PIXEL_ID = '1088666567360094';
 
 const INTERNAL_STORAGE_KEY = 'klaro_internal';
 
@@ -54,37 +58,98 @@ function cleanUrl(href) {
   }
 }
 
+// `value` är statistikvalet (samma fält som före Meta Pixel, så gamla val
+// fortsätter gälla). `marketing` saknas i val gjorda innan kategorin fanns;
+// då är marknadsföring inte godkänd och bannern visas igen för att fråga.
 function readConsent() {
   try {
     const stored = JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null');
     if (!stored || (stored.value !== 'granted' && stored.value !== 'denied')) return null;
     if (Date.now() - stored.ts > CONSENT_MAX_AGE_MS) return null;
-    return stored.value;
+    return {
+      analytics: stored.value === 'granted',
+      marketing: stored.marketing === 'granted',
+      complete: stored.marketing === 'granted' || stored.marketing === 'denied',
+    };
   } catch (e) {
     return null;
   }
 }
 
-function saveConsent(value) {
+function saveConsent(choice) {
   try {
-    localStorage.setItem(CONSENT_KEY, JSON.stringify({ value, ts: Date.now() }));
+    localStorage.setItem(CONSENT_KEY, JSON.stringify({
+      value: choice.analytics ? 'granted' : 'denied',
+      marketing: choice.marketing ? 'granted' : 'denied',
+      ts: Date.now(),
+    }));
   } catch (e) {
     // Privat läge o.d. – valet gäller då bara den här sidvisningen.
   }
 }
 
-// Tar bort GA-cookies om besökaren drar tillbaka ett tidigare godkännande.
-function clearGaCookies() {
+// Tar bort cookies om besökaren drar tillbaka ett tidigare godkännande.
+function clearCookies(isTarget) {
   const host = location.hostname;
   const domains = ['', host, '.' + host, '.' + host.replace(/^www\./, '')];
   document.cookie.split(';').forEach((part) => {
     const name = part.split('=')[0].trim();
-    if (name === '_ga' || name.indexOf('_ga_') === 0) {
+    if (isTarget(name)) {
       domains.forEach((domain) => {
         document.cookie = name + '=; Max-Age=0; path=/' + (domain ? '; domain=' + domain : '');
       });
     }
   });
+}
+
+const isGaCookie = (name) => name === '_ga' || name.indexOf('_ga_') === 0;
+const isMetaCookie = (name) => name === '_fbp' || name === '_fbc';
+
+// Meta Pixel: laddas bara från produktionsdomänen (som GA-taggen), eller med
+// ?meta_debug=1 för felsökning. window.__klaroMetaPixel är 'active' när pixeln
+// är initierad och samtycket gäller, 'revoked' om samtycket dragits tillbaka
+// under sidvisningen, och saknas innan pixeln har laddats.
+function enableMetaPixel() {
+  const allowed = /[?&]meta_debug=1\b/.test(location.search) || PROD_HOSTS.indexOf(location.hostname) !== -1;
+  if (!allowed) return;
+
+  // Redan initierad på den här sidvisningen: slå bara på samtycket igen, utan
+  // ny init eller ett andra PageView.
+  if (window.__klaroMetaPixel) {
+    window.fbq('consent', 'grant');
+    window.__klaroMetaPixel = 'active';
+    return;
+  }
+  window.__klaroMetaPixel = 'active';
+
+  // Metas bas-kod (fbevents.js), utan <noscript>-bilden.
+  if (!window.fbq) {
+    const fbq = function () {
+      if (fbq.callMethod) fbq.callMethod.apply(fbq, arguments);
+      else fbq.queue.push(arguments);
+    };
+    window.fbq = fbq;
+    if (!window._fbq) window._fbq = fbq;
+    fbq.push = fbq;
+    fbq.loaded = true;
+    fbq.version = '2.0';
+    fbq.queue = [];
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+    document.head.appendChild(script);
+  }
+
+  window.fbq('init', META_PIXEL_ID);
+  window.fbq('track', 'PageView');
+}
+
+function disableMetaPixel() {
+  if (window.__klaroMetaPixel === 'active') {
+    window.fbq('consent', 'revoke');
+    window.__klaroMetaPixel = 'revoked';
+  }
+  clearCookies(isMetaCookie);
 }
 
 // Besök som kommer från AI-assistenter. Matchas på referrer-domän och på
@@ -137,7 +202,8 @@ function trackAiReferral(gtag) {
 function init() {
   // Danilo / interna enheter ska aldrig laddas eller skicka GA4-data.
   if (isInternalUser) {
-    clearGaCookies();
+    clearCookies(isGaCookie);
+    clearCookies(isMetaCookie);
     return;
   }
 
@@ -159,8 +225,9 @@ function init() {
     security_storage: 'granted',
   });
 
-  const stored = readConsent();
-  if (stored === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' });
+  // Aktuellt val; uppdateras i applyChoice så det gäller även om localStorage inte går att skriva.
+  let consent = readConsent();
+  if (consent && consent.analytics) gtag('consent', 'update', { analytics_storage: 'granted' });
 
   const debug = /[?&]ga_debug=1\b/.test(location.search);
   const shouldLoad = debug || PROD_HOSTS.indexOf(location.hostname) !== -1;
@@ -183,10 +250,16 @@ function init() {
 
   trackAiReferral(gtag);
 
+  // Tidigare sparat godkännande av marknadsföring: starta pixeln direkt.
+  if (consent && consent.marketing) enableMetaPixel();
+
   // Anropas av sidornas formulärkod först när en förfrågan har tagits emot.
   // Tar bara ett formulärnamn – aldrig några fältvärden.
   window.klaroTrackLead = function (formName) {
     gtag('event', 'generate_lead', { form_name: String(formName || 'kontaktformular').slice(0, 40) });
+    if (consent && consent.marketing && window.__klaroMetaPixel === 'active') {
+      window.fbq('track', 'Lead');
+    }
   };
 
   // Spåra visningar av kundcase.
@@ -252,13 +325,16 @@ function init() {
     }
   });
 
-  if (!stored) showBanner();
+  if (!consent || !consent.complete) showBanner();
 
-  function applyChoice(value) {
-    const previous = readConsent();
-    saveConsent(value);
-    gtag('consent', 'update', { analytics_storage: value });
-    if (value === 'denied' && previous === 'granted') clearGaCookies();
+  function applyChoice(choice) {
+    const previous = consent;
+    consent = { analytics: choice.analytics, marketing: choice.marketing, complete: true };
+    saveConsent(consent);
+    gtag('consent', 'update', { analytics_storage: choice.analytics ? 'granted' : 'denied' });
+    if (!choice.analytics && previous && previous.analytics) clearCookies(isGaCookie);
+    if (choice.marketing) enableMetaPixel();
+    else if (previous && previous.marketing) disableMetaPixel();
     hideBanner();
   }
 
@@ -280,16 +356,29 @@ function init() {
     el.setAttribute('role', 'region');
     el.setAttribute('aria-label', 'Cookie-inställningar');
     el.innerHTML =
-      '<p class="skc-text"><strong>Cookies för statistik</strong>' +
-      'Vi vill använda Google Analytics för att förstå hur sajten används och göra den bättre. ' +
-      'Uppgifterna används inte för annonser. Du kan också välja att bara tillåta nödvändiga cookies.</p>' +
+      '<p class="skc-text"><strong>Cookies</strong>' +
+      'Vi vill använda Google Analytics för att förstå hur sajten används, och Meta Pixel för att mäta ' +
+      'hur våra annonser på Facebook och Instagram fungerar. Välj vad du godkänner. ' +
+      'Nödvändiga cookies används alltid.</p>' +
+      '<div class="skc-options">' +
+      '<label class="skc-option"><input type="checkbox" data-category="analytics"' + (consent && consent.analytics ? ' checked' : '') + '>' +
+      '<span><strong>Statistik</strong> – Google Analytics</span></label>' +
+      '<label class="skc-option"><input type="checkbox" data-category="marketing"' + (consent && consent.marketing ? ' checked' : '') + '>' +
+      '<span><strong>Marknadsföring</strong> – Meta Pixel</span></label>' +
+      '</div>' +
       '<div class="skc-actions">' +
-      '<button type="button" class="skc-btn" data-choice="denied">Endast nödvändiga</button>' +
-      '<button type="button" class="skc-btn" data-choice="granted">Godkänn statistik</button>' +
+      '<button type="button" class="skc-btn" data-choice="necessary">Endast nödvändiga</button>' +
+      '<button type="button" class="skc-btn" data-choice="save">Spara val</button>' +
+      '<button type="button" class="skc-btn" data-choice="all">Godkänn alla</button>' +
       '</div>';
     el.addEventListener('click', (event) => {
       const btn = event.target.closest('[data-choice]');
-      if (btn) applyChoice(btn.getAttribute('data-choice'));
+      if (!btn) return;
+      const action = btn.getAttribute('data-choice');
+      const checked = (category) => el.querySelector('[data-category="' + category + '"]').checked;
+      if (action === 'all') applyChoice({ analytics: true, marketing: true });
+      else if (action === 'save') applyChoice({ analytics: checked('analytics'), marketing: checked('marketing') });
+      else applyChoice({ analytics: false, marketing: false });
     });
     document.body.appendChild(el);
   }
@@ -299,6 +388,11 @@ const BANNER_CSS = `
 #sk-cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:2147483000;max-width:560px;margin:0 auto;box-sizing:border-box;background:#0F172A;color:#E2E8F0;border:1px solid rgba(255,255,255,0.16);border-radius:16px;padding:20px;box-shadow:0 18px 40px rgba(15,23,42,0.28);font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;line-height:1.55;}
 #sk-cookie-banner .skc-text{margin:0 0 16px;}
 #sk-cookie-banner .skc-text strong{display:block;color:#fff;font-size:15px;font-weight:800;margin-bottom:4px;}
+#sk-cookie-banner .skc-options{display:grid;gap:8px;margin:0 0 16px;}
+#sk-cookie-banner .skc-option{display:flex;align-items:center;gap:10px;cursor:pointer;}
+#sk-cookie-banner .skc-option input{width:18px;height:18px;margin:0;flex:none;accent-color:#AFC6E8;cursor:pointer;}
+#sk-cookie-banner .skc-option strong{color:#fff;font-weight:700;}
+#sk-cookie-banner .skc-option input:focus-visible{outline:2px solid #AFC6E8;outline-offset:2px;}
 #sk-cookie-banner .skc-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;}
 #sk-cookie-banner .skc-btn{flex:1 1 180px;min-height:44px;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer;border:none;background:#fff;color:#0F172A;}
 #sk-cookie-banner .skc-btn:focus-visible{outline:2px solid #AFC6E8;outline-offset:2px;}

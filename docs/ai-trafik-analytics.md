@@ -67,7 +67,7 @@ Vercel Preview går inte att testa på det här sättet.
 1. Öppna Google Tag Assistant: `https://tagassistant.google.com/`
 2. Välj *Add domain* och anslut `https://studioklaro.se/`. Sajten öppnas i ett nytt
    fönster som är kopplat till Tag Assistant.
-3. Klicka **Godkänn statistik** i cookie-bannern i det fönstret.
+3. Kryssa i **Statistik** och klicka **Spara val** (eller **Godkänn alla**) i cookie-bannern i det fönstret.
 4. I samma fönster, gå till `https://studioklaro.se/?utm_source=chatgpt.com` så att
    händelsen utlöses med samtycke givet.
 5. Öppna GA4 → **Admin → DebugView** och välj den aktuella debug-enheten.
