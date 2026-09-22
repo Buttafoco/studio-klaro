@@ -96,6 +96,7 @@
     [data-rgrid4]{grid-template-columns:1fr!important;}
   }
 </style>
+<link rel="stylesheet" href="/src/lead-dock.css">
 <script type="module" src="/src/analytics.js"></script>
 <!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
 <noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-ans{opacity:1!important;}.faq-more{height:auto!important;visibility:visible!important;}.faq-more-btn,.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
@@ -536,5 +537,11 @@
 })();
 </script>
 
+
+  <!-- Flytande formulärrad: samma formulär som på startsidan (src/lead-dock.js) -->
+  <aside class="wz-dock" id="wz-dock" aria-label="Få konkreta idéer för din hemsida">
+    <div class="wz-shell" data-wz-mount="dock"></div>
+  </aside>
+<script type="module" src="/src/lead-dock.js"></script>
 </body>
 </html>

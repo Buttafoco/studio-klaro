@@ -356,6 +356,7 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="/src/lead-dock.css">
 <script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
 <!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
@@ -799,6 +800,12 @@
 
 </div>
 
+
+  <!-- Flytande formulärrad: använder sidans egen formulärkomponent -->
+  <aside class="wz-dock" id="wz-dock" aria-label="Få konkreta idéer för din hemsida">
+    <div class="wz-shell" data-wz-mount="dock"></div>
+  </aside>
+
 <script>
 (function () {
   /* Sticky nav shrink */
@@ -1140,5 +1147,56 @@
 })();
 </script>
 
+<script>
+/* Flytande formulärrad: samma beteende som på startsidan. Formuläret monteras av sidans
+   egen komponent ovan (alla [data-wz-mount] monteras där). */
+(function () {
+  var dock = document.getElementById('wz-dock');
+  if (!dock) return;
+  var msg = document.getElementById('wz-f-message-dock');
+  var card = document.getElementById('wz-card-dock');
+  var ownForms = Array.prototype.slice.call(document.querySelectorAll('[data-wz-mount]')).filter(function (el) { return !dock.contains(el); });
+  var formVisible = false;
+  function focusInside() { return dock.contains(document.activeElement); }
+  function evaluate() {
+    var vh = window.innerHeight;
+    var past = window.scrollY > vh * 0.8;
+    var show = past && !formVisible;
+    if (!show && focusInside()) return;
+    if (show) dock.classList.add('is-shown');
+    else dock.classList.remove('is-shown');
+  }
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () { ticking = false; evaluate(); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  if (ownForms.length && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      formVisible = entries.some(function (e) { return e.isIntersecting; });
+      evaluate();
+    }, { rootMargin: '0px 0px -10% 0px' });
+    ownForms.forEach(function (el) { io.observe(el); });
+  }
+  function syncOpen() {
+    var wrap = document.getElementById('wz-form-wrap-dock');
+    var open = focusInside() || (msg && msg.value.trim() !== '') ||
+      (card && card.classList.contains('is-step2')) || !wrap || wrap.style.display === 'none';
+    dock.classList.toggle('is-open', !!open);
+    dock.classList.toggle('has-text', !!(msg && msg.value.trim() !== ''));
+  }
+  dock.addEventListener('focusin', syncOpen);
+  dock.addEventListener('focusout', function () { setTimeout(function () { syncOpen(); evaluate(); }, 0); });
+  if (msg) msg.addEventListener('input', syncOpen);
+  if (card) card.addEventListener('mousedown', function (e) {
+    if (!dock.classList.contains('is-open') && !e.target.closest('button') && msg) { e.preventDefault(); msg.focus(); }
+  });
+  syncOpen();
+  evaluate();
+})();
+</script>
 </body>
 </html>

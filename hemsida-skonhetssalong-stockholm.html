@@ -337,6 +337,7 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="/src/lead-dock.css">
 <script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
 <!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
@@ -796,5 +797,11 @@
 })();
 </script>
 
+
+  <!-- Flytande formulärrad: samma formulär som på startsidan (src/lead-dock.js) -->
+  <aside class="wz-dock" id="wz-dock" aria-label="Få konkreta idéer för din hemsida">
+    <div class="wz-shell" data-wz-mount="dock"></div>
+  </aside>
+<script type="module" src="/src/lead-dock.js"></script>
 </body>
 </html>
