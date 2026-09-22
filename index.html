@@ -69,53 +69,6 @@
   a:focus-visible,button:focus-visible{outline:2px solid #0F172A;outline-offset:2px;}
 
 
-  /* Process – zigzag journey */
-  .proc-track{position:relative;max-width:840px;margin:0 auto;}
-  .proc-line-base{position:absolute;top:6px;bottom:6px;left:50%;width:2px;transform:translateX(-50%);background-image:repeating-linear-gradient(to bottom, rgba(20,110,245,0.35) 0 6px, transparent 6px 14px);}
-  .proc-line-progress{position:absolute;top:6px;left:50%;width:2px;height:calc(100% - 12px);transform:translateX(-50%) scaleY(0);transform-origin:top;background:#146EF5;will-change:transform;}
-  .proc-row{position:relative;display:flex;margin-bottom:60px;}
-  .proc-row:last-child{margin-bottom:0;}
-  .proc-row.proc-r{justify-content:flex-end;}
-  .proc-row.proc-l{justify-content:flex-start;}
-  .proc-dot{position:absolute;top:34px;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#fff;border:2.5px solid #146EF5;z-index:2;display:flex;align-items:center;justify-content:center;}
-  .proc-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff;opacity:0;}
-  .proc-dot-end{width:24px;height:24px;transform:translate(-50%,-50%) scale(0.9);}
-  .proc-dot-end::after{display:none;}
-  .proc-check{color:#fff;font-size:11px;font-weight:800;line-height:1;opacity:0;}
-  .proc-card{width:45%;border-radius:20px;padding:28px 26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);}
-  .proc-card-lg{padding:34px 30px;border:1px solid rgba(20,110,245,0.14);}
-  .proc-eyebrow{font-size:12px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin:0 0 10px;}
-  .proc-title{font-size:18px;font-weight:800;color:#0F172A;margin:0 0 8px;line-height:1.3;}
-  .proc-title-lg{font-size:21px;}
-  .proc-desc{font-size:14px;color:#52657A;line-height:1.6;margin:0;}
-
-  /* Mobil tidslinje – prickar/kort */
-  .proc-m-track{position:relative;padding-left:28px;}
-  .proc-m-line-base{position:absolute;left:9px;top:6px;bottom:6px;width:2px;background-image:repeating-linear-gradient(to bottom, rgba(20,110,245,0.35) 0 5px, transparent 5px 11px);}
-  .proc-m-line-progress{position:absolute;left:9px;top:6px;width:2px;height:calc(100% - 12px);background:#146EF5;transform:scaleY(0);transform-origin:top;will-change:transform;}
-  .proc-m-step{position:relative;margin-bottom:26px;}
-  .proc-m-step:last-child{margin-bottom:0;}
-  .proc-m-dot{position:absolute;left:-28px;top:2px;width:20px;height:20px;border-radius:50%;background:#fff;border:2.5px solid #146EF5;box-shadow:0 0 0 4px #DCEEFF;display:flex;align-items:center;justify-content:center;}
-  .proc-m-dot::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff;opacity:0;}
-  .proc-m-end::after{display:none;}
-  .proc-m-end .proc-check{font-size:10px;}
-
-  @media (prefers-reduced-motion: no-preference){
-    .proc-dot,.proc-m-dot{transition:background-color .3s ease,border-color .3s ease,box-shadow .3s ease;}
-    .proc-dot::after,.proc-m-dot::after{transition:opacity .3s ease;}
-    .proc-row.is-active .proc-dot,.proc-m-step.is-active .proc-m-dot{background:#146EF5;border-color:#146EF5;box-shadow:0 0 0 6px rgba(20,110,245,0.12);}
-    .proc-m-step.is-active .proc-m-dot{box-shadow:0 0 0 4px #DCEEFF,0 0 0 8px rgba(20,110,245,0.12);}
-    .proc-row.is-active .proc-dot::after,.proc-m-step.is-active .proc-m-dot::after{opacity:1;}
-    .proc-dot-end{transition:background-color .35s cubic-bezier(0.22,1,0.36,1),border-color .35s cubic-bezier(0.22,1,0.36,1),box-shadow .35s cubic-bezier(0.22,1,0.36,1),transform .35s cubic-bezier(0.22,1,0.36,1);}
-    .proc-row.is-active .proc-dot-end{box-shadow:0 0 0 8px rgba(20,110,245,0.14);transform:translate(-50%,-50%) scale(1);}
-    .proc-check{transition:opacity .3s ease;}
-    .proc-row.is-active .proc-check,.proc-m-step.is-active .proc-check{opacity:1;}
-    .proc-card{opacity:.8;transform:translateY(6px);transition:opacity .4s cubic-bezier(0.22,1,0.36,1),transform .4s cubic-bezier(0.22,1,0.36,1);}
-    .proc-row.is-active .proc-card{opacity:1;transform:translateY(0);}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .proc-line-progress,.proc-m-line-progress{display:none;}
-  }
 
   /* Formulärfält */
   .wz-input{border:none;border-bottom:2px solid rgba(15,23,42,0.15);padding:10px 2px;font-size:17px;font-family:inherit;outline:none;background:transparent;transition:border-color 0.25s cubic-bezier(0.22,1,0.36,1);width:100%;box-sizing:border-box;}
@@ -150,6 +103,50 @@
   }
   @media (prefers-reduced-motion: reduce){
     .wz-typing-caret{display:none;}
+  }
+  /* Flytande kompakt formulärrad (dock) */
+  .hero-form{position:relative;}
+  .wz-sentinel{position:absolute;left:0;width:1px;height:1px;pointer-events:none;}
+  .wz-sentinel--show{bottom:-80px;}   /* passerad = hero-formuläret har tydligt lämnat skärmen */
+  .wz-sentinel--hide{bottom:140px;}   /* synlig igen = en tydlig del av hero-formuläret syns */
+  .wz-dock{--dock-ease:cubic-bezier(0.22,1,0.36,1);position:fixed;left:50%;bottom:clamp(12px,2vw,28px);z-index:40;width:min(480px,calc(100vw - var(--sbw,0px) - 32px));border-radius:28px;
+    transform:translate3d(-50%,calc(100% + 32px),0);opacity:0;visibility:hidden;pointer-events:none;box-shadow:0 0 0 rgba(15,27,51,0);
+    transition:transform 750ms var(--dock-ease),opacity 500ms ease,box-shadow 750ms ease,visibility 0s linear 750ms;}
+  .wz-dock.is-shown{transform:translate3d(-50%,0,0);opacity:1;visibility:visible;pointer-events:auto;
+    box-shadow:0 18px 50px rgba(15,27,51,0.12),0 4px 14px rgba(15,27,51,0.06);
+    transition:transform 750ms var(--dock-ease),opacity 500ms ease,box-shadow 750ms ease,visibility 0s linear 0s;}
+  .wz-dock .wz-shell{max-width:none;}
+  /* Lång steg 2 får scrolla inne i dockan i stället för att gå utanför skärmen */
+  .wz-dock #wz-form-wrap-dock,.wz-dock #wz-success-dock{max-height:calc(100svh - 120px);overflow-y:auto;border-radius:28px;overscroll-behavior:contain;}
+  .wz-dock .wz-card{box-shadow:none;border-color:rgba(15,27,51,0.06);}
+  .wz-dock .wz-prompt-card{position:relative;padding:12px 22px;border-radius:30px;transition:padding 500ms var(--dock-ease),border-radius 500ms var(--dock-ease),border-color .25s ease;}
+  .wz-dock .wz-input.wz-prompt{height:26px;font-size:16px;line-height:1.6;transition:height 500ms var(--dock-ease);}
+  .wz-dock .wz-prompt-bar{position:absolute;left:22px;right:8px;bottom:8px;margin:0;justify-content:flex-end;}
+  .wz-dock .wz-prompt-hint{position:absolute;left:0;bottom:12px;opacity:0;transition:opacity .3s ease;pointer-events:none;white-space:nowrap;}
+  .wz-dock .wz-next{width:44px;height:44px;padding:0;border-radius:50%;font-size:0;gap:0;box-shadow:0 6px 16px rgba(20,110,245,0.3);
+    opacity:0;visibility:hidden;transform:scale(.85);transition:opacity .3s ease,transform .35s var(--dock-ease),visibility 0s linear .3s;}
+  /* Pilknappen visas först när besökaren har börjat skriva */
+  .wz-dock.has-text .wz-next{opacity:1;visibility:visible;transform:none;transition:opacity .3s ease,transform .35s var(--dock-ease),visibility 0s linear 0s;}
+  .wz-dock.has-text:not(.is-open) .wz-prompt-card{padding-right:64px;}
+  .wz-dock .wz-next span{font-size:18px;}
+  .wz-dock .wz-prompt-error{margin-top:6px;}
+  /* Expanderat: växer uppåt (nederkanten ligger kvar), pilen kvar nere till höger */
+  .wz-dock.is-open .wz-prompt-card{padding:22px 22px 66px;border-radius:26px;}
+  .wz-dock.is-open .wz-input.wz-prompt{height:96px;}
+  .wz-dock.is-open .wz-prompt-hint{opacity:1;}
+  .wz-dock .wz-prompt-card.is-step2{padding:22px 22px 24px;}
+  .wz-dock .wz-prompt-card.is-step2 .wz-input.wz-prompt{height:52px;}
+  .wz-dock .wz-callback-toggle{display:none;}
+  @media (max-width:600px){
+    .wz-dock{width:calc(100vw - var(--sbw,0px) - 32px);}
+    .wz-dock .wz-prompt-hint{display:none;}
+    .wz-dock .wz-prompt-bar{flex-direction:row;align-items:center;}
+    .wz-dock .wz-next{width:44px;padding:0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .wz-dock,.wz-dock.is-shown{transform:translate3d(-50%,0,0);transition:opacity 200ms ease,visibility 0s linear 200ms;}
+    .wz-dock.is-shown{transition:opacity 200ms ease,visibility 0s linear 0s;}
+    .wz-dock .wz-prompt-card,.wz-dock .wz-input.wz-prompt{transition:none;}
   }
   /* Kontakt: prompt-kort i två steg */
   .wz-head{max-width:640px;margin:0 auto 36px;text-align:center;}
@@ -202,6 +199,11 @@
   .wz-perks{list-style:none;margin:22px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;}
   .wz-perks li{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#52657A;}
   .wz-perk-ic{color:#146EF5;font-size:14px;font-weight:800;flex:none;}
+  /* Hero: Google-betyget först, sedan punkter som avskiljare (i stället för bockar) */
+  .hero-perks li + li::before{content:'';flex:none;width:4px;height:4px;border-radius:50%;background:#9AAAC0;margin-right:6px;}
+  @media (max-width:600px){
+    .hero-perks li + li::before{margin-right:2px;}
+  }
   .wz-rating{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;border-radius:6px;}
   .wz-rating:hover{color:#0F172A;}
   .wz-rating:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
@@ -237,40 +239,175 @@
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
 
-  /* Projektportal – statisk förhandsvisning (startsida) */
-  .pp-benefits{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
-  .pp-benefit{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0F172A;}
-  .pp-benefit-ic{width:22px;height:22px;border-radius:7px;background:#fff;color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 10px rgba(15,23,42,0.06);flex:none;}
-  .pp-mock{background:#fff;border-radius:22px;border:1px solid rgba(15,23,42,0.05);box-shadow:0 14px 36px rgba(15,23,42,0.08);overflow:hidden;}
-  .pp-bar{background:#0F172A;padding:11px 16px;display:flex;align-items:center;gap:7px;}
-  .pp-bar-dot{width:9px;height:9px;border-radius:50%;flex:none;}
-  .pp-bar-label{margin-left:8px;font-size:11px;font-weight:700;color:#8FA6C2;letter-spacing:.04em;}
-  .pp-body{background:#F7FAFE;padding:20px;display:flex;flex-direction:column;gap:14px;}
-  .pp-card{background:#fff;border:1px solid rgba(15,23,42,0.06);border-radius:16px;padding:16px;}
-  .pp-eyebrow{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8296B0;margin-bottom:6px;}
-  .pp-phase{font-size:17px;font-weight:800;color:#0F172A;line-height:1.2;}
-  .pp-track{display:flex;gap:5px;margin-top:14px;}
-  .pp-seg{flex:1;height:6px;border-radius:999px;background:rgba(15,23,42,0.09);}
-  .pp-seg.is-done{background:#146EF5;}
-  .pp-seg.is-active{background:linear-gradient(90deg,#146EF5 0 60%,rgba(20,110,245,0.18) 60% 100%);}
-  .pp-meta{margin-top:9px;font-size:11px;font-weight:700;color:#8296B0;}
-  .pp-steps{display:flex;flex-direction:column;gap:10px;}
-  .pp-step{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#8296B0;}
-  .pp-step.is-done{color:#0F172A;}
-  .pp-step.is-active{color:#0F172A;font-weight:800;}
-  .pp-mark{width:20px;height:20px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;background:rgba(15,23,42,0.07);color:#8296B0;}
-  .pp-step.is-done .pp-mark{background:#146EF5;color:#fff;}
-  .pp-step.is-active .pp-mark{background:#fff;border:2.5px solid #146EF5;box-shadow:0 0 0 4px rgba(20,110,245,0.12);}
-  .pp-pill{margin-left:auto;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#146EF5;background:rgba(20,110,245,0.1);padding:3px 9px;border-radius:999px;}
-  .pp-next{font-size:14px;font-weight:700;color:#0F172A;line-height:1.45;}
-  .pp-files{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
-  .pp-file{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;color:#52657A;background:#F3F7FC;border-radius:10px;padding:9px 11px;}
-  .pp-file-ic{width:18px;height:18px;border-radius:5px;background:#DCEEFF;flex:none;}
-  .pp-file-meta{margin-left:auto;font-size:11px;font-weight:700;color:#8296B0;}
-  .pp-bridge{display:flex;flex-direction:column;align-items:center;text-align:center;margin:44px 0 40px;}
-  .pp-bridge-line{width:2px;height:26px;flex:none;background-image:repeating-linear-gradient(to bottom, rgba(20,110,245,0.35) 0 6px, transparent 6px 14px);}
-  .pp-bridge-text{margin:12px 0;max-width:560px;background:#fff;border:1px solid rgba(20,110,245,0.14);border-radius:999px;padding:11px 24px;font-size:14px;font-weight:700;color:#0F172A;line-height:1.5;box-shadow:0 6px 18px rgba(15,23,42,0.05);}
-  .pp-bridge-arrow{margin-top:10px;width:26px;height:26px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;line-height:1;box-shadow:0 6px 16px rgba(20,110,245,0.28);}
+  /* Mörkt kapitel (omdömen → process). JS sätter html.dk-on medan kapitlet fyller skärmen: då tonar hela sidans
+     bakgrund lugnt till varm svart och tillbaka, i båda scrollriktningarna. Utan JS / vid reducerad rörelse:
+     kapitlet är statiskt mörkt och allt innehåll syns direkt. */
+  @property --dk-ink{syntax:'<color>';inherits:true;initial-value:#F4F1EA;}
+  @property --dk-mute{syntax:'<color>';inherits:true;initial-value:#ABA59B;}
+  @property --dk-line{syntax:'<color>';inherits:true;initial-value:rgba(244,241,234,0.1);}
+  @property --dk-surf{syntax:'<color>';inherits:true;initial-value:rgba(244,241,234,0.035);}
+  @property --dk-accent{syntax:'<color>';inherits:true;initial-value:#8AB6FF;}
+  @property --dk-page{syntax:'<color>';inherits:true;initial-value:#1D1C1A;}
+  body.dk-anim{transition:background-color 1.1s cubic-bezier(0.4,0,0.2,1);}
+  html.dk-on body{background:#1D1C1A;}
+  body.dk-anim #kontakt{transition:opacity .9s ease;}
+  html.dk-on #kontakt{opacity:0;}
+  .dk{--dk-ease:cubic-bezier(0.22,1,0.36,1);--dk-ink:#0F172A;--dk-mute:#52657A;--dk-line:rgba(15,23,42,0.1);--dk-surf:rgba(255,255,255,0.4);--dk-accent:#146EF5;--dk-page:#DCEEFF;
+    --dk-full:calc(100vw - var(--sbw,0px));width:var(--dk-full);margin:64px 0 0 calc(50% - var(--dk-full) / 2);padding:120px 0 128px;overflow-x:clip;color:var(--dk-ink);
+    transition:--dk-ink 1.1s ease,--dk-mute 1.1s ease,--dk-line 1.1s ease,--dk-surf 1.1s ease,--dk-accent 1.1s ease,--dk-page 1.1s ease;}
+  html.dk-on .dk,.dk:not(.dk-js){--dk-ink:#F4F1EA;--dk-mute:#ABA59B;--dk-line:rgba(244,241,234,0.1);--dk-surf:rgba(244,241,234,0.035);--dk-accent:#8AB6FF;--dk-page:#1D1C1A;}
+  .dk:not(.dk-js){background:#1D1C1A;}
+  .dk-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
+  .dk-eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dk-accent);margin-bottom:18px;}
+  .dk-h2{font-size:clamp(40px,5.6vw,78px);font-weight:800;line-height:1.02;letter-spacing:-0.04em;margin:0 auto 22px;max-width:14ch;color:var(--dk-ink);text-wrap:balance;}
+  .dk-h2--sm{font-size:clamp(32px,4.2vw,56px);max-width:18ch;letter-spacing:-0.035em;}
+  .dk-h3{font-size:clamp(24px,2.4vw,32px);font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin:0;color:var(--dk-ink);}
+  .dk-lead{font-size:17px;line-height:1.65;font-weight:500;color:var(--dk-mute);max-width:560px;margin:0 auto;}
+
+  /* Scroll-reveal i kapitlet: en gång per element, ingen scroll-kapning */
+  .dk-js [data-dk]{opacity:0;transform:translateY(28px);transition:opacity .9s var(--dk-ease),transform .9s var(--dk-ease);transition-delay:var(--dk-d,0ms);}
+  .dk-js [data-dk].in{opacity:1;transform:none;}
+
+  /* Omdömen */
+  .dk-reviews{text-align:center;}
+  .dk-rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:960px;margin:36px auto 0;text-align:left;}
+  .dk-rev{margin:0;padding:26px 28px;border:1px solid var(--dk-line);border-radius:20px;background:var(--dk-surf);}
+  .dk-rev-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .dk-av{width:34px;height:34px;border-radius:50%;background:#146EF5;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .dk-stars{color:#F5B400;font-size:13px;letter-spacing:2px;}
+  .dk-rev blockquote{margin:0 0 16px;font-size:18px;font-weight:600;line-height:1.45;letter-spacing:-0.01em;color:var(--dk-ink);}
+  .dk-rev figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .dk-rev-name{font-size:14px;font-weight:700;color:var(--dk-ink);}
+  .dk-rev-src{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--dk-mute);text-decoration:none;}
+  .dk-rev-src:hover{color:var(--dk-ink);}
+
+  /* Allt du får med */
+  .dk-intro{text-align:center;margin-top:150px;}
+
+  /* Projektportalen – mörk, ton-i-ton */
+  .dp{max-width:980px;margin:64px auto 0;text-align:left;background:#262421;border:1px solid rgba(244,241,234,0.09);border-radius:24px;box-shadow:0 40px 90px rgba(0,0,0,0.28);overflow:hidden;color:#F4F1EA;}
+  .dp-bar{display:flex;align-items:center;gap:7px;padding:13px 18px;border-bottom:1px solid rgba(244,241,234,0.07);}
+  .dp-bar span{width:9px;height:9px;border-radius:50%;background:rgba(244,241,234,0.16);}
+  .dp-bar em{font-style:normal;margin-left:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#9C968C;}
+  .dp-body{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;padding:18px;}
+  .dp-col{display:flex;flex-direction:column;gap:14px;}
+  .dp-part{background:#2D2B27;border:1px solid rgba(244,241,234,0.07);border-radius:16px;padding:18px;transition:opacity .9s ease,border-color .9s ease;}
+  .dp-phase{flex:1;display:flex;flex-direction:column;}
+  .dp-row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .dp-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#9C968C;margin-bottom:6px;}
+  .dp-row .dp-label{margin-bottom:0;}
+  .dp-row > div .dp-label{margin-bottom:5px;}
+  .dp-title{font-size:26px;font-weight:800;letter-spacing:-0.02em;margin:10px 0 0;}
+  .dp-text{font-size:15px;font-weight:700;line-height:1.4;}
+  .dp-prev{margin-top:16px;border:1px solid rgba(244,241,234,0.08);border-radius:12px;overflow:hidden;background:rgba(244,241,234,0.03);}
+  .dp-prev-bar{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9C968C;padding:7px 10px;border-bottom:1px solid rgba(244,241,234,0.06);}
+  .dp-prev-page{padding:14px 14px 12px;display:flex;flex-direction:column;gap:7px;}
+  .dp-prev-page > i{display:block;height:8px;border-radius:4px;background:rgba(244,241,234,0.16);}
+  .dp-prev-page > i.w60{width:60%;height:11px;background:rgba(244,241,234,0.28);}
+  .dp-prev-page > i.w40{width:40%;}
+  .dp-prev-page b{display:block;width:84px;height:18px;border-radius:999px;background:#146EF5;margin:3px 0 4px;}
+  .dp-prev-page span{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .dp-prev-page span i{height:34px;border-radius:6px;background:rgba(244,241,234,0.07);}
+  .dp-track{display:flex;gap:6px;margin-top:auto;padding-top:22px;}
+  .dp-track i{flex:1;height:6px;border-radius:999px;background:rgba(244,241,234,0.1);}
+  .dp-track i.is-done{background:#146EF5;}
+  .dp-track i.is-active{background:linear-gradient(90deg,#146EF5 0 60%,rgba(20,110,245,0.25) 60% 100%);}
+  .dp-meta{margin-top:10px;font-size:12px;font-weight:700;color:#9C968C;}
+  .dp-pill{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#A9C8FF;background:rgba(20,110,245,0.18);padding:4px 9px;border-radius:999px;transition:opacity .7s ease,transform .7s var(--dk-ease);}
+  .dp-file{display:flex;align-items:center;gap:10px;margin-top:9px;padding:9px 11px;border-radius:10px;background:rgba(244,241,234,0.04);font-size:13px;font-weight:600;color:#D9D4CA;}
+  .dp-file span{width:18px;height:18px;border-radius:5px;background:rgba(138,182,255,0.25);}
+  .dp-file em{font-style:normal;margin-left:auto;font-size:11px;font-weight:700;color:#9C968C;}
+  .dp-comment{display:flex;gap:10px;align-items:flex-start;margin-top:6px;}
+  .dp-av{width:24px;height:24px;border-radius:50%;flex:none;background:linear-gradient(135deg,#E8DCC8,#B59D7C);}
+  .dp-bubble{font-size:13px;font-weight:600;line-height:1.45;color:#EDE8DF;background:rgba(244,241,234,0.05);border-radius:4px 12px 12px 12px;padding:9px 12px;transition:opacity .8s ease,transform .8s var(--dk-ease);}
+  .dp-ok{flex:none;font-size:11px;font-weight:800;color:#9FE0B4;background:rgba(34,197,94,0.14);padding:5px 10px;border-radius:999px;transition:opacity .7s ease,transform .7s var(--dk-ease);}
+  /* Statusdelarna tänds i tur och ordning när portalen kommer in */
+  .dk-js .dp .dp-part{opacity:.45;}
+  .dk-js .dp.in .dp-part{opacity:1;transition-delay:calc(450ms + var(--dp-i,0) * 220ms);}
+  .dk-js .dp .dp-pill,.dk-js .dp .dp-ok{opacity:0;transform:scale(.9);}
+  .dk-js .dp.in .dp-pill,.dk-js .dp.in .dp-ok{opacity:1;transform:none;transition-delay:calc(700ms + var(--dp-i,0) * 220ms);}
+  .dk-js .dp .dp-bubble{opacity:0;transform:translateY(6px);}
+  .dk-js .dp.in .dp-bubble{opacity:1;transform:none;transition-delay:calc(700ms + var(--dp-i,0) * 220ms);}
+
+  /* Fördelarna – lugnt 2x2 med tunna avdelare */
+  .dk-benefits{list-style:none;margin:72px auto 0;padding:0;max-width:980px;display:grid;grid-template-columns:1fr 1fr;text-align:left;border-top:1px solid var(--dk-line);}
+  .dk-benefits li{padding:30px 36px 32px 4px;border-bottom:1px solid var(--dk-line);transition:background-color .4s ease;}
+  .dk-benefits li:nth-child(odd){border-right:1px solid var(--dk-line);}
+  .dk-benefits li:nth-child(even){padding-left:36px;}
+  .dk-benefits li:hover{background:var(--dk-surf);}
+  .dk-benefits h3{font-size:16px;font-weight:800;margin:0 0 8px;color:var(--dk-ink);}
+  .dk-benefits p{font-size:15px;line-height:1.6;margin:0;color:var(--dk-mute);font-weight:500;max-width:40ch;}
+
+  /* Detta ingår – kapslar som glider in från olika håll och lägger sig i en samling */
+  .dk-incl{text-align:center;margin-top:150px;}
+  .dk-pile{list-style:none;margin:48px auto 0;padding:0;max-width:760px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;}
+  .dk-cap{margin:-5px -6px;padding:16px 30px;border-radius:999px;font-size:clamp(17px,1.7vw,22px);font-weight:700;letter-spacing:-0.01em;transform:rotate(var(--r,0deg));box-shadow:0 12px 30px rgba(0,0,0,0.22);}
+  .dk-cap--blue{background:#2F5DA8;color:#F2F6FF;}
+  .dk-cap--sky{background:#BCD6F5;color:#0F2748;}
+  .dk-cap--beige{background:#E6D8C1;color:#3B2E1C;}
+  .dk-cap--sage{background:#C5D4BF;color:#1F3020;}
+  .dk-js .dk-cap{opacity:0;transform:translate(var(--fx,0),var(--fy,0)) rotate(calc(var(--r,0deg) * 4));transition:opacity 1.2s ease,transform 1.7s cubic-bezier(0.16,1,0.3,1);}
+  .dk-js .dk-pile.in .dk-cap{opacity:1;transform:rotate(var(--r,0deg));}
+  .dk-pile .dk-cap:nth-child(2){transition-delay:90ms;}
+  .dk-pile .dk-cap:nth-child(3){transition-delay:180ms;}
+  .dk-pile .dk-cap:nth-child(4){transition-delay:270ms;}
+  .dk-pile .dk-cap:nth-child(5){transition-delay:360ms;}
+  .dk-pile .dk-cap:nth-child(6){transition-delay:450ms;}
+  .dk-pkg{max-width:640px;margin:64px auto 0;text-align:left;}
+  .dk-pkg-h{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dk-mute);margin-bottom:8px;}
+  .dk-pkg ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--dk-line);}
+  .dk-pkg li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--dk-line);font-size:14px;font-weight:600;color:var(--dk-ink);}
+  .dk-pkg-tier{flex:none;font-size:13px;font-weight:600;color:var(--dk-mute);text-align:right;}
+  .dk-pkg-note{font-size:13px;line-height:1.6;color:var(--dk-mute);margin:14px 0 0;font-weight:500;}
+  .dk-pkg-note a{color:var(--dk-accent);font-weight:700;text-decoration:none;}
+  .dk-pkg-note a:hover{text-decoration:underline;}
+
+  /* Processen – kompakt tidslinje */
+  .dk-proc{margin-top:140px;scroll-margin-top:110px;}
+  .dk-proc .dk-h3{text-align:center;margin-bottom:48px;}
+  .dk-tl{--tl-inset:calc(100% / 12);position:relative;}
+  .dk-tl::before,.dk-tl-fill{content:'';position:absolute;top:6px;left:var(--tl-inset);right:var(--tl-inset);height:2px;border-radius:2px;}
+  .dk-tl::before{background:var(--dk-line);}
+  .dk-tl-fill{background:#146EF5;transform-origin:left center;transform:scaleX(var(--tl-p,1));transition:transform .6s var(--dk-ease);}
+  .dk-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:0 12px;position:relative;}
+  .dk-step{display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .dk-dot{width:14px;height:14px;border-radius:50%;box-sizing:border-box;background:var(--dk-page);border:2px solid #146EF5;margin-bottom:18px;transition:background-color .4s ease,box-shadow .4s ease,border-color .4s ease;}
+  .dk-num{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--dk-mute);margin-bottom:6px;transition:color .4s ease;}
+  .dk-name{font-size:15px;font-weight:800;color:var(--dk-ink);margin-bottom:4px;transition:color .4s ease;}
+  .dk-desc{font-size:13px;line-height:1.45;color:var(--dk-mute);font-weight:500;max-width:150px;}
+  .dk-step.is-done .dk-dot{background:#146EF5;}
+  .dk-step.is-current .dk-dot{background:#146EF5;box-shadow:0 0 0 6px rgba(20,110,245,0.25);}
+  .dk-step.is-current .dk-name,.dk-step.is-current .dk-num{color:var(--dk-accent);}
+  .dk-tl-js .dk-step:not(.is-done):not(.is-current) .dk-dot{border-color:var(--dk-line);}
+
+  @media (max-width:900px){
+    .dk{padding:96px 0 104px;}
+    .dk-intro,.dk-incl{margin-top:112px;}
+    .dk-proc{margin-top:104px;}
+    .dp-body{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .dk-inner{padding:0 16px;}
+    .dk-rev-grid{grid-template-columns:1fr;}
+    .dk-benefits{grid-template-columns:1fr;margin-top:48px;}
+    .dk-benefits li,.dk-benefits li:nth-child(even){padding:22px 4px;border-right:0;}
+    .dk-benefits li:nth-child(odd){border-right:0;}
+    .dp{margin-top:44px;border-radius:20px;}
+    .dp-prev{display:none;}
+    .dp-body{padding:12px;gap:10px;}
+    .dp-col{gap:10px;}
+    .dk-cap{padding:12px 20px;margin:-4px -4px;}
+    .dk-pkg li{flex-direction:column;gap:2px;}
+    .dk-pkg-tier{text-align:left;}
+    .dk-proc .dk-h3{text-align:left;margin-bottom:28px;}
+    .dk-tl::before,.dk-tl-fill{top:7px;bottom:7px;left:6px;right:auto;width:2px;height:auto;}
+    .dk-tl-fill{transform-origin:center top;transform:scaleY(var(--tl-p,1));}
+    .dk-steps{grid-template-columns:1fr;gap:22px;}
+    .dk-step{display:grid;grid-template-columns:14px auto 1fr;column-gap:14px;align-items:baseline;text-align:left;}
+    .dk-dot{grid-row:1 / span 2;align-self:start;margin:2px 0 0;}
+    .dk-num,.dk-name{margin:0;}
+    .dk-desc{grid-column:2 / span 2;max-width:none;}
+  }
 
   /* Scroll-reveal */
   [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1);}
@@ -655,6 +792,9 @@
     .ind{margin-top:80px;--ind-w:86%;--ind-gap:8px;}
     .ind-h2{font-size:28px;}
     .ind-card{aspect-ratio:auto;height:min(520px,calc(100svh - 140px));min-height:460px;border-radius:26px;}
+    /* Stående beskärning: ansiktena ligger långt till höger i fotograf- och restaurangbilden */
+    .ind-card--fotograf .ind-bg{object-position:74% 38%!important;}
+    .ind-card--restaurang .ind-bg{object-position:70% 36%!important;}
     .ind-shade{background:linear-gradient(0deg,rgba(9,14,28,.92) 0%,rgba(9,14,28,.78) 40%,rgba(9,14,28,.15) 66%,rgba(9,14,28,0) 78%);}
     .ind-row{left:18px;right:18px;bottom:18px;flex-direction:column;align-items:stretch;gap:16px;}
     .ind-devices{flex:none;width:64%;align-self:center;}
@@ -683,8 +823,6 @@
     [data-rhide]{display:none!important;}
     [data-rshow]{display:block!important;}
     [data-rcta-h2]{font-size:24px!important;}
-    [data-rproc-head]{text-align:left!important;margin-bottom:24px!important;}
-    [data-rproc-head] p{font-size:13px!important;}
     [data-rcasewrap]{min-height:620px!important;}
     .faq-q-btn{max-width:88%!important;}
     .faq-ans > div{max-width:88%!important;}
@@ -985,16 +1123,23 @@
     <h1 data-rhero-h1 class="hero-h1" style="opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">Hemsidor som blir <span class="hw hw-1" data-w="hittade,">hittade,</span> <span class="hw hw-2" data-w="förstådda">förstådda</span> och <span class="hw hw-3" data-w="valda.">valda.</span></h1>
     <p class="hero-lead" style="opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;">Vi hjälper småföretag att skapa en professionell närvaro som bygger förtroende och gör det enkelt för rätt kunder att boka, köpa eller ta kontakt.</p>
     <div class="hero-form" style="opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.32s forwards;">
+      <span class="wz-sentinel wz-sentinel--show" id="wz-dock-show" aria-hidden="true"></span>
+      <span class="wz-sentinel wz-sentinel--hide" id="wz-dock-hide" aria-hidden="true"></span>
       <div class="wz-shell" data-wz-mount="hero"></div>
-      <ul class="wz-perks">
-        <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Anpassat efter ditt företag</li>
-        <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Personlig återkoppling</li>
+      <ul class="wz-perks hero-perks">
         <li><a class="wz-rating" href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" aria-label="Betyg 5,0 av 5 på Google – öppnar våra omdömen i en ny flik"><span class="wz-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></span>5,0 på Google</a></li>
+        <li>Anpassat efter ditt företag</li>
+        <li>Personlig återkoppling</li>
       </ul>
     </div>
   </div>
 
-  <!-- BRANSCHER (horisontell karusell med scroll snap). Bakgrundsfoto för salong: Pexels (fri licens) – foto 7750099. -->
+  <!-- Flytande kompakt formulärrad: samma formulärkomponent (steg, validering, inskickning) som hero och kontakt. -->
+  <aside class="wz-dock" id="wz-dock" aria-label="Få konkreta idéer för din hemsida">
+    <div class="wz-shell" data-wz-mount="dock"></div>
+  </aside>
+
+  <!-- BRANSCHER (horisontell karusell med scroll snap). -->
   <section id="branscher" class="ind" aria-labelledby="ind-title">
     <div class="ind-head" data-reveal>
       <div class="ind-eyebrow">HEMSIDOR FÖR SMÅFÖRETAG</div>
@@ -1022,7 +1167,7 @@
         </li>
         <li class="ind-item">
           <a class="ind-card ind-card--salong" href="/hemsida-skonhetssalong-stockholm">
-            <img class="ind-bg" src="/branscher/salong-1920.webp" srcset="/branscher/salong-960.webp 960w, /branscher/salong-1920.webp 1920w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:50% 55%;">
+            <img class="ind-bg" src="/branscher/salong-salon-1672.webp" srcset="/branscher/salong-salon-960.webp 960w, /branscher/salong-salon-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 38%;">
             <span class="ind-shade" aria-hidden="true"></span>
             <span class="ind-row">
               <span class="ind-devices">
@@ -1041,7 +1186,7 @@
         </li>
         <li class="ind-item">
           <a class="ind-card ind-card--restaurang" href="/hemsida-restaurang-stockholm">
-            <img class="ind-bg" src="/branscher/restaurang-1920.webp" srcset="/branscher/restaurang-960.webp 960w, /branscher/restaurang-1920.webp 1920w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:50% 62%;">
+            <img class="ind-bg" src="/branscher/restaurang-waiter-1640.webp" srcset="/branscher/restaurang-waiter-960.webp 960w, /branscher/restaurang-waiter-1640.webp 1640w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 36%;">
             <span class="ind-shade" aria-hidden="true"></span>
             <span class="ind-row">
               <span class="ind-devices">
@@ -1076,7 +1221,7 @@
         </li>
         <li class="ind-item">
           <a class="ind-card ind-card--fotograf" href="/hemsida-fotograf">
-            <img class="ind-bg" src="/branscher/fotograf-1920.webp" srcset="/branscher/fotograf-960.webp 960w, /branscher/fotograf-1920.webp 1920w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:50% 28%;">
+            <img class="ind-bg" src="/branscher/fotograf-studio-1672.webp" srcset="/branscher/fotograf-studio-960.webp 960w, /branscher/fotograf-studio-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:58% 38%;">
             <span class="ind-shade" aria-hidden="true"></span>
             <span class="ind-row">
               <span class="ind-devices">
@@ -1305,233 +1450,118 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <div id="referenser" style="max-width:1140px;margin:56px auto 0;padding:0 20px;">
-    <div style="text-align:center;margin-bottom:24px;">
-      <div style="font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Omdömen</div>
-      <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0;">Vad kunderna säger</h2>
-    </div>
-    <div data-reveal data-rgrid style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-      <div data-rrow data-rgap style="display:flex;align-items:center;gap:18px;background:rgba(255,255,255,0.55);border-radius:16px;padding:22px 28px;box-shadow:0 4px 16px rgba(15,23,42,0.04);text-align:left;">
-        <div style="width:42px;height:42px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex:none;">J</div>
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px;">
-            <span style="color:#F5B400;font-size:13px;letter-spacing:1px;line-height:1;">★★★★★</span>
-            <span style="font-size:13px;font-weight:700;color:#0F172A;">Johan Larsson</span>
-          </div>
-          <p style="font-size:14px;font-weight:600;color:#0F172A;line-height:1.5;margin:0 0 6px;">"Snabb och prisvärd upplevelse! Jättenöjd med min sida."</p>
-          <a href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#8FA6C2;text-decoration:none;">
-            <svg width="13" height="13" viewBox="0 0 48 48" style="flex:none;"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
-            Google-recension
-          </a>
+  <!-- MÖRKT KAPITEL: omdömen, allt du får med, portal, fördelar, innehåll och process.
+       Hela sidans bakgrund tonar till mörkt medan kapitlet fyller skärmen (html.dk-on, sätts i JS). -->
+  <div class="dk" id="dk">
+    <div class="dk-inner">
+
+      <!-- Omdömen (autentiska Google-omdömen) -->
+      <section id="referenser" class="dk-reviews" aria-labelledby="dk-rev-title">
+        <div class="dk-eyebrow" data-dk>Omdömen</div>
+        <h2 id="dk-rev-title" class="dk-h3" data-dk>Vad kunderna säger</h2>
+        <div class="dk-rev-grid">
+          <figure class="dk-rev" data-dk>
+            <div class="dk-rev-top"><span class="dk-av" aria-hidden="true">J</span><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span></div>
+            <blockquote>"Snabb och prisvärd upplevelse! Jättenöjd med min sida."</blockquote>
+            <figcaption><span class="dk-rev-name">Johan Larsson</span><a href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" class="dk-rev-src"><svg width="13" height="13" viewBox="0 0 48 48" style="flex:none;"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg> Google-recension</a></figcaption>
+          </figure>
+          <figure class="dk-rev" data-dk>
+            <div class="dk-rev-top"><span class="dk-av" aria-hidden="true">A</span><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span></div>
+            <blockquote>"Jätte bra service och rimligt pris!"</blockquote>
+            <figcaption><span class="dk-rev-name">Arian Ghasemi</span><a href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" class="dk-rev-src"><svg width="13" height="13" viewBox="0 0 48 48" style="flex:none;"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg> Google-recension</a></figcaption>
+          </figure>
         </div>
-      </div>
-      <div data-rrow data-rgap style="display:flex;align-items:center;gap:18px;background:rgba(255,255,255,0.55);border-radius:16px;padding:22px 28px;box-shadow:0 4px 16px rgba(15,23,42,0.04);text-align:left;">
-        <div style="width:42px;height:42px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex:none;">A</div>
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px;">
-            <span style="color:#F5B400;font-size:13px;letter-spacing:1px;line-height:1;">★★★★★</span>
-            <span style="font-size:13px;font-weight:700;color:#0F172A;">Arian Ghasemi</span>
+      </section>
+
+      <!-- Allt du får med -->
+      <section id="projektportal" class="dk-intro" aria-labelledby="dk-title">
+        <div class="dk-eyebrow" data-dk>Allt du får med</div>
+        <h2 id="dk-title" class="dk-h2" data-dk>Mer än en färdig hemsida.</h2>
+        <p class="dk-lead" data-dk>Från första idé till lansering får du en tydlig process, en personlig projektportal och allt samlat på ett ställe.</p>
+
+        <!-- Projektportalen: ett sammanhängande gränssnitt -->
+        <div class="dp" data-dk role="img" aria-label="Illustration av projektportalen: aktuell fas Utveckling (steg 4 av 6), nästa steg, nytt uppladdat material, en kommentar på startsidan och en godkänd design.">
+          <div class="dp-bar" aria-hidden="true"><span></span><span></span><span></span><em>Projektportal</em></div>
+          <div class="dp-body" aria-hidden="true">
+            <div class="dp-col">
+              <div class="dp-part dp-phase" data-dp>
+                <div class="dp-row"><div class="dp-label">Aktuell fas</div><span class="dp-pill">Pågår</span></div>
+                <div class="dp-title">Utveckling</div>
+                <div class="dp-prev"><div class="dp-prev-bar">Senaste versionen</div><div class="dp-prev-page"><i class="w60"></i><i class="w40"></i><b></b><span><i></i><i></i><i></i></span></div></div>
+                <div class="dp-track"><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i class="is-active"></i><i></i><i></i></div>
+                <div class="dp-meta">Steg 4 av 6</div>
+              </div>
+              <div class="dp-part" data-dp>
+                <div class="dp-label">Nästa steg</div>
+                <div class="dp-text">Granska utkast av startsidan</div>
+              </div>
+            </div>
+            <div class="dp-col">
+              <div class="dp-part" data-dp>
+                <div class="dp-row"><div class="dp-label">Material</div><span class="dp-pill">Nytt</span></div>
+                <div class="dp-file"><span></span>Bilder<em>12 filer</em></div>
+                <div class="dp-file"><span></span>Texter<em>Uppladdat</em></div>
+              </div>
+              <div class="dp-part" data-dp>
+                <div class="dp-label">Feedback · Startsidan</div>
+                <div class="dp-comment"><span class="dp-av"></span><span class="dp-bubble">Kan vi lyfta fram bokningsknappen lite mer?</span></div>
+              </div>
+              <div class="dp-part" data-dp>
+                <div class="dp-row"><div><div class="dp-label">Godkännande</div><div class="dp-text">Design</div></div><span class="dp-ok">✓ Godkänd</span></div>
+              </div>
+            </div>
           </div>
-          <p style="font-size:14px;font-weight:600;color:#0F172A;line-height:1.5;margin:0 0 6px;">"Jätte bra service och rimligt pris!"</p>
-          <a href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#8FA6C2;text-decoration:none;">
-            <svg width="13" height="13" viewBox="0 0 48 48" style="flex:none;"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
-            Google-recension
-          </a>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- PROJEKTPORTAL + PROCESS (sammanhängande avsnitt) -->
-  <div id="processen" style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+        <!-- Fördelarna -->
+        <ul class="dk-benefits">
+          <li data-dk><h3>Personlig projektportal</h3><p>Följ aktuell fas, nästa steg och den senaste versionen av din hemsida.</p></li>
+          <li data-dk><h3>Tydlig process</h3><p>Du vet alltid vad som händer nu och vad som behöver göras härnäst.</p></li>
+          <li data-dk><h3>Feedback på ett ställe</h3><p>Material, kommentarer och godkännanden samlas utan långa mejltrådar.</p></li>
+          <li data-dk><h3>Stöd fram till lansering</h3><p>Vi håller ihop projektet och hjälper dig hela vägen fram till en färdig hemsida.</p></li>
+        </ul>
+      </section>
 
-    <!-- Portalen -->
-    <section id="projektportal" aria-labelledby="pp-title" style="scroll-margin-top:110px;">
-      <div data-reveal data-rgrid data-rgap style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
-
-        <div>
-          <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Din projektportal</div>
-          <h2 id="pp-title" data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 14px;line-height:1.3;">Full koll från projektstart till lansering</h2>
-          <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 28px;font-weight:500;">När projektet startar får du tillgång till en personlig projektportal. Där kan du följa arbetet, se den senaste versionen av hemsidan och ha material, godkännanden och dokument samlade på ett ställe.</p>
-          <ul class="pp-benefits">
-            <li class="pp-benefit"><span class="pp-benefit-ic" aria-hidden="true">✓</span>Se aktuell fas och nästa steg</li>
-            <li class="pp-benefit"><span class="pp-benefit-ic" aria-hidden="true">✓</span>Följ hemsidan medan den utvecklas</li>
-            <li class="pp-benefit"><span class="pp-benefit-ic" aria-hidden="true">✓</span>Ladda upp material och projektdokument</li>
-            <li class="pp-benefit"><span class="pp-benefit-ic" aria-hidden="true">✓</span>Granska och godkänn på ett ställe</li>
+      <!-- Detta ingår i ditt projekt -->
+      <section class="dk-incl" aria-labelledby="dk-incl-title">
+        <div class="dk-eyebrow" data-dk>Detta ingår i ditt projekt</div>
+        <h2 id="dk-incl-title" class="dk-h2 dk-h2--sm" data-dk>Det du behöver – samlat i ett projekt.</h2>
+        <p class="dk-lead" data-dk>Design, teknik och en tydlig process utan onödigt många verktyg eller kontaktvägar.</p>
+        <ul class="dk-pile" aria-label="Ingår i alla upplägg">
+          <li class="dk-cap dk-cap--blue" style="--fx:-220px;--fy:-60px;--r:-5deg;">Unik design</li>
+          <li class="dk-cap dk-cap--beige" style="--fx:0px;--fy:-140px;--r:3deg;">Mobilanpassning</li>
+          <li class="dk-cap dk-cap--sky" style="--fx:240px;--fy:-40px;--r:-2deg;">Grundläggande SEO</li>
+          <li class="dk-cap dk-cap--sage" style="--fx:-260px;--fy:90px;--r:4deg;">Projektportal</li>
+          <li class="dk-cap dk-cap--sky" style="--fx:60px;--fy:150px;--r:-4deg;">Publicering</li>
+          <li class="dk-cap dk-cap--beige" style="--fx:260px;--fy:110px;--r:2deg;">Löpande avstämningar</li>
+        </ul>
+        <div class="dk-pkg" data-dk>
+          <div class="dk-pkg-h">Beroende på upplägg</div>
+          <ul>
+            <li><span>Kontaktformulär</span><span class="dk-pkg-tier">Professionell, Komplett närvaro</span></li>
+            <li><span>Domänkoppling</span><span class="dk-pkg-tier">Professionell, Komplett närvaro</span></li>
+            <li><span>Google Företagsprofil och Analytics</span><span class="dk-pkg-tier">Professionell, Komplett närvaro</span></li>
+            <li><span>Lokal SEO-start och professionell mejladress</span><span class="dk-pkg-tier">Komplett närvaro</span></li>
           </ul>
+          <p class="dk-pkg-note">Domän, mejl och andra externa tjänster betalas separat. <a href="/priser">Jämför uppläggen</a></p>
         </div>
+      </section>
 
-        <!-- Statisk illustration av portalen (exempeldata) -->
-        <div class="pp-mock" role="img" aria-label="Illustration av projektportalen: aktuell fas Utveckling, steg 4 av 6, processteg, nästa steg och uppladdat material.">
-          <div class="pp-bar" aria-hidden="true">
-            <span class="pp-bar-dot" style="background:#EF4444;"></span>
-            <span class="pp-bar-dot" style="background:#F59E0B;"></span>
-            <span class="pp-bar-dot" style="background:#22C55E;"></span>
-            <span class="pp-bar-label">PROJEKTPORTAL</span>
-          </div>
-          <div class="pp-body" aria-hidden="true">
-
-            <div class="pp-card">
-              <div class="pp-eyebrow">Aktuell fas</div>
-              <div class="pp-phase">Utveckling</div>
-              <div class="pp-track">
-                <span class="pp-seg is-done"></span>
-                <span class="pp-seg is-done"></span>
-                <span class="pp-seg is-done"></span>
-                <span class="pp-seg is-active"></span>
-                <span class="pp-seg"></span>
-                <span class="pp-seg"></span>
-              </div>
-              <div class="pp-meta">Steg 4 av 6</div>
-            </div>
-
-            <div class="pp-card">
-              <div class="pp-steps">
-                <div class="pp-step is-done"><span class="pp-mark">✓</span>Projektstart</div>
-                <div class="pp-step is-done"><span class="pp-mark">✓</span>Material</div>
-                <div class="pp-step is-done"><span class="pp-mark">✓</span>Design</div>
-                <div class="pp-step is-active"><span class="pp-mark"></span>Utveckling<span class="pp-pill">Pågår</span></div>
-                <div class="pp-step"><span class="pp-mark"></span>Granskning</div>
-                <div class="pp-step"><span class="pp-mark"></span>Lansering</div>
-              </div>
-            </div>
-
-            <div class="pp-card">
-              <div class="pp-eyebrow">Nästa steg</div>
-              <div class="pp-next">Granska utkast av startsidan</div>
-            </div>
-
-            <div class="pp-card">
-              <div class="pp-eyebrow">Material</div>
-              <div class="pp-files">
-                <div class="pp-file"><span class="pp-file-ic"></span>Bilder<span class="pp-file-meta">12 filer</span></div>
-                <div class="pp-file"><span class="pp-file-ic"></span>Texter<span class="pp-file-meta">Uppladdat</span></div>
-              </div>
-            </div>
-
-          </div>
+      <!-- Processen -->
+      <section id="processen" class="dk-proc" aria-labelledby="dk-proc-title">
+        <h2 id="dk-proc-title" class="dk-h3" data-dk>Från idé till färdig hemsida</h2>
+        <div class="dk-tl" data-dk>
+          <span class="dk-tl-fill" aria-hidden="true"></span>
+          <ol class="dk-steps">
+            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">01</span><span class="dk-name">Projektstart</span><span class="dk-desc">Vi lär känna företaget</span></li>
+            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">02</span><span class="dk-name">Material</span><span class="dk-desc">Samla innehåll och inspiration</span></li>
+            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">03</span><span class="dk-name">Design</span><span class="dk-desc">Vi sätter det visuella uttrycket</span></li>
+            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">04</span><span class="dk-name">Utveckling</span><span class="dk-desc">Hemsidan tar form</span></li>
+            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">05</span><span class="dk-name">Granskning</span><span class="dk-desc">Vi finslipar tillsammans</span></li>
+            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">06</span><span class="dk-name">Lansering</span><span class="dk-desc">Dags att gå live</span></li>
+          </ol>
         </div>
-
-      </div>
-    </section>
-
-    <!-- Övergång portal → process -->
-    <div data-reveal class="pp-bridge">
-      <span class="pp-bridge-line" aria-hidden="true"></span>
-      <p class="pp-bridge-text">Portalen följer samma tydliga process – från projektstart till lansering.</p>
-      <span class="pp-bridge-line" aria-hidden="true"></span>
-      <span class="pp-bridge-arrow" aria-hidden="true">↓</span>
-    </div>
-
-    <!-- Processen -->
-    <div data-rproc-head style="text-align:center;margin-bottom:56px;">
-      <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Från idé till färdig hemsida</h2>
-      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Du följer varje steg i portalen och ser alltid vad som är klart, vad som pågår och vad som händer härnäst.</p>
-    </div>
-
-    <!-- Mobil: vertikal tidslinje -->
-    <div data-rshow style="display:none;">
-      <div class="proc-m-track">
-        <div class="proc-m-line-base"></div>
-        <div class="proc-m-line-progress"></div>
-        <div data-reveal class="proc-m-step">
-          <div class="proc-m-dot"></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">01 — Projektstart</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi lär känna företaget</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi går igenom verksamheten, målen och vad hemsidan behöver göra.</div>
-        </div>
-        <div data-reveal class="proc-m-step">
-          <div class="proc-m-dot"></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">02 — Material</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Samla innehåll och inspiration</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Du laddar upp bilder, texter, logotyp och inspiration direkt i projektportalen.</div>
-        </div>
-        <div data-reveal class="proc-m-step">
-          <div class="proc-m-dot"></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">03 — Design</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi sätter det visuella uttrycket</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi tar fram sidans struktur och design utifrån företaget, innehållet och målgruppen.</div>
-        </div>
-        <div data-reveal class="proc-m-step">
-          <div class="proc-m-dot"></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">04 — Utveckling</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Hemsidan tar form</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Vi bygger hemsidan och du kan följa utvecklingen medan arbetet pågår.</div>
-        </div>
-        <div data-reveal class="proc-m-step">
-          <div class="proc-m-dot"></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">05 — Granskning</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Vi finslipar tillsammans</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">Du granskar resultatet, lämnar feedback och godkänner nästa steg i portalen.</div>
-        </div>
-        <div data-reveal class="proc-m-step">
-          <div class="proc-m-dot proc-m-end"><span class="proc-check">✓</span></div>
-          <div style="font-size:11px;font-weight:800;color:#146EF5;letter-spacing:.03em;margin-bottom:4px;">06 — Lansering</div>
-          <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:4px;">Dags att gå live</div>
-          <div style="font-size:13px;color:#52657A;line-height:1.5;">När allt känns rätt gör vi slutkontrollen, kopplar domänen och publicerar hemsidan.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Desktop: sicksack-resa med prickad kopplingslinje -->
-    <div data-rhide class="proc-track">
-      <div class="proc-line-base"></div>
-      <div class="proc-line-progress"></div>
-
-      <div data-reveal class="proc-row proc-l">
-        <div class="proc-dot"></div>
-        <div class="proc-card" style="background:linear-gradient(160deg,#EAF6EE,#E2F1E7);">
-          <div class="proc-eyebrow">01 — Projektstart</div>
-          <div class="proc-title">Vi lär känna företaget</div>
-          <p class="proc-desc">Vi går igenom verksamheten, målen och vad hemsidan behöver göra.</p>
-        </div>
-      </div>
-
-      <div data-reveal class="proc-row proc-r" style="margin-top:-16px;">
-        <div class="proc-dot"></div>
-        <div class="proc-card" style="background:linear-gradient(160deg,#FBF3E1,#F6ECD8);">
-          <div class="proc-eyebrow">02 — Material</div>
-          <div class="proc-title">Samla innehåll och inspiration</div>
-          <p class="proc-desc">Du laddar upp bilder, texter, logotyp och inspiration direkt i projektportalen.</p>
-        </div>
-      </div>
-
-      <div data-reveal class="proc-row proc-l" style="margin-top:8px;">
-        <div class="proc-dot"></div>
-        <div class="proc-card proc-card-lg" style="background:linear-gradient(160deg,#EDF3FC,#E4ECF9);">
-          <div class="proc-eyebrow">03 — Design</div>
-          <div class="proc-title proc-title-lg">Vi sätter det visuella uttrycket</div>
-          <p class="proc-desc">Vi tar fram sidans struktur och design utifrån företaget, innehållet och målgruppen.</p>
-        </div>
-      </div>
-
-      <div data-reveal class="proc-row proc-r" style="margin-top:-16px;">
-        <div class="proc-dot"></div>
-        <div class="proc-card" style="background:linear-gradient(160deg,#EFEFF6,#E6E8F2);">
-          <div class="proc-eyebrow">04 — Utveckling</div>
-          <div class="proc-title">Hemsidan tar form</div>
-          <p class="proc-desc">Vi bygger hemsidan och du kan följa utvecklingen medan arbetet pågår.</p>
-        </div>
-      </div>
-
-      <div data-reveal class="proc-row proc-l" style="margin-top:8px;">
-        <div class="proc-dot"></div>
-        <div class="proc-card" style="background:linear-gradient(160deg,#F2EEF9,#E9E3F4);">
-          <div class="proc-eyebrow">05 — Granskning</div>
-          <div class="proc-title">Vi finslipar tillsammans</div>
-          <p class="proc-desc">Du granskar resultatet, lämnar feedback och godkänner nästa steg i portalen.</p>
-        </div>
-      </div>
-
-      <div data-reveal class="proc-row proc-r" style="margin-top:-16px;">
-        <div class="proc-dot proc-dot-end"><span class="proc-check">✓</span></div>
-        <div class="proc-card" style="background:linear-gradient(160deg,#EAF4FF,#DCEEFF);">
-          <div class="proc-eyebrow">06 — Lansering</div>
-          <div class="proc-title">Dags att gå live</div>
-          <p class="proc-desc">När allt känns rätt gör vi slutkontrollen, kopplar domänen och publicerar hemsidan.</p>
-        </div>
-      </div>
+      </section>
 
     </div>
   </div>
@@ -1545,10 +1575,10 @@
     </div>
 
     <div data-reveal class="wz-shell" data-wz-mount="kontakt"></div>
-    <ul class="wz-perks" data-reveal>
-      <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Anpassat efter ditt företag</li>
-      <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Personlig återkoppling</li>
-      <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Du väljer själv om du vill gå vidare</li>
+    <ul class="wz-perks hero-perks" data-reveal>
+      <li><a class="wz-rating" href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" aria-label="Betyg 5,0 av 5 på Google – öppnar våra omdömen i en ny flik"><span class="wz-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></span>5,0 på Google</a></li>
+      <li>Anpassat efter ditt företag</li>
+      <li>Personlig återkoppling</li>
     </ul>
   </div>
 
@@ -1871,82 +1901,86 @@
     setTimeout(function () { revealEls.forEach(function (el) { el.classList.add('is-visible'); }); }, 1800);
   }
 
-  /* ---------- Process-tidslinje: scroll-driven progress ---------- */
+  /* ---------- Mörkt kapitel: sidans bakgrund, reveal, portalens statusdelar och tidslinjen ---------- */
   (function () {
-    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dk = document.getElementById('dk');
+    if (!dk) return;
+    var root = document.documentElement;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var horizontal = window.matchMedia('(min-width: 761px)');
+    var tl = dk.querySelector('.dk-tl');
+    var steps = Array.prototype.slice.call(dk.querySelectorAll('.dk-step'));
+    var dots = steps.map(function (s) { return s.querySelector('.dk-dot'); });
+    // Ordning för portalens delar: fas, nästa steg, material, feedback, godkännande
+    Array.prototype.slice.call(dk.querySelectorAll('[data-dp]')).forEach(function (el, i) { el.style.setProperty('--dp-i', i); });
 
-    function buildTrack(trackEl, lineEl, rowSelector, dotTopOffset, transformPrefix) {
-      if (!trackEl || !lineEl) return null;
-      return {
-        track: trackEl,
-        line: lineEl,
-        rows: Array.prototype.slice.call(trackEl.querySelectorAll(rowSelector)),
-        dotTopOffset: dotTopOffset,
-        transformPrefix: transformPrefix,
-        nodeFractions: []
-      };
+    function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+    // Reveal: varje element tonar in en gång när det når viewporten; element som kommer in samtidigt staggas
+    var revealEls = Array.prototype.slice.call(dk.querySelectorAll('[data-dk], .dk-pile'));
+    var io = null;
+    function showAll() { revealEls.forEach(function (el) { el.classList.add('in'); }); }
+    function setMode() {
+      var still = reduceMotion.matches || !('IntersectionObserver' in window);
+      dk.classList.toggle('dk-js', !still);
+      document.body.classList.toggle('dk-anim', !still);
+      if (still) { if (io) io.disconnect(); showAll(); root.classList.remove('dk-on'); }
+      else if (!io) {
+        io = new IntersectionObserver(function (entries) {
+          var n = 0;
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            e.target.style.setProperty('--dk-d', (n++ * 80) + 'ms');
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        revealEls.forEach(function (el) { if (!el.classList.contains('in')) io.observe(el); });
+      }
     }
+    setMode();
 
-    var tracks = [
-      buildTrack(document.querySelector('.proc-track'), document.querySelector('.proc-line-progress'), '.proc-row', 34, 'translateX(-50%) '),
-      buildTrack(document.querySelector('.proc-m-track'), document.querySelector('.proc-m-line-progress'), '.proc-m-step', 2, '')
-    ].filter(Boolean);
-
-    if (!tracks.length) return;
-
-    if (reduceMotion) {
-      tracks.forEach(function (t) {
-        t.rows.forEach(function (row) { row.classList.add('is-active'); });
-      });
-      return;
-    }
-
-    function measure() {
-      tracks.forEach(function (t) {
-        var trackHeight = t.track.offsetHeight || 1;
-        t.nodeFractions = t.rows.map(function (row) {
-          var y = row.offsetTop + t.dotTopOffset;
-          return Math.max(0, Math.min(1, y / trackHeight));
-        });
-      });
-    }
-    measure();
-
-    var ticking = false;
     function update() {
       ticking = false;
-      var progresses = tracks.map(function (t) {
-        var rect = t.track.getBoundingClientRect();
-        var vh = window.innerHeight;
-        var startY = vh * 0.85;
-        var endY = vh * 0.55;
-        var denom = rect.height + startY - endY;
-        var p = denom > 0 ? (startY - rect.top) / denom : 0;
-        return Math.max(0, Math.min(1, p));
-      });
-      tracks.forEach(function (t, idx) {
-        var progress = progresses[idx];
-        t.line.style.transform = t.transformPrefix + 'scaleY(' + progress.toFixed(4) + ')';
-        t.rows.forEach(function (row, i) {
-          var active = progress >= (t.nodeFractions[i] - 0.015);
-          row.classList.toggle('is-active', active);
-        });
+      var vh = window.innerHeight;
+      var still = reduceMotion.matches;
+
+      // Hela sidan blir mörk medan kapitlet täcker mitten av skärmen (båda riktningarna).
+      // CTA:n under är dold i mörkt läge och tonar in i takt med att sidan ljusnar igen.
+      if (!still) {
+        var r = dk.getBoundingClientRect();
+        root.classList.toggle('dk-on', r.top < vh * 0.55 && r.bottom > vh * 0.5);
+      }
+
+      // Tidslinjen: stegen aktiveras successivt, aktuellt steg i blått
+      var fill, reached;
+      if (still) {
+        fill = 1; reached = steps.length;
+      } else if (horizontal.matches) {
+        var lr = tl.getBoundingClientRect();
+        fill = clamp((vh * 0.85 - lr.top) / (vh * 0.4));
+        reached = lr.top < vh * 0.85 ? Math.min(steps.length, Math.floor(fill * (steps.length - 1) + 0.02) + 1) : 0;
+      } else {
+        var line = vh * 0.7;
+        reached = 0;
+        dots.forEach(function (d) { if (d.getBoundingClientRect().top < line) reached++; });
+        var a = dots[0].getBoundingClientRect().top, b = dots[dots.length - 1].getBoundingClientRect().top;
+        fill = clamp((line - a) / Math.max(1, b - a));
+      }
+      tl.classList.add('dk-tl-js');
+      tl.style.setProperty('--tl-p', fill.toFixed(4));
+      steps.forEach(function (s, i) {
+        s.classList.toggle('is-done', i < reached - 1);
+        s.classList.toggle('is-current', i === reached - 1);
       });
     }
-    function onScroll() {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }
+
+    var ticking = false;
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function () { measure(); onScroll(); }, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', function () { setMode(); update(); });
     update();
-    // Fail-safe: ensure steps are visible even if something prevents scroll updates.
-    setTimeout(function () {
-      tracks.forEach(function (t) {
-        if (!t.rows.some(function (row) { return row.classList.contains('is-active'); })) {
-          onScroll();
-        }
-      });
-    }, 2000);
   })();
 
   /* ---------- FAQ accordion (tillgänglig) ---------- */
@@ -2269,6 +2303,55 @@
   }
 
   document.querySelectorAll('[data-wz-mount]').forEach(mountLeadForm);
+
+  /* ---------- Flytande kompakt formulärrad (dock) ----------
+     Visas när hero-formuläret tydligt har passerats och döljs när en tydlig del av det syns igen
+     (två sentinels = hysteresis, inga scroll-event). Kompakt enradsläge; expanderar uppåt vid fokus. */
+  var dock = document.getElementById('wz-dock');
+  var dockShowS = document.getElementById('wz-dock-show');
+  var dockHideS = document.getElementById('wz-dock-hide');
+  if (dock && dockShowS && dockHideS && 'IntersectionObserver' in window) (function () {
+    var msg = document.getElementById('wz-f-message-dock');
+    var card = document.getElementById('wz-card-dock');
+    var passed = false, heroVisible = true;
+    function focusInside() { return dock.contains(document.activeElement); }
+    function setShown(on) {
+      // Dölj aldrig raden mitt i en inmatning – vänta tills fokus lämnat den.
+      if (!on && focusInside()) return;
+      dock.classList.toggle('is-shown', on);
+    }
+    function evaluate() { setShown(passed && !heroVisible); }
+    // Visa: först när sentinelen 80 px under hero-formuläret har lämnat skärmens överkant.
+    new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      if (!e.isIntersecting && e.boundingClientRect.top < 0) { passed = true; evaluate(); }
+    }).observe(dockShowS);
+    // Dölj: först när sentinelen inne i hero-formuläret syns igen (eller om man är ovanför det).
+    // Mellan de två sentinelerna behåller raden sitt läge – ingen flimmer vid tröskeln.
+    new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      heroVisible = e.isIntersecting;
+      if (e.isIntersecting || e.boundingClientRect.top > 0) passed = false;
+      evaluate();
+    }).observe(dockHideS);
+
+    // Öppet läge: vid fokus, när fältet har text, i steg 2 och efter inskickning. Text bevaras alltid.
+    function syncOpen() {
+      var open = focusInside() || (msg && msg.value.trim() !== '') ||
+        (card && card.classList.contains('is-step2')) || !dock.querySelector('#wz-form-wrap-dock') ||
+        dock.querySelector('#wz-form-wrap-dock').style.display === 'none';
+      dock.classList.toggle('is-open', !!open);
+      dock.classList.toggle('has-text', !!(msg && msg.value.trim() !== ''));
+    }
+    dock.addEventListener('focusin', syncOpen);
+    dock.addEventListener('focusout', function () { setTimeout(function () { syncOpen(); evaluate(); }, 0); });
+    if (msg) msg.addEventListener('input', syncOpen);
+    // Klick var som helst på den kompakta raden fokuserar textfältet.
+    if (card) card.addEventListener('mousedown', function (e) {
+      if (!dock.classList.contains('is-open') && !e.target.closest('button') && msg) { e.preventDefault(); msg.focus(); }
+    });
+    syncOpen();
+  })();
 
   /* ---------- Hero-formuläret: exempeltexter som skrivs, pausas och raderas ----------
      Ett rent visuellt lager (aria-hidden) ovanpå den tomma textarean. Textareans value ändras aldrig,
