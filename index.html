@@ -40,7 +40,7 @@
   }
 
   /* Section scroll offset for sticky nav */
-  #varfor,#processen,#tjansten,#referenser,#faq,#kontakt,#portfolio{scroll-margin-top:110px;}
+  #processen,#tjansten,#referenser,#faq,#kontakt,#portfolio{scroll-margin-top:110px;}
 
   /* Sticky shrinking nav capsule */
   .nav-wrap{position:sticky;top:0;z-index:50;padding:0px 0px 0;transition:padding .5s cubic-bezier(0.22,1,0.36,1);}
@@ -65,14 +65,9 @@
   .lift-dark:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,110,245,0.45);}
   .lift-case:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,110,245,0.35);}
   .lift-case:active{transform:translateY(0px) scale(0.98);}
-  .lift-orange:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(200,102,61,0.4);}
-  .lift-orange:active{transform:translateY(0px) scale(0.98);}
   .lift-footer:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,0.15);}
   a:focus-visible,button:focus-visible{outline:2px solid #0F172A;outline-offset:2px;}
 
-  /* Card hover */
-  .card-serv{border:1px solid transparent;transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1),box-shadow .3s cubic-bezier(0.22,1,0.36,1),border-color .3s cubic-bezier(0.22,1,0.36,1);}
-  .card-serv.is-visible:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 18px 34px rgba(15,23,42,0.1);border-color:rgba(20,110,245,0.15);}
 
   /* Process – zigzag journey */
   .proc-track{position:relative;max-width:840px;margin:0 auto;}
@@ -128,8 +123,8 @@
   .wz-chip{border-width:1.5px;border-style:solid;border-radius:20px;padding:10px 16px;min-height:40px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;transition:all 0.2s ease;background:#fff;color:#0F172A;border-color:rgba(15,23,42,0.15);}
   .wz-chip.selected{background:#146EF5;color:#fff;border-color:#146EF5;}
   .wz-input.wz-invalid{border-bottom-color:#D64545;}
-  #wz-goals.wz-goals-invalid{outline:2px solid #D64545;outline-offset:8px;border-radius:12px;}
-  /* Progressiv formulärexpansion: triggas när Namn börjar fyllas i */
+  .wz-goals.wz-goals-invalid{outline:2px solid #D64545;outline-offset:8px;border-radius:12px;}
+  /* Progressiv formulärexpansion: steg 2 fälls ut när prompten skickats vidare */
   .wz-expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.38s cubic-bezier(0.22,1,0.36,1);}
   .wz-expand.wz-open{grid-template-rows:1fr;}
   .wz-expand-inner{overflow:hidden;opacity:0;transform:translateY(-10px);transition:opacity 0.32s ease-out,transform 0.32s ease-out;}
@@ -137,6 +132,98 @@
   @media (prefers-reduced-motion: reduce){
     .wz-expand{transition:none;}
     .wz-expand-inner{transition:none;}
+  }
+  /* Hero-formuläret: animerade exempeltexter som visuellt lager (textareans value rörs aldrig) */
+  .wz-typing{position:relative;}
+  /* Plats för etiketten ovanför exemplet (bara heroinstansen, fast värde – ändras inte under animationen) */
+  .wz-prompt-card.has-typing{padding-top:40px;}
+  .wz-typing-ov{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.005em;color:#7F8DA3;white-space:pre-wrap;overflow-wrap:break-word;transition:opacity .15s ease;}
+  .wz-typing-label{position:absolute;left:0;bottom:calc(100% + 6px);pointer-events:none;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9AAAC0;transition:opacity .15s ease;}
+  .wz-typing-caret{display:inline-block;width:1.5px;height:1.05em;margin-left:1px;vertical-align:-0.16em;background:#146EF5;border-radius:1px;animation:wz-caret 1.05s steps(1) infinite;}
+  .wz-typing.is-typing .wz-typing-caret{animation:none;}
+  @keyframes wz-caret{50%{opacity:0;}}
+  .wz-typing.is-off .wz-typing-ov,.wz-typing.is-off .wz-typing-label{opacity:0;}
+  /* Den riktiga placeholdern döljs bara medan exemplet visas (finns kvar för hjälpmedel) */
+  .wz-typing:not(.is-off) .wz-input.wz-prompt::placeholder{color:transparent;}
+  @media (max-width:600px){
+    .wz-typing-ov{font-size:17px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .wz-typing-caret{display:none;}
+  }
+  /* Kontakt: prompt-kort i två steg */
+  .wz-head{max-width:640px;margin:0 auto 36px;text-align:center;}
+  .hero-h1{font-size:clamp(44px,5.6vw,76px);line-height:1.04;font-weight:800;color:#0F172A;margin:0 auto 26px;max-width:1000px;letter-spacing:-0.03em;text-wrap:balance;}
+  /* Hero-rubrikens svep: ett blått färgsvep passerar hittade → förstådda → valda i en 8 s-loop.
+     Lagret är ett pseudo-element med tom alternativtext ("/ ''"), så ordet dupliceras varken i DOM:en eller för skärmläsare. */
+  .hw{position:relative;display:inline-block;white-space:nowrap;}
+  .hw::after{content:attr(data-w) / "";position:absolute;left:0;top:0;right:0;bottom:0;pointer-events:none;color:transparent;
+    background:linear-gradient(90deg,#146EF5 0%,#5AA2FF 50%,#146EF5 100%);-webkit-background-clip:text;background-clip:text;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 33.4%,#000 46%,#000 54%,transparent 66.6%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,transparent 33.4%,#000 46%,#000 54%,transparent 66.6%,transparent 100%);
+    -webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-position:100% 0;mask-position:100% 0;
+    animation:hw-sweep 8s cubic-bezier(0.45,0,0.25,1) infinite both;}
+  .hw-1::after{animation-delay:1.5s;}
+  .hw-2::after{animation-delay:3.5s;}
+  .hw-3::after{animation-delay:5.5s;}
+  /* 0–20 % av cykeln (~1,6 s): bandet sveper från vänster till höger genom ordet; resten av cykeln är det utanför */
+  @keyframes hw-sweep{
+    0%{-webkit-mask-position:100% 0;mask-position:100% 0;}
+    20%{-webkit-mask-position:0% 0;mask-position:0% 0;}
+    100%{-webkit-mask-position:0% 0;mask-position:0% 0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hw::after{display:none;}
+  }
+  .hero-lead{font-size:19px;line-height:1.6;color:#52657A;margin:0 auto 44px;max-width:600px;font-weight:500;text-wrap:pretty;}
+  .hero-form{max-width:680px;margin:0 auto;text-align:left;}
+  .wz-shell{max-width:680px;margin:0 auto;}
+  .wz-card{background:#fff;border-radius:32px;padding:26px 30px 18px;border:1px solid transparent;box-shadow:0 18px 44px rgba(20,110,245,0.10);box-sizing:border-box;}
+  .wz-prompt-card{transition:border-color .25s ease,box-shadow .25s ease;}
+  .wz-prompt-card:hover{border-color:rgba(20,110,245,0.12);}
+  .wz-prompt-card:focus-within{border-color:rgba(20,110,245,0.22);box-shadow:0 0 0 4px rgba(20,110,245,0.06),0 18px 44px rgba(20,110,245,0.10);}
+  .wz-prompt-card.wz-card-invalid{border-color:rgba(214,69,69,0.55);}
+  .wz-input.wz-prompt{display:block;border:none;padding:0;height:112px;resize:none;font-size:19px;line-height:1.5;font-weight:400;color:#0F172A;letter-spacing:-0.005em;transition:height .38s cubic-bezier(0.22,1,0.36,1),font-size .38s cubic-bezier(0.22,1,0.36,1);}
+  .wz-input.wz-prompt::placeholder{color:#8A96A8;opacity:1;}
+  .wz-prompt-error{font-size:13px;color:#D64545;font-weight:600;margin-top:10px;}
+  .wz-prompt-error:empty{display:none;}
+  .wz-prompt-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:12px -12px 0 0;}
+  .wz-prompt-hint{font-size:13px;color:#8A96A8;font-weight:500;line-height:1.4;}
+  .wz-next{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(20,110,245,0.3);}
+  .wz-next:focus-visible,.wz-submit:focus-visible,.wz-callback-toggle:focus-visible,.wz-chip:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
+  /* Steg 2: prompten ligger kvar (redigerbar) men krymper */
+  .wz-prompt-card.is-step2 .wz-input.wz-prompt{height:64px;font-size:17px;}
+  .wz-prompt-card.is-step2 .wz-prompt-bar{display:none;}
+  .wz-prompt-card.is-step2{padding-bottom:28px;}
+  .wz-step2{border-top:1px solid rgba(15,23,42,0.08);margin-top:24px;padding-top:26px;}
+  .wz-step2-title{font-size:19px;font-weight:800;color:#0F172A;margin:0 0 22px;line-height:1.3;}
+  .wz-fields{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px;margin-bottom:24px;}
+  .wz-label{display:block;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;}
+  .wz-perks{list-style:none;margin:22px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;}
+  .wz-perks li{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#52657A;}
+  .wz-perk-ic{color:#146EF5;font-size:14px;font-weight:800;flex:none;}
+  .wz-rating{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;border-radius:6px;}
+  .wz-rating:hover{color:#0F172A;}
+  .wz-rating:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
+  .wz-stars{display:inline-flex;gap:2px;flex:none;}
+  .wz-stars svg{display:block;}
+  @media (prefers-reduced-motion: reduce){
+    .wz-input.wz-prompt{transition:none;}
+  }
+  @media (max-width:600px){
+    .wz-head{text-align:left;margin-bottom:24px;}
+    .hero-lead{font-size:16px;margin-bottom:28px;}
+    .hero-form .wz-perks{width:fit-content;margin-left:auto;margin-right:auto;}
+    .wz-card{border-radius:28px;padding:22px 20px 20px;}
+    .wz-input.wz-prompt{height:120px;font-size:17px;}
+    .wz-prompt-card.is-step2 .wz-input.wz-prompt{height:96px;font-size:16px;}
+    .wz-prompt-bar{flex-direction:column;align-items:stretch;gap:12px;margin-right:0;}
+    .wz-prompt-hint{text-align:center;order:2;}
+    .wz-next{width:100%;padding:16px 20px;}
+    .wz-fields{grid-template-columns:1fr;gap:18px;}
+    .wz-step2{margin-top:18px;padding-top:22px;}
+    .wz-perks{flex-direction:column;align-items:flex-start;gap:8px;margin-top:20px;}
+    .wz-form-note > div{text-align:center!important;}
   }
   .btn-next{transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s cubic-bezier(0.22,1,0.36,1),opacity 0.2s ease;}
   .btn-next:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,110,245,0.4);}
@@ -146,28 +233,9 @@
   .faq-q{transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);}
   .faq-item:hover .faq-q{transform:translateY(-2px);}
 
-  /* Pris-teaser: minimalistiska paketrader */
-  .price-teaser-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 6px;text-decoration:none;border-radius:12px;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),background-color 0.2s ease,border-color 0.2s ease;border-top:1px solid transparent;}
-  .price-teaser-row + .price-teaser-row{border-top-color:rgba(15,23,42,0.08);}
-  .price-teaser-row:hover{transform:translateX(3px);background-color:rgba(15,23,42,0.025);}
-  .price-teaser-row.price-teaser-pro:hover{background-color:rgba(20,110,245,0.05);}
-  .price-teaser-name{font-size:14px;font-weight:700;color:#0F172A;display:inline-flex;align-items:center;gap:8px;}
-  .price-teaser-price{font-size:16px;font-weight:800;color:#0F172A;white-space:nowrap;}
-  .price-teaser-pro .price-teaser-price{color:#146EF5;}
-  .price-teaser-badge{font-size:10px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.1);padding:2px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;}
 
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
-  /* SEO-koll-teaser (startsida) */
-  .hp-seo-group{display:flex;align-items:stretch;gap:10px;background:#F3F7FC;border-radius:16px;padding:8px;border:1px solid rgba(15,23,42,0.06);}
-  .hp-seo-input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:#0F172A;padding:14px 16px;}
-  .hp-seo-input::placeholder{color:#8296B0;}
-  .hp-seo-btn{flex:none;font-size:15px;font-weight:700;padding:14px 24px;border-radius:12px;border:none;cursor:pointer;font-family:inherit;white-space:nowrap;}
-  @media (max-width:600px){
-    .hp-seo-group{flex-direction:column;background:transparent;border:none;padding:0;gap:12px;}
-    .hp-seo-input{background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(15,23,42,0.08);border:1px solid rgba(15,23,42,0.06);}
-    .hp-seo-btn{width:100%;text-align:center;}
-  }
 
   /* Projektportal – statisk förhandsvisning (startsida) */
   .pp-benefits{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
@@ -220,13 +288,379 @@
   .faq-more-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(20,110,245,0.16);border-radius:999px;padding:12px 22px;font-family:inherit;font-size:14px;font-weight:700;color:#146EF5;cursor:pointer;box-shadow:0 6px 18px rgba(15,23,42,0.05);transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s ease;}
   .faq-more-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,0.08);}
   .faq-more-btn:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
-  .pf-tab:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
   .faq-more-ic{flex:none;display:block;transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);}
   .faq-more-btn[aria-expanded="true"] .faq-more-ic{transform:rotate(180deg);}
   @media (prefers-reduced-motion: reduce){
     .faq-more{transition:visibility 0s;}
   }
 
+  /* Portfolio – kontinuerligt diagonalt projektband. Bryter ut ur sidans 1440 px-behållare (--sbw sätts i JS). */
+  .pfr-sec{--pfr-ease:cubic-bezier(0.22,1,0.36,1);--pfr-gutter:24px;margin-top:100px;}
+  .pfr-wide{--pfr-w:min(1440px,calc(100vw - var(--sbw,0px) - var(--pfr-gutter) * 2));width:var(--pfr-w);margin-left:calc(50% - var(--pfr-w) / 2);}
+  .pfr-intro{margin:0 0 22px;padding:0 6px;}
+  .pfr-eyebrow{font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;}
+  .pfr-h2{font-size:clamp(28px,2.6vw,44px);font-weight:800;color:#0F172A;margin:0;line-height:1.08;letter-spacing:-0.025em;}
+  .pfr{position:relative;}
+  .pfr-stage{position:relative;overflow:hidden;width:100%;height:clamp(560px,39vw,760px);border-radius:30px;background:#FFFFFF;border:1px solid rgba(15,27,51,0.06);box-sizing:border-box;}
+  /* Yttre lager: hela bandet roteras – korten roteras aldrig var för sig */
+  /* Kortbredd: 46vw enligt referensen, men minst 56 % av scenen så att breda/låga scener (laptop) också fylls */
+  .pfr-band{--pfr-rot:-11deg;--pfr-cw:clamp(640px,max(46vw,56%),960px);position:absolute;left:calc(38% - var(--pfr-cw) / 2);top:-60%;width:var(--pfr-cw);height:220%;transform:rotate(var(--pfr-rot));transform-origin:50% 50%;}
+  /* Inre track: linjär, oändlig rörelse uppåt. --pfr-dist = exakt en uppsättning (mäts i JS). */
+  .pfr-track{display:flex;flex-direction:column;gap:44px;will-change:transform;animation:pfr-reel var(--pfr-dur,28s) linear infinite;animation-play-state:paused;}
+  .pfr.is-running .pfr-track{animation-play-state:running;}
+  .pfr-band:hover .pfr-track,.pfr-band:focus-within .pfr-track{animation-play-state:paused;}
+  @keyframes pfr-reel{from{transform:translate3d(0,0,0);}to{transform:translate3d(0,calc(-1 * var(--pfr-dist,50%)),0);}}
+  .pfr-item{position:relative;flex-shrink:0;display:block;width:100%;border-radius:20px;overflow:hidden;background:#fff;text-decoration:none;color:#0F172A;box-shadow:0 40px 90px rgba(15,23,42,0.14),0 4px 14px rgba(15,23,42,0.06);}
+  .pfr-item:focus-visible{outline:3px solid #146EF5;outline-offset:5px;}
+  .pfr-bar{display:flex;align-items:center;gap:7px;height:34px;padding:0 14px;background:#F6F7F9;border-bottom:1px solid rgba(15,23,42,0.06);}
+  .pfr-bar i{width:10px;height:10px;border-radius:50%;background:#D5DAE2;}
+  .pfr-url{margin-left:12px;flex:0 1 40%;height:20px;border-radius:999px;background:#fff;border:1px solid rgba(15,23,42,0.06);font-size:11px;font-weight:600;color:#8296B0;display:flex;align-items:center;padding:0 10px;white-space:nowrap;overflow:hidden;}
+  .pfr-screen{position:relative;display:block;aspect-ratio:16/9;background:#E7EAEF;}
+  .pfr-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+  .pfr-ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:12px;padding:28px 30px;background:linear-gradient(0deg,rgba(8,12,22,.7),rgba(8,12,22,.28) 55%,rgba(8,12,22,.12));color:#fff;opacity:0;transition:opacity .3s ease;}
+  .pfr-item:hover .pfr-ov,.pfr-item:focus-visible .pfr-ov{opacity:1;}
+  .pfr-ov-name{font-size:24px;font-weight:800;letter-spacing:-0.01em;}
+  .pfr-ov-open{font-size:14px;font-weight:700;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.32);padding:9px 14px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  /* Fast text nere till vänster */
+  .pfr-note{position:absolute;left:clamp(24px,3vw,48px);bottom:clamp(24px,3vw,48px);z-index:5;max-width:300px;padding:16px 18px;border-radius:20px;background:rgba(255,255,255,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 10px 28px rgba(15,23,42,0.08);pointer-events:none;}
+  .pfr-note-k{font-size:11px;font-weight:800;letter-spacing:.08em;color:#146EF5;margin-bottom:6px;}
+  .pfr-note-t{margin:0;font-size:15px;font-weight:600;line-height:1.45;color:#0F172A;}
+  /* Fast accordion till höger */
+  .pfr-panel{position:absolute;top:18px;right:18px;width:clamp(280px,20vw,340px);z-index:6;}
+  .pfr .pfv-row-btn{min-height:44px;padding:11px 16px;font-size:14px;}
+  .pfr .pfv-row-panel p{padding:0 16px 14px;font-size:13.5px;}
+  .pfr .pfv-rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .pfr .pfv-row{border-radius:20px;background:rgba(233,236,241,0.95);border:1px solid rgba(15,23,42,0.04);box-shadow:0 2px 8px rgba(15,23,42,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background-color .35s ease,box-shadow .35s ease;}
+  .pfr .pfv-row.is-open{background:#fff;box-shadow:0 10px 26px rgba(15,23,42,0.08);}
+  .pfv-row-btn{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;min-height:50px;padding:13px 18px;background:none;border:0;font:inherit;text-align:left;color:#0F172A;font-size:15px;font-weight:700;cursor:pointer;border-radius:20px;}
+  .pfv-row-btn:focus-visible{outline:2px solid #146EF5;outline-offset:2px;}
+  .pfv-ic{position:relative;flex:none;width:24px;height:24px;border-radius:50%;background:rgba(15,23,42,0.05);color:#146EF5;}
+  .pfv-ic::before,.pfv-ic::after{content:'';position:absolute;left:50%;top:50%;width:10px;height:1.8px;margin:-0.9px 0 0 -5px;border-radius:2px;background:currentColor;transition:transform .35s var(--pfr-ease);}
+  .pfv-ic::after{transform:rotate(90deg);}
+  .pfv-row.is-open .pfv-ic::after{transform:rotate(0deg);}
+  .pfv-row-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--pfr-ease);}
+  .pfv-row.is-open .pfv-row-panel{grid-template-rows:1fr;}
+  .pfv-row-panel > div{overflow:hidden;}
+  .pfv-row-panel p{margin:0;padding:0 18px 16px;font-size:14.5px;line-height:1.55;color:#52657A;}
+  /* Reducerad rörelse: ingen animation, statisk komposition */
+  @media (prefers-reduced-motion: reduce){
+    .pfr-track{animation:none!important;transform:translate3d(0,0,0);}
+    .pfr-ov,.pfv-row,.pfv-row-panel,.pfv-ic::before,.pfv-ic::after{transition:none;}
+  }
+  /* Mobil: mindre rotation, kort ~90vw, kortare scen; text och accordion under reelen */
+  @media (max-width:820px){
+    .pfr-sec{margin-top:80px;--pfr-gutter:20px;}
+    .pfr-stage{height:clamp(440px,120vw,560px);border-radius:24px;}
+    .pfr-band{--pfr-rot:-5deg;--pfr-cw:min(90vw,560px);left:calc(50% - var(--pfr-cw) / 2);}
+    .pfr-track{gap:24px;}
+    .pfr-ov{opacity:1;background:none;padding:12px;justify-content:flex-end;align-items:flex-end;}
+    .pfr-ov-name{display:none;}
+    .pfr-ov-open{font-size:12px;padding:6px 11px;background:rgba(15,23,42,0.72);border-color:rgba(255,255,255,0.2);}
+    .pfr-note{position:static;max-width:none;margin:12px 0 0;box-shadow:none;border:1px solid rgba(15,23,42,0.06);}
+    .pfr-panel{position:static;width:auto;margin-top:12px;}
+  }
+
+  /* Byggd för resultat (bento) */
+  .bento{max-width:1260px;margin:100px auto 0;padding:0 20px;scroll-margin-top:110px;}
+  .bento-head{max-width:660px;margin:0 auto 44px;text-align:center;}
+  .bento-eyebrow{font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
+  .bento-h2{font-size:36px;font-weight:800;color:#0F172A;margin:0 0 14px;line-height:1.15;letter-spacing:-0.02em;text-wrap:balance;}
+  .bento-lead{font-size:16px;color:#52657A;line-height:1.6;margin:0;font-weight:500;text-wrap:pretty;}
+  .bento-grid{display:grid;grid-template-columns:1fr 1.22fr 1fr;grid-template-rows:auto auto;gap:22px;}
+  .bento-card{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(15,23,42,0.06);border-radius:28px;padding:22px 26px 26px;box-shadow:0 1px 2px rgba(15,23,42,0.03);overflow:hidden;color:#0F172A;text-decoration:none;min-width:0;}
+  .bento .bento-card[data-reveal]{transform:translateY(14px);}
+  .bento .bento-card[data-reveal].is-visible{transform:none;}
+  .bento-card--seo{grid-column:2;grid-row:1 / span 2;background:linear-gradient(180deg,#FFFFFF 0%,#F6FAFF 100%);}
+  .bento-card--brand{grid-column:1;grid-row:1;}
+  .bento-card--booking{grid-column:1;grid-row:2;}
+  .bento-card--rating{grid-column:3;grid-row:1;}
+  .bento-card--leads{grid-column:3;grid-row:2;}
+  .bc-art{position:relative;flex:1 1 auto;min-height:206px;margin-bottom:18px;}
+  .bc-body{flex:none;}
+  .bc-title{font-size:19px;font-weight:800;line-height:1.25;letter-spacing:-0.01em;margin:0 0 6px;color:#0F172A;}
+  .bc-text{font-size:14.5px;line-height:1.55;color:#52657A;margin:0;font-weight:500;}
+  .bento-card--seo .bc-title{font-size:24px;}
+  .bento-card--seo .bc-text{font-size:15.5px;max-width:440px;}
+  .bc-pill{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.04em;padding:5px 10px;border-radius:999px;}
+  .bc-pill--muted{color:#52657A;background:#F1F5FB;border:1px solid rgba(15,23,42,0.06);}
+
+  /* Synlighet: linjediagram */
+  .bc-chart{display:flex;flex-direction:column;min-height:380px;}
+  .bc-chart-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+  .bc-chips{display:flex;gap:6px;}
+  .bc-chips span{font-size:11px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.08);padding:5px 10px;border-radius:999px;}
+  /* Interaktiv graf (kc = KPI-chart). --kx/--ky = aktiv position i px, satta i JS. */
+  .kc-plot{position:relative;flex:1 1 auto;min-height:240px;cursor:grab;touch-action:pan-y;outline:none;border-radius:14px;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;}
+  .kc-plot.is-dragging{cursor:grabbing;}
+  .kc-plot:focus-visible{box-shadow:0 0 0 3px rgba(20,110,245,0.35);}
+  .kc-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+  .kc-dots{position:absolute;inset:0;pointer-events:none;}
+  .kc-dot{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;border:2px solid rgba(20,110,245,0.55);box-sizing:border-box;transition:opacity .35s ease,transform .35s ease;}
+  /* Händelsemånader: liten blå romb snett ovanför punkten */
+  .kc-dot--event::after{content:'';position:absolute;left:50%;top:-13px;width:7px;height:7px;margin-left:-3.5px;background:#146EF5;border:1.5px solid #fff;border-radius:2px;transform:rotate(45deg);box-shadow:0 1px 3px rgba(20,110,245,0.35);}
+  .kc-guide{position:absolute;left:0;top:0;bottom:0;width:0;border-left:1.5px dashed rgba(20,110,245,0.35);transform:translateX(var(--kx,0px));pointer-events:none;}
+  .kc-active{position:absolute;left:0;top:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;border:3px solid #146EF5;box-sizing:border-box;box-shadow:0 0 0 6px rgba(20,110,245,0.14);transform:translate(var(--kx,0px),var(--ky,0px));pointer-events:none;}
+  .kc-tip{position:absolute;left:0;top:0;display:flex;flex-direction:column;min-width:112px;background:#0F172A;color:#fff;padding:10px 14px 11px;border-radius:14px;box-shadow:0 10px 24px rgba(15,23,42,0.18);transform:translate(var(--tx,0px),var(--ty,0px));pointer-events:none;white-space:nowrap;}
+  .kc-tip-m{font-size:12px;font-weight:700;color:#B7C6DB;}
+  .kc-tip-v{font-size:24px;font-weight:800;line-height:1.1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;}
+  .kc-tip-l{font-size:11px;font-weight:600;color:#8FA6C2;}
+  .kc-tip-e{font-size:11.5px;font-weight:700;color:#8DBBFF;margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.1);}
+  .kc-tip-e:empty{display:none;}
+  /* Pil mot punkten; --ax = pilens x inom tooltipen */
+  .kc-tip::after{content:'';position:absolute;left:var(--ax,50%);width:10px;height:10px;margin-left:-5px;background:#0F172A;border-radius:2px;transform:rotate(45deg);}
+  .kc-tip[data-side="above"]::after{bottom:-4px;}
+  .kc-tip[data-side="below"]::after{top:-4px;}
+  .kc-event{position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:2px;max-width:170px;background:#fff;border:1px solid rgba(20,110,245,0.18);border-left:3px solid #146EF5;border-radius:10px;padding:7px 10px 8px;box-shadow:0 6px 16px rgba(15,23,42,0.08);transform:translate(var(--ex,0px),var(--ey,0px));opacity:0;pointer-events:none;transition:opacity .3s ease;}
+  .kc-event.is-on{opacity:1;}
+  .kc-event-k{font-size:9.5px;font-weight:800;letter-spacing:.08em;color:#146EF5;}
+  .kc-event-t{font-size:12px;font-weight:700;color:#0F172A;line-height:1.3;white-space:normal;}
+  .kc-months{position:relative;height:16px;margin-top:10px;font-size:11px;font-weight:600;color:#8296B0;}
+  .kc-months span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;}
+  /* Mjuk rörelse mellan månader (släpp, tangentbord). Under dragning/hover följer markören direkt. */
+  .kc-plot.is-snapping .kc-active,.kc-plot.is-snapping .kc-guide{transition:transform .38s cubic-bezier(0.25,0.8,0.25,1);}
+  .kc-tip,.kc-event{transition:transform .32s cubic-bezier(0.25,0.8,0.25,1),opacity .3s ease;}
+  .kc-plot.is-following .kc-tip,.kc-plot.is-following .kc-event{transition:transform .14s linear,opacity .3s ease;}
+  /* Innan introt (bara när JS kör): allt dolt utom stödlinjerna */
+  .kc-plot.is-pre .kc-dot,.kc-plot.is-pre .kc-active,.kc-plot.is-pre .kc-tip,.kc-plot.is-pre .kc-guide{opacity:0;}
+  .kc-plot.is-intro .kc-dot:not(.is-shown){opacity:0;transform:scale(.4);}
+  .kc-plot.is-intro .kc-tip,.kc-plot.is-intro .kc-event{transition:none;}
+  @media (max-width:640px){
+    .kc-plot{min-height:210px;}
+    .kc-tip{min-width:96px;padding:8px 11px 9px;border-radius:12px;}
+    .kc-tip-v{font-size:20px;}
+    .kc-event{max-width:140px;padding:6px 9px 7px;}
+    .kc-months{font-size:10px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .kc-dot,.kc-tip,.kc-event,.kc-plot.is-snapping .kc-active,.kc-plot.is-snapping .kc-guide{transition:none;}
+  }
+
+  /* Visuellt uttryck: tre överlappande designkort som växlar mellan fyra identiteter.
+     Tokens per identitet: --vi-ink (mörk), --vi-accent, --vi-soft, --vi-tint (ljusast), --vi-surface (sidbakgrund). */
+  .vi{--vi-ink:#0F172A;--vi-accent:#146EF5;--vi-soft:#8DBBFF;--vi-tint:#EAF2FF;--vi-surface:#FFFFFF;--vi-cap:#A9CBFF;--vi-ease:cubic-bezier(0.25,0.8,0.25,1);}
+  .vi[data-id="1"]{--vi-ink:#3B2A20;--vi-accent:#C2603E;--vi-soft:#E3C9A4;--vi-tint:#F8F1E6;--vi-surface:#FFFCF7;--vi-cap:#E3C9A4;}
+  .vi[data-id="2"]{--vi-ink:#1F3A2E;--vi-accent:#6F8F76;--vi-soft:#B9CDBE;--vi-tint:#E4F1E8;--vi-surface:#FAF8F3;--vi-cap:#C3D8C8;}
+  .vi[data-id="3"]{--vi-ink:#1E1B2E;--vi-accent:#F2604F;--vi-soft:#8B5CF6;--vi-tint:#F1E9FF;--vi-surface:#FFFFFF;--vi-cap:#CDBDFE;}
+  /* Typsnitt per identitet (projektets Manrope + systemtypsnitt – inga nya externa typsnitt) */
+  .vi-v[data-v="0"]{font-family:'Manrope',system-ui,sans-serif;font-weight:800;letter-spacing:-0.02em;}
+  .vi-v[data-v="1"]{font-family:'Didot','Bodoni 72','Bodoni MT',Georgia,'Times New Roman',serif;font-weight:700;letter-spacing:-0.01em;}
+  .vi-v[data-v="2"]{font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;font-style:italic;font-weight:600;}
+  .vi-v[data-v="3"]{font-family:'Avenir Next','Futura','Century Gothic','Trebuchet MS','Manrope',sans-serif;font-weight:700;letter-spacing:-0.035em;}
+  .bs-cap .vi-v{font-family:'Manrope',system-ui,sans-serif;font-style:normal;letter-spacing:0;font-weight:700;}
+  /* Staplade typografiprover: crossfade + 4 px rörelse uppåt, ingen font-family-animation */
+  .vi-stack{display:grid;}
+  .vi-v{grid-area:1 / 1;opacity:0;transform:translateY(4px);transition:opacity .8s var(--vi-ease),transform .8s var(--vi-ease);white-space:nowrap;}
+  .vi[data-id="0"] .vi-v[data-v="0"],.vi[data-id="1"] .vi-v[data-v="1"],.vi[data-id="2"] .vi-v[data-v="2"],.vi[data-id="3"] .vi-v[data-v="3"]{opacity:1;transform:none;}
+  .vi .bs-card,.vi .bs-hero,.vi .bs-bar,.vi .bs-bar i,.vi .bs-lines i,.vi .bs-hero em,.vi .bs-btn,.vi .bs-sw,.vi .vi-h,.vi .bs-aa,.vi .bs-cap{transition:background-color .8s var(--vi-ease),border-color .8s var(--vi-ease),color .8s var(--vi-ease);}
+  .vi .bs-logo-a,.vi .bs-logo-b{transition:fill .8s var(--vi-ease);}
+  .bc-stack .bs-card{position:absolute;background:#fff;border:1px solid rgba(15,23,42,0.08);border-radius:16px;box-shadow:0 10px 24px rgba(15,23,42,0.08);}
+  .bc-stack .bs-web{left:4%;top:6%;width:58%;height:70%;transform:rotate(-7deg);overflow:hidden;display:flex;flex-direction:column;background:var(--vi-surface);}
+  .bs-bar{display:flex;gap:4px;padding:8px 10px;background:var(--vi-tint);}
+  .bs-bar i{width:6px;height:6px;border-radius:50%;background:var(--vi-soft);}
+  .bs-hero{position:relative;margin:10px;border-radius:10px;height:46%;background:var(--vi-tint);display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:5px;padding:10px;box-sizing:border-box;overflow:hidden;}
+  .bs-hero .vi-h{font-size:15px;line-height:1.05;color:var(--vi-ink);}
+  .bs-hero em{display:block;width:62%;height:5px;border-radius:3px;background:var(--vi-soft);}
+  .bs-btn{display:block;width:34%;height:11px;border-radius:999px;background:var(--vi-accent);margin-top:2px;}
+  .bs-lines{display:flex;flex-direction:column;gap:5px;padding:0 10px;}
+  .bs-lines i{display:block;height:5px;border-radius:3px;background:var(--vi-tint);}
+  .bs-lines i:last-child{width:60%;}
+  .bc-stack .bs-palette{right:3%;top:2%;width:44%;padding:12px;transform:rotate(6deg);display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+  .bs-sw{aspect-ratio:1;border-radius:8px;border:1px solid rgba(15,23,42,0.06);}
+  .bs-sw1{background:var(--vi-ink);}
+  .bs-sw2{background:var(--vi-accent);transition-delay:.08s !important;}
+  .bs-sw3{background:var(--vi-soft);transition-delay:.16s !important;}
+  .bs-sw4{background:var(--vi-tint);transition-delay:.24s !important;}
+  .bs-cap{grid-column:1 / -1;font-size:10.5px;font-weight:700;color:#52657A;}
+  .bc-stack .bs-brandcard{left:30%;bottom:0;width:48%;padding:14px;transform:rotate(-2deg);display:flex;flex-direction:column;gap:6px;background:var(--vi-ink);border-color:var(--vi-ink);}
+  .bs-logo-a{fill:var(--vi-accent);opacity:.55;}
+  .bs-logo-b{fill:var(--vi-accent);}
+  .bs-brandcard .bs-aa{font-size:28px;line-height:1;color:var(--vi-tint);}
+  .bs-brandcard .bs-cap{color:var(--vi-cap);font-size:9.5px;line-height:1.25;}
+  .bs-brandcard .bs-cap .vi-v{white-space:normal;}
+  @media (prefers-reduced-motion: reduce){
+    .vi .vi-v,.vi .bs-card,.vi .bs-hero,.vi .bs-sw,.vi .bs-btn{transition:none;}
+  }
+
+  /* Bokningar */
+  .bc-bookings .bk{position:absolute;display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid rgba(15,23,42,0.08);border-radius:18px;padding:14px 16px;box-shadow:0 10px 24px rgba(15,23,42,0.08);width:72%;box-sizing:border-box;transition:transform .9s cubic-bezier(0.22,1,0.36,1) .3s;}
+  .bk--back{right:2%;top:4%;transform:rotate(5deg);background:#F7FAFE;}
+  .bk--front{left:2%;bottom:6%;transform:rotate(-4deg);}
+  .bento-card.is-visible .bk--back{transform:rotate(5deg) translate(4px,-3px);}
+  .bento-card.is-visible .bk--front{transform:rotate(-4deg) translate(-3px,3px);}
+  .bk-when{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#146EF5;}
+  .bk-what{font-size:15px;font-weight:800;color:#0F172A;}
+  .bk-meta{display:flex;gap:6px;align-items:center;}
+  .bk-tag{font-size:11px;font-weight:700;color:#52657A;background:#F1F5FB;padding:4px 9px;border-radius:999px;}
+  .bk-status{font-size:11px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.1);padding:4px 9px;border-radius:999px;}
+
+  /* Kundupplevelse: 5,0 som målbild */
+  .bc-kicker{display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:#146EF5;margin-bottom:6px;}
+  .cx{display:flex;flex-direction:column;justify-content:center;gap:14px;}
+  .bento-card--rating .bc-art.cx{min-height:176px;}
+  .cx::before{content:'';position:absolute;left:-30px;top:-40px;width:260px;height:220px;background:radial-gradient(closest-side,rgba(232,169,42,0.10),rgba(232,169,42,0));pointer-events:none;}
+  .cx-score{position:relative;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .cx-num{font-size:54px;font-weight:800;line-height:.95;letter-spacing:-0.04em;color:#0F172A;font-variant-numeric:tabular-nums;min-width:2.1ch;}
+  .cx-stars{display:flex;gap:4px;}
+  .cx-stars svg{width:24px;height:24px;fill:#E8A92A;transition:fill .45s ease,transform .45s cubic-bezier(0.25,0.8,0.25,1),opacity .45s ease;}
+  .cx-factors{position:relative;list-style:none;margin:0;padding:12px 0 0;display:flex;flex-direction:column;gap:6px;border-top:1px solid rgba(15,23,42,0.07);}
+  .cx-factors li{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:#334155;transition:opacity .5s ease,transform .5s cubic-bezier(0.25,0.8,0.25,1);}
+  .cx-ic{flex:none;width:20px;height:20px;border-radius:50%;background:rgba(20,110,245,0.09);color:#146EF5;display:flex;align-items:center;justify-content:center;}
+  /* Intro (bara när JS kör): stjärnorna släckta, faktorerna dolda */
+  .cx.cx-pre .cx-stars svg{fill:#E4E8EF;transform:scale(.86);}
+  .cx.cx-pre .cx-factors li{opacity:0;transform:translateY(6px);}
+  .cx.cx-run .cx-stars svg:nth-child(1){transition-delay:.25s;}
+  .cx.cx-run .cx-stars svg:nth-child(2){transition-delay:.42s;}
+  .cx.cx-run .cx-stars svg:nth-child(3){transition-delay:.59s;}
+  .cx.cx-run .cx-stars svg:nth-child(4){transition-delay:.76s;}
+  .cx.cx-run .cx-stars svg:nth-child(5){transition-delay:.93s;}
+  .cx.cx-run .cx-factors li:nth-child(1){transition-delay:1.35s;}
+  .cx.cx-run .cx-factors li:nth-child(2){transition-delay:1.5s;}
+  .cx.cx-run .cx-factors li:nth-child(3){transition-delay:1.65s;}
+  @media (prefers-reduced-motion: reduce){
+    .cx-stars svg,.cx-factors li{transition:none;}
+  }
+
+  /* Kontaktflöde: nya händelser faller in överst, äldre flyttas ned och tonas bort */
+  .lf-wrap{display:flex;align-items:center;}
+  .lf{--lf-h:54px;--lf-gap:10px;position:relative;width:100%;height:calc(var(--lf-h) * 3 + var(--lf-gap) * 2);overflow:visible;}
+  .lf-item{position:absolute;left:0;right:0;top:0;height:var(--lf-h);box-sizing:border-box;display:flex;align-items:center;gap:11px;background:#fff;border:1px solid rgba(15,23,42,0.07);border-radius:16px;padding:0 14px 0 11px;box-shadow:0 4px 14px rgba(15,23,42,0.05);transform:translateY(calc(var(--slot, 0) * (var(--lf-h) + var(--lf-gap))));transition:transform .72s cubic-bezier(0.34,1.22,0.64,1),opacity .6s ease,box-shadow .9s ease;}
+  .lf-item[data-slot="-1"]{opacity:0;}
+  .lf-item[data-slot="1"]{opacity:.82;}
+  .lf-item[data-slot="2"]{opacity:.55;}
+  .lf-item[data-slot="3"]{opacity:0;}
+  .lf-item.is-new{box-shadow:0 10px 24px rgba(15,23,42,0.09);}
+  .lf-ic{flex:none;width:32px;height:32px;border-radius:10px;background:#F1F5FB;color:#52657A;display:flex;align-items:center;justify-content:center;}
+  .lf-item[data-slot="0"] .lf-ic{background:rgba(20,110,245,0.09);color:#146EF5;}
+  .lf-ic svg{width:16px;height:16px;}
+  .lf-tx{display:flex;flex-direction:column;min-width:0;flex:1;}
+  .lf-tx b{font-size:12.5px;font-weight:800;color:#0F172A;line-height:1.3;}
+  .lf-tx span{font-size:12px;color:#52657A;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;}
+  .lf-t{flex:none;font-size:11px;font-weight:600;color:#8296B0;}
+  @media (prefers-reduced-motion: reduce){
+    .lf-item{transition:none;}
+  }
+
+  /* Tjänsteöversikt under griden */
+  .bento-foot{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:30px;text-align:center;}
+  .bento-services{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 0;margin:0;font-size:14px;font-weight:600;color:#52657A;}
+  .bento-services span + span::before{content:'·';margin:0 10px;color:#9AAAC0;}
+
+  /* Tablet: synlighetskortet över hela bredden, övriga i 2 × 2 */
+  @media (max-width:1024px){
+    .bento-grid{grid-template-columns:1fr 1fr;}
+    .bento-card--seo{grid-column:1 / -1;grid-row:auto;}
+    .bento-card--brand,.bento-card--booking,.bento-card--rating,.bento-card--leads{grid-column:auto;grid-row:auto;}
+    .bc-chart{min-height:320px;}
+  }
+  /* Mobil: en kolumn i DOM-ordning (synlighet först) */
+  @media (max-width:640px){
+    .bento{margin-top:80px;}
+    .bento-h2{font-size:28px;}
+    .bento-grid{grid-template-columns:1fr;gap:16px;}
+    .bento-card{padding:18px 20px 22px;border-radius:26px;}
+    .bc-art{min-height:176px;}
+    .bc-chart{min-height:260px;}
+    .bento-card--seo .bc-title{font-size:21px;}
+    .bento-services{gap:8px;font-size:13px;}
+    .bento-services span{background:rgba(255,255,255,.7);border:1px solid rgba(15,23,42,0.06);padding:5px 11px;border-radius:999px;}
+    .bento-services span + span::before{content:none;}
+  }
+  /* Branschkarusell */
+  /* Sektionen bryter ut ur sidans maxbredd (1440 px) och går kant i kant; --sbw = scrollbarens bredd (sätts i JS) */
+  .ind{--ind-full:calc(100vw - var(--sbw,0px));width:var(--ind-full);margin:110px 0 -16px calc(50% - var(--ind-full) / 2);--ind-w:min(1320px,74%);--ind-gap:56px;--ind-ease:cubic-bezier(0.25,0.8,0.25,1);}
+  .ind-head{max-width:640px;margin:0 auto 36px;padding:0 20px;text-align:center;}
+  .ind-eyebrow{font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
+  .ind-h2{font-size:36px;font-weight:800;color:#0F172A;margin:0 0 12px;line-height:1.15;letter-spacing:-0.02em;text-wrap:balance;}
+  .ind-lead{font-size:16px;color:#52657A;line-height:1.6;margin:0;font-weight:500;}
+  .ind-track{list-style:none;margin:0;padding:12px calc(50% - var(--ind-w) / 2) 20px;display:flex;gap:var(--ind-gap);overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;position:relative;outline:none;cursor:grab;}
+  /* Med kloner i ändarna (JS) behövs ingen sidopadding – klonerna fyller ut istället */
+  .ind-track.has-clones{padding-left:0;padding-right:0;}
+  .ind-track::-webkit-scrollbar{display:none;}
+  .ind-track:focus-visible{box-shadow:inset 0 0 0 3px rgba(20,110,245,0.35);border-radius:12px;}
+  .ind-track.is-dragging{scroll-snap-type:none;cursor:grabbing;user-select:none;}
+  .ind-track.is-animating{scroll-snap-type:none;}
+  /* Används en bildruta när loopen flyttar scrollpositionen till motsvarande riktiga kort */
+  .ind-track.no-anim .ind-card,.ind-track.no-anim .ind-card *{transition:none!important;}
+  .ind-track.is-dragging .ind-card{pointer-events:none;}
+  .ind-item{flex:0 0 var(--ind-w);scroll-snap-align:center;}
+  .ind-card{position:relative;display:block;aspect-ratio:2/1;border-radius:28px;overflow:hidden;color:#fff;text-decoration:none;isolation:isolate;background:#0F172A;box-shadow:0 10px 30px rgba(15,23,42,0.08);transition:transform .55s var(--ind-ease),opacity .55s var(--ind-ease);}
+  /* Kort före och efter det aktiva: 85 % skala och nedtonade. Förskjutningen (7,5 % = halva krympningen)
+     håller kanten mot huvudkortet på plats, så att mellanrummet är detsamma som --ind-gap. */
+  .ind-item.is-before .ind-card{transform:translateX(7.5%) scale(.85);opacity:.7;}
+  .ind-item.is-after .ind-card{transform:translateX(-7.5%) scale(.85);opacity:.7;}
+  .ind-card:focus-visible{outline:3px solid #146EF5;outline-offset:4px;}
+  .ind-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s var(--ind-ease);}
+  .ind-card:hover .ind-bg{transform:scale(1.02);}
+  .ind-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(9,14,28,.8) 0%,rgba(9,14,28,.5) 22%,rgba(9,14,28,.1) 42%,rgba(9,14,28,0) 55%);}
+  .ind-row{position:absolute;left:clamp(20px,2vw,28px);right:clamp(20px,2vw,28px);bottom:clamp(20px,2vw,28px);display:flex;align-items:flex-end;justify-content:flex-start;gap:clamp(24px,3vw,44px);}
+  .ind-devices{flex:0 0 25%;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));transition:transform .55s var(--ind-ease);}
+  .ind-devices > img{display:block;width:100%;height:auto;}
+  .ind-card:hover .ind-devices{transform:translateY(-4px);}
+  .ind-body{flex:0 1 400px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;}
+  .ind-tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:6px 12px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  .ind-name{font-size:clamp(22px,2vw,30px);font-weight:800;line-height:1.08;letter-spacing:-0.02em;margin:0;color:#fff;text-wrap:balance;}
+  .ind-text{font-size:15px;line-height:1.5;color:#DCE4EF;font-weight:500;}
+
+  /* Dator + telefon i CSS för webbkoncepten (samma proportioner som de riktiga mockup-bilderna) */
+  .dv{position:relative;display:block;width:100%;aspect-ratio:1017/580;container-type:inline-size;}
+  .dv-lap{position:absolute;right:0;top:0;width:86%;display:flex;flex-direction:column;align-items:center;}
+  .dv-lid{display:block;width:100%;aspect-ratio:16/10;background:#0c0d10;border-radius:2.4cqw 2.4cqw .8cqw .8cqw;padding:1.4cqw 1.4cqw 2cqw;box-sizing:border-box;box-shadow:inset 0 0 0 .25cqw #2a2d33;}
+  .dv-screen{display:block;position:relative;width:100%;height:100%;overflow:hidden;border-radius:.4cqw;background:#fff;}
+  .dv-screen > img,.dv-pscreen > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .dv-base{display:block;width:112%;height:2.4cqw;margin-top:-.2cqw;border-radius:0 0 2.4cqw 2.4cqw;background:linear-gradient(#d6d9df,#8f949c);position:relative;}
+  .dv-base::after{content:'';position:absolute;left:50%;top:0;width:16%;height:45%;transform:translateX(-50%);border-radius:0 0 1cqw 1cqw;background:#aeb3bb;}
+  .dv-phone{position:absolute;left:0;bottom:0;width:21%;aspect-ratio:9/19;background:#0c0d10;border-radius:3.4cqw;padding:.9cqw;box-sizing:border-box;box-shadow:inset 0 0 0 .25cqw #2a2d33;}
+  .dv-pscreen{display:block;position:relative;width:100%;height:100%;overflow:hidden;border-radius:2.6cqw;background:#fff;}
+  .dv-pscreen::before{content:'';position:absolute;left:50%;top:.8cqw;width:36%;height:1.6cqw;transform:translateX(-50%);border-radius:999px;background:#0c0d10;z-index:2;}
+  .cs-page{position:absolute;inset:0;display:flex;flex-direction:column;gap:1.2cqw;padding:3cqw 4cqw 3cqw 9cqw;color:#0F172A;text-align:left;}
+  .cs-nav{display:flex;align-items:center;gap:2.2cqw;font-size:1.25cqw;color:#52657A;}
+  .cs-nav b{color:#0F172A;font-weight:800;margin-right:auto;font-size:1.5cqw;}
+  .cs-nav em,.cs-btn{font-style:normal;font-weight:700;color:#fff;padding:.7cqw 1.5cqw;border-radius:999px;}
+  .cs-t{font-size:4.4cqw;font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-top:2.4cqw;max-width:80%;}
+  .cs-s{font-size:1.5cqw;color:#52657A;font-weight:500;}
+  .cs-list{display:flex;gap:1.4cqw;margin-top:auto;}
+  .cs-list > span{flex:1;display:flex;flex-direction:column;gap:.4cqw;padding:1.6cqw;border-radius:1cqw;background:#fff;font-size:1.2cqw;}
+  .cs-list b{font-weight:800;}
+  .cs-list i{font-style:normal;color:#52657A;}
+  /* Mobilversionen i telefonen */
+  .cs-m{padding:5.4cqw 1.8cqw 1.8cqw;gap:1cqw;}
+  .cs-m .cs-nav{font-size:1cqw;}
+  .cs-m .cs-nav b{font-size:1.2cqw;}
+  .cs-burger{width:2cqw;height:1.2cqw;border-top:.25cqw solid #0F172A;border-bottom:.25cqw solid #0F172A;box-sizing:border-box;}
+  .cs-m .cs-t{font-size:2.4cqw;max-width:none;margin-top:1.6cqw;}
+  .cs-m .cs-s{font-size:1cqw;}
+  .cs-m .cs-btn{align-self:flex-start;font-size:1cqw;padding:.7cqw 1.4cqw;margin-top:.4cqw;}
+  .cs-m .cs-list{flex-direction:column;gap:.8cqw;}
+  .cs-m .cs-list > span{padding:1.1cqw;font-size:.95cqw;}
+  .dv--salong .cs-page{background:linear-gradient(160deg,#FBF4F1,#F1E1DA);}
+  .dv--salong .cs-nav em,.dv--salong .cs-btn{background:#8A5A4E;}
+  .dv--konsult .cs-page{background:linear-gradient(160deg,#F7FAFE,#E3EEFF);}
+  .dv--konsult .cs-nav em,.dv--konsult .cs-btn{background:#146EF5;}
+  .sera-m{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:1cqw;padding:2cqw 1.8cqw 3.2cqw;background:linear-gradient(0deg,rgba(0,0,0,.75),rgba(0,0,0,.15) 60%);color:#fff;font-family:Georgia,'Times New Roman',serif;}
+  .sera-m-logo{position:absolute;top:4.2cqw;left:50%;transform:translateX(-50%);font-size:1.3cqw;font-style:italic;}
+  .sera-m-t{font-size:2.1cqw;line-height:1.1;}
+  .sera-m em{align-self:flex-start;font-style:normal;font-family:'Manrope',sans-serif;font-size:.95cqw;font-weight:700;background:#8E3B2E;padding:.7cqw 1.4cqw;border-radius:999px;}
+
+  @media (prefers-reduced-motion: reduce){
+    .ind-card,.ind-bg,.ind-devices{transition:none;}
+    .ind-card:hover .ind-bg{transform:none;}
+  }
+  @media (max-width:1024px){
+    .ind{--ind-w:80%;--ind-gap:24px;}
+    .ind-text{font-size:14px;}
+    .ind-devices{flex-basis:30%;}
+  }
+  /* Mobil: mockupen centrerad i mitten, text och fullbredds-CTA i kortets nederdel */
+  @media (max-width:700px){
+    .ind{margin-top:80px;--ind-w:86%;--ind-gap:8px;}
+    .ind-h2{font-size:28px;}
+    .ind-card{aspect-ratio:auto;height:min(520px,calc(100svh - 140px));min-height:460px;border-radius:26px;}
+    .ind-shade{background:linear-gradient(0deg,rgba(9,14,28,.92) 0%,rgba(9,14,28,.78) 40%,rgba(9,14,28,.15) 66%,rgba(9,14,28,0) 78%);}
+    .ind-row{left:18px;right:18px;bottom:18px;flex-direction:column;align-items:stretch;gap:16px;}
+    .ind-devices{flex:none;width:64%;align-self:center;}
+    .ind-body{flex:none;gap:10px;}
+    .ind-text{font-size:15px;}
+  }
   /* Responsiv mobilanpassning */
   @media (max-width:820px){
     [data-rnav]{display:none!important;}
@@ -234,7 +668,7 @@
     [data-rgrid4]{grid-template-columns:repeat(2,1fr)!important;}
     [data-rgrid3]{grid-template-columns:1fr!important;}
     [data-rrow]{flex-direction:column!important;align-items:stretch!important;}
-    [data-rhero-h1]{font-size:30px!important;}
+    [data-rhero-h1]{font-size:50px!important;}
     [data-rhero-title]{font-size:26px!important;}
     [data-rsection-h2]{font-size:23px!important;}
     [data-rpad]{padding-left:16px!important;padding-right:16px!important;}
@@ -242,11 +676,9 @@
     [data-rmt]{margin-top:56px!important;}
     [data-rbtnfull] a, [data-rbtnfull] button{width:100%!important;box-sizing:border-box!important;text-align:center!important;}
     /* Formulärknappar: långa, staplade och centrerade i mobilläge */
-    #wz-btnrow{flex-direction:column!important;align-items:stretch!important;gap:12px!important;}
-    #wz-btnrow button{width:100%!important;box-sizing:border-box!important;text-align:center!important;justify-content:center!important;}
+    .wz-btnrow{flex-direction:column!important;align-items:stretch!important;gap:12px!important;}
+    .wz-btnrow button{width:100%!important;box-sizing:border-box!important;text-align:center!important;justify-content:center!important;}
     [data-rimg]{flex:none!important;width:100%!important;height:260px!important;margin:0!important;}
-    #portfolio [data-rimg]{width:100%!important;height:auto!important;aspect-ratio:16/9;margin:0!important;border-radius:16px;overflow:hidden;}
-    #portfolio #pf-img{object-fit:cover!important;transform:scale(1.05);}
     [data-rpanelpad]{padding:26px!important;}
     [data-rhide]{display:none!important;}
     [data-rshow]{display:block!important;}
@@ -259,6 +691,7 @@
   }
   @media (max-width:520px){
     [data-rgrid4]{grid-template-columns:1fr!important;}
+    [data-rhero-h1]{font-size:40px!important;line-height:1.08!important;}
   }
 </style>
 <script type="application/ld+json">
@@ -548,137 +981,329 @@
   </div>
 
   <!-- HERO -->
-  <div style="max-width:820px;margin:60px auto 0;text-align:center;padding:0 20px;">
-    <h1 data-rhero-h1 style="font-size:44px;line-height:1.15;font-weight:800;color:#0F172A;margin:0 0 20px;letter-spacing:-0.01em;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">En hemsida som känns lika professionell som ditt företag.</h1>
-    <p style="font-size:17px;line-height:1.6;color:#52657A;margin:0 0 32px;font-weight:500;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;">Vi hjälper småföretag att bli hittade, bygga förtroende och göra det enkelt för rätt kunder att boka, köpa eller ta kontakt.</p>
-    <div data-rrow data-rbtnfull style="display:flex;justify-content:center;gap:14px;margin-bottom:16px;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.32s forwards;">
-      <a href="#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få en gratis genomgång</a>
-      <a href="#portfolio" class="btn-lift lift-ghost" style="background:#fff;color:#0F172A;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;border:1px solid rgba(15,23,42,0.08);">Se våra case</a>
+  <div style="max-width:1040px;margin:72px auto 0;text-align:center;padding:0 20px;">
+    <h1 data-rhero-h1 class="hero-h1" style="opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">Hemsidor som blir <span class="hw hw-1" data-w="hittade,">hittade,</span> <span class="hw hw-2" data-w="förstådda">förstådda</span> och <span class="hw hw-3" data-w="valda.">valda.</span></h1>
+    <p class="hero-lead" style="opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;">Vi hjälper småföretag att skapa en professionell närvaro som bygger förtroende och gör det enkelt för rätt kunder att boka, köpa eller ta kontakt.</p>
+    <div class="hero-form" style="opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.32s forwards;">
+      <div class="wz-shell" data-wz-mount="hero"></div>
+      <ul class="wz-perks">
+        <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Anpassat efter ditt företag</li>
+        <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Personlig återkoppling</li>
+        <li><a class="wz-rating" href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" aria-label="Betyg 5,0 av 5 på Google – öppnar våra omdömen i en ny flik"><span class="wz-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></span>5,0 på Google</a></li>
+      </ul>
     </div>
-    <div style="margin-bottom:16px;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.36s forwards;">
-      <a href="/seo-koll" style="display:inline-flex;align-items:center;gap:6px;color:#146EF5;font-size:14px;font-weight:700;text-decoration:none;">Se hur din hemsida syns på Google →</a>
-    </div>
-    <div style="font-size:13px;color:#52657A;font-weight:600;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;">Fast pris &nbsp;·&nbsp; Personlig hjälp &nbsp;·&nbsp; Tidsplan innan projektstart</div>
-    <p style="font-size:14px;color:#7C8CA3;font-weight:500;margin:18px 0 0;opacity:0;animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.48s forwards;">Studio Klaro är en webbyrå i Stockholm för småföretag som vill synas professionellt online – utan att betala för en stor byrås omkostnader.</p>
   </div>
 
-  <!-- VARFÖR -->
-  <section id="varfor" aria-labelledby="varfor-h2" style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
-    <div data-reveal data-rgrid style="background:#0F172A;border-radius:24px;padding:48px 56px;box-shadow:0 20px 50px rgba(15,23,42,0.2);display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;">
-      <div>
-        <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;">Varför det spelar roll</div>
-        <h2 id="varfor-h2" style="font-size:26px;font-weight:800;color:#fff;margin:0 0 14px;line-height:1.3;">Bli hittad. Bli förstådd. Bli vald.</h2>
-        <p style="font-size:15px;color:#B7C6DB;line-height:1.6;margin:0 0 20px;">När en potentiell kund söker efter det du erbjuder jämför de ofta flera företag. På några sekunder avgörs om verksamheten känns relevant, pålitlig och enkel att anlita. En tydlig och genomarbetad hemsida hjälper rätt kunder att hitta dig, förstå ditt erbjudande och ta nästa steg.</p>
-        <p style="font-size:15px;font-weight:700;color:#fff;line-height:1.6;margin:0 0 24px;">Resultatet är en hemsida som inte bara ser bra ut, utan som arbetar för verksamheten.</p>
-        <a href="#kontakt" class="btn-lift lift-dark" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:14px 24px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.35);">Få en gratis genomgång</a>
-      </div>
-      <div data-rgrid4 style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-        <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:20px;">
-          <svg width="26" height="26" viewBox="0 0 40 40" style="margin-bottom:12px;"><circle cx="15" cy="20" r="11" fill="#146EF5" opacity="0.55"></circle><circle cx="25" cy="20" r="11" fill="#146EF5"></circle></svg>
-          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Hittas lättare</div>
-          <div style="font-size:12.5px;color:#B7C6DB;line-height:1.5;">Rätt innehåll och lokal SEO gör dig synlig när behovet finns.</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:20px;">
-          <svg width="26" height="26" viewBox="0 0 40 40" style="margin-bottom:12px;"><circle cx="20" cy="13" r="9" fill="#146EF5"></circle><circle cx="20" cy="28" r="9" fill="#146EF5" opacity="0.55"></circle></svg>
-          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Bygger förtroende</div>
-          <div style="font-size:12.5px;color:#B7C6DB;line-height:1.5;">Ett professionellt första intryck visar att företaget är seriöst.</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:20px;">
-          <svg width="26" height="26" viewBox="0 0 40 40" style="margin-bottom:12px;"><circle cx="14" cy="14" r="9" fill="#146EF5" opacity="0.55"></circle><circle cx="26" cy="26" r="9" fill="#146EF5"></circle></svg>
-          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Gör valet enklare</div>
-          <div style="font-size:12.5px;color:#B7C6DB;line-height:1.5;">Tjänster, priser och fördelar blir tydliga direkt.</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:20px;">
-          <svg width="26" height="26" viewBox="0 0 40 40" style="margin-bottom:12px;"><circle cx="14" cy="26" r="9" fill="#146EF5" opacity="0.55"></circle><circle cx="26" cy="14" r="9" fill="#146EF5"></circle></svg>
-          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Sparar tid</div>
-          <div style="font-size:12.5px;color:#B7C6DB;line-height:1.5;">Bokning, kontaktuppgifter och vanliga frågor finns tillgängliga även när du är upptagen.</div>
-        </div>
-      </div>
+  <!-- BRANSCHER (horisontell karusell med scroll snap). Bakgrundsfoto för salong: Pexels (fri licens) – foto 7750099. -->
+  <section id="branscher" class="ind" aria-labelledby="ind-title">
+    <div class="ind-head" data-reveal>
+      <div class="ind-eyebrow">HEMSIDOR FÖR SMÅFÖRETAG</div>
+      <h2 id="ind-title" class="ind-h2">Hemsidor byggda för din bransch.</h2>
+      <p class="ind-lead">Utforska exempel anpassade efter olika verksamheter, kundresor och mål.</p>
+    </div>
+
+    <div class="ind-viewport" data-reveal>
+      <ul id="ind-track" class="ind-track" tabindex="0" aria-label="Branscher – använd piltangenterna för att bläddra">
+        <li class="ind-item">
+          <a class="ind-card ind-card--frisor" href="/hemsida-frisor-stockholm">
+            <img class="ind-bg" src="/branscher/frisor-barber-1672.webp" srcset="/branscher/frisor-barber-960.webp 960w, /branscher/frisor-barber-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 40%;">
+            <span class="ind-shade" aria-hidden="true"></span>
+            <span class="ind-row">
+              <span class="ind-devices">
+                <img src="/branscher/chairman-devices.webp" alt="Hemsidan som Studio Klaro byggt för The Chairman Barber i Vasastan, visad på dator och mobil" width="1017" height="580" loading="lazy" decoding="async" draggable="false">
+              </span>
+              <span class="ind-body">
+                <span class="ind-tag">Kundcase · The Chairman Barber</span>
+                <h3 class="ind-name">Frisör &amp; barberare</h3>
+                <span class="ind-text">Fyll fler stolar med tydlig information och enkel bokning.</span>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li class="ind-item">
+          <a class="ind-card ind-card--salong" href="/hemsida-skonhetssalong-stockholm">
+            <img class="ind-bg" src="/branscher/salong-1920.webp" srcset="/branscher/salong-960.webp 960w, /branscher/salong-1920.webp 1920w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:50% 55%;">
+            <span class="ind-shade" aria-hidden="true"></span>
+            <span class="ind-row">
+              <span class="ind-devices">
+                <span class="dv dv--salong" role="img" aria-label="Illustrerat webbkoncept för en skönhetssalong med behandlingar, priser och bokningsknapp, visat på dator och mobil">
+                  <span class="dv-lap" aria-hidden="true"><span class="dv-lid"><span class="dv-screen"><span class="cs-page"><span class="cs-nav"><b>Salongen</b><span>Behandlingar</span><span>Om oss</span><em>Boka tid</em></span><span class="cs-t">Tid för dig.</span><span class="cs-s">Ansiktsbehandlingar, fransar och bryn i lugn miljö.</span><span class="cs-list"><span><b>Ansiktsbehandling</b><i>60 min · 895 kr</i></span><span><b>Fransförlängning</b><i>90 min · 1 195 kr</i></span><span><b>Brynstyling</b><i>30 min · 395 kr</i></span></span></span></span></span><span class="dv-base"></span></span>
+                  <span class="dv-phone" aria-hidden="true"><span class="dv-pscreen"><span class="cs-page cs-m"><span class="cs-nav"><b>Salongen</b><span class="cs-burger"></span></span><span class="cs-t">Tid för dig.</span><span class="cs-s">Ansiktsbehandlingar, fransar och bryn.</span><em class="cs-btn">Boka tid</em><span class="cs-list"><span><b>Ansiktsbehandling</b><i>60 min · 895 kr</i></span><span><b>Fransförlängning</b><i>90 min · 1 195 kr</i></span></span></span></span></span>
+                </span>
+              </span>
+              <span class="ind-body">
+                <span class="ind-tag">Webbkoncept för salonger</span>
+                <h3 class="ind-name">Salong &amp; skönhet</h3>
+                <span class="ind-text">Gör behandlingarna lätta att förstå och tiden enkel att boka.</span>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li class="ind-item">
+          <a class="ind-card ind-card--restaurang" href="/hemsida-restaurang-stockholm">
+            <img class="ind-bg" src="/branscher/restaurang-1920.webp" srcset="/branscher/restaurang-960.webp 960w, /branscher/restaurang-1920.webp 1920w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:50% 62%;">
+            <span class="ind-shade" aria-hidden="true"></span>
+            <span class="ind-row">
+              <span class="ind-devices">
+                <span class="dv dv--sera" role="img" aria-label="Webbkonceptet SERA – en fiktiv italiensk restaurang på Södermalm – visat på dator och mobil">
+                  <span class="dv-lap" aria-hidden="true"><span class="dv-lid"><span class="dv-screen"><img src="/demo/sera-media/sera-preview-1100.webp" alt="" loading="lazy" decoding="async" draggable="false"></span></span><span class="dv-base"></span></span>
+                  <span class="dv-phone" aria-hidden="true"><span class="dv-pscreen"><img src="/demo/sera-media/hero-768.webp" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:38% 50%;"><span class="sera-m"><span class="sera-m-logo">Sera</span><span class="sera-m-t">SERA — italiensk restaurang på Södermalm</span><em>Boka bord</em></span></span></span>
+                </span>
+              </span>
+              <span class="ind-body">
+                <span class="ind-tag">Webbkoncept för restauranger</span>
+                <h3 class="ind-name">Restaurang &amp; café</h3>
+                <span class="ind-text">Visa känslan, menyn och vägen till bokning.</span>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li class="ind-item">
+          <a class="ind-card ind-card--butik" href="#kontakt">
+            <img class="ind-bg" src="/branscher/butik-shop-1672.webp" srcset="/branscher/butik-shop-960.webp 960w, /branscher/butik-shop-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 40%;">
+            <span class="ind-shade" aria-hidden="true"></span>
+            <span class="ind-row">
+              <span class="ind-devices">
+                <img src="/branscher/itreon-devices.webp" alt="Itreon Market – B2B-marknadsplatsen som Studio Klaro designat och utvecklat, visad på dator och mobil" width="1017" height="580" loading="lazy" decoding="async" draggable="false">
+              </span>
+              <span class="ind-body">
+                <span class="ind-tag">Kundcase · Itreon Market</span>
+                <h3 class="ind-name">Butik &amp; e-handel</h3>
+                <span class="ind-text">Gör produkter enkla att upptäcka och köpa.</span>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li class="ind-item">
+          <a class="ind-card ind-card--fotograf" href="/hemsida-fotograf">
+            <img class="ind-bg" src="/branscher/fotograf-1920.webp" srcset="/branscher/fotograf-960.webp 960w, /branscher/fotograf-1920.webp 1920w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:50% 28%;">
+            <span class="ind-shade" aria-hidden="true"></span>
+            <span class="ind-row">
+              <span class="ind-devices">
+                <img src="/branscher/galleri86-devices.webp" alt="Hemsidan som Studio Klaro byggt för Galleri86 på Södermalm, visad på dator och mobil" width="1017" height="580" loading="lazy" decoding="async" draggable="false">
+              </span>
+              <span class="ind-body">
+                <span class="ind-tag">Kundcase · Galleri86</span>
+                <h3 class="ind-name">Fotograf &amp; kreatör</h3>
+                <span class="ind-text">Låt arbetet stå i centrum och gör det enkelt att ta kontakt.</span>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li class="ind-item">
+          <a class="ind-card ind-card--konsult" href="#kontakt">
+            <img class="ind-bg" src="/branscher/konsult-office-1672.webp" srcset="/branscher/konsult-office-960.webp 960w, /branscher/konsult-office-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 38%;">
+            <span class="ind-shade" aria-hidden="true"></span>
+            <span class="ind-row">
+              <span class="ind-devices">
+                <span class="dv dv--konsult" role="img" aria-label="Illustrerat webbkoncept för ett konsultföretag med tjänster och knapp för att boka samtal, visat på dator och mobil">
+                  <span class="dv-lap" aria-hidden="true"><span class="dv-lid"><span class="dv-screen"><span class="cs-page"><span class="cs-nav"><b>Byrån</b><span>Tjänster</span><span>Om oss</span><em>Boka samtal</em></span><span class="cs-t">Tydliga beslut. Mätbara resultat.</span><span class="cs-s">Strategi och ekonomi för växande småföretag.</span><span class="cs-list"><span><b>Strategi</b><i>Affärsplan och mål</i></span><span><b>Ekonomi</b><i>Budget och prognos</i></span><span><b>Process</b><i>Från idé till plan</i></span></span></span></span></span><span class="dv-base"></span></span>
+                  <span class="dv-phone" aria-hidden="true"><span class="dv-pscreen"><span class="cs-page cs-m"><span class="cs-nav"><b>Byrån</b><span class="cs-burger"></span></span><span class="cs-t">Tydliga beslut. Mätbara resultat.</span><span class="cs-s">Strategi och ekonomi för småföretag.</span><em class="cs-btn">Boka samtal</em><span class="cs-list"><span><b>Strategi</b><i>Affärsplan och mål</i></span><span><b>Ekonomi</b><i>Budget och prognos</i></span></span></span></span></span>
+                </span>
+              </span>
+              <span class="ind-body">
+                <span class="ind-tag">Webbkoncept för tjänsteföretag</span>
+                <h3 class="ind-name">Konsult &amp; tjänsteföretag</h3>
+                <span class="ind-text">Förklara värdet tydligt och omvandla besökare till förfrågningar.</span>
+              </span>
+            </span>
+          </a>
+        </li>
+      </ul>
     </div>
   </section>
 
-  <!-- TJÄNSTEN -->
-  <div id="tjansten" style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
-    <div style="text-align:center;margin-bottom:48px;">
-      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Allt du behöver för att synas professionellt online</h2>
-      <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Hos Studio Klaro får du hemsida, visuell identitet och teknisk uppsättning samlat på ett ställe. En genomtänkt helhet som gör företaget lättare att hitta, förstå och välja.</p>
+  <!-- BYGGD FÖR RESULTAT (bento). Ersätter "Varför det spelar roll" och "Allt du behöver …".
+       Alla illustrationer är UI-exempel: inga verkliga siffror, kunder eller resultat. -->
+  <section id="tjansten" class="bento" aria-labelledby="bento-title">
+    <div class="bento-head" data-reveal>
+      <div class="bento-eyebrow">BYGGD FÖR RESULTAT</div>
+      <h2 id="bento-title" class="bento-h2">En hemsida som arbetar för företaget.</h2>
+      <p class="bento-lead">Studio Klaro samlar design, synlighet och tydliga kundvägar i en genomtänkt helhet – så att fler kan hitta, förstå och välja ditt företag.</p>
     </div>
-    <div data-rgrid4 style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
-      <div data-reveal class="card-serv" style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
-        <svg width="32" height="32" viewBox="0 0 40 40" style="margin-bottom:16px;"><circle cx="15" cy="20" r="11" fill="#146EF5" opacity="0.55"></circle><circle cx="25" cy="20" r="11" fill="#146EF5"></circle></svg>
-        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Hemsida</div>
-        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">En genomtänkt hemsida som kombinerar design, innehåll och funktion – byggd kring ditt företag och det du vill uppnå.</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#0F172A;font-weight:600;">
-          <div>✓ Design och struktur anpassad efter företaget</div><div>✓ Tydliga kundresor och vägar till kontakt</div><div>✓ Innehåll som presenterar erbjudandet övertygande</div><div>✓ Bokning, formulär och integrationer efter behov</div><div>✓ Snabb, responsiv och byggd för att kunna utvecklas</div>
-        </div>
-      </div>
-      <div data-reveal class="card-serv" style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
-        <svg width="32" height="32" viewBox="0 0 40 40" style="margin-bottom:16px;"><circle cx="20" cy="13" r="9" fill="#146EF5"></circle><circle cx="20" cy="28" r="9" fill="#146EF5" opacity="0.55"></circle></svg>
-        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Visuellt uttryck</div>
-        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">Vi formar färger, typografi och bildval så att hemsidan känns enhetlig och professionell.</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#0F172A;font-weight:600;">
-          <div>✓ Färgpalett för webben</div><div>✓ Typsnitt och typografi</div><div>✓ Sammanhållet bilduttryck</div><div>✓ Anpassning av befintligt visuellt material</div><div>✓ Rådgivning kring logotyp vid behov</div>
-        </div>
-      </div>
-      <div data-reveal class="card-serv" style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
-        <svg width="32" height="32" viewBox="0 0 40 40" style="margin-bottom:16px;"><circle cx="14" cy="14" r="9" fill="#146EF5" opacity="0.55"></circle><circle cx="26" cy="26" r="9" fill="#146EF5"></circle></svg>
-        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Domän och teknik</div>
-        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">Den tekniska grunden som behövs för att hemsidan ska fungera och vara redo att lanseras.</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#0F172A;font-weight:600;">
-          <div>✓ Hjälp att välja och koppla domän</div><div>✓ Koppling till webbplattform</div><div>✓ Hjälp att koppla företagsmejl</div><div>✓ Grundläggande teknisk uppsättning</div><div>✓ Slutkontroll och publicering</div>
-        </div>
-      </div>
-      <div data-reveal class="card-serv" style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
-        <svg width="32" height="32" viewBox="0 0 40 40" style="margin-bottom:16px;"><circle cx="14" cy="26" r="9" fill="#146EF5" opacity="0.55"></circle><circle cx="26" cy="14" r="9" fill="#146EF5"></circle></svg>
-        <div style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px;">Google och synlighet</div>
-        <div style="font-size:13px;color:#52657A;line-height:1.55;margin-bottom:16px;">En tydlig grund som hjälper fler lokala kunder att hitta företaget.</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#0F172A;font-weight:600;">
-          <div>✓ Hjälp med företagets Google-profil</div><div>✓ Optimering av information, kategorier och öppettider</div><div>✓ Lokal SEO på hemsidan</div><div>✓ Bättre grund för synlighet på Google och Maps</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- PORTFOLIO -->
-  <div id="portfolio" style="max-width:1140px;margin:80px auto 0;padding:0 20px;">
-    <div style="text-align:center;margin-bottom:24px;">
-      <div style="font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Portfolio</div>
-      <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0;">Saker vi har gjort</h2>
-    </div>
-    <!-- Första caset är förrenderat så att innehållet finns i HTML:en även utan JavaScript; skriptet längre ner tar över och ritar samma sak. -->
-    <div id="pf-tabs" role="tablist" aria-label="Utvalda projekt" style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;"><button type="button" class="pf-tab" id="pf-tab-0" role="tab" aria-selected="true" aria-controls="pf-panel" tabindex="0" data-i="0" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid #146EF5;cursor:pointer;transition:all 0.2s ease;background:#146EF5;color:#fff;">The Chairman Barber</button><button type="button" class="pf-tab" id="pf-tab-1" role="tab" aria-selected="false" aria-controls="pf-panel" tabindex="-1" data-i="1" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">Galleri86</button><button type="button" class="pf-tab" id="pf-tab-2" role="tab" aria-selected="false" aria-controls="pf-panel" tabindex="-1" data-i="2" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">SERA</button><button type="button" class="pf-tab" id="pf-tab-3" role="tab" aria-selected="false" aria-controls="pf-panel" tabindex="-1" data-i="3" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">Itreon Market</button></div>
-    <div id="pf-panel" role="tabpanel" aria-labelledby="pf-tab-0" data-reveal data-rgrid data-rpanelpad style="background:#0F172A;border-radius:24px;padding:56px;display:grid;grid-template-columns:0.72fr 1.5fr;gap:28px;align-items:center;overflow:hidden;">
-      <div>
-        <div id="pf-cat" style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8fa3bd;margin-bottom:16px;">Kundcase · Webbdesign &amp; Utveckling</div>
-        <h3 id="pf-name" style="font-size:28px;font-weight:800;color:#fff;margin:0 0 18px;line-height:1.2;height:40px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">The Chairman Barber</h3>
-        <p id="pf-desc" style="font-size:14px;color:#B7C6DB;line-height:1.65;margin:0 0 22px;">Vi tog fram en ny digital identitet och hemsida för The Chairman Barber i Vasastan — med fokus på en exklusiv känsla, tydlig struktur och en enkel väg till bokning. Designen kombinerar barbershopens klassiska karaktär med ett modernt digitalt uttryck.</p>
-        <div id="pf-tags" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;min-height:31px;"><div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">Webdesign</div><div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">Responsiv</div><div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">SEO</div><div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">Bokningsflöde</div></div>
-        <a id="pf-link" href="https://www.thechairmanbarber.se" target="_blank" rel="noopener noreferrer" class="btn-lift lift-orange" style="display:inline-block;margin-top:14px;background:#C8663D;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;">Besök hemsidan</a>
-        <a id="pf-related" href="/hemsida-frisor-stockholm" style="display:block;margin-top:16px;font-size:13px;font-weight:700;color:#8FC0FF;text-decoration:none;">Så bygger vi hemsidor för frisörer och barberare <span aria-hidden="true">→</span></a>
-      </div>
-      <div data-rimg style="height:500px;margin:0 -56px 0 0;">
-        <img id="pf-img" src="/thechairman.webp" alt="Hemsida designad för The Chairman Barber" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;">
-        <div id="pf-imgph" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;text-align:center;background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.2);border-radius:16px;color:#8fa3bd;font-size:14px;font-weight:600;padding:24px;box-sizing:border-box;"></div>
-        <a id="pf-embed" href="#" target="_blank" rel="noopener noreferrer" style="display:none;flex-direction:column;width:100%;height:100%;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.4);text-decoration:none;">
-          <div style="background:#0F172A;padding:10px 14px;display:flex;align-items:center;gap:8px;flex:none;">
-            <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#22C55E;"></div>
+    <div class="bento-grid">
+      <!-- Synlighet (stort mittenkort). Står först i DOM:en = först i läsordningen och på mobil. -->
+      <article class="bento-card bento-card--seo" data-reveal>
+        <div class="bc-art bc-chart">
+          <div class="bc-chart-top" aria-hidden="true">
+            <span class="bc-pill bc-pill--muted">Illustrativ utveckling</span>
+            <span class="bc-chips"><span>Google</span><span>Maps</span><span>AI-sök</span></span>
           </div>
-          <div style="flex:1;position:relative;background:#fff;">
-            <iframe id="pf-iframe" title="Live-förhandsvisning" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;"></iframe>
+          <!-- Interaktiv graf: dra, hovra eller använd piltangenterna. Värdena är illustrativa, inte kundresultat. -->
+          <div class="kc-plot" id="kc-plot" role="slider" tabindex="0" aria-label="Illustrativt synlighetsindex per månad" aria-valuemin="1" aria-valuemax="9" aria-valuenow="9" aria-valuetext="September, synlighetsindex 76" data-points="[{&quot;m&quot;: &quot;Januari&quot;, &quot;v&quot;: 18, &quot;e&quot;: &quot;Ny webbplats publicerad&quot;}, {&quot;m&quot;: &quot;Februari&quot;, &quot;v&quot;: 25, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Mars&quot;, &quot;v&quot;: 34, &quot;e&quot;: &quot;Google-profil optimerad&quot;}, {&quot;m&quot;: &quot;April&quot;, &quot;v&quot;: 30, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Maj&quot;, &quot;v&quot;: 44, &quot;e&quot;: &quot;Lokala tjänstesidor lanserade&quot;}, {&quot;m&quot;: &quot;Juni&quot;, &quot;v&quot;: 53, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Juli&quot;, &quot;v&quot;: 49, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Augusti&quot;, &quot;v&quot;: 68, &quot;e&quot;: &quot;Innehåll och SEO uppdaterat&quot;}, {&quot;m&quot;: &quot;September&quot;, &quot;v&quot;: 76, &quot;e&quot;: &quot;&quot;}]">
+            <svg class="kc-svg" viewBox="0 0 600 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="kc-area-fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#146EF5" stop-opacity="0.16"/>
+                  <stop offset="1" stop-color="#146EF5" stop-opacity="0"/>
+                </linearGradient>
+                <clipPath id="kc-clip"><rect class="kc-clip-rect" x="0" y="0" width="600" height="300"/></clipPath>
+              </defs>
+              <g stroke="#0F172A" stroke-opacity="0.07" stroke-width="1">
+                <line x1="0" y1="50" x2="600" y2="50" vector-effect="non-scaling-stroke"/><line x1="0" y1="120" x2="600" y2="120" vector-effect="non-scaling-stroke"/><line x1="0" y1="190" x2="600" y2="190" vector-effect="non-scaling-stroke"/><line x1="0" y1="260" x2="600" y2="260" vector-effect="non-scaling-stroke"/>
+              </g>
+              <g clip-path="url(#kc-clip)">
+                <path class="kc-area" d="M30.0,237.8 C52.5,230.7 75.0,224.6 97.5,216.6 C120.0,208.5 142.5,189.3 165.0,189.3 C187.5,189.3 210.0,201.4 232.5,201.4 C255.0,201.4 277.5,170.6 300.0,159.0 C322.5,147.4 345.0,131.8 367.5,131.8 C390.0,131.8 412.5,143.9 435.0,143.9 C457.5,143.9 480.0,100.0 502.5,86.3 C525.0,72.7 547.5,70.2 570.0,62.1 L570.0,300 L30.0,300 Z" fill="url(#kc-area-fill)"/>
+                <path class="kc-line" d="M30.0,237.8 C52.5,230.7 75.0,224.6 97.5,216.6 C120.0,208.5 142.5,189.3 165.0,189.3 C187.5,189.3 210.0,201.4 232.5,201.4 C255.0,201.4 277.5,170.6 300.0,159.0 C322.5,147.4 345.0,131.8 367.5,131.8 C390.0,131.8 412.5,143.9 435.0,143.9 C457.5,143.9 480.0,100.0 502.5,86.3 C525.0,72.7 547.5,70.2 570.0,62.1" fill="none" stroke="#146EF5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              </g>
+            </svg>
+            <span class="kc-guide" aria-hidden="true"></span>
+            <span class="kc-dots" aria-hidden="true"><span class="kc-dot kc-dot--event" style="left:5.000%;top:79.257%;"></span><span class="kc-dot" style="left:16.250%;top:72.190%;"></span><span class="kc-dot kc-dot--event" style="left:27.500%;top:63.105%;"></span><span class="kc-dot" style="left:38.750%;top:67.143%;"></span><span class="kc-dot kc-dot--event" style="left:50.000%;top:53.010%;"></span><span class="kc-dot" style="left:61.250%;top:43.924%;"></span><span class="kc-dot" style="left:72.500%;top:47.962%;"></span><span class="kc-dot kc-dot--event" style="left:83.750%;top:28.781%;"></span><span class="kc-dot" style="left:95.000%;top:20.705%;"></span></span>
+            <span class="kc-active" aria-hidden="true"></span>
+            <span class="kc-tip" aria-hidden="true"><span class="kc-tip-m">September</span><b class="kc-tip-v">76</b><span class="kc-tip-l">Synlighetsindex</span><span class="kc-tip-e"></span></span>
+            <span class="kc-event" aria-hidden="true"><span class="kc-event-k">HÄNDELSE</span><b class="kc-event-t"></b></span>
           </div>
-        </a>
+          <div class="kc-months" aria-hidden="true"><span style="left:5.000%;">Jan</span><span style="left:16.250%;">Feb</span><span style="left:27.500%;">Mars</span><span style="left:38.750%;">April</span><span style="left:50.000%;">Maj</span><span style="left:61.250%;">Juni</span><span style="left:72.500%;">Juli</span><span style="left:83.750%;">Aug</span><span style="left:95.000%;">Sep</span></div>
+          <ul class="sr-only"><li>Januari: synlighetsindex 18. Händelse: Ny webbplats publicerad.</li><li>Februari: synlighetsindex 25.</li><li>Mars: synlighetsindex 34. Händelse: Google-profil optimerad.</li><li>April: synlighetsindex 30.</li><li>Maj: synlighetsindex 44. Händelse: Lokala tjänstesidor lanserade.</li><li>Juni: synlighetsindex 53.</li><li>Juli: synlighetsindex 49.</li><li>Augusti: synlighetsindex 68. Händelse: Innehåll och SEO uppdaterat.</li><li>September: synlighetsindex 76.</li></ul>
+        </div>
+        <div class="bc-body">
+          <h3 class="bc-title">Synlighet som går att följa</h3>
+          <p class="bc-text">En stabil grund för Google, Maps och AI-sök – byggd för att rätt kunder ska kunna hitta dig.</p>
+        </div>
+      </article>
+
+      <!-- Visuellt uttryck -->
+      <article class="bento-card bento-card--brand" data-reveal>
+        <div class="bc-art bc-stack vi" data-id="0" role="img" aria-label="Illustration: en webbvy, en färgpalett och ett typografikort som växlar mellan fyra visuella identiteter.">
+          <span class="bs-card bs-web" aria-hidden="true">
+            <span class="bs-bar"><i></i><i></i><i></i></span>
+            <span class="bs-hero">
+              <span class="vi-stack vi-h"><span class="vi-v" data-v="0">Välkommen</span><span class="vi-v" data-v="1">Välkommen</span><span class="vi-v" data-v="2">Välkommen</span><span class="vi-v" data-v="3">Välkommen</span></span>
+              <em></em>
+              <span class="bs-btn"></span>
+            </span>
+            <span class="bs-lines"><i></i><i></i></span>
+          </span>
+          <span class="bs-card bs-palette" aria-hidden="true">
+            <span class="bs-sw bs-sw1"></span><span class="bs-sw bs-sw2"></span><span class="bs-sw bs-sw3"></span><span class="bs-sw bs-sw4"></span>
+            <span class="bs-cap">Färgpalett</span>
+          </span>
+          <span class="bs-card bs-brandcard" aria-hidden="true">
+            <svg width="30" height="20" viewBox="0 0 40 26"><circle class="bs-logo-a" cx="13" cy="13" r="11"/><circle class="bs-logo-b" cx="27" cy="13" r="11"/></svg>
+            <span class="vi-stack bs-aa"><span class="vi-v" data-v="0">Aa</span><span class="vi-v" data-v="1">Aa</span><span class="vi-v" data-v="2">Aa</span><span class="vi-v" data-v="3">Aa</span></span>
+            <span class="vi-stack bs-cap"><span class="vi-v" data-v="0">Modern &amp; professionell</span><span class="vi-v" data-v="1">Varm &amp; redaktionell</span><span class="vi-v" data-v="2">Naturlig &amp; lugn</span><span class="vi-v" data-v="3">Kreativ &amp; uttrycksfull</span></span>
+          </span>
+        </div>
+        <div class="bc-body">
+          <h3 class="bc-title">Ett starkare första intryck</h3>
+          <p class="bc-text">Ett sammanhållet visuellt uttryck gör företaget lättare att känna igen och lita på.</p>
+        </div>
+      </article>
+
+      <!-- Bokningar -->
+      <article class="bento-card bento-card--booking" data-reveal>
+        <div class="bc-art bc-bookings" role="img" aria-label="Illustrativa exempel på två bokningar: en kostnadsfri genomgång på torsdag klockan 11 och en ny bokning på onsdag klockan 14.">
+          <span class="bk bk--back" aria-hidden="true">
+            <span class="bk-when">Onsdag · 14:00</span>
+            <span class="bk-what">Ny bokning</span>
+            <span class="bk-meta"><span class="bk-tag">Hemsida</span></span>
+          </span>
+          <span class="bk bk--front" aria-hidden="true">
+            <span class="bk-when"><svg width="14" height="14" viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 6.5h13M5 1v3M11 1v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Torsdag · 11:00</span>
+            <span class="bk-what">Kostnadsfri genomgång</span>
+            <span class="bk-meta"><span class="bk-tag">30 min</span><span class="bk-status">Bekräftad</span></span>
+          </span>
+        </div>
+        <div class="bc-body">
+          <h3 class="bc-title">Enklare bokningar</h3>
+          <p class="bc-text">Låt kunder boka, köpa eller ta kontakt direkt från hemsidan.</p>
+        </div>
+      </article>
+
+      <!-- Kundupplevelse: aspirerande KPI – vad en tydlig hemsida skapar förutsättningar för (inget löfte, inga recensioner). -->
+      <article class="bento-card bento-card--rating" data-reveal>
+        <div class="bc-art cx">
+          <div class="cx-score">
+            <span class="cx-num" aria-hidden="true">5,0</span>
+            <span class="cx-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg></span>
+            <span class="sr-only">Målbild: 5,0 av 5 stjärnor.</span>
+          </div>
+          <ul class="cx-factors">
+            <li><span class="cx-ic" aria-hidden="true"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tydlig information</li>
+            <li><span class="cx-ic" aria-hidden="true"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Enkel bokning</li>
+            <li><span class="cx-ic" aria-hidden="true"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Smidig kontakt</li>
+          </ul>
+        </div>
+        <div class="bc-body">
+          <span class="bc-kicker">KUNDUPPLEVELSE</span>
+          <h3 class="bc-title">Bygg för femstjärniga omdömen</h3>
+          <p class="bc-text">En tydlig hemsida och en smidig kundresa skapar bättre förutsättningar för nöjda kunder och starka omdömen.</p>
+        </div>
+      </article>
+
+      <!-- Kontakt och leads -->
+      <article class="bento-card bento-card--leads" data-reveal>
+        <div class="bc-art lf-wrap">
+          <p class="sr-only">Illustration: nya bokningar, förfrågningar och beställningar från olika typer av småföretag.</p>
+          <!-- Dekorativt flöde. De tre första händelserna är förrenderade; JS tar över och animerar. -->
+          <div class="lf" aria-hidden="true"><div class="lf-item" data-slot="0" style="--slot:0;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M2.5 4.5h11v9a1.5 1.5 0 0 1-1.5 1.5H4a1.5 1.5 0 0 1-1.5-1.5z M2.5 7.5h11 M5.5 2.5v3 M10.5 2.5v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny bokning</b><span>Klippning bokad</span></span><span class="lf-t">nu</span></div><div class="lf-item" data-slot="1" style="--slot:1;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M3 5.5h10l-.8 8.5H3.8z M5.8 5.5V4.5a2.2 2.2 0 0 1 4.4 0v1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny beställning</b><span>En produkt har beställts</span></span><span class="lf-t">8 min</span></div><div class="lf-item" data-slot="2" style="--slot:2;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M5 2v5.5M3.5 2v3.5a1.5 1.5 0 0 0 3 0V2M5 7.5V14M11.5 2c-1.4.6-2 2.3-2 4.5V9h2V14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny bordsbokning</b><span>Bord för fyra personer</span></span><span class="lf-t">nu</span></div></div>
+        </div>
+        <div class="bc-body">
+          <h3 class="bc-title">Tydligare vägar till kontakt</h3>
+          <p class="bc-text">Gör nästa steg enkelt när kundens intresse är som störst.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="bento-foot" data-reveal>
+      <p class="bento-services"><span>Webbdesign</span><span>Visuellt uttryck</span><span>Domän &amp; teknik</span><span>Lokal SEO</span></p>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO – kontinuerligt diagonalt projektband (CSS-animation) bakom två fasta informationslager. -->
+  <section id="portfolio" class="pfr-sec" aria-labelledby="pfr-title">
+    <div class="pfr-wide">
+      <div class="pfr-intro" data-reveal>
+        <div class="pfr-eyebrow">UTVALDA PROJEKT</div>
+        <h2 id="pfr-title" class="pfr-h2">Fyra företag. Fyra digitala uttryck.</h2>
+      </div>
+
+      <div class="pfr" id="pfr" data-reveal>
+        <div class="pfr-stage">
+          <!-- Yttre lager: roterar hela bandet. Inre track: rör sig linjärt uppåt. Kopiorna läggs till i JS. -->
+          <div class="pfr-band" id="pfr-band">
+            <div class="pfr-track" id="pfr-track">
+            <a class="pfr-item" href="https://www.thechairmanbarber.se" target="_blank" rel="noopener noreferrer">
+              <span class="pfr-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pfr-url">thechairmanbarber.se</span></span>
+              <span class="pfr-screen"><img src="/branscher/shot-chairman-1200.webp" srcset="/branscher/shot-chairman-800.webp 800w, /branscher/shot-chairman-1200.webp 1200w" sizes="(max-width: 820px) 90vw, 62vw" alt="Startsidan på The Chairman Barbers hemsida: mörk bakgrund, porträtt och knappen Boka tid" width="1200" height="675" decoding="async" draggable="false"></span>
+              <span class="pfr-ov"><span class="pfr-ov-name">The Chairman Barber</span><span class="pfr-ov-open">Öppna projekt <span aria-hidden="true">↗</span><span class="sr-only"> (öppnas i en ny flik)</span></span></span>
+            </a>
+            <a class="pfr-item" href="/case-galleri86">
+              <span class="pfr-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pfr-url">Galleri86</span></span>
+              <span class="pfr-screen"><img src="/branscher/shot-galleri-1200.webp" srcset="/branscher/shot-galleri-800.webp 800w, /branscher/shot-galleri-1200.webp 1200w" sizes="(max-width: 820px) 90vw, 62vw" alt="Startsidan på Galleri86:s hemsida med logotyp, introduktionstext och stora konstverk" width="1200" height="675" decoding="async" draggable="false"></span>
+              <span class="pfr-ov"><span class="pfr-ov-name">Galleri86</span><span class="pfr-ov-open">Öppna projekt <span aria-hidden="true">↗</span></span></span>
+            </a>
+            <a class="pfr-item" href="/demo/sera">
+              <span class="pfr-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pfr-url">SERA – koncept</span></span>
+              <span class="pfr-screen"><img src="/branscher/shot-sera-1200.webp" srcset="/branscher/shot-sera-800.webp 800w, /branscher/shot-sera-1200.webp 1200w" sizes="(max-width: 820px) 90vw, 62vw" alt="Startsidan på koncepthemsidan SERA: kvällsbild av en uteservering och rubriken SERA – italiensk restaurang på Södermalm" width="1200" height="675" decoding="async" draggable="false"></span>
+              <span class="pfr-ov"><span class="pfr-ov-name">SERA</span><span class="pfr-ov-open">Öppna projekt <span aria-hidden="true">↗</span></span></span>
+            </a>
+            <a class="pfr-item" href="https://market.itreon.eu" target="_blank" rel="noopener noreferrer">
+              <span class="pfr-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pfr-url">market.itreon.eu</span></span>
+              <span class="pfr-screen"><img src="/branscher/shot-itreon-1200.webp" srcset="/branscher/shot-itreon-800.webp 800w, /branscher/shot-itreon-1200.webp 1200w" sizes="(max-width: 820px) 90vw, 62vw" alt="Startsidan på Itreon Market med meny, rubriken Itreon Market och två mobiltelefoner" width="1200" height="675" decoding="async" draggable="false"></span>
+              <span class="pfr-ov"><span class="pfr-ov-name">Itreon Market</span><span class="pfr-ov-open">Öppna projekt <span aria-hidden="true">↗</span><span class="sr-only"> (öppnas i en ny flik)</span></span></span>
+            </a>
+            </div>
+          </div>
+        </div>
+        <div class="pfr-note">
+          <div class="pfr-note-k">HEMSIDOR FÖR SMÅFÖRETAG</div>
+          <p class="pfr-note-t">Designade för att göra det enklare att hitta, förstå och välja ditt företag.</p>
+        </div>
+        <aside class="pfr-panel" aria-label="Det här ingår">
+          <ul class="pfv-rows">
+            <li class="pfv-row is-open"><button type="button" class="pfv-row-btn" aria-expanded="true" aria-controls="pfr-row-0">Tydligare tjänster<span class="pfv-ic" aria-hidden="true"></span></button><div class="pfv-row-panel" id="pfr-row-0"><div><p>Besökaren förstår snabbt vad företaget erbjuder och varför det är relevant.</p></div></div></li>
+            <li class="pfv-row"><button type="button" class="pfv-row-btn" aria-expanded="false" aria-controls="pfr-row-1">Enklare bokning<span class="pfv-ic" aria-hidden="true"></span></button><div class="pfv-row-panel" id="pfr-row-1"><div><p>Tydliga nästa steg gör det lättare att boka eller skicka en förfrågan.</p></div></div></li>
+            <li class="pfv-row"><button type="button" class="pfv-row-btn" aria-expanded="false" aria-controls="pfr-row-2">Mobilanpassad<span class="pfv-ic" aria-hidden="true"></span></button><div class="pfv-row-panel" id="pfr-row-2"><div><p>Samma genomtänkta upplevelse på mobil, surfplatta och desktop.</p></div></div></li>
+            <li class="pfv-row"><button type="button" class="pfv-row-btn" aria-expanded="false" aria-controls="pfr-row-3">Starkare visuellt uttryck<span class="pfv-ic" aria-hidden="true"></span></button><div class="pfv-row-panel" id="pfr-row-3"><div><p>Designen anpassas efter företagets identitet och målgrupp.</p></div></div></li>
+            <li class="pfv-row"><button type="button" class="pfv-row-btn" aria-expanded="false" aria-controls="pfr-row-4">Synlighet från start<span class="pfv-ic" aria-hidden="true"></span></button><div class="pfv-row-panel" id="pfr-row-4"><div><p>Struktur och innehåll byggs för Google, Maps och AI-sök.</p></div></div></li>
+            <li class="pfv-row"><button type="button" class="pfv-row-btn" aria-expanded="false" aria-controls="pfr-row-5">Tydligare kontaktvägar<span class="pfv-ic" aria-hidden="true"></span></button><div class="pfv-row-panel" id="pfr-row-5"><div><p>Rätt kontaktmöjlighet visas när besökarens intresse är som störst.</p></div></div></li>
+          </ul>
+        </aside>
       </div>
     </div>
-    <noscript>
-      <ul style="list-style:none;margin:24px 0 0;padding:0;display:grid;gap:16px;">
-        <li style="background:#fff;border-radius:16px;padding:22px 26px;"><strong style="color:#0F172A;">Galleri86</strong> – Kundcase · Webbdesign, UX/UI &amp; CMS. Vi gjorde om Galleri86 på Södermalm från en enkel informationssida till en modern digital utställningsyta — med konsten i centrum och ett eget administrationssystem så galleriet kan uppdatera bilder, texter och utställningar helt utan kod. <a href="/case-galleri86" style="color:#146EF5;font-weight:700;">Visa case</a></li>
-        <li style="background:#fff;border-radius:16px;padding:22px 26px;"><strong style="color:#0F172A;">SERA</strong> – Koncepthemsida · Webbdesign &amp; UX/UI. SERA är en fiktiv italiensk restaurang på Södermalm som vi skapat för att visa hur en modern restauranghemsida kan se ut, kännas och fungera — med stämningsfull bildsättning, tydlig meny och en enkel väg till bordsbokning. <a href="/demo/sera" style="color:#146EF5;font-weight:700;">Utforska SERA</a> · <a href="/hemsida-restaurang-stockholm" style="color:#146EF5;font-weight:700;">Hemsidor för restauranger</a></li>
-        <li style="background:#fff;border-radius:16px;padding:22px 26px;"><strong style="color:#0F172A;">Itreon Market</strong> – Kundcase · UX/UI &amp; Webbutveckling. Vi designade och utvecklade Itreon Market — en digital B2B-marknadsplats för att presentera lager, deals och produktgradering på ett tydligt och förtroendeingivande sätt. <a href="https://market.itreon.eu" style="color:#146EF5;font-weight:700;">Besök hemsidan</a></li>
-      </ul>
-    </noscript>
-  </div>
+  </section>
 
   <!-- TESTIMONIALS -->
   <div id="referenser" style="max-width:1140px;margin:56px auto 0;padding:0 20px;">
@@ -911,137 +1536,116 @@
     </div>
   </div>
 
-  <!-- PRISER TEASER -->
-  <div style="max-width:1140px;margin:56px auto 0;padding:0 20px;" data-rpad>
-    <div data-reveal data-rpanelpad style="background:#fff;border-radius:28px;padding:56px 48px;box-shadow:0 10px 30px rgba(15,23,42,0.06);">
-      <div data-rgrid data-rgap style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:64px;align-items:center;">
-
-        <div data-rbtnfull>
-          <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;">Tydliga priser från start</div>
-          <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 12px;line-height:1.3;">Hitta nivån som passar ditt företag.</h2>
-          <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 28px;font-weight:500;">Se exakt vad som ingår och välj mellan direktbetalning eller Klaro Flex.</p>
-          <a href="/priser" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Se priser &amp; paket →</a>
-        </div>
-
-        <div>
-          <a href="/priser" class="price-teaser-row">
-            <span class="price-teaser-name">Startklar</span>
-            <span class="price-teaser-price">från 7 900 kr</span>
-          </a>
-          <a href="/priser" class="price-teaser-row price-teaser-pro">
-            <span class="price-teaser-name">Professionell<span class="price-teaser-badge">Mest vald</span></span>
-            <span class="price-teaser-price">från 13 900 kr</span>
-          </a>
-          <a href="/priser" class="price-teaser-row">
-            <span class="price-teaser-name">Komplett närvaro</span>
-            <span class="price-teaser-price">från 22 900 kr</span>
-          </a>
-          <p style="font-size:12px;color:#52657A;margin:12px 6px 0;">Alla priser anges exkl. moms.</p>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- CONTACT (3-step wizard + success) -->
-  <div id="kontakt" data-rgrid style="max-width:1140px;margin:110px auto 0;padding:0 20px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:40px;align-items:start;">
-    <div data-reveal style="padding-top:12px;">
+  <!-- CONTACT (prompt-flöde i två steg + success) -->
+  <div id="kontakt" style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
+    <div data-reveal class="wz-head">
       <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:14px;">KOSTNADSFRI GENOMGÅNG</div>
       <h2 style="font-size:30px;font-weight:800;color:#0F172A;margin:0 0 16px;line-height:1.25;">Få konkreta idéer för din hemsida</h2>
-      <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 28px;">Berätta kort om ditt företag så tittar vi på vad som kan förbättras och återkommer med konkreta förslag.</p>
-      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
-        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0F172A;"><span style="width:22px;height:22px;border-radius:7px;background:#fff;color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 10px rgba(15,23,42,0.06);">✓</span>Anpassat efter ditt företag</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0F172A;"><span style="width:22px;height:22px;border-radius:7px;background:#fff;color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 10px rgba(15,23,42,0.06);">✓</span>Personlig återkoppling</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0F172A;"><span style="width:22px;height:22px;border-radius:7px;background:#fff;color:#146EF5;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 10px rgba(15,23,42,0.06);">✓</span>Du väljer själv om du vill gå vidare</div>
+      <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0;">Berätta kort om ditt företag så tittar vi på vad som kan förbättras och återkommer med konkreta förslag.</p>
+    </div>
+
+    <div data-reveal class="wz-shell" data-wz-mount="kontakt"></div>
+    <ul class="wz-perks" data-reveal>
+      <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Anpassat efter ditt företag</li>
+      <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Personlig återkoppling</li>
+      <li><span class="wz-perk-ic" aria-hidden="true">✓</span>Du väljer själv om du vill gå vidare</li>
+    </ul>
+  </div>
+
+  <!-- Formulärkomponent för kostnadsfri genomgång. Klonas in i varje [data-wz-mount]
+       (hero + kontaktsektionen). id:n får instansens nyckel som suffix, t.ex. wz-f-name-hero. -->
+  <template id="wz-template">
+
+    <!-- SUCCESS -->
+    <div id="wz-success" class="wz-card" style="display:none;text-align:center;animation:fadeUp .5s cubic-bezier(0.22,1,0.36,1);">
+      <div style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#146EF5,#3B8CFF);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;margin:12px auto 24px;box-shadow:0 10px 24px rgba(20,110,245,0.35);" aria-hidden="true">✓</div>
+      <h3 id="wz-success-title" tabindex="-1" style="font-size:24px;font-weight:800;color:#0F172A;margin:0 0 14px;line-height:1.3;outline:none;">Tack! Vi kikar på det.</h3>
+      <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 24px;">Vi går igenom det du skickat och återkommer personligt så snart vi kan.</p>
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px;" aria-hidden="true">
+        <div style="width:8px;height:8px;border-radius:50%;background:#146EF5;"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#146EF5;"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#146EF5;"></div>
       </div>
     </div>
-    <div data-reveal data-rpanelpad style="background:#fff;border-radius:22px;padding:36px;box-shadow:0 10px 26px rgba(15,23,42,0.05);">
 
-      <!-- SUCCESS -->
-      <div id="wz-success" style="display:none;text-align:center;padding:20px 0;animation:fadeUp .5s cubic-bezier(0.22,1,0.36,1);">
-        <div style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#146EF5,#3B8CFF);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 24px;box-shadow:0 10px 24px rgba(20,110,245,0.35);">✓</div>
-        <h3 style="font-size:24px;font-weight:800;color:#0F172A;margin:0 0 14px;line-height:1.3;">Tack! Vi kikar på det.</h3>
-        <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 24px;">Vi går igenom det du skickat och återkommer personligt så snart vi kan.</p>
-        <div style="display:flex;gap:8px;justify-content:center;">
-          <div style="width:8px;height:8px;border-radius:50%;background:#146EF5;"></div>
-          <div style="width:8px;height:8px;border-radius:50%;background:#146EF5;"></div>
-          <div style="width:8px;height:8px;border-radius:50%;background:#146EF5;"></div>
-        </div>
-      </div>
+    <!-- FORM -->
+    <div id="wz-form-wrap">
+      <form id="wz-form" novalidate>
+        <div id="wz-card" class="wz-card wz-prompt-card">
+          <!-- Steg 1: prompt -->
+          <label for="wz-f-message" class="sr-only">Berätta kort om ditt företag och vad du vill förbättra</label>
+          <textarea class="wz-input wz-prompt" id="wz-f-message" data-field="message" rows="5" placeholder="Berätta kort om ditt företag och vad du vill förbättra…" aria-describedby="wz-prompt-hint"></textarea>
+          <div id="wz-prompt-error" class="wz-prompt-error" role="alert"></div>
+          <div id="wz-prompt-bar" class="wz-prompt-bar">
+            <div id="wz-prompt-hint" class="wz-prompt-hint">Några rader räcker – du får personlig återkoppling.</div>
+            <button type="button" id="wz-next" class="wz-next btn-lift lift-primary" aria-controls="wz-expand" aria-expanded="false">Få konkreta idéer <span aria-hidden="true">→</span></button>
+          </div>
 
-      <!-- FORM -->
-      <div id="wz-form-wrap">
-        <h3 style="font-size:24px;font-weight:800;color:#0F172A;margin:0 0 8px;line-height:1.3;">Berätta kort vad du behöver hjälp med</h3>
-        <p style="font-size:14px;color:#52657A;line-height:1.5;margin:0 0 24px;">Berätta kort om ditt företag så återkommer vi med några konkreta idéer.</p>
-
-        <form id="wz-form" novalidate>
-          <div style="display:flex;flex-direction:column;gap:18px;">
-            <div>
-              <label for="wz-f-name" style="display:block;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;">Namn *</label>
-              <input class="wz-input" id="wz-f-name" type="text" placeholder="Ditt namn" data-field="name" autocomplete="name" aria-expanded="false" aria-controls="wz-expand">
-            </div>
-            <div id="wz-expand" class="wz-expand" inert>
-              <div class="wz-expand-inner">
-                <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:26px;">
+          <!-- Steg 2: kontaktuppgifter -->
+          <div id="wz-expand" class="wz-expand" inert>
+            <div class="wz-expand-inner">
+              <div class="wz-step2" role="group" aria-labelledby="wz-step2-title">
+                <div id="wz-step2-title" class="wz-step2-title">Toppen! Vart ska vi skicka idéerna?</div>
+                <div class="wz-fields">
                   <div>
-                    <label for="wz-f-email" style="display:block;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;">E-post *</label>
+                    <label for="wz-f-name" class="wz-label">Namn *</label>
+                    <input class="wz-input" id="wz-f-name" type="text" placeholder="Ditt namn" data-field="name" autocomplete="name">
+                  </div>
+                  <div>
+                    <label for="wz-f-email" class="wz-label">E-post *</label>
                     <input class="wz-input" id="wz-f-email" type="email" placeholder="din@email.se" data-field="email" autocomplete="email">
                   </div>
                   <div>
-                    <label for="wz-f-company" style="display:block;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;">Företagsnamn *</label>
+                    <label for="wz-f-company" class="wz-label">Företagsnamn *</label>
                     <input class="wz-input" id="wz-f-company" type="text" placeholder="Företagets namn" data-field="company" autocomplete="organization">
                   </div>
                   <div>
-                    <label for="wz-f-website" style="display:block;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;">Nuvarande hemsida <span style="color:#8FA6C2;font-weight:600;">(valfritt)</span></label>
-                    <input class="wz-input" id="wz-f-website" type="text" placeholder="https://..." data-field="website" autocomplete="url">
-                    <div style="font-size:12px;color:#8FA6C2;margin-top:6px;">Lämna tomt om du inte har någon hemsida idag.</div>
+                    <label for="wz-f-website" class="wz-label">Nuvarande hemsida <span style="color:#8FA6C2;font-weight:600;">(valfritt)</span></label>
+                    <input class="wz-input" id="wz-f-website" type="text" placeholder="https://..." data-field="website" autocomplete="url" aria-describedby="wz-website-hint">
+                    <div id="wz-website-hint" style="font-size:12px;color:#8FA6C2;margin-top:6px;">Lämna tomt om du inte har någon hemsida idag.</div>
                   </div>
-                  <div>
-                    <div style="font-size:14px;font-weight:700;color:#0F172A;margin-bottom:12px;">Vad vill du ha hjälp med? *</div>
-                    <div id="wz-goals" style="display:flex;flex-wrap:wrap;gap:10px;"></div>
-                  </div>
-                  <div>
-                    <label for="wz-f-message" style="display:block;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;">Berätta kort om ditt företag *</label>
-                    <textarea class="wz-input" id="wz-f-message" placeholder="Vad gör företaget och vad skulle du vilja förbättra eller få hjälp med?" rows="3" style="resize:vertical;" data-field="message"></textarea>
-                  </div>
+                </div>
+                <div style="margin-bottom:26px;">
+                  <div id="wz-goals-label" class="wz-label" style="margin-bottom:12px;">Vad vill du ha hjälp med? *</div>
+                  <div id="wz-goals" class="wz-goals" role="group" aria-labelledby="wz-goals-label" style="display:flex;flex-wrap:wrap;gap:10px;"></div>
                 </div>
 
-                <div id="wz-error" style="font-size:13px;color:#D64545;font-weight:600;margin-bottom:14px;display:none;"></div>
-                <div id="wz-btnrow" style="display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
-                  <button type="button" id="wz-callback-toggle" style="background:transparent;border:1.5px solid rgba(15,23,42,0.15);color:#0F172A;font-size:13px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;font-family:inherit;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Bli kontaktad istället</button>
-                  <button type="submit" id="wz-submit" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 24px rgba(20,110,245,0.3);font-family:inherit;">Få min gratis genomgång →</button>
+                <div id="wz-error" aria-live="polite" style="font-size:13px;color:#D64545;font-weight:600;margin-bottom:14px;display:none;"></div>
+                <div id="wz-btnrow" class="wz-btnrow" style="display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+                  <button type="button" id="wz-callback-toggle" class="wz-callback-toggle" style="background:transparent;border:1.5px solid rgba(15,23,42,0.15);color:#0F172A;font-size:13px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;font-family:inherit;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Bli kontaktad istället</button>
+                  <button type="submit" id="wz-submit" class="wz-submit btn-next" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 24px rgba(20,110,245,0.3);font-family:inherit;">Få min gratis genomgång →</button>
                 </div>
-                <div id="wz-form-note">
-                  <div style="text-align:center;font-size:12px;color:#52657A;line-height:1.5;">Vi återkommer personligt så snart vi kan.</div>
+                <div id="wz-form-note" class="wz-form-note">
+                  <div style="text-align:right;font-size:12px;color:#52657A;line-height:1.5;">Vi återkommer personligt så snart vi kan.</div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
-
-        <div id="wz-callback-panel" style="overflow:hidden;max-height:0;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1);">
-          <div id="wz-callback-success" style="display:none;background:#0F172A;border-radius:16px;padding:36px;margin-top:16px;text-align:center;">
-            <div style="width:52px;height:52px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px;">✓</div>
-            <div style="font-size:19px;font-weight:800;color:#fff;margin-bottom:8px;">Tack, <span id="wz-callback-succ-name"></span>!</div>
-            <div style="font-size:14px;color:#B8C6DC;line-height:1.6;">Vi har tagit emot din förfrågan och kontaktar dig inom en timme under vardagar 09–17.</div>
-          </div>
-          <form id="wz-callback-form" novalidate style="background:#0F172A;border-radius:16px;padding:24px;margin-top:16px;">
-            <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:6px;">Bli kontaktad istället?</div>
-            <div style="font-size:13px;color:#B8C6DC;margin-bottom:16px;">Lämna dina uppgifter, vi kontaktar dig inom en timme under vardagar 09–17.</div>
-            <div style="display:flex;flex-direction:column;gap:12px;">
-              <input id="wz-cb-name" type="text" placeholder="Namn *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
-              <input id="wz-cb-email" type="email" placeholder="Email *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
-              <input id="wz-cb-phone" type="tel" placeholder="Telefonnummer *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
-              <input id="wz-cb-company" type="text" placeholder="Företag (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
-              <input id="wz-cb-website" type="url" placeholder="Hemsida (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
-              <div id="wz-callback-error" style="font-size:13px;color:#FF8A8A;font-weight:600;display:none;">Fyll i namn, e-post och telefonnummer.</div>
-              <button type="submit" id="wz-callback-submit" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:12px;border:none;white-space:nowrap;cursor:pointer;align-self:flex-start;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Skicka</button>
-            </div>
-          </form>
         </div>
+      </form>
+
+      <div id="wz-callback-panel" style="overflow:hidden;max-height:0;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1);">
+        <div id="wz-callback-success" style="display:none;background:#0F172A;border-radius:16px;padding:36px;margin-top:16px;text-align:center;">
+          <div style="width:52px;height:52px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px;">✓</div>
+          <div style="font-size:19px;font-weight:800;color:#fff;margin-bottom:8px;">Tack, <span id="wz-callback-succ-name"></span>!</div>
+          <div style="font-size:14px;color:#B8C6DC;line-height:1.6;">Vi har tagit emot din förfrågan och kontaktar dig inom en timme under vardagar 09–17.</div>
+        </div>
+        <form id="wz-callback-form" novalidate style="background:#0F172A;border-radius:16px;padding:24px;margin-top:16px;">
+          <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:6px;">Bli kontaktad istället?</div>
+          <div style="font-size:13px;color:#B8C6DC;margin-bottom:16px;">Lämna dina uppgifter, vi kontaktar dig inom en timme under vardagar 09–17.</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <input id="wz-cb-name" type="text" placeholder="Namn *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <input id="wz-cb-email" type="email" placeholder="Email *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <input id="wz-cb-phone" type="tel" placeholder="Telefonnummer *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <input id="wz-cb-company" type="text" placeholder="Företag (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <input id="wz-cb-website" type="url" placeholder="Hemsida (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <div id="wz-callback-error" style="font-size:13px;color:#FF8A8A;font-weight:600;display:none;">Fyll i namn, e-post och telefonnummer.</div>
+            <button type="submit" id="wz-callback-submit" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:12px;border:none;white-space:nowrap;cursor:pointer;align-self:flex-start;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Skicka</button>
+          </div>
+        </form>
       </div>
     </div>
-  </div>
+  </template>
 
   <!-- FAQ -->
   <div id="faq" style="max-width:800px;margin:100px auto 0;padding:0 20px;">
@@ -1135,27 +1739,6 @@
         </button>
       </div>
 
-    </div>
-  </div>
-
-  <!-- SEO-KOLL TEASER -->
-  <div style="max-width:1140px;margin:56px auto 0;padding:0 20px;" data-rpad>
-    <div data-reveal data-rgrid data-rpanelpad style="background:#146EF5;border-radius:28px;padding:56px;box-shadow:0 24px 54px rgba(20,110,245,0.28);display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center;">
-      <div>
-        <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;">Kostnadsfri SEO-koll</div>
-        <h2 style="font-size:28px;font-weight:800;color:#fff;margin:0 0 12px;line-height:1.3;">Hur mår din SEO?</h2>
-        <p style="font-size:15px;color:rgba(255,255,255,0.85);line-height:1.6;margin:0;font-weight:500;max-width:400px;">Se vad som fungerar på din hemsida – och vad som kan förbättras.</p>
-      </div>
-      <div>
-        <form id="home-seo-form" novalidate>
-          <label for="home-seo-url" class="sr-only">Webbadress</label>
-          <div class="hp-seo-group" style="background:#fff;border:none;box-shadow:0 10px 26px rgba(15,23,42,0.18);">
-            <input id="home-seo-url" class="hp-seo-input" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://dittforetag.se">
-            <button type="submit" class="btn-lift hp-seo-btn" style="background:#0F172A;color:#fff;box-shadow:0 8px 20px rgba(0,0,0,0.25);">Analysera gratis</button>
-          </div>
-          <div id="home-seo-error" role="alert" style="display:none;color:#FFE9E9;background:rgba(0,0,0,0.18);border-radius:10px;padding:10px 14px;font-size:14px;font-weight:600;margin-top:14px;"></div>
-        </form>
-      </div>
     </div>
   </div>
 
@@ -1366,150 +1949,6 @@
     }, 2000);
   })();
 
-  /* ---------- Portfolio showcase ("Saker vi har gjort") ---------- */
-  var pfProjects = [
-    {
-      mock: "The Chairman Barber",
-      category: "Kundcase · Webbdesign & Utveckling",
-      desc: "Vi tog fram en ny digital identitet och hemsida för The Chairman Barber i Vasastan — med fokus på en exklusiv känsla, tydlig struktur och en enkel väg till bokning. Designen kombinerar barbershopens klassiska karaktär med ett modernt digitalt uttryck.",
-      tags: ["Webdesign", "Responsiv", "SEO", "Bokningsflöde"],
-      image: "/thechairman.webp",
-      url: "https://www.thechairmanbarber.se",
-      related: { href: "/hemsida-frisor-stockholm", label: "Så bygger vi hemsidor för frisörer och barberare" }
-    },
-    {
-      mock: "Galleri86",
-      category: "Kundcase · Webbdesign, UX/UI & CMS",
-      desc: "Vi gjorde om Galleri86 på Södermalm från en enkel informationssida till en modern digital utställningsyta — med konsten i centrum och ett eget administrationssystem så galleriet kan uppdatera bilder, texter och utställningar helt utan kod.",
-      tags: ["Webdesign", "UX/UI", "Utveckling", "CMS"],
-      image: "/galleri86-thumb.png",
-      url: "https://galleri86.vercel.app/",
-      linkLabel: "Visa case",
-      linkUrl: "case-galleri86.html"
-    },
-    {
-      mock: "SERA",
-      category: "Koncepthemsida · Webbdesign & UX/UI",
-      desc: "SERA är en fiktiv italiensk restaurang på Södermalm som vi skapat för att visa hur en modern restauranghemsida kan se ut, kännas och fungera — med stämningsfull bildsättning, tydlig meny och en enkel väg till bordsbokning.",
-      tags: ["Webdesign", "UX/UI", "Restaurang", "Responsiv"],
-      image: "/sera-mockup.webp",
-      url: "/demo/sera",
-      linkLabel: "Utforska SERA",
-      related: { href: "/hemsida-restaurang-stockholm", label: "Så bygger vi hemsidor för restauranger" }
-    },
-    {
-      mock: "Itreon Market",
-      category: "Kundcase · UX/UI & Webbutveckling",
-      desc: "Vi designade och utvecklade Itreon Market — en digital B2B-marknadsplats för att presentera lager, deals och produktgradering på ett tydligt och förtroendeingivande sätt. Fokus låg på att göra stora mängder produktinformation enkel att navigera, skapa tydliga vägar till rätt erbjudanden och bygga ett gränssnitt som fungerar sömlöst på både desktop och mobil.",
-      tags: ["UX/UI", "B2B", "Responsiv", "Marknadsplats"],
-      image: "/itreon-market.png",
-      url: "https://market.itreon.eu"
-    }
-  ];
-  var pfIndex = 0;
-  var pfTabs = document.getElementById('pf-tabs');
-  var pfCat = document.getElementById('pf-cat');
-  var pfName = document.getElementById('pf-name');
-  var pfDesc = document.getElementById('pf-desc');
-  var pfTagsWrap = document.getElementById('pf-tags');
-  var pfLink = document.getElementById('pf-link');
-  var pfRelated = document.getElementById('pf-related');
-  var pfImg = document.getElementById('pf-img');
-  var pfImgPh = document.getElementById('pf-imgph');
-  var pfEmbed = document.getElementById('pf-embed');
-  var pfIframe = document.getElementById('pf-iframe');
-
-  var pfPanel = document.getElementById('pf-panel');
-
-  function pfRender() {
-    pfTabs.querySelectorAll('.pf-tab').forEach(function (t, i) {
-      var active = i === pfIndex;
-      t.style.background = active ? '#146EF5' : '#fff';
-      t.style.color = active ? '#fff' : '#52657A';
-      t.style.borderColor = active ? '#146EF5' : 'rgba(15,23,42,0.1)';
-      t.setAttribute('aria-selected', active ? 'true' : 'false');
-      t.tabIndex = active ? 0 : -1;
-    });
-    pfPanel.setAttribute('aria-labelledby', 'pf-tab-' + pfIndex);
-    var p = pfProjects[pfIndex];
-    pfCat.textContent = p.category || '';
-    pfName.textContent = p.mock || '';
-    pfDesc.textContent = p.desc || '';
-    pfTagsWrap.innerHTML = (p.tags || []).map(function (tag) {
-      return '<div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">' + esc(tag) + '</div>';
-    }).join('');
-    var linkUrl = p.linkUrl || p.url;
-    if (linkUrl) {
-      pfLink.href = linkUrl;
-      pfLink.textContent = p.linkLabel || 'Besök hemsidan';
-      if (/^https?:\/\//.test(linkUrl)) {
-        pfLink.target = '_blank';
-        pfLink.rel = 'noopener noreferrer';
-      } else {
-        pfLink.removeAttribute('target');
-        pfLink.removeAttribute('rel');
-      }
-      pfLink.style.display = 'inline-block';
-    } else {
-      pfLink.style.display = 'none';
-    }
-    if (p.related) {
-      pfRelated.href = p.related.href;
-      pfRelated.innerHTML = esc(p.related.label) + ' <span aria-hidden="true">→</span>';
-      pfRelated.style.display = 'block';
-    } else {
-      pfRelated.style.display = 'none';
-    }
-    if (p.embed) {
-      if (pfIframe.getAttribute('src') !== p.embed) pfIframe.src = p.embed;
-      pfEmbed.href = p.url || p.embed;
-      pfEmbed.style.display = 'flex';
-      pfImg.style.display = 'none';
-      pfImgPh.style.display = 'none';
-    } else if (p.image) {
-      pfImg.src = p.image;
-      pfImg.alt = 'Hemsida designad för ' + (p.mock || '');
-      pfImg.style.display = 'block';
-      pfEmbed.style.display = 'none';
-      pfImgPh.style.display = 'none';
-    } else {
-      pfImg.removeAttribute('src');
-      pfImg.style.display = 'none';
-      pfEmbed.style.display = 'none';
-      pfImgPh.textContent = (p.mock || '') + ' — bild läggs till inom kort';
-      pfImgPh.style.display = 'flex';
-    }
-  }
-  pfTabs.innerHTML = pfProjects.map(function (p, i) {
-    return '<button type="button" class="pf-tab" id="pf-tab-' + i + '" role="tab" aria-selected="false" aria-controls="pf-panel" tabindex="-1" data-i="' + i + '" style="font-family:inherit;margin:0;font-size:13px;font-weight:700;padding:9px 16px;border-radius:20px;border:1px solid rgba(15,23,42,0.1);cursor:pointer;transition:all 0.2s ease;background:#fff;color:#52657A;">' + esc(p.mock) + '</button>';
-  }).join('');
-  var pfTabEls = pfTabs.querySelectorAll('.pf-tab');
-  function pfSelect(i, moveFocus) {
-    pfIndex = i;
-    pfRender();
-    if (moveFocus) pfTabEls[i].focus();
-  }
-  // Klick täcker även Enter och Space, eftersom flikarna är riktiga knappar.
-  pfTabEls.forEach(function (t) {
-    t.addEventListener('click', function () { pfSelect(+t.getAttribute('data-i'), false); });
-  });
-  // ARIA tabs-mönstret med automatisk aktivering: pilar flyttar och väljer, Home/End går till första/sista.
-  pfTabs.addEventListener('keydown', function (e) {
-    var tab = e.target.closest && e.target.closest('.pf-tab');
-    if (!tab) return;
-    var current = +tab.getAttribute('data-i');
-    var last = pfTabEls.length - 1;
-    var next;
-    if (e.key === 'ArrowRight') next = current === last ? 0 : current + 1;
-    else if (e.key === 'ArrowLeft') next = current === 0 ? last : current - 1;
-    else if (e.key === 'Home') next = 0;
-    else if (e.key === 'End') next = last;
-    else return;
-    e.preventDefault();
-    pfSelect(next, true);
-  });
-  pfRender();
-
   /* ---------- FAQ accordion (tillgänglig) ---------- */
   document.querySelectorAll('.faq-q-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -1553,256 +1992,1103 @@
   // Så länge den är tom skickas inget – formuläret visar då ett tydligt felmeddelande.
   var WEB3FORMS_KEY = '3e1c55ed-82c4-435f-8126-33f86c5d4a92';
 
-  var wz = { submitting: false, name: '', company: '', email: '', website: '', goal: '', message: '' };
   var goalOptions = ['Förbättra befintlig hemsida','Ny hemsida','SEO / synlighet','Vet inte än'];
 
-  var errorBox = document.getElementById('wz-error');
-  var formEl = document.getElementById('wz-form');
-  var formWrap = document.getElementById('wz-form-wrap');
-  var successEl = document.getElementById('wz-success');
-  var submitBtn = document.getElementById('wz-submit');
-  var goalsWrap = document.getElementById('wz-goals');
-  var nameInput = document.getElementById('wz-f-name');
-  var emailInput = document.getElementById('wz-f-email');
-  var companyInput = document.getElementById('wz-f-company');
-  var websiteInput = document.getElementById('wz-f-website');
-  var messageInput = document.getElementById('wz-f-message');
-
-  // Progressiv formulärexpansion: resten av formuläret döljs tills Namn börjar fyllas i
-  var expandWrap = document.getElementById('wz-expand');
-  var formExpanded = false;
-  function revealForm() {
-    if (formExpanded) return;
-    formExpanded = true;
-    expandWrap.classList.add('wz-open');
-    expandWrap.removeAttribute('inert');
-    nameInput.setAttribute('aria-expanded', 'true');
-  }
-  nameInput.addEventListener('input', function () {
-    if (nameInput.value !== '') revealForm();
-  });
-  // Om fälten redan innehåller data vid sidladdning (t.ex. bfcache/autofill) ska formuläret visas expanderat direkt.
-  if (nameInput.value !== '' || emailInput.value !== '' || companyInput.value !== '' || websiteInput.value !== '' || messageInput.value !== '') {
-    revealForm();
-  }
-
-  // "Bli kontaktad istället" – fällbar panel
-  var callbackToggle = document.getElementById('wz-callback-toggle');
-  var callbackPanel = document.getElementById('wz-callback-panel');
-  var callbackFormEl = document.getElementById('wz-callback-form');
-  var callbackSuccess = document.getElementById('wz-callback-success');
-  var callbackSuccName = document.getElementById('wz-callback-succ-name');
-  var callbackError = document.getElementById('wz-callback-error');
-  var callbackSubmit = document.getElementById('wz-callback-submit');
-  var cbName = document.getElementById('wz-cb-name');
-  var cbEmail = document.getElementById('wz-cb-email');
-  var cbPhone = document.getElementById('wz-cb-phone');
-  var cbCompany = document.getElementById('wz-cb-company');
-  var cbWebsite = document.getElementById('wz-cb-website');
-  var CALLBACK_MAX = '540px';
-  var callbackOpen = false;
-
-  function resetCallbackView() {
-    callbackSuccess.style.display = 'none';
-    callbackFormEl.style.display = 'block';
-    callbackError.style.display = 'none';
-  }
-  callbackToggle.addEventListener('click', function () {
-    callbackOpen = !callbackOpen;
-    if (callbackOpen) resetCallbackView();
-    callbackPanel.style.maxHeight = callbackOpen ? CALLBACK_MAX : '0';
-  });
-  callbackFormEl.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (callbackSubmit.disabled) return;
-    var name = cbName.value.trim(), email = cbEmail.value.trim(), phone = cbPhone.value.trim();
-    if (!name || !email || !phone) { callbackError.style.display = 'block'; return; }
-    callbackError.style.display = 'none';
-    callbackSubmit.disabled = true;
-    callbackSubmit.textContent = 'Skickar …';
-    var ok = function () {
-      callbackSuccName.textContent = name;
-      callbackSuccess.style.display = 'block';
-      callbackFormEl.style.display = 'none';
-      callbackPanel.style.maxHeight = CALLBACK_MAX;
-    };
-    if (!WEB3FORMS_KEY) { ok(); return; }
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        subject: 'Bli kontaktad – begäran från webbplatsen',
-        from_name: 'Studio Klaro – kontaktförfrågan',
-        replyto: email,
-        'Namn': name,
-        'E-post': email,
-        'Telefonnummer': phone,
-        'Företag': cbCompany.value.trim() || '—',
-        'Hemsida': cbWebsite.value.trim() || '—'
-      })
-    })
-      .then(function (r) {
-        return r.json().then(function (d) {
-          if (r.ok && d && d.success && window.klaroTrackLead) window.klaroTrackLead('bli_kontaktad');
-        }, function () {});
-      })
-      .then(function () { ok(); })
-      .catch(function () { ok(); });
-  });
-
-  document.querySelectorAll('.wz-input').forEach(function (input) {
-    input.addEventListener('input', function () {
-      wz[input.getAttribute('data-field')] = input.value;
-      input.classList.remove('wz-invalid');
-      errorBox.style.display = 'none';
+  // Samma formulär (steg, validering, inskick) på flera ställen: varje [data-wz-mount]
+  // får en egen klon av #wz-template och en egen, självständig instans av logiken nedan.
+  var WZ_REF_ATTRS = ['for', 'aria-controls', 'aria-labelledby', 'aria-describedby'];
+  function mountLeadForm(mount) {
+    var key = mount.getAttribute('data-wz-mount');
+    var frag = document.getElementById('wz-template').content.cloneNode(true);
+    frag.querySelectorAll('[id]').forEach(function (el) { el.id = el.id + '-' + key; });
+    frag.querySelectorAll('[' + WZ_REF_ATTRS.join('],[') + ']').forEach(function (el) {
+      WZ_REF_ATTRS.forEach(function (attr) {
+        var v = el.getAttribute(attr);
+        if (v) el.setAttribute(attr, v.split(/\s+/).map(function (id) { return id + '-' + key; }).join(' '));
+      });
     });
-  });
+    mount.appendChild(frag);
+    initLeadForm(mount, key);
+  }
 
-  function buildChips(container, options, field) {
-    container.innerHTML = options.map(function (o) {
-      return '<button type="button" class="wz-chip" data-val="' + esc(o) + '">' + esc(o) + '</button>';
-    }).join('');
-    container.querySelectorAll('.wz-chip').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        wz[field] = btn.getAttribute('data-val');
-        container.querySelectorAll('.wz-chip').forEach(function (b) {
-          b.classList.toggle('selected', b.getAttribute('data-val') === wz[field]);
-        });
-        container.classList.remove('wz-goals-invalid');
+  function initLeadForm(root, key) {
+    var $ = function (id) { return root.querySelector('#' + id + '-' + key); };
+
+    var wz = { submitting: false, name: '', company: '', email: '', website: '', goal: '', message: '' };
+
+    var errorBox = $('wz-error');
+    var formEl = $('wz-form');
+    var formWrap = $('wz-form-wrap');
+    var successEl = $('wz-success');
+    var submitBtn = $('wz-submit');
+    var goalsWrap = $('wz-goals');
+    var nameInput = $('wz-f-name');
+    var emailInput = $('wz-f-email');
+    var companyInput = $('wz-f-company');
+    var websiteInput = $('wz-f-website');
+    var messageInput = $('wz-f-message');
+
+    // Tvåstegsflöde: steg 1 är prompten (Kort beskrivning), steg 2 kontaktuppgifterna.
+    // Att gå vidare till steg 2 skickar ingenting och triggar inga lead-event.
+    var promptCard = $('wz-card');
+    var promptError = $('wz-prompt-error');
+    var nextBtn = $('wz-next');
+    var successTitle = $('wz-success-title');
+    var expandWrap = $('wz-expand');
+    var formExpanded = false;
+    function revealForm() {
+      if (formExpanded) return;
+      formExpanded = true;
+      promptCard.classList.add('is-step2');
+      expandWrap.classList.add('wz-open');
+      expandWrap.removeAttribute('inert');
+      nextBtn.setAttribute('aria-expanded', 'true');
+    }
+    function setPromptInvalid(bad) {
+      messageInput.classList.toggle('wz-invalid', bad);
+      promptCard.classList.toggle('wz-card-invalid', bad);
+      if (bad) messageInput.setAttribute('aria-invalid', 'true');
+      else messageInput.removeAttribute('aria-invalid');
+    }
+    function goToStep2() {
+      if (messageInput.value.trim() === '') {
+        setPromptInvalid(true);
+        promptError.textContent = 'Skriv några rader om ditt företag och vad du vill ha hjälp med först.';
+        messageInput.focus();
+        return;
+      }
+      setPromptInvalid(false);
+      promptError.textContent = '';
+      revealForm();
+      nameInput.focus();
+    }
+    nextBtn.addEventListener('click', goToStep2);
+    // Cmd/Ctrl + Enter i prompten tar en vidare, som i en chatt. Vanlig Enter ger radbrytning.
+    messageInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey) && !formExpanded) {
+        e.preventDefault();
+        goToStep2();
+      }
+    });
+    messageInput.addEventListener('input', function () {
+      setPromptInvalid(false);
+      promptError.textContent = '';
+    });
+    // Om kontaktfälten redan innehåller data vid sidladdning (t.ex. bfcache/autofill) visas steg 2 direkt.
+    if (nameInput.value !== '' || emailInput.value !== '' || companyInput.value !== '' || websiteInput.value !== '') {
+      revealForm();
+    }
+
+    // "Bli kontaktad istället" – fällbar panel
+    var callbackToggle = $('wz-callback-toggle');
+    var callbackPanel = $('wz-callback-panel');
+    var callbackFormEl = $('wz-callback-form');
+    var callbackSuccess = $('wz-callback-success');
+    var callbackSuccName = $('wz-callback-succ-name');
+    var callbackError = $('wz-callback-error');
+    var callbackSubmit = $('wz-callback-submit');
+    var cbName = $('wz-cb-name');
+    var cbEmail = $('wz-cb-email');
+    var cbPhone = $('wz-cb-phone');
+    var cbCompany = $('wz-cb-company');
+    var cbWebsite = $('wz-cb-website');
+    var CALLBACK_MAX = '540px';
+    var callbackOpen = false;
+
+    function resetCallbackView() {
+      callbackSuccess.style.display = 'none';
+      callbackFormEl.style.display = 'block';
+      callbackError.style.display = 'none';
+    }
+    callbackToggle.addEventListener('click', function () {
+      callbackOpen = !callbackOpen;
+      if (callbackOpen) resetCallbackView();
+      callbackPanel.style.maxHeight = callbackOpen ? CALLBACK_MAX : '0';
+    });
+    callbackFormEl.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (callbackSubmit.disabled) return;
+      var name = cbName.value.trim(), email = cbEmail.value.trim(), phone = cbPhone.value.trim();
+      if (!name || !email || !phone) { callbackError.style.display = 'block'; return; }
+      callbackError.style.display = 'none';
+      callbackSubmit.disabled = true;
+      callbackSubmit.textContent = 'Skickar …';
+      var ok = function () {
+        callbackSuccName.textContent = name;
+        callbackSuccess.style.display = 'block';
+        callbackFormEl.style.display = 'none';
+        callbackPanel.style.maxHeight = CALLBACK_MAX;
+      };
+      if (!WEB3FORMS_KEY) { ok(); return; }
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'Bli kontaktad – begäran från webbplatsen',
+          from_name: 'Studio Klaro – kontaktförfrågan',
+          replyto: email,
+          'Namn': name,
+          'E-post': email,
+          'Telefonnummer': phone,
+          'Företag': cbCompany.value.trim() || '—',
+          'Hemsida': cbWebsite.value.trim() || '—'
+        })
+      })
+        .then(function (r) {
+          return r.json().then(function (d) {
+            if (r.ok && d && d.success && window.klaroTrackLead) window.klaroTrackLead('bli_kontaktad', key);
+          }, function () {});
+        })
+        .then(function () { ok(); })
+        .catch(function () { ok(); });
+    });
+
+    root.querySelectorAll('.wz-input').forEach(function (input) {
+      input.addEventListener('input', function () {
+        wz[input.getAttribute('data-field')] = input.value;
+        input.classList.remove('wz-invalid');
         errorBox.style.display = 'none';
       });
     });
-  }
-  buildChips(goalsWrap, goalOptions, 'goal');
 
-  function validateAndMark() {
-    var ok = true;
-    [
-      [nameInput, wz.name],
-      [emailInput, wz.email],
-      [companyInput, wz.company],
-      [messageInput, wz.message]
-    ].forEach(function (pair) {
-      var bad = pair[1].trim() === '';
-      pair[0].classList.toggle('wz-invalid', bad);
-      if (bad) ok = false;
-    });
-    var goalBad = wz.goal.trim() === '';
-    goalsWrap.classList.toggle('wz-goals-invalid', goalBad);
-    if (goalBad) ok = false;
-    return ok;
-  }
-
-  function showSuccess() {
-    formWrap.style.display = 'none';
-    successEl.style.display = 'block';
-  }
-
-  function resetSubmitBtn() {
-    wz.submitting = false;
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Få min gratis genomgång →';
-    submitBtn.style.opacity = '1';
-  }
-
-  function submitForm() {
-    if (wz.submitting) return;
-    if (!validateAndMark()) {
-      errorBox.textContent = 'Fyll i namn, e-post, företagsnamn, vad du behöver hjälp med och en kort beskrivning för att skicka.';
-      errorBox.style.display = 'block';
-      return;
-    }
-    errorBox.style.display = 'none';
-    if (!WEB3FORMS_KEY) {
-      errorBox.textContent = 'Formuläret är inte kopplat än (access key saknas). Mejla oss på hej@studioklaro.se så länge.';
-      errorBox.style.display = 'block';
-      return;
-    }
-    wz.submitting = true;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Skickar …';
-    submitBtn.style.opacity = '0.75';
-
-    var payload = {
-      access_key: WEB3FORMS_KEY,
-      subject: 'Ny förfrågan – ' + (wz.company || 'okänt företag'),
-      from_name: 'Studio Klaro – webbformulär',
-      replyto: wz.email,
-      'Namn': wz.name,
-      'Företag': wz.company,
-      'E-post': wz.email,
-      'Nuvarande hemsida': wz.website || '—',
-      'Vad de behöver hjälp med': wz.goal,
-      'Kort beskrivning': wz.message
-    };
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
-      .then(function (res) {
-        if (res.ok && res.data.success) {
-          if (window.klaroTrackLead) window.klaroTrackLead('kontakt_genomgang');
-          showSuccess();
-        } else {
-          resetSubmitBtn();
-          errorBox.textContent = 'Något gick fel när förfrågan skulle skickas. Försök igen eller mejla hej@studioklaro.se.';
-          errorBox.style.display = 'block';
-        }
-      })
-      .catch(function () {
-        resetSubmitBtn();
-        errorBox.textContent = 'Kunde inte nå servern. Kontrollera din uppkoppling eller mejla hej@studioklaro.se.';
-        errorBox.style.display = 'block';
+    function buildChips(container, options, field) {
+      container.innerHTML = options.map(function (o) {
+        return '<button type="button" class="wz-chip" data-val="' + esc(o) + '">' + esc(o) + '</button>';
+      }).join('');
+      container.querySelectorAll('.wz-chip').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          wz[field] = btn.getAttribute('data-val');
+          container.querySelectorAll('.wz-chip').forEach(function (b) {
+            b.classList.toggle('selected', b.getAttribute('data-val') === wz[field]);
+          });
+          container.classList.remove('wz-goals-invalid');
+          errorBox.style.display = 'none';
+        });
       });
-  }
-  formEl.addEventListener('submit', function (e) {
-    e.preventDefault();
-    submitForm();
-  });
+    }
+    buildChips(goalsWrap, goalOptions, 'goal');
 
-  /* ---------- SEO-koll-teaser: validera, normalisera och skicka vidare till /seo-koll ----------
-     Kör aldrig analysen här — bara navigerar med URL:en som query-parameter så
-     att /seo-koll kan förifylla sitt eget fält. */
-  var homeSeoForm = document.getElementById('home-seo-form');
-  if (homeSeoForm) {
-    var homeSeoInput = document.getElementById('home-seo-url');
-    var homeSeoError = document.getElementById('home-seo-error');
+    function validateAndMark() {
+      var ok = true;
+      // Läs om fälten så att värden som återställts utan input-event (bfcache/autofill) också räknas.
+      root.querySelectorAll('.wz-input').forEach(function (input) {
+        wz[input.getAttribute('data-field')] = input.value;
+      });
+      [
+        [nameInput, wz.name],
+        [emailInput, wz.email],
+        [companyInput, wz.company],
+        [messageInput, wz.message]
+      ].forEach(function (pair) {
+        var bad = pair[1].trim() === '';
+        pair[0].classList.toggle('wz-invalid', bad);
+        if (bad) ok = false;
+      });
+      setPromptInvalid(wz.message.trim() === '');
+      var goalBad = wz.goal.trim() === '';
+      goalsWrap.classList.toggle('wz-goals-invalid', goalBad);
+      if (goalBad) ok = false;
+      return ok;
+    }
 
-    var normalizeHomeSeoUrl = function (raw) {
-      var value = (raw || '').trim();
-      if (!value) return null;
-      if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(value)) {
-        value = 'https://' + value;
-      }
-      try {
-        var parsed = new URL(value);
-        if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
-        return parsed.toString();
-      } catch (e) {
-        return null;
-      }
-    };
+    function showSuccess() {
+      formWrap.style.display = 'none';
+      successEl.style.display = 'block';
+      successTitle.focus({ preventScroll: true });
+      // Formuläret var högre än kvittot – se till att kvittot hamnar i synfältet.
+      successEl.scrollIntoView({ block: 'center' });
+    }
 
-    homeSeoForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-      var normalized = normalizeHomeSeoUrl(homeSeoInput.value);
-      if (!normalized) {
-        homeSeoError.textContent = 'Skriv in en giltig webbadress.';
-        homeSeoError.style.display = 'block';
+    function resetSubmitBtn() {
+      wz.submitting = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Få min gratis genomgång →';
+      submitBtn.style.opacity = '1';
+    }
+
+    function submitForm() {
+      if (wz.submitting) return;
+      if (!validateAndMark()) {
+        errorBox.textContent = 'Fyll i namn, e-post, företagsnamn, vad du behöver hjälp med och en kort beskrivning för att skicka.';
+        errorBox.style.display = 'block';
         return;
       }
-      homeSeoError.style.display = 'none';
-      window.location.href = '/seo-koll?url=' + encodeURIComponent(normalized);
-    });
+      errorBox.style.display = 'none';
+      if (!WEB3FORMS_KEY) {
+        errorBox.textContent = 'Formuläret är inte kopplat än (access key saknas). Mejla oss på hej@studioklaro.se så länge.';
+        errorBox.style.display = 'block';
+        return;
+      }
+      wz.submitting = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Skickar …';
+      submitBtn.style.opacity = '0.75';
 
-    homeSeoInput.addEventListener('input', function () {
-      if (homeSeoError.style.display !== 'none') homeSeoError.style.display = 'none';
+      var payload = {
+        access_key: WEB3FORMS_KEY,
+        subject: 'Ny förfrågan – ' + (wz.company || 'okänt företag'),
+        from_name: 'Studio Klaro – webbformulär',
+        replyto: wz.email,
+        'Namn': wz.name,
+        'Företag': wz.company,
+        'E-post': wz.email,
+        'Nuvarande hemsida': wz.website || '—',
+        'Vad de behöver hjälp med': wz.goal,
+        'Kort beskrivning': wz.message
+      };
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+        .then(function (res) {
+          if (res.ok && res.data.success) {
+            if (window.klaroTrackLead) window.klaroTrackLead('kontakt_genomgang', key);
+            showSuccess();
+          } else {
+            resetSubmitBtn();
+            errorBox.textContent = 'Något gick fel när förfrågan skulle skickas. Försök igen eller mejla hej@studioklaro.se.';
+            errorBox.style.display = 'block';
+          }
+        })
+        .catch(function () {
+          resetSubmitBtn();
+          errorBox.textContent = 'Kunde inte nå servern. Kontrollera din uppkoppling eller mejla hej@studioklaro.se.';
+          errorBox.style.display = 'block';
+        });
+    }
+    formEl.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Säkerhetsspärr: skicka aldrig från steg 1, gå bara vidare.
+      if (!formExpanded) { goToStep2(); return; }
+      submitForm();
     });
   }
+
+  document.querySelectorAll('[data-wz-mount]').forEach(mountLeadForm);
+
+  /* ---------- Hero-formuläret: exempeltexter som skrivs, pausas och raderas ----------
+     Ett rent visuellt lager (aria-hidden) ovanpå den tomma textarean. Textareans value ändras aldrig,
+     så exemplen kan inte skickas med eller påverka valideringen. Endast heroinstansen får animationen. */
+  var heroMsg = document.getElementById('wz-f-message-hero');
+  if (heroMsg) (function () {
+    var EXAMPLES = [
+      'Jag driver en frisörsalong i Stockholm och vill göra det enklare för kunder att boka tid.',
+      'Vi öppnar en restaurang och behöver en hemsida med meny och bordsbokning.',
+      'Jag har en butik och vill visa våra produkter och få fler förfrågningar.',
+      'Jag är fotograf och behöver en portfolio som känns professionell.',
+      'Vår nuvarande hemsida känns gammal och syns dåligt på Google.',
+      'Jag startar ett konsultföretag och behöver hjälp att förklara våra tjänster tydligt.'
+    ];
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var promptCard = document.getElementById('wz-card-hero');
+    if (promptCard) promptCard.classList.add('has-typing');
+
+    // Lägg textarean i ett eget omslag så att lagret täcker exakt samma yta (samma höjd – ingen layoutförskjutning).
+    var wrap = document.createElement('div');
+    wrap.className = 'wz-typing is-off';
+    heroMsg.parentNode.insertBefore(wrap, heroMsg);
+    wrap.appendChild(heroMsg);
+    var label = document.createElement('span');
+    label.className = 'wz-typing-label';
+    label.setAttribute('aria-hidden', 'true');
+    label.textContent = 'Exempel på vad du kan skriva';
+    var ov = document.createElement('span');
+    ov.className = 'wz-typing-ov';
+    ov.setAttribute('aria-hidden', 'true');
+    var textNode = document.createTextNode('');
+    var caret = document.createElement('span');
+    caret.className = 'wz-typing-caret';
+    ov.appendChild(textNode);
+    ov.appendChild(caret);
+    wrap.appendChild(label);
+    wrap.appendChild(ov);
+
+    var ex = 0, pos = 0, phase = 'type'; // type → hold → erase → gap → (nästa) type
+    var timer = null, fadeTimer = null;
+    var focused = false, inView = true, running = false;
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+    function blocked() {
+      return focused || heroMsg.value !== '' || document.hidden || !inView ||
+        (promptCard && promptCard.classList.contains('is-step2')) || !heroMsg.offsetParent;
+    }
+    function clearTimers() { clearTimeout(timer); timer = null; }
+    function show() { clearTimeout(fadeTimer); wrap.classList.remove('is-off'); }
+    function hide() { wrap.classList.add('is-off'); wrap.classList.remove('is-typing'); }
+    function render() { textNode.nodeValue = EXAMPLES[ex].slice(0, pos); }
+
+    function tick() {
+      timer = null;
+      if (blocked()) { pause(); return; }
+      var text = EXAMPLES[ex], delay;
+      if (phase === 'type') {
+        wrap.classList.add('is-typing');
+        pos++;
+        render();
+        var ch = text.charAt(pos - 1);
+        delay = rand(38, 65) + (ch === '.' || ch === ',' ? rand(180, 320) : ch === ' ' ? rand(0, 30) : 0);
+        if (pos >= text.length) { phase = 'hold'; delay = rand(1800, 2300); wrap.classList.remove('is-typing'); }
+      } else if (phase === 'hold') {
+        phase = 'erase';
+        delay = rand(18, 32);
+      } else if (phase === 'erase') {
+        wrap.classList.add('is-typing');
+        pos--;
+        render();
+        delay = rand(18, 32);
+        if (pos <= 0) { phase = 'gap'; delay = rand(400, 600); wrap.classList.remove('is-typing'); }
+      } else { // gap
+        ex = (ex + 1) % EXAMPLES.length;
+        pos = 0;
+        phase = 'type';
+        delay = rand(38, 65);
+      }
+      timer = setTimeout(tick, delay);
+    }
+
+    // Statiskt läge vid reducerad rörelse: ett helt exempel, ingen skrivning.
+    function showStatic() {
+      if (blocked()) { hide(); return; }
+      pos = EXAMPLES[ex].length;
+      render();
+      show();
+    }
+    function start(delay) {
+      clearTimers();
+      if (reduceMotion.matches) { showStatic(); return; }
+      if (blocked()) return;
+      running = true;
+      show();
+      render();
+      timer = setTimeout(tick, delay);
+    }
+    function pause() {
+      clearTimers();
+      running = false;
+      if (focused || heroMsg.value !== '' || (promptCard && promptCard.classList.contains('is-step2'))) hide();
+    }
+    // Nytt exempel från början (efter fokus eller inmatning).
+    function resetToNext() {
+      if (pos > 0 || phase !== 'type') ex = (ex + 1) % EXAMPLES.length;
+      pos = 0;
+      phase = 'type';
+    }
+
+    heroMsg.addEventListener('focus', function () {
+      focused = true;
+      clearTimers();
+      running = false;
+      hide();
+      // Töm lagret efter uttoningen så att nästa start börjar på ett nytt exempel.
+      fadeTimer = setTimeout(function () { resetToNext(); render(); }, 180);
+    });
+    heroMsg.addEventListener('blur', function () {
+      focused = false;
+      if (heroMsg.value === '') start(1500);
+    });
+    // Inmatning (även autofyll): stoppa direkt. Användarens text rörs aldrig.
+    heroMsg.addEventListener('input', function () {
+      if (heroMsg.value !== '') { clearTimers(); running = false; hide(); }
+      else if (!focused) start(1500);
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) pause(); else if (!running && !blocked()) start(400);
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+        if (!inView) pause(); else if (!running && !blocked()) start(400);
+      }, { rootMargin: '200px 0px' }).observe(wrap);
+    }
+    if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', function () { resetToNext(); start(700); });
+
+    start(700);
+  })();
+
+  /* ---------- Branschkarusell: cirkulär, native scroll + scroll snap, tangentbord, musdrag ----------
+     Listan är [kloner | riktiga kort | kloner]. När scrollningen stannar på en klon flyttas positionen
+     omärkbart (ett helt varv) till motsvarande riktiga kort, så att det alltid går att fortsätta åt båda håll. */
+  var indTrack = document.getElementById('ind-track');
+  if (indTrack) (function () {
+    var setScrollbarWidth = function () {
+      document.documentElement.style.setProperty('--sbw', (window.innerWidth - document.documentElement.clientWidth) + 'px');
+    };
+    setScrollbarWidth();
+    window.addEventListener('resize', setScrollbarWidth);
+
+    var real = Array.prototype.slice.call(indTrack.querySelectorAll('.ind-item'));
+    var n = real.length;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Visuell kopia av ett kort: samma utseende, men utan länk, rubrik, id, alt-texter eller fokusbara
+    // element, och dold för hjälpmedel. Den finns bara för att fylla ut loopen.
+    function makeClone(src) {
+      var li = src.cloneNode(true);
+      li.classList.add('ind-clone');
+      li.setAttribute('aria-hidden', 'true');
+      var link = li.querySelector('a.ind-card');
+      var card = document.createElement('div');
+      card.className = link.className;
+      while (link.firstChild) card.appendChild(link.firstChild);
+      link.parentNode.replaceChild(card, link);
+      li.querySelectorAll('h3').forEach(function (h) {
+        var span = document.createElement('span');
+        span.className = h.className;
+        span.innerHTML = h.innerHTML;
+        h.parentNode.replaceChild(span, h);
+      });
+      li.querySelectorAll('[id]').forEach(function (el) { el.removeAttribute('id'); });
+      li.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
+      li.querySelectorAll('[role],[aria-label]').forEach(function (el) { el.removeAttribute('role'); el.removeAttribute('aria-label'); });
+      return li;
+    }
+    real.forEach(function (el) { indTrack.insertBefore(makeClone(el), real[0]); });
+    real.forEach(function (el) { indTrack.appendChild(makeClone(el)); });
+    indTrack.classList.add('has-clones');
+    var all = Array.prototype.slice.call(indTrack.querySelectorAll('.ind-item')); // 0..n-1 kloner, n..2n-1 riktiga, 2n..3n-1 kloner
+
+    var active = -1;
+    var pending = null;   // målkortet medan en animation pågår
+    var touching = false;
+    var drag = null, suppressClick = false;
+
+    function centerOf(i) { var el = all[i]; return el.offsetLeft + el.offsetWidth / 2 - indTrack.clientWidth / 2; }
+    function loopWidth() { return all[n].offsetLeft - all[0].offsetLeft; }
+    function nearest() {
+      var mid = indTrack.scrollLeft + indTrack.clientWidth / 2;
+      var best = 0, bestDist = Infinity;
+      for (var i = 0; i < all.length; i++) {
+        var d = Math.abs(all[i].offsetLeft + all[i].offsetWidth / 2 - mid);
+        if (d < bestDist) { bestDist = d; best = i; }
+      }
+      return best;
+    }
+    function setActive(i) {
+      if (i === active) return;
+      active = i;
+      for (var k = 0; k < all.length; k++) {
+        all[k].classList.toggle('is-active', k === i);
+        all[k].classList.toggle('is-before', k < i);
+        all[k].classList.toggle('is-after', k > i);
+      }
+    }
+    // Flytta ett helt varv (±n kort) utan animation. Klonerna ser identiska ut, så inget syns.
+    function shift(dir) {
+      var delta = dir * loopWidth();
+      indTrack.classList.add('no-anim', 'is-animating');
+      indTrack.scrollLeft += delta;
+      if (drag) { drag.left += delta; drag.start += dir * n; }
+      if (anim) { anim.from += delta; anim.to += delta; }
+      if (pending !== null) pending += dir * n;
+      setActive(active + dir * n);
+      void indTrack.offsetWidth; // tvinga fram stilberäkning innan övergångarna slås på igen
+      indTrack.classList.remove('no-anim');
+      if (!anim && !drag) indTrack.classList.remove('is-animating');
+    }
+    // Håll det aktiva kortet i den riktiga mittdelen.
+    function normalize() {
+      if (active < n) shift(1);
+      else if (active >= 2 * n) shift(-1);
+    }
+
+    // Egen, lugn scrollanimation (ingen studs) för klick, tangenter och släppta drag.
+    var anim = null;
+    var ANIM_MS = 560;
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+    function stopAnim() {
+      if (!anim) return;
+      cancelAnimationFrame(anim.raf);
+      anim = null;
+      indTrack.classList.remove('is-animating');
+    }
+    function goTo(i, instant, ms) {
+      stopAnim();
+      // Mål i klonzonen: flytta först ett varv så att animationen alltid sker mot ett riktigt kort.
+      if (i >= 2 * n) { shift(-1); i -= n; }
+      else if (i < n) { shift(1); i += n; }
+      i = Math.max(0, Math.min(all.length - 1, i));
+      setActive(i);
+      var to = centerOf(i);
+      if (instant || reduceMotion.matches) {
+        pending = null;
+        indTrack.classList.add('is-animating');
+        indTrack.scrollLeft = to;
+        void indTrack.offsetWidth;
+        indTrack.classList.remove('is-animating');
+        return;
+      }
+      pending = i;
+      var from = indTrack.scrollLeft;
+      if (Math.abs(to - from) < 1) { pending = null; return; }
+      indTrack.classList.add('is-animating');
+      anim = { raf: 0, from: from, to: to, start: null, ms: ms || ANIM_MS };
+      var step = function (now) {
+        if (!anim) return;
+        if (anim.start === null) anim.start = now;
+        var t = Math.min(1, (now - anim.start) / anim.ms);
+        indTrack.scrollLeft = anim.from + (anim.to - anim.from) * easeOut(t);
+        if (t < 1) { anim.raf = requestAnimationFrame(step); return; }
+        stopAnim();
+        pending = null;
+        normalize();
+      };
+      anim.raf = requestAnimationFrame(step);
+    }
+    function base() { return pending !== null ? pending : active; }
+
+    // När scrollningen stannat (efter swipe, trackpad eller hjul): hoppa till motsvarande riktiga kort.
+    var settleTimer = null;
+    function onSettle() {
+      if (drag || touching || anim) return;
+      setActive(nearest());
+      normalize();
+    }
+    var ticking = false;
+    indTrack.addEventListener('scroll', function () {
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(onSettle, 140);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var k = nearest();
+        if (pending !== null) { if (k !== pending) return; pending = null; }
+        setActive(k);
+        // Vid lång, obruten scroll (t.ex. hjul) närmar vi oss listans kant: flytta ett varv i förväg.
+        if (!touching && !anim && (k < 2 || k > all.length - 3)) normalize();
+      });
+    }, { passive: true });
+    indTrack.addEventListener('scrollend', onSettle);
+    indTrack.addEventListener('touchstart', function () { touching = true; stopAnim(); pending = null; }, { passive: true });
+    indTrack.addEventListener('touchend', function () { touching = false; }, { passive: true });
+    indTrack.addEventListener('touchcancel', function () { touching = false; }, { passive: true });
+    indTrack.addEventListener('wheel', function () { stopAnim(); pending = null; }, { passive: true });
+    window.addEventListener('resize', function () { if (active !== -1) goTo(active, true); });
+
+    indTrack.addEventListener('keydown', function (e) {
+      var target;
+      if (e.key === 'ArrowLeft') target = base() - 1;
+      else if (e.key === 'ArrowRight') target = base() + 1;
+      else return;
+      e.preventDefault();
+      goTo(target);
+      // Flytta med fokus om det låg på ett kort, så att Enter öppnar det synliga kortet.
+      if (document.activeElement !== indTrack) {
+        var link = real[((active - n) % n + n) % n].querySelector('a');
+        if (link) link.focus({ preventScroll: true });
+      }
+    });
+    // Tabbar man till ett kort som inte är aktivt centreras det (bara riktiga kort är fokusbara).
+    indTrack.addEventListener('focusin', function (e) {
+      var i = all.indexOf(e.target.closest('.ind-item'));
+      if (i !== -1 && i !== active) goTo(i);
+    });
+
+    // Musdrag på desktop (touch och trackpad scrollar redan naturligt).
+    indTrack.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      stopAnim();
+      pending = null;
+      drag = { x: e.clientX, left: indTrack.scrollLeft, start: active, moved: false };
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) > 6) { drag.moved = true; indTrack.classList.add('is-dragging'); }
+      if (!drag.moved) return;
+      indTrack.scrollLeft = drag.left - dx;
+      // Långa drag: flytta ett varv innan listans kant nås.
+      var k = nearest();
+      setActive(k);
+      if (k < 2) shift(1); else if (k > all.length - 3) shift(-1);
+    });
+    window.addEventListener('pointerup', function (e) {
+      if (!drag) return;
+      var d = drag; drag = null;
+      if (!d.moved) return;
+      suppressClick = true;
+      setTimeout(function () { suppressClick = false; }, 0);
+      indTrack.classList.remove('is-dragging');
+      var dx = e.clientX - d.x;
+      var target = nearest();
+      // Ett tydligt drag byter alltid minst ett kort, även om det inte nått halvvägs.
+      if (target === d.start && Math.abs(dx) > 60) target = d.start + (dx < 0 ? 1 : -1);
+      goTo(target);
+    });
+    // Klick efter ett drag öppnar inte länken; klick på ett sidokort (även en klon) centrerar det.
+    indTrack.addEventListener('click', function (e) {
+      if (suppressClick) { e.preventDefault(); e.stopPropagation(); return; }
+      var i = all.indexOf(e.target.closest('.ind-item'));
+      if (i !== -1 && i !== active) { e.preventDefault(); goTo(i); }
+    }, true);
+
+    // Automatisk växling åt höger var 7:e sekund. Pausar när besökaren hovrar, har fokus i karusellen,
+    // interagerar, när sektionen inte syns, när fliken är dold och helt vid prefers-reduced-motion.
+    var AUTO_MS = 7000, AUTO_ANIM_MS = 900;
+    var autoTimer = null, hovering = false, focused = false, inView = false;
+    function scheduleAuto() {
+      clearTimeout(autoTimer);
+      if (reduceMotion.matches || hovering || focused || !inView || document.hidden) return;
+      autoTimer = setTimeout(function () {
+        if (drag || touching || anim) { scheduleAuto(); return; }
+        goTo(base() + 1, false, AUTO_ANIM_MS);
+        scheduleAuto();
+      }, AUTO_MS);
+    }
+    // Varje egen interaktion startar om nedräkningen.
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (type) {
+      indTrack.addEventListener(type, scheduleAuto, { passive: true });
+    });
+    indTrack.addEventListener('mouseenter', function () { hovering = true; scheduleAuto(); });
+    indTrack.addEventListener('mouseleave', function () { hovering = false; scheduleAuto(); });
+    indTrack.addEventListener('focusin', function () { focused = true; scheduleAuto(); });
+    indTrack.addEventListener('focusout', function (e) {
+      if (!indTrack.contains(e.relatedTarget)) { focused = false; scheduleAuto(); }
+    });
+    document.addEventListener('visibilitychange', scheduleAuto);
+    if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', scheduleAuto);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+        scheduleAuto();
+      }, { threshold: 0.5 }).observe(indTrack);
+    } else {
+      inView = true;
+      scheduleAuto();
+    }
+
+    goTo(n, true);
+  })();
+
+  /* ---------- KPI-graf "Synlighet som går att följa": intro, hover, dragning och tangentbord ----------
+     Värdena i data-points är illustrativa (synlighetsindex), inte kundresultat. Dragningen utforskar
+     bara tidslinjen – datan ändras aldrig. Koordinater i SVG:ns viewBox (600 × 300). */
+  var kcPlot = document.getElementById('kc-plot');
+  if (kcPlot) (function () {
+    var pts = JSON.parse(kcPlot.getAttribute('data-points'));
+    var n = pts.length;
+    var VW = 600, VH = 300, X0 = 30, X1 = 570;
+    var xs = pts.map(function (p, i) { return X0 + i * (X1 - X0) / (n - 1); });
+    var ys = pts.map(function (p) { return 262 - (p.v - 10) / 70 * 212; });
+
+    // Monoton kubisk interpolation (Fritsch–Carlson): mjuk kurva utan överslag vid nedgångarna.
+    var d = [], m = [];
+    for (var i = 0; i < n - 1; i++) d.push((ys[i + 1] - ys[i]) / (xs[i + 1] - xs[i]));
+    m[0] = d[0]; m[n - 1] = d[n - 2];
+    for (i = 1; i < n - 1; i++) m[i] = d[i - 1] * d[i] <= 0 ? 0 : (d[i - 1] + d[i]) / 2;
+    for (i = 0; i < n - 1; i++) {
+      if (d[i] === 0) { m[i] = m[i + 1] = 0; continue; }
+      var a = m[i] / d[i], b = m[i + 1] / d[i], s2 = a * a + b * b;
+      if (s2 > 9) { var t3 = 3 / Math.sqrt(s2); m[i] = t3 * a * d[i]; m[i + 1] = t3 * b * d[i]; }
+    }
+    function yAt(x) {
+      if (x <= xs[0]) return ys[0];
+      if (x >= xs[n - 1]) return ys[n - 1];
+      var k = Math.min(n - 2, Math.floor((x - X0) / (xs[1] - xs[0])));
+      var h = xs[k + 1] - xs[k], t = (x - xs[k]) / h, t2 = t * t, t3 = t2 * t;
+      return (2 * t3 - 3 * t2 + 1) * ys[k] + (t3 - 2 * t2 + t) * h * m[k] + (-2 * t3 + 3 * t2) * ys[k + 1] + (t3 - t2) * h * m[k + 1];
+    }
+    var f1 = function (v) { return v.toFixed(1); };
+    var lineD = 'M' + f1(xs[0]) + ',' + f1(ys[0]);
+    for (i = 0; i < n - 1; i++) {
+      var hh = xs[i + 1] - xs[i];
+      lineD += ' C' + f1(xs[i] + hh / 3) + ',' + f1(ys[i] + m[i] * hh / 3) + ' ' + f1(xs[i + 1] - hh / 3) + ',' + f1(ys[i + 1] - m[i + 1] * hh / 3) + ' ' + f1(xs[i + 1]) + ',' + f1(ys[i + 1]);
+    }
+    var lineEl = kcPlot.querySelector('.kc-line'), areaEl = kcPlot.querySelector('.kc-area');
+    lineEl.setAttribute('d', lineD);
+    areaEl.setAttribute('d', lineD + ' L' + f1(xs[n - 1]) + ',300 L' + f1(xs[0]) + ',300 Z');
+
+    var clipRect = kcPlot.querySelector('.kc-clip-rect');
+    var dots = kcPlot.querySelectorAll('.kc-dot');
+    var tip = kcPlot.querySelector('.kc-tip'), tipM = tip.querySelector('.kc-tip-m'), tipV = tip.querySelector('.kc-tip-v'), tipE = tip.querySelector('.kc-tip-e');
+    var ev = kcPlot.querySelector('.kc-event'), evT = ev.querySelector('.kc-event-t');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    var W = 0, H = 0, tw = 0, th = 0, ew = 0, eh = 0;
+    var cur = -1, pos = { x: xs[n - 1], y: ys[n - 1] };
+    var introState = 'pending'; // pending → running → done
+
+    function measure() { W = kcPlot.clientWidth; H = kcPlot.clientHeight; }
+    function measureBoxes() { tw = tip.offsetWidth; th = tip.offsetHeight; ew = ev.offsetWidth; eh = ev.offsetHeight; }
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+    function nearestIndex(x) { return clamp(Math.round((x - X0) / (xs[1] - xs[0])), 0, n - 1); }
+
+    function setMonth(k) {
+      if (k === cur) return;
+      cur = k;
+      var p = pts[k];
+      tipM.textContent = p.m;
+      tipV.textContent = p.v;
+      tipE.textContent = p.e || '';
+      if (p.e) { evT.textContent = p.e; ev.classList.add('is-on'); } else ev.classList.remove('is-on');
+      kcPlot.setAttribute('aria-valuenow', String(k + 1));
+      kcPlot.setAttribute('aria-valuetext', p.m + ', synlighetsindex ' + p.v + (p.e ? ', ' + (/^Google/.test(p.e) ? p.e : p.e.charAt(0).toLowerCase() + p.e.slice(1)) : ''));
+      measureBoxes();
+    }
+
+    function overlaps(a, b) { return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y; }
+    function inside(r) { return r.x >= 0 && r.y >= 0 && r.x + r.w <= W && r.y + r.h <= H; }
+
+    // Placera markör, tooltip och händelsekort. Endast skrivningar – mätningar sker vid månadsbyte/resize.
+    function render() {
+      var px = pos.x / VW * W, py = pos.y / VH * H;
+      kcPlot.style.setProperty('--kx', px + 'px');
+      kcPlot.style.setProperty('--ky', py + 'px');
+      var above = py - 16 - th >= 0;
+      var ty = above ? py - 16 - th : Math.min(py + 16, H - th);
+      var tx = clamp(px - tw / 2, 0, Math.max(0, W - tw));
+      tip.dataset.side = above ? 'above' : 'below';
+      kcPlot.style.setProperty('--tx', tx + 'px');
+      kcPlot.style.setProperty('--ty', ty + 'px');
+      kcPlot.style.setProperty('--ax', clamp(px - tx, 14, tw - 14) + 'px');
+      if (!ev.classList.contains('is-on')) return;
+      var tipR = { x: tx - 6, y: ty - 6, w: tw + 12, h: th + 12 };
+      var dotR = { x: px - 12, y: py - 12, w: 24, h: 24 };
+      var cands = [
+        { x: clamp(px - ew / 2, 0, W - ew), y: above ? py + 18 : py - 18 - eh },
+        { x: px + 20, y: py - eh / 2 },
+        { x: px - 20 - ew, y: py - eh / 2 },
+        { x: tx + tw + 10, y: ty },
+        { x: tx - ew - 10, y: ty }
+      ];
+      var pick = null;
+      for (var c = 0; c < cands.length; c++) {
+        var r = { x: cands[c].x, y: cands[c].y, w: ew, h: eh };
+        if (inside(r) && !overlaps(r, tipR) && !overlaps(r, dotR)) { pick = r; break; }
+      }
+      // Får kortet inte plats någonstans räcker händelseraden i tooltipen.
+      ev.style.visibility = pick ? '' : 'hidden';
+      if (pick) {
+        kcPlot.style.setProperty('--ex', pick.x + 'px');
+        kcPlot.style.setProperty('--ey', pick.y + 'px');
+      }
+    }
+
+    var snapTimer = null;
+    function snapTo(k, animate) {
+      clearTimeout(snapTimer);
+      kcPlot.classList.remove('is-following');
+      if (animate && !reduceMotion.matches) {
+        kcPlot.classList.add('is-snapping');
+        snapTimer = setTimeout(function () { kcPlot.classList.remove('is-snapping'); }, 420);
+      }
+      pos = { x: xs[k], y: ys[k] };
+      setMonth(k);
+      render();
+    }
+
+    // Introt: kurvan ritas från januari till september, punkter och händelser dyker upp när linjen når dem.
+    function showDotsUpTo(x) {
+      for (var j = 0; j < n; j++) dots[j].classList.toggle('is-shown', xs[j] <= x + 0.5);
+    }
+    function finishIntro() {
+      if (introState === 'done') return;
+      introState = 'done';
+      clipRect.setAttribute('width', VW);
+      areaEl.style.opacity = '';
+      kcPlot.classList.remove('is-pre', 'is-intro');
+      showDotsUpTo(VW);
+      snapTo(n - 1, false);
+    }
+    function runIntro() {
+      if (introState !== 'pending') return;
+      if (reduceMotion.matches) { finishIntro(); return; }
+      introState = 'running';
+      kcPlot.classList.remove('is-pre');
+      kcPlot.classList.add('is-intro');
+      var DUR = 1900, start = null;
+      var ease = function (t) { return -(Math.cos(Math.PI * t) - 1) / 2; };
+      var step = function (now) {
+        if (introState !== 'running') return;
+        if (start === null) start = now;
+        var t = Math.min(1, (now - start) / DUR), e = ease(t);
+        var x = X0 + (X1 - X0) * e;
+        clipRect.setAttribute('width', x + 3);
+        areaEl.style.opacity = String(e);
+        showDotsUpTo(x);
+        pos = { x: x, y: yAt(x) };
+        setMonth(clamp(Math.floor((x - X0) / (xs[1] - xs[0]) + 0.02), 0, n - 1));
+        render();
+        if (t < 1) requestAnimationFrame(step); else finishIntro();
+      };
+      requestAnimationFrame(step);
+    }
+
+    // Följ pekaren längs kurvan (hover på desktop, dragning med mus/penna/finger).
+    var pendingX = null, rafId = 0;
+    function follow(clientX) {
+      pendingX = clientX;
+      if (rafId) return;
+      rafId = requestAnimationFrame(function () {
+        rafId = 0;
+        var rect = kcPlot.getBoundingClientRect();
+        var vx = clamp((pendingX - rect.left) / rect.width * VW, X0, X1);
+        kcPlot.classList.remove('is-snapping');
+        kcPlot.classList.add('is-following');
+        pos = { x: vx, y: yAt(vx) };
+        setMonth(nearestIndex(vx));
+        render();
+      });
+    }
+    var drag = null;
+    kcPlot.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      finishIntro();
+      drag = { id: e.pointerId, x: e.clientX, y: e.clientY, type: e.pointerType, active: e.pointerType !== 'touch' };
+      if (drag.active) {
+        kcPlot.setPointerCapture(e.pointerId);
+        kcPlot.classList.add('is-dragging');
+        follow(e.clientX);
+      }
+    });
+    kcPlot.addEventListener('pointermove', function (e) {
+      if (drag && drag.id === e.pointerId) {
+        // Touch: börja dra först vid en tydligt horisontell rörelse, annars får sidan scrolla vertikalt.
+        if (!drag.active) {
+          var dx = Math.abs(e.clientX - drag.x), dy = Math.abs(e.clientY - drag.y);
+          if (dx < 8 || dx <= dy) return;
+          drag.active = true;
+          kcPlot.setPointerCapture(e.pointerId);
+          kcPlot.classList.add('is-dragging');
+        }
+        follow(e.clientX);
+      } else if (e.pointerType === 'mouse' && introState === 'done') {
+        follow(e.clientX);
+      }
+    });
+    function endDrag(e) {
+      if (!drag || drag.id !== e.pointerId) return;
+      var wasActive = drag.active;
+      drag = null;
+      kcPlot.classList.remove('is-dragging');
+      if (kcPlot.hasPointerCapture && kcPlot.hasPointerCapture(e.pointerId)) kcPlot.releasePointerCapture(e.pointerId);
+      if (wasActive || e.type === 'pointerup') {
+        if (e.type === 'pointerup' && !wasActive) follow(e.clientX);
+        requestAnimationFrame(function () { snapTo(nearestIndex(pos.x), true); });
+      }
+    }
+    kcPlot.addEventListener('pointerup', endDrag);
+    kcPlot.addEventListener('pointercancel', endDrag);
+    kcPlot.addEventListener('pointerleave', function (e) {
+      if (e.pointerType === 'mouse' && !drag && introState === 'done') snapTo(nearestIndex(pos.x), true);
+    });
+
+    kcPlot.addEventListener('keydown', function (e) {
+      var k = null;
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') k = cur - 1;
+      else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') k = cur + 1;
+      else if (e.key === 'Home') k = 0;
+      else if (e.key === 'End') k = n - 1;
+      if (k === null) return;
+      e.preventDefault();
+      finishIntro();
+      snapTo(clamp(k, 0, n - 1), true);
+    });
+
+    measure();
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(function () { measure(); measureBoxes(); render(); }).observe(kcPlot);
+    } else {
+      window.addEventListener('resize', function () { measure(); measureBoxes(); render(); });
+    }
+
+    // Startläge: förbered introt (dolt), eller visa slutläget direkt.
+    setMonth(n - 1);
+    render();
+    if ('IntersectionObserver' in window && !reduceMotion.matches) {
+      kcPlot.classList.add('is-pre');
+      clipRect.setAttribute('width', 0);
+      areaEl.style.opacity = '0';
+      var kcIO = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        kcIO.disconnect();
+        setTimeout(runIntro, 250);
+      }, { threshold: 0.35 });
+      kcIO.observe(kcPlot);
+    } else {
+      finishIntro();
+    }
+  })();
+
+  /* ---------- Kundupplevelse (bento): 5,0 räknas upp, stjärnor tänds, faktorer tonas in – en gång ---------- */
+  var cxWrap = document.querySelector('.bento-card--rating .cx');
+  if (cxWrap && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) (function () {
+    var num = cxWrap.querySelector('.cx-num');
+    cxWrap.classList.add('cx-pre');
+    num.textContent = '0,0';
+    var cxIO = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      cxIO.disconnect();
+      cxWrap.classList.add('cx-run');
+      void cxWrap.offsetWidth;
+      cxWrap.classList.remove('cx-pre');
+      var DUR = 1150, start = null;
+      var step = function (now) {
+        if (start === null) start = now;
+        var t = Math.min(1, (now - start) / DUR);
+        var e = 1 - Math.pow(1 - t, 3);
+        num.textContent = (Math.round(e * 50) / 10).toFixed(1).replace('.', ',');
+        if (t < 1) requestAnimationFrame(step);
+        else setTimeout(function () { cxWrap.classList.remove('cx-run'); }, 1200);
+      };
+      requestAnimationFrame(step);
+    }, { threshold: 0.5 });
+    cxIO.observe(cxWrap);
+  })();
+
+  /* ---------- Kontaktflöde (bento "Tydligare vägar till kontakt") ----------
+     Dekorativt och dolt för skärmläsare. Fast ordning (ingen slump), ett nytt kort ungefär var fjärde sekund,
+     bara när kortet syns och fliken är aktiv. Vid prefers-reduced-motion: tre statiska kort. */
+  var lfBox = document.querySelector('.bento-card--leads .lf');
+  if (lfBox) (function () {
+    var ICONS = {
+      cal: '<path d="M2.5 4.5h11v9a1.5 1.5 0 0 1-1.5 1.5H4a1.5 1.5 0 0 1-1.5-1.5z M2.5 7.5h11 M5.5 2.5v3 M10.5 2.5v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+      cutlery: '<path d="M5 2v5.5M3.5 2v3.5a1.5 1.5 0 0 0 3 0V2M5 7.5V14M11.5 2c-1.4.6-2 2.3-2 4.5V9h2V14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+      camera: '<path d="M2.5 5.5h2.2l1.2-1.8h4.2l1.2 1.8h2.2v7.5h-11z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="9" r="2.3" fill="none" stroke="currentColor" stroke-width="1.5"/>',
+      bag: '<path d="M3 5.5h10l-.8 8.5H3.8z M5.8 5.5V4.5a2.2 2.2 0 0 1 4.4 0v1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+      phone: '<path d="M4.2 2.5h2l1 3-1.4 1a7 7 0 0 0 3.7 3.7l1-1.4 3 1v2a1.5 1.5 0 0 1-1.6 1.5A10.5 10.5 0 0 1 2.7 4.1 1.5 1.5 0 0 1 4.2 2.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>'
+    };
+    // Blandad men fast ordning mellan verksamheterna.
+    var EVENTS = [
+      { t: 'Ny bokning', s: 'Klippning bokad', when: 'nu', ic: 'cal' },          // frisör
+      { t: 'Ny beställning', s: 'En produkt har beställts', when: '8 min', ic: 'bag' }, // butik
+      { t: 'Ny bordsbokning', s: 'Bord för fyra personer', when: 'nu', ic: 'cutlery' }, // restaurang
+      { t: 'Nytt möte', s: 'Kostnadsfritt samtal bokat', when: '12 min', ic: 'phone' }, // konsult
+      { t: 'Ny behandling', s: 'Ansiktsbehandling bokad', when: '2 min', ic: 'cal' },   // salong
+      { t: 'Ny förfrågan', s: 'Fotografering till bröllop', when: '5 min', ic: 'camera' } // fotograf
+    ];
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function makeItem(ev) {
+      var el = document.createElement('div');
+      el.className = 'lf-item';
+      el.innerHTML = '<span class="lf-ic"><svg viewBox="0 0 16 16">' + ICONS[ev.ic] + '</svg></span>' +
+        '<span class="lf-tx"><b>' + ev.t + '</b><span>' + ev.s + '</span></span><span class="lf-t">' + ev.when + '</span>';
+      return el;
+    }
+    function setSlot(el, slot) {
+      el.dataset.slot = String(slot);
+      el.style.setProperty('--slot', slot);
+    }
+
+    // Startläge: de tre förrenderade korten (eller bygg dem om de saknas).
+    var items = Array.prototype.slice.call(lfBox.querySelectorAll('.lf-item'));
+    if (!items.length) {
+      for (var k = 0; k < 3; k++) { items.push(makeItem(EVENTS[k])); lfBox.appendChild(items[k]); }
+    }
+    items.forEach(function (it, i) { setSlot(it, i); });
+    var next = 3;
+
+    var timer = null, visible = false;
+    function step() {
+      timer = null;
+      var el = makeItem(EVENTS[next % EVENTS.length]);
+      next++;
+      setSlot(el, -1);
+      lfBox.insertBefore(el, lfBox.firstChild);
+      void el.offsetWidth; // startläget ovanför måste vara renderat innan förflyttningen
+      items.unshift(el);
+      items.forEach(function (it, i) { setSlot(it, i); });
+      el.classList.add('is-new');
+      setTimeout(function () { el.classList.remove('is-new'); }, 1100);
+      var gone = items.splice(3);
+      setTimeout(function () { gone.forEach(function (g) { if (g.parentNode) g.parentNode.removeChild(g); }); }, 800);
+      schedule();
+    }
+    function schedule() {
+      clearTimeout(timer);
+      timer = null;
+      if (reduceMotion.matches || !visible || document.hidden) return;
+      timer = setTimeout(step, 4000);
+    }
+    document.addEventListener('visibilitychange', schedule);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        schedule();
+      }, { threshold: 0.3 }).observe(lfBox);
+    }
+  })();
+
+  /* ---------- "Ett starkare första intryck": identiteterna växlar i fast ordning ungefär var fjärde sekund ----------
+     Pausar när kortet inte syns, fliken är dold eller muspekaren vilar på illustrationen. Reducerad rörelse: identitet 1 statiskt. */
+  var viEl = document.querySelector('.bento-card--brand .vi');
+  if (viEl && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) (function () {
+    var COUNT = 4, id = 0, timer = null, visible = false, hovering = false;
+    function schedule() {
+      clearTimeout(timer);
+      timer = null;
+      if (!visible || hovering || document.hidden) return;
+      timer = setTimeout(function () {
+        id = (id + 1) % COUNT;
+        viEl.dataset.id = String(id);
+        schedule();
+      }, 4000);
+    }
+    viEl.addEventListener('mouseenter', function () { hovering = true; schedule(); });
+    viEl.addEventListener('mouseleave', function () { hovering = false; schedule(); });
+    document.addEventListener('visibilitychange', schedule);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        schedule();
+      }, { threshold: 0.3 }).observe(viEl);
+    }
+  })();
+
+  /* ---------- Portfolio: kontinuerligt projektband ----------
+     Rörelsen är en ren CSS-animation (linjär, oändlig). JS gör bara tre saker: duplicerar listan för en sömlös loop,
+     mäter exakt loop-avstånd/varaktighet och startar/pausar när sektionen syns. Accordionen är fast och påverkar inte bandet. */
+  var pfr = document.getElementById('pfr');
+  if (pfr) (function () {
+    var track = document.getElementById('pfr-track');
+    var originals = Array.prototype.slice.call(track.querySelectorAll('.pfr-item'));
+    // Kopior: dolda för hjälpmedel och inte fokusbara (inga dubbla länkar i tabbordningen).
+    originals.forEach(function (el) {
+      var c = el.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.tabIndex = -1;
+      c.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
+      c.querySelectorAll('.sr-only').forEach(function (s) { s.remove(); });
+      track.appendChild(c);
+    });
+    var SPEED = 88; // px per sekund
+    function measure() {
+      // Avståndet från första originalet till första kopian = en uppsättning inklusive gap → hoppfri loop.
+      var dist = track.children[originals.length].offsetTop - track.children[0].offsetTop;
+      if (dist <= 0) return;
+      var dur = dist / SPEED; // samma hastighet oavsett storlek
+      track.style.setProperty('--pfr-dist', dist + 'px');
+      track.style.setProperty('--pfr-dur', dur.toFixed(2) + 's');
+    }
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('load', measure);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        pfr.classList.toggle('is-running', entries[0].isIntersecting);
+      }, { threshold: 0.15 }).observe(pfr);
+    } else {
+      pfr.classList.add('is-running');
+    }
+
+    // Fast accordion: klick öppnar vald rad och stänger föregående.
+    var rows = Array.prototype.slice.call(pfr.querySelectorAll('.pfv-row'));
+    rows.forEach(function (row) {
+      row.querySelector('.pfv-row-btn').addEventListener('click', function () {
+        rows.forEach(function (r) {
+          var open = r === row;
+          r.classList.toggle('is-open', open);
+          r.querySelector('.pfv-row-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+    });
+  })();
+
 })();
 </script>
 

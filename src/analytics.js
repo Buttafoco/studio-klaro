@@ -255,8 +255,11 @@ function init() {
 
   // Anropas av sidornas formulärkod först när en förfrågan har tagits emot.
   // Tar bara ett formulärnamn – aldrig några fältvärden.
-  window.klaroTrackLead = function (formName) {
-    gtag('event', 'generate_lead', { form_name: String(formName || 'kontaktformular').slice(0, 40) });
+  // formLocation (valfri) anger var på sidan formuläret satt, t.ex. 'hero' eller 'kontakt'.
+  window.klaroTrackLead = function (formName, formLocation) {
+    const params = { form_name: String(formName || 'kontaktformular').slice(0, 40) };
+    if (formLocation) params.form_location = String(formLocation).slice(0, 40);
+    gtag('event', 'generate_lead', params);
     if (consent && consent.marketing && window.__klaroMetaPixel === 'active') {
       window.fbq('track', 'Lead');
     }
