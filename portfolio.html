@@ -92,6 +92,70 @@
     [data-rba-arrow]{transform:rotate(90deg)!important;}
     [data-rpad]{padding-left:18px!important;padding-right:18px!important;}
   }
+
+  /* Formulär "Få konkreta idéer" – samma design och flöde som startsidans kontaktformulär */
+  .wz-input{border:none;border-bottom:2px solid rgba(15,23,42,0.15);padding:10px 2px;font-size:17px;font-family:inherit;outline:none;background:transparent;transition:border-color 0.25s cubic-bezier(0.22,1,0.36,1);width:100%;box-sizing:border-box;}
+  .wz-input:focus{border-color:#146EF5;}
+  .wz-chip{border-width:1.5px;border-style:solid;border-radius:20px;padding:10px 16px;min-height:40px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;transition:all 0.2s ease;background:#fff;color:#0F172A;border-color:rgba(15,23,42,0.15);}
+  .wz-chip.selected{background:#146EF5;color:#fff;border-color:#146EF5;}
+  .wz-input.wz-invalid{border-bottom-color:#D64545;}
+  .wz-goals.wz-goals-invalid{outline:2px solid #D64545;outline-offset:8px;border-radius:12px;}
+  .wz-expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.38s cubic-bezier(0.22,1,0.36,1);}
+  .wz-expand.wz-open{grid-template-rows:1fr;}
+  .wz-expand-inner{overflow:hidden;opacity:0;transform:translateY(-10px);transition:opacity 0.32s ease-out,transform 0.32s ease-out;}
+  .wz-expand.wz-open .wz-expand-inner{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .wz-expand{transition:none;}
+    .wz-expand-inner{transition:none;}
+  }
+  .wz-shell{max-width:680px;margin:0 auto;}
+  .wz-card{background:#fff;border-radius:32px;padding:26px 30px 18px;border:1px solid transparent;box-shadow:0 18px 44px rgba(20,110,245,0.10);box-sizing:border-box;}
+  .wz-prompt-card{transition:border-color .25s ease,box-shadow .25s ease;}
+  .wz-prompt-card:hover{border-color:rgba(20,110,245,0.12);}
+  .wz-prompt-card:focus-within{border-color:rgba(20,110,245,0.22);box-shadow:0 0 0 4px rgba(20,110,245,0.06),0 18px 44px rgba(20,110,245,0.10);}
+  .wz-prompt-card.wz-card-invalid{border-color:rgba(214,69,69,0.55);}
+  .wz-input.wz-prompt{display:block;border:none;padding:0;height:112px;resize:none;font-size:19px;line-height:1.5;font-weight:400;color:#0F172A;letter-spacing:-0.005em;transition:height .38s cubic-bezier(0.22,1,0.36,1),font-size .38s cubic-bezier(0.22,1,0.36,1);}
+  .wz-input.wz-prompt::placeholder{color:#8A96A8;opacity:1;}
+  .wz-prompt-error{font-size:13px;color:#D64545;font-weight:600;margin-top:10px;}
+  .wz-prompt-error:empty{display:none;}
+  .wz-prompt-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:12px -12px 0 0;}
+  .wz-prompt-hint{font-size:13px;color:#8A96A8;font-weight:500;line-height:1.4;}
+  .wz-next{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(20,110,245,0.3);}
+  .wz-next:focus-visible,.wz-submit:focus-visible,.wz-callback-toggle:focus-visible,.wz-chip:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
+  .wz-prompt-card.is-step2 .wz-input.wz-prompt{height:64px;font-size:17px;}
+  .wz-prompt-card.is-step2 .wz-prompt-bar{display:none;}
+  .wz-prompt-card.is-step2{padding-bottom:28px;}
+  .wz-step2{border-top:1px solid rgba(15,23,42,0.08);margin-top:24px;padding-top:26px;}
+  .wz-step2-title{font-size:19px;font-weight:800;color:#0F172A;margin:0 0 22px;line-height:1.3;}
+  .wz-fields{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px;margin-bottom:24px;}
+  .wz-label{display:block;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;}
+  @media (prefers-reduced-motion: reduce){
+    .wz-input.wz-prompt{transition:none;}
+  }
+  @media (max-width:600px){
+    .wz-card{border-radius:28px;padding:22px 20px 20px;}
+    .wz-input.wz-prompt{height:120px;font-size:17px;}
+    .wz-prompt-card.is-step2 .wz-input.wz-prompt{height:96px;font-size:16px;}
+    .wz-prompt-bar{flex-direction:column;align-items:stretch;gap:12px;margin-right:0;}
+    .wz-prompt-hint{text-align:center;order:2;}
+    .wz-next{width:100%;padding:16px 20px;}
+    .wz-fields{grid-template-columns:1fr;gap:18px;}
+    .wz-step2{margin-top:18px;padding-top:22px;}
+    .wz-form-note > div{text-align:center!important;}
+  }
+  .btn-next{transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s cubic-bezier(0.22,1,0.36,1),opacity 0.2s ease;}
+  .btn-next:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,110,245,0.4);}
+  .btn-next:active{transform:translateY(0px) scale(0.98);}
+  @media (max-width:820px){
+    .wz-btnrow{flex-direction:column!important;align-items:stretch!important;gap:12px!important;}
+    .wz-btnrow button{width:100%!important;box-sizing:border-box!important;text-align:center!important;justify-content:center!important;}
+  }
+  @media (max-width:600px){
+    .wz-btnrow{flex-direction:column!important;align-items:stretch!important;gap:12px!important;}
+    .wz-btnrow button{width:100%!important;box-sizing:border-box!important;text-align:center!important;justify-content:center!important;}
+  }
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  .wz-shell{text-align:left;}
 </style>
 <script type="application/ld+json">
 {
@@ -309,7 +373,6 @@
       </a>
       <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
         <a href="/#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
-        <a href="/#tjansten" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Tjänster</a>
         <a href="/#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
         <a href="/seo-koll" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">SEO</a>
         <a href="/priser" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
@@ -325,7 +388,6 @@
     <div data-rshow id="mnav-panel" class="mnav-panel" style="display:none;">
       <div style="background:#fff;border-radius:18px;box-shadow:0 12px 30px rgba(15,23,42,0.12);overflow:hidden;">
         <a href="/#processen" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
-        <a href="/#tjansten" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Tjänster</a>
         <a href="/#portfolio" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
         <a href="/seo-koll" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">SEO</a>
         <a href="/priser" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
@@ -618,20 +680,104 @@
     <h2 style="font-size:30px;font-weight:800;color:#0F172A;margin:0 0 16px;">Redo att visa vad du faktiskt kan?</h2>
     <p style="font-size:16px;color:#52657A;max-width:520px;margin:0 auto 30px;line-height:1.6;">Skicka ditt material till oss så bygger vi en portfolio du kan vara stolt över att dela.</p>
 
-    <div id="pf-form-success" style="display:none;background:#fff;border-radius:20px;padding:40px;box-shadow:0 12px 30px rgba(15,23,42,0.06);max-width:480px;margin:0 auto;">
-      <div style="width:52px;height:52px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px;">✓</div>
-      <div style="font-size:18px;font-weight:800;color:#0F172A;">Tack! Vi hör av oss inom kort.</div>
+    <div class="wz-shell" data-wz-mount="portfolio"></div>
+  </section>
+
+
+  <!-- Formulärkomponent för kostnadsfri genomgång. Klonas in i varje [data-wz-mount]
+       (hero + kontaktsektionen). id:n får instansens nyckel som suffix, t.ex. wz-f-name-hero. -->
+  <template id="wz-template">
+
+    <!-- SUCCESS -->
+    <div id="wz-success" class="wz-card" style="display:none;text-align:center;animation:fadeUp .5s cubic-bezier(0.22,1,0.36,1);">
+      <div style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#146EF5,#3B8CFF);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;margin:12px auto 24px;box-shadow:0 10px 24px rgba(20,110,245,0.35);" aria-hidden="true">✓</div>
+      <h3 id="wz-success-title" tabindex="-1" style="font-size:24px;font-weight:800;color:#0F172A;margin:0 0 14px;line-height:1.3;outline:none;">Tack! Vi kikar på det.</h3>
+      <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 24px;">Vi går igenom det du skickat och återkommer personligt så snart vi kan.</p>
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px;" aria-hidden="true">
+        <div style="width:8px;height:8px;border-radius:50%;background:#146EF5;"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#146EF5;"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#146EF5;"></div>
+      </div>
     </div>
 
-    <form id="pf-form" data-reveal style="background:#fff;border-radius:20px;padding:32px;box-shadow:0 12px 30px rgba(15,23,42,0.06);max-width:480px;margin:0 auto;text-align:left;">
-      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
-        <input type="text" name="name" required placeholder="Namn *" style="border:none;border-bottom:2px solid rgba(15,23,42,0.15);padding:10px 2px;font-size:16px;font-family:inherit;outline:none;background:transparent;">
-        <input type="email" name="email" required placeholder="E-post *" style="border:none;border-bottom:2px solid rgba(15,23,42,0.15);padding:10px 2px;font-size:16px;font-family:inherit;outline:none;background:transparent;">
-        <textarea name="message" placeholder="Berätta kort om dig och ditt arbete" rows="3" style="border:none;border-bottom:2px solid rgba(15,23,42,0.15);padding:10px 2px;font-size:16px;font-family:inherit;outline:none;background:transparent;resize:vertical;"></textarea>
+    <!-- FORM -->
+    <div id="wz-form-wrap">
+      <form id="wz-form" novalidate>
+        <div id="wz-card" class="wz-card wz-prompt-card">
+          <!-- Steg 1: prompt -->
+          <label for="wz-f-message" class="sr-only">Berätta kort om ditt företag och vad du vill förbättra</label>
+          <textarea class="wz-input wz-prompt" id="wz-f-message" data-field="message" rows="5" placeholder="Berätta kort om ditt företag och vad du vill förbättra…" aria-describedby="wz-prompt-hint"></textarea>
+          <div id="wz-prompt-error" class="wz-prompt-error" role="alert"></div>
+          <div id="wz-prompt-bar" class="wz-prompt-bar">
+            <div id="wz-prompt-hint" class="wz-prompt-hint">Några rader räcker – du får personlig återkoppling.</div>
+            <button type="button" id="wz-next" class="wz-next btn-lift lift-primary" aria-controls="wz-expand" aria-expanded="false">Få konkreta idéer <span aria-hidden="true">→</span></button>
+          </div>
+
+          <!-- Steg 2: kontaktuppgifter -->
+          <div id="wz-expand" class="wz-expand" inert>
+            <div class="wz-expand-inner">
+              <div class="wz-step2" role="group" aria-labelledby="wz-step2-title">
+                <div id="wz-step2-title" class="wz-step2-title">Toppen! Vart ska vi skicka idéerna?</div>
+                <div class="wz-fields">
+                  <div>
+                    <label for="wz-f-name" class="wz-label">Namn *</label>
+                    <input class="wz-input" id="wz-f-name" type="text" placeholder="Ditt namn" data-field="name" autocomplete="name">
+                  </div>
+                  <div>
+                    <label for="wz-f-email" class="wz-label">E-post *</label>
+                    <input class="wz-input" id="wz-f-email" type="email" placeholder="din@email.se" data-field="email" autocomplete="email">
+                  </div>
+                  <div>
+                    <label for="wz-f-company" class="wz-label">Företagsnamn *</label>
+                    <input class="wz-input" id="wz-f-company" type="text" placeholder="Företagets namn" data-field="company" autocomplete="organization">
+                  </div>
+                  <div>
+                    <label for="wz-f-website" class="wz-label">Nuvarande hemsida <span style="color:#8FA6C2;font-weight:600;">(valfritt)</span></label>
+                    <input class="wz-input" id="wz-f-website" type="text" placeholder="https://..." data-field="website" autocomplete="url" aria-describedby="wz-website-hint">
+                    <div id="wz-website-hint" style="font-size:12px;color:#8FA6C2;margin-top:6px;">Lämna tomt om du inte har någon hemsida idag.</div>
+                  </div>
+                </div>
+                <div style="margin-bottom:26px;">
+                  <div id="wz-goals-label" class="wz-label" style="margin-bottom:12px;">Vad vill du ha hjälp med? *</div>
+                  <div id="wz-goals" class="wz-goals" role="group" aria-labelledby="wz-goals-label" style="display:flex;flex-wrap:wrap;gap:10px;"></div>
+                </div>
+
+                <div id="wz-error" aria-live="polite" style="font-size:13px;color:#D64545;font-weight:600;margin-bottom:14px;display:none;"></div>
+                <div id="wz-btnrow" class="wz-btnrow" style="display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+                  <button type="button" id="wz-callback-toggle" class="wz-callback-toggle" style="background:transparent;border:1.5px solid rgba(15,23,42,0.15);color:#0F172A;font-size:13px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;font-family:inherit;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Bli kontaktad istället</button>
+                  <button type="submit" id="wz-submit" class="wz-submit btn-next" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 24px rgba(20,110,245,0.3);font-family:inherit;">Få min gratis genomgång →</button>
+                </div>
+                <div id="wz-form-note" class="wz-form-note">
+                  <div style="text-align:right;font-size:12px;color:#52657A;line-height:1.5;">Vi återkommer personligt så snart vi kan.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div id="wz-callback-panel" style="overflow:hidden;max-height:0;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1);">
+        <div id="wz-callback-success" style="display:none;background:#0F172A;border-radius:16px;padding:36px;margin-top:16px;text-align:center;">
+          <div style="width:52px;height:52px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px;">✓</div>
+          <div style="font-size:19px;font-weight:800;color:#fff;margin-bottom:8px;">Tack, <span id="wz-callback-succ-name"></span>!</div>
+          <div style="font-size:14px;color:#B8C6DC;line-height:1.6;">Vi har tagit emot din förfrågan och kontaktar dig inom en timme under vardagar 09–17.</div>
+        </div>
+        <form id="wz-callback-form" novalidate style="background:#0F172A;border-radius:16px;padding:24px;margin-top:16px;">
+          <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:6px;">Bli kontaktad istället?</div>
+          <div style="font-size:13px;color:#B8C6DC;margin-bottom:16px;">Lämna dina uppgifter, vi kontaktar dig inom en timme under vardagar 09–17.</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <input id="wz-cb-name" type="text" placeholder="Namn *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <input id="wz-cb-email" type="email" placeholder="Email *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <input id="wz-cb-phone" type="tel" placeholder="Telefonnummer *" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <input id="wz-cb-company" type="text" placeholder="Företag (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <input id="wz-cb-website" type="url" placeholder="Hemsida (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
+            <div id="wz-callback-error" style="font-size:13px;color:#FF8A8A;font-weight:600;display:none;">Fyll i namn, e-post och telefonnummer.</div>
+            <button type="submit" id="wz-callback-submit" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:12px;border:none;white-space:nowrap;cursor:pointer;align-self:flex-start;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Skicka</button>
+          </div>
+        </form>
       </div>
-      <button type="submit" class="btn-lift lift-primary" style="width:100%;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Skapa min portfolio</button>
-    </form>
-  </section>
+    </div>
+  </template>
 
   </main>
 
@@ -703,17 +849,294 @@
     });
   });
 
-  /* Kontaktformulär */
-  var form = document.getElementById('pf-form');
-  var success = document.getElementById('pf-form-success');
-  if (form) {
-    form.addEventListener('submit', function (e) {
+  var esc = function (s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  };
+
+  /* ---------- Contact form ---------- */
+  // Klistra in din access key från web3forms.com (mejlas till hej@studioklaro.se).
+  // Så länge den är tom skickas inget – formuläret visar då ett tydligt felmeddelande.
+  var WEB3FORMS_KEY = '3e1c55ed-82c4-435f-8126-33f86c5d4a92';
+
+  var goalOptions = ['Förbättra befintlig hemsida','Ny hemsida','SEO / synlighet','Vet inte än'];
+
+  // Samma formulär (steg, validering, inskick) på flera ställen: varje [data-wz-mount]
+  // får en egen klon av #wz-template och en egen, självständig instans av logiken nedan.
+  var WZ_REF_ATTRS = ['for', 'aria-controls', 'aria-labelledby', 'aria-describedby'];
+  function mountLeadForm(mount) {
+    var key = mount.getAttribute('data-wz-mount');
+    var frag = document.getElementById('wz-template').content.cloneNode(true);
+    frag.querySelectorAll('[id]').forEach(function (el) { el.id = el.id + '-' + key; });
+    frag.querySelectorAll('[' + WZ_REF_ATTRS.join('],[') + ']').forEach(function (el) {
+      WZ_REF_ATTRS.forEach(function (attr) {
+        var v = el.getAttribute(attr);
+        if (v) el.setAttribute(attr, v.split(/\s+/).map(function (id) { return id + '-' + key; }).join(' '));
+      });
+    });
+    mount.appendChild(frag);
+    initLeadForm(mount, key);
+  }
+
+  function initLeadForm(root, key) {
+    var $ = function (id) { return root.querySelector('#' + id + '-' + key); };
+
+    var wz = { submitting: false, name: '', company: '', email: '', website: '', goal: '', message: '' };
+
+    var errorBox = $('wz-error');
+    var formEl = $('wz-form');
+    var formWrap = $('wz-form-wrap');
+    var successEl = $('wz-success');
+    var submitBtn = $('wz-submit');
+    var goalsWrap = $('wz-goals');
+    var nameInput = $('wz-f-name');
+    var emailInput = $('wz-f-email');
+    var companyInput = $('wz-f-company');
+    var websiteInput = $('wz-f-website');
+    var messageInput = $('wz-f-message');
+
+    // Tvåstegsflöde: steg 1 är prompten (Kort beskrivning), steg 2 kontaktuppgifterna.
+    // Att gå vidare till steg 2 skickar ingenting och triggar inga lead-event.
+    var promptCard = $('wz-card');
+    var promptError = $('wz-prompt-error');
+    var nextBtn = $('wz-next');
+    var successTitle = $('wz-success-title');
+    var expandWrap = $('wz-expand');
+    var formExpanded = false;
+    function revealForm() {
+      if (formExpanded) return;
+      formExpanded = true;
+      promptCard.classList.add('is-step2');
+      expandWrap.classList.add('wz-open');
+      expandWrap.removeAttribute('inert');
+      nextBtn.setAttribute('aria-expanded', 'true');
+    }
+    function setPromptInvalid(bad) {
+      messageInput.classList.toggle('wz-invalid', bad);
+      promptCard.classList.toggle('wz-card-invalid', bad);
+      if (bad) messageInput.setAttribute('aria-invalid', 'true');
+      else messageInput.removeAttribute('aria-invalid');
+    }
+    function goToStep2() {
+      if (messageInput.value.trim() === '') {
+        setPromptInvalid(true);
+        promptError.textContent = 'Skriv några rader om ditt företag och vad du vill ha hjälp med först.';
+        messageInput.focus();
+        return;
+      }
+      setPromptInvalid(false);
+      promptError.textContent = '';
+      revealForm();
+      nameInput.focus();
+    }
+    nextBtn.addEventListener('click', goToStep2);
+    // Cmd/Ctrl + Enter i prompten tar en vidare, som i en chatt. Vanlig Enter ger radbrytning.
+    messageInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey) && !formExpanded) {
+        e.preventDefault();
+        goToStep2();
+      }
+    });
+    messageInput.addEventListener('input', function () {
+      setPromptInvalid(false);
+      promptError.textContent = '';
+    });
+    // Om kontaktfälten redan innehåller data vid sidladdning (t.ex. bfcache/autofill) visas steg 2 direkt.
+    if (nameInput.value !== '' || emailInput.value !== '' || companyInput.value !== '' || websiteInput.value !== '') {
+      revealForm();
+    }
+
+    // "Bli kontaktad istället" – fällbar panel
+    var callbackToggle = $('wz-callback-toggle');
+    var callbackPanel = $('wz-callback-panel');
+    var callbackFormEl = $('wz-callback-form');
+    var callbackSuccess = $('wz-callback-success');
+    var callbackSuccName = $('wz-callback-succ-name');
+    var callbackError = $('wz-callback-error');
+    var callbackSubmit = $('wz-callback-submit');
+    var cbName = $('wz-cb-name');
+    var cbEmail = $('wz-cb-email');
+    var cbPhone = $('wz-cb-phone');
+    var cbCompany = $('wz-cb-company');
+    var cbWebsite = $('wz-cb-website');
+    var CALLBACK_MAX = '540px';
+    var callbackOpen = false;
+
+    function resetCallbackView() {
+      callbackSuccess.style.display = 'none';
+      callbackFormEl.style.display = 'block';
+      callbackError.style.display = 'none';
+    }
+    callbackToggle.addEventListener('click', function () {
+      callbackOpen = !callbackOpen;
+      if (callbackOpen) resetCallbackView();
+      callbackPanel.style.maxHeight = callbackOpen ? CALLBACK_MAX : '0';
+    });
+    callbackFormEl.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      form.style.display = 'none';
-      success.style.display = 'block';
+      if (callbackSubmit.disabled) return;
+      var name = cbName.value.trim(), email = cbEmail.value.trim(), phone = cbPhone.value.trim();
+      if (!name || !email || !phone) { callbackError.style.display = 'block'; return; }
+      callbackError.style.display = 'none';
+      callbackSubmit.disabled = true;
+      callbackSubmit.textContent = 'Skickar …';
+      var ok = function () {
+        callbackSuccName.textContent = name;
+        callbackSuccess.style.display = 'block';
+        callbackFormEl.style.display = 'none';
+        callbackPanel.style.maxHeight = CALLBACK_MAX;
+      };
+      if (!WEB3FORMS_KEY) { ok(); return; }
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'Bli kontaktad – begäran från webbplatsen',
+          from_name: 'Studio Klaro – kontaktförfrågan',
+          replyto: email,
+          'Namn': name,
+          'E-post': email,
+          'Telefonnummer': phone,
+          'Företag': cbCompany.value.trim() || '—',
+          'Hemsida': cbWebsite.value.trim() || '—'
+        })
+      })
+        .then(function (r) {
+          return r.json().then(function (d) {
+            if (r.ok && d && d.success && window.klaroTrackLead) window.klaroTrackLead('bli_kontaktad', key);
+          }, function () {});
+        })
+        .then(function () { ok(); })
+        .catch(function () { ok(); });
+    });
+
+    root.querySelectorAll('.wz-input').forEach(function (input) {
+      input.addEventListener('input', function () {
+        wz[input.getAttribute('data-field')] = input.value;
+        input.classList.remove('wz-invalid');
+        errorBox.style.display = 'none';
+      });
+    });
+
+    function buildChips(container, options, field) {
+      container.innerHTML = options.map(function (o) {
+        return '<button type="button" class="wz-chip" data-val="' + esc(o) + '">' + esc(o) + '</button>';
+      }).join('');
+      container.querySelectorAll('.wz-chip').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          wz[field] = btn.getAttribute('data-val');
+          container.querySelectorAll('.wz-chip').forEach(function (b) {
+            b.classList.toggle('selected', b.getAttribute('data-val') === wz[field]);
+          });
+          container.classList.remove('wz-goals-invalid');
+          errorBox.style.display = 'none';
+        });
+      });
+    }
+    buildChips(goalsWrap, goalOptions, 'goal');
+
+    function validateAndMark() {
+      var ok = true;
+      // Läs om fälten så att värden som återställts utan input-event (bfcache/autofill) också räknas.
+      root.querySelectorAll('.wz-input').forEach(function (input) {
+        wz[input.getAttribute('data-field')] = input.value;
+      });
+      [
+        [nameInput, wz.name],
+        [emailInput, wz.email],
+        [companyInput, wz.company],
+        [messageInput, wz.message]
+      ].forEach(function (pair) {
+        var bad = pair[1].trim() === '';
+        pair[0].classList.toggle('wz-invalid', bad);
+        if (bad) ok = false;
+      });
+      setPromptInvalid(wz.message.trim() === '');
+      var goalBad = wz.goal.trim() === '';
+      goalsWrap.classList.toggle('wz-goals-invalid', goalBad);
+      if (goalBad) ok = false;
+      return ok;
+    }
+
+    function showSuccess() {
+      formWrap.style.display = 'none';
+      successEl.style.display = 'block';
+      successTitle.focus({ preventScroll: true });
+      // Formuläret var högre än kvittot – se till att kvittot hamnar i synfältet.
+      successEl.scrollIntoView({ block: 'center' });
+    }
+
+    function resetSubmitBtn() {
+      wz.submitting = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Få min gratis genomgång →';
+      submitBtn.style.opacity = '1';
+    }
+
+    function submitForm() {
+      if (wz.submitting) return;
+      if (!validateAndMark()) {
+        errorBox.textContent = 'Fyll i namn, e-post, företagsnamn, vad du behöver hjälp med och en kort beskrivning för att skicka.';
+        errorBox.style.display = 'block';
+        return;
+      }
+      errorBox.style.display = 'none';
+      if (!WEB3FORMS_KEY) {
+        errorBox.textContent = 'Formuläret är inte kopplat än (access key saknas). Mejla oss på hej@studioklaro.se så länge.';
+        errorBox.style.display = 'block';
+        return;
+      }
+      wz.submitting = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Skickar …';
+      submitBtn.style.opacity = '0.75';
+
+      var payload = {
+        access_key: WEB3FORMS_KEY,
+        subject: 'Ny förfrågan – ' + (wz.company || 'okänt företag'),
+        from_name: 'Studio Klaro – webbformulär',
+        replyto: wz.email,
+        'Namn': wz.name,
+        'Företag': wz.company,
+        'E-post': wz.email,
+        'Nuvarande hemsida': wz.website || '—',
+        'Vad de behöver hjälp med': wz.goal,
+        'Kort beskrivning': wz.message
+      };
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+        .then(function (res) {
+          if (res.ok && res.data.success) {
+            if (window.klaroTrackLead) window.klaroTrackLead('kontakt_genomgang', key);
+            showSuccess();
+          } else {
+            resetSubmitBtn();
+            errorBox.textContent = 'Något gick fel när förfrågan skulle skickas. Försök igen eller mejla hej@studioklaro.se.';
+            errorBox.style.display = 'block';
+          }
+        })
+        .catch(function () {
+          resetSubmitBtn();
+          errorBox.textContent = 'Kunde inte nå servern. Kontrollera din uppkoppling eller mejla hej@studioklaro.se.';
+          errorBox.style.display = 'block';
+        });
+    }
+    formEl.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Säkerhetsspärr: skicka aldrig från steg 1, gå bara vidare.
+      if (!formExpanded) { goToStep2(); return; }
+      submitForm();
     });
   }
+
+  document.querySelectorAll('[data-wz-mount]').forEach(mountLeadForm);
 })();
 </script>
 
