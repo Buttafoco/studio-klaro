@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Glaseffekt på menyn när man scrollar (alla sidor): halvgenomskinlig kapsel med blur.
+   Ta bort denna fil och dess <link> i sidorna för att återgå till den täckande menyn.
+   ========================================================================== */
+.nav-capsule{
+  transition:max-width .5s cubic-bezier(0.22,1,0.36,1),padding .5s cubic-bezier(0.22,1,0.36,1),border-radius .5s cubic-bezier(0.22,1,0.36,1),background .5s cubic-bezier(0.22,1,0.36,1),box-shadow .5s cubic-bezier(0.22,1,0.36,1),backdrop-filter .5s cubic-bezier(0.22,1,0.36,1),-webkit-backdrop-filter .5s cubic-bezier(0.22,1,0.36,1);
+}
+.nav-wrap.scrolled .nav-capsule{
+  background:rgba(255,255,255,0.52);
+  -webkit-backdrop-filter:blur(18px) saturate(170%);
+  backdrop-filter:blur(18px) saturate(170%);
+  box-shadow:0 10px 30px rgba(15,23,42,0.10),inset 0 0 0 1px rgba(255,255,255,0.65);
+}
+/* Webbläsare utan backdrop-filter: behåll en läsbar, nästan täckande yta */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nav-wrap.scrolled .nav-capsule{background:rgba(255,255,255,0.94);}
+}
