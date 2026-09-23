@@ -660,7 +660,7 @@
   /* Kontaktflöde: nya händelser faller in överst, äldre flyttas ned och tonas bort */
   .lf-wrap{display:flex;align-items:center;}
   .lf{--lf-h:54px;--lf-gap:10px;position:relative;width:100%;height:calc(var(--lf-h) * 3 + var(--lf-gap) * 2);overflow:visible;}
-  .lf-item{position:absolute;left:0;right:0;top:0;height:var(--lf-h);box-sizing:border-box;display:flex;align-items:center;gap:11px;background:#fff;border:1px solid rgba(15,23,42,0.07);border-radius:16px;padding:0 14px 0 11px;box-shadow:0 4px 14px rgba(15,23,42,0.05);transform:translateY(calc(var(--slot, 0) * (var(--lf-h) + var(--lf-gap))));transition:transform .72s cubic-bezier(0.34,1.22,0.64,1),opacity .6s ease,box-shadow .9s ease;}
+  .lf-item{position:absolute;left:0;right:0;top:0;height:var(--lf-h);box-sizing:border-box;display:flex;align-items:center;gap:11px;background:#fff;border:1px solid rgba(15,23,42,0.07);border-radius:16px;padding:0 14px 0 11px;box-shadow:0 4px 14px rgba(15,23,42,0.05);transform:translateY(calc(var(--slot, 0) * (var(--lf-h) + var(--lf-gap))));transition:transform .55s cubic-bezier(0.34,1.22,0.64,1),opacity .45s ease,box-shadow .9s ease;}
   .lf-item[data-slot="-1"]{opacity:0;}
   .lf-item[data-slot="1"]{opacity:.82;}
   .lf-item[data-slot="2"]{opacity:.55;}
@@ -2857,7 +2857,12 @@
       }
     });
     // Tabbar man till ett kort som inte är aktivt centreras det (bara riktiga kort är fokusbara).
+    // Bara tangentbordsfokus: vid klick/tryck får länken fokus före klicket, och då ska
+    // klickhanteraren avgöra (sidokort centreras, mittkortet öppnas).
     indTrack.addEventListener('focusin', function (e) {
+      var keyboard = true;
+      try { keyboard = e.target.matches(':focus-visible'); } catch (err) {}
+      if (!keyboard) return;
       var i = all.indexOf(e.target.closest('.ind-item'));
       if (i !== -1 && i !== active) goTo(i);
     });
@@ -3215,7 +3220,7 @@
   })();
 
   /* ---------- Kontaktflöde (bento "Tydligare vägar till kontakt") ----------
-     Dekorativt och dolt för skärmläsare. Fast ordning (ingen slump), ett nytt kort ungefär var fjärde sekund,
+     Dekorativt och dolt för skärmläsare. Fast ordning (ingen slump), ett nytt kort ungefär var tredje sekund,
      bara när kortet syns och fliken är aktiv. Vid prefers-reduced-motion: tre statiska kort. */
   var lfBox = document.querySelector('.bento-card--leads .lf');
   if (lfBox) (function () {
@@ -3277,7 +3282,7 @@
       clearTimeout(timer);
       timer = null;
       if (reduceMotion.matches || !visible || document.hidden) return;
-      timer = setTimeout(step, 4000);
+      timer = setTimeout(step, 2800);
     }
     document.addEventListener('visibilitychange', schedule);
     if ('IntersectionObserver' in window) {
