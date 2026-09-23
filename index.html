@@ -831,6 +831,63 @@
     [data-rgrid4]{grid-template-columns:1fr!important;}
     [data-rhero-h1]{font-size:40px!important;line-height:1.08!important;}
   }
+
+  /* ---------- En sista koll – avslutning före footern ---------- */
+  .lc{max-width:1140px;margin:120px auto 0;padding:0 20px;}
+  .lc-box{background:#fff;border:1px solid rgba(74,91,112,0.12);border-radius:36px;padding:72px 64px 64px;box-shadow:0 1px 2px rgba(15,23,42,0.03);}
+  .lc-eyebrow{font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;}
+  .lc-title{font-size:clamp(30px,3.8vw,48px);font-weight:800;line-height:1.1;letter-spacing:-0.025em;color:#0F172A;margin:0 0 18px;max-width:18ch;text-wrap:balance;}
+  .lc-lead{font-size:17px;line-height:1.65;color:#4A5B70;font-weight:500;margin:0;max-width:56ch;}
+  .lc-qs{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(74,91,112,0.16);}
+  .lc-q{padding:32px 32px 8px 0;}
+  .lc-q + .lc-q{padding-left:32px;border-left:1px solid rgba(74,91,112,0.12);}
+  .lc-check{position:relative;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(74,91,112,0.3);margin-bottom:22px;}
+  .lc-check::before{content:'';position:absolute;inset:-1.5px;border-radius:50%;background:#146EF5;transform:scale(1);}
+  .lc-check svg{position:relative;width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+  .lc-n{display:block;font-size:12px;font-weight:800;letter-spacing:0.04em;color:#6B7F99;margin-bottom:8px;font-variant-numeric:tabular-nums;}
+  .lc-text{display:block;font-size:clamp(20px,2.1vw,26px);font-weight:800;line-height:1.25;letter-spacing:-0.015em;color:#0F172A;text-wrap:balance;}
+  .lc-end{margin-top:48px;padding-top:32px;border-top:1px solid rgba(74,91,112,0.12);display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap;}
+  .lc-note{font-size:18px;font-weight:700;color:#0F172A;margin:0;}
+  .lc-actions{display:flex;align-items:center;gap:12px 24px;flex-wrap:wrap;}
+  .lc-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.26);transition:transform .2s cubic-bezier(0.22,1,0.36,1),box-shadow .2s cubic-bezier(0.22,1,0.36,1);}
+  .lc-btn:hover{color:#fff;transform:translateY(-2px);box-shadow:0 14px 28px rgba(20,110,245,0.34);}
+  .lc-btn:focus-visible,.lc-mail:focus-visible{outline:2px solid #0F172A;outline-offset:3px;}
+  .lc-mail{display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:700;color:#146EF5;text-decoration:none;}
+  .lc-mail:hover{text-decoration:underline;}
+  /* Sekvensen (bara med JS): tom cirkel → blå med bock, en fråga i taget, sist CTA:n */
+  .lc-js .lc-check::before{transform:scale(0);transition:transform .5s cubic-bezier(0.22,1,0.36,1);}
+  .lc-js .lc-check svg{opacity:0;transform:scale(.6);transition:opacity .3s ease,transform .4s cubic-bezier(0.22,1,0.36,1);}
+  .lc-js .lc-text{opacity:.55;transition:opacity .5s ease;}
+  .lc-js .lc-end{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(0.22,1,0.36,1);}
+  .lc-js.is-on .lc-check::before{transform:scale(1);}
+  .lc-js.is-on .lc-check svg{opacity:1;transform:none;}
+  .lc-js.is-on .lc-text{opacity:1;}
+  .lc-js.is-on .lc-end{opacity:1;transform:none;transition-delay:760ms;}
+  .lc-js.is-on .lc-q:nth-child(1) *,.lc-js.is-on .lc-q:nth-child(1) .lc-check::before{transition-delay:200ms;}
+  .lc-js.is-on .lc-q:nth-child(2) *,.lc-js.is-on .lc-q:nth-child(2) .lc-check::before{transition-delay:350ms;}
+  .lc-js.is-on .lc-q:nth-child(3) *,.lc-js.is-on .lc-q:nth-child(3) .lc-check::before{transition-delay:500ms;}
+  @media (max-width:860px){
+    .lc{margin-top:88px;}
+    .lc-box{padding:44px 28px 36px;border-radius:28px;}
+    .lc-qs{grid-template-columns:minmax(0,1fr);margin-top:36px;}
+    .lc-q,.lc-q + .lc-q{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:18px;align-items:center;padding:22px 0;border-left:0;}
+    .lc-q + .lc-q{border-top:1px solid rgba(74,91,112,0.12);}
+    .lc-check{grid-row:1 / 3;margin:0;}
+    .lc-n{margin-bottom:2px;}
+    .lc-end{margin-top:12px;flex-direction:column;align-items:flex-start;}
+  }
+  @media (max-width:600px){
+    .lc{margin-top:72px;}
+    .lc-box{padding:32px 20px 28px;border-radius:24px;}
+    .lc-lead{font-size:16px;}
+    .lc-q,.lc-q + .lc-q{grid-template-columns:40px minmax(0,1fr);column-gap:14px;}
+    .lc-check{width:40px;height:40px;}
+    .lc-actions,.lc-btn{width:100%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .lc-js .lc-check::before,.lc-js .lc-check svg,.lc-js .lc-text,.lc-js .lc-end{transition:none!important;}
+    .lc-btn:hover{transform:none;}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -1077,8 +1134,79 @@
 <script type="module" src="/src/speed-insights.js"></script>
 <!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
 <noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-ans{opacity:1!important;}.faq-more{height:auto!important;visibility:visible!important;}.faq-more-btn,.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
+<!-- ===== KlaroIntro (experiment) – början. Ta bort detta block och blocket i <body> för att stänga av. =====
+     Varumärkesintro, ingen riktig laddning: sidan renderas direkt bakom overlayn.
+     Visas bara på startsidan, en gång per webbläsarsession (sessionStorage "klaro-intro-seen"),
+     inte vid navigering inifrån sajten. /?intro=1 tvingar fram den för test. -->
+<style>
+  .ki{display:none;}
+  html.ki-play{overflow:hidden;scrollbar-gutter:stable;}
+  html.ki-play .ki{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;height:100vh;height:100dvh;z-index:9999;background:#DCEEFF;pointer-events:none;will-change:transform;animation:kiLift .45s cubic-bezier(0.7,0,0.2,1) 1.05s both;}
+  .ki-mark{--ki-w:240px;position:relative;width:var(--ki-w);animation:kiIn .4s cubic-bezier(0.22,1,0.36,1) both;}
+  /* Loggan beskärs ovanför sitt eget understreck; strecket ritas i stället exakt där det ligger i bilden */
+  .ki-logo{display:block;width:100%;height:auto;clip-path:inset(0 0 17% 0);}
+  .ki-line{position:absolute;left:33.97%;top:87.95%;width:34.92%;height:6.03%;border-radius:1px;background:#146EF5;transform-origin:left center;transform:scaleX(0);animation:kiLine .4s cubic-bezier(0.65,0,0.35,1) .25s both;}
+  .ki-dot{position:absolute;left:0;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#146EF5;opacity:0;animation:kiDot .45s cubic-bezier(0.65,0,0.35,1) .62s both;}
+  html.ki-play div:has(> .hero-h1){animation:kiHero .45s cubic-bezier(0.22,1,0.36,1) 1.05s both;}
+  @keyframes kiIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  @keyframes kiLine{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+  @keyframes kiDot{0%{opacity:0;transform:translateX(0) scale(.4);}25%{opacity:1;transform:translateX(0) scale(1);}100%{opacity:1;transform:translateX(calc(var(--ki-w) * 0.3492)) scale(1);}}
+  @keyframes kiLift{from{transform:none;}to{transform:translateY(calc(-100% - 2px));}}
+  @keyframes kiHero{from{opacity:.55;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  @keyframes kiFade{from{opacity:1;}to{opacity:0;}}
+  @media (max-width:600px){ .ki-mark{--ki-w:184px;} .ki-dot{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;} }
+  /* Reducerad rörelse: bara en kort fade, ingen rörelse */
+  html.ki-play.ki-reduce .ki{animation:kiFade .15s linear both;}
+  html.ki-play.ki-reduce .ki-mark,html.ki-play.ki-reduce .ki-line{animation:none;transform:none;}
+  html.ki-play.ki-reduce .ki-dot,html.ki-play.ki-reduce div:has(> .hero-h1){animation:none;}
+</style>
+<script>
+  (function () {
+    try {
+      var force = /[?&]intro=1(&|$)/.test(location.search);
+      var internal = false;
+      try { internal = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
+      if (!force && (sessionStorage.getItem('klaro-intro-seen') || internal)) return;
+      sessionStorage.setItem('klaro-intro-seen', '1');
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.documentElement.classList.add('ki-play');
+      if (reduce) document.documentElement.classList.add('ki-reduce');
+    } catch (e) {}
+  })();
+</script>
+<!-- ===== KlaroIntro – slut (head) ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&amp;display=block&amp;text=studio%20klaro" rel="stylesheet">
+<link rel="stylesheet" href="/src/site-footer.css">
+<!-- Sidövergång (src/page-transition.*): intern ankomst – placeras på tidigare scrollposition före första bildrutan -->
+<script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');var c=document.documentElement.classList;c.add('pt-arrive','pt-fast');var ptY=sessionStorage.getItem('pt-y');sessionStorage.removeItem('pt-y');if(ptY&&!location.hash){window.__ptY=+ptY;c.add('pt-hold');setTimeout(function(){c.remove('pt-hold');},1000);}}}catch(e){}</script>
+<link rel="stylesheet" href="/src/page-transition.css">
 </head>
 <body>
+<!-- ===== KlaroIntro (experiment) – markup. Dekorativ, visas bara när <html> har klassen ki-play. ===== -->
+<div class="ki" id="klaro-intro" aria-hidden="true">
+  <div class="ki-mark">
+    <img class="ki-logo" src="logo-klaro.webp" alt="" width="630" height="166" decoding="async">
+    <span class="ki-line"><span class="ki-dot"></span></span>
+  </div>
+</div>
+<script>
+  (function () {
+    var root = document.documentElement, el = document.getElementById('klaro-intro');
+    if (!el) return;
+    if (!root.classList.contains('ki-play')) { el.remove(); return; }
+    var done = false;
+    function end() {
+      if (done) return;
+      done = true;
+      root.classList.remove('ki-play', 'ki-reduce');   // återställer scroll och hero
+      el.remove();                                      // helt bort från DOM
+    }
+    el.addEventListener('animationend', function (e) { if (e.target === el) end(); });
+    setTimeout(end, 2500);                              // säkerhetsnät om något går fel
+    window.addEventListener('pagehide', end);
+  })();
+</script>
+<!-- ===== KlaroIntro – slut (body) ===== -->
 
 <div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
 
@@ -1770,64 +1898,114 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <div style="margin-top:80px;width:100vw;margin-left:calc(50% - 50vw);">
-    <div style="background:#146EF5;padding:26px 20px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
-      <div style="font-size:16px;font-weight:800;color:#fff;">Redo att synas online? Låt oss ta första steget tillsammans.</div>
-      <a href="#kontakt" class="btn-lift lift-footer" style="background:#fff;color:#146EF5;font-size:13px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;white-space:nowrap;">Få en gratis genomgång</a>
-    </div>
-    <div style="background:#0C1424;">
-      <div data-rgrid style="max-width:1140px;margin:0 auto;padding:44px 20px 28px;display:grid;grid-template-columns:1.2fr 0.85fr 0.85fr 0.85fr;gap:40px;">
-        <div>
-          <div style="font-size:18px;color:#fff;margin-bottom:14px;"><span style="font-weight:300;">Studio</span> <span style="font-weight:800;">Klaro</span></div>
-          <p style="font-size:13px;color:#8FA6C2;line-height:1.6;max-width:280px;margin:0;">Digitala helhetslösningar för småföretag som vill synas professionellt online.</p>
-        </div>
-        <div>
-          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Navigation</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
-            <a href="#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
-            <a href="/priser" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Priser</a>
-            <a href="/om" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
-            <a href="#kontakt" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Kontakt</a>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Sidor</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="/hemsida-frisor-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för frisörer</a>
-            <a href="/hemsida-restaurang-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för restaurang</a>
-            <a href="/hemsida-skonhetssalong-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för salong</a>
-            <a href="/hemsida-fotograf" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för fotograf</a>
-            <a href="/portfolio" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Portfolio</a>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Kontakt</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="mailto:hej@studioklaro.se" style="font-size:14px;color:#AFC6E8;text-decoration:none;">hej@studioklaro.se</a>
-            <div style="font-size:14px;color:#AFC6E8;">Stockholm</div>
-          </div>
-          <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">
-            <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Tillgänglighet</div>
-            <div style="display:flex;flex-direction:column;gap:10px;">
-              <div style="font-size:13px;color:#AFC6E8;">Vardagar 09:00–17:00</div>
-              <div style="font-size:13px;color:#AFC6E8;">Lör–Sön Stängt</div>
-            </div>
-          </div>
+  <!-- EN SISTA KOLL – ersätter den generiska CTA-remsan före footern -->
+  <section class="lc" id="sista-koll" aria-labelledby="lc-title">
+    <div class="lc-box">
+      <p class="lc-eyebrow">En sista koll</p>
+      <h2 id="lc-title" class="lc-title">Gör hemsidan det enkelt att välja dig?</h2>
+      <p class="lc-lead">En bra hemsida behöver inte göra allt. Den behöver hjälpa rätt kund att hitta, förstå och ta nästa steg.</p>
+      <ol class="lc-qs">
+        <li class="lc-q"><span class="lc-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 12.5l3.2 3.2L17 9"/></svg></span><span class="lc-n" aria-hidden="true">01</span><span class="lc-text">Kan rätt kunder hitta dig?</span></li>
+        <li class="lc-q"><span class="lc-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 12.5l3.2 3.2L17 9"/></svg></span><span class="lc-n" aria-hidden="true">02</span><span class="lc-text">Förstår de snabbt vad du erbjuder?</span></li>
+        <li class="lc-q"><span class="lc-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 12.5l3.2 3.2L17 9"/></svg></span><span class="lc-n" aria-hidden="true">03</span><span class="lc-text">Är nästa steg tydligt?</span></li>
+      </ol>
+      <div class="lc-end">
+        <p class="lc-note">Om du tvekar på någon av dem, börjar vi där.</p>
+        <div class="lc-actions">
+          <a class="lc-btn" href="#kontakt" data-lc-cta>Se vad vi skulle förbättra <span aria-hidden="true">→</span></a>
+          <a class="lc-mail" href="mailto:hej@studioklaro.se">Eller mejla hej@studioklaro.se</a>
         </div>
       </div>
-      <div style="max-width:1140px;margin:0 auto;padding:18px 20px 28px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
-          <div style="font-size:12px;color:#6B84A6;">© 2026 Studio Klaro</div>
-          <a href="#" data-cookie-settings style="font-size:12px;color:#6B84A6;text-decoration:none;">Cookie-inställningar</a>
+    </div>
+  </section>
+  <script>
+    (function () {
+      var sec = document.getElementById('sista-koll');
+      if (!sec) return;
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Frågorna bockas av en gång när sektionen syns (bara opacity/transform i CSS)
+      if (!reduce && 'IntersectionObserver' in window) {
+        sec.classList.add('lc-js');
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          sec.classList.add('is-on');
+          io.disconnect();
+        }, { threshold: 0.35 });
+        io.observe(sec);
+      }
+      // CTA: till det befintliga formuläret för kostnadsfri genomgång och fokus i fältet
+      sec.querySelector('[data-lc-cta]').addEventListener('click', function (e) {
+        var field = document.querySelector('#kontakt [data-field="message"]');
+        var target = document.querySelector('#kontakt .wz-shell') || document.getElementById('kontakt');
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+        if (field) setTimeout(function () { field.focus({ preventScroll: true }); }, reduce ? 0 : 600);
+      });
+    })();
+  </script>
+
+    <!-- FOOTER – gemensam för alla sidor (stil: src/site-footer.css, beteende: src/site-footer.js) -->
+  <footer class="sf" aria-labelledby="sf-title" data-wz-dock-clear>
+    <div class="sf-in">
+      <div class="sf-top">
+        <div>
+          <p class="sf-eyebrow">Har du något på gång?</p>
+          <h2 id="sf-title" class="sf-title">Säg hej, så tar vi det därifrån.</h2>
         </div>
-        <a href="https://www.instagram.com/studioklaro/" target="_blank" rel="noopener" aria-label="Instagram" style="color:#6B84A6;display:inline-flex;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line></svg>
-        </a>
+        <a class="sf-mail" href="mailto:hej@studioklaro.se"><span>hej@studioklaro.se</span><span class="sf-mail-arrow" aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="sf-grid">
+        <div class="sf-about">
+          <p class="sf-name">Studio Klaro</p>
+          <p>Digitala helhetslösningar för småföretag som vill synas professionellt online.</p>
+          <p class="sf-loc">Stockholm</p>
+        </div>
+        <nav aria-labelledby="sf-h-explore">
+          <h3 id="sf-h-explore" class="sf-h">Utforska</h3>
+          <ul class="sf-list">
+            <li><a href="/#processen">Processen</a></li>
+            <li><a href="/#portfolio">Case</a></li>
+            <li><a href="/priser">Priser</a></li>
+            <li><a href="/seo-koll">SEO</a></li>
+            <li><a href="/om">Om</a></li>
+            <li><a href="/#kontakt">Kontakt</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="sf-h-industry">
+          <h3 id="sf-h-industry" class="sf-h">För din bransch</h3>
+          <ul class="sf-list">
+            <li><a href="/hemsida-frisor-stockholm">Hemsida för frisörer</a></li>
+            <li><a href="/hemsida-restaurang-stockholm">Hemsida för restaurang</a></li>
+            <li><a href="/hemsida-skonhetssalong-stockholm">Hemsida för salong</a></li>
+            <li><a href="/hemsida-fotograf">Hemsida för fotograf</a></li>
+            <li><a href="/portfolio">Portfolio</a></li>
+          </ul>
+        </nav>
+        <div class="sf-contact">
+          <h3 class="sf-h">Kontakt och tillgänglighet</h3>
+          <ul class="sf-list">
+            <li><a href="mailto:hej@studioklaro.se">hej@studioklaro.se</a></li>
+            <li><span>Vardagar 09:00–17:00</span></li>
+            <li><span>Lör–Sön stängt</span></li>
+            <li><a href="https://www.instagram.com/studioklaro/" target="_blank" rel="noopener">Instagram<span class="sf-sr"> (öppnas i en ny flik)</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <a class="sf-mark" href="/" aria-label="Studio Klaro – till startsidan">
+        <span class="sf-mark-text">studio klaro</span>
+        <span class="sf-line" aria-hidden="true"></span><span class="sf-dot" aria-hidden="true"></span>
+      </a>
+
+      <div class="sf-bottom">
+        <p>© 2026 Studio Klaro</p>
+        <a href="#" data-cookie-settings>Cookie-inställningar</a>
+        <a class="sf-totop" href="#" data-sf-top>Tillbaka till toppen <span aria-hidden="true">↑</span></a>
       </div>
     </div>
-  </div>
+  </footer>
 
 </div>
 
@@ -2318,7 +2496,22 @@
       if (!on && focusInside()) return;
       dock.classList.toggle('is-shown', on);
     }
-    function evaluate() { setShown(passed && !heroVisible); }
+    var clearVisible = false;
+    function evaluate() { setShown(passed && !heroVisible && !clearVisible); }
+    // Dölj även när en yta som inte får skymmas syns (markerad med data-wz-dock-clear, t.ex. footern).
+    var clearEls = document.querySelectorAll('[data-wz-dock-clear]'), clearOn = [];
+    if (clearEls.length) {
+      var clearIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var i = clearOn.indexOf(e.target);
+          if (e.isIntersecting && i === -1) clearOn.push(e.target);
+          else if (!e.isIntersecting && i > -1) clearOn.splice(i, 1);
+        });
+        clearVisible = clearOn.length > 0;
+        evaluate();
+      }, { rootMargin: '0px 0px -10% 0px' });
+      clearEls.forEach(function (el) { clearIO.observe(el); });
+    }
     // Visa: först när sentinelen 80 px under hero-formuläret har lämnat skärmens överkant.
     new IntersectionObserver(function (entries) {
       var e = entries[0];
@@ -3173,5 +3366,7 @@
 })();
 </script>
 
+<script type="module" src="/src/site-footer.js"></script>
+<script type="module" src="/src/page-transition.js"></script>
 </body>
 </html>

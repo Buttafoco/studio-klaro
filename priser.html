@@ -830,6 +830,11 @@
 <script type="module" src="/src/speed-insights.js"></script>
 <!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
 <noscript><style>[data-rv]{opacity:1!important;transform:none!important;}.pr-collapse{grid-template-rows:1fr!important;opacity:1!important;}.pr-collapse > div{visibility:visible!important;}.pr-pane[hidden]{display:block!important;}[data-collapse]{display:none!important;}.rv-js .pr-tiers .pr-tier-bar{opacity:1!important;transform:none!important;}</style></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&amp;display=block&amp;text=studio%20klaro" rel="stylesheet">
+<link rel="stylesheet" href="/src/site-footer.css">
+<!-- Sidövergång (src/page-transition.*): intern ankomst – placeras på tidigare scrollposition före första bildrutan -->
+<script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');var c=document.documentElement.classList;c.add('pt-arrive','pt-fast');var ptY=sessionStorage.getItem('pt-y');sessionStorage.removeItem('pt-y');if(ptY&&!location.hash){window.__ptY=+ptY;c.add('pt-hold');setTimeout(function(){c.remove('pt-hold');},1000);}}}catch(e){}</script>
+<link rel="stylesheet" href="/src/page-transition.css">
 </head>
 <body>
 
@@ -1429,60 +1434,67 @@
   </section>
   </main>
 
-  <!-- FOOTER -->
-  <div style="margin-top:80px;width:100vw;margin-left:calc(50% - 50vw);">
-    <div style="background:#0C1424;">
-      <div data-rgrid style="max-width:1140px;margin:0 auto;padding:44px 20px 28px;display:grid;grid-template-columns:1.2fr 0.85fr 0.85fr 0.85fr;gap:40px;">
+    <!-- FOOTER – gemensam för alla sidor (stil: src/site-footer.css, beteende: src/site-footer.js) -->
+  <footer class="sf" aria-labelledby="sf-title" data-wz-dock-clear>
+    <div class="sf-in">
+      <div class="sf-top">
         <div>
-          <div style="font-size:18px;color:#fff;margin-bottom:14px;"><span style="font-weight:300;">Studio</span> <span style="font-weight:800;">Klaro</span></div>
-          <p style="font-size:13px;color:#8FA6C2;line-height:1.6;max-width:280px;margin:0;">Digitala helhetslösningar för småföretag som vill synas professionellt online.</p>
+          <p class="sf-eyebrow">Har du något på gång?</p>
+          <h2 id="sf-title" class="sf-title">Säg hej, så tar vi det därifrån.</h2>
         </div>
-        <div>
-          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Navigation</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="/#tjansten" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Tjänsten</a>
-            <a href="/#processen" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Processen</a>
-            <a href="/priser" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Priser</a>
-            <a href="/om" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Om</a>
-            <a href="/#kontakt" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Kontakt</a>
-          </div>
+        <a class="sf-mail" href="mailto:hej@studioklaro.se"><span>hej@studioklaro.se</span><span class="sf-mail-arrow" aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="sf-grid">
+        <div class="sf-about">
+          <p class="sf-name">Studio Klaro</p>
+          <p>Digitala helhetslösningar för småföretag som vill synas professionellt online.</p>
+          <p class="sf-loc">Stockholm</p>
         </div>
-        <div>
-          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Sidor</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="/hemsida-frisor-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för frisörer</a>
-            <a href="/hemsida-restaurang-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för restaurang</a>
-            <a href="/hemsida-skonhetssalong-stockholm" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för salong</a>
-            <a href="/hemsida-fotograf" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Hemsida för fotograf</a>
-            <a href="/portfolio" style="font-size:14px;color:#AFC6E8;text-decoration:none;">Portfolio</a>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Kontakt</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="mailto:hej@studioklaro.se" style="font-size:14px;color:#AFC6E8;text-decoration:none;">hej@studioklaro.se</a>
-            <div style="font-size:14px;color:#AFC6E8;">Stockholm</div>
-          </div>
-          <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">
-            <div style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;">Tillgänglighet</div>
-            <div style="display:flex;flex-direction:column;gap:10px;">
-              <div style="font-size:13px;color:#AFC6E8;">Vardagar 09:00–17:00</div>
-              <div style="font-size:13px;color:#AFC6E8;">Lör–Sön Stängt</div>
-            </div>
-          </div>
+        <nav aria-labelledby="sf-h-explore">
+          <h3 id="sf-h-explore" class="sf-h">Utforska</h3>
+          <ul class="sf-list">
+            <li><a href="/#processen">Processen</a></li>
+            <li><a href="/#portfolio">Case</a></li>
+            <li><a href="/priser">Priser</a></li>
+            <li><a href="/seo-koll">SEO</a></li>
+            <li><a href="/om">Om</a></li>
+            <li><a href="/#kontakt">Kontakt</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="sf-h-industry">
+          <h3 id="sf-h-industry" class="sf-h">För din bransch</h3>
+          <ul class="sf-list">
+            <li><a href="/hemsida-frisor-stockholm">Hemsida för frisörer</a></li>
+            <li><a href="/hemsida-restaurang-stockholm">Hemsida för restaurang</a></li>
+            <li><a href="/hemsida-skonhetssalong-stockholm">Hemsida för salong</a></li>
+            <li><a href="/hemsida-fotograf">Hemsida för fotograf</a></li>
+            <li><a href="/portfolio">Portfolio</a></li>
+          </ul>
+        </nav>
+        <div class="sf-contact">
+          <h3 class="sf-h">Kontakt och tillgänglighet</h3>
+          <ul class="sf-list">
+            <li><a href="mailto:hej@studioklaro.se">hej@studioklaro.se</a></li>
+            <li><span>Vardagar 09:00–17:00</span></li>
+            <li><span>Lör–Sön stängt</span></li>
+            <li><a href="https://www.instagram.com/studioklaro/" target="_blank" rel="noopener">Instagram<span class="sf-sr"> (öppnas i en ny flik)</span></a></li>
+          </ul>
         </div>
       </div>
-      <div style="max-width:1140px;margin:0 auto;padding:18px 20px 28px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
-          <div style="font-size:12px;color:#6B84A6;">© 2026 Studio Klaro</div>
-          <a href="#" data-cookie-settings style="font-size:12px;color:#6B84A6;text-decoration:none;">Cookie-inställningar</a>
-        </div>
-        <a href="https://www.instagram.com/studioklaro/" target="_blank" rel="noopener" aria-label="Instagram" style="color:#6B84A6;display:inline-flex;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line></svg>
-        </a>
+
+      <a class="sf-mark" href="/" aria-label="Studio Klaro – till startsidan">
+        <span class="sf-mark-text">studio klaro</span>
+        <span class="sf-line" aria-hidden="true"></span><span class="sf-dot" aria-hidden="true"></span>
+      </a>
+
+      <div class="sf-bottom">
+        <p>© 2026 Studio Klaro</p>
+        <a href="#" data-cookie-settings>Cookie-inställningar</a>
+        <a class="sf-totop" href="#" data-sf-top>Tillbaka till toppen <span aria-hidden="true">↑</span></a>
       </div>
     </div>
-  </div>
+  </footer>
 
 </div>
 
@@ -2015,5 +2027,7 @@
     <div class="wz-shell" data-wz-mount="dock"></div>
   </aside>
 <script type="module" src="/src/lead-dock.js"></script>
+<script type="module" src="/src/site-footer.js"></script>
+<script type="module" src="/src/page-transition.js"></script>
 </body>
 </html>

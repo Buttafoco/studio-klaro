@@ -1,0 +1,19 @@
+/* ==========================================================================
+   Studio Klaro – sidövergång för intern navigation (alla sidor). Beteendet finns i
+   src/page-transition.js. Ingen crossfade, overlay eller snapshot: nya sidan visas direkt
+   på motsvarande scrollposition och glider själv upp till toppen.
+   ========================================================================== */
+
+/* Nya sidan är dold i högst några ögonblick tills den har placerats på rätt scrollposition
+   (webbläsaren visar den gamla sidan under tiden). Ett säkerhetsnät i <head> tar alltid bort klassen. */
+html.pt-hold body { visibility: hidden; }
+
+/* Under glidningen: ingen konkurrerande native smooth scroll */
+html.pt-running { scroll-behavior: auto !important; }
+
+/* Ankomst via intern navigering: navigationen spelar inte upp sin intro igen, och innehåll som
+   annars tonas in är redan färdigt medan sidan glider upp (pt-fast tas bort när rörelsen är klar). */
+.pt-arrive .nav-capsule { animation: none !important; opacity: 1 !important; transform: none !important; }
+.pt-fast [style*="fadeUp"] { animation: none !important; opacity: 1 !important; transform: none !important; }
+.pt-fast [data-rv], .pt-fast [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+[data-pt-focus]:focus { outline: none; }

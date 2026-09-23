@@ -1,0 +1,80 @@
+/* ==========================================================================
+   Studio Klaro – gemensam footer (alla sidor). Markup: <footer class="sf"> i varje sida,
+   beteende i src/site-footer.js. Mörk marinblå, rundad överkant, signatur med understreck.
+   ========================================================================== */
+.sf{--sf-ink:#fff;--sf-mute:#A9B8CC;--sf-soft:#8FA3BE;--sf-accent:#146EF5;--sf-accent-light:#7FB2FF;--sf-line:rgba(255,255,255,0.1);--sf-ease:cubic-bezier(0.22,1,0.36,1);
+  margin-top:112px;background:#0F172A;color:var(--sf-ink);border-radius:40px 40px 0 0;font-family:'Manrope',system-ui,sans-serif;}
+.sf *{box-sizing:border-box;}
+.sf-in{max-width:1140px;margin:0 auto;padding:88px 20px 20px;}
+.sf a{color:inherit;}
+.sf a:focus-visible{outline:2px solid var(--sf-accent-light);outline-offset:3px;border-radius:4px;}
+.sf-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* Del 1 – kontaktöppning */
+.sf-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:32px 64px;padding-bottom:64px;border-bottom:1px solid var(--sf-line);}
+.sf-eyebrow{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--sf-accent-light);margin:0 0 16px;}
+.sf-title{font-size:clamp(30px,4vw,52px);font-weight:800;line-height:1.08;letter-spacing:-0.03em;color:var(--sf-ink);margin:0;max-width:14ch;text-wrap:balance;}
+.sf-mail{position:relative;display:inline-flex;align-items:baseline;gap:10px;padding:6px 0 12px;font-size:clamp(22px,2.6vw,34px);font-weight:700;letter-spacing:-0.015em;color:var(--sf-ink);text-decoration:none;white-space:nowrap;}
+.sf-mail::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:var(--sf-accent);transform:scaleX(0);transform-origin:left center;transition:transform .45s var(--sf-ease);}
+.sf-mail-arrow{display:inline-block;color:var(--sf-accent-light);transition:transform .3s var(--sf-ease);}
+.sf-mail:hover::after,.sf-mail:focus-visible::after{transform:scaleX(1);}
+.sf-mail:hover .sf-mail-arrow,.sf-mail:focus-visible .sf-mail-arrow{transform:translate(4px,-4px);}
+.sf .sf-mail:focus-visible{outline-offset:8px;}
+
+/* Del 2 – information och navigation */
+.sf-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr)) minmax(0,1.15fr);gap:40px;padding:56px 0 8px;}
+.sf-name{font-size:15px;font-weight:800;color:var(--sf-ink);margin:0 0 12px;}
+.sf-about p{font-size:15px;line-height:1.65;color:var(--sf-mute);margin:0;max-width:32ch;}
+.sf-about .sf-loc{display:flex;align-items:center;gap:10px;margin-top:18px;font-size:14px;font-weight:600;}
+.sf-loc::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:var(--sf-accent);}
+.sf-h{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--sf-ink);margin:0 0 14px;}
+.sf-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;}
+.sf-list a,.sf-list span{position:relative;display:inline-flex;align-items:center;min-height:34px;font-size:15px;font-weight:500;line-height:1.4;color:var(--sf-mute);text-decoration:none;transition:color .2s ease;}
+.sf-list a::before{content:'';position:absolute;left:-13px;top:50%;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;background:var(--sf-accent);opacity:0;transition:opacity .2s ease;}
+.sf-list a:hover,.sf-list a:focus-visible{color:var(--sf-ink);}
+.sf-list a:hover::before,.sf-list a:focus-visible::before{opacity:1;}
+
+/* Del 3 – signatur: samma wordmark, understrecket ritas i Klaroblått */
+.sf-mark{position:relative;display:flex;justify-content:center;align-items:flex-start;width:min(100%,820px);aspect-ratio:879 / 216;margin:72px auto 0;text-decoration:none;container-type:inline-size;}
+/* Wordmarken som riktig text: loggans typsnitt (Montserrat 400, ingen spärrning), skalad med font-size –
+   aldrig transform/zoom. Storleken motsvarar den tidigare bilden exakt (17,07 % av markens bredd). */
+.sf-mark-text{display:block;font-family:'Montserrat',sans-serif;font-weight:400;font-synthesis:none;letter-spacing:0;line-height:1;white-space:nowrap;color:#fff;
+  font-size:clamp(20px,calc((100vw - 40px) * 0.1707),140px);font-size:clamp(1px,17.07cqi,140px);margin-top:-0.0898em;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+.sf-line{position:absolute;left:30.83%;top:93.52%;width:36.52%;height:4.63%;min-height:3px;border-radius:2px;background:var(--sf-accent);transform-origin:left center;}
+/* Punkten skalar med wordmarken: ca dubbla streckets tjocklek, centrerad på streckets slut */
+.sf-dot{position:absolute;left:67.35%;top:95.83%;width:2.2%;aspect-ratio:1;margin:-1.1% 0 0 -1.1%;border-radius:50%;background:var(--sf-accent);box-shadow:0 0 0 0.45em #0F172A;font-size:clamp(4px,0.8vw,8px);}
+.sf-js .sf-line{transform:scaleX(0);}
+.sf-js .sf-dot{opacity:0;transform:scale(.4);}
+.sf-js .sf-mark.is-drawn .sf-line{transform:scaleX(1);transition:transform .8s cubic-bezier(0.65,0,0.35,1);}
+.sf-js .sf-mark.is-drawn .sf-dot{opacity:1;transform:none;transition:opacity .25s ease .72s,transform .35s var(--sf-ease) .72s;}
+
+/* Del 4 – bottenrad */
+.sf-bottom{display:flex;align-items:center;flex-wrap:wrap;gap:4px 28px;margin-top:40px;padding-top:14px;border-top:1px solid var(--sf-line);font-size:13px;color:var(--sf-soft);}
+.sf-bottom p{margin:0;}
+.sf-bottom a{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:var(--sf-mute);text-decoration:none;transition:color .2s ease;}
+.sf-bottom a:hover,.sf-bottom a:focus-visible{color:var(--sf-ink);}
+.sf-totop{margin-left:auto;}
+.sf-totop span{display:inline-block;transition:transform .25s var(--sf-ease);}
+.sf-totop:hover span,.sf-totop:focus-visible span{transform:translateY(-3px);}
+
+@media (max-width:1024px){
+  .sf-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .sf-about{grid-column:1 / -1;}
+}
+@media (max-width:760px){
+  .sf{margin-top:72px;border-radius:28px 28px 0 0;}
+  .sf-in{padding:56px 20px 12px;}
+  .sf-top{grid-template-columns:minmax(0,1fr);gap:24px;padding-bottom:40px;}
+  .sf-mail{font-size:clamp(19px,6vw,28px);white-space:normal;overflow-wrap:anywhere;}
+  .sf-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 20px;padding-top:40px;}
+  .sf-contact{grid-column:1 / -1;}
+  .sf-list a,.sf-list span{min-height:44px;}
+  .sf-mark{margin-top:48px;}
+  .sf-bottom{margin-top:28px;gap:0 20px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .sf-mail::after,.sf-mail-arrow,.sf-totop span,.sf-list a,.sf-list a::before{transition:none;}
+  .sf-mail:hover .sf-mail-arrow,.sf-mail:focus-visible .sf-mail-arrow,.sf-totop:hover span{transform:none;}
+  .sf-js .sf-line,.sf-js .sf-dot{transform:none;opacity:1;transition:none;}
+}
