@@ -201,14 +201,12 @@
   .wz-perks{list-style:none;margin:22px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;}
   .wz-perks li{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#52657A;}
   .wz-perk-ic{color:#146EF5;font-size:14px;font-weight:800;flex:none;}
-  /* Hero: Google-betyget först, sedan punkter som avskiljare (i stället för bockar) */
+  /* Hero: kundomdömen först, sedan punkter som avskiljare (i stället för bockar) */
   .hero-perks li + li::before{content:'';flex:none;width:4px;height:4px;border-radius:50%;background:#9AAAC0;margin-right:6px;}
   @media (max-width:600px){
     .hero-perks li + li::before{margin-right:2px;}
   }
-  .wz-rating{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;border-radius:6px;}
-  .wz-rating:hover{color:#0F172A;}
-  .wz-rating:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
+  .wz-rating{display:inline-flex;align-items:center;gap:8px;}
   .wz-stars{display:inline-flex;gap:2px;flex:none;}
   .wz-stars svg{display:block;}
   @media (prefers-reduced-motion: reduce){
@@ -272,17 +270,20 @@
   .dk-js [data-dk].in{opacity:1;transform:none;}
 
   /* Omdömen */
+  /* Kundomdömen: rundade vita kort som inte länkar någonstans; lätt lyft vid hover */
   .dk-reviews{text-align:center;}
-  .dk-rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:960px;margin:36px auto 0;text-align:left;}
-  .dk-rev{margin:0;padding:26px 28px;border:1px solid var(--dk-line);border-radius:20px;background:var(--dk-surf);}
-  .dk-rev-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-  .dk-av{width:34px;height:34px;border-radius:50%;background:#146EF5;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
-  .dk-stars{color:#F5B400;font-size:13px;letter-spacing:2px;}
-  .dk-rev blockquote{margin:0 0 16px;font-size:18px;font-weight:600;line-height:1.45;letter-spacing:-0.01em;color:var(--dk-ink);}
-  .dk-rev figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-  .dk-rev-name{font-size:14px;font-weight:700;color:var(--dk-ink);}
-  .dk-rev-src{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--dk-mute);text-decoration:none;}
-  .dk-rev-src:hover{color:var(--dk-ink);}
+  .dk-reviews .dk-lead{margin-top:14px;}
+  .dk-rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:960px;margin:44px auto 0;text-align:left;}
+  .dk-rev{display:flex;flex-direction:column;margin:0;padding:30px 32px 28px;border-radius:24px;background:#fff;color:#0F172A;box-shadow:0 1px 2px rgba(15,23,42,0.04),0 12px 32px rgba(15,23,42,0.08);transition:translate .35s var(--dk-ease),box-shadow .35s var(--dk-ease);}
+  @media (hover:hover){ .dk-rev:hover{translate:0 -3px;box-shadow:0 1px 2px rgba(15,23,42,0.04),0 18px 40px rgba(15,23,42,0.12);} }
+  .dk-rev-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
+  .dk-stars{color:#146EF5;font-size:14px;letter-spacing:2px;line-height:1;}
+  .dk-rev-tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#146EF5;background:rgba(20,110,245,0.08);padding:6px 10px;border-radius:999px;}
+  .dk-rev blockquote{flex:1;margin:0 0 22px;font-size:19px;font-weight:600;line-height:1.45;letter-spacing:-0.01em;color:#0F172A;}
+  .dk-rev figcaption{display:flex;align-items:center;gap:12px;}
+  .dk-av{width:36px;height:36px;border-radius:50%;background:#146EF5;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;}
+  .dk-rev-name{font-size:14px;font-weight:700;color:#0F172A;}
+  @media (prefers-reduced-motion: reduce){ .dk-rev{transition:none;} .dk-rev:hover{translate:none;} }
 
   /* Allt du får med */
   .dk-intro{text-align:center;margin-top:150px;}
@@ -1300,7 +1301,7 @@
       <span class="wz-sentinel wz-sentinel--hide" id="wz-dock-hide" aria-hidden="true"></span>
       <div class="wz-shell" data-wz-mount="hero"></div>
       <ul class="wz-perks hero-perks">
-        <li><a class="wz-rating" href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" aria-label="Betyg 5,0 av 5 på Google – öppnar våra omdömen i en ny flik"><span class="wz-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></span>5,0 på Google</a></li>
+        <li><span class="wz-rating"><span class="wz-stars" role="img" aria-label="Fem stjärnor"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></span>Omdömen från våra kunder</span></li>
         <li>Anpassat efter ditt företag</li>
         <li>Personlig återkoppling</li>
       </ul>
@@ -1628,20 +1629,21 @@
   <div class="dk" id="dk">
     <div class="dk-inner">
 
-      <!-- Omdömen (autentiska Google-omdömen) -->
+      <!-- Kundomdömen: riktiga omdömen från kunder, inga länkar till externa plattformar -->
       <section id="referenser" class="dk-reviews" aria-labelledby="dk-rev-title">
-        <div class="dk-eyebrow" data-dk>Omdömen</div>
-        <h2 id="dk-rev-title" class="dk-h3" data-dk>Vad kunderna säger</h2>
+        <div class="dk-eyebrow" data-dk>Kundomdömen</div>
+        <h2 id="dk-rev-title" class="dk-h3" data-dk>Ord från företag vi har hjälpt.</h2>
+        <p class="dk-lead" data-dk>Några ord från kunder som har fått hjälp med sin digitala närvaro.</p>
         <div class="dk-rev-grid">
           <figure class="dk-rev" data-dk>
-            <div class="dk-rev-top"><span class="dk-av" aria-hidden="true">J</span><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span></div>
+            <div class="dk-rev-top"><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span><span class="dk-rev-tag">Kundomdöme</span></div>
             <blockquote>"Snabb och prisvärd upplevelse! Jättenöjd med min sida."</blockquote>
-            <figcaption><span class="dk-rev-name">Johan Larsson</span><a href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" class="dk-rev-src"><svg width="13" height="13" viewBox="0 0 48 48" style="flex:none;"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg> Google-recension</a></figcaption>
+            <figcaption><span class="dk-av" aria-hidden="true">J</span><span class="dk-rev-name">Johan Larsson</span></figcaption>
           </figure>
           <figure class="dk-rev" data-dk>
-            <div class="dk-rev-top"><span class="dk-av" aria-hidden="true">A</span><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span></div>
+            <div class="dk-rev-top"><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span><span class="dk-rev-tag">Kundomdöme</span></div>
             <blockquote>"Jätte bra service och rimligt pris!"</blockquote>
-            <figcaption><span class="dk-rev-name">Arian Ghasemi</span><a href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" class="dk-rev-src"><svg width="13" height="13" viewBox="0 0 48 48" style="flex:none;"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg> Google-recension</a></figcaption>
+            <figcaption><span class="dk-av" aria-hidden="true">A</span><span class="dk-rev-name">Arian Ghasemi</span></figcaption>
           </figure>
         </div>
       </section>
@@ -1749,7 +1751,7 @@
 
     <div data-reveal class="wz-shell" data-wz-mount="kontakt"></div>
     <ul class="wz-perks hero-perks" data-reveal>
-      <li><a class="wz-rating" href="https://www.google.com/maps?cid=13149903044471778473" target="_blank" rel="noopener noreferrer" aria-label="Betyg 5,0 av 5 på Google – öppnar våra omdömen i en ny flik"><span class="wz-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#F5B400" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></span>5,0 på Google</a></li>
+      <li><span class="wz-rating"><span class="wz-stars" role="img" aria-label="Fem stjärnor"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></span>Omdömen från våra kunder</span></li>
       <li>Anpassat efter ditt företag</li>
       <li>Personlig återkoppling</li>
     </ul>

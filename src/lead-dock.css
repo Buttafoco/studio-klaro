@@ -92,9 +92,7 @@
 .wz-perks{list-style:none;margin:22px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;}
 .wz-perks li{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#52657A;}
 .wz-perk-ic{color:#146EF5;font-size:14px;font-weight:800;flex:none;}
-.wz-rating{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;border-radius:6px;}
-.wz-rating:hover{color:#0F172A;}
-.wz-rating:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
+.wz-rating{display:inline-flex;align-items:center;gap:8px;}
 .wz-stars{display:inline-flex;gap:2px;flex:none;}
 .wz-stars svg{display:block;}
 @media (prefers-reduced-motion: reduce){
