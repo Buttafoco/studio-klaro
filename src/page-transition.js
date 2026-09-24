@@ -34,6 +34,20 @@
     focusMain();
   }
 
+  /* ---------- Ankomst från mobilmenyn: panelen som täcker sidan glider upp ---------- */
+  if (root.classList.contains('pt-cover')) {
+    var coverGone = false;
+    var reveal = function () {
+      if (coverGone) return;
+      coverGone = true;
+      root.classList.add('pt-cover-out');
+      setTimeout(function () { root.classList.remove('pt-cover', 'pt-cover-out'); }, reduce ? 260 : 700);
+    };
+    // Två bildrutor efter montering (sidan är målad bakom panelen), med tidsgräns om bildrutorna dröjer
+    requestAnimationFrame(function () { requestAnimationFrame(function () { setTimeout(reveal, 60); }); });
+    setTimeout(reveal, 450);
+  }
+
   if (root.classList.contains('pt-arrive')) {
     var saved = typeof window.__ptY === 'number' ? window.__ptY : 0;
     if (location.hash || reduce || saved < 2) {

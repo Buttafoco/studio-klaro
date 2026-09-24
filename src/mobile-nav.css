@@ -1,0 +1,100 @@
+/* ==========================================================================
+   Studio Klaro – mobilmeny (alla sidor, ≤ 820 px). Beteendet finns i src/mobile-nav.js.
+   En luftig helskärmspanel i ljust Klaro-blått: headern (logga + menyknapp) ligger kvar
+   ovanpå, panelen växer ned bakom den, länkarna kommer in med en lätt stagger och CTA:n sist.
+   Sidbyte från menyn: panelen ligger kvar och täcker, och den nya sidan avslöjas av
+   sidövergången (src/page-transition.*, klassen pt-cover).
+   Animeras bara med transform, opacity och clip-path. Desktopnavigationen påverkas inte.
+   ========================================================================== */
+:root{--mnav-e:cubic-bezier(0.22,1,0.36,1);--mnav-bg:linear-gradient(180deg,#FFFFFF 0%,#F2F8FF 46%,#E3EFFF 100%);}
+
+/* Menyknappen i headern (syns bara i mobil via sidornas [data-rshow]) */
+.mnav-toggle{width:44px;height:44px;padding:0;border-radius:14px;border:1px solid rgba(15,23,42,0.08);background:rgba(255,255,255,0.86);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 4px 14px rgba(15,23,42,0.07);color:#0F172A;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:transform .22s var(--mnav-e),background-color .4s var(--mnav-e),box-shadow .4s var(--mnav-e);}
+.mnav-toggle:active{transform:scale(0.93);}
+.mnav-toggle:focus-visible{outline:2px solid #0F172A;outline-offset:3px;}
+.mnav-lines{position:relative;display:block;width:20px;height:8px;}
+.mnav-lines i{position:absolute;left:0;right:0;height:1.75px;border-radius:2px;background:currentColor;transition:transform .48s var(--mnav-e);}
+.mnav-lines i:first-child{top:0;}
+.mnav-lines i:last-child{bottom:0;}
+html.mnav-open .mnav-lines i:first-child{transform:translateY(3.12px) rotate(45deg);}
+html.mnav-open .mnav-lines i:last-child{transform:translateY(-3.12px) rotate(-45deg);}
+html.mnav-open .mnav-toggle{background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.06);}
+
+@media (max-width:820px){
+  html{scrollbar-gutter:stable;}
+  /* Öppen meny: sidan bakom står still på exakt samma position */
+  html.mnav-lock{overflow:hidden;}
+  /* Headern ligger stabilt ovanpå panelen och smälter in i den */
+  html.mnav-active .nav-wrap{z-index:2147482001;}
+  html.mnav-active .nav-wrap .nav-capsule{background:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;}
+  html.mnav-leaving .nav-wrap{opacity:0;transition:opacity .26s ease;}
+}
+
+/* Panelen */
+.mnav{position:fixed;inset:0;width:100%;min-height:100vh;min-height:100dvh;z-index:2147482000;background:var(--mnav-bg);color:#0F172A;
+  font-family:'Manrope',system-ui,sans-serif;visibility:hidden;clip-path:inset(0 0 100% 0 round 0 0 36px 36px);
+  transition:clip-path .4s var(--mnav-e) .12s,visibility 0s linear .52s;}
+.mnav.is-open{visibility:visible;clip-path:inset(0 0 0 0 round 0 0 0 0);transition:clip-path .52s var(--mnav-e);}
+/* Mjuk övertoning under headern när listan scrollas på låga skärmar */
+.mnav::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(env(safe-area-inset-top,0px) + 96px);z-index:1;pointer-events:none;
+  background:linear-gradient(#FFFFFF 62%,rgba(255,255,255,0));}
+.mnav-scroll{position:absolute;inset:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 108px) 20px calc(env(safe-area-inset-bottom,0px) + 22px);}
+.mnav-inner{display:flex;flex-direction:column;flex:1 0 auto;width:100%;}
+
+.mnav-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(15,23,42,0.08);}
+.mnav-list li{border-bottom:1px solid rgba(15,23,42,0.08);}
+.mnav-link{display:grid;grid-template-columns:30px minmax(0,1fr) 24px;align-items:center;column-gap:12px;min-height:64px;
+  padding:clamp(11px,2.1vh,19px) 2px;color:#0F172A;text-decoration:none;-webkit-tap-highlight-color:transparent;
+  transition:opacity .3s var(--mnav-e);}
+.mnav-n{align-self:start;padding-top:.95em;font-size:12px;font-weight:700;letter-spacing:.04em;color:#7A8BA1;font-variant-numeric:tabular-nums;}
+.mnav-t{display:block;font-size:clamp(28px,9vw,38px);font-weight:800;line-height:1.06;letter-spacing:-0.035em;transition:color .3s var(--mnav-e);}
+.mnav-d{display:flex;align-items:center;gap:7px;margin-top:5px;font-size:14px;font-weight:600;line-height:1.35;color:#5E6F84;}
+.mnav-arrow{width:22px;height:22px;color:#0F172A;opacity:.5;transition:transform .35s var(--mnav-e),opacity .35s var(--mnav-e),color .3s;}
+.mnav-link:hover .mnav-arrow{transform:translateX(4px);opacity:1;}
+.mnav-link:focus-visible,.mnav-cta:focus-visible,.mnav-contact a:focus-visible{outline:2px solid #0F172A;outline-offset:3px;border-radius:10px;}
+/* Aktuell sida */
+.mnav-link[aria-current] .mnav-t,.mnav-link[aria-current] .mnav-n{color:#146EF5;}
+.mnav-here{color:#146EF5;}
+.mnav-here::before{content:"";display:inline-block;width:6px;height:6px;margin-right:7px;border-radius:50%;background:#146EF5;transform:translateY(-1px);}
+/* Vald länk vid sidbyte: raden blir Klaro-blå, övriga tonas ned */
+.mnav-link.is-picked .mnav-t,.mnav-link.is-picked .mnav-n,.mnav-link.is-picked .mnav-arrow{color:#146EF5;}
+.mnav-link.is-picked .mnav-arrow{transform:translateX(6px);opacity:1;}
+.mnav.is-leaving .mnav-link:not(.is-picked){opacity:.3;}
+
+.mnav-foot{margin-top:auto;padding-top:34px;}
+.mnav-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:56px;box-sizing:border-box;padding:0 20px;
+  border-radius:14px;background:#146EF5;color:#fff;font-size:16px;font-weight:700;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);
+  -webkit-tap-highlight-color:transparent;transition:transform .2s var(--mnav-e);}
+.mnav-cta:active{transform:scale(0.98);}
+.mnav-contact{margin:14px 0 0;display:flex;flex-direction:column;align-items:center;font-size:14px;font-weight:600;color:#5E6F84;text-align:center;}
+.mnav-contact a{display:inline-flex;align-items:center;min-height:44px;padding:0 8px;color:#0F172A;text-decoration:none;}
+
+/* In- och utgång: länkarna uppifrån med stagger, CTA och kontakt sist. Stängning: snabbare, utan stagger */
+.mnav-item{opacity:0;transform:translateY(-14px);transition:opacity .18s ease,transform .18s ease;}
+.mnav.is-open .mnav-item{opacity:1;transform:none;transition:opacity .42s var(--mnav-e) calc(150ms + var(--i,0) * 52ms),transform .42s var(--mnav-e) calc(150ms + var(--i,0) * 52ms);}
+.mnav-foot.mnav-item{transform:translateY(8px);}
+.mnav.is-open .mnav-foot.mnav-item{transform:none;}
+.mnav.is-open.is-fading .mnav-item{opacity:0;transition:opacity .22s ease;}
+
+@media (min-width:600px){
+  .mnav-scroll{padding-left:20px;padding-right:20px;}
+  .mnav-t{font-size:38px;}
+}
+@media (max-height:620px){
+  .mnav-scroll{padding-top:calc(env(safe-area-inset-top,0px) + 96px);}
+  .mnav-link{min-height:56px;padding:8px 2px;}
+  .mnav-t{font-size:clamp(26px,8vw,32px);}
+  .mnav-d{margin-top:2px;font-size:13px;}
+  .mnav-foot{padding-top:22px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .mnav{clip-path:none;opacity:0;transition:opacity .2s ease,visibility 0s linear .2s;}
+  .mnav.is-open{clip-path:none;opacity:1;transition:opacity .2s ease;}
+  .mnav-item,.mnav.is-open .mnav-item,.mnav-foot.mnav-item{transform:none;transition:none;opacity:1;}
+  .mnav.is-open.is-fading .mnav-item{opacity:1;}
+  .mnav-lines i,.mnav-toggle,.mnav-arrow,.mnav-link{transition:none;}
+}

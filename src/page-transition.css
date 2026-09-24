@@ -23,3 +23,14 @@ html.pt-internal-settled [style*="fadeUp"]:not(.wz-card):not([style*="floaty"]) 
 html.pt-internal-settled [style*="fadeUp"][style*="floaty"] { opacity: 1 !important; }
 .pt-fast [data-rv], .pt-fast [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
 [data-pt-focus]:focus { outline: none; }
+
+/* Sidbyte från mobilmenyn (src/mobile-nav.*): menypanelen täcker nya sidan från första bildrutan
+   och glider sedan upp och avslöjar den. pt-cover sätts i <head>, pt-cover-out i page-transition.js. */
+html.pt-cover body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+  background: var(--mnav-bg, linear-gradient(180deg,#FFFFFF 0%,#F2F8FF 46%,#E3EFFF 100%));
+  box-shadow: 0 30px 60px rgba(15,23,42,0.10); transition: transform .62s cubic-bezier(0.22,1,0.36,1); }
+html.pt-cover-out body::after { transform: translateY(calc(-100% - 90px)); }
+@media (prefers-reduced-motion: reduce) {
+  html.pt-cover body::after { transition: opacity .22s ease; }
+  html.pt-cover-out body::after { transform: none; opacity: 0; }
+}

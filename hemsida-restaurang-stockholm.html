@@ -48,10 +48,6 @@
   .nav-wrap.scrolled{padding:14px 20px 0;}
   .nav-wrap.scrolled .nav-capsule{max-width:880px;padding:14px 28px;border-radius:18px;background:rgba(255,255,255,0.9);box-shadow:0 12px 30px rgba(15,23,42,0.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
 
-  /* Mobil nedfällbar meny */
-  .mnav-panel{max-width:1140px;margin:8px auto 0;overflow:hidden;max-height:0;transition:max-height 0.35s cubic-bezier(0.22,1,0.36,1);border-radius:18px;}
-  .nav-wrap.scrolled .mnav-panel{max-width:880px;}
-  .mnav-panel.open{max-height:400px;}
 
   /* Hover-lyfteffekter */
   .btn-lift{transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s cubic-bezier(0.22,1,0.36,1);}
@@ -374,8 +370,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&amp;display=block&amp;text=studio%20klaro" rel="stylesheet">
 <link rel="stylesheet" href="/src/site-footer.css">
 <!-- Sidövergång (src/page-transition.*): intern ankomst – placeras på tidigare scrollposition före första bildrutan -->
-<script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');var c=document.documentElement.classList;c.add('pt-arrive','pt-fast');var ptY=sessionStorage.getItem('pt-y');sessionStorage.removeItem('pt-y');if(ptY&&!location.hash){window.__ptY=+ptY;c.add('pt-hold');setTimeout(function(){c.remove('pt-hold');},1000);}}}catch(e){}</script>
+<script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');var c=document.documentElement.classList;c.add('pt-arrive','pt-fast');if(sessionStorage.getItem('pt-cover')){sessionStorage.removeItem('pt-cover');c.add('pt-cover');setTimeout(function(){c.remove('pt-cover','pt-cover-out');},3000);}var ptY=sessionStorage.getItem('pt-y');sessionStorage.removeItem('pt-y');if(ptY&&!location.hash){window.__ptY=+ptY;c.add('pt-hold');setTimeout(function(){c.remove('pt-hold');},1000);}}}catch(e){}</script>
 <link rel="stylesheet" href="/src/page-transition.css">
+<link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/nav-glass.css">
 </head>
 <body>
@@ -397,23 +394,9 @@
       </div>
       <a data-rhide href="/#kontakt" class="btn-lift lift-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få en gratis genomgång</a>
       <div data-rshow style="display:none;">
-        <button id="mnav-toggle" aria-label="Meny" aria-expanded="false" aria-controls="mnav-panel" style="width:40px;height:40px;border-radius:10px;background:#146EF5;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
-          <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div><div style="width:16px;height:2px;background:#fff;border-radius:2px;"></div></div>
-        </button>
+        <button id="mnav-toggle" class="mnav-toggle" type="button" aria-label="Öppna meny" aria-expanded="false" aria-controls="mnav"><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
       </div>
     </nav>
-    <div data-rshow id="mnav-panel" class="mnav-panel" style="display:none;">
-      <div style="background:#fff;border-radius:18px;box-shadow:0 12px 30px rgba(15,23,42,0.12);overflow:hidden;">
-        <a href="/#processen" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Process</a>
-        <a href="/#portfolio" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Case</a>
-        <a href="/seo-koll" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">SEO</a>
-        <a href="/priser" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Priser</a>
-        <a href="/om" style="display:block;padding:16px 20px;font-size:15px;font-weight:700;color:#0F172A;text-decoration:none;border-bottom:1px solid rgba(15,23,42,0.06);">Om</a>
-        <div style="padding:16px 20px;">
-          <a href="/#kontakt" data-mnav-close style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:12px;text-decoration:none;">Få en gratis genomgång</a>
-        </div>
-      </div>
-    </div>
   </header>
 
   <main>
@@ -815,19 +798,6 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ---------- Mobil nedfällbar meny ---------- */
-  var mnavToggle = document.getElementById('mnav-toggle');
-  var mnavPanel = document.getElementById('mnav-panel');
-  var setMnav = function (open) {
-    mnavPanel.classList.toggle('open', open);
-    mnavToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  };
-  mnavToggle.addEventListener('click', function () {
-    setMnav(!mnavPanel.classList.contains('open'));
-  });
-  mnavPanel.querySelectorAll('[data-mnav-close]').forEach(function (a) {
-    a.addEventListener('click', function () { setMnav(false); });
-  });
 
   /* ---------- Scroll-reveal (+ fail-safe) ---------- */
   var revealEls = document.querySelectorAll('[data-reveal]');
@@ -866,6 +836,7 @@
   </aside>
 <script type="module" src="/src/lead-dock.js"></script>
 <script type="module" src="/src/site-footer.js"></script>
+<script type="module" src="/src/mobile-nav.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 </body>
 </html>
