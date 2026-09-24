@@ -42,12 +42,8 @@
   font-size:clamp(20px,calc((100vw - 40px) * 0.1707),140px);font-size:clamp(1px,17.07cqi,140px);margin-top:-0.0898em;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 .sf-line{position:absolute;left:30.83%;top:93.52%;width:36.52%;height:4.63%;min-height:3px;border-radius:2px;background:var(--sf-accent);transform-origin:left center;}
-/* Punkten skalar med wordmarken: ca dubbla streckets tjocklek, centrerad på streckets slut */
-.sf-dot{position:absolute;left:67.35%;top:95.83%;width:2.2%;aspect-ratio:1;margin:-1.1% 0 0 -1.1%;border-radius:50%;background:var(--sf-accent);box-shadow:0 0 0 0.45em #0F172A;font-size:clamp(4px,0.8vw,8px);}
 .sf-js .sf-line{transform:scaleX(0);}
-.sf-js .sf-dot{opacity:0;transform:scale(.4);}
 .sf-js .sf-mark.is-drawn .sf-line{transform:scaleX(1);transition:transform .8s cubic-bezier(0.65,0,0.35,1);}
-.sf-js .sf-mark.is-drawn .sf-dot{opacity:1;transform:none;transition:opacity .25s ease .72s,transform .35s var(--sf-ease) .72s;}
 
 /* Del 4 – bottenrad */
 .sf-bottom{display:flex;align-items:center;flex-wrap:wrap;gap:4px 28px;margin-top:40px;padding-top:14px;border-top:1px solid var(--sf-line);font-size:13px;color:var(--sf-soft);}
@@ -76,5 +72,5 @@
 @media (prefers-reduced-motion: reduce){
   .sf-mail::after,.sf-mail-arrow,.sf-totop span,.sf-list a,.sf-list a::before{transition:none;}
   .sf-mail:hover .sf-mail-arrow,.sf-mail:focus-visible .sf-mail-arrow,.sf-totop:hover span{transform:none;}
-  .sf-js .sf-line,.sf-js .sf-dot{transform:none;opacity:1;transition:none;}
+  .sf-js .sf-line{transform:none;transition:none;}
 }

@@ -31,6 +31,8 @@
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{margin:0;background:#DCEEFF;font-family:'Manrope',system-ui,sans-serif;}
+  /* Extra skydd mot sidledsscroll (clip skapar ingen scrollbehållare, så sticky-menyn påverkas inte) */
+  html,body{max-width:100%;overflow-x:clip;}
   a{color:#146EF5;}
   a:hover{color:#0F5AD1;}
   ::selection{background:#146EF5;color:#fff;}
@@ -709,10 +711,12 @@
   .ind-eyebrow{font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
   .ind-h2{font-size:36px;font-weight:800;color:#0F172A;margin:0 0 12px;line-height:1.15;letter-spacing:-0.02em;text-wrap:balance;}
   .ind-lead{font-size:16px;color:#52657A;line-height:1.6;margin:0;font-weight:500;}
-  .ind-track{list-style:none;margin:0;padding:12px calc(50% - var(--ind-w) / 2) 20px;display:flex;gap:var(--ind-gap);overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;position:relative;outline:none;cursor:grab;}
+  .ind-track{list-style:none;margin:0;padding:12px calc(50% - var(--ind-w) / 2) 20px;display:flex;gap:var(--ind-gap);overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;position:relative;outline:none;cursor:grab;}
   /* Med kloner i ändarna (JS) behövs ingen sidopadding – klonerna fyller ut istället */
   .ind-track.has-clones{padding-left:0;padding-right:0;}
-  .ind-track::-webkit-scrollbar{display:none;}
+  .ind-track::-webkit-scrollbar{display:none;width:0;height:0;}
+  /* Karusellens yttre ram: inget innehåll får sticka ut i sidled och ge sidan en scrollbar */
+  .ind-viewport{overflow-x:clip;}
   .ind-track:focus-visible{box-shadow:inset 0 0 0 3px rgba(20,110,245,0.35);border-radius:12px;}
   .ind-track.is-dragging{scroll-snap-type:none;cursor:grabbing;user-select:none;}
   .ind-track.is-animating{scroll-snap-type:none;}
@@ -1134,43 +1138,53 @@
 <script type="module" src="/src/speed-insights.js"></script>
 <!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
 <noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-ans{opacity:1!important;}.faq-more{height:auto!important;visibility:visible!important;}.faq-more-btn,.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
-<!-- ===== KlaroIntro (experiment) – början. Ta bort detta block och blocket i <body> för att stänga av. =====
-     Varumärkesintro, ingen riktig laddning: sidan renderas direkt bakom overlayn.
-     Visas bara på startsidan, en gång per webbläsarsession (sessionStorage "klaro-intro-seen"),
-     inte vid navigering inifrån sajten. /?intro=1 tvingar fram den för test. -->
+<!-- ===== KlaroIntro – början. Ta bort detta block och blocket i <body> för att stänga av. =====
+     Varumärkesintro som visas vid fullständig sidladdning eller uppdatering av startsidan, aldrig vid
+     intern navigering. Ligger kvar tills både minimitiden (2 s) har gått och sidan är färdigladdad,
+     och crossfadar sedan till startsidan, som redan är renderad bakom (.ki-page). /?intro=1 tvingar fram den för test. -->
+<link rel="preload" as="image" href="logo-klaro.webp" fetchpriority="high">
 <style>
   .ki{display:none;}
   html.ki-play{overflow:hidden;scrollbar-gutter:stable;}
-  html.ki-play .ki{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;height:100vh;height:100dvh;z-index:9999;background:#DCEEFF;pointer-events:none;will-change:transform;animation:kiLift .45s cubic-bezier(0.7,0,0.2,1) 1.05s both;}
-  .ki-mark{--ki-w:240px;position:relative;width:var(--ki-w);animation:kiIn .4s cubic-bezier(0.22,1,0.36,1) both;}
+  html.ki-play .ki{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;height:100vh;height:100dvh;z-index:9999;background:#DCEEFF;touch-action:none;transition:opacity .55s cubic-bezier(0.22,1,0.36,1);}
+  .ki-mark{--ki-w:240px;position:relative;width:var(--ki-w);opacity:0;}
   /* Loggan beskärs ovanför sitt eget understreck; strecket ritas i stället exakt där det ligger i bilden */
   .ki-logo{display:block;width:100%;height:auto;clip-path:inset(0 0 17% 0);}
-  .ki-line{position:absolute;left:33.97%;top:87.95%;width:34.92%;height:6.03%;border-radius:1px;background:#146EF5;transform-origin:left center;transform:scaleX(0);animation:kiLine .4s cubic-bezier(0.65,0,0.35,1) .25s both;}
-  .ki-dot{position:absolute;left:0;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#146EF5;opacity:0;animation:kiDot .45s cubic-bezier(0.65,0,0.35,1) .62s both;}
-  html.ki-play div:has(> .hero-h1){animation:kiHero .45s cubic-bezier(0.22,1,0.36,1) 1.05s both;}
-  @keyframes kiIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  .ki-line{position:absolute;left:33.97%;top:87.95%;width:34.92%;height:6.03%;border-radius:1px;background:#146EF5;transform-origin:left center;transform:scaleX(0);}
+  /* Animationerna startar först när loggan är avkodad (ki-go), så hela förloppet syns även på långsam uppkoppling */
+  html.ki-go .ki-mark{animation:kiIn .9s cubic-bezier(0.22,1,0.36,1) both;}
+  html.ki-go .ki-line{animation:kiLine 1.1s cubic-bezier(0.65,0,0.35,1) .55s both;}
+  html.ki-out .ki{opacity:0;}
+  /* Startsidan ligger färdigrenderad men osynlig bakom introt och tonar in samtidigt som introt tonar ut.
+     Förflyttningen görs med translate (inte transform) på barnen, så befintliga transforms lämnas orörda
+     och den fasta formulärraden (.wz-dock) inte får en ny referensram. */
+  html.ki-play .ki-page{opacity:0;will-change:opacity;}
+  html.ki-play .ki-page > :not(.wz-dock){translate:0 10px;}
+  html.ki-out .ki-page{opacity:1;transition:opacity .55s cubic-bezier(0.22,1,0.36,1);}
+  html.ki-out .ki-page > :not(.wz-dock){translate:none;transition:translate .55s cubic-bezier(0.22,1,0.36,1);}
+  @keyframes kiIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
   @keyframes kiLine{from{transform:scaleX(0);}to{transform:scaleX(1);}}
-  @keyframes kiDot{0%{opacity:0;transform:translateX(0) scale(.4);}25%{opacity:1;transform:translateX(0) scale(1);}100%{opacity:1;transform:translateX(calc(var(--ki-w) * 0.3492)) scale(1);}}
-  @keyframes kiLift{from{transform:none;}to{transform:translateY(calc(-100% - 2px));}}
-  @keyframes kiHero{from{opacity:.55;transform:translateY(16px);}to{opacity:1;transform:none;}}
-  @keyframes kiFade{from{opacity:1;}to{opacity:0;}}
-  @media (max-width:600px){ .ki-mark{--ki-w:184px;} .ki-dot{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;} }
-  /* Reducerad rörelse: bara en kort fade, ingen rörelse */
-  html.ki-play.ki-reduce .ki{animation:kiFade .15s linear both;}
-  html.ki-play.ki-reduce .ki-mark,html.ki-play.ki-reduce .ki-line{animation:none;transform:none;}
-  html.ki-play.ki-reduce .ki-dot,html.ki-play.ki-reduce div:has(> .hero-h1){animation:none;}
+  @keyframes kiFade{from{opacity:0;}to{opacity:1;}}
+  @media (max-width:600px){ .ki-mark{--ki-w:184px;} }
+  /* Reducerad rörelse: samma minimitid, men bara diskreta toningar och crossfade – ingen förflyttning eller ritning */
+  html.ki-reduce.ki-go .ki-mark{animation:kiFade .6s ease both;}
+  html.ki-reduce .ki-line{animation:none;transform:none;}
+  html.ki-reduce .ki-page > :not(.wz-dock){translate:none;}
 </style>
 <script>
   (function () {
     try {
       var force = /[?&]intro=1(&|$)/.test(location.search);
+      var nav = performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+      var type = nav ? nav.type : '';
       var internal = false;
       try { internal = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
-      if (!force && (sessionStorage.getItem('klaro-intro-seen') || internal)) return;
-      sessionStorage.setItem('klaro-intro-seen', '1');
-      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document.documentElement.classList.add('ki-play');
-      if (reduce) document.documentElement.classList.add('ki-reduce');
+      try { internal = internal || !!sessionStorage.getItem('pt-arrive'); } catch (e) {}
+      // Uppdatering visar alltid introt; bakåt/framåt och intern navigering gör det aldrig
+      if (!force && (type === 'back_forward' || (internal && type !== 'reload'))) return;
+      var c = document.documentElement.classList;
+      c.add('ki-play');
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) c.add('ki-reduce');
     } catch (e) {}
   })();
 </script>
@@ -1183,11 +1197,11 @@
 <link rel="stylesheet" href="/src/nav-glass.css">
 </head>
 <body>
-<!-- ===== KlaroIntro (experiment) – markup. Dekorativ, visas bara när <html> har klassen ki-play. ===== -->
+<!-- ===== KlaroIntro – markup. Dekorativ, visas bara när <html> har klassen ki-play. ===== -->
 <div class="ki" id="klaro-intro" aria-hidden="true">
   <div class="ki-mark">
-    <img class="ki-logo" src="logo-klaro.webp" alt="" width="630" height="166" decoding="async">
-    <span class="ki-line"><span class="ki-dot"></span></span>
+    <img class="ki-logo" src="logo-klaro.webp" alt="" width="630" height="166">
+    <span class="ki-line"></span>
   </div>
 </div>
 <script>
@@ -1195,21 +1209,49 @@
     var root = document.documentElement, el = document.getElementById('klaro-intro');
     if (!el) return;
     if (!root.classList.contains('ki-play')) { el.remove(); return; }
-    var done = false;
+    var MIN = 2000, FADE = 550, MAX = 10000;       // minsta visningstid, crossfade, yttersta gräns
+    var started = false, minDone = false, loaded = false, leaving = false, done = false;
+
     function end() {
       if (done) return;
       done = true;
-      root.classList.remove('ki-play', 'ki-reduce');   // återställer scroll och hero
-      el.remove();                                      // helt bort från DOM
+      root.classList.remove('ki-play', 'ki-go', 'ki-out', 'ki-reduce');   // låser upp scroll
+      el.remove();
     }
-    el.addEventListener('animationend', function (e) { if (e.target === el) end(); });
-    setTimeout(end, 2500);                              // säkerhetsnät om något går fel
+    function leave() {
+      if (leaving) return;
+      leaving = true;
+      root.classList.add('ki-out');                 // crossfade; overlayn blockerar klick och scroll tills den är borta
+      el.addEventListener('transitionend', function (e) { if (e.target === el && e.propertyName === 'opacity') end(); });
+      setTimeout(end, FADE + 100);                  // säkerhetsnät om transitionend uteblir
+    }
+    function check() { if (minDone && loaded) leave(); }
+
+    // Starta animationen (och minimitiden) först när loggan kan visas, max 600 ms väntan
+    function go() {
+      if (started) return;
+      started = true;
+      root.classList.add('ki-go');
+      setTimeout(function () { minDone = true; check(); }, MIN);
+    }
+    var img = el.querySelector('img');
+    if (img && img.decode) img.decode().then(go, go); else go();
+    setTimeout(go, 600);
+
+    // Sidan räknas som redo när load har skett och typsnitten är klara
+    function ready() {
+      var f = document.fonts && document.fonts.ready;
+      (f ? f : Promise.resolve()).then(function () { loaded = true; check(); });
+    }
+    if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready);
+
+    setTimeout(leave, MAX);                         // säkerhetsnät om load aldrig kommer
     window.addEventListener('pagehide', end);
   })();
 </script>
 <!-- ===== KlaroIntro – slut (body) ===== -->
 
-<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
+<div class="ki-page" style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
 
   <!-- NAV -->
   <div class="nav-wrap">
@@ -1997,7 +2039,7 @@
 
       <a class="sf-mark" href="/" aria-label="Studio Klaro – till startsidan">
         <span class="sf-mark-text">studio klaro</span>
-        <span class="sf-line" aria-hidden="true"></span><span class="sf-dot" aria-hidden="true"></span>
+        <span class="sf-line" aria-hidden="true"></span>
       </a>
 
       <div class="sf-bottom">
