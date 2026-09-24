@@ -217,7 +217,8 @@
   @media (max-width:600px){
     .wz-head{text-align:left;margin-bottom:24px;}
     .hero-lead{font-size:16px;margin-bottom:28px;}
-    .hero-form .wz-perks{width:fit-content;margin-left:auto;margin-right:auto;}
+    /* Samma centrerade lista i hero och kontaktsektionen */
+    .hero-perks{width:fit-content;margin-left:auto;margin-right:auto;}
     .wz-card{border-radius:28px;padding:22px 20px 20px;}
     .wz-input.wz-prompt{height:120px;font-size:17px;}
     .wz-prompt-card.is-step2 .wz-input.wz-prompt{height:96px;font-size:16px;}
@@ -1139,8 +1140,8 @@
 <!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
 <noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-ans{opacity:1!important;}.faq-more{height:auto!important;visibility:visible!important;}.faq-more-btn,.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
 <!-- ===== KlaroIntro – början. Ta bort detta block och blocket i <body> för att stänga av. =====
-     Varumärkesintro som visas vid fullständig sidladdning eller uppdatering av startsidan, aldrig vid
-     intern navigering. Ligger kvar tills både minimitiden (2 s) har gått och sidan är färdigladdad,
+     Varumärkesintro som visas en gång per flik (sessionStorage "studio-klaro-intro-seen-v1"): när startsidan
+     öppnas i en ny flik eller ett nytt fönster – inte vid omladdning, bakåt/framåt eller intern navigering. Ligger kvar tills både minimitiden (2 s) har gått och sidan är färdigladdad,
      och crossfadar sedan till startsidan, som redan är renderad bakom (.ki-page). /?intro=1 tvingar fram den för test. -->
 <link rel="preload" as="image" href="logo-klaro.webp" fetchpriority="high">
 <style>
@@ -1180,8 +1181,11 @@
       var internal = false;
       try { internal = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
       try { internal = internal || !!sessionStorage.getItem('pt-arrive'); } catch (e) {}
-      // Uppdatering visar alltid introt; bakåt/framåt och intern navigering gör det aldrig
-      if (!force && (type === 'back_forward' || (internal && type !== 'reload'))) return;
+      var KEY = 'studio-klaro-intro-seen-v1', seen = false;
+      try { seen = !!sessionStorage.getItem(KEY); } catch (e) {}
+      // Bara vid första öppningen i fliken; omladdning, bakåt/framåt och intern navigering visar aldrig introt
+      if (!force && (seen || internal || (type && type !== 'navigate'))) return;
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}   // utan sessionStorage styr bara navigeringstypen
       var c = document.documentElement.classList;
       c.add('ki-play');
       if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) c.add('ki-reduce');
