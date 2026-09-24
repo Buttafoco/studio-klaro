@@ -15,5 +15,11 @@ html.pt-running { scroll-behavior: auto !important; }
    annars tonas in är redan färdigt medan sidan glider upp (pt-fast tas bort när rörelsen är klar). */
 .pt-arrive .nav-capsule { animation: none !important; opacity: 1 !important; transform: none !important; }
 .pt-fast [style*="fadeUp"] { animation: none !important; opacity: 1 !important; transform: none !important; }
+/* Efter glidningen (bara vid intern navigering): entréanimationerna förblir avstängda, annars startar de om
+   från opacity 0 när pt-fast tas bort. Påverkar inte ::after-effekter som de markerade orden i heron.
+   Undantag: formulärets bekräftelsekort (.wz-card, visas först vid inskick och ska tona in då) och
+   element som även svävar (floaty) – de behåller sin rörelse men hålls fullt synliga. */
+html.pt-internal-settled [style*="fadeUp"]:not(.wz-card):not([style*="floaty"]) { animation: none !important; opacity: 1 !important; transform: none !important; }
+html.pt-internal-settled [style*="fadeUp"][style*="floaty"] { opacity: 1 !important; }
 .pt-fast [data-rv], .pt-fast [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
 [data-pt-focus]:focus { outline: none; }

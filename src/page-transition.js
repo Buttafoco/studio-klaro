@@ -27,6 +27,9 @@
     target.focus({ preventScroll: true });
   }
   function settle() {
+    // Läggs till i samma synkrona steg som pt-fast tas bort (ingen bildruta emellan) och ligger kvar
+    // under hela besöket, så att inline-fadeUp inte startar om och får innehållet att blinka.
+    root.classList.add('pt-internal-settled');
     root.classList.remove('pt-hold', 'pt-running', 'pt-fast');
     focusMain();
   }
