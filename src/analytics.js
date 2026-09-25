@@ -13,6 +13,8 @@
      Query-parametrar rensas bort ur page_location/page_referrer (t.ex.
      /seo-koll?url=… som innehåller det besökaren skrev i ett formulär). */
 
+import { isPortfolioEmbed } from './embed-mode.js';
+
 const MEASUREMENT_ID = 'G-LF04L4G9WG';
 const META_PIXEL_ID = '1088666567360094';
 
@@ -200,6 +202,10 @@ function trackAiReferral(gtag) {
 }
 
 function init() {
+  // Live-preview i Danilos portfolio: ingen mätning och ingen banner. Inget
+  // samtycke ges eller sparas – ett tidigare val på studioklaro.se står kvar.
+  if (isPortfolioEmbed) return;
+
   // Danilo / interna enheter ska aldrig laddas eller skicka GA4-data.
   if (isInternalUser) {
     clearCookies(isGaCookie);

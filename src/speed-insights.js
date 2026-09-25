@@ -1,3 +1,4 @@
 import { injectSpeedInsights } from '@vercel/speed-insights';
+import { isPortfolioEmbed } from './embed-mode.js';
 
-injectSpeedInsights();
+if (!isPortfolioEmbed) injectSpeedInsights();
