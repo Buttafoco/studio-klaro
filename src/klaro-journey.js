@@ -197,7 +197,7 @@
   // jämna mellanrum, LIVE sist – och punkterna binds ihop med en monoton kubisk kurva (Fritsch–Carlson),
   // så att farten ändras mjukt utan ryck och bromsar in lugnt mot LIVE.
   var KEY_T = [0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1];
-  var schedule = function (t) { return t; };
+  var timeline = function (t) { return t; }; // (eget namn – schedule() bygger om banorna)
   function makeSchedule(ys) {
     var xs = KEY_T, n = xs.length, d = [], m = [], i;
     for (i = 0; i < n - 1; i++) d.push((ys[i + 1] - ys[i]) / (xs[i + 1] - xs[i]));
@@ -313,7 +313,7 @@
     var L = center(live, base);
     d += curve(prev, L);
     total = lengthOf(d);
-    schedule = makeSchedule([0].concat(at.map(function (x) { return x / total; }), [1]));
+    timeline = makeSchedule([0].concat(at.map(function (x) { return x / total; }), [1]));
     main.setAttribute('d', d);
     glow.setAttribute('d', d);
     main.style.strokeDasharray = glow.style.strokeDasharray = total + ' ' + total;
@@ -356,7 +356,7 @@
       }
       elapsed += dt * speed;
       var t = Math.min(1, elapsed / DRAW_MS);
-      prog = Math.max(prog, schedule(t)); // aldrig bakåt, även om banan byggs om under ritningen
+      prog = Math.max(prog, timeline(t)); // aldrig bakåt, även om banan byggs om under ritningen
       render(prog);
       if (t >= 1) { arrive(); return; }
       requestAnimationFrame(frame);

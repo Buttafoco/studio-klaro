@@ -1744,13 +1744,6 @@
                   <p class="kd-care-p">Fortsatt hjälp med mindre ändringar, support och förbättringar – bara om du vill. Hemsidan är redan färdig, och den är din även utan Klaro Care.</p>
                 </div>
 
-                <div class="kd-cta">
-                  <div class="kd-cta-row">
-                    <a class="kd-btn" href="#kontakt">Starta din resa <span class="kd-arrow" aria-hidden="true">→</span></a>
-                    <a class="kd-link" href="#kj-ch-1">Se hela processen</a>
-                  </div>
-                  <p class="kd-trust">Första steget är en kostnadsfri genomgång.</p>
-                </div>
               </div>
 
             </div>
@@ -2173,11 +2166,12 @@
       var vh = window.innerHeight;
       var still = reduceMotion.matches;
 
-      // Hela sidan blir mörk medan kapitlet täcker mitten av skärmen (båda riktningarna).
+      // Hela sidan blir mörk medan kapitlet täcker mitten av skärmen (båda riktningarna). Den ljusnar redan när
+      // kapitlets slut når ~75 % av höjden, så att kontaktsektionen under inte står osynlig i en tom mörk yta.
       // CTA:n under är dold i mörkt läge och tonar in i takt med att sidan ljusnar igen.
       if (!still) {
         var r = dk.getBoundingClientRect();
-        root.classList.toggle('dk-on', r.top < vh * 0.55 && r.bottom > vh * 0.5);
+        root.classList.toggle('dk-on', r.top < vh * 0.55 && r.bottom > vh * 0.75);
       }
     }
 
