@@ -461,3 +461,25 @@
   .kj--split .kj-viewport > .kj-view,.kj--split .kj-viewport > .kj-view.is-past{transform:none;}
   .kj-js .kj-view:not(.is-on) .kj-up{transform:none;}
 }
+
+/* ---------- Övergången till kontaktsektionen (#kontakt) ----------
+   Den visade projektresan är klar – nu börjar besökarens egen. En kort linje lämnar LIVE, går rakt ned
+   mellan grenarna (aldrig genom Klaro Care), gör en mjuk båge och landar i en ny startpunkt. På mobil är
+   den en kort lodrät anslutning. Utan JS syns startpunkt, rubrik och formulär direkt (utan linje). */
+.kx{position:relative;}
+.kx-svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0;}
+.kx-path,.kx-glow{fill:none;stroke:#2F7DF6;stroke-linecap:round;stroke-linejoin:round;}
+.kx-path{stroke-width:2;}
+.kx-glow{stroke-width:10;opacity:.13;}
+.kx-head,.kx .wz-shell,.kx .wz-perks{position:relative;z-index:1;}
+.kx-start{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0F5AD1;}
+.kx-dot{flex:none;width:14px;height:14px;border-radius:50%;background:#146EF5;box-shadow:0 0 0 5px rgba(20,110,245,0.16);transition:transform .45s cubic-bezier(0.22,1,0.36,1),opacity .3s ease;}
+/* Starttillstånd bara med JS: linjen ritas först, sedan tonar etikett, rubrik och formulär in */
+.kx-js:not(.is-open) .kx-in{opacity:0;transform:translateY(10px);}
+.kx-js:not(.is-open) .kx-start{transform:none;} /* startpunkten står still – linjen landar exakt ovanför den */
+.kx-js:not(.is-open) .kx-dot{opacity:0;transform:scale(.4);}
+.kx-in{transition:opacity .5s ease,transform .6s cubic-bezier(0.22,1,0.36,1);}
+.kx-js.is-open .kx-in{transition-delay:calc(var(--kx-i,0) * 70ms);}
+@media (prefers-reduced-motion: reduce){
+  .kx-in,.kx-dot{transition:none!important;}
+}

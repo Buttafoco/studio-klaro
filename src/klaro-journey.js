@@ -385,3 +385,96 @@
   } else window.addEventListener('resize', schedule, { passive: true });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
 })();
+
+/* ---------- Övergången till kontaktsektionen (#kontakt) ----------
+   Den visade projektresan är klar – nu kan besökarens egen börja. En kort linje lämnar LIVE-punkten,
+   går rakt ned mellan grenarna (inte genom Klaro Care) och gör en mjuk båge till startpunkten
+   "Ditt första steg". På mobil: en kort lodrät anslutning. Ritas en gång per sidvisning när sektionen
+   når mitten av viewporten (IntersectionObserver + rAF, ~1,2 s på desktop, ~0,6 s på mobil); därefter
+   tonar etikett, rubrik och formulär in. Fokus i formuläret visar allt direkt. Reducerad rörelse: direkt. */
+(function () {
+  var kx = document.getElementById('kontakt');
+  if (!kx || !kx.classList.contains('kx') || !('IntersectionObserver' in window)) return;
+  var svg = kx.querySelector('.kx-svg'), path = kx.querySelector('.kx-path'), glow = kx.querySelector('.kx-glow');
+  var dot = kx.querySelector('.kx-dot');
+  var kd = document.getElementById('kj-dest');
+  var live = kd && kd.querySelector('.kd-live-dot');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var small = window.matchMedia('(max-width: 760px)');
+  var ins = Array.prototype.slice.call(kx.querySelectorAll('.kx-in'));
+  var total = 1, prog = 0, started = false, opened = false;
+  ins.forEach(function (el, i) { el.style.setProperty('--kx-i', i); });
+  kx.classList.add('kx-js');
+
+  function center(el, base) {
+    var r = el.getBoundingClientRect();
+    return { x: r.left + r.width / 2 - base.left, y: r.top + r.height / 2 - base.top };
+  }
+  function render(p) {
+    path.style.strokeDashoffset = glow.style.strokeDashoffset = total * (1 - p);
+  }
+  function build() {
+    pending = false;
+    var base = kx.getBoundingClientRect();
+    if (!base.width) return;
+    svg.setAttribute('width', base.width);
+    svg.setAttribute('height', base.height);
+    var end = center(dot, base); end.y -= 11; // landar precis ovanför startpunkten
+    var d;
+    if (small.matches || !live || !live.offsetParent) {
+      d = 'M ' + end.x + ' ' + (end.y - 56) + ' L ' + end.x + ' ' + end.y;
+    } else {
+      var L = center(live, base);
+      var from = { x: L.x, y: L.y + 18 };
+      var bend = { x: L.x, y: kd.getBoundingClientRect().bottom - base.top }; // rakt ned mellan grenarna
+      if (bend.y < from.y) bend.y = from.y;
+      var m = (end.y - bend.y) / 2;
+      d = 'M ' + from.x + ' ' + from.y + ' L ' + bend.x + ' ' + bend.y +
+        ' C ' + bend.x + ' ' + (bend.y + m) + ' ' + end.x + ' ' + (end.y - m) + ' ' + end.x + ' ' + end.y;
+    }
+    path.setAttribute('d', d); glow.setAttribute('d', d);
+    total = path.getTotalLength() || 1;
+    path.style.strokeDasharray = glow.style.strokeDasharray = total + ' ' + total;
+    render(prog);
+  }
+  var pending = false;
+  function schedule() { if (!pending) { pending = true; requestAnimationFrame(build); } }
+
+  function open() { if (opened) return; opened = true; kx.classList.add('is-open'); }
+  function finish() { prog = 1; render(1); open(); }
+  // ease-in-out: lugn start, mjuk landning
+  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function draw() {
+    if (started) return;
+    started = true;
+    if (reduce.matches) { finish(); return; }
+    var dur = small.matches ? 600 : 1200, t0 = null;
+    function frame(now) {
+      if (prog >= 1) return;
+      if (t0 === null) t0 = now;
+      var t = Math.min(1, (now - t0) / dur);
+      prog = ease(t);
+      render(prog);
+      if (t >= 0.72) open(); // rubrik och formulär börjar tona in när linjen närmar sig startpunkten
+      if (t < 1) requestAnimationFrame(frame); else finish();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  build();
+  if (reduce.matches) finish();
+  else {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { draw(); io.disconnect(); }
+    }, { rootMargin: '0px 0px -50% 0px' });
+    io.observe(kx);
+  }
+  // Tangentbord eller hopp direkt till formuläret: visa allt direkt
+  kx.addEventListener('focusin', function () { if (!opened) { started = true; finish(); } });
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(schedule);
+    ro.observe(kx);
+    if (kd) ro.observe(kd);
+  } else window.addEventListener('resize', schedule, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+})();

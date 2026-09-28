@@ -250,7 +250,7 @@
   body.dk-anim #kontakt{transition:opacity .9s ease;}
   html.dk-on #kontakt{opacity:0;}
   .dk{--dk-ease:cubic-bezier(0.22,1,0.36,1);--dk-ink:#0F172A;--dk-mute:#52657A;--dk-line:rgba(15,23,42,0.1);--dk-surf:rgba(255,255,255,0.4);--dk-accent:#146EF5;--dk-page:#DCEEFF;
-    --dk-full:calc(100vw - var(--sbw,0px));width:var(--dk-full);margin:64px 0 0 calc(50% - var(--dk-full) / 2);padding:120px 0 128px;overflow-x:clip;color:var(--dk-ink);
+    --dk-full:calc(100vw - var(--sbw,0px));width:var(--dk-full);margin:64px 0 0 calc(50% - var(--dk-full) / 2);padding:120px 0 56px;overflow-x:clip;color:var(--dk-ink);
     transition:--dk-ink 1.1s ease,--dk-mute 1.1s ease,--dk-line 1.1s ease,--dk-surf 1.1s ease,--dk-accent 1.1s ease,--dk-page 1.1s ease;}
   html.dk-on .dk,.dk:not(.dk-js){--dk-ink:#F4F1EA;--dk-mute:#ABA59B;--dk-line:rgba(244,241,234,0.1);--dk-surf:rgba(244,241,234,0.035);--dk-accent:#8AB6FF;--dk-page:#1D1C1A;}
   .dk:not(.dk-js){background:#1D1C1A;}
@@ -280,7 +280,7 @@
   @media (prefers-reduced-motion: reduce){ .dk-rev{transition:none;} .dk-rev:hover{translate:none;} }
 
   @media (max-width:900px){
-    .dk{padding:96px 0 104px;}
+    .dk{padding:96px 0 48px;}
   }
   @media (max-width:760px){
     .dk-inner{padding:0 16px;}
@@ -1761,16 +1761,20 @@
     </div>
   </div>
 
-  <!-- CONTACT (prompt-flöde i två steg + success) -->
-  <div id="kontakt" style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
-    <div data-reveal class="wz-head">
-      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:14px;">KOSTNADSFRI GENOMGÅNG</div>
-      <h2 style="font-size:30px;font-weight:800;color:#0F172A;margin:0 0 16px;line-height:1.25;">Få konkreta idéer för din hemsida</h2>
-      <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0;">Berätta kort om ditt företag så tittar vi på vad som kan förbättras och återkommer med konkreta förslag.</p>
+  <!-- CONTACT (prompt-flöde i två steg + success). Den visade projektresan är klar – här börjar besökarens egen:
+       reselinjen lämnar LIVE, gör en mjuk båge och landar i en ny startpunkt ("Ditt första steg"). Linje och
+       intoning styrs av src/klaro-journey.js; utan JS syns allt direkt. Formuläret delar utkast med hero-formuläret. -->
+  <div id="kontakt" class="kx" style="max-width:1140px;margin:40px auto 0;padding:0 20px;" data-wz-dock-clear>
+    <svg class="kx-svg" aria-hidden="true" focusable="false"><path class="kx-glow"></path><path class="kx-path"></path></svg>
+    <div class="wz-head kx-head">
+      <p class="kx-start kx-in"><span class="kx-dot" aria-hidden="true"></span>Ditt första steg</p>
+      <div class="kx-in" style="font-size:12px;font-weight:700;color:#0F5AD1;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:14px;">NÄSTA RESA KAN VARA DIN</div>
+      <h2 class="kx-in" style="font-size:30px;font-weight:800;color:#0F172A;margin:0 0 16px;line-height:1.25;">Din resa börjar med några rader.</h2>
+      <p class="kx-in" style="font-size:15px;color:#52657A;line-height:1.6;margin:0;">Berätta kort om företaget och vad du vill förbättra. Vi läser, tänker och återkommer med konkreta idéer för ett bra första steg.</p>
     </div>
 
-    <div data-reveal class="wz-shell" data-wz-mount="kontakt"></div>
-    <ul class="wz-perks hero-perks" data-reveal>
+    <div class="wz-shell kx-in" data-wz-mount="kontakt"></div>
+    <ul class="wz-perks hero-perks kx-in">
       <li><span class="wz-rating"><span class="wz-stars" role="img" aria-label="Fem stjärnor"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></span>Omdömen från våra kunder</span></li>
       <li>Anpassat efter ditt företag</li>
       <li>Personlig återkoppling</li>
@@ -2233,6 +2237,18 @@
   // Samma formulär (steg, validering, inskick) på flera ställen: varje [data-wz-mount]
   // får en egen klon av #wz-template och en egen, självständig instans av logiken nedan.
   var WZ_REF_ATTRS = ['for', 'aria-controls', 'aria-labelledby', 'aria-describedby'];
+  // Delat utkast mellan hero-formuläret och kontaktsektionen (samma sidvisning, bara i minnet – inget sparas).
+  // Fält, vald hjälp och steg 2 speglas; ett pågående eller lyckat inskick spärrar båda instanserna.
+  var WZ_SHARED_KEYS = ['hero', 'kontakt'];
+  var WZ_PEERS = [];
+  var WZ_STATE = { submitting: false, done: false };
+  var wzMirroring = false;
+  function wzEachPeer(self, fn) {
+    if (!self || wzMirroring || WZ_SHARED_KEYS.indexOf(self.key) === -1) return;
+    wzMirroring = true;
+    try { WZ_PEERS.forEach(function (o) { if (o !== self) fn(o); }); } finally { wzMirroring = false; }
+  }
+
   function mountLeadForm(mount) {
     var key = mount.getAttribute('data-wz-mount');
     var frag = document.getElementById('wz-template').content.cloneNode(true);
@@ -2279,6 +2295,7 @@
       expandWrap.classList.add('wz-open');
       expandWrap.removeAttribute('inert');
       nextBtn.setAttribute('aria-expanded', 'true');
+      wzEachPeer(peer, function (o) { o.reveal(); });
     }
     function setPromptInvalid(bad) {
       messageInput.classList.toggle('wz-invalid', bad);
@@ -2385,6 +2402,8 @@
         wz[input.getAttribute('data-field')] = input.value;
         input.classList.remove('wz-invalid');
         errorBox.style.display = 'none';
+        var field = input.getAttribute('data-field');
+        wzEachPeer(peer, function (o) { o.setField(field, input.value); });
       });
     });
 
@@ -2400,6 +2419,8 @@
           });
           container.classList.remove('wz-goals-invalid');
           errorBox.style.display = 'none';
+          var v = wz[field];
+          wzEachPeer(peer, function (o) { o.setGoal(v); });
         });
       });
     }
@@ -2438,6 +2459,7 @@
 
     function resetSubmitBtn() {
       wz.submitting = false;
+      WZ_STATE.submitting = false;
       submitBtn.disabled = false;
       submitBtn.textContent = 'Få min gratis genomgång →';
       submitBtn.style.opacity = '1';
@@ -2445,6 +2467,8 @@
 
     function submitForm() {
       if (wz.submitting) return;
+      // Samma förfrågan kan inte skickas två gånger från hero och kontaktsektionen
+      if (WZ_SHARED_KEYS.indexOf(key) !== -1 && (WZ_STATE.submitting || WZ_STATE.done)) return;
       if (!validateAndMark()) {
         errorBox.textContent = 'Fyll i namn, e-post, företagsnamn, vad du behöver hjälp med och en kort beskrivning för att skicka.';
         errorBox.style.display = 'block';
@@ -2457,6 +2481,7 @@
         return;
       }
       wz.submitting = true;
+      if (WZ_SHARED_KEYS.indexOf(key) !== -1) WZ_STATE.submitting = true;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Skickar …';
       submitBtn.style.opacity = '0.75';
@@ -2483,7 +2508,9 @@
         .then(function (res) {
           if (res.ok && res.data.success) {
             if (window.klaroTrackLead) window.klaroTrackLead('kontakt_genomgang', key);
+            if (WZ_SHARED_KEYS.indexOf(key) !== -1) { WZ_STATE.submitting = false; WZ_STATE.done = true; }
             showSuccess();
+            wzEachPeer(peer, function (o) { o.showDone(); });
           } else {
             resetSubmitBtn();
             errorBox.textContent = 'Något gick fel när förfrågan skulle skickas. Försök igen eller mejla hej@studioklaro.se.';
@@ -2496,6 +2523,49 @@
           errorBox.style.display = 'block';
         });
     }
+    // Speglingens gränssnitt: sätter värden utan att flytta fokus eller skicka något
+    var peer = {
+      key: key,
+      reveal: function () { revealForm(); },
+      setField: function (field, value) {
+        var t = root.querySelector('.wz-input[data-field="' + field + '"]');
+        if (!t || t.value === value) return;
+        t.value = value;
+        t.dispatchEvent(new Event('input', { bubbles: true })); // uppdaterar instansens state (spegling spärrad)
+      },
+      setGoal: function (v) {
+        wz.goal = v;
+        goalsWrap.querySelectorAll('.wz-chip').forEach(function (b) { b.classList.toggle('selected', b.getAttribute('data-val') === v); });
+        goalsWrap.classList.remove('wz-goals-invalid');
+      },
+      showDone: function () {
+        // Den andra instansen byter inte till kvittot (det skulle ändra sidans höjd ovanför besökaren och ge
+        // layoutförskjutning). Den låses i samma storlek: knappen visar att förfrågan redan är skickad.
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Skickat – tack!';
+        submitBtn.style.opacity = '0.75';
+        nextBtn.disabled = true;
+      },
+      snapshot: function () {
+        var f = {};
+        root.querySelectorAll('.wz-input[data-field]').forEach(function (i) { f[i.getAttribute('data-field')] = i.value; });
+        return { fields: f, goal: wz.goal, expanded: formExpanded };
+      }
+    };
+    if (WZ_SHARED_KEYS.indexOf(key) !== -1) {
+      // Ta över det som redan finns i en annan instans (t.ex. text som återställts vid bakåtnavigering)
+      WZ_PEERS.forEach(function (o) {
+        var snap = o.snapshot();
+        wzMirroring = true;
+        try {
+          Object.keys(snap.fields).forEach(function (f) { if (snap.fields[f] && !peer.snapshot().fields[f]) peer.setField(f, snap.fields[f]); });
+          if (snap.goal && !wz.goal) peer.setGoal(snap.goal);
+          if (snap.expanded) revealForm();
+        } finally { wzMirroring = false; }
+      });
+      WZ_PEERS.push(peer);
+    }
+
     formEl.addEventListener('submit', function (e) {
       e.preventDefault();
       // Säkerhetsspärr: skicka aldrig från steg 1, gå bara vidare.
