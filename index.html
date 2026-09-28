@@ -1081,6 +1081,7 @@
 <link rel="stylesheet" href="/src/page-transition.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/klaro-journey.css">
+<link rel="stylesheet" href="/src/social-proof.css">
 <link rel="stylesheet" href="/src/nav-glass.css">
 </head>
 <body>
@@ -1508,20 +1509,54 @@
     <div class="dk-inner">
 
       <!-- Kundomdömen: riktiga omdömen från kunder, inga länkar till externa plattformar -->
+      <!-- Social proof: publicerade kundcase med kundens omdöme + fristående omdömen.
+           Endast verifierbar information (se kundcasen). Varje case har ett datablock (pc-data) med status
+           (published = publicerat kundprojekt, concept = illustrativt koncept) och kpis[] – KPI-raden visas av
+           src/social-proof.js först när en KPI har värde, etikett, mätperiod och källa (src/proof-kpi.mjs). -->
       <section id="referenser" class="dk-reviews" aria-labelledby="dk-rev-title">
-        <div class="dk-eyebrow" data-dk>Kundomdömen</div>
+        <div class="dk-eyebrow" data-dk>Kundcase och omdömen</div>
         <h2 id="dk-rev-title" class="dk-h3" data-dk>Ord från företag vi har hjälpt.</h2>
-        <p class="dk-lead" data-dk>Några ord från kunder som har fått hjälp med sin digitala närvaro.</p>
-        <div class="dk-rev-grid">
+        <p class="dk-lead" data-dk>Ett publicerat kundprojekt – och vad kunderna själva säger om samarbetet.</p>
+
+        <article class="pc" aria-labelledby="pc-chairman-title" data-dk>
+          <script type="application/json" class="pc-data">{"id":"chairman","status":"published","company":"The Chairman Barber","industry":"Barberare","location":"Vasastan, Stockholm","url":"https://www.thechairmanbarber.se","caseUrl":"/hemsida-frisor-stockholm","kpis":[]}</script>
+          <figure class="pc-media">
+            <div class="pc-browser">
+              <div class="pc-bar" aria-hidden="true"><i></i><i></i><i></i><em>thechairmanbarber.se</em></div>
+              <picture><source type="image/avif" srcset="/case/chairman/chairman-hero-desktop-640.avif 640w, /case/chairman/chairman-hero-desktop-960.avif 960w, /case/chairman/chairman-hero-desktop-1280.avif 1280w" sizes="(max-width:900px) calc(100vw - 64px), 600px"><source type="image/webp" srcset="/case/chairman/chairman-hero-desktop-640.webp 640w, /case/chairman/chairman-hero-desktop-960.webp 960w, /case/chairman/chairman-hero-desktop-1280.webp 1280w" sizes="(max-width:900px) calc(100vw - 64px), 600px"><img src="/case/chairman/chairman-hero-desktop-960.webp" width="1800" height="1004" alt="Startsidan på The Chairman Barbers publicerade hemsida: rubriken Klassiskt hantverk. Modern precision. med knapparna Boka tid och Se behandlingar" loading="lazy" decoding="async"></picture>
+            </div>
+            <figcaption class="pc-cap">Skärmbild av den publicerade hemsidan</figcaption>
+          </figure>
+          <div class="pc-body">
+            <p class="pc-meta"><span class="pc-live"><i aria-hidden="true"></i>Publicerat kundprojekt</span><span class="pc-where">Barberare · Vasastan, Stockholm</span></p>
+            <p class="pc-company">The Chairman Barber</p>
+            <h3 id="pc-chairman-title" class="pc-title">Från information till en tydlig väg mot bokning.</h3>
+            <p class="pc-desc">The Chairman Barber behövde en hemsida som speglade salongens uttryck och gjorde det enklare att förstå behandlingarna och boka en tid.</p>
+            <h4 class="pc-k">Det vi genomförde</h4>
+            <ul class="pc-done">
+              <li>Behandlingar med tid, pris och innehåll</li>
+              <li>Boka tid i sidhuvud, hero och avslutning</li>
+              <li>Mobilanpassad kundresa</li>
+              <li>Visuellt uttryck anpassat efter salongen</li>
+            </ul>
+            <div class="pc-kpis" data-kpi-slot hidden></div>
+            <figure class="pc-quote">
+              <span class="pc-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span>
+              <blockquote><p>”Jätte bra service och rimligt pris!”</p></blockquote>
+              <figcaption><span class="pc-av" aria-hidden="true">A</span><span class="pc-who"><b>Arian Ghasemi</b><span>Ägare, The Chairman Barber</span></span></figcaption>
+            </figure>
+            <div class="pc-links">
+              <a class="pc-btn" href="/hemsida-frisor-stockholm">Se projektet <span aria-hidden="true">→</span></a>
+              <a class="pc-link" href="https://www.thechairmanbarber.se" target="_blank" rel="noopener">Besök den publicerade hemsidan <span aria-hidden="true">↗</span><span class="sr-only"> (öppnas i en ny flik)</span></a>
+            </div>
+          </div>
+        </article>
+
+        <div class="dk-rev-grid dk-rev-grid--one">
           <figure class="dk-rev" data-dk>
             <div class="dk-rev-top"><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span><span class="dk-rev-tag">Kundomdöme</span></div>
             <blockquote>"Snabb och prisvärd upplevelse! Jättenöjd med min sida."</blockquote>
             <figcaption><span class="dk-av" aria-hidden="true">J</span><span class="dk-rev-name">Johan Larsson</span></figcaption>
-          </figure>
-          <figure class="dk-rev" data-dk>
-            <div class="dk-rev-top"><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span><span class="dk-rev-tag">Kundomdöme</span></div>
-            <blockquote>"Jätte bra service och rimligt pris!"</blockquote>
-            <figcaption><span class="dk-av" aria-hidden="true">A</span><span class="dk-rev-name">Arian Ghasemi</span></figcaption>
           </figure>
         </div>
       </section>
@@ -3498,6 +3533,7 @@
 <script type="module" src="/src/mobile-nav.js"></script>
 <script type="module" src="/src/klaro-journey.js"></script>
 <script type="module" src="/src/industry-personalize.js"></script>
+<script type="module" src="/src/social-proof.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 </body>
 </html>
