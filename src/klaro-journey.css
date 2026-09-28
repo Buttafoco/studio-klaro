@@ -317,6 +317,12 @@
 .kd-live-dot::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(67,168,102,0.55);opacity:0;pointer-events:none;}
 .kd-js.is-live .kd-live-dot::before{animation:kd-arrive 1.4s cubic-bezier(0.22,1,0.36,1) 1;}
 @keyframes kd-arrive{0%{opacity:.9;transform:scale(1);}100%{opacity:0;transform:scale(2.6);}}
+/* Avslutande konfetti (skapas och tas bort av JS vid ankomsten till LIVE) */
+.kd-confetti{position:absolute;z-index:2;width:0;height:0;pointer-events:none;}
+.kd-cf{position:absolute;left:0;top:0;display:block;border-radius:1px;pointer-events:none;will-change:transform,opacity;}
+.kd-cf--dot{border-radius:50%;}
+.kd-cf--streak{border-radius:1px;}
+@media (prefers-reduced-motion: reduce){ .kd-confetti{display:none;} }
 
 /* Grenarna efter Live */
 .kd-forks{display:grid;grid-template-columns:var(--kd-cols);align-items:start;margin-top:84px;}

@@ -238,6 +238,58 @@
     if (head) head.classList.remove('is-on');
     kd.classList.add('is-live');
     bOpt.style.strokeDashoffset = 0;
+    if (!reduce.matches) confetti();
+  }
+
+  // Avslutande konfetti från LIVE-punkten: ~22 små partiklar (Klaro-blå, LIVE-grön, vitt, lite ljusblått)
+  // som skjuts mjukt uppåt och utåt, singlar ned en bit och tonar bort på ~1,6–2 s. Bara transform/opacity
+  // via Web Animations, absolut positionerat (ingen layoutförskjutning), aria-hidden, pointer-events: none,
+  // och tas bort ur DOM när den är klar. Körs bara från arrive(), dvs. en gång när linjen når LIVE.
+  function confetti() {
+    var map = kd.querySelector('.kd-map');
+    if (!map || !live || typeof Element.prototype.animate !== 'function') return;
+    var mr = map.getBoundingClientRect(), lr = live.getBoundingClientRect();
+    var box = document.createElement('div');
+    box.className = 'kd-confetti';
+    box.setAttribute('aria-hidden', 'true');
+    box.style.left = (lr.left + lr.width / 2 - mr.left) + 'px';
+    box.style.top = (lr.top + lr.height / 2 - mr.top) + 'px';
+    map.appendChild(box);
+
+    var narrow = small.matches;
+    var COLORS = ['#146EF5', '#146EF5', '#146EF5', '#43A866', '#43A866', '#43A866', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#9CC3FF'];
+    var SHAPES = ['rect', 'rect', 'rect', 'streak', 'streak', 'dot'];
+    var rnd = function (a, b) { return a + Math.random() * (b - a); };
+    var anims = [];
+    for (var i = 0; i < 22; i++) {
+      var el = document.createElement('i');
+      var shape = SHAPES[i % SHAPES.length];
+      el.className = 'kd-cf kd-cf--' + shape;
+      el.style.background = COLORS[(i * 7) % COLORS.length];
+      var sz = rnd(0.8, 1.25);
+      if (shape === 'rect') { el.style.width = (6 * sz) + 'px'; el.style.height = (3.2 * sz) + 'px'; }
+      else if (shape === 'streak') { el.style.width = (1.6 * sz) + 'px'; el.style.height = (9 * sz) + 'px'; }
+      else { el.style.width = el.style.height = (4.2 * sz) + 'px'; }
+      box.appendChild(el);
+
+      // Kon uppåt och ut åt sidorna; på mobil ligger punkten vid vänsterkanten, så konen vänds åt höger
+      var ang = (narrow ? rnd(-100, -15) : rnd(-165, -15)) * Math.PI / 180;
+      var dist = narrow ? rnd(55, 120) : rnd(70, 165);
+      var x1 = Math.cos(ang) * dist, y1 = Math.sin(ang) * dist;
+      var x2 = x1 * rnd(1.1, 1.3) + rnd(-10, 10), y2 = y1 + rnd(45, 95);
+      var r0 = rnd(0, 180), r1 = r0 + rnd(-220, 220), r2 = r1 + rnd(-160, 160);
+      var dur = rnd(1600, 2000);
+      anims.push(el.animate([
+        { transform: 'translate(-50%,-50%) translate(0,0) rotate(' + r0 + 'deg) scale(.5)', opacity: 0, easing: 'cubic-bezier(0.16,1,0.3,1)' },
+        { transform: 'translate(-50%,-50%) translate(' + x1 * 0.35 + 'px,' + y1 * 0.35 + 'px) rotate(' + (r0 + (r1 - r0) * 0.3) + 'deg) scale(1)', opacity: 1, offset: 0.08, easing: 'cubic-bezier(0.16,1,0.3,1)' },
+        { transform: 'translate(-50%,-50%) translate(' + x1 + 'px,' + y1 + 'px) rotate(' + r1 + 'deg) scale(1)', opacity: 1, offset: 0.42, easing: 'cubic-bezier(0.45,0,0.7,1)' },
+        { transform: 'translate(-50%,-50%) translate(' + x2 + 'px,' + y2 + 'px) rotate(' + r2 + 'deg) scale(.9)', opacity: 0 }
+      ], { duration: dur, delay: rnd(0, 90), fill: 'both' }));
+    }
+    var done = false;
+    var clean = function () { if (!done) { done = true; box.remove(); } };
+    Promise.all(anims.map(function (a) { return a.finished; })).then(clean, clean);
+    setTimeout(clean, 2600); // säkerhetsnät om en animation avbryts
   }
 
   function build() {
