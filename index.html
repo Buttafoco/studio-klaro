@@ -1715,47 +1715,84 @@
             </div>
           </div>
 
-          <!-- Avslutning -->
-          <div class="kj-end" data-reveal>
-            <div>
-              <h3>Du bygger inte ensam.</h3>
-              <p>Vi håller ihop projektet, visar vägen framåt och ser till att både du och hemsidan är redo när det är dags att gå live.</p>
-            </div>
-            <div class="kj-cta">
-              <a class="kj-cta-main btn-lift lift-primary" href="#kontakt">Starta din resa <span aria-hidden="true">→</span></a>
-              <a class="kj-cta-link" href="#kj-ch-1">Se hur processen fungerar</a>
+          <!-- Slutdestinationen: resans linje fortsätter från kapitel 04 genom det som alltid ingår och landar i Live.
+               Därefter grenar: "Anpassas efter din resa" (expanderbar) och Klaro Care (valfritt). Linjen ritas av
+               src/klaro-journey.js utifrån nodernas positioner; utan JS visas innehållet utan linje. -->
+          <div class="kd" id="kj-dest">
+            <svg class="kd-svg" aria-hidden="true" focusable="false">
+              <path class="kd-path kd-glow"></path><path class="kd-path kd-main"></path>
+              <path class="kd-path kd-branch kd-branch--opt"></path><path class="kd-path kd-branch kd-branch--care"></path>
+            </svg>
+
+            <header class="kd-intro">
+              <p class="kd-eyebrow">När vi är framme</p>
+              <h3 class="kd-h">Din hemsida är live. <span>Men du har inte byggt den ensam.</span></h3>
+              <p class="kd-lead">Vi håller ihop projektet från första materialet till publicering. Du ser vägen framåt, får hjälp i varje steg och står till slut med en hemsida som är redo att användas – och som är din.</p>
+            </header>
+
+            <div class="kd-map">
+              <h4 class="kd-k" id="kd-always"><span>Detta ingår alltid</span></h4>
+              <ol class="kd-stops" aria-labelledby="kd-always">
+                <li class="kd-stop" style="--dx:0px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">01</span><h5>Unik design</h5><p>Formgiven efter företaget – inte en färdig mall.</p><span class="kd-ok">Ingår</span></div></li>
+                <li class="kd-stop" style="--dx:34px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">02</span><h5>Mobilanpassning</h5><p>Samma genomtänkta upplevelse på alla skärmar.</p><span class="kd-ok">Ingår</span></div></li>
+                <li class="kd-stop" style="--dx:-18px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">03</span><h5>Grundläggande SEO</h5><p>Struktur och innehåll som sökmotorer kan förstå.</p><span class="kd-ok">Ingår</span></div></li>
+                <li class="kd-stop" style="--dx:40px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">04</span><h5>Projektportal</h5><p>Material, versioner och återkoppling samlat.</p><span class="kd-ok">Ingår</span></div></li>
+                <li class="kd-stop" style="--dx:6px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">05</span><h5>Publicering</h5><p>Vi kontrollerar och publicerar tillsammans.</p><span class="kd-ok">Ingår</span></div></li>
+                <li class="kd-stop" style="--dx:-26px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">06</span><h5>Löpande avstämningar</h5><p>Du vet vad som händer och vad nästa steg är.</p><span class="kd-ok">Ingår</span></div></li>
+              </ol>
+
+              <div class="kd-live">
+                <span class="kd-live-dot" aria-hidden="true"></span>
+                <div class="kd-live-txt">
+                  <p class="kd-live-st"><span class="kd-live-pip" aria-hidden="true"></span>Live</p>
+                  <p class="kd-live-sub">Din hemsida är publicerad</p>
+                  <p class="kd-live-url">www.dittforetag.se</p>
+                  <ul class="kd-live-checks">
+                    <li>Alla kontroller genomförda</li>
+                    <li>Hemsidan tillhör dig</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kd-forks">
+                <div class="kd-fork kd-fork--opt">
+                  <span class="kd-fdot" aria-hidden="true"></span>
+                  <p class="kd-fork-k">Anpassas efter din resa</p>
+                  <button type="button" class="kd-fork-btn" aria-expanded="true" aria-controls="kd-opt-panel">
+                    <span>Beroende på upplägg · 5 delar</span><span class="kd-fork-ic" aria-hidden="true"></span>
+                  </button>
+                  <div class="kd-fork-panel" id="kd-opt-panel">
+                    <div class="kd-fork-in">
+                      <ul class="kd-opts">
+                        <li style="--i:0"><b>Kontaktformulär</b><span>Professionell · Komplett närvaro</span></li>
+                        <li style="--i:1"><b>Domänkoppling</b><span>Professionell · Komplett närvaro</span></li>
+                        <li style="--i:2"><b>Google Företagsprofil och Analytics</b><span>Professionell · Komplett närvaro</span></li>
+                        <li style="--i:3"><b>Lokal SEO-start</b><span>Komplett närvaro</span></li>
+                        <li style="--i:4"><b>Professionell mejladress</b><span>Komplett närvaro</span></li>
+                      </ul>
+                      <p class="kd-opts-note">Domän, mejl och andra externa tjänster betalas separat. <a href="/priser">Jämför uppläggen <span aria-hidden="true">→</span></a></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="kd-fork kd-fork--care">
+                  <span class="kd-fdot" aria-hidden="true"></span>
+                  <p class="kd-fork-k">Valfritt nästa kapitel</p>
+                  <p class="kd-care-t">Klaro Care</p>
+                  <p class="kd-care-p">Fortsatt hjälp med mindre ändringar, support och förbättringar – bara om du vill. Hemsidan är redan färdig, och den är din även utan Klaro Care.</p>
+                </div>
+
+                <div class="kd-cta">
+                  <div class="kd-cta-row">
+                    <a class="kd-btn" href="#kontakt">Starta din resa <span class="kd-arrow" aria-hidden="true">→</span></a>
+                    <a class="kd-link" href="#kj-ch-1">Se hela processen</a>
+                  </div>
+                  <p class="kd-trust">Första steget är en kostnadsfri genomgång.</p>
+                </div>
+              </div>
+
             </div>
           </div>
-
-          <!-- Detta ingår: kompakt och sekundärt till resan -->
-          <section class="kj-incl" aria-labelledby="kj-incl-title">
-            <div class="kj-incl-head">
-              <h3 id="kj-incl-title">Detta ingår i ditt projekt</h3>
-              <a href="/priser">Jämför uppläggen <span aria-hidden="true">→</span></a>
-            </div>
-            <div class="kj-incl-row">
-              <span class="kj-incl-k" id="kj-incl-always">Alltid med</span>
-              <ul class="kj-tags" aria-labelledby="kj-incl-always">
-                <li>Unik design</li>
-                <li>Mobilanpassning</li>
-                <li>Grundläggande SEO</li>
-                <li>Projektportal</li>
-                <li>Publicering</li>
-                <li>Löpande avstämningar</li>
-              </ul>
-            </div>
-            <details class="kj-more">
-              <summary>Beroende på upplägg <span>5 delar</span></summary>
-              <ul class="kj-pkg">
-                <li><span>Kontaktformulär</span><span>Professionell, Komplett närvaro</span></li>
-                <li><span>Domänkoppling</span><span>Professionell, Komplett närvaro</span></li>
-                <li><span>Google Företagsprofil och Analytics</span><span>Professionell, Komplett närvaro</span></li>
-                <li><span>Lokal SEO-start</span><span>Komplett närvaro</span></li>
-                <li><span>Professionell mejladress</span><span>Komplett närvaro</span></li>
-              </ul>
-              <p class="kj-pkg-note">Domän, mejl och andra externa tjänster betalas separat.</p>
-            </details>
-          </section>
         </div>
       </section>
 

@@ -131,3 +131,126 @@
   else if (splitMq.addListener) splitMq.addListener(layout);
   layout();
 })();
+
+/* ---------- Slutdestinationen (#kj-dest) ----------
+   Linjen byggs som en SVG-bana genom nodernas faktiska mittpunkter: från kapitel 04:s nod, förbi
+   inledningen, genom de sex stoppen och till Live; därefter grenar till sidovägen och Klaro Care.
+   Banan byggs om vid storleksändring (rAF-strypt), ritas en gång när kartan syns (IntersectionObserver)
+   och stoppen tänds när linjen passerar dem. Reducerad rörelse: allt visas direkt. */
+(function () {
+  var kd = document.getElementById('kj-dest');
+  if (!kd || !('IntersectionObserver' in window)) return;
+
+  var svg = kd.querySelector('.kd-svg');
+  var main = kd.querySelector('.kd-main');
+  var glow = kd.querySelector('.kd-glow');
+  var bOpt = kd.querySelector('.kd-branch--opt');
+  var bCare = kd.querySelector('.kd-branch--care');
+  var intro = kd.querySelector('.kd-intro');
+  var stops = Array.prototype.slice.call(kd.querySelectorAll('.kd-stop'));
+  var dots = stops.map(function (s) { return s.querySelector('.kd-dot'); });
+  var live = kd.querySelector('.kd-live-dot');
+  var fOpt = kd.querySelector('.kd-fork--opt .kd-fdot');
+  var fCare = kd.querySelector('.kd-fork--care .kd-fdot');
+  var railNodes = document.querySelectorAll('#processen .kj-node');
+  var lastNode = railNodes[railNodes.length - 1];
+  var btn = kd.querySelector('.kd-fork-btn');
+  var panel = document.getElementById(btn.getAttribute('aria-controls'));
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var small = window.matchMedia('(max-width: 760px)');
+  var probe = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  var drawn = false;
+
+  kd.classList.add('kd-js');
+  svg.appendChild(probe);
+  probe.setAttribute('fill', 'none');
+
+  // Sidovägen: stängd från start (öppen utan JS), aria-expanded + inert på panelen
+  function setOpen(open) {
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    panel.inert = !open;
+  }
+  setOpen(false);
+  btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
+
+  function center(el, base) {
+    var r = el.getBoundingClientRect();
+    return { x: r.left + r.width / 2 - base.left, y: r.top + r.height / 2 - base.top };
+  }
+  // Mjuk kurva med lodräta tangenter mellan två punkter
+  function curve(a, b) {
+    var m = (b.y - a.y) / 2;
+    return ' C ' + a.x + ' ' + (a.y + m) + ' ' + b.x + ' ' + (b.y - m) + ' ' + b.x + ' ' + b.y;
+  }
+  function lengthOf(d) { probe.setAttribute('d', d); return probe.getTotalLength(); }
+  function dash(p, len) {
+    p.style.strokeDasharray = len + ' ' + len;
+    p.style.strokeDashoffset = drawn ? 0 : len;
+  }
+
+  function build() {
+    pending = false;
+    var base = kd.getBoundingClientRect();
+    if (!base.width) return;
+    svg.setAttribute('width', base.width);
+    svg.setAttribute('height', base.height);
+
+    var s = lastNode && lastNode.offsetParent ? center(lastNode, base) : { x: 22, y: 0 };
+    if (lastNode && lastNode.offsetParent) s.y += lastNode.offsetHeight / 2;
+    var bend = { x: s.x, y: intro.getBoundingClientRect().bottom - base.top + 24 };
+    var d = 'M ' + s.x + ' ' + s.y + ' L ' + bend.x + ' ' + bend.y;
+    var prev = bend;
+    var at = [];
+    dots.forEach(function (dot) {
+      var p = center(dot, base);
+      d += curve(prev, p); prev = p;
+      at.push(lengthOf(d));
+    });
+    var L = center(live, base);
+    d += curve(prev, L);
+    var total = lengthOf(d);
+    main.setAttribute('d', d);
+    glow.setAttribute('d', d);
+
+    var o = center(fOpt, base), k = center(fCare, base);
+    var dOpt = 'M ' + L.x + ' ' + L.y + curve(L, o);
+    bOpt.setAttribute('d', dOpt);
+    // Staplat (mobil): Care ligger under sidovägen, så den prickade grenen fortsätter därifrån
+    var from = Math.abs(k.x - o.x) < 30 && k.y > o.y ? o : L;
+    bCare.setAttribute('d', 'M ' + from.x + ' ' + from.y + curve(from, k));
+
+    var dur = reduce.matches ? 0 : small.matches ? 1400 : 2400;
+    kd.style.setProperty('--kd-dur', dur + 'ms');
+    at.forEach(function (len, i) { stops[i].style.setProperty('--kd-d', Math.round(len / total * dur) + 'ms'); });
+    dash(main, total);
+    dash(glow, total);
+    dash(bOpt, lengthOf(dOpt));
+  }
+
+  var pending = false;
+  function schedule() { if (!pending) { pending = true; requestAnimationFrame(build); } }
+
+  function draw() {
+    if (drawn) return;
+    drawn = true;
+    kd.getBoundingClientRect(); // starttillståndet renderas innan övergången börjar
+    kd.classList.add('is-drawn');
+    [main, glow, bOpt].forEach(function (p) { p.style.strokeDashoffset = 0; });
+  }
+
+  build();
+  if (reduce.matches) draw();
+  else {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { draw(); io.disconnect(); }
+    }, { rootMargin: '0px 0px -30% 0px' });
+    io.observe(kd.querySelector('.kd-map'));
+  }
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(schedule);
+    ro.observe(kd);
+    // Kapitlen ovanför kan byta höjd (t.ex. delat/staplat läge) och flytta startpunkten
+    ro.observe(document.querySelector('#processen .kj-story'));
+  } else window.addEventListener('resize', schedule, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+})();
