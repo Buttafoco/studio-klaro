@@ -248,18 +248,23 @@
 /* ---------- Slutdestinationen (#kj-dest) ----------
    Resans linje fortsätter från kapitel 04:s nod, passerar sex stopp och landar i Live; därefter en
    tunn gren till "Anpassas efter din resa" och en prickad gren till Klaro Care. Linjen (SVG) byggs av
-   JS utifrån nodernas positioner och ritas en gång. Basläget är slutläget; .kd-js:not(.is-drawn) är start. */
-.kd{--kd-line:#2F7DF6;--kd-fork:#8E8CEA;--kd-x:66px;--kd-cols:minmax(0,4fr) 150px minmax(0,5fr);--kd-dur:2400ms;position:relative;margin-top:120px;}
+   JS utifrån nodernas positioner och ritas en gång med requestAnimationFrame (spetsen följs av en lysande
+   punkt, stoppen tänds när linjen når dem, LIVE sist). Basläget är slutläget; .kd-js utan .is-on/.is-live är start. */
+.kd{--kd-line:#2F7DF6;--kd-fork:#8E8CEA;--kd-x:66px;--kd-cols:minmax(0,4fr) 150px minmax(0,5fr);position:relative;margin-top:120px;}
 .kd-svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
 .kd-path{fill:none;stroke-linecap:round;stroke-linejoin:round;}
 .kd-main{stroke:var(--kd-line);stroke-width:2;}
 .kd-glow{stroke:var(--kd-line);stroke-width:10;opacity:.13;}
 .kd-branch--opt{stroke:var(--kd-fork);stroke-width:1.5;opacity:.75;}
 .kd-branch--care{stroke:var(--kd-fork);stroke-width:1.5;stroke-dasharray:1 7;opacity:.7;}
-.kd-js .kd-main,.kd-js .kd-glow{transition:stroke-dashoffset var(--kd-dur) linear;}
-.kd-js .kd-branch--opt{transition:stroke-dashoffset .8s cubic-bezier(0.4,0,0.2,1) calc(var(--kd-dur) + 200ms);}
-.kd-js .kd-branch--care{transition:opacity .8s ease calc(var(--kd-dur) + 500ms);}
-.kd-js:not(.is-drawn) .kd-branch--care{opacity:0;}
+.kd-js .kd-branch--opt{transition:stroke-dashoffset .9s cubic-bezier(0.22,1,0.36,1) .25s;}
+.kd-js .kd-branch--care{transition:opacity .8s ease .45s;}
+.kd-js:not(.is-live) .kd-branch--care{opacity:0;}
+/* Den lysande spetsen som följer linjen medan den ritas */
+.kd-head{opacity:0;transition:opacity .5s ease;}
+.kd-head.is-on{opacity:1;}
+.kd-head-halo{fill:var(--kd-line);opacity:.28;}
+.kd-head-core{fill:#CFE0FF;}
 
 /* Inledning: i linje med kapitlens textkolumn, linjen löper till vänster om den */
 .kd-intro{position:relative;padding-left:var(--kd-x);max-width:calc(var(--kd-x) + 780px);}
@@ -286,10 +291,10 @@
 .kd-txt p{margin:0;font-size:14.5px;line-height:1.55;font-weight:500;color:var(--kj-mute);}
 .kd-ok{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--kj-ok-ink);transition:opacity .5s ease,transform .5s var(--kj-ease);}
 .kd-ok::before{content:'';flex:none;width:14px;height:14px;border-radius:50%;background:rgba(67,168,102,0.2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 2 4-4.4' fill='none' stroke='%239FDDB2' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat;}
-.kd-js:not(.is-drawn) .kd-dot{background:var(--dk-page);box-shadow:none;}
-.kd-js:not(.is-drawn) .kd-txt{opacity:.4;}
-.kd-js:not(.is-drawn) .kd-ok{opacity:0;transform:translateY(4px);}
-.kd-js.is-drawn .kd-stop .kd-dot,.kd-js.is-drawn .kd-stop .kd-txt,.kd-js.is-drawn .kd-stop .kd-ok{transition-delay:var(--kd-d,0ms);}
+.kd-js .kd-stop:not(.is-on) .kd-dot{background:var(--dk-page);box-shadow:none;}
+.kd-js .kd-stop:not(.is-on) .kd-txt{opacity:.4;}
+.kd-js .kd-stop:not(.is-on) .kd-ok{opacity:0;transform:translateY(4px);}
+.kd-js .kd-stop.is-on .kd-ok{transition-delay:.12s;}
 
 /* Live-destinationen: sektionens höjdpunkt */
 .kd-live{display:grid;grid-template-columns:var(--kd-cols);align-items:start;margin-top:40px;}
@@ -305,10 +310,13 @@
 .kd-live-checks{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;}
 .kd-live-checks li{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--kj-navy);}
 .kd-live-checks li::before{content:'';flex:none;width:16px;height:16px;border-radius:50%;background:rgba(67,168,102,0.2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 2 4-4.4' fill='none' stroke='%239FDDB2' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat;}
-.kd-js:not(.is-drawn) .kd-live-dot{background:var(--dk-page);border-color:color-mix(in srgb,var(--kd-line) 45%,transparent);box-shadow:none;}
-.kd-js:not(.is-drawn) .kd-live-dot::after{opacity:0;}
-.kd-js:not(.is-drawn) .kd-live-txt{opacity:.35;transform:translateY(6px);}
-.kd-js.is-drawn .kd-live-dot,.kd-js.is-drawn .kd-live-dot::after,.kd-js.is-drawn .kd-live-txt{transition-delay:var(--kd-dur);}
+.kd-js:not(.is-live) .kd-live-dot{background:var(--dk-page);border-color:color-mix(in srgb,var(--kd-line) 45%,transparent);box-shadow:none;}
+.kd-js:not(.is-live) .kd-live-dot::after{opacity:0;}
+.kd-js:not(.is-live) .kd-live-txt{opacity:.35;transform:translateY(6px);}
+/* Ankomsten: en mjuk grön puls en gång när linjen når LIVE */
+.kd-live-dot::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(67,168,102,0.55);opacity:0;pointer-events:none;}
+.kd-js.is-live .kd-live-dot::before{animation:kd-arrive 1.4s cubic-bezier(0.22,1,0.36,1) 1;}
+@keyframes kd-arrive{0%{opacity:.9;transform:scale(1);}100%{opacity:0;transform:scale(2.6);}}
 
 /* Grenarna efter Live */
 .kd-forks{display:grid;grid-template-columns:var(--kd-cols);align-items:start;margin-top:84px;}
@@ -362,7 +370,7 @@
 }
 /* Mobil: vertikal linje till vänster, noderna växelvis indragna */
 @media (max-width:760px){
-  .kd{--kd-x:46px;--kd-cols:32px minmax(0,1fr);--kd-dur:1400ms;margin-top:72px;}
+  .kd{--kd-x:46px;--kd-cols:32px minmax(0,1fr);margin-top:72px;}
   .kd-h{font-size:clamp(34px,10vw,44px);}
   .kd-lead{font-size:16px;}
   .kd-map{margin-top:56px;}
@@ -389,7 +397,8 @@
 }
 @media (prefers-reduced-motion: reduce){
   .kd-live-dot::after{animation:none;}
-  .kd-js .kd-main,.kd-js .kd-glow,.kd-js .kd-branch--opt,.kd-js .kd-branch--care{transition:none;}
+  .kd-js .kd-branch--opt,.kd-js .kd-branch--care{transition:none;}
+  .kd-live-dot::before{animation:none!important;}
 }
 
 /* ---------- Surfplatta och mobil ---------- */

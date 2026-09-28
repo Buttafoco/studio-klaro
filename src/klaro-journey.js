@@ -135,8 +135,11 @@
 /* ---------- Slutdestinationen (#kj-dest) ----------
    Linjen byggs som en SVG-bana genom nodernas faktiska mittpunkter: från kapitel 04:s nod, förbi
    inledningen, genom de sex stoppen och till Live; därefter grenar till sidovägen och Klaro Care.
-   Banan byggs om vid storleksändring (rAF-strypt), ritas en gång när kartan syns (IntersectionObserver)
-   och stoppen tänds när linjen passerar dem. Reducerad rörelse: allt visas direkt. */
+   Banan byggs om vid storleksändring (rAF-strypt). Ritningen startar en gång per sidvisning när
+   inledningen når ~68 % ned i viewporten (IntersectionObserver) och fortsätter sedan av sig själv med
+   requestAnimationFrame: ~3,2 s enligt en mjuk tidsplan per etapp (se KEY_T), oberoende av scrollen. En lysande
+   punkt följer spetsen, varje stopp tänds när linjen når det och LIVE tänds sist. Scrollar besökaren
+   förbi en spets som redan har synts ritas linjen ikapp snabbare. Reducerad rörelse: allt visas direkt. */
 (function () {
   var kd = document.getElementById('kj-dest');
   if (!kd || !('IntersectionObserver' in window)) return;
@@ -159,7 +162,11 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var small = window.matchMedia('(max-width: 760px)');
   var probe = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  var drawn = false;
+  var head = kd.querySelector('.kd-head');
+  var DRAW_MS = 3200;
+  var total = 1, at = [];  // banans längd och varje stopps position längs den
+  var prog = 0;            // ritad andel 0–1 (tillstånd som överlever ombyggnad vid storleksändring)
+  var started = false, finished = false;
 
   kd.classList.add('kd-js');
   svg.appendChild(probe);
@@ -183,9 +190,54 @@
     return ' C ' + a.x + ' ' + (a.y + m) + ' ' + b.x + ' ' + (b.y - m) + ' ' + b.x + ' ' + b.y;
   }
   function lengthOf(d) { probe.setAttribute('d', d); return probe.getTotalLength(); }
-  function dash(p, len) {
-    p.style.strokeDasharray = len + ' ' + len;
-    p.style.strokeDashoffset = drawn ? 0 : len;
+
+  // Tidsplan för ritningen. Banan är ojämn: infarten från kapitel 04 förbi inledningen är över hälften
+  // av längden, stoppen ligger tätt därefter. En easing på hela längden skulle därför klumpa ihop stoppen
+  // och lämna en lång, seg sista etapp. I stället får varje etapp sin tid – infarten ~30 %, stopp 1–6 med
+  // jämna mellanrum, LIVE sist – och punkterna binds ihop med en monoton kubisk kurva (Fritsch–Carlson),
+  // så att farten ändras mjukt utan ryck och bromsar in lugnt mot LIVE.
+  var KEY_T = [0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1];
+  var schedule = function (t) { return t; };
+  function makeSchedule(ys) {
+    var xs = KEY_T, n = xs.length, d = [], m = [], i;
+    for (i = 0; i < n - 1; i++) d.push((ys[i + 1] - ys[i]) / (xs[i + 1] - xs[i]));
+    m[0] = d[0] * 1.4;          // lugn men tydlig start
+    m[n - 1] = d[n - 2] * 0.2;  // mjuk ankomst till LIVE
+    for (i = 1; i < n - 1; i++) m[i] = d[i - 1] * d[i] <= 0 ? 0 : (d[i - 1] + d[i]) / 2;
+    for (i = 0; i < n - 1; i++) {
+      if (d[i] === 0) { m[i] = m[i + 1] = 0; continue; }
+      var a2 = m[i] / d[i], b2 = m[i + 1] / d[i], h2 = a2 * a2 + b2 * b2;
+      if (h2 > 9) { var k = 3 / Math.sqrt(h2); m[i] = k * a2 * d[i]; m[i + 1] = k * b2 * d[i]; }
+    }
+    return function (t) {
+      if (t <= 0) return 0;
+      if (t >= 1) return 1;
+      for (var j = 0; j < n - 1 && t > xs[j + 1]; j++);
+      var h = xs[j + 1] - xs[j], u = (t - xs[j]) / h, u2 = u * u, u3 = u2 * u;
+      return (2 * u3 - 3 * u2 + 1) * ys[j] + (u3 - 2 * u2 + u) * h * m[j] +
+        (-2 * u3 + 3 * u2) * ys[j + 1] + (u3 - u2) * h * m[j + 1];
+    };
+  }
+
+  // Visa ritad andel: linje, glöd, spets och de stopp linjen har nått
+  function render(p) {
+    var len = total * p;
+    main.style.strokeDashoffset = glow.style.strokeDashoffset = total - len;
+    if (head) {
+      var pt = main.getPointAtLength(len);
+      head.setAttribute('transform', 'translate(' + pt.x + ' ' + pt.y + ')');
+    }
+    for (var i = 0; i < at.length; i++) {
+      if (len >= at[i] - 1 && !stops[i].classList.contains('is-on')) stops[i].classList.add('is-on');
+    }
+  }
+  function arrive() {
+    finished = true;
+    prog = 1;
+    render(1);
+    if (head) head.classList.remove('is-on');
+    kd.classList.add('is-live');
+    bOpt.style.strokeDashoffset = 0;
   }
 
   function build() {
@@ -200,7 +252,7 @@
     var bend = { x: s.x, y: intro.getBoundingClientRect().bottom - base.top + 24 };
     var d = 'M ' + s.x + ' ' + s.y + ' L ' + bend.x + ' ' + bend.y;
     var prev = bend;
-    var at = [];
+    at = [];
     dots.forEach(function (dot) {
       var p = center(dot, base);
       d += curve(prev, p); prev = p;
@@ -208,42 +260,69 @@
     });
     var L = center(live, base);
     d += curve(prev, L);
-    var total = lengthOf(d);
+    total = lengthOf(d);
+    schedule = makeSchedule([0].concat(at.map(function (x) { return x / total; }), [1]));
     main.setAttribute('d', d);
     glow.setAttribute('d', d);
+    main.style.strokeDasharray = glow.style.strokeDasharray = total + ' ' + total;
 
     var o = center(fOpt, base), k = center(fCare, base);
     var dOpt = 'M ' + L.x + ' ' + L.y + curve(L, o);
     bOpt.setAttribute('d', dOpt);
+    var optLen = lengthOf(dOpt);
+    bOpt.style.strokeDasharray = optLen + ' ' + optLen;
+    bOpt.style.strokeDashoffset = finished ? 0 : optLen;
     // Staplat (mobil): Care ligger under sidovägen, så den prickade grenen fortsätter därifrån
     var from = Math.abs(k.x - o.x) < 30 && k.y > o.y ? o : L;
     bCare.setAttribute('d', 'M ' + from.x + ' ' + from.y + curve(from, k));
 
-    var dur = reduce.matches ? 0 : small.matches ? 1400 : 2400;
-    kd.style.setProperty('--kd-dur', dur + 'ms');
-    at.forEach(function (len, i) { stops[i].style.setProperty('--kd-d', Math.round(len / total * dur) + 'ms'); });
-    dash(main, total);
-    dash(glow, total);
-    dash(bOpt, lengthOf(dOpt));
+    render(prog); // behåller ritad andel vid storleksändring (0 = helt dold, 1 = klar)
   }
 
   var pending = false;
   function schedule() { if (!pending) { pending = true; requestAnimationFrame(build); } }
 
+  // Ritningen: tidsstyrd med rAF. Normal takt ger ~3,2 s; om spetsen hamnat ovanför viewporten
+  // (besökaren har scrollat förbi) går tiden fortare så att linjen hinner ikapp.
   function draw() {
-    if (drawn) return;
-    drawn = true;
-    kd.getBoundingClientRect(); // starttillståndet renderas innan övergången börjar
-    kd.classList.add('is-drawn');
-    [main, glow, bOpt].forEach(function (p) { p.style.strokeDashoffset = 0; });
+    if (started) return;
+    started = true;
+    if (reduce.matches) { arrive(); return; }
+    if (head) head.classList.add('is-on');
+    var elapsed = 0, last = null, tipSeen = false;
+    function frame(now) {
+      if (finished) return;
+      if (last === null) last = now;
+      var dt = Math.min(64, now - last); last = now;
+      var speed = 1;
+      if (head) {
+        // Ikapp bara när spetsen redan har synts och besökaren sedan scrollat förbi den – inte i början,
+        // när linjen startar vid kapitel 04:s nod ovanför viewporten.
+        var r = head.getBoundingClientRect();
+        if (r.top > 0 && r.bottom < window.innerHeight) tipSeen = true;
+        else if (tipSeen && r.bottom < window.innerHeight * 0.15) speed = 3.5;
+      }
+      elapsed += dt * speed;
+      var t = Math.min(1, elapsed / DRAW_MS);
+      prog = Math.max(prog, schedule(t)); // aldrig bakåt, även om banan byggs om under ritningen
+      render(prog);
+      if (t >= 1) { arrive(); return; }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
   }
 
   build();
   if (reduce.matches) draw();
   else {
+    // Start när inledningen (eller något senare i resan) når ~68 % ned i viewporten. Om besökaren redan
+    // har passerat sektionen (t.ex. återställd scrollposition längre ned) startar den när den syns igen.
     var io = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) { draw(); io.disconnect(); }
-    }, { rootMargin: '0px 0px -30% 0px' });
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) { draw(); io.disconnect(); return; }
+      }
+    }, { rootMargin: '0px 0px -32% 0px' });
+    io.observe(intro);
     io.observe(kd.querySelector('.kd-map'));
   }
   if ('ResizeObserver' in window) {
