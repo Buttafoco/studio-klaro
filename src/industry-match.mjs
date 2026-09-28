@@ -205,8 +205,7 @@ export const SOURCE_RANK = { text: 1, url: 2, click: 3 };
 
 export function createIndustryPersonalizer(deps) {
   const { carousel, setLead, storage, reducedMotion } = deps;
-  let applied = null;      // { code, source } som styr just nu
-  let textApplied = false; // textanpassningen görs högst en gång per sidvisning
+  let applied = null; // { code, source } som styr just nu
 
   function apply(code, source, opts) {
     if (!isCode(code)) return false;
@@ -236,13 +235,13 @@ export function createIndustryPersonalizer(deps) {
       }
       return null;
     },
-    // Hero-texten (anropas efter debounce). Bara första säkra matchningen används.
+    // Hero-texten (anropas efter debounce). Varje ny säker kategori uppdaterar kort och underrubrik
+    // tillsammans, så länge besökaren inte själv har rört karusellen. Samma kategori flyttar inget;
+    // tom eller osäker mellantext (medan besökaren skriver om) behåller senaste giltiga val.
     text(value) {
-      if (textApplied) return null;
       const code = categorize(value);
       if (!code) return null;
-      textApplied = true;
-      storage.set(code, 'text');
+      storage.set(code, 'text'); // senaste giltiga kategorikod – aldrig texten
       return apply(code, 'text', { animate: true }) ? code : null;
     },
     // Besökaren klickade själv på ett kort: kom ihåg kategorin för nästa besök på startsidan i fliken

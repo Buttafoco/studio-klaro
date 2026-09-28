@@ -190,10 +190,17 @@ describe('URL-signaler', () => {
 // Falsk karusell och lagring för styrenheten
 function setup(opts = {}) {
   const calls = [];
-  const state = { touched: false, inView: !!opts.inView, stored: opts.stored || null, lead: null };
+  const state = { touched: false, inView: !!opts.inView, stored: opts.stored || null, lead: null, autoplay: true, card: 0 };
   const p = createIndustryPersonalizer({
     carousel: {
-      show(index, animate) { if (state.touched) return false; calls.push({ index, animate }); return true; },
+      // Som i index.html: show() avstår om besökaren rört karusellen och stänger annars av autoplay
+      show(index, animate) {
+        if (state.touched) return false;
+        state.autoplay = false;
+        state.card = index;
+        calls.push({ index, animate });
+        return true;
+      },
       touched: () => state.touched,
       inView: () => state.inView
     },
@@ -233,14 +240,14 @@ describe('styrenhet: anpassning, prioritet och manuell interaktion', () => {
     p.text('Vi har en butik');
     assert.equal(calls[0].animate, false);
   });
-  test('bara första automatiska textanpassningen per sidvisning', () => {
+  test('ny text med annan kategori uppdaterar under samma sidvisning', () => {
     const { p, calls } = setup();
     p.text('restaurang');
-    p.text('nej förresten, jag är fotograf');
-    assert.equal(calls.length, 1);
-    assert.equal(p.current(), 'restaurant');
+    assert.equal(p.text('nej förresten, jag är fotograf'), 'creator');
+    assert.equal(calls.length, 2);
+    assert.equal(p.current(), 'creator');
   });
-  test('osäker text förbrukar inte anpassningen', () => {
+  test('osäker text ger ingen förflyttning', () => {
     const { p, calls } = setup();
     assert.equal(p.text('Hej! Vi behöver'), null);
     assert.equal(p.text('Hej! Vi behöver en ny sida för vår restaurang'), 'restaurant');
@@ -291,5 +298,108 @@ describe('styrenhet: anpassning, prioritet och manuell interaktion', () => {
     const { p, calls } = setup({ stored: { code: '<script>', source: 'text' } });
     assert.equal(p.init({}), null);
     assert.equal(calls.length, 0);
+  });
+});
+
+describe('hero-texten byter bransch under samma sidvisning', () => {
+  const BEAUTY = 'Jag driver en nagelsalong med fransar och bryn';
+  const RESTAURANT = 'Jag har en restaurang med meny och bordsbokning';
+  const SHOP = 'Jag säljer produkter i en webbshop';
+
+  test('beauty → restaurant', () => {
+    const { p, state } = setup();
+    assert.equal(p.text(BEAUTY), 'beauty');
+    assert.equal(state.card, CARD_INDEX.beauty);
+    assert.equal(p.text(RESTAURANT), 'restaurant');
+    assert.equal(state.card, CARD_INDEX.restaurant);
+  });
+  test('restaurant → e-handel', () => {
+    const { p, state } = setup();
+    p.text(RESTAURANT);
+    assert.equal(p.text(SHOP), 'shop');
+    assert.equal(state.card, CARD_INDEX.shop);
+  });
+  test('tre branscher i följd utan omladdning', () => {
+    const { p, calls } = setup();
+    [BEAUTY, RESTAURANT, SHOP].forEach((t) => p.text(t));
+    assert.deepEqual(calls.map((c) => c.index), [CARD_INDEX.beauty, CARD_INDEX.restaurant, CARD_INDEX.shop]);
+  });
+  test('samma kategori två gånger ger ingen ny förflyttning', () => {
+    const { p, calls } = setup();
+    p.text(RESTAURANT);
+    assert.equal(p.text('Vi har ett litet café och en bar'), null);
+    assert.equal(calls.length, 1);
+  });
+  test('tillfälligt tomt fält behåller senaste giltiga kategori', () => {
+    const { p, calls, state } = setup();
+    p.text(BEAUTY);
+    assert.equal(p.text(''), null);
+    assert.equal(p.text('   '), null);
+    assert.equal(calls.length, 1);
+    assert.equal(p.current(), 'beauty');
+    assert.equal(state.lead, LEADS.beauty);
+    assert.deepEqual(state.stored, { code: 'beauty', source: 'text' });
+  });
+  test('okänd mellantext behåller senaste giltiga kategori', () => {
+    const { p, calls, state } = setup();
+    p.text(BEAUTY);
+    assert.equal(p.text('Jag har en'), null);
+    assert.equal(p.text('Vår hemsida känns gammal'), null);
+    assert.equal(calls.length, 1);
+    assert.equal(state.card, CARD_INDEX.beauty);
+  });
+  test('sessionStorage följer senaste giltiga kod, aldrig texten', () => {
+    const { p, state } = setup();
+    p.text(BEAUTY);
+    p.text(RESTAURANT);
+    p.text('Jag har en');
+    p.text(SHOP);
+    assert.deepEqual(state.stored, { code: 'shop', source: 'text' });
+    assert.ok(!JSON.stringify(state.stored).includes('webbshop'));
+  });
+  test('autoplay förblir avstängd efter första personaliseringen', () => {
+    const { p, state } = setup();
+    assert.equal(state.autoplay, true);
+    p.text(BEAUTY);
+    assert.equal(state.autoplay, false);
+    p.text('');
+    p.text(RESTAURANT);
+    assert.equal(state.autoplay, false);
+  });
+  test('manuell karusellinteraktion blockerar efterföljande textändringar', () => {
+    const { p, calls, state } = setup({ inView: true });
+    p.text(BEAUTY);
+    state.touched = true; // drag, swipe, sidledes scroll, piltangent eller klick i karusellen
+    assert.equal(p.text(RESTAURANT), null);
+    assert.equal(p.text(SHOP), null);
+    assert.equal(calls.length, 1);
+    assert.equal(state.lead, LEADS.beauty); // underrubriken ändras inte heller
+  });
+  test('att skriva flera texter räknas inte som manuell interaktion', () => {
+    const { p, calls } = setup();
+    ['Jag', BEAUTY, 'Jag har', RESTAURANT, '', SHOP].forEach((t) => p.text(t));
+    assert.equal(calls.length, 3);
+  });
+  test('kort och underrubrik förblir synkroniserade', () => {
+    const { p, state } = setup();
+    for (const [t, code] of [[BEAUTY, 'beauty'], [RESTAURANT, 'restaurant'], ['Jag har en', 'restaurant'], [SHOP, 'shop']]) {
+      p.text(t);
+      assert.equal(state.card, CARD_INDEX[code]);
+      assert.equal(state.lead, LEADS[code]);
+      assert.equal(p.current(), code);
+    }
+  });
+  test('mjuk animation när sektionen syns, direkt när den inte syns', () => {
+    const { p, calls, state } = setup({ inView: true });
+    p.text(BEAUTY);
+    state.inView = false;
+    p.text(RESTAURANT);
+    assert.deepEqual(calls.map((c) => c.animate), [true, false]);
+  });
+  test('reduced motion: varje byte sker direkt', () => {
+    const { p, calls } = setup({ inView: true, reduced: true });
+    [BEAUTY, RESTAURANT, SHOP].forEach((t) => p.text(t));
+    assert.equal(calls.length, 3);
+    assert.ok(calls.every((c) => c.animate === false));
   });
 });
