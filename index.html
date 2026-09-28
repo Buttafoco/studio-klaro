@@ -591,6 +591,8 @@
   .ind-lead{display:grid;}
   .ind-lead-v{grid-area:1 / 1;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s;}
   .ind-lead-v.is-on{opacity:1;visibility:visible;transition:opacity .6s ease .12s,visibility 0s;}
+  /* Reducerad rörelse: rent byte (den globala regeln kortar bara duration, inte fördröjningarna) */
+  @media (prefers-reduced-motion: reduce){ .ind-lead-v,.ind-lead-v.is-on{transition:none;} }
   .ind-track{list-style:none;margin:0;padding:12px calc(50% - var(--ind-w) / 2) 20px;display:flex;gap:var(--ind-gap);overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;position:relative;outline:none;cursor:grab;}
   /* Med kloner i ändarna (JS) behövs ingen sidopadding – klonerna fyller ut istället */
   .ind-track.has-clones{padding-left:0;padding-right:0;}
