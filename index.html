@@ -236,7 +236,7 @@
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
 
-  /* Mörkt kapitel (kundomdömen). JS sätter html.dk-on medan kapitlet fyller skärmen: då tonar hela sidans
+  /* Mörkt kapitel (kundomdömen och kundresan). JS sätter html.dk-on medan kapitlet fyller skärmen: då tonar hela sidans
      bakgrund lugnt till varm svart och tillbaka, i båda scrollriktningarna. Utan JS / vid reducerad rörelse:
      kapitlet är statiskt mörkt och allt innehåll syns direkt. */
   @property --dk-ink{syntax:'<color>';inherits:true;initial-value:#F4F1EA;}
@@ -1486,7 +1486,7 @@
     </div>
   </section>
 
-  <!-- MÖRKT KAPITEL: kundomdömen. Därefter ljusnar sidan igen när kundresan (#processen) tar vid.
+  <!-- MÖRKT KAPITEL: kundomdömen och kundresan (#processen) till och med "Detta ingår". Därefter ljusnar sidan inför kontakt.
        Hela sidans bakgrund tonar till mörkt medan kapitlet fyller skärmen (html.dk-on, sätts i JS). -->
   <div class="dk" id="dk">
     <div class="dk-inner">
@@ -1510,257 +1510,257 @@
         </div>
       </section>
 
-    </div>
-  </div>
+      <!-- KUNDRESAN: hela projektet i fyra kapitel med projektportalen som följer med.
+           Stil: src/klaro-journey.css, beteende: src/klaro-journey.js. Portalvyerna är dekorativa (aria-hidden);
+           allt viktigt finns i kapitlens text. ≥1024px flyttas vyerna in i det sticky portalfönstret. -->
+      <section id="processen" class="kj" aria-labelledby="kj-title">
+        <div class="kj-inner">
+          <header class="kj-head" id="projektportal" data-reveal>
+            <p class="kj-eyebrow">Hela resan samlad</p>
+            <h2 id="kj-title" class="kj-h2">Mer än en färdig hemsida. <span>En tydlig väg dit – och vidare.</span></h2>
+            <p class="kj-lead">Från första materialet till lansering följer du projektet i din personliga portal. Du ser vad som händer nu, vad som kommer härnäst och vad vi behöver från varandra – utan långa mejltrådar eller otydliga överlämningar.</p>
+          </header>
 
-  <!-- KUNDRESAN: hela projektet i fyra kapitel med projektportalen som följer med.
-       Stil: src/klaro-journey.css, beteende: src/klaro-journey.js. Portalvyerna är dekorativa (aria-hidden);
-       allt viktigt finns i kapitlens text. ≥1024px flyttas vyerna in i det sticky portalfönstret. -->
-  <section id="processen" class="kj" aria-labelledby="kj-title">
-    <div class="kj-inner">
-      <header class="kj-head" id="projektportal" data-reveal>
-        <p class="kj-eyebrow">Hela resan samlad</p>
-        <h2 id="kj-title" class="kj-h2">Mer än en färdig hemsida. <span>En tydlig väg dit – och vidare.</span></h2>
-        <p class="kj-lead">Från första materialet till lansering följer du projektet i din personliga portal. Du ser vad som händer nu, vad som kommer härnäst och vad vi behöver från varandra – utan långa mejltrådar eller otydliga överlämningar.</p>
-      </header>
+          <div class="kj-story">
+            <div class="kj-chapters">
+              <div class="kj-rail" aria-hidden="true"><span class="kj-rail-fill"></span></div>
+              <ol class="kj-ch-list">
 
-      <div class="kj-story">
-        <div class="kj-chapters">
-          <div class="kj-rail" aria-hidden="true"><span class="kj-rail-fill"></span></div>
-          <ol class="kj-ch-list">
-
-          <!-- 01 Starten -->
-          <li class="kj-ch" id="kj-ch-1">
-            <span class="kj-node" aria-hidden="true">01</span>
-            <p class="kj-kicker">Starten</p>
-            <h3>Vi börjar på samma sida.</h3>
-            <div class="kj-frame" data-theme="start" aria-hidden="true">
-              <div class="kj-top">
-                <span class="kj-brand"><span class="kj-logo" data-wait><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span><span class="kj-logo-ph">Din logotyp</span></span>
-                <span class="kj-frame-phase">Start</span>
-              </div>
-              <div class="kj-frame-body">
-                <div class="kj-view" data-view="0">
-                  <div class="kj-msg kj-up">
-                    <span class="kj-av">SK</span>
-                    <div class="kj-msg-b">
-                      <div class="kj-msg-h">Studio Klaro <span>Välkommen</span></div>
-                      <p>Välkommen in i ditt projekt! Här samlar vi material, versioner och nästa steg. Börja med det du redan har – resten reder vi ut tillsammans.</p>
-                    </div>
+              <!-- 01 Starten -->
+              <li class="kj-ch" id="kj-ch-1">
+                <span class="kj-node" aria-hidden="true">01</span>
+                <p class="kj-kicker">Starten</p>
+                <h3>Vi börjar på samma sida.</h3>
+                <div class="kj-frame" data-theme="start" aria-hidden="true">
+                  <div class="kj-top">
+                    <span class="kj-brand"><span class="kj-logo" data-wait><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span><span class="kj-logo-ph">Din logotyp</span></span>
+                    <span class="kj-frame-phase">Start</span>
                   </div>
-                  <div class="kj-card kj-mat kj-up" style="--d:1">
-                    <div class="kj-row"><span class="kj-label">Material för start</span><span class="kj-pill kj-swap"><span class="a">1 av 3 delar klara</span><span class="b">2 av 3 delar klara</span></span></div>
-                    <div class="kj-meter"><i style="--w:.67"></i></div>
-                    <ul class="kj-list">
-                      <li class="kj-upl-row is-done"><span class="kj-chk"></span><span class="kj-upl">Logotyp<span class="kj-meter"><i></i></span></span><em>logotyp.svg</em></li>
-                      <li class="is-done"><span class="kj-chk"></span>Texter om företaget<em>Inskickat</em></li>
-                      <li><span class="kj-chk"></span>Bilder och inspiration<em>Väntar</em></li>
-                    </ul>
-                  </div>
-                  <div class="kj-next kj-up" style="--d:2">
-                    <div><span class="kj-label">Nästa steg</span><b>Skicka in material</b></div>
-                    <span class="kj-btn">Ladda upp <span>→</span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p>Du välkomnas in i projektet och får en tydlig introduktion till hur samarbetet fungerar. Börja med logotyp, innehåll och inspiration – resten hjälper vi dig att reda ut.</p>
-            <ul class="kj-points">
-              <li>Personlig introduktion</li>
-              <li>Logotyp och material på ett ställe</li>
-              <li>Tydligt vad som behövs för att starta</li>
-            </ul>
-            <div class="kj-next-hint" aria-hidden="true">Nästa: 02 Bygget</div>
-          </li>
-
-          <!-- 02 Bygget -->
-          <li class="kj-ch" id="kj-ch-2">
-            <span class="kj-node" aria-hidden="true">02</span>
-            <p class="kj-kicker">Bygget</p>
-            <h3>Du ser hemsidan växa fram.</h3>
-            <div class="kj-frame" data-theme="build" aria-hidden="true">
-              <div class="kj-top">
-                <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span>
-                <span class="kj-frame-phase">Bygge</span>
-              </div>
-              <div class="kj-frame-body">
-                <div class="kj-view" data-view="1">
-                  <div class="kj-okbar kj-up"><span class="kj-chk is-done"></span>Designgrund godkänd<span>Färg, typsnitt och uttryck</span></div>
-                  <div class="kj-grid">
-                    <div class="kj-card kj-up" style="--d:1">
-                      <span class="kj-label">Versioner</span>
-                      <ul class="kj-vers">
-                        <li class="is-new"><span class="kj-vtag">V2</span><div><b>Version 2</b><span>Publicerad i dag</span></div><span class="kj-pill">Ny</span></li>
-                        <li><span class="kj-vtag">V1</span><div><b>Version 1</b><span>Granskad</span></div></li>
-                      </ul>
-                      <div class="kj-thumb"><i class="w60"></i><i class="w40"></i><b></b><span><i></i><i></i><i></i></span></div>
-                    </div>
-                    <div class="kj-col">
-                      <div class="kj-card kj-up" style="--d:2">
-                        <span class="kj-label">Vad har ändrats?</span>
-                        <ul class="kj-changes">
-                          <li>Startsidan har uppdaterats</li>
-                          <li>Tjänsterna har fått tydligare struktur</li>
-                          <li>Mobilvyn är redo att granskas</li>
+                  <div class="kj-frame-body">
+                    <div class="kj-view" data-view="0">
+                      <div class="kj-msg kj-up">
+                        <span class="kj-av">SK</span>
+                        <div class="kj-msg-b">
+                          <div class="kj-msg-h">Studio Klaro <span>Välkommen</span></div>
+                          <p>Välkommen in i ditt projekt! Här samlar vi material, versioner och nästa steg. Börja med det du redan har – resten reder vi ut tillsammans.</p>
+                        </div>
+                      </div>
+                      <div class="kj-card kj-mat kj-up" style="--d:1">
+                        <div class="kj-row"><span class="kj-label">Material för start</span><span class="kj-pill kj-swap"><span class="a">1 av 3 delar klara</span><span class="b">2 av 3 delar klara</span></span></div>
+                        <div class="kj-meter"><i style="--w:.67"></i></div>
+                        <ul class="kj-list">
+                          <li class="kj-upl-row is-done"><span class="kj-chk"></span><span class="kj-upl">Logotyp<span class="kj-meter"><i></i></span></span><em>logotyp.svg</em></li>
+                          <li class="is-done"><span class="kj-chk"></span>Texter om företaget<em>Inskickat</em></li>
+                          <li><span class="kj-chk"></span>Bilder och inspiration<em>Väntar</em></li>
                         </ul>
                       </div>
-                      <div class="kj-card kj-up" style="--d:3">
-                        <span class="kj-label">Feedback · Version 2</span>
-                        <div class="kj-input">Skriv din återkoppling …</div>
-                        <div class="kj-row"><span class="kj-pill kj-pill--dot">Din återkoppling behövs</span><span class="kj-btn">Skicka</span></div>
+                      <div class="kj-next kj-up" style="--d:2">
+                        <div><span class="kj-label">Nästa steg</span><b>Skicka in material</b></div>
+                        <span class="kj-btn">Ladda upp <span>→</span></span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <p>Vi börjar med designgrunden och bygger sedan vidare i tydliga versioner. Du kan se vad som har ändrats, lämna feedback och följa dialogen medan arbetet pågår.</p>
-            <ul class="kj-points">
-              <li>Designgrunden godkänns först</li>
-              <li>Nya versioner publiceras löpande</li>
-              <li>Feedback kopplas till rätt version</li>
-            </ul>
-            <div class="kj-next-hint" aria-hidden="true">Nästa: 03 Lanseringen</div>
-          </li>
+                <p>Du välkomnas in i projektet och får en tydlig introduktion till hur samarbetet fungerar. Börja med logotyp, innehåll och inspiration – resten hjälper vi dig att reda ut.</p>
+                <ul class="kj-points">
+                  <li>Personlig introduktion</li>
+                  <li>Logotyp och material på ett ställe</li>
+                  <li>Tydligt vad som behövs för att starta</li>
+                </ul>
+                <div class="kj-next-hint" aria-hidden="true">Nästa: 02 Bygget</div>
+              </li>
 
-          <!-- 03 Lanseringen -->
-          <li class="kj-ch" id="kj-ch-3">
-            <span class="kj-node" aria-hidden="true">03</span>
-            <p class="kj-kicker">Lanseringen</p>
-            <h3>Vi går live tillsammans.</h3>
-            <div class="kj-frame" data-theme="launch" aria-hidden="true">
-              <div class="kj-top">
-                <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span>
-                <span class="kj-frame-phase">Lansering</span>
-              </div>
-              <div class="kj-frame-body">
-                <div class="kj-view" data-view="2">
-                  <div class="kj-launch kj-up">
-                    <div class="kj-row">
-                      <div><span class="kj-label">Status</span><span class="kj-launch-st kj-swap"><span class="a">Redo för lansering</span><span class="b"><i class="kj-dot"></i>Live</span></span></div>
-                      <span class="kj-addr"><i class="kj-dot"></i>www.dittforetag.se</span>
-                    </div>
-                    <div class="kj-meter"><i></i></div>
-                    <div class="kj-launch-meta"><span>Slutgodkänd</span><span>Publicerad</span></div>
+              <!-- 02 Bygget -->
+              <li class="kj-ch" id="kj-ch-2">
+                <span class="kj-node" aria-hidden="true">02</span>
+                <p class="kj-kicker">Bygget</p>
+                <h3>Du ser hemsidan växa fram.</h3>
+                <div class="kj-frame" data-theme="build" aria-hidden="true">
+                  <div class="kj-top">
+                    <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span>
+                    <span class="kj-frame-phase">Bygge</span>
                   </div>
-                  <div class="kj-card kj-up" style="--d:1">
-                    <span class="kj-label">Checklista inför lansering</span>
-                    <ul class="kj-list">
-                      <li class="is-done"><span class="kj-chk kj-chk--ok"></span>Gemensamt slutgodkännande<em>Klart</em></li>
-                      <li class="is-done"><span class="kj-chk kj-chk--ok"></span>Domän bekräftad<em>dittforetag.se</em></li>
-                      <li class="is-done kj-tick-late"><span class="kj-chk kj-chk--ok"></span>DNS och åtkomst ordnad<em>Klart</em></li>
-                      <li class="is-done kj-tick-late"><span class="kj-chk kj-chk--ok"></span>SSL och länkar kontrollerade<em>Klart</em></li>
-                    </ul>
+                  <div class="kj-frame-body">
+                    <div class="kj-view" data-view="1">
+                      <div class="kj-okbar kj-up"><span class="kj-chk is-done"></span>Designgrund godkänd<span>Färg, typsnitt och uttryck</span></div>
+                      <div class="kj-grid">
+                        <div class="kj-card kj-up" style="--d:1">
+                          <span class="kj-label">Versioner</span>
+                          <ul class="kj-vers">
+                            <li class="is-new"><span class="kj-vtag">V2</span><div><b>Version 2</b><span>Publicerad i dag</span></div><span class="kj-pill">Ny</span></li>
+                            <li><span class="kj-vtag">V1</span><div><b>Version 1</b><span>Granskad</span></div></li>
+                          </ul>
+                          <div class="kj-thumb"><i class="w60"></i><i class="w40"></i><b></b><span><i></i><i></i><i></i></span></div>
+                        </div>
+                        <div class="kj-col">
+                          <div class="kj-card kj-up" style="--d:2">
+                            <span class="kj-label">Vad har ändrats?</span>
+                            <ul class="kj-changes">
+                              <li>Startsidan har uppdaterats</li>
+                              <li>Tjänsterna har fått tydligare struktur</li>
+                              <li>Mobilvyn är redo att granskas</li>
+                            </ul>
+                          </div>
+                          <div class="kj-card kj-up" style="--d:3">
+                            <span class="kj-label">Feedback · Version 2</span>
+                            <div class="kj-input">Skriv din återkoppling …</div>
+                            <div class="kj-row"><span class="kj-pill kj-pill--dot">Din återkoppling behövs</span><span class="kj-btn">Skicka</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <p>När vi båda är nöjda hjälper vi till med de sista stegen. Domän, säker anslutning och publicering samlas i en tydlig checklista så att inget faller mellan stolarna.</p>
-            <ul class="kj-points">
-              <li>Gemensamt slutgodkännande</li>
-              <li>Hjälp med domän och teknik</li>
-              <li>Kontrollerad publicering</li>
-            </ul>
-            <div class="kj-next-hint" aria-hidden="true">Nästa: 04 Fortsättningen</div>
-          </li>
+                <p>Vi börjar med designgrunden och bygger sedan vidare i tydliga versioner. Du kan se vad som har ändrats, lämna feedback och följa dialogen medan arbetet pågår.</p>
+                <ul class="kj-points">
+                  <li>Designgrunden godkänns först</li>
+                  <li>Nya versioner publiceras löpande</li>
+                  <li>Feedback kopplas till rätt version</li>
+                </ul>
+                <div class="kj-next-hint" aria-hidden="true">Nästa: 03 Lanseringen</div>
+              </li>
 
-          <!-- 04 Fortsättningen -->
-          <li class="kj-ch" id="kj-ch-4">
-            <span class="kj-node" aria-hidden="true">04</span>
-            <p class="kj-kicker">Fortsättningen</p>
-            <h3>Lanseringen behöver inte vara slutet.</h3>
-            <div class="kj-frame" data-theme="care" aria-hidden="true">
-              <div class="kj-top">
-                <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span>
-                <span class="kj-frame-phase">Efter lansering</span>
-              </div>
-              <div class="kj-frame-body">
-                <div class="kj-view" data-view="3">
-                  <div class="kj-card kj-livecard kj-up">
-                    <div><span class="kj-live"><i class="kj-dot"></i>Hemsidan är live</span><b>www.dittforetag.se</b></div>
-                    <div class="kj-last"><span class="kj-label">Senaste kontroll</span><b>I dag · Allt fungerar</b></div>
+              <!-- 03 Lanseringen -->
+              <li class="kj-ch" id="kj-ch-3">
+                <span class="kj-node" aria-hidden="true">03</span>
+                <p class="kj-kicker">Lanseringen</p>
+                <h3>Vi går live tillsammans.</h3>
+                <div class="kj-frame" data-theme="launch" aria-hidden="true">
+                  <div class="kj-top">
+                    <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span>
+                    <span class="kj-frame-phase">Lansering</span>
                   </div>
-                  <div class="kj-care kj-up" style="--d:1">
-                    <div class="kj-row">
-                      <div><span class="kj-opt">Valfritt efter lansering</span><b class="kj-care-t">Klaro Care</b></div>
-                      <span class="kj-btn">Skicka en ny förfrågan</span>
+                  <div class="kj-frame-body">
+                    <div class="kj-view" data-view="2">
+                      <div class="kj-launch kj-up">
+                        <div class="kj-row">
+                          <div><span class="kj-label">Status</span><span class="kj-launch-st kj-swap"><span class="a">Redo för lansering</span><span class="b"><i class="kj-dot"></i>Live</span></span></div>
+                          <span class="kj-addr"><i class="kj-dot"></i>www.dittforetag.se</span>
+                        </div>
+                        <div class="kj-meter"><i></i></div>
+                        <div class="kj-launch-meta"><span>Slutgodkänd</span><span>Publicerad</span></div>
+                      </div>
+                      <div class="kj-card kj-up" style="--d:1">
+                        <span class="kj-label">Checklista inför lansering</span>
+                        <ul class="kj-list">
+                          <li class="is-done"><span class="kj-chk kj-chk--ok"></span>Gemensamt slutgodkännande<em>Klart</em></li>
+                          <li class="is-done"><span class="kj-chk kj-chk--ok"></span>Domän bekräftad<em>dittforetag.se</em></li>
+                          <li class="is-done kj-tick-late"><span class="kj-chk kj-chk--ok"></span>DNS och åtkomst ordnad<em>Klart</em></li>
+                          <li class="is-done kj-tick-late"><span class="kj-chk kj-chk--ok"></span>SSL och länkar kontrollerade<em>Klart</em></li>
+                        </ul>
+                      </div>
                     </div>
-                    <ul class="kj-care-cards">
-                      <li><b>Uppdateringar</b><span>Mindre ändringar i text och bild</span></li>
-                      <li><b>Support</b><span>Hjälp när något behöver lösas</span></li>
-                      <li><b>Synlighet</b><span>Löpande förbättringar över tid</span></li>
-                    </ul>
-                    <p class="kj-care-note">Hemsidan är din – med eller utan Klaro Care.</p>
                   </div>
                 </div>
+                <p>När vi båda är nöjda hjälper vi till med de sista stegen. Domän, säker anslutning och publicering samlas i en tydlig checklista så att inget faller mellan stolarna.</p>
+                <ul class="kj-points">
+                  <li>Gemensamt slutgodkännande</li>
+                  <li>Hjälp med domän och teknik</li>
+                  <li>Kontrollerad publicering</li>
+                </ul>
+                <div class="kj-next-hint" aria-hidden="true">Nästa: 04 Fortsättningen</div>
+              </li>
+
+              <!-- 04 Fortsättningen -->
+              <li class="kj-ch" id="kj-ch-4">
+                <span class="kj-node" aria-hidden="true">04</span>
+                <p class="kj-kicker">Fortsättningen</p>
+                <h3>Lanseringen behöver inte vara slutet.</h3>
+                <div class="kj-frame" data-theme="care" aria-hidden="true">
+                  <div class="kj-top">
+                    <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span>
+                    <span class="kj-frame-phase">Efter lansering</span>
+                  </div>
+                  <div class="kj-frame-body">
+                    <div class="kj-view" data-view="3">
+                      <div class="kj-card kj-livecard kj-up">
+                        <div><span class="kj-live"><i class="kj-dot"></i>Hemsidan är live</span><b>www.dittforetag.se</b></div>
+                        <div class="kj-last"><span class="kj-label">Senaste kontroll</span><b>I dag · Allt fungerar</b></div>
+                      </div>
+                      <div class="kj-care kj-up" style="--d:1">
+                        <div class="kj-row">
+                          <div><span class="kj-opt">Valfritt efter lansering</span><b class="kj-care-t">Klaro Care</b></div>
+                          <span class="kj-btn">Skicka en ny förfrågan</span>
+                        </div>
+                        <ul class="kj-care-cards">
+                          <li><b>Uppdateringar</b><span>Mindre ändringar i text och bild</span></li>
+                          <li><b>Support</b><span>Hjälp när något behöver lösas</span></li>
+                          <li><b>Synlighet</b><span>Löpande förbättringar över tid</span></li>
+                        </ul>
+                        <p class="kj-care-note">Hemsidan är din – med eller utan Klaro Care.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p>Hemsidan är din när den är klar. Vill du fortsätta utveckla den finns Klaro Care som ett valfritt nästa kapitel – för mindre ändringar, stöd och löpande förbättringar.</p>
+                <ul class="kj-points">
+                  <li>Hemsidan är fortfarande din</li>
+                  <li>Klaro Care är helt valfritt</li>
+                  <li>Fortsatt stöd och utveckling vid behov</li>
+                </ul>
+              </li>
+              </ol>
+            </div>
+
+            <!-- Sticky portalfönster (≥1024px): vyerna ovan flyttas hit av src/klaro-journey.js -->
+            <div class="kj-stage" aria-hidden="true">
+              <div class="kj-portal" data-theme="start">
+                <div class="kj-bar"><i></i><i></i><i></i><em>Studio Klaro · Projektportal</em></div>
+                <div class="kj-top">
+                  <span class="kj-brand"><span class="kj-logo" data-wait><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span><span class="kj-logo-ph">Din logotyp</span></span>
+                  <ol class="kj-phases"><li class="is-current">Start</li><li>Bygge</li><li>Lansering</li><li>Efter</li></ol>
+                </div>
+                <div class="kj-viewport"></div>
               </div>
             </div>
-            <p>Hemsidan är din när den är klar. Vill du fortsätta utveckla den finns Klaro Care som ett valfritt nästa kapitel – för mindre ändringar, stöd och löpande förbättringar.</p>
-            <ul class="kj-points">
-              <li>Hemsidan är fortfarande din</li>
-              <li>Klaro Care är helt valfritt</li>
-              <li>Fortsatt stöd och utveckling vid behov</li>
-            </ul>
-          </li>
-          </ol>
-        </div>
-
-        <!-- Sticky portalfönster (≥1024px): vyerna ovan flyttas hit av src/klaro-journey.js -->
-        <div class="kj-stage" aria-hidden="true">
-          <div class="kj-portal" data-theme="start">
-            <div class="kj-bar"><i></i><i></i><i></i><em>Studio Klaro · Projektportal</em></div>
-            <div class="kj-top">
-              <span class="kj-brand"><span class="kj-logo" data-wait><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span><span class="kj-logo-ph">Din logotyp</span></span>
-              <ol class="kj-phases"><li class="is-current">Start</li><li>Bygge</li><li>Lansering</li><li>Efter</li></ol>
-            </div>
-            <div class="kj-viewport"></div>
           </div>
-        </div>
-      </div>
 
-      <!-- Avslutning -->
-      <div class="kj-end" data-reveal>
-        <div>
-          <h3>Du bygger inte ensam.</h3>
-          <p>Vi håller ihop projektet, visar vägen framåt och ser till att både du och hemsidan är redo när det är dags att gå live.</p>
-        </div>
-        <div class="kj-cta">
-          <a class="kj-cta-main btn-lift lift-primary" href="#kontakt">Starta din resa <span aria-hidden="true">→</span></a>
-          <a class="kj-cta-link" href="#kj-ch-1">Se hur processen fungerar</a>
-        </div>
-      </div>
+          <!-- Avslutning -->
+          <div class="kj-end" data-reveal>
+            <div>
+              <h3>Du bygger inte ensam.</h3>
+              <p>Vi håller ihop projektet, visar vägen framåt och ser till att både du och hemsidan är redo när det är dags att gå live.</p>
+            </div>
+            <div class="kj-cta">
+              <a class="kj-cta-main btn-lift lift-primary" href="#kontakt">Starta din resa <span aria-hidden="true">→</span></a>
+              <a class="kj-cta-link" href="#kj-ch-1">Se hur processen fungerar</a>
+            </div>
+          </div>
 
-      <!-- Detta ingår: kompakt och sekundärt till resan -->
-      <section class="kj-incl" aria-labelledby="kj-incl-title">
-        <div class="kj-incl-head">
-          <h3 id="kj-incl-title">Detta ingår i ditt projekt</h3>
-          <a href="/priser">Jämför uppläggen <span aria-hidden="true">→</span></a>
+          <!-- Detta ingår: kompakt och sekundärt till resan -->
+          <section class="kj-incl" aria-labelledby="kj-incl-title">
+            <div class="kj-incl-head">
+              <h3 id="kj-incl-title">Detta ingår i ditt projekt</h3>
+              <a href="/priser">Jämför uppläggen <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="kj-incl-row">
+              <span class="kj-incl-k" id="kj-incl-always">Alltid med</span>
+              <ul class="kj-tags" aria-labelledby="kj-incl-always">
+                <li>Unik design</li>
+                <li>Mobilanpassning</li>
+                <li>Grundläggande SEO</li>
+                <li>Projektportal</li>
+                <li>Publicering</li>
+                <li>Löpande avstämningar</li>
+              </ul>
+            </div>
+            <details class="kj-more">
+              <summary>Beroende på upplägg <span>5 delar</span></summary>
+              <ul class="kj-pkg">
+                <li><span>Kontaktformulär</span><span>Professionell, Komplett närvaro</span></li>
+                <li><span>Domänkoppling</span><span>Professionell, Komplett närvaro</span></li>
+                <li><span>Google Företagsprofil och Analytics</span><span>Professionell, Komplett närvaro</span></li>
+                <li><span>Lokal SEO-start</span><span>Komplett närvaro</span></li>
+                <li><span>Professionell mejladress</span><span>Komplett närvaro</span></li>
+              </ul>
+              <p class="kj-pkg-note">Domän, mejl och andra externa tjänster betalas separat.</p>
+            </details>
+          </section>
         </div>
-        <div class="kj-incl-row">
-          <span class="kj-incl-k" id="kj-incl-always">Alltid med</span>
-          <ul class="kj-tags" aria-labelledby="kj-incl-always">
-            <li>Unik design</li>
-            <li>Mobilanpassning</li>
-            <li>Grundläggande SEO</li>
-            <li>Projektportal</li>
-            <li>Publicering</li>
-            <li>Löpande avstämningar</li>
-          </ul>
-        </div>
-        <details class="kj-more">
-          <summary>Beroende på upplägg <span>5 delar</span></summary>
-          <ul class="kj-pkg">
-            <li><span>Kontaktformulär</span><span>Professionell, Komplett närvaro</span></li>
-            <li><span>Domänkoppling</span><span>Professionell, Komplett närvaro</span></li>
-            <li><span>Google Företagsprofil och Analytics</span><span>Professionell, Komplett närvaro</span></li>
-            <li><span>Lokal SEO-start</span><span>Komplett närvaro</span></li>
-            <li><span>Professionell mejladress</span><span>Komplett närvaro</span></li>
-          </ul>
-          <p class="kj-pkg-note">Domän, mejl och andra externa tjänster betalas separat.</p>
-        </details>
       </section>
+
     </div>
-  </section>
+  </div>
 
   <!-- CONTACT (prompt-flöde i två steg + success) -->
   <div id="kontakt" style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
@@ -2134,7 +2134,7 @@
     setTimeout(function () { revealEls.forEach(function (el) { el.classList.add('is-visible'); }); }, 1800);
   }
 
-  /* ---------- Mörkt kapitel (kundomdömen): sidans bakgrund och reveal ---------- */
+  /* ---------- Mörkt kapitel (kundomdömen och kundresan): sidans bakgrund och reveal ---------- */
   (function () {
     var dk = document.getElementById('dk');
     if (!dk) return;
@@ -2171,6 +2171,7 @@
       var still = reduceMotion.matches;
 
       // Hela sidan blir mörk medan kapitlet täcker mitten av skärmen (båda riktningarna).
+      // CTA:n under är dold i mörkt läge och tonar in i takt med att sidan ljusnar igen.
       if (!still) {
         var r = dk.getBoundingClientRect();
         root.classList.toggle('dk-on', r.top < vh * 0.55 && r.bottom > vh * 0.5);
