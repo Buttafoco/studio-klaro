@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Studio Klaro – global header (alla sidor). Ersätter glasmenyn (src/nav-glass.css, ligger kvar oanvänd).
+   Redaktionell och lugn: ordmärket till vänster, länkarna och CTA:n samlade till höger, samma maxbredd
+   och sidmarginaler som innehållet. Högst upp ligger headern direkt på sidans bakgrund; när man scrollat
+   krymper den mjukt och får en nästan opak varmvit yta med en tunn neutral nederkant.
+   Headerns yttre höjd är fast (--sh-h), så krympningen sker inuti den reserverade ytan – inget i sidan flyttar sig.
+   Skalningen mot sidornas egna .nav-capsule-regler sker med högre specificitet (.sh.nav-wrap …).
+   ========================================================================== */
+.sh{--sh-h:88px;--sh-h-s:68px;--sh-ease:cubic-bezier(0.22,1,0.36,1);--sh-t:.28s;
+  --sh-bg:rgba(247,245,240,0.97);--sh-line:rgba(15,23,42,0.1);--sh-ink:#0F172A;--sh-cta:#0F5AD1;--sh-accent:#146EF5;--sh-focus:#146EF5;}
+
+/* Reserverad höjd: ytterboxen ändrar aldrig storlek */
+.sh.nav-wrap,.sh.nav-wrap.scrolled{position:sticky;top:0;z-index:50;height:var(--sh-h);padding:0;box-sizing:border-box;pointer-events:none;transition:none;}
+.sh.nav-wrap .nav-capsule,.sh.nav-wrap.scrolled .nav-capsule{
+  position:relative;box-sizing:border-box;max-width:1140px;height:var(--sh-h);margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;pointer-events:auto;
+  background:transparent;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;
+  transition:height var(--sh-t) var(--sh-ease);}
+.sh.nav-wrap.scrolled .nav-capsule{height:var(--sh-h-s);}
+
+/* Ytan och nederkanten när man scrollat: går kant i kant utan att skapa horisontell scroll */
+.sh.nav-wrap .nav-capsule::before,.sh.nav-wrap .nav-capsule::after{content:'';position:absolute;left:0;right:0;z-index:-1;pointer-events:none;
+  clip-path:inset(0 -100vmax);opacity:0;transition:opacity var(--sh-t) ease;}
+.sh.nav-wrap .nav-capsule::before{top:0;bottom:0;background:var(--sh-bg);box-shadow:0 0 0 100vmax var(--sh-bg);}
+.sh.nav-wrap .nav-capsule::after{bottom:0;height:1px;background:var(--sh-line);box-shadow:0 0 0 100vmax var(--sh-line);}
+.sh.nav-wrap.scrolled .nav-capsule::before,.sh.nav-wrap.scrolled .nav-capsule::after{opacity:1;}
+
+/* Ordmärket: befintlig bild, understrecket ritas som en skarp linje på hel pixel */
+.sh-logo{position:relative;display:block;flex:none;line-height:0;border-radius:2px;}
+.sh-logo img{display:block;width:auto;height:34px;clip-path:inset(0 0 17% 0);transition:height var(--sh-t) var(--sh-ease);}
+.sh-logo-line{position:absolute;left:44px;top:30px;width:45px;height:2px;background:#0F0D0E;
+  transition:left var(--sh-t) var(--sh-ease),top var(--sh-t) var(--sh-ease),width var(--sh-t) var(--sh-ease);}
+.sh.scrolled .sh-logo img{height:30px;}
+.sh.scrolled .sh-logo-line{left:39px;top:26px;width:40px;}
+.sh-logo:focus-visible{outline:2px solid var(--sh-focus);outline-offset:6px;}
+
+/* Länkarna och CTA:n i en grupp till höger */
+.sh-nav{margin-left:auto;}
+.sh-list{display:flex;align-items:center;gap:30px;margin:0;padding:0;list-style:none;}
+.sh-link{position:relative;display:inline-block;padding:10px 0;font-size:14.5px;font-weight:500;line-height:1.2;letter-spacing:0;color:var(--sh-ink);text-decoration:none;}
+/* Linjen ritas från vänster till höger; ingen platta, inget som flyttar texten */
+.sh-link::after{content:'';position:absolute;left:0;right:0;bottom:4px;height:1.5px;background:var(--sh-accent);
+  transform:scaleX(0);transform-origin:left center;transition:transform .2s var(--sh-ease);}
+.sh-link:hover::after,.sh-link[aria-current]::after{transform:scaleX(1);}
+.sh .sh-link:hover{color:var(--sh-ink);}           /* sidornas globala a:hover gör inte länktexten blå */
+.sh .sh-cta:hover{color:var(--sh-cta);}
+.sh-link:focus-visible{outline:2px solid var(--sh-focus);outline-offset:4px;border-radius:2px;}
+
+.sh-cta-item{margin-left:6px;}
+.sh-cta{position:relative;display:inline-flex;align-items:baseline;gap:5px;padding:10px 0;font-size:14.5px;font-weight:600;line-height:1.2;color:var(--sh-cta);text-decoration:none;}
+.sh-cta::after{content:'';position:absolute;left:0;right:0;bottom:4px;height:1px;background:var(--sh-accent);opacity:.45;
+  transition:opacity .2s ease,height .2s ease;}
+.sh-cta-arrow{display:inline-block;color:var(--sh-accent);transition:transform .2s var(--sh-ease);}
+.sh-cta:hover::after{opacity:1;height:1.5px;}
+.sh-cta:hover .sh-cta-arrow{transform:translate(2px,-2px);}
+.sh-cta:focus-visible{outline:2px solid var(--sh-focus);outline-offset:4px;border-radius:2px;}
+
+/* Mindre dator: tätare men samma uttryck */
+@media (max-width:1000px){
+  .sh-list{gap:22px;}
+  .sh-link,.sh-cta{font-size:14px;}
+}
+
+/* Mobil: ordmärke och en textknapp "Meny" */
+@media (max-width:820px){
+  .sh{--sh-h:72px;--sh-h-s:60px;}
+  .sh.nav-wrap .nav-capsule,.sh.nav-wrap.scrolled .nav-capsule{padding:0 16px 0 20px;}
+  .sh-logo img,.sh.scrolled .sh-logo img{height:30px;}
+  .sh-logo-line,.sh.scrolled .sh-logo-line{left:39px;top:26px;width:40px;}
+  .sh-menu{margin-right:-8px;}
+  /* Öppen meny: headern ligger kvar ovanpå panelen, i panelens egen färg och utan nederkant */
+  html.mnav-active .sh.nav-wrap .nav-capsule::before{opacity:1;background:var(--mnav-bg,#F7F5F0);box-shadow:0 0 0 100vmax var(--mnav-bg,#F7F5F0);}
+  html.mnav-active .sh.nav-wrap .nav-capsule::after{opacity:0;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .sh.nav-wrap .nav-capsule,.sh.nav-wrap .nav-capsule::before,.sh.nav-wrap .nav-capsule::after,
+  .sh-logo img,.sh-logo-line,.sh-link::after,.sh-cta::after,.sh-cta-arrow{transition:none;}
+}

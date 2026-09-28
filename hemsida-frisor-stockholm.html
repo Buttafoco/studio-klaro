@@ -257,13 +257,15 @@
   .cw-bridge-t{position:absolute;left:calc(var(--gx) + 84px);top:38px;margin:0;font-size:15px;font-weight:700;color:var(--ab-mute);white-space:nowrap;}
   .fr-live .cw-bridge-t{opacity:0;transform:translateX(-8px);transition:opacity .6s ease 1s,transform .6s cubic-bezier(.22,.8,.24,1) 1s;}
   .fr-live .cw-bridge.in .cw-bridge-t{opacity:1;transform:none;}
-  /* Headern ovanpå den mörka zonen: mörkt transparent, varmvit text, guldvariant av knappen */
-  .nav-capsule > a:first-child img{transition:filter .5s ease;}
-  html.cw-dark .nav-wrap.scrolled .nav-capsule{background:rgba(18,16,13,0.74)!important;box-shadow:0 12px 30px rgba(0,0,0,0.35),inset 0 0 0 1px rgba(201,162,74,0.16)!important;}
-  html.cw-dark .nav-capsule [data-rnav] a{color:#EFE8DC!important;}
-  html.cw-dark .nav-capsule a[data-rhide]{background:#C9A24A!important;color:#12100D!important;box-shadow:0 8px 20px rgba(0,0,0,0.3)!important;}
-  html.cw-dark .nav-capsule > a:first-child img{filter:brightness(0) invert(.92);}
-  html.cw-dark.mnav-active .nav-capsule > a:first-child img{filter:none;}
+  /* Mörk sektion: headern (src/site-header.css) byter till mörk yta, ljus text och guld som accent */
+  .sh .sh-logo img,.sh .sh-logo-line{transition:filter .5s ease,background-color .5s ease,height .28s cubic-bezier(0.22,1,0.36,1),left .28s cubic-bezier(0.22,1,0.36,1),top .28s cubic-bezier(0.22,1,0.36,1),width .28s cubic-bezier(0.22,1,0.36,1);}
+  html.cw-dark .sh{--sh-bg:rgba(18,16,13,0.96);--sh-line:rgba(239,232,220,0.12);--sh-ink:#EFE8DC;--sh-cta:#E2C176;--sh-accent:#C9A24A;--sh-focus:#E2C176;}
+  html.cw-dark .sh-logo img{filter:brightness(0) invert(.92);}
+  html.cw-dark .sh-logo-line{background:#EBEBEB;}
+  html.cw-dark.mnav-active .sh{--sh-ink:#0F172A;--sh-cta:#0F5AD1;--sh-accent:#146EF5;--sh-focus:#146EF5;}
+  html.cw-dark.mnav-active .sh-logo img{filter:none;}
+  html.cw-dark.mnav-active .sh-logo-line{background:#0F0D0E;}
+  @media (prefers-reduced-motion: reduce){ .sh .sh-logo img,.sh .sh-logo-line{transition:none;} }
 
   /* The Chairman-vyer: återskapade delar av den publicerade sidan (palett och typsnitt därifrån) */
   .ch-screen{container-type:inline-size;border-radius:16px;overflow:hidden;background:var(--ch-bg);border:1px solid rgba(15,23,42,0.1);box-shadow:0 30px 70px rgba(15,23,42,0.16);color:var(--ch-cream);font-family:'Manrope',sans-serif;}
@@ -826,30 +828,30 @@
 <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');var c=document.documentElement.classList;c.add('pt-arrive','pt-fast');if(sessionStorage.getItem('pt-cover')){sessionStorage.removeItem('pt-cover');c.add('pt-cover');setTimeout(function(){c.remove('pt-cover','pt-cover-out');},3000);}var ptY=sessionStorage.getItem('pt-y');sessionStorage.removeItem('pt-y');if(ptY&&!location.hash){window.__ptY=+ptY;c.add('pt-hold');setTimeout(function(){c.remove('pt-hold');},1000);}}}catch(e){}</script>
 <link rel="stylesheet" href="/src/page-transition.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
-<link rel="stylesheet" href="/src/nav-glass.css">
+<link rel="stylesheet" href="/src/site-header.css">
 </head>
 <body>
 
 <div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
 
   <!-- NAV -->
-  <header class="nav-wrap">
-    <nav class="nav-capsule" aria-label="Huvudmeny">
-      <a href="/" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
-        <img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
-      </a>
-      <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
-        <a href="/#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
-        <a href="/#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
-        <a href="/seo-koll" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">SEO</a>
-        <a href="/priser" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
-        <a href="/om" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Om</a>
+  <header class="nav-wrap sh">
+    <div class="nav-capsule sh-bar">
+      <a class="sh-logo" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166"><span class="sh-logo-line" aria-hidden="true"></span></a>
+      <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
+        <ul class="sh-list">
+          <li><a class="sh-link" href="/#processen">Process</a></li>
+          <li><a class="sh-link" href="/#portfolio">Projekt</a></li>
+          <li><a class="sh-link" href="/seo-koll">SEO</a></li>
+          <li><a class="sh-link" href="/priser">Priser</a></li>
+          <li><a class="sh-link" href="/om">Om</a></li>
+          <li class="sh-cta-item"><a class="sh-cta" data-rhide href="/#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
+        </ul>
+      </nav>
+      <div class="sh-menu" data-rshow style="display:none;">
+        <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
       </div>
-      <a data-rhide href="/#kontakt" class="btn-lift lift-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få en gratis genomgång</a>
-      <div data-rshow style="display:none;">
-        <button id="mnav-toggle" class="mnav-toggle" type="button" aria-label="Öppna meny" aria-expanded="false" aria-controls="mnav"><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
-      </div>
-    </nav>
+    </div>
   </header>
 
   <main class="fr" id="fr">

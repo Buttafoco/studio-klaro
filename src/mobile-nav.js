@@ -1,6 +1,7 @@
 /* ==========================================================================
-   Studio Klaro – mobilmeny (alla sidor). Stil: src/mobile-nav.css.
-   Bygger en gemensam helskärmspanel utifrån sidans menyknapp (#mnav-toggle) och headerns CTA.
+   Studio Klaro – mobilmeny (alla sidor). Stil: src/mobile-nav.css (headern: src/site-header.css).
+   Bygger en gemensam varmvit helskärmspanel utifrån sidans menyknapp (#mnav-toggle, textknappen "Meny")
+   och headerns CTA. Knappens synliga text växlar mellan "Meny" och "Stäng"; aria-expanded anger läget.
    - Tillgänglig modal navigation: aria-expanded/aria-controls, fokus in i menyn och fångat där,
      Escape och webbläsarens tillbaka stänger, bakgrunden är inert, fokus tillbaka till knappen.
    - Scrollåsning utan att sidan bakom flyttar sig (overflow på roten + scrollbar-gutter).
@@ -16,25 +17,24 @@
   var root = document.documentElement;
   var mq = window.matchMedia('(max-width: 820px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var OPEN_MS = reduce ? 200 : 520;
-  var CLOSE_MS = reduce ? 200 : 520;
+  var OPEN_MS = reduce ? 0 : 280;
+  var CLOSE_MS = reduce ? 0 : 280;
 
   var ITEMS = [
-    ['Process', '/#processen', 'Så går det till'],
-    ['Case', '/#portfolio', 'Se vad vi har byggt'],
-    ['SEO', '/seo-koll', 'Få koll på synligheten'],
-    ['Priser', '/priser', 'Hitta rätt upplägg'],
-    ['Om', '/om', 'Lär känna Studio Klaro']
+    ['Process', '/#processen'],
+    ['Projekt', '/#portfolio'],
+    ['SEO', '/seo-koll'],
+    ['Priser', '/priser'],
+    ['Om', '/om']
   ];
   var norm = function (p) { p = p.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, ''); return p || '/'; };
   var here = norm(location.pathname);
 
   // Headerns CTA gäller även i menyn (samma text och mål som på desktop)
   var headCta = navWrap.querySelector('a[data-rhide]');
-  var ctaText = headCta ? headCta.textContent.replace(/\s*→\s*$/, '').trim() : 'Få en gratis genomgång';
+  var ctaText = headCta ? headCta.textContent.replace(/\s*[→↗]\s*$/, '').trim() : 'Starta ett projekt';
   var ctaHref = headCta ? headCta.getAttribute('href') : '/#kontakt';
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  var ARROW = '<svg class="mnav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></svg>';
 
   /* ---------- Panelen ---------- */
   var panel = document.createElement('div');
@@ -42,20 +42,18 @@
   panel.id = 'mnav';
   panel.innerHTML =
     '<div class="mnav-scroll"><div class="mnav-inner">' +
-      '<nav aria-label="Huvudmeny"><ol class="mnav-list">' +
+      '<nav aria-label="Huvudmeny"><ul class="mnav-list">' +
       ITEMS.map(function (it, i) {
-        // Aktuell sida; case-sidorna hör till Case (som pekar på startsidans sektion, därför aria-current="true")
+        // Aktuell sida; case-sidorna hör till Projekt (som pekar på startsidans sektion, därför aria-current="true")
         var page = norm(it[1].split('#')[0]) === here && it[1].indexOf('#') < 0;
-        var cur = page || (it[0] === 'Case' && /^\/case-/.test(here));
+        var cur = page || (it[0] === 'Projekt' && /^\/case-/.test(here));
         return '<li class="mnav-item" style="--i:' + i + '"><a class="mnav-link" href="' + it[1] + '"' + (cur ? ' aria-current="' + (page ? 'page' : 'true') + '"' : '') + '>' +
-          '<span class="mnav-n" aria-hidden="true">0' + (i + 1) + '</span>' +
-          '<span><span class="mnav-t">' + it[0] + '</span>' +
-          '<span class="mnav-d">' + (cur ? '<span class="mnav-here">Du är här</span>' : it[2]) + '</span></span>' + ARROW + '</a></li>';
+          '<span class="mnav-t">' + it[0] + '</span></a></li>';
       }).join('') +
-      '</ol></nav>' +
-      '<div class="mnav-foot mnav-item" style="--i:6.5">' +
-        '<a class="mnav-cta" href="' + esc(ctaHref) + '">' + esc(ctaText) + ' <span aria-hidden="true">→</span></a>' +
-        '<p class="mnav-contact"><a href="mailto:hej@studioklaro.se">hej@studioklaro.se</a><span>Stockholm · Vardagar 09–17</span></p>' +
+      '</ul></nav>' +
+      '<div class="mnav-foot">' +
+        '<a class="mnav-cta mnav-item" style="--i:5" href="' + esc(ctaHref) + '">' + esc(ctaText) + ' <span class="mnav-cta-arrow" aria-hidden="true">↗</span></a>' +
+        '<p class="mnav-contact mnav-item" style="--i:6"><a href="mailto:hej@studioklaro.se">hej@studioklaro.se</a></p>' +
       '</div>' +
     '</div></div>';
   document.body.appendChild(panel);
@@ -63,7 +61,8 @@
 
   toggle.setAttribute('aria-controls', 'mnav');
   toggle.setAttribute('aria-expanded', 'false');
-  toggle.setAttribute('aria-label', 'Öppna meny');
+  toggle.removeAttribute('aria-label');               // namnet är den synliga texten
+  var label = toggle.querySelector('.mnav-label');
 
   /* ---------- Bakgrunden: inert medan menyn är öppen (headern med logga och knapp undantas) ---------- */
   var inerted = [];
@@ -90,7 +89,8 @@
   function setIcon(open) {
     root.classList.toggle('mnav-open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    toggle.setAttribute('aria-label', open ? 'Stäng meny' : 'Öppna meny');
+    if (label) label.textContent = open ? 'Stäng' : 'Meny';
+    else toggle.setAttribute('aria-label', open ? 'Stäng meny' : 'Öppna meny');
   }
 
   function open() {
@@ -110,7 +110,7 @@
     focusT = setTimeout(function () {
       var first = panel.querySelector('.mnav-link');
       if (isOpen && first) first.focus({ preventScroll: true });
-    }, reduce ? 0 : 200);
+    }, reduce ? 0 : 120);
   }
 
   // Stänger: innehållet tonas bort, panelen dras upp mot headern, krysset blir menyikon, fokus till knappen

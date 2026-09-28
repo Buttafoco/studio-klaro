@@ -743,30 +743,30 @@
 <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');var c=document.documentElement.classList;c.add('pt-arrive','pt-fast');if(sessionStorage.getItem('pt-cover')){sessionStorage.removeItem('pt-cover');c.add('pt-cover');setTimeout(function(){c.remove('pt-cover','pt-cover-out');},3000);}var ptY=sessionStorage.getItem('pt-y');sessionStorage.removeItem('pt-y');if(ptY&&!location.hash){window.__ptY=+ptY;c.add('pt-hold');setTimeout(function(){c.remove('pt-hold');},1000);}}}catch(e){}</script>
 <link rel="stylesheet" href="/src/page-transition.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
-<link rel="stylesheet" href="/src/nav-glass.css">
+<link rel="stylesheet" href="/src/site-header.css">
 </head>
 <body>
 
 <div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
 
   <!-- NAV -->
-  <header class="nav-wrap">
-    <nav class="nav-capsule" aria-label="Huvudmeny">
-      <a href="/" aria-label="Studio Klaro – till startsidan" style="display:block;line-height:0;">
-        <img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166" style="height:30px;width:auto;display:block;">
-      </a>
-      <div data-rnav style="display:flex;align-items:center;gap:36px;font-size:14px;font-weight:600;color:#0F172A;">
-        <a href="/#processen" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Process</a>
-        <a href="/#portfolio" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Case</a>
-        <a href="/seo-koll" style="color:#146EF5;text-decoration:none;transition:color 0.2s ease;">SEO</a>
-        <a href="/priser" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Priser</a>
-        <a href="/om" style="color:#0F172A;text-decoration:none;transition:color 0.2s ease;">Om</a>
+  <header class="nav-wrap sh">
+    <div class="nav-capsule sh-bar">
+      <a class="sh-logo" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166"><span class="sh-logo-line" aria-hidden="true"></span></a>
+      <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
+        <ul class="sh-list">
+          <li><a class="sh-link" href="/#processen">Process</a></li>
+          <li><a class="sh-link" href="/#portfolio">Projekt</a></li>
+          <li><a class="sh-link" href="/seo-koll" aria-current="page">SEO</a></li>
+          <li><a class="sh-link" href="/priser">Priser</a></li>
+          <li><a class="sh-link" href="/om">Om</a></li>
+          <li class="sh-cta-item"><a class="sh-cta" data-rhide href="/#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
+        </ul>
+      </nav>
+      <div class="sh-menu" data-rshow style="display:none;">
+        <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
       </div>
-      <a data-rhide href="/#kontakt" class="btn-lift cta-nav" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(20,110,245,0.28);">Få en gratis genomgång</a>
-      <div data-rshow style="display:none;">
-        <button id="mnav-toggle" class="mnav-toggle" type="button" aria-label="Öppna meny" aria-expanded="false" aria-controls="mnav"><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
-      </div>
-    </nav>
+    </div>
   </header>
 
   <main>

@@ -389,9 +389,9 @@
 /* ---------- Övergången till kontaktsektionen (#kontakt) ----------
    Den visade projektresan är klar – nu kan besökarens egen börja. En kort linje lämnar LIVE-punkten,
    går rakt ned mellan grenarna (inte genom Klaro Care) och gör en mjuk båge till startpunkten
-   "Ditt första steg". På mobil: en kort lodrät anslutning. Ritas en gång per sidvisning när sektionen
-   når mitten av viewporten (IntersectionObserver + rAF, ~1,2 s på desktop, ~0,6 s på mobil); därefter
-   tonar etikett, rubrik och formulär in. Fokus i formuläret visar allt direkt. Reducerad rörelse: direkt. */
+   "Ditt första steg". På mobil: en kort lodrät anslutning. En gång per sidvisning, när ~22 % av sektionen
+   syns (IntersectionObserver, kopplas bort direkt): linjen ritas (rAF, ~0,7 s på desktop, ~0,4 s på mobil)
+   och samtidigt glider innehållet upp i tre steg (se .kx-in i klaro-journey.css). Fokus i formuläret visar allt direkt. Reducerad rörelse: direkt. */
 (function () {
   var kx = document.getElementById('kontakt');
   if (!kx || !kx.classList.contains('kx') || !('IntersectionObserver' in window)) return;
@@ -403,7 +403,11 @@
   var small = window.matchMedia('(max-width: 760px)');
   var ins = Array.prototype.slice.call(kx.querySelectorAll('.kx-in'));
   var total = 1, prog = 0, started = false, opened = false;
-  ins.forEach(function (el, i) { el.style.setProperty('--kx-i', i); });
+  // Tre steg: etikett, eyebrow och rubrik först, brödtexten +100 ms, formulär och trygghetsrad +220 ms
+  ins.forEach(function (el) {
+    var d = el.matches('.wz-shell, .wz-perks') ? 220 : (el.tagName === 'P' && !el.classList.contains('kx-start')) ? 100 : 0;
+    el.style.setProperty('--kx-d', d + 'ms');
+  });
   kx.classList.add('kx-js');
 
   function center(el, base) {
@@ -448,14 +452,14 @@
     if (started) return;
     started = true;
     if (reduce.matches) { finish(); return; }
-    var dur = small.matches ? 600 : 1200, t0 = null;
+    open(); // innehållet börjar direkt när sektionen nått in i viewporten; linjen ritas samtidigt
+    var dur = small.matches ? 400 : 700, t0 = null;
     function frame(now) {
       if (prog >= 1) return;
       if (t0 === null) t0 = now;
       var t = Math.min(1, (now - t0) / dur);
       prog = ease(t);
       render(prog);
-      if (t >= 0.72) open(); // rubrik och formulär börjar tona in när linjen närmar sig startpunkten
       if (t < 1) requestAnimationFrame(frame); else finish();
     }
     requestAnimationFrame(frame);
@@ -465,8 +469,8 @@
   if (reduce.matches) finish();
   else {
     var io = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) { draw(); io.disconnect(); }
-    }, { rootMargin: '0px 0px -50% 0px' });
+      if (entries[0].isIntersecting) { io.disconnect(); draw(); }
+    }, { threshold: 0.22 });
     io.observe(kx);
   }
   // Tangentbord eller hopp direkt till formuläret: visa allt direkt
