@@ -12,6 +12,9 @@
    Korta, mångtydiga ord (hår, mat, bar, foto, byrå) matchar bara som hela ord/böjningar.
    Varje nyckelord räknas en gång. Vinnaren måste nå MIN_SCORE och slå tvåan –
    vid lika eller svag matchning returneras null (standardordningen gäller).
+   Frisör/salong tävlar som en kategori men har två kort: nyckelorden är märkta som
+   hår (g: 'hair' → The Chairman, koden salon) eller skönhet (g: 'beauty' → Salong &
+   skönhet, koden beauty). Flest/starkast träffar avgör; vid lika blir det The Chairman.
    ========================================================================== */
 
 export const MIN_SCORE = 2;
@@ -34,18 +37,29 @@ export const LEADS = {
 // k: nyckelord, w: vikt, m: läge, forms: tillåtna hela ord, not: ord som aldrig ska matcha
 const RULES = {
   salon: [
-    { k: 'frisör', w: 3, m: 'contains' },
-    { k: 'barberare', w: 3, m: 'prefix' },
-    { k: 'barbershop', w: 3, m: 'prefix' },
-    { k: 'barber', w: 3, m: 'word', forms: ['barber', 'barbers', 'barbern'] },
-    { k: 'salong', w: 2, m: 'contains' },
-    { k: 'hår', w: 1, m: 'word', forms: ['hår', 'håret', 'hårvård', 'hårfärgning'] },
-    { k: 'klippning', w: 2, m: 'contains' },
-    { k: 'skönhet', w: 2, m: 'contains' },
-    { k: 'behandling', w: 1, m: 'contains', not: ['databehandling', 'personuppgiftsbehandling', 'ärendebehandling'] },
-    { k: 'naglar', w: 2, m: 'word', forms: ['naglar', 'naglarna', 'nagel', 'nagelsalong', 'nagelteknolog', 'nageltekniker', 'manikyr', 'pedikyr'] },
-    { k: 'fransar', w: 2, m: 'word', forms: ['fransar', 'fransarna', 'fransförlängning', 'fransstylist', 'lashes'] },
-    { k: 'bryn', w: 2, m: 'word', forms: ['bryn', 'brynen', 'ögonbryn', 'ögonbrynen', 'brynstyling'] }
+    // Hår → The Chairman Barber
+    { k: 'frisör', w: 3, m: 'contains', g: 'hair' },
+    { k: 'barberare', w: 3, m: 'prefix', g: 'hair' },
+    { k: 'barbershop', w: 3, m: 'prefix', g: 'hair' },
+    { k: 'barber', w: 3, m: 'word', g: 'hair', forms: ['barber', 'barbers', 'barbern'] },
+    { k: 'hårsalong', w: 3, m: 'contains', g: 'hair' },
+    { k: 'hår', w: 1, m: 'word', g: 'hair', forms: ['hår', 'håret', 'hårvård', 'hårfärgning', 'hårklippning', 'hårklippningar'] },
+    { k: 'frisyr', w: 2, m: 'contains', g: 'hair' },
+    { k: 'klippning', w: 2, m: 'contains', g: 'hair' },
+    { k: 'rakning', w: 2, m: 'contains', g: 'hair' },
+    { k: 'fade', w: 1, m: 'word', g: 'hair', forms: ['fade', 'fades', 'skinfade'] },
+    // Skönhet → Salong & skönhet ("salong" räknas hit, men väger mindre än tydliga hårord)
+    { k: 'salong', w: 2, m: 'contains', g: 'beauty', not: ['hårsalong', 'hårsalongen', 'hårsalonger'] },
+    { k: 'naglar', w: 2, m: 'word', g: 'beauty', forms: ['naglar', 'naglarna', 'nagel', 'nagelsalong', 'nagelsalongen', 'nagelteknolog', 'nageltekniker', 'manikyr', 'pedikyr'] },
+    { k: 'fransar', w: 2, m: 'word', g: 'beauty', forms: ['fransar', 'fransarna', 'fransförlängning', 'fransstylist', 'lashes'] },
+    { k: 'bryn', w: 2, m: 'word', g: 'beauty', forms: ['bryn', 'brynen', 'ögonbryn', 'ögonbrynen', 'brynstyling', 'brynbehandling', 'brynbehandlingar'] },
+    { k: 'hudvård', w: 2, m: 'contains', g: 'beauty' },
+    { k: 'ansiktsbehandling', w: 2, m: 'contains', g: 'beauty' },
+    { k: 'behandling', w: 1, m: 'contains', g: 'beauty', not: ['databehandling', 'personuppgiftsbehandling', 'ärendebehandling'] },
+    { k: 'massage', w: 2, m: 'contains', g: 'beauty' },
+    { k: 'massör', w: 2, m: 'prefix', g: 'beauty' },
+    { k: 'skönhet', w: 2, m: 'contains', g: 'beauty' },
+    { k: 'stylist', w: 2, m: 'contains', g: 'beauty' }
   ],
   restaurant: [
     { k: 'restaurang', w: 3, m: 'contains' },
@@ -109,12 +123,13 @@ function tokenMatches(rule, token) {
   return false;
 }
 
-// Poäng per kategori. Varje nyckelord räknas högst en gång.
-export function score(text) {
+// Poäng per kategori (och per grupp inom frisör/salong). Varje nyckelord räknas högst en gång.
+export function scoreDetailed(text) {
   const norm = normalize(text);
   const out = {};
+  const groups = { hair: 0, beauty: 0 };
   Object.keys(RULES).forEach((cat) => { out[cat] = 0; });
-  if (!norm) return out;
+  if (!norm) return { totals: out, groups };
   const tokens = norm.split(' ');
   const padded = ' ' + norm + ' ';
   Object.keys(RULES).forEach((cat) => {
@@ -122,21 +137,26 @@ export function score(text) {
       const hit = rule.m === 'phrase'
         ? rule.forms.some((f) => padded.indexOf(' ' + f + ' ') !== -1)
         : tokens.some((t) => tokenMatches(rule, t));
-      if (hit) out[cat] += rule.w;
+      if (hit) { out[cat] += rule.w; if (rule.g) groups[rule.g] += rule.w; }
     });
   });
-  return out;
+  return { totals: out, groups };
 }
 
-// Säker kategori eller null (tom text, okänd bransch, för svag eller oavgjord matchning)
+export function score(text) { return scoreDetailed(text).totals; }
+
+// Säker kategorikod (salon, beauty, restaurant, shop, creator, consultant) eller null (tom text, okänd bransch, för svag eller oavgjord matchning)
 export function categorize(text) {
-  const s = score(text);
+  const d = scoreDetailed(text);
+  const s = d.totals;
   let best = null, bestScore = 0, second = 0;
   Object.keys(s).forEach((cat) => {
     if (s[cat] > bestScore) { second = bestScore; bestScore = s[cat]; best = cat; }
     else if (s[cat] > second) second = s[cat];
   });
   if (bestScore < MIN_SCORE || bestScore === second) return null;
+  // Frisör/salong: hårord → The Chairman, skönhetsord → Salong & skönhet; lika → The Chairman
+  if (best === 'salon' && d.groups.beauty > d.groups.hair) return 'beauty';
   return best;
 }
 

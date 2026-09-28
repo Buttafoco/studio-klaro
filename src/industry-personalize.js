@@ -69,6 +69,8 @@ import { createIndustryPersonalizer, codeFromPath, codeFromParam, CARD_CODES } f
     var timer = null;
     var run = function () { timer = null; p.text(hero.value); };
     hero.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(run, 400); });
+    // Ingen debounce-timer kvar när sidan lämnas
+    window.addEventListener('pagehide', function () { clearTimeout(timer); timer = null; });
     // Webbläsaren kan återställa fältets text vid bakåtnavigering
     if (hero.value.trim()) run();
   }

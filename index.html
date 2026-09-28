@@ -2985,11 +2985,13 @@
 
     // Automatisk växling åt höger var 7:e sekund. Pausar när besökaren hovrar, har fokus i karusellen,
     // interagerar, när sektionen inte syns, när fliken är dold och helt vid prefers-reduced-motion.
+    // Efter en branschanpassning (autoOff) roterar karusellen aldrig mer under sidvisningen: det relevanta
+    // kortet ligger kvar tills besökaren själv navigerar, och besökaren har därefter kontrollen.
     var AUTO_MS = 7000, AUTO_ANIM_MS = 900;
-    var autoTimer = null, hovering = false, focused = false, inView = false;
+    var autoTimer = null, hovering = false, focused = false, inView = false, autoOff = false;
     function scheduleAuto() {
       clearTimeout(autoTimer);
-      if (reduceMotion.matches || hovering || focused || !inView || document.hidden) return;
+      if (autoOff || reduceMotion.matches || hovering || focused || !inView || document.hidden) return;
       autoTimer = setTimeout(function () {
         if (drag || touching || anim) { scheduleAuto(); return; }
         goTo(base() + 1, false, AUTO_ANIM_MS);
@@ -3007,6 +3009,9 @@
       if (!indTrack.contains(e.relatedTarget)) { focused = false; scheduleAuto(); }
     });
     document.addEventListener('visibilitychange', scheduleAuto);
+    // Inga timrar kvar när sidan lämnas (även vid bakåt-/framåtcache); pageshow startar om vid behov.
+    window.addEventListener('pagehide', function () { clearTimeout(autoTimer); autoTimer = null; });
+    window.addEventListener('pageshow', function (e) { if (e.persisted) scheduleAuto(); });
     if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', scheduleAuto);
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
@@ -3042,13 +3047,19 @@
         // Närmaste kopia av kortet (klon eller riktigt), så att förflyttningen blir så kort som möjligt
         var cur = base(), best = n + realIndex;
         [realIndex, n + realIndex, 2 * n + realIndex].forEach(function (c) { if (Math.abs(c - cur) < Math.abs(best - cur)) best = c; });
+        // Pausa autoplay för resten av sidvisningen – det anpassade kortet ska ligga kvar
+        autoOff = true;
+        clearTimeout(autoTimer);
+        autoTimer = null;
         if (best !== cur) goTo(best, !animate, 650);
         prime(base()); // efter goTo: målet kan ha flyttats ett varv till motsvarande kopia
-        scheduleAuto();
         return true;
       },
       touched: function () { return touched; },
-      inView: function () { return inView; }
+      inView: function () { return inView; },
+      autoplay: function () { return !autoOff && autoTimer !== null; },
+      // Städning om karusellen tas bort: stoppar autoplay och pågående animation
+      destroy: function () { autoOff = true; clearTimeout(autoTimer); autoTimer = null; stopAnim(); }
     };
   })();
 

@@ -13,9 +13,14 @@ describe('categorize – varje kategori', () => {
       'Vi är ett barbershop på Söder.',
       'Jag är barberare och vill ha fler kunder.',
       'Vi har en salong med klippning och färg.',
+      'Ny frisyr och skäggrakning för herrar'
+    ],
+    beauty: [
       'Skönhetssalong med behandlingar för ansikte och kropp',
       'Jag gör naglar och fransar',
-      'Bryn och fransar – vill synas mer'
+      'Bryn och fransar – vill synas mer',
+      'Hudvård och massage i Vasastan',
+      'Jag är stylist och har en egen salong'
     ],
     restaurant: [
       'Vi öppnar en restaurang och behöver en hemsida med meny och bordsbokning.',
@@ -52,6 +57,41 @@ describe('categorize – varje kategori', () => {
   }
 });
 
+describe('frisör/salong: The Chairman eller Salong & skönhet', () => {
+  test('"Jag driver en frisörsalong" → The Chairman', () => {
+    assert.equal(categorize('Jag driver en frisörsalong'), 'salon');
+    assert.equal(CARD_INDEX[categorize('Jag driver en frisörsalong')], 0);
+  });
+  test('"Nagelsalong med bokning" → Salong & skönhet', () => {
+    assert.equal(categorize('Nagelsalong med bokning'), 'beauty');
+    assert.equal(CARD_INDEX.beauty, 1);
+  });
+  test('"Fransar och brynbehandlingar" → Salong & skönhet', () => {
+    assert.equal(categorize('Fransar och brynbehandlingar'), 'beauty');
+  });
+  test('"Barberare och rakning" → The Chairman', () => {
+    assert.equal(categorize('Barberare och rakning'), 'salon');
+  });
+  test('båda typerna med tydlig poängskillnad', () => {
+    // hår: frisör 3 + barberare 3 = 6; skönhet: naglar 2
+    assert.equal(categorize('Frisör och barberare som också gör naglar'), 'salon');
+    // skönhet: skönhet 2 + salong 2 + ansiktsbehandling 2 + behandling 1 + massage 2 = 9; hår: klippning 2
+    assert.equal(categorize('Skönhetssalong med ansiktsbehandlingar, massage och lite klippning'), 'beauty');
+  });
+  test('"salong" utan tydligare hårord → Salong & skönhet; hårsalong → The Chairman', () => {
+    assert.equal(categorize('Vi har en liten salong'), 'beauty');
+    assert.equal(categorize('Hårsalong i Solna'), 'salon');
+  });
+  test('lika poäng → The Chairman', () => {
+    // hår: klippning 2; skönhet: salong 2
+    assert.equal(categorize('Salong med klippning'), 'salon');
+  });
+  test('frisör/salong tävlar som en kategori mot andra branscher', () => {
+    // salon totalt: fransar 2 + bryn 2 = 4; restaurant: café 3
+    assert.equal(categorize('Fransar och bryn, och ett litet café'), 'beauty');
+  });
+});
+
 describe('svenska böjningar, sammansättningar och versaler', () => {
   test('bestämd form och plural', () => {
     assert.equal(categorize('Frisören behöver ny sida'), 'salon');
@@ -62,7 +102,7 @@ describe('svenska böjningar, sammansättningar och versaler', () => {
   });
   test('sammansättningar', () => {
     assert.equal(categorize('Herrfrisör'), 'salon');
-    assert.equal(categorize('hårsalong i Solna'), 'salon');
+    assert.equal(categorize('skäggrakning'), 'salon');
     assert.equal(categorize('Klädbutik online'), 'shop');
     assert.equal(categorize('IT-konsult'), 'consultant');
   });
