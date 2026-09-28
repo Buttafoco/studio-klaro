@@ -234,7 +234,7 @@
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
 
-  /* Mörkt kapitel (kundomdömen och kundresan). JS sätter html.dk-on medan kapitlet fyller skärmen: då tonar hela sidans
+  /* Mörkt kapitel (kundresan). JS sätter html.dk-on medan kapitlet fyller skärmen: då tonar hela sidans
      bakgrund lugnt till varm svart och tillbaka, i båda scrollriktningarna. Utan JS / vid reducerad rörelse:
      kapitlet är statiskt mörkt och allt innehåll syns direkt. */
   @property --dk-ink{syntax:'<color>';inherits:true;initial-value:#F4F1EA;}
@@ -261,28 +261,12 @@
   .dk-js [data-dk]{opacity:0;transform:translateY(28px);transition:opacity .9s var(--dk-ease),transform .9s var(--dk-ease);transition-delay:var(--dk-d,0ms);}
   .dk-js [data-dk].in{opacity:1;transform:none;}
 
-  /* Omdömen */
-  /* Kundomdömen: rundade vita kort som inte länkar någonstans; lätt lyft vid hover */
-  .dk-reviews{text-align:center;}
-  .dk-reviews .dk-lead{margin-top:14px;}
-  .dk-rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:960px;margin:44px auto 0;text-align:left;}
-  .dk-rev{display:flex;flex-direction:column;margin:0;padding:30px 32px 28px;border-radius:24px;background:#fff;color:#0F172A;box-shadow:0 1px 2px rgba(15,23,42,0.04),0 12px 32px rgba(15,23,42,0.08);transition:translate .35s var(--dk-ease),box-shadow .35s var(--dk-ease);}
-  @media (hover:hover){ .dk-rev:hover{translate:0 -3px;box-shadow:0 1px 2px rgba(15,23,42,0.04),0 18px 40px rgba(15,23,42,0.12);} }
-  .dk-rev-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
-  .dk-stars{color:#146EF5;font-size:14px;letter-spacing:2px;line-height:1;}
-  .dk-rev-tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#146EF5;background:rgba(20,110,245,0.08);padding:6px 10px;border-radius:999px;}
-  .dk-rev blockquote{flex:1;margin:0 0 22px;font-size:19px;font-weight:600;line-height:1.45;letter-spacing:-0.01em;color:#0F172A;}
-  .dk-rev figcaption{display:flex;align-items:center;gap:12px;}
-  .dk-av{width:36px;height:36px;border-radius:50%;background:#146EF5;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;}
-  .dk-rev-name{font-size:14px;font-weight:700;color:#0F172A;}
-  @media (prefers-reduced-motion: reduce){ .dk-rev{transition:none;} .dk-rev:hover{translate:none;} }
 
   @media (max-width:900px){
     .dk{padding:96px 0 48px;}
   }
   @media (max-width:760px){
     .dk-inner{padding:0 16px;}
-    .dk-rev-grid{grid-template-columns:1fr;}
   }
 
   /* Scroll-reveal */
@@ -1127,6 +1111,7 @@
 <link rel="stylesheet" href="/src/page-transition.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/klaro-journey.css">
+<link rel="stylesheet" href="/src/social-proof.css">
 <link rel="stylesheet" href="/src/nav-glass.css">
 </head>
 <body>
@@ -1548,29 +1533,39 @@
     </div>
   </section>
 
-  <!-- MÖRKT KAPITEL: kundomdömen och kundresan (#processen) till och med "Detta ingår". Därefter ljusnar sidan inför kontakt.
+  <!-- KUNDOMDÖMEN: två kompakta kort. Endast verifierad information: citatet (exakt som kunden skrev det)
+       och namnet. Ingen företags-, roll- eller projektkoppling visas, eftersom den inte är dokumenterad.
+       Stil: src/social-proof.css. -->
+  <section id="referenser" class="sp" aria-labelledby="sp-title" data-wz-dock-clear>
+    <header class="sp-head" data-reveal>
+      <p class="sp-eyebrow">Kundomdömen</p>
+      <h2 id="sp-title" class="sp-title">Några ord från företag vi har hjälpt.</h2>
+      <p class="sp-intro">Riktiga omdömen från kunder vi har arbetat tillsammans med.</p>
+    </header>
+    <ul class="sp-cards" data-reveal>
+      <li class="sp-card sp-card--line">
+        <figure>
+          <p class="sp-stars"><span aria-hidden="true">★★★★★</span><span class="sr-only">Betyg: 5 av 5</span></p>
+          <blockquote><p>”Jätte bra service och rimligt pris!”</p></blockquote>
+          <figcaption><span class="sp-av" aria-hidden="true">A</span><span class="sp-name">Arian Ghasemi</span></figcaption>
+        </figure>
+      </li>
+      <li class="sp-card sp-card--tint">
+        <figure>
+          <p class="sp-stars"><span aria-hidden="true">★★★★★</span><span class="sr-only">Betyg: 5 av 5</span></p>
+          <blockquote><p>”Snabb och prisvärd upplevelse! Jättenöjd med min sida.”</p></blockquote>
+          <figcaption><span class="sp-av" aria-hidden="true">J</span><span class="sp-name">Johan Larsson</span></figcaption>
+        </figure>
+      </li>
+    </ul>
+  </section>
+
+  <!-- MÖRKT KAPITEL: kundresan (#processen) till och med "Detta ingår". Därefter ljusnar sidan inför kontakt.
        Hela sidans bakgrund tonar till mörkt medan kapitlet fyller skärmen (html.dk-on, sätts i JS). -->
   <div class="dk" id="dk">
     <div class="dk-inner">
 
       <!-- Kundomdömen: riktiga omdömen från kunder, inga länkar till externa plattformar -->
-      <section id="referenser" class="dk-reviews" aria-labelledby="dk-rev-title">
-        <div class="dk-eyebrow" data-dk>Kundomdömen</div>
-        <h2 id="dk-rev-title" class="dk-h3" data-dk>Ord från företag vi har hjälpt.</h2>
-        <p class="dk-lead" data-dk>Några ord från kunder som har fått hjälp med sin digitala närvaro.</p>
-        <div class="dk-rev-grid">
-          <figure class="dk-rev" data-dk>
-            <div class="dk-rev-top"><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span><span class="dk-rev-tag">Kundomdöme</span></div>
-            <blockquote>"Snabb och prisvärd upplevelse! Jättenöjd med min sida."</blockquote>
-            <figcaption><span class="dk-av" aria-hidden="true">J</span><span class="dk-rev-name">Johan Larsson</span></figcaption>
-          </figure>
-          <figure class="dk-rev" data-dk>
-            <div class="dk-rev-top"><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span><span class="dk-rev-tag">Kundomdöme</span></div>
-            <blockquote>"Jätte bra service och rimligt pris!"</blockquote>
-            <figcaption><span class="dk-av" aria-hidden="true">A</span><span class="dk-rev-name">Arian Ghasemi</span></figcaption>
-          </figure>
-        </div>
-      </section>
 
       <!-- KUNDRESAN: hela projektet i fyra kapitel med projektportalen som följer med.
            Stil: src/klaro-journey.css, beteende: src/klaro-journey.js. Portalvyerna är dekorativa (aria-hidden);
@@ -2209,7 +2204,7 @@
     setTimeout(function () { revealEls.forEach(function (el) { el.classList.add('is-visible'); }); }, 1800);
   }
 
-  /* ---------- Mörkt kapitel (kundomdömen och kundresan): sidans bakgrund och reveal ---------- */
+  /* ---------- Mörkt kapitel (kundresan): sidans bakgrund och reveal ---------- */
   (function () {
     var dk = document.getElementById('dk');
     if (!dk) return;
