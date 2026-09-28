@@ -1487,56 +1487,31 @@
     </div>
   </section>
 
-  <!-- ETT PROJEKT I VERKLIGHETEN: publicerat kundcase (The Chairman Barber) och kundomdömen.
-       Endast verifierbar information. Omdömena visas med namn men utan roll/företag och kopplas inte
-       till caset, eftersom den kopplingen inte är dokumenterad. Datablocket (pc-data) håller status
-       (published/concept) och kpis[] – KPI:er visas av src/social-proof.js först när värde, etikett,
-       mätperiod och källa finns (src/proof-kpi.mjs). Stil: src/social-proof.css. -->
+  <!-- KUNDOMDÖMEN: två kompakta kort. Endast verifierad information: citatet (exakt som kunden skrev det)
+       och namnet. Ingen företags-, roll- eller projektkoppling visas, eftersom den inte är dokumenterad.
+       Stil: src/social-proof.css. -->
   <section id="referenser" class="sp" aria-labelledby="sp-title" data-wz-dock-clear>
     <header class="sp-head" data-reveal>
-      <p class="sp-eyebrow">Ett projekt i verkligheten</p>
-      <h2 id="sp-title" class="sp-title">En tydligare väg till stolen.</h2>
-      <p class="sp-intro">För The Chairman Barber skapade vi ett digitalt uttryck som speglar det klassiska hantverket och gör vägen till behandling och bokning tydlig.</p>
+      <p class="sp-eyebrow">Kundomdömen</p>
+      <h2 id="sp-title" class="sp-title">Några ord från företag vi har hjälpt.</h2>
+      <p class="sp-intro">Riktiga omdömen från kunder vi har arbetat tillsammans med.</p>
     </header>
-
-    <article class="sp-case" aria-label="Kundcase: The Chairman Barber" data-reveal>
-      <script type="application/json" class="pc-data">{"id":"chairman","status":"published","company":"The Chairman Barber","industry":"Barberare","location":"Vasastan, Stockholm","url":"https://www.thechairmanbarber.se","caseUrl":"/hemsida-frisor-stockholm","kpis":[]}</script>
-      <figure class="sp-shot">
-        <div class="sp-browser">
-          <div class="sp-bar" aria-hidden="true"><i></i><i></i><i></i><em>thechairmanbarber.se</em></div>
-          <picture><source type="image/avif" srcset="/case/chairman/chairman-hero-desktop-640.avif 640w, /case/chairman/chairman-hero-desktop-960.avif 960w, /case/chairman/chairman-hero-desktop-1280.avif 1280w, /case/chairman/chairman-hero-desktop-1800.avif 1800w" sizes="(max-width:900px) calc(100vw - 24px), 720px"><source type="image/webp" srcset="/case/chairman/chairman-hero-desktop-640.webp 640w, /case/chairman/chairman-hero-desktop-960.webp 960w, /case/chairman/chairman-hero-desktop-1280.webp 1280w, /case/chairman/chairman-hero-desktop-1800.webp 1800w" sizes="(max-width:900px) calc(100vw - 24px), 720px"><img src="/case/chairman/chairman-hero-desktop-1280.webp" width="1800" height="1004" alt="Startsidan på The Chairman Barbers publicerade hemsida: rubriken Klassiskt hantverk. Modern precision. med knapparna Boka tid och Se behandlingar" loading="lazy" decoding="async"></picture>
-        </div>
-      </figure>
-      <ol class="sp-changes">
-        <li><span class="sp-n" aria-hidden="true">01</span><h3>Tjänster som går att förstå</h3><p>Behandlingar, innehåll och priser presenteras i en tydligare struktur.</p></li>
-        <li><span class="sp-n" aria-hidden="true">02</span><h3>Bokning när intresset är som störst</h3><p>Vägen till tidsbokning finns där kunden behöver den.</p></li>
-        <li><span class="sp-n" aria-hidden="true">03</span><h3>Samma känsla på varje skärm</h3><p>Uttrycket och kundresan fungerar på både mobil och desktop.</p></li>
-      </ol>
-      <div class="sp-kpis" data-kpi-slot hidden></div>
-    </article>
-
-    <div class="sp-voices" data-reveal>
-      <p class="sp-voices-k" id="sp-voices-k">Vad kunderna säger</p>
-      <div class="sp-quotes" role="list" aria-labelledby="sp-voices-k">
-        <figure class="sp-quote" role="listitem">
-          <span class="sp-mark" aria-hidden="true">“</span>
-          <span class="sp-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span>
-          <blockquote><p>Jätte bra service och rimligt pris!</p></blockquote>
-          <figcaption>Arian Ghasemi</figcaption>
+    <ul class="sp-cards" data-reveal>
+      <li class="sp-card sp-card--line">
+        <figure>
+          <p class="sp-stars"><span aria-hidden="true">★★★★★</span><span class="sr-only">Betyg: 5 av 5</span></p>
+          <blockquote><p>”Jätte bra service och rimligt pris!”</p></blockquote>
+          <figcaption><span class="sp-av" aria-hidden="true">A</span><span class="sp-name">Arian Ghasemi</span></figcaption>
         </figure>
-        <figure class="sp-quote" role="listitem">
-          <span class="sp-mark" aria-hidden="true">“</span>
-          <span class="sp-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span>
-          <blockquote><p>Snabb och prisvärd upplevelse! Jättenöjd med min sida.</p></blockquote>
-          <figcaption>Johan Larsson</figcaption>
+      </li>
+      <li class="sp-card sp-card--tint">
+        <figure>
+          <p class="sp-stars"><span aria-hidden="true">★★★★★</span><span class="sr-only">Betyg: 5 av 5</span></p>
+          <blockquote><p>”Snabb och prisvärd upplevelse! Jättenöjd med min sida.”</p></blockquote>
+          <figcaption><span class="sp-av" aria-hidden="true">J</span><span class="sp-name">Johan Larsson</span></figcaption>
         </figure>
-      </div>
-    </div>
-
-    <div class="sp-cta" data-reveal>
-      <a class="sp-btn" href="/hemsida-frisor-stockholm">Se hela projektet <span aria-hidden="true">→</span></a>
-      <a class="sp-link" href="https://www.thechairmanbarber.se" target="_blank" rel="noopener">Besök den publicerade hemsidan <span aria-hidden="true">↗</span><span class="sr-only"> (öppnas i en ny flik)</span></a>
-    </div>
+      </li>
+    </ul>
   </section>
 
   <!-- MÖRKT KAPITEL: kundresan (#processen) till och med "Detta ingår". Därefter ljusnar sidan inför kontakt.
@@ -3518,7 +3493,6 @@
 <script type="module" src="/src/mobile-nav.js"></script>
 <script type="module" src="/src/klaro-journey.js"></script>
 <script type="module" src="/src/industry-personalize.js"></script>
-<script type="module" src="/src/social-proof.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 </body>
 </html>

@@ -1,89 +1,39 @@
 /* ==========================================================================
-   Studio Klaro – "Ett projekt i verkligheten" (#referenser). Beteende: src/social-proof.js.
-   Ligger öppet på sidans ljusblå bakgrund (före det mörka kapitlet), utan panel eller platta.
-   Desktop: stor skärmbild (~62 %) till vänster, smal redaktionell kolumn med tre numrerade
-   förändringar till höger; därunder en lugn citatrad och en enda primär handling.
-   Mobil: rubrik → ingress → bild → förändringar → omdömen → CTA (DOM-ordning).
-   Blått används sparsamt: etikett, siffror och primär CTA.
+   Studio Klaro – kundomdömen på startsidan (#referenser).
+   Kompakt sektion på den ljusblå bakgrunden: två vita omdömeskort bredvid varandra (staplade
+   på mobil). Citatet är huvudsaken; stjärnor, initial och namn är diskreta. Korten skiljer sig
+   bara subtilt: tunn blå topplinje respektive svagt blåtonad bakgrund.
    ========================================================================== */
-.sp{--sp-ink:#0F172A;--sp-mute:#52657A;--sp-blue:#146EF5;--sp-blue-ink:#0F5AD1;--sp-line:rgba(15,23,42,0.12);
-  max-width:1200px;margin:120px auto 0;padding:0 24px;box-sizing:border-box;color:var(--sp-ink);}
+.sp{max-width:1140px;margin:100px auto 0;padding:0 20px;box-sizing:border-box;color:#0F172A;}
+.sp-head{max-width:640px;margin:0 auto 32px;text-align:center;}
+.sp-eyebrow{margin:0 0 12px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0F5AD1;}
+.sp-title{margin:0 0 10px;font-size:clamp(26px,3vw,34px);font-weight:800;line-height:1.15;letter-spacing:-0.02em;text-wrap:balance;}
+.sp-intro{margin:0;font-size:15.5px;line-height:1.6;font-weight:500;color:#52657A;}
 
-/* Introduktion */
-.sp-head{max-width:720px;}
-.sp-eyebrow{margin:0 0 14px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sp-blue-ink);}
-.sp-title{margin:0 0 16px;font-size:clamp(32px,4.2vw,54px);font-weight:800;line-height:1.05;letter-spacing:-0.035em;text-wrap:balance;}
-.sp-intro{margin:0;max-width:58ch;font-size:17px;line-height:1.65;font-weight:500;color:var(--sp-mute);}
+.sp-cards{list-style:none;margin:0 auto;padding:0;max-width:960px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:stretch;}
+.sp-card{position:relative;display:flex;border-radius:24px;border:1px solid rgba(15,23,42,0.08);background:#fff;overflow:hidden;
+  transition:border-color .2s ease,transform .25s cubic-bezier(0.22,1,0.36,1);}
+.sp-card--line::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:#146EF5;opacity:.85;}
+.sp-card--tint{background:#F6F9FF;}
+@media (hover:hover){ .sp-card:hover{border-color:rgba(20,110,245,0.28);transform:translateY(-2px);} }
+.sp-card figure{display:flex;flex-direction:column;width:100%;margin:0;padding:30px 30px 26px;}
+.sp-stars{margin:0 0 14px;color:#146EF5;font-size:13px;letter-spacing:2px;line-height:1;}
+.sp-card blockquote{margin:0;flex:1;}
+.sp-card blockquote p{margin:0;max-width:30ch;font-size:21px;font-weight:700;line-height:1.4;letter-spacing:-0.01em;color:#0F172A;text-wrap:pretty;}
+.sp-card figcaption{display:flex;align-items:center;gap:10px;margin-top:22px;}
+.sp-av{flex:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#EAF2FF;color:#0F5AD1;font-size:13px;font-weight:800;}
+.sp-name{font-size:14px;font-weight:700;color:#33445A;}
 
-/* Huvudkompositionen: bilden bär sektionen, texten är en smal kolumn */
-.sp-case{display:grid;grid-template-columns:minmax(0,66fr) minmax(0,34fr);gap:clamp(36px,4.5vw,64px);align-items:center;margin-top:56px;}
-.sp-data,.pc-data{display:none;}
-.sp-shot{margin:0;}
-.sp-browser{border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,0.06),0 30px 70px rgba(15,23,42,0.16);}
-.sp-bar{display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;background:#fff;border-bottom:1px solid rgba(15,23,42,0.07);}
-.sp-bar i{width:9px;height:9px;border-radius:50%;background:rgba(15,23,42,0.14);}
-.sp-bar em{margin-left:10px;font-style:normal;font-size:12px;font-weight:600;color:var(--sp-mute);}
-.sp-browser picture,.sp-browser img{display:block;width:100%;height:auto;aspect-ratio:1800/1004;}
-
-/* Tre numrerade förändringar – siffror och typografi skapar hierarkin, tunna linjer emellan */
-.sp-changes{list-style:none;margin:0;padding:0;}
-.sp-changes li{padding:22px 0;border-top:1px solid var(--sp-line);}
-.sp-changes li:first-child{padding-top:0;border-top:0;}
-.sp-changes li:last-child{padding-bottom:0;}
-.sp-n{display:block;margin-bottom:8px;font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--sp-blue-ink);font-variant-numeric:tabular-nums;}
-.sp-changes h3{margin:0 0 6px;font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-0.015em;color:var(--sp-ink);}
-.sp-changes p{margin:0;max-width:38ch;font-size:15.5px;line-height:1.6;font-weight:500;color:var(--sp-mute);}
-
-/* KPI:er (visas bara när riktiga värden finns) */
-.sp-kpis{grid-column:1 / -1;}
-.pc-kpi-list{margin:0;display:flex;flex-wrap:wrap;gap:12px 32px;}
-.pc-kpi{display:flex;flex-direction:column;}
-.pc-kpi-l{font-size:12.5px;font-weight:700;color:var(--sp-mute);}
-.pc-kpi-v{margin:2px 0 0;font-size:28px;font-weight:800;letter-spacing:-0.02em;color:var(--sp-ink);}
-.pc-kpi-src{margin:2px 0 0;font-size:12px;font-weight:600;color:var(--sp-mute);}
-
-/* Omdömen: en lugn horisontell citatrad, utan ramar */
-.sp-voices{margin-top:64px;padding-top:32px;border-top:1px solid var(--sp-line);}
-.sp-voices-k{margin:0 0 18px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sp-mute);}
-.sp-quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 56px;}
-.sp-quote{position:relative;margin:0;padding-left:52px;}
-.sp-mark{position:absolute;left:0;top:-14px;font-size:72px;font-weight:800;line-height:1;color:rgba(20,110,245,0.22);font-family:Georgia,'Times New Roman',serif;}
-.sp-stars{display:block;margin-bottom:8px;color:var(--sp-blue);font-size:12px;letter-spacing:2px;line-height:1;}
-.sp-quote blockquote{margin:0;}
-.sp-quote blockquote p{margin:0;font-size:20px;font-weight:700;line-height:1.4;letter-spacing:-0.01em;color:var(--sp-ink);text-wrap:pretty;}
-.sp-quote figcaption{margin-top:10px;font-size:14px;font-weight:700;color:var(--sp-mute);}
-
-/* En tydlig primär handling och en diskret textlänk */
-.sp-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;margin-top:40px;}
-.sp-btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 20px;border-radius:12px;background:var(--sp-blue);color:#fff;font-size:15px;font-weight:800;text-decoration:none;transition:background-color .2s ease;}
-.sp-btn span{transition:transform .25s cubic-bezier(0.22,1,0.36,1);}
-.sp-btn:hover{background:#1B63DA;color:#fff;}
-.sp-btn:hover span{transform:translateX(3px);}
-.sp-link{display:inline-flex;align-items:center;gap:5px;min-height:44px;font-size:14.5px;font-weight:700;color:var(--sp-mute);text-decoration:none;}
-.sp-link:hover{color:var(--sp-blue-ink);text-decoration:underline;text-underline-offset:3px;}
-.sp-btn:focus-visible,.sp-link:focus-visible{outline:2px solid var(--sp-blue);outline-offset:3px;border-radius:12px;}
-
-@media (max-width:900px){
-  .sp{margin-top:96px;}
-  .sp-case{grid-template-columns:1fr;gap:36px;margin-top:40px;}
-  .sp-changes p{max-width:52ch;}
-  .sp-quotes{grid-template-columns:1fr;gap:28px;}
-}
-@media (max-width:640px){
-  .sp{margin-top:80px;padding:0 16px;}
-  .sp-intro{font-size:16px;}
-  /* Bilden använder nästan hela skärmbredden */
-  .sp-shot{margin:0 -8px;}
-  .sp-browser{border-radius:20px;}
-  .sp-bar{height:32px;padding:0 12px;}
-  .sp-changes h3{font-size:18.5px;}
-  .sp-voices{margin-top:48px;}
-  .sp-quote{padding-left:40px;}
-  .sp-mark{font-size:60px;top:-10px;}
-  .sp-quote blockquote p{font-size:18px;}
-  .sp-cta{flex-direction:column;align-items:stretch;gap:4px;}
-  .sp-btn,.sp-link{justify-content:center;}
+@media (max-width:760px){
+  .sp{margin-top:72px;padding:0 16px;}
+  .sp-head{margin-bottom:24px;}
+  .sp-cards{grid-template-columns:1fr;gap:12px;}
+  .sp-card{border-radius:22px;}
+  .sp-card figure{padding:24px 22px 22px;}
+  .sp-card blockquote p{font-size:19px;max-width:none;}
+  .sp-card figcaption{margin-top:18px;}
 }
 @media (prefers-reduced-motion: reduce){
-  .sp-btn,.sp-btn span{transition:none;}
+  .sp-card{transition:none;}
+  .sp-card:hover{transform:none;}
 }
