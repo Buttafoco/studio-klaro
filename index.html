@@ -587,6 +587,10 @@
   .ind-eyebrow{font-size:12px;font-weight:700;color:#146EF5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
   .ind-h2{font-size:36px;font-weight:800;color:#0F172A;margin:0 0 12px;line-height:1.15;letter-spacing:-0.02em;text-wrap:balance;}
   .ind-lead{font-size:16px;color:#52657A;line-height:1.6;margin:0;font-weight:500;}
+  /* Underrubrikens varianter: samma cell, crossfade (höjden = den längsta varianten) */
+  .ind-lead{display:grid;}
+  .ind-lead-v{grid-area:1 / 1;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s;}
+  .ind-lead-v.is-on{opacity:1;visibility:visible;transition:opacity .6s ease .12s,visibility 0s;}
   .ind-track{list-style:none;margin:0;padding:12px calc(50% - var(--ind-w) / 2) 20px;display:flex;gap:var(--ind-gap);overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;position:relative;outline:none;cursor:grab;}
   /* Med kloner i ändarna (JS) behövs ingen sidopadding – klonerna fyller ut istället */
   .ind-track.has-clones{padding-left:0;padding-right:0;}
@@ -1180,7 +1184,17 @@
     <div class="ind-head" data-reveal>
       <div class="ind-eyebrow">HEMSIDOR FÖR SMÅFÖRETAG</div>
       <h2 id="ind-title" class="ind-h2">Hemsidor byggda för din bransch.</h2>
-      <p class="ind-lead">Utforska exempel anpassade efter olika verksamheter, kundresor och mål.</p>
+      <!-- Underrubriken byts av src/industry-personalize.js när besökarens egen text eller en landningssida
+           visar vilken typ av verksamhet det gäller. Alla varianter ligger staplade i samma cell så att höjden
+           är reserverad från start (ingen layoutförskjutning); bara den synliga läses upp. -->
+      <p class="ind-lead" id="ind-lead">
+        <span class="ind-lead-v is-on" data-lead="default">Utforska exempel anpassade efter olika verksamheter, kundresor och mål.</span>
+        <span class="ind-lead-v" data-lead="salon" aria-hidden="true">Exempel för verksamheter där behandlingar, förtroende och enkel bokning står i centrum.</span>
+        <span class="ind-lead-v" data-lead="restaurant" aria-hidden="true">Exempel där känslan, menyn och vägen till bokning behöver bli tydliga.</span>
+        <span class="ind-lead-v" data-lead="shop" aria-hidden="true">Exempel som gör produkter lättare att upptäcka, förstå och köpa.</span>
+        <span class="ind-lead-v" data-lead="creator" aria-hidden="true">Exempel där arbetet får stå i centrum och kontaktvägen känns självklar.</span>
+        <span class="ind-lead-v" data-lead="consultant" aria-hidden="true">Exempel som förklarar värdet tydligt och gör nästa steg enkelt.</span>
+      </p>
     </div>
 
     <div class="ind-viewport" data-reveal>
@@ -3005,6 +3019,37 @@
     }
 
     goTo(n, true);
+
+    // API för branschanpassningen (src/industry-personalize.js). show() centrerar ett kort utan att
+    // flytta fokus och avstår helt när besökaren själv har rört karusellen (drag, swipe, sidledes
+    // hjul/trackpad, piltangenter, tangentbordsfokus eller klick) – den kämpar aldrig emot besökaren.
+    var touched = false;
+    function touch() { touched = true; }
+    indTrack.addEventListener('scroll', function () { if (touching || drag) touch(); }, { passive: true });
+    indTrack.addEventListener('wheel', function (e) { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) touch(); }, { passive: true });
+    indTrack.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') touch(); });
+    indTrack.addEventListener('click', touch, true);
+    indTrack.addEventListener('focusin', function (e) { try { if (e.target.matches(':focus-visible')) touch(); } catch (err) {} });
+    // Aktivt kort och grannar laddas med prioritet (bilderna är annars lazy)
+    function prime(i) {
+      for (var k = i - 1; k <= i + 1; k++) {
+        if (all[k]) all[k].querySelectorAll('img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; });
+      }
+    }
+    indTrack.klaroIndustry = {
+      show: function (realIndex, animate) {
+        if (touched || drag || touching || realIndex < 0 || realIndex >= n) return false;
+        // Närmaste kopia av kortet (klon eller riktigt), så att förflyttningen blir så kort som möjligt
+        var cur = base(), best = n + realIndex;
+        [realIndex, n + realIndex, 2 * n + realIndex].forEach(function (c) { if (Math.abs(c - cur) < Math.abs(best - cur)) best = c; });
+        if (best !== cur) goTo(best, !animate, 650);
+        prime(base()); // efter goTo: målet kan ha flyttats ett varv till motsvarande kopia
+        scheduleAuto();
+        return true;
+      },
+      touched: function () { return touched; },
+      inView: function () { return inView; }
+    };
   })();
 
   /* ---------- KPI-graf "Synlighet som går att följa": intro, hover, dragning och tangentbord ----------
@@ -3438,6 +3483,7 @@
 <script type="module" src="/src/site-footer.js"></script>
 <script type="module" src="/src/mobile-nav.js"></script>
 <script type="module" src="/src/klaro-journey.js"></script>
+<script type="module" src="/src/industry-personalize.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node scripts/check-seo.mjs",
+    "test": "node scripts/check-seo.mjs && node --test \"tests/*.test.mjs\"",
     "check:seo:dist": "node scripts/check-seo.mjs dist",
     "dev": "vite",
     "build": "vite build"
