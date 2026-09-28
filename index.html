@@ -291,22 +291,37 @@
   [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1);}
   [data-reveal].is-visible{opacity:1;transform:translateY(0);}
 
-  /* FAQ – tillgänglig accordion (behåller chattbubbel-uttrycket) */
-  .faq-q-btn{background:#0F172A;color:#fff;font-size:15px;font-weight:700;padding:12px 18px;border-radius:16px 16px 4px 16px;max-width:75%;border:none;cursor:pointer;font-family:inherit;text-align:left;line-height:1.4;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);}
-  .faq-q-btn:hover{transform:translateY(-2px);}
-  .faq-rows{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.4s cubic-bezier(0.22,1,0.36,1);}
-  .faq-ans{display:flex;justify-content:flex-start;opacity:0;transition:opacity 0.35s cubic-bezier(0.22,1,0.36,1) 0.05s;}
-  /* FAQ – "Visa fler frågor" (innehållet finns alltid i DOM, döljs bara visuellt) */
-  .faq-more{height:0;overflow:hidden;visibility:hidden;transition:height 0.45s cubic-bezier(0.22,1,0.36,1),visibility 0s linear 0.45s;}
-  .faq-more.is-open{visibility:visible;transition:height 0.45s cubic-bezier(0.22,1,0.36,1),visibility 0s linear 0s;}
-  .faq-more-inner{display:flow-root;}
-  .faq-more-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(20,110,245,0.16);border-radius:999px;padding:12px 22px;font-family:inherit;font-size:14px;font-weight:700;color:#146EF5;cursor:pointer;box-shadow:0 6px 18px rgba(15,23,42,0.05);transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s ease;}
-  .faq-more-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,0.08);}
-  .faq-more-btn:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
-  .faq-more-ic{flex:none;display:block;transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);}
-  .faq-more-btn[aria-expanded="true"] .faq-more-ic{transform:rotate(180deg);}
+  /* FAQ – lugn, redaktionell accordion (en sammanhållen vit panel) */
+  .faq{max-width:900px;margin:84px auto 0;padding:0 20px;box-sizing:border-box;}
+  .faq-head{text-align:center;margin-bottom:28px;}
+  .faq-title{font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;letter-spacing:-0.01em;}
+  .faq-list{background:#fff;border:1px solid rgba(15,23,42,0.06);border-radius:24px;box-shadow:0 1px 2px rgba(15,23,42,0.04);overflow:hidden;}
+  .faq-item + .faq-item{border-top:1px solid rgba(15,23,42,0.08);}
+  .faq-h{margin:0;font-size:inherit;font-weight:inherit;}
+  .faq-q-btn{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;min-height:64px;padding:18px 26px;margin:0;background:transparent;border:0;border-radius:0;cursor:pointer;font-family:inherit;font-size:16px;font-weight:700;line-height:1.4;color:#0F172A;text-align:left;transition:background-color .2s ease,color .2s ease;}
+  .faq-q-btn:hover{background:rgba(20,110,245,0.035);}
+  .faq-q-btn:focus-visible{outline:2px solid #146EF5;outline-offset:-2px;border-radius:14px;}
+  .faq-q-text{flex:1 1 auto;min-width:0;}
+  .faq-icon{flex:none;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:999px;border:1px solid rgba(15,23,42,0.1);color:#52657A;transition:transform .3s cubic-bezier(0.22,1,0.36,1),background-color .2s ease,border-color .2s ease,color .2s ease;}
+  .faq-q-btn:hover .faq-icon{border-color:rgba(20,110,245,0.3);color:#146EF5;}
+  .faq-item.is-open .faq-icon{transform:rotate(45deg);background:rgba(20,110,245,0.08);border-color:transparent;color:#146EF5;}
+  .faq-rows{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s cubic-bezier(0.22,1,0.36,1);}
+  .faq-clip{overflow:hidden;min-height:0;visibility:hidden;transition:visibility 0s linear .32s;}
+  .faq-ans{opacity:0;transition:opacity .24s ease;}
+  .faq-ans p{margin:0;padding:0 84px 22px 26px;font-size:15px;line-height:1.65;color:#52657A;font-weight:500;max-width:68ch;}
+  .faq-item.is-open .faq-rows{grid-template-rows:1fr;}
+  .faq-item.is-open .faq-clip{visibility:visible;transition:visibility 0s linear 0s;}
+  .faq-item.is-open .faq-ans{opacity:1;transition:opacity .28s ease .06s;}
+  @media (max-width:640px){
+    .faq{margin-top:64px;padding:0 16px;}
+    .faq-title{font-size:24px;}
+    .faq-list{border-radius:20px;}
+    .faq-q-btn{min-height:56px;padding:16px 18px;gap:16px;font-size:15.5px;}
+    .faq-icon{width:30px;height:30px;}
+    .faq-ans p{padding:0 18px 20px;}
+  }
   @media (prefers-reduced-motion: reduce){
-    .faq-more{transition:visibility 0s;}
+    .faq-rows,.faq-clip,.faq-ans,.faq-icon,.faq-q-btn{transition:none!important;}
   }
 
   /* Portfolio – kontinuerligt diagonalt projektband. Bryter ut ur sidans 1440 px-behållare (--sbw sätts i JS). */
@@ -710,8 +725,6 @@
     [data-rshow]{display:block!important;}
     [data-rcta-h2]{font-size:24px!important;}
     [data-rcasewrap]{min-height:620px!important;}
-    .faq-q-btn{max-width:88%!important;}
-    .faq-ans > div{max-width:88%!important;}
   }
   @media (max-width:520px){
     [data-rgrid4]{grid-template-columns:1fr!important;}
@@ -1019,7 +1032,7 @@
 <script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
 <!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
-<noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-ans{opacity:1!important;}.faq-more{height:auto!important;visibility:visible!important;}.faq-more-btn,.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
+<noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}.faq-rows{grid-template-rows:1fr!important;}.faq-clip{visibility:visible!important;}.faq-ans{opacity:1!important;}.faq-icon{display:none!important;}.flex-acc-btn{display:none!important;}.flex-acc-panel{max-height:none!important;}</style></noscript>
 <!-- ===== KlaroIntro – början. Ta bort detta block och blocket i <body> för att stänga av. =====
      Varumärkesintro som visas en gång per flik (sessionStorage "studio-klaro-intro-seen-v1"): när startsidan
      öppnas i en ny flik eller ett nytt fönster – inte vid omladdning, bakåt/framåt eller intern navigering. Ligger kvar tills både minimitiden (2 s) har gått och sidan är färdigladdad,
@@ -1927,100 +1940,107 @@
     </div>
   </template>
 
-  <!-- FAQ -->
-  <div id="faq" style="max-width:800px;margin:100px auto 0;padding:0 20px;">
-    <div style="text-align:center;margin-bottom:44px;">
-      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Vanliga frågor innan vi sätter igång</h2>
+  <!-- FAQ – en sammanhållen accordion. Alla svar finns alltid i HTML:en
+       (sökmotorer och FAQPage-schemat ser dem); stängda svar döljs bara
+       visuellt och för skärmläsare. -->
+  <section id="faq" class="faq" aria-labelledby="faq-title" data-wz-dock-clear>
+    <div class="faq-head">
+      <h2 id="faq-title" class="faq-title">Vanliga frågor innan vi sätter igång</h2>
       <p style="font-size:15px;color:#52657A;margin:0;font-weight:500;">Här hittar du svar på de vanligaste frågorna om pris, material, leverans och vad som händer efter lanseringen.</p>
     </div>
-    <div data-reveal>
-
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-1">Vad behöver jag skicka in?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-1" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Du får ett enkelt formulär där du fyller i information om företaget och vad hemsidan behöver innehålla. Där kan du även ladda upp bilder, logotyp och annat material. Saknas något hjälper vi dig att reda ut vad som behövs.</div></div></div></div>
+    <div class="faq-list" data-reveal>
+      <div class="faq-item is-open">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-1" aria-expanded="true" aria-controls="faq-ans-1">
+            <span class="faq-q-text">Vad behöver jag skicka in?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-1" role="region" aria-labelledby="faq-q-1" class="faq-ans"><p>Du får ett enkelt formulär där du fyller i information om företaget och vad hemsidan behöver innehålla. Där kan du även ladda upp bilder, logotyp och annat material. Saknas något hjälper vi dig att reda ut vad som behövs.</p></div></div></div>
       </div>
-
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-2">Kan du hjälpa mig med texter och innehåll?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-2" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Vi hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig och anpassad efter dina kunder. Du behöver inte ha alla texter färdiga när projektet startar.</div></div></div></div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-2" aria-expanded="false" aria-controls="faq-ans-2">
+            <span class="faq-q-text">Kan du hjälpa mig med texter och innehåll?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-2" role="region" aria-labelledby="faq-q-2" class="faq-ans"><p>Ja. Vi hjälper till att strukturera och formulera innehållet så att hemsidan blir tydlig och anpassad efter dina kunder. Du behöver inte ha alla texter färdiga när projektet startar.</p></div></div></div>
       </div>
-
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-3">Hur lång tid tar det att få hemsidan klar?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-3" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det beror på upplägget. Startklar blir normalt klar inom 7–10 arbetsdagar (cirka 1–2 veckor), Professionell tar cirka 2–4 veckor och för Komplett närvaro anpassas tidsplanen efter projektets omfattning. Tiden påverkas också av hur snabbt material och feedback finns tillgängligt, och du får alltid en uppskattad tidsplan innan projektet startar.</div></div></div></div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-3" aria-expanded="false" aria-controls="faq-ans-3">
+            <span class="faq-q-text">Hur lång tid tar det att få hemsidan klar?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-3" role="region" aria-labelledby="faq-q-3" class="faq-ans"><p>Det beror på upplägget. Startklar blir normalt klar inom 7–10 arbetsdagar (cirka 1–2 veckor), Professionell tar cirka 2–4 veckor och för Komplett närvaro anpassas tidsplanen efter projektets omfattning. Tiden påverkas också av hur snabbt material och feedback finns tillgängligt, och du får alltid en uppskattad tidsplan innan projektet startar.</p></div></div></div>
       </div>
-
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-4">Hur kan jag följa projektet?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-4" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">När projektet startar får du tillgång till en personlig projektportal. Där ser du aktuell fas, nästa steg och den senaste versionen av hemsidan. Du kan även ladda upp material, granska och godkänna samt hitta projektets dokument.</div></div></div></div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-4" aria-expanded="false" aria-controls="faq-ans-4">
+            <span class="faq-q-text">Hur kan jag följa projektet?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-4" role="region" aria-labelledby="faq-q-4" class="faq-ans"><p>När projektet startar får du tillgång till en personlig projektportal. Där ser du aktuell fas, nästa steg och den senaste versionen av hemsidan. Du kan även ladda upp material, granska och godkänna samt hitta projektets dokument.</p></div></div></div>
       </div>
-
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-5">Hur många ändringar får jag göra?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-5" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Vi arbetar med löpande feedback i stället för ett fast antal korrekturrundor. Nya sidor, funktioner eller en helt ny riktning kan räknas som förändrad omfattning och offereras separat.</div></div></div></div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-5" aria-expanded="false" aria-controls="faq-ans-5">
+            <span class="faq-q-text">Hur många ändringar får jag göra?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-5" role="region" aria-labelledby="faq-q-5" class="faq-ans"><p>Vi arbetar med löpande feedback i stället för ett fast antal korrekturrundor. Nya sidor, funktioner eller en helt ny riktning kan räknas som förändrad omfattning och offereras separat.</p></div></div></div>
       </div>
-
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-          <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-6">Hur fungerar betalningen?</button>
-        </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-6" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Externa kostnader för exempelvis domän, hosting och e-post betalas separat.</div></div></div></div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-6" aria-expanded="false" aria-controls="faq-ans-6">
+            <span class="faq-q-text">Hur fungerar betalningen?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-6" role="region" aria-labelledby="faq-q-6" class="faq-ans"><p>50 procent betalas vid projektstart och resterande 50 procent innan hemsidan publiceras. Externa kostnader för exempelvis domän, hosting och e-post betalas separat.</p></div></div></div>
       </div>
-
-      <!-- Resterande frågor: alltid i DOM, endast visuellt dolda tills knappen klickas -->
-      <div id="faq-more" class="faq-more">
-        <div class="faq-more-inner">
-
-        <div class="faq-item" style="margin-bottom:22px;">
-            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-              <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-7">Ingår domän och webbplattform, och vem äger kontona?</button>
-            </div>
-            <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-7" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Vi hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst. Externa tjänster tecknas och betalas av dig, och domänen samt tillhörande konton står i ditt namn. Du behåller tillgången och kontrollen över din digitala närvaro.</div></div></div></div>
-        </div>
-
-        <div class="faq-item" style="margin-bottom:22px;">
-            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-              <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-8">Kan mitt befintliga bokningssystem användas?</button>
-            </div>
-            <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-8" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Hemsidan kan kopplas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. Mer avancerade eller specialbyggda bokningsfunktioner offereras separat.</div></div></div></div>
-        </div>
-
-        <div class="faq-item" style="margin-bottom:22px;">
-            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-              <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-9">Vad händer om jag inte har en logotyp?</button>
-            </div>
-            <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-9" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Vi kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du vill ta fram en ny logotyp pratar vi om behovet separat.</div></div></div></div>
-        </div>
-
-        <div class="faq-item" style="margin-bottom:22px;">
-            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-              <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-10">Kan jag ändra hemsidan efter lanseringen?</button>
-            </div>
-            <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-10" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care för löpande support och uppdateringar. Större förändringar och nya funktioner offereras separat.</div></div></div></div>
-        </div>
-
-        </div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-7" aria-expanded="false" aria-controls="faq-ans-7">
+            <span class="faq-q-text">Ingår domän och webbplattform, och vem äger kontona?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-7" role="region" aria-labelledby="faq-q-7" class="faq-ans"><p>Vi hjälper dig att välja och koppla domän, webbplattform och eventuell e-posttjänst. Externa tjänster tecknas och betalas av dig, och domänen samt tillhörande konton står i ditt namn. Du behåller tillgången och kontrollen över din digitala närvaro.</p></div></div></div>
       </div>
-
-      <div style="display:flex;justify-content:center;margin-top:10px;">
-        <button type="button" id="faq-more-btn" class="faq-more-btn" aria-expanded="false" aria-controls="faq-more">
-          <span class="faq-more-label">Visa fler frågor</span>
-          <svg class="faq-more-ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5 12 15.5 18 9.5"/></svg>
-        </button>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-8" aria-expanded="false" aria-controls="faq-ans-8">
+            <span class="faq-q-text">Kan mitt befintliga bokningssystem användas?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-8" role="region" aria-labelledby="faq-q-8" class="faq-ans"><p>Ja. Hemsidan kan kopplas till exempelvis Bokadirekt, Timma, Fresha eller ett annat befintligt bokningssystem. Mer avancerade eller specialbyggda bokningsfunktioner offereras separat.</p></div></div></div>
       </div>
-
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-9" aria-expanded="false" aria-controls="faq-ans-9">
+            <span class="faq-q-text">Vad händer om jag inte har en logotyp?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-9" role="region" aria-labelledby="faq-q-9" class="faq-ans"><p>Det går bra att skapa en professionell hemsida även utan en färdig logotyp. Vi kan bygga ett tydligt visuellt uttryck med färger, typografi och företagsnamnet. Om du vill ta fram en ny logotyp pratar vi om behovet separat.</p></div></div></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button type="button" class="faq-q-btn" id="faq-q-10" aria-expanded="false" aria-controls="faq-ans-10">
+            <span class="faq-q-text">Kan jag ändra hemsidan efter lanseringen?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-10" role="region" aria-labelledby="faq-q-10" class="faq-ans"><p>Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care för löpande support och uppdateringar. Större förändringar och nya funktioner offereras separat.</p></div></div></div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- EN SISTA KOLL – ersätter den generiska CTA-remsan före footern -->
   <section class="lc" id="sista-koll" aria-labelledby="lc-title">
@@ -2240,43 +2260,21 @@
     update();
   })();
 
-  /* ---------- FAQ accordion (tillgänglig) ---------- */
-  document.querySelectorAll('.faq-q-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-      var item = btn.closest('.faq-item');
-      var rows = item.querySelector('.faq-rows');
-      var ans = item.querySelector('.faq-ans');
-      rows.style.gridTemplateRows = open ? '0fr' : '1fr';
-      ans.style.opacity = open ? '0' : '1';
+  /* ---------- FAQ accordion (tillgänglig, en öppen åt gången) ---------- */
+  (function () {
+    var items = Array.prototype.slice.call(document.querySelectorAll('#faq .faq-item'));
+    function setOpen(item, open) {
+      item.classList.toggle('is-open', open);
+      item.querySelector('.faq-q-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    items.forEach(function (item) {
+      item.querySelector('.faq-q-btn').addEventListener('click', function () {
+        var willOpen = !item.classList.contains('is-open');
+        items.forEach(function (other) { if (other !== item) setOpen(other, false); });
+        setOpen(item, willOpen);
+      });
     });
-  });
-
-  /* "Visa fler frågor" – styr endast synligheten, allt innehåll finns i DOM */
-  var faqMoreTimer;
-  var faqMoreBtn = document.getElementById('faq-more-btn');
-  var faqMoreWrap = document.getElementById('faq-more');
-  if (faqMoreBtn && faqMoreWrap) {
-    faqMoreBtn.addEventListener('click', function () {
-      var open = faqMoreBtn.getAttribute('aria-expanded') === 'true';
-      faqMoreBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
-      var inner = faqMoreWrap.querySelector('.faq-more-inner');
-      clearTimeout(faqMoreTimer);
-      if (open) {
-        faqMoreWrap.style.height = inner.offsetHeight + 'px';
-        void faqMoreWrap.offsetHeight;
-        faqMoreWrap.classList.remove('is-open');
-        faqMoreWrap.style.height = '0px';
-      } else {
-        faqMoreWrap.classList.add('is-open');
-        faqMoreWrap.style.height = inner.offsetHeight + 'px';
-        /* Släpp höjden efteråt så att svar som fälls ut inte klipps */
-        faqMoreTimer = setTimeout(function () { faqMoreWrap.style.height = 'auto'; }, 480);
-      }
-      faqMoreBtn.querySelector('.faq-more-label').textContent = open ? 'Visa fler frågor' : 'Visa färre frågor';
-    });
-  }
+  })();
 
   /* ---------- Contact form ---------- */
   // Klistra in din access key från web3forms.com (mejlas till hej@studioklaro.se).
