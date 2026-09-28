@@ -236,7 +236,7 @@
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
 
-  /* Mörkt kapitel (omdömen → process). JS sätter html.dk-on medan kapitlet fyller skärmen: då tonar hela sidans
+  /* Mörkt kapitel (kundomdömen). JS sätter html.dk-on medan kapitlet fyller skärmen: då tonar hela sidans
      bakgrund lugnt till varm svart och tillbaka, i båda scrollriktningarna. Utan JS / vid reducerad rörelse:
      kapitlet är statiskt mörkt och allt innehåll syns direkt. */
   @property --dk-ink{syntax:'<color>';inherits:true;initial-value:#F4F1EA;}
@@ -256,8 +256,6 @@
   .dk:not(.dk-js){background:#1D1C1A;}
   .dk-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
   .dk-eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dk-accent);margin-bottom:18px;}
-  .dk-h2{font-size:clamp(40px,5.6vw,78px);font-weight:800;line-height:1.02;letter-spacing:-0.04em;margin:0 auto 22px;max-width:14ch;color:var(--dk-ink);text-wrap:balance;}
-  .dk-h2--sm{font-size:clamp(32px,4.2vw,56px);max-width:18ch;letter-spacing:-0.035em;}
   .dk-h3{font-size:clamp(24px,2.4vw,32px);font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin:0;color:var(--dk-ink);}
   .dk-lead{font-size:17px;line-height:1.65;font-weight:500;color:var(--dk-mute);max-width:560px;margin:0 auto;}
 
@@ -281,132 +279,12 @@
   .dk-rev-name{font-size:14px;font-weight:700;color:#0F172A;}
   @media (prefers-reduced-motion: reduce){ .dk-rev{transition:none;} .dk-rev:hover{translate:none;} }
 
-  /* Allt du får med */
-  .dk-intro{text-align:center;margin-top:150px;}
-
-  /* Projektportalen – mörk, ton-i-ton */
-  .dp{max-width:980px;margin:64px auto 0;text-align:left;background:#262421;border:1px solid rgba(244,241,234,0.09);border-radius:24px;box-shadow:0 40px 90px rgba(0,0,0,0.28);overflow:hidden;color:#F4F1EA;}
-  .dp-bar{display:flex;align-items:center;gap:7px;padding:13px 18px;border-bottom:1px solid rgba(244,241,234,0.07);}
-  .dp-bar span{width:9px;height:9px;border-radius:50%;background:rgba(244,241,234,0.16);}
-  .dp-bar em{font-style:normal;margin-left:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#9C968C;}
-  .dp-body{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;padding:18px;}
-  .dp-col{display:flex;flex-direction:column;gap:14px;}
-  .dp-part{background:#2D2B27;border:1px solid rgba(244,241,234,0.07);border-radius:16px;padding:18px;transition:opacity .9s ease,border-color .9s ease;}
-  .dp-phase{flex:1;display:flex;flex-direction:column;}
-  .dp-row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
-  .dp-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#9C968C;margin-bottom:6px;}
-  .dp-row .dp-label{margin-bottom:0;}
-  .dp-row > div .dp-label{margin-bottom:5px;}
-  .dp-title{font-size:26px;font-weight:800;letter-spacing:-0.02em;margin:10px 0 0;}
-  .dp-text{font-size:15px;font-weight:700;line-height:1.4;}
-  .dp-prev{margin-top:16px;border:1px solid rgba(244,241,234,0.08);border-radius:12px;overflow:hidden;background:rgba(244,241,234,0.03);}
-  .dp-prev-bar{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9C968C;padding:7px 10px;border-bottom:1px solid rgba(244,241,234,0.06);}
-  .dp-prev-page{padding:14px 14px 12px;display:flex;flex-direction:column;gap:7px;}
-  .dp-prev-page > i{display:block;height:8px;border-radius:4px;background:rgba(244,241,234,0.16);}
-  .dp-prev-page > i.w60{width:60%;height:11px;background:rgba(244,241,234,0.28);}
-  .dp-prev-page > i.w40{width:40%;}
-  .dp-prev-page b{display:block;width:84px;height:18px;border-radius:999px;background:#146EF5;margin:3px 0 4px;}
-  .dp-prev-page span{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
-  .dp-prev-page span i{height:34px;border-radius:6px;background:rgba(244,241,234,0.07);}
-  .dp-track{display:flex;gap:6px;margin-top:auto;padding-top:22px;}
-  .dp-track i{flex:1;height:6px;border-radius:999px;background:rgba(244,241,234,0.1);}
-  .dp-track i.is-done{background:#146EF5;}
-  .dp-track i.is-active{background:linear-gradient(90deg,#146EF5 0 60%,rgba(20,110,245,0.25) 60% 100%);}
-  .dp-meta{margin-top:10px;font-size:12px;font-weight:700;color:#9C968C;}
-  .dp-pill{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#A9C8FF;background:rgba(20,110,245,0.18);padding:4px 9px;border-radius:999px;transition:opacity .7s ease,transform .7s var(--dk-ease);}
-  .dp-file{display:flex;align-items:center;gap:10px;margin-top:9px;padding:9px 11px;border-radius:10px;background:rgba(244,241,234,0.04);font-size:13px;font-weight:600;color:#D9D4CA;}
-  .dp-file span{width:18px;height:18px;border-radius:5px;background:rgba(138,182,255,0.25);}
-  .dp-file em{font-style:normal;margin-left:auto;font-size:11px;font-weight:700;color:#9C968C;}
-  .dp-comment{display:flex;gap:10px;align-items:flex-start;margin-top:6px;}
-  .dp-av{width:24px;height:24px;border-radius:50%;flex:none;background:linear-gradient(135deg,#E8DCC8,#B59D7C);}
-  .dp-bubble{font-size:13px;font-weight:600;line-height:1.45;color:#EDE8DF;background:rgba(244,241,234,0.05);border-radius:4px 12px 12px 12px;padding:9px 12px;transition:opacity .8s ease,transform .8s var(--dk-ease);}
-  .dp-ok{flex:none;font-size:11px;font-weight:800;color:#9FE0B4;background:rgba(34,197,94,0.14);padding:5px 10px;border-radius:999px;transition:opacity .7s ease,transform .7s var(--dk-ease);}
-  /* Statusdelarna tänds i tur och ordning när portalen kommer in */
-  .dk-js .dp .dp-part{opacity:.45;}
-  .dk-js .dp.in .dp-part{opacity:1;transition-delay:calc(450ms + var(--dp-i,0) * 220ms);}
-  .dk-js .dp .dp-pill,.dk-js .dp .dp-ok{opacity:0;transform:scale(.9);}
-  .dk-js .dp.in .dp-pill,.dk-js .dp.in .dp-ok{opacity:1;transform:none;transition-delay:calc(700ms + var(--dp-i,0) * 220ms);}
-  .dk-js .dp .dp-bubble{opacity:0;transform:translateY(6px);}
-  .dk-js .dp.in .dp-bubble{opacity:1;transform:none;transition-delay:calc(700ms + var(--dp-i,0) * 220ms);}
-
-  /* Fördelarna – lugnt 2x2 med tunna avdelare */
-  .dk-benefits{list-style:none;margin:72px auto 0;padding:0;max-width:980px;display:grid;grid-template-columns:1fr 1fr;text-align:left;border-top:1px solid var(--dk-line);}
-  .dk-benefits li{padding:30px 36px 32px 4px;border-bottom:1px solid var(--dk-line);transition:background-color .4s ease;}
-  .dk-benefits li:nth-child(odd){border-right:1px solid var(--dk-line);}
-  .dk-benefits li:nth-child(even){padding-left:36px;}
-  .dk-benefits li:hover{background:var(--dk-surf);}
-  .dk-benefits h3{font-size:16px;font-weight:800;margin:0 0 8px;color:var(--dk-ink);}
-  .dk-benefits p{font-size:15px;line-height:1.6;margin:0;color:var(--dk-mute);font-weight:500;max-width:40ch;}
-
-  /* Detta ingår – kapslar som glider in från olika håll och lägger sig i en samling */
-  .dk-incl{text-align:center;margin-top:150px;}
-  .dk-pile{list-style:none;margin:48px auto 0;padding:0;max-width:760px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;}
-  .dk-cap{margin:-5px -6px;padding:16px 30px;border-radius:999px;font-size:clamp(17px,1.7vw,22px);font-weight:700;letter-spacing:-0.01em;transform:rotate(var(--r,0deg));box-shadow:0 12px 30px rgba(0,0,0,0.22);}
-  .dk-cap--blue{background:#2F5DA8;color:#F2F6FF;}
-  .dk-cap--sky{background:#BCD6F5;color:#0F2748;}
-  .dk-cap--beige{background:#E6D8C1;color:#3B2E1C;}
-  .dk-cap--sage{background:#C5D4BF;color:#1F3020;}
-  .dk-js .dk-cap{opacity:0;transform:translate(var(--fx,0),var(--fy,0)) rotate(calc(var(--r,0deg) * 4));transition:opacity 1.2s ease,transform 1.7s cubic-bezier(0.16,1,0.3,1);}
-  .dk-js .dk-pile.in .dk-cap{opacity:1;transform:rotate(var(--r,0deg));}
-  .dk-pile .dk-cap:nth-child(2){transition-delay:90ms;}
-  .dk-pile .dk-cap:nth-child(3){transition-delay:180ms;}
-  .dk-pile .dk-cap:nth-child(4){transition-delay:270ms;}
-  .dk-pile .dk-cap:nth-child(5){transition-delay:360ms;}
-  .dk-pile .dk-cap:nth-child(6){transition-delay:450ms;}
-  .dk-pkg{max-width:640px;margin:64px auto 0;text-align:left;}
-  .dk-pkg-h{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dk-mute);margin-bottom:8px;}
-  .dk-pkg ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--dk-line);}
-  .dk-pkg li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--dk-line);font-size:14px;font-weight:600;color:var(--dk-ink);}
-  .dk-pkg-tier{flex:none;font-size:13px;font-weight:600;color:var(--dk-mute);text-align:right;}
-  .dk-pkg-note{font-size:13px;line-height:1.6;color:var(--dk-mute);margin:14px 0 0;font-weight:500;}
-  .dk-pkg-note a{color:var(--dk-accent);font-weight:700;text-decoration:none;}
-  .dk-pkg-note a:hover{text-decoration:underline;}
-
-  /* Processen – kompakt tidslinje */
-  .dk-proc{margin-top:140px;scroll-margin-top:110px;}
-  .dk-proc .dk-h3{text-align:center;margin-bottom:48px;}
-  .dk-tl{--tl-inset:calc(100% / 12);position:relative;}
-  .dk-tl::before,.dk-tl-fill{content:'';position:absolute;top:6px;left:var(--tl-inset);right:var(--tl-inset);height:2px;border-radius:2px;}
-  .dk-tl::before{background:var(--dk-line);}
-  .dk-tl-fill{background:#146EF5;transform-origin:left center;transform:scaleX(var(--tl-p,1));transition:transform .6s var(--dk-ease);}
-  .dk-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:0 12px;position:relative;}
-  .dk-step{display:flex;flex-direction:column;align-items:center;text-align:center;}
-  .dk-dot{width:14px;height:14px;border-radius:50%;box-sizing:border-box;background:var(--dk-page);border:2px solid #146EF5;margin-bottom:18px;transition:background-color .4s ease,box-shadow .4s ease,border-color .4s ease;}
-  .dk-num{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--dk-mute);margin-bottom:6px;transition:color .4s ease;}
-  .dk-name{font-size:15px;font-weight:800;color:var(--dk-ink);margin-bottom:4px;transition:color .4s ease;}
-  .dk-desc{font-size:13px;line-height:1.45;color:var(--dk-mute);font-weight:500;max-width:150px;}
-  .dk-step.is-done .dk-dot{background:#146EF5;}
-  .dk-step.is-current .dk-dot{background:#146EF5;box-shadow:0 0 0 6px rgba(20,110,245,0.25);}
-  .dk-step.is-current .dk-name,.dk-step.is-current .dk-num{color:var(--dk-accent);}
-  .dk-tl-js .dk-step:not(.is-done):not(.is-current) .dk-dot{border-color:var(--dk-line);}
-
   @media (max-width:900px){
     .dk{padding:96px 0 104px;}
-    .dk-intro,.dk-incl{margin-top:112px;}
-    .dk-proc{margin-top:104px;}
-    .dp-body{grid-template-columns:1fr;}
   }
   @media (max-width:760px){
     .dk-inner{padding:0 16px;}
     .dk-rev-grid{grid-template-columns:1fr;}
-    .dk-benefits{grid-template-columns:1fr;margin-top:48px;}
-    .dk-benefits li,.dk-benefits li:nth-child(even){padding:22px 4px;border-right:0;}
-    .dk-benefits li:nth-child(odd){border-right:0;}
-    .dp{margin-top:44px;border-radius:20px;}
-    .dp-prev{display:none;}
-    .dp-body{padding:12px;gap:10px;}
-    .dp-col{gap:10px;}
-    .dk-cap{padding:12px 20px;margin:-4px -4px;}
-    .dk-pkg li{flex-direction:column;gap:2px;}
-    .dk-pkg-tier{text-align:left;}
-    .dk-proc .dk-h3{text-align:left;margin-bottom:28px;}
-    .dk-tl::before,.dk-tl-fill{top:7px;bottom:7px;left:6px;right:auto;width:2px;height:auto;}
-    .dk-tl-fill{transform-origin:center top;transform:scaleY(var(--tl-p,1));}
-    .dk-steps{grid-template-columns:1fr;gap:22px;}
-    .dk-step{display:grid;grid-template-columns:14px auto 1fr;column-gap:14px;align-items:baseline;text-align:left;}
-    .dk-dot{grid-row:1 / span 2;align-self:start;margin:2px 0 0;}
-    .dk-num,.dk-name{margin:0;}
-    .dk-desc{grid-column:2 / span 2;max-width:none;}
   }
 
   /* Scroll-reveal */
@@ -1196,6 +1074,7 @@
 <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');var c=document.documentElement.classList;c.add('pt-arrive','pt-fast');if(sessionStorage.getItem('pt-cover')){sessionStorage.removeItem('pt-cover');c.add('pt-cover');setTimeout(function(){c.remove('pt-cover','pt-cover-out');},3000);}var ptY=sessionStorage.getItem('pt-y');sessionStorage.removeItem('pt-y');if(ptY&&!location.hash){window.__ptY=+ptY;c.add('pt-hold');setTimeout(function(){c.remove('pt-hold');},1000);}}}catch(e){}</script>
 <link rel="stylesheet" href="/src/page-transition.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
+<link rel="stylesheet" href="/src/klaro-journey.css">
 <link rel="stylesheet" href="/src/nav-glass.css">
 </head>
 <body>
@@ -1607,7 +1486,7 @@
     </div>
   </section>
 
-  <!-- MÖRKT KAPITEL: omdömen, allt du får med, portal, fördelar, innehåll och process.
+  <!-- MÖRKT KAPITEL: kundomdömen. Därefter ljusnar sidan igen när kundresan (#processen) tar vid.
        Hela sidans bakgrund tonar till mörkt medan kapitlet fyller skärmen (html.dk-on, sätts i JS). -->
   <div class="dk" id="dk">
     <div class="dk-inner">
@@ -1631,98 +1510,257 @@
         </div>
       </section>
 
-      <!-- Allt du får med -->
-      <section id="projektportal" class="dk-intro" aria-labelledby="dk-title">
-        <div class="dk-eyebrow" data-dk>Allt du får med</div>
-        <h2 id="dk-title" class="dk-h2" data-dk>Mer än en färdig hemsida.</h2>
-        <p class="dk-lead" data-dk>Från första idé till lansering får du en tydlig process, en personlig projektportal och allt samlat på ett ställe.</p>
-
-        <!-- Projektportalen: ett sammanhängande gränssnitt -->
-        <div class="dp" data-dk role="img" aria-label="Illustration av projektportalen: aktuell fas Utveckling (steg 4 av 6), nästa steg, nytt uppladdat material, en kommentar på startsidan och en godkänd design.">
-          <div class="dp-bar" aria-hidden="true"><span></span><span></span><span></span><em>Projektportal</em></div>
-          <div class="dp-body" aria-hidden="true">
-            <div class="dp-col">
-              <div class="dp-part dp-phase" data-dp>
-                <div class="dp-row"><div class="dp-label">Aktuell fas</div><span class="dp-pill">Pågår</span></div>
-                <div class="dp-title">Utveckling</div>
-                <div class="dp-prev"><div class="dp-prev-bar">Senaste versionen</div><div class="dp-prev-page"><i class="w60"></i><i class="w40"></i><b></b><span><i></i><i></i><i></i></span></div></div>
-                <div class="dp-track"><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i class="is-active"></i><i></i><i></i></div>
-                <div class="dp-meta">Steg 4 av 6</div>
-              </div>
-              <div class="dp-part" data-dp>
-                <div class="dp-label">Nästa steg</div>
-                <div class="dp-text">Granska utkast av startsidan</div>
-              </div>
-            </div>
-            <div class="dp-col">
-              <div class="dp-part" data-dp>
-                <div class="dp-row"><div class="dp-label">Material</div><span class="dp-pill">Nytt</span></div>
-                <div class="dp-file"><span></span>Bilder<em>12 filer</em></div>
-                <div class="dp-file"><span></span>Texter<em>Uppladdat</em></div>
-              </div>
-              <div class="dp-part" data-dp>
-                <div class="dp-label">Feedback · Startsidan</div>
-                <div class="dp-comment"><span class="dp-av"></span><span class="dp-bubble">Kan vi lyfta fram bokningsknappen lite mer?</span></div>
-              </div>
-              <div class="dp-part" data-dp>
-                <div class="dp-row"><div><div class="dp-label">Godkännande</div><div class="dp-text">Design</div></div><span class="dp-ok">✓ Godkänd</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Fördelarna -->
-        <ul class="dk-benefits">
-          <li data-dk><h3>Personlig projektportal</h3><p>Följ aktuell fas, nästa steg och den senaste versionen av din hemsida.</p></li>
-          <li data-dk><h3>Tydlig process</h3><p>Du vet alltid vad som händer nu och vad som behöver göras härnäst.</p></li>
-          <li data-dk><h3>Feedback på ett ställe</h3><p>Material, kommentarer och godkännanden samlas utan långa mejltrådar.</p></li>
-          <li data-dk><h3>Stöd fram till lansering</h3><p>Vi håller ihop projektet och hjälper dig hela vägen fram till en färdig hemsida.</p></li>
-        </ul>
-      </section>
-
-      <!-- Detta ingår i ditt projekt -->
-      <section class="dk-incl" aria-labelledby="dk-incl-title">
-        <div class="dk-eyebrow" data-dk>Detta ingår i ditt projekt</div>
-        <h2 id="dk-incl-title" class="dk-h2 dk-h2--sm" data-dk>Det du behöver – samlat i ett projekt.</h2>
-        <p class="dk-lead" data-dk>Design, teknik och en tydlig process utan onödigt många verktyg eller kontaktvägar.</p>
-        <ul class="dk-pile" aria-label="Ingår i alla upplägg">
-          <li class="dk-cap dk-cap--blue" style="--fx:-220px;--fy:-60px;--r:-5deg;">Unik design</li>
-          <li class="dk-cap dk-cap--beige" style="--fx:0px;--fy:-140px;--r:3deg;">Mobilanpassning</li>
-          <li class="dk-cap dk-cap--sky" style="--fx:240px;--fy:-40px;--r:-2deg;">Grundläggande SEO</li>
-          <li class="dk-cap dk-cap--sage" style="--fx:-260px;--fy:90px;--r:4deg;">Projektportal</li>
-          <li class="dk-cap dk-cap--sky" style="--fx:60px;--fy:150px;--r:-4deg;">Publicering</li>
-          <li class="dk-cap dk-cap--beige" style="--fx:260px;--fy:110px;--r:2deg;">Löpande avstämningar</li>
-        </ul>
-        <div class="dk-pkg" data-dk>
-          <div class="dk-pkg-h">Beroende på upplägg</div>
-          <ul>
-            <li><span>Kontaktformulär</span><span class="dk-pkg-tier">Professionell, Komplett närvaro</span></li>
-            <li><span>Domänkoppling</span><span class="dk-pkg-tier">Professionell, Komplett närvaro</span></li>
-            <li><span>Google Företagsprofil och Analytics</span><span class="dk-pkg-tier">Professionell, Komplett närvaro</span></li>
-            <li><span>Lokal SEO-start och professionell mejladress</span><span class="dk-pkg-tier">Komplett närvaro</span></li>
-          </ul>
-          <p class="dk-pkg-note">Domän, mejl och andra externa tjänster betalas separat. <a href="/priser">Jämför uppläggen</a></p>
-        </div>
-      </section>
-
-      <!-- Processen -->
-      <section id="processen" class="dk-proc" aria-labelledby="dk-proc-title">
-        <h2 id="dk-proc-title" class="dk-h3" data-dk>Från idé till färdig hemsida</h2>
-        <div class="dk-tl" data-dk>
-          <span class="dk-tl-fill" aria-hidden="true"></span>
-          <ol class="dk-steps">
-            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">01</span><span class="dk-name">Projektstart</span><span class="dk-desc">Vi lär känna företaget</span></li>
-            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">02</span><span class="dk-name">Material</span><span class="dk-desc">Samla innehåll och inspiration</span></li>
-            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">03</span><span class="dk-name">Design</span><span class="dk-desc">Vi sätter det visuella uttrycket</span></li>
-            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">04</span><span class="dk-name">Utveckling</span><span class="dk-desc">Hemsidan tar form</span></li>
-            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">05</span><span class="dk-name">Granskning</span><span class="dk-desc">Vi finslipar tillsammans</span></li>
-            <li class="dk-step"><span class="dk-dot" aria-hidden="true"></span><span class="dk-num">06</span><span class="dk-name">Lansering</span><span class="dk-desc">Dags att gå live</span></li>
-          </ol>
-        </div>
-      </section>
-
     </div>
   </div>
+
+  <!-- KUNDRESAN: hela projektet i fyra kapitel med projektportalen som följer med.
+       Stil: src/klaro-journey.css, beteende: src/klaro-journey.js. Portalvyerna är dekorativa (aria-hidden);
+       allt viktigt finns i kapitlens text. ≥1024px flyttas vyerna in i det sticky portalfönstret. -->
+  <section id="processen" class="kj" aria-labelledby="kj-title">
+    <div class="kj-inner">
+      <header class="kj-head" id="projektportal" data-reveal>
+        <p class="kj-eyebrow">Hela resan samlad</p>
+        <h2 id="kj-title" class="kj-h2">Mer än en färdig hemsida. <span>En tydlig väg dit – och vidare.</span></h2>
+        <p class="kj-lead">Från första materialet till lansering följer du projektet i din personliga portal. Du ser vad som händer nu, vad som kommer härnäst och vad vi behöver från varandra – utan långa mejltrådar eller otydliga överlämningar.</p>
+      </header>
+
+      <div class="kj-story">
+        <div class="kj-chapters">
+          <div class="kj-rail" aria-hidden="true"><span class="kj-rail-fill"></span></div>
+          <ol class="kj-ch-list">
+
+          <!-- 01 Starten -->
+          <li class="kj-ch" id="kj-ch-1">
+            <span class="kj-node" aria-hidden="true">01</span>
+            <p class="kj-kicker">Starten</p>
+            <h3>Vi börjar på samma sida.</h3>
+            <div class="kj-frame" data-theme="start" aria-hidden="true">
+              <div class="kj-top">
+                <span class="kj-brand"><span class="kj-logo" data-wait><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span><span class="kj-logo-ph">Din logotyp</span></span>
+                <span class="kj-frame-phase">Start</span>
+              </div>
+              <div class="kj-frame-body">
+                <div class="kj-view" data-view="0">
+                  <div class="kj-msg kj-up">
+                    <span class="kj-av">SK</span>
+                    <div class="kj-msg-b">
+                      <div class="kj-msg-h">Studio Klaro <span>Välkommen</span></div>
+                      <p>Välkommen in i ditt projekt! Här samlar vi material, versioner och nästa steg. Börja med det du redan har – resten reder vi ut tillsammans.</p>
+                    </div>
+                  </div>
+                  <div class="kj-card kj-mat kj-up" style="--d:1">
+                    <div class="kj-row"><span class="kj-label">Material för start</span><span class="kj-pill kj-swap"><span class="a">1 av 3 delar klara</span><span class="b">2 av 3 delar klara</span></span></div>
+                    <div class="kj-meter"><i style="--w:.67"></i></div>
+                    <ul class="kj-list">
+                      <li class="kj-upl-row is-done"><span class="kj-chk"></span><span class="kj-upl">Logotyp<span class="kj-meter"><i></i></span></span><em>logotyp.svg</em></li>
+                      <li class="is-done"><span class="kj-chk"></span>Texter om företaget<em>Inskickat</em></li>
+                      <li><span class="kj-chk"></span>Bilder och inspiration<em>Väntar</em></li>
+                    </ul>
+                  </div>
+                  <div class="kj-next kj-up" style="--d:2">
+                    <div><span class="kj-label">Nästa steg</span><b>Skicka in material</b></div>
+                    <span class="kj-btn">Ladda upp <span>→</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p>Du välkomnas in i projektet och får en tydlig introduktion till hur samarbetet fungerar. Börja med logotyp, innehåll och inspiration – resten hjälper vi dig att reda ut.</p>
+            <ul class="kj-points">
+              <li>Personlig introduktion</li>
+              <li>Logotyp och material på ett ställe</li>
+              <li>Tydligt vad som behövs för att starta</li>
+            </ul>
+            <div class="kj-next-hint" aria-hidden="true">Nästa: 02 Bygget</div>
+          </li>
+
+          <!-- 02 Bygget -->
+          <li class="kj-ch" id="kj-ch-2">
+            <span class="kj-node" aria-hidden="true">02</span>
+            <p class="kj-kicker">Bygget</p>
+            <h3>Du ser hemsidan växa fram.</h3>
+            <div class="kj-frame" data-theme="build" aria-hidden="true">
+              <div class="kj-top">
+                <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span>
+                <span class="kj-frame-phase">Bygge</span>
+              </div>
+              <div class="kj-frame-body">
+                <div class="kj-view" data-view="1">
+                  <div class="kj-okbar kj-up"><span class="kj-chk is-done"></span>Designgrund godkänd<span>Färg, typsnitt och uttryck</span></div>
+                  <div class="kj-grid">
+                    <div class="kj-card kj-up" style="--d:1">
+                      <span class="kj-label">Versioner</span>
+                      <ul class="kj-vers">
+                        <li class="is-new"><span class="kj-vtag">V2</span><div><b>Version 2</b><span>Publicerad i dag</span></div><span class="kj-pill">Ny</span></li>
+                        <li><span class="kj-vtag">V1</span><div><b>Version 1</b><span>Granskad</span></div></li>
+                      </ul>
+                      <div class="kj-thumb"><i class="w60"></i><i class="w40"></i><b></b><span><i></i><i></i><i></i></span></div>
+                    </div>
+                    <div class="kj-col">
+                      <div class="kj-card kj-up" style="--d:2">
+                        <span class="kj-label">Vad har ändrats?</span>
+                        <ul class="kj-changes">
+                          <li>Startsidan har uppdaterats</li>
+                          <li>Tjänsterna har fått tydligare struktur</li>
+                          <li>Mobilvyn är redo att granskas</li>
+                        </ul>
+                      </div>
+                      <div class="kj-card kj-up" style="--d:3">
+                        <span class="kj-label">Feedback · Version 2</span>
+                        <div class="kj-input">Skriv din återkoppling …</div>
+                        <div class="kj-row"><span class="kj-pill kj-pill--dot">Din återkoppling behövs</span><span class="kj-btn">Skicka</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p>Vi börjar med designgrunden och bygger sedan vidare i tydliga versioner. Du kan se vad som har ändrats, lämna feedback och följa dialogen medan arbetet pågår.</p>
+            <ul class="kj-points">
+              <li>Designgrunden godkänns först</li>
+              <li>Nya versioner publiceras löpande</li>
+              <li>Feedback kopplas till rätt version</li>
+            </ul>
+            <div class="kj-next-hint" aria-hidden="true">Nästa: 03 Lanseringen</div>
+          </li>
+
+          <!-- 03 Lanseringen -->
+          <li class="kj-ch" id="kj-ch-3">
+            <span class="kj-node" aria-hidden="true">03</span>
+            <p class="kj-kicker">Lanseringen</p>
+            <h3>Vi går live tillsammans.</h3>
+            <div class="kj-frame" data-theme="launch" aria-hidden="true">
+              <div class="kj-top">
+                <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span>
+                <span class="kj-frame-phase">Lansering</span>
+              </div>
+              <div class="kj-frame-body">
+                <div class="kj-view" data-view="2">
+                  <div class="kj-launch kj-up">
+                    <div class="kj-row">
+                      <div><span class="kj-label">Status</span><span class="kj-launch-st kj-swap"><span class="a">Redo för lansering</span><span class="b"><i class="kj-dot"></i>Live</span></span></div>
+                      <span class="kj-addr"><i class="kj-dot"></i>www.dittforetag.se</span>
+                    </div>
+                    <div class="kj-meter"><i></i></div>
+                    <div class="kj-launch-meta"><span>Slutgodkänd</span><span>Publicerad</span></div>
+                  </div>
+                  <div class="kj-card kj-up" style="--d:1">
+                    <span class="kj-label">Checklista inför lansering</span>
+                    <ul class="kj-list">
+                      <li class="is-done"><span class="kj-chk kj-chk--ok"></span>Gemensamt slutgodkännande<em>Klart</em></li>
+                      <li class="is-done"><span class="kj-chk kj-chk--ok"></span>Domän bekräftad<em>dittforetag.se</em></li>
+                      <li class="is-done kj-tick-late"><span class="kj-chk kj-chk--ok"></span>DNS och åtkomst ordnad<em>Klart</em></li>
+                      <li class="is-done kj-tick-late"><span class="kj-chk kj-chk--ok"></span>SSL och länkar kontrollerade<em>Klart</em></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p>När vi båda är nöjda hjälper vi till med de sista stegen. Domän, säker anslutning och publicering samlas i en tydlig checklista så att inget faller mellan stolarna.</p>
+            <ul class="kj-points">
+              <li>Gemensamt slutgodkännande</li>
+              <li>Hjälp med domän och teknik</li>
+              <li>Kontrollerad publicering</li>
+            </ul>
+            <div class="kj-next-hint" aria-hidden="true">Nästa: 04 Fortsättningen</div>
+          </li>
+
+          <!-- 04 Fortsättningen -->
+          <li class="kj-ch" id="kj-ch-4">
+            <span class="kj-node" aria-hidden="true">04</span>
+            <p class="kj-kicker">Fortsättningen</p>
+            <h3>Lanseringen behöver inte vara slutet.</h3>
+            <div class="kj-frame" data-theme="care" aria-hidden="true">
+              <div class="kj-top">
+                <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span>
+                <span class="kj-frame-phase">Efter lansering</span>
+              </div>
+              <div class="kj-frame-body">
+                <div class="kj-view" data-view="3">
+                  <div class="kj-card kj-livecard kj-up">
+                    <div><span class="kj-live"><i class="kj-dot"></i>Hemsidan är live</span><b>www.dittforetag.se</b></div>
+                    <div class="kj-last"><span class="kj-label">Senaste kontroll</span><b>I dag · Allt fungerar</b></div>
+                  </div>
+                  <div class="kj-care kj-up" style="--d:1">
+                    <div class="kj-row">
+                      <div><span class="kj-opt">Valfritt efter lansering</span><b class="kj-care-t">Klaro Care</b></div>
+                      <span class="kj-btn">Skicka en ny förfrågan</span>
+                    </div>
+                    <ul class="kj-care-cards">
+                      <li><b>Uppdateringar</b><span>Mindre ändringar i text och bild</span></li>
+                      <li><b>Support</b><span>Hjälp när något behöver lösas</span></li>
+                      <li><b>Synlighet</b><span>Löpande förbättringar över tid</span></li>
+                    </ul>
+                    <p class="kj-care-note">Hemsidan är din – med eller utan Klaro Care.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p>Hemsidan är din när den är klar. Vill du fortsätta utveckla den finns Klaro Care som ett valfritt nästa kapitel – för mindre ändringar, stöd och löpande förbättringar.</p>
+            <ul class="kj-points">
+              <li>Hemsidan är fortfarande din</li>
+              <li>Klaro Care är helt valfritt</li>
+              <li>Fortsatt stöd och utveckling vid behov</li>
+            </ul>
+          </li>
+          </ol>
+        </div>
+
+        <!-- Sticky portalfönster (≥1024px): vyerna ovan flyttas hit av src/klaro-journey.js -->
+        <div class="kj-stage" aria-hidden="true">
+          <div class="kj-portal" data-theme="start">
+            <div class="kj-bar"><i></i><i></i><i></i><em>Studio Klaro · Projektportal</em></div>
+            <div class="kj-top">
+              <span class="kj-brand"><span class="kj-logo" data-wait><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span><span class="kj-logo-ph">Din logotyp</span></span>
+              <ol class="kj-phases"><li class="is-current">Start</li><li>Bygge</li><li>Lansering</li><li>Efter</li></ol>
+            </div>
+            <div class="kj-viewport"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avslutning -->
+      <div class="kj-end" data-reveal>
+        <div>
+          <h3>Du bygger inte ensam.</h3>
+          <p>Vi håller ihop projektet, visar vägen framåt och ser till att både du och hemsidan är redo när det är dags att gå live.</p>
+        </div>
+        <div class="kj-cta">
+          <a class="kj-cta-main btn-lift lift-primary" href="#kontakt">Starta din resa <span aria-hidden="true">→</span></a>
+          <a class="kj-cta-link" href="#kj-ch-1">Se hur processen fungerar</a>
+        </div>
+      </div>
+
+      <!-- Detta ingår: kompakt och sekundärt till resan -->
+      <section class="kj-incl" aria-labelledby="kj-incl-title">
+        <div class="kj-incl-head">
+          <h3 id="kj-incl-title">Detta ingår i ditt projekt</h3>
+          <a href="/priser">Jämför uppläggen <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="kj-incl-row">
+          <span class="kj-incl-k" id="kj-incl-always">Alltid med</span>
+          <ul class="kj-tags" aria-labelledby="kj-incl-always">
+            <li>Unik design</li>
+            <li>Mobilanpassning</li>
+            <li>Grundläggande SEO</li>
+            <li>Projektportal</li>
+            <li>Publicering</li>
+            <li>Löpande avstämningar</li>
+          </ul>
+        </div>
+        <details class="kj-more">
+          <summary>Beroende på upplägg <span>5 delar</span></summary>
+          <ul class="kj-pkg">
+            <li><span>Kontaktformulär</span><span>Professionell, Komplett närvaro</span></li>
+            <li><span>Domänkoppling</span><span>Professionell, Komplett närvaro</span></li>
+            <li><span>Google Företagsprofil och Analytics</span><span>Professionell, Komplett närvaro</span></li>
+            <li><span>Lokal SEO-start</span><span>Komplett närvaro</span></li>
+            <li><span>Professionell mejladress</span><span>Komplett närvaro</span></li>
+          </ul>
+          <p class="kj-pkg-note">Domän, mejl och andra externa tjänster betalas separat.</p>
+        </details>
+      </section>
+    </div>
+  </section>
 
   <!-- CONTACT (prompt-flöde i två steg + success) -->
   <div id="kontakt" style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
@@ -2096,23 +2134,15 @@
     setTimeout(function () { revealEls.forEach(function (el) { el.classList.add('is-visible'); }); }, 1800);
   }
 
-  /* ---------- Mörkt kapitel: sidans bakgrund, reveal, portalens statusdelar och tidslinjen ---------- */
+  /* ---------- Mörkt kapitel (kundomdömen): sidans bakgrund och reveal ---------- */
   (function () {
     var dk = document.getElementById('dk');
     if (!dk) return;
     var root = document.documentElement;
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var horizontal = window.matchMedia('(min-width: 761px)');
-    var tl = dk.querySelector('.dk-tl');
-    var steps = Array.prototype.slice.call(dk.querySelectorAll('.dk-step'));
-    var dots = steps.map(function (s) { return s.querySelector('.dk-dot'); });
-    // Ordning för portalens delar: fas, nästa steg, material, feedback, godkännande
-    Array.prototype.slice.call(dk.querySelectorAll('[data-dp]')).forEach(function (el, i) { el.style.setProperty('--dp-i', i); });
-
-    function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
     // Reveal: varje element tonar in en gång när det når viewporten; element som kommer in samtidigt staggas
-    var revealEls = Array.prototype.slice.call(dk.querySelectorAll('[data-dk], .dk-pile'));
+    var revealEls = Array.prototype.slice.call(dk.querySelectorAll('[data-dk]'));
     var io = null;
     function showAll() { revealEls.forEach(function (el) { el.classList.add('in'); }); }
     function setMode() {
@@ -2141,33 +2171,10 @@
       var still = reduceMotion.matches;
 
       // Hela sidan blir mörk medan kapitlet täcker mitten av skärmen (båda riktningarna).
-      // CTA:n under är dold i mörkt läge och tonar in i takt med att sidan ljusnar igen.
       if (!still) {
         var r = dk.getBoundingClientRect();
         root.classList.toggle('dk-on', r.top < vh * 0.55 && r.bottom > vh * 0.5);
       }
-
-      // Tidslinjen: stegen aktiveras successivt, aktuellt steg i blått
-      var fill, reached;
-      if (still) {
-        fill = 1; reached = steps.length;
-      } else if (horizontal.matches) {
-        var lr = tl.getBoundingClientRect();
-        fill = clamp((vh * 0.85 - lr.top) / (vh * 0.4));
-        reached = lr.top < vh * 0.85 ? Math.min(steps.length, Math.floor(fill * (steps.length - 1) + 0.02) + 1) : 0;
-      } else {
-        var line = vh * 0.7;
-        reached = 0;
-        dots.forEach(function (d) { if (d.getBoundingClientRect().top < line) reached++; });
-        var a = dots[0].getBoundingClientRect().top, b = dots[dots.length - 1].getBoundingClientRect().top;
-        fill = clamp((line - a) / Math.max(1, b - a));
-      }
-      tl.classList.add('dk-tl-js');
-      tl.style.setProperty('--tl-p', fill.toFixed(4));
-      steps.forEach(function (s, i) {
-        s.classList.toggle('is-done', i < reached - 1);
-        s.classList.toggle('is-current', i === reached - 1);
-      });
     }
 
     var ticking = false;
@@ -3392,6 +3399,7 @@
 
 <script type="module" src="/src/site-footer.js"></script>
 <script type="module" src="/src/mobile-nav.js"></script>
+<script type="module" src="/src/klaro-journey.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 </body>
 </html>
