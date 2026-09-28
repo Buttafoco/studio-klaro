@@ -1,79 +1,89 @@
 /* ==========================================================================
-   Studio Klaro – kundcase i social proof-sektionen (#referenser). Beteende: src/social-proof.js.
-   Sektionen ligger i startsidans mörka kapitel; kortet håller Studio Klaros vita och ljusblå
-   formspråk med egna, fasta färger (kontrast oberoende av sidans ljus/mörk-övergång).
-   Desktop: skärmbild till vänster, berättelse och omdöme till höger. Mobil: bild först.
+   Studio Klaro – "Ett projekt i verkligheten" (#referenser). Beteende: src/social-proof.js.
+   Ligger öppet på sidans ljusblå bakgrund (före det mörka kapitlet), utan panel eller platta.
+   Desktop: stor skärmbild (~62 %) till vänster, smal redaktionell kolumn med tre numrerade
+   förändringar till höger; därunder en lugn citatrad och en enda primär handling.
+   Mobil: rubrik → ingress → bild → förändringar → omdömen → CTA (DOM-ordning).
+   Blått används sparsamt: etikett, siffror och primär CTA.
    ========================================================================== */
-.pc{--pc-ink:#0F172A;--pc-mute:#52657A;--pc-blue:#146EF5;--pc-blue-ink:#0F5AD1;--pc-sky:#EAF2FF;--pc-line:rgba(15,23,42,0.08);
-  display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:0;max-width:1080px;margin:48px auto 0;text-align:left;
-  background:#fff;color:var(--pc-ink);border-radius:30px;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,0.05),0 24px 60px rgba(0,0,0,0.18);}
-.pc-data{display:none;}
+.sp{--sp-ink:#0F172A;--sp-mute:#52657A;--sp-blue:#146EF5;--sp-blue-ink:#0F5AD1;--sp-line:rgba(15,23,42,0.12);
+  max-width:1200px;margin:120px auto 0;padding:0 24px;box-sizing:border-box;color:var(--sp-ink);}
 
-/* Skärmbilden i en lugn ljusblå yta, inramad som ett webbläsarfönster */
-.pc-media{margin:0;padding:36px 32px;background:linear-gradient(160deg,#EEF5FF 0%,#DCEBFF 100%);display:flex;flex-direction:column;justify-content:center;gap:12px;}
-.pc-browser{border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,0.06),0 18px 40px rgba(15,23,42,0.14);}
-.pc-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#F4F7FB;border-bottom:1px solid var(--pc-line);}
-.pc-bar i{width:8px;height:8px;border-radius:50%;background:rgba(15,23,42,0.14);}
-.pc-bar em{margin-left:8px;font-style:normal;font-size:11px;font-weight:700;color:var(--pc-mute);}
-.pc-browser picture,.pc-browser img{display:block;width:100%;height:auto;aspect-ratio:1800/1004;}
-.pc-cap{font-size:12px;font-weight:600;color:var(--pc-mute);}
+/* Introduktion */
+.sp-head{max-width:720px;}
+.sp-eyebrow{margin:0 0 14px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sp-blue-ink);}
+.sp-title{margin:0 0 16px;font-size:clamp(32px,4.2vw,54px);font-weight:800;line-height:1.05;letter-spacing:-0.035em;text-wrap:balance;}
+.sp-intro{margin:0;max-width:58ch;font-size:17px;line-height:1.65;font-weight:500;color:var(--sp-mute);}
 
-.pc-body{padding:40px 44px 38px;display:flex;flex-direction:column;}
-.pc-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 0 16px;font-size:12.5px;font-weight:700;color:var(--pc-mute);}
-.pc-live{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;background:#E3F5EA;color:#166534;font-size:11.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;}
-.pc-live i{width:7px;height:7px;border-radius:50%;background:#16A34A;box-shadow:0 0 0 3px rgba(22,163,74,0.18);}
-.pc-company{margin:0 0 6px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pc-blue-ink);}
-.pc-title{margin:0 0 14px;font-size:clamp(24px,2.6vw,32px);font-weight:800;line-height:1.12;letter-spacing:-0.025em;color:var(--pc-ink);text-wrap:balance;}
-.pc-desc{margin:0;max-width:52ch;font-size:15.5px;line-height:1.65;font-weight:500;color:var(--pc-mute);}
-.pc-k{margin:24px 0 10px;font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pc-mute);}
-/* Små resultatmarkörer: genomförda förbättringar, inga siffror */
-.pc-done{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;}
-.pc-done li{display:flex;align-items:flex-start;gap:9px;font-size:14px;font-weight:700;line-height:1.4;color:var(--pc-ink);}
-.pc-done li::before{content:'';flex:none;width:18px;height:18px;margin-top:1px;border-radius:50%;background:var(--pc-sky) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5.2 9.3l2.5 2.5 5.2-5.6' fill='none' stroke='%230F5AD1' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat;}
+/* Huvudkompositionen: bilden bär sektionen, texten är en smal kolumn */
+.sp-case{display:grid;grid-template-columns:minmax(0,66fr) minmax(0,34fr);gap:clamp(36px,4.5vw,64px);align-items:center;margin-top:56px;}
+.sp-data,.pc-data{display:none;}
+.sp-shot{margin:0;}
+.sp-browser{border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,0.06),0 30px 70px rgba(15,23,42,0.16);}
+.sp-bar{display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;background:#fff;border-bottom:1px solid rgba(15,23,42,0.07);}
+.sp-bar i{width:9px;height:9px;border-radius:50%;background:rgba(15,23,42,0.14);}
+.sp-bar em{margin-left:10px;font-style:normal;font-size:12px;font-weight:600;color:var(--sp-mute);}
+.sp-browser picture,.sp-browser img{display:block;width:100%;height:auto;aspect-ratio:1800/1004;}
+
+/* Tre numrerade förändringar – siffror och typografi skapar hierarkin, tunna linjer emellan */
+.sp-changes{list-style:none;margin:0;padding:0;}
+.sp-changes li{padding:22px 0;border-top:1px solid var(--sp-line);}
+.sp-changes li:first-child{padding-top:0;border-top:0;}
+.sp-changes li:last-child{padding-bottom:0;}
+.sp-n{display:block;margin-bottom:8px;font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--sp-blue-ink);font-variant-numeric:tabular-nums;}
+.sp-changes h3{margin:0 0 6px;font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-0.015em;color:var(--sp-ink);}
+.sp-changes p{margin:0;max-width:38ch;font-size:15.5px;line-height:1.6;font-weight:500;color:var(--sp-mute);}
 
 /* KPI:er (visas bara när riktiga värden finns) */
-.pc-kpis{margin-top:20px;}
-.pc-kpi-list{margin:0;display:flex;flex-wrap:wrap;gap:12px;}
-.pc-kpi{flex:1 1 150px;padding:12px 14px;border-radius:14px;background:var(--pc-sky);}
-.pc-kpi-l{font-size:12px;font-weight:700;color:var(--pc-mute);}
-.pc-kpi-v{margin:2px 0 0;font-size:24px;font-weight:800;letter-spacing:-0.02em;color:var(--pc-ink);}
-.pc-kpi-src{margin:2px 0 0;font-size:11.5px;font-weight:600;color:var(--pc-mute);}
+.sp-kpis{grid-column:1 / -1;}
+.pc-kpi-list{margin:0;display:flex;flex-wrap:wrap;gap:12px 32px;}
+.pc-kpi{display:flex;flex-direction:column;}
+.pc-kpi-l{font-size:12.5px;font-weight:700;color:var(--sp-mute);}
+.pc-kpi-v{margin:2px 0 0;font-size:28px;font-weight:800;letter-spacing:-0.02em;color:var(--sp-ink);}
+.pc-kpi-src{margin:2px 0 0;font-size:12px;font-weight:600;color:var(--sp-mute);}
 
-/* Omdömet som en del av berättelsen */
-.pc-quote{position:relative;margin:26px 0 0;padding:20px 22px 18px;border-radius:18px;background:#F4F8FF;border-left:3px solid var(--pc-blue);}
-.pc-stars{display:block;margin-bottom:8px;color:var(--pc-blue);font-size:13px;letter-spacing:2px;line-height:1;}
-.pc-quote blockquote{margin:0;}
-.pc-quote blockquote p{margin:0;font-size:19px;font-weight:700;line-height:1.4;letter-spacing:-0.01em;color:var(--pc-ink);}
-.pc-quote figcaption{display:flex;align-items:center;gap:11px;margin-top:14px;}
-.pc-av{flex:none;width:34px;height:34px;border-radius:50%;background:#12100D;color:#E2C07A;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;}
-.pc-who{display:flex;flex-direction:column;line-height:1.3;}
-.pc-who b{font-size:14px;font-weight:800;color:var(--pc-ink);}
-.pc-who span{font-size:12.5px;font-weight:600;color:var(--pc-mute);}
+/* Omdömen: en lugn horisontell citatrad, utan ramar */
+.sp-voices{margin-top:64px;padding-top:32px;border-top:1px solid var(--sp-line);}
+.sp-voices-k{margin:0 0 18px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sp-mute);}
+.sp-quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 56px;}
+.sp-quote{position:relative;margin:0;padding-left:52px;}
+.sp-mark{position:absolute;left:0;top:-14px;font-size:72px;font-weight:800;line-height:1;color:rgba(20,110,245,0.22);font-family:Georgia,'Times New Roman',serif;}
+.sp-stars{display:block;margin-bottom:8px;color:var(--sp-blue);font-size:12px;letter-spacing:2px;line-height:1;}
+.sp-quote blockquote{margin:0;}
+.sp-quote blockquote p{margin:0;font-size:20px;font-weight:700;line-height:1.4;letter-spacing:-0.01em;color:var(--sp-ink);text-wrap:pretty;}
+.sp-quote figcaption{margin-top:10px;font-size:14px;font-weight:700;color:var(--sp-mute);}
 
-.pc-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:24px;}
-.pc-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;background:var(--pc-blue);color:#fff;font-size:14.5px;font-weight:800;text-decoration:none;transition:background-color .2s ease;}
-.pc-btn span{transition:transform .25s cubic-bezier(0.22,1,0.36,1);}
-.pc-btn:hover{background:#1B63DA;color:#fff;}
-.pc-btn:hover span{transform:translateX(3px);}
-.pc-link{display:inline-flex;align-items:center;gap:5px;min-height:44px;font-size:14.5px;font-weight:700;color:var(--pc-blue-ink);text-decoration:none;}
-.pc-link:hover{color:#0B4AB0;text-decoration:underline;text-underline-offset:3px;}
-.pc-btn:focus-visible,.pc-link:focus-visible{outline:2px solid var(--pc-blue);outline-offset:3px;border-radius:12px;}
-
-/* Fristående omdöme under caset */
-.dk-rev-grid--one{grid-template-columns:minmax(0,560px);justify-content:center;margin-top:24px;}
+/* En tydlig primär handling och en diskret textlänk */
+.sp-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;margin-top:40px;}
+.sp-btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 20px;border-radius:12px;background:var(--sp-blue);color:#fff;font-size:15px;font-weight:800;text-decoration:none;transition:background-color .2s ease;}
+.sp-btn span{transition:transform .25s cubic-bezier(0.22,1,0.36,1);}
+.sp-btn:hover{background:#1B63DA;color:#fff;}
+.sp-btn:hover span{transform:translateX(3px);}
+.sp-link{display:inline-flex;align-items:center;gap:5px;min-height:44px;font-size:14.5px;font-weight:700;color:var(--sp-mute);text-decoration:none;}
+.sp-link:hover{color:var(--sp-blue-ink);text-decoration:underline;text-underline-offset:3px;}
+.sp-btn:focus-visible,.sp-link:focus-visible{outline:2px solid var(--sp-blue);outline-offset:3px;border-radius:12px;}
 
 @media (max-width:900px){
-  .pc{grid-template-columns:1fr;border-radius:26px;margin-top:40px;}
-  .pc-media{padding:22px 20px 18px;}
-  .pc-body{padding:26px 22px 26px;}
+  .sp{margin-top:96px;}
+  .sp-case{grid-template-columns:1fr;gap:36px;margin-top:40px;}
+  .sp-changes p{max-width:52ch;}
+  .sp-quotes{grid-template-columns:1fr;gap:28px;}
 }
-@media (max-width:520px){
-  .pc-done{grid-template-columns:1fr;}
-  .pc-quote blockquote p{font-size:17px;}
-  .pc-links{flex-direction:column;align-items:stretch;gap:4px;}
-  .pc-btn{justify-content:center;}
-  .pc-link{justify-content:center;}
+@media (max-width:640px){
+  .sp{margin-top:80px;padding:0 16px;}
+  .sp-intro{font-size:16px;}
+  /* Bilden använder nästan hela skärmbredden */
+  .sp-shot{margin:0 -8px;}
+  .sp-browser{border-radius:20px;}
+  .sp-bar{height:32px;padding:0 12px;}
+  .sp-changes h3{font-size:18.5px;}
+  .sp-voices{margin-top:48px;}
+  .sp-quote{padding-left:40px;}
+  .sp-mark{font-size:60px;top:-10px;}
+  .sp-quote blockquote p{font-size:18px;}
+  .sp-cta{flex-direction:column;align-items:stretch;gap:4px;}
+  .sp-btn,.sp-link{justify-content:center;}
 }
 @media (prefers-reduced-motion: reduce){
-  .pc-btn,.pc-btn span{transition:none;}
+  .sp-btn,.sp-btn span{transition:none;}
 }

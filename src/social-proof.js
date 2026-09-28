@@ -1,12 +1,12 @@
 /* ==========================================================================
-   Studio Klaro – kundcase i social proof-sektionen (#referenser). Stil: src/social-proof.css.
-   Läser varje cases datablock (.pc-data) och visar KPI-raden endast när minst en KPI har
+   Studio Klaro – "Ett projekt i verkligheten" (#referenser). Stil: src/social-proof.css.
+   Läser kundcasets datablock (.pc-data) och visar KPI-raden endast när minst en KPI har
    värde, etikett, mätperiod och källa (src/proof-kpi.mjs). Utan giltiga KPI:er – eller utan
    JS – förblir raden dold, så inga tomma eller påhittade siffror kan visas.
    ========================================================================== */
 import { parseCase, renderKpis } from './proof-kpi.mjs';
 
-document.querySelectorAll('#referenser .pc').forEach(function (card) {
+document.querySelectorAll('#referenser .sp-case').forEach(function (card) {
   var dataEl = card.querySelector('.pc-data');
   var slot = card.querySelector('[data-kpi-slot]');
   if (!dataEl || !slot) return;

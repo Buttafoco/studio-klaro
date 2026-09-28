@@ -15,6 +15,8 @@
 .kj{--kj-ease:cubic-bezier(0.22,1,0.36,1);--kj-t:1;--kj-navy:var(--dk-ink);--kj-mute:var(--dk-mute);--kj-hi:var(--dk-accent);--kj-line:var(--dk-line);
   --kj-blue:#146EF5;--kj-ok:#43A866;--kj-ok-ink:#9FDDB2;--kj-ok-soft:rgba(67,168,102,0.16);
   margin-top:150px;color:var(--kj-navy);}
+/* Kundresan inleder det mörka kapitlet – kapitlets egen toppmarginal räcker */
+.dk-inner > .kj:first-child{margin-top:0;}
 /* Färgresan i portalen: start (himmelsblå) → bygge (Klaro-blå) → lansering (blått + dämpat grönt) → fortsättning (Care) */
 .kj [data-theme],.kj-portal{transition:--kj-acc .7s ease,--kj-ink .7s ease,--kj-soft .7s ease,--kj-tint .7s ease;}
 .kj [data-theme="start"]{--kj-acc:#4C95F8;--kj-ink:#A3C8FF;--kj-soft:rgba(76,149,248,0.16);--kj-tint:#1F232A;}

@@ -236,7 +236,7 @@
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
 
-  /* Mörkt kapitel (kundomdömen och kundresan). JS sätter html.dk-on medan kapitlet fyller skärmen: då tonar hela sidans
+  /* Mörkt kapitel (kundresan). JS sätter html.dk-on medan kapitlet fyller skärmen: då tonar hela sidans
      bakgrund lugnt till varm svart och tillbaka, i båda scrollriktningarna. Utan JS / vid reducerad rörelse:
      kapitlet är statiskt mörkt och allt innehåll syns direkt. */
   @property --dk-ink{syntax:'<color>';inherits:true;initial-value:#F4F1EA;}
@@ -263,28 +263,12 @@
   .dk-js [data-dk]{opacity:0;transform:translateY(28px);transition:opacity .9s var(--dk-ease),transform .9s var(--dk-ease);transition-delay:var(--dk-d,0ms);}
   .dk-js [data-dk].in{opacity:1;transform:none;}
 
-  /* Omdömen */
-  /* Kundomdömen: rundade vita kort som inte länkar någonstans; lätt lyft vid hover */
-  .dk-reviews{text-align:center;}
-  .dk-reviews .dk-lead{margin-top:14px;}
-  .dk-rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:960px;margin:44px auto 0;text-align:left;}
-  .dk-rev{display:flex;flex-direction:column;margin:0;padding:30px 32px 28px;border-radius:24px;background:#fff;color:#0F172A;box-shadow:0 1px 2px rgba(15,23,42,0.04),0 12px 32px rgba(15,23,42,0.08);transition:translate .35s var(--dk-ease),box-shadow .35s var(--dk-ease);}
-  @media (hover:hover){ .dk-rev:hover{translate:0 -3px;box-shadow:0 1px 2px rgba(15,23,42,0.04),0 18px 40px rgba(15,23,42,0.12);} }
-  .dk-rev-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
-  .dk-stars{color:#146EF5;font-size:14px;letter-spacing:2px;line-height:1;}
-  .dk-rev-tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#146EF5;background:rgba(20,110,245,0.08);padding:6px 10px;border-radius:999px;}
-  .dk-rev blockquote{flex:1;margin:0 0 22px;font-size:19px;font-weight:600;line-height:1.45;letter-spacing:-0.01em;color:#0F172A;}
-  .dk-rev figcaption{display:flex;align-items:center;gap:12px;}
-  .dk-av{width:36px;height:36px;border-radius:50%;background:#146EF5;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;}
-  .dk-rev-name{font-size:14px;font-weight:700;color:#0F172A;}
-  @media (prefers-reduced-motion: reduce){ .dk-rev{transition:none;} .dk-rev:hover{translate:none;} }
 
   @media (max-width:900px){
     .dk{padding:96px 0 104px;}
   }
   @media (max-width:760px){
     .dk-inner{padding:0 16px;}
-    .dk-rev-grid{grid-template-columns:1fr;}
   }
 
   /* Scroll-reveal */
@@ -1503,63 +1487,64 @@
     </div>
   </section>
 
-  <!-- MÖRKT KAPITEL: kundomdömen och kundresan (#processen) till och med "Detta ingår". Därefter ljusnar sidan inför kontakt.
+  <!-- ETT PROJEKT I VERKLIGHETEN: publicerat kundcase (The Chairman Barber) och kundomdömen.
+       Endast verifierbar information. Omdömena visas med namn men utan roll/företag och kopplas inte
+       till caset, eftersom den kopplingen inte är dokumenterad. Datablocket (pc-data) håller status
+       (published/concept) och kpis[] – KPI:er visas av src/social-proof.js först när värde, etikett,
+       mätperiod och källa finns (src/proof-kpi.mjs). Stil: src/social-proof.css. -->
+  <section id="referenser" class="sp" aria-labelledby="sp-title" data-wz-dock-clear>
+    <header class="sp-head" data-reveal>
+      <p class="sp-eyebrow">Ett projekt i verkligheten</p>
+      <h2 id="sp-title" class="sp-title">En tydligare väg till stolen.</h2>
+      <p class="sp-intro">För The Chairman Barber skapade vi ett digitalt uttryck som speglar det klassiska hantverket och gör vägen till behandling och bokning tydlig.</p>
+    </header>
+
+    <article class="sp-case" aria-label="Kundcase: The Chairman Barber" data-reveal>
+      <script type="application/json" class="pc-data">{"id":"chairman","status":"published","company":"The Chairman Barber","industry":"Barberare","location":"Vasastan, Stockholm","url":"https://www.thechairmanbarber.se","caseUrl":"/hemsida-frisor-stockholm","kpis":[]}</script>
+      <figure class="sp-shot">
+        <div class="sp-browser">
+          <div class="sp-bar" aria-hidden="true"><i></i><i></i><i></i><em>thechairmanbarber.se</em></div>
+          <picture><source type="image/avif" srcset="/case/chairman/chairman-hero-desktop-640.avif 640w, /case/chairman/chairman-hero-desktop-960.avif 960w, /case/chairman/chairman-hero-desktop-1280.avif 1280w, /case/chairman/chairman-hero-desktop-1800.avif 1800w" sizes="(max-width:900px) calc(100vw - 24px), 720px"><source type="image/webp" srcset="/case/chairman/chairman-hero-desktop-640.webp 640w, /case/chairman/chairman-hero-desktop-960.webp 960w, /case/chairman/chairman-hero-desktop-1280.webp 1280w, /case/chairman/chairman-hero-desktop-1800.webp 1800w" sizes="(max-width:900px) calc(100vw - 24px), 720px"><img src="/case/chairman/chairman-hero-desktop-1280.webp" width="1800" height="1004" alt="Startsidan på The Chairman Barbers publicerade hemsida: rubriken Klassiskt hantverk. Modern precision. med knapparna Boka tid och Se behandlingar" loading="lazy" decoding="async"></picture>
+        </div>
+      </figure>
+      <ol class="sp-changes">
+        <li><span class="sp-n" aria-hidden="true">01</span><h3>Tjänster som går att förstå</h3><p>Behandlingar, innehåll och priser presenteras i en tydligare struktur.</p></li>
+        <li><span class="sp-n" aria-hidden="true">02</span><h3>Bokning när intresset är som störst</h3><p>Vägen till tidsbokning finns där kunden behöver den.</p></li>
+        <li><span class="sp-n" aria-hidden="true">03</span><h3>Samma känsla på varje skärm</h3><p>Uttrycket och kundresan fungerar på både mobil och desktop.</p></li>
+      </ol>
+      <div class="sp-kpis" data-kpi-slot hidden></div>
+    </article>
+
+    <div class="sp-voices" data-reveal>
+      <p class="sp-voices-k" id="sp-voices-k">Vad kunderna säger</p>
+      <div class="sp-quotes" role="list" aria-labelledby="sp-voices-k">
+        <figure class="sp-quote" role="listitem">
+          <span class="sp-mark" aria-hidden="true">“</span>
+          <span class="sp-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span>
+          <blockquote><p>Jätte bra service och rimligt pris!</p></blockquote>
+          <figcaption>Arian Ghasemi</figcaption>
+        </figure>
+        <figure class="sp-quote" role="listitem">
+          <span class="sp-mark" aria-hidden="true">“</span>
+          <span class="sp-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span>
+          <blockquote><p>Snabb och prisvärd upplevelse! Jättenöjd med min sida.</p></blockquote>
+          <figcaption>Johan Larsson</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="sp-cta" data-reveal>
+      <a class="sp-btn" href="/hemsida-frisor-stockholm">Se hela projektet <span aria-hidden="true">→</span></a>
+      <a class="sp-link" href="https://www.thechairmanbarber.se" target="_blank" rel="noopener">Besök den publicerade hemsidan <span aria-hidden="true">↗</span><span class="sr-only"> (öppnas i en ny flik)</span></a>
+    </div>
+  </section>
+
+  <!-- MÖRKT KAPITEL: kundresan (#processen) till och med "Detta ingår". Därefter ljusnar sidan inför kontakt.
        Hela sidans bakgrund tonar till mörkt medan kapitlet fyller skärmen (html.dk-on, sätts i JS). -->
   <div class="dk" id="dk">
     <div class="dk-inner">
 
       <!-- Kundomdömen: riktiga omdömen från kunder, inga länkar till externa plattformar -->
-      <!-- Social proof: publicerade kundcase med kundens omdöme + fristående omdömen.
-           Endast verifierbar information (se kundcasen). Varje case har ett datablock (pc-data) med status
-           (published = publicerat kundprojekt, concept = illustrativt koncept) och kpis[] – KPI-raden visas av
-           src/social-proof.js först när en KPI har värde, etikett, mätperiod och källa (src/proof-kpi.mjs). -->
-      <section id="referenser" class="dk-reviews" aria-labelledby="dk-rev-title">
-        <div class="dk-eyebrow" data-dk>Kundcase och omdömen</div>
-        <h2 id="dk-rev-title" class="dk-h3" data-dk>Ord från företag vi har hjälpt.</h2>
-        <p class="dk-lead" data-dk>Ett publicerat kundprojekt – och vad kunderna själva säger om samarbetet.</p>
-
-        <article class="pc" aria-labelledby="pc-chairman-title" data-dk>
-          <script type="application/json" class="pc-data">{"id":"chairman","status":"published","company":"The Chairman Barber","industry":"Barberare","location":"Vasastan, Stockholm","url":"https://www.thechairmanbarber.se","caseUrl":"/hemsida-frisor-stockholm","kpis":[]}</script>
-          <figure class="pc-media">
-            <div class="pc-browser">
-              <div class="pc-bar" aria-hidden="true"><i></i><i></i><i></i><em>thechairmanbarber.se</em></div>
-              <picture><source type="image/avif" srcset="/case/chairman/chairman-hero-desktop-640.avif 640w, /case/chairman/chairman-hero-desktop-960.avif 960w, /case/chairman/chairman-hero-desktop-1280.avif 1280w" sizes="(max-width:900px) calc(100vw - 64px), 600px"><source type="image/webp" srcset="/case/chairman/chairman-hero-desktop-640.webp 640w, /case/chairman/chairman-hero-desktop-960.webp 960w, /case/chairman/chairman-hero-desktop-1280.webp 1280w" sizes="(max-width:900px) calc(100vw - 64px), 600px"><img src="/case/chairman/chairman-hero-desktop-960.webp" width="1800" height="1004" alt="Startsidan på The Chairman Barbers publicerade hemsida: rubriken Klassiskt hantverk. Modern precision. med knapparna Boka tid och Se behandlingar" loading="lazy" decoding="async"></picture>
-            </div>
-            <figcaption class="pc-cap">Skärmbild av den publicerade hemsidan</figcaption>
-          </figure>
-          <div class="pc-body">
-            <p class="pc-meta"><span class="pc-live"><i aria-hidden="true"></i>Publicerat kundprojekt</span><span class="pc-where">Barberare · Vasastan, Stockholm</span></p>
-            <p class="pc-company">The Chairman Barber</p>
-            <h3 id="pc-chairman-title" class="pc-title">Från information till en tydlig väg mot bokning.</h3>
-            <p class="pc-desc">The Chairman Barber behövde en hemsida som speglade salongens uttryck och gjorde det enklare att förstå behandlingarna och boka en tid.</p>
-            <h4 class="pc-k">Det vi genomförde</h4>
-            <ul class="pc-done">
-              <li>Behandlingar med tid, pris och innehåll</li>
-              <li>Boka tid i sidhuvud, hero och avslutning</li>
-              <li>Mobilanpassad kundresa</li>
-              <li>Visuellt uttryck anpassat efter salongen</li>
-            </ul>
-            <div class="pc-kpis" data-kpi-slot hidden></div>
-            <figure class="pc-quote">
-              <span class="pc-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span>
-              <blockquote><p>”Jätte bra service och rimligt pris!”</p></blockquote>
-              <figcaption><span class="pc-av" aria-hidden="true">A</span><span class="pc-who"><b>Arian Ghasemi</b><span>Ägare, The Chairman Barber</span></span></figcaption>
-            </figure>
-            <div class="pc-links">
-              <a class="pc-btn" href="/hemsida-frisor-stockholm">Se projektet <span aria-hidden="true">→</span></a>
-              <a class="pc-link" href="https://www.thechairmanbarber.se" target="_blank" rel="noopener">Besök den publicerade hemsidan <span aria-hidden="true">↗</span><span class="sr-only"> (öppnas i en ny flik)</span></a>
-            </div>
-          </div>
-        </article>
-
-        <div class="dk-rev-grid dk-rev-grid--one">
-          <figure class="dk-rev" data-dk>
-            <div class="dk-rev-top"><span class="dk-stars" role="img" aria-label="5 av 5 stjärnor">★★★★★</span><span class="dk-rev-tag">Kundomdöme</span></div>
-            <blockquote>"Snabb och prisvärd upplevelse! Jättenöjd med min sida."</blockquote>
-            <figcaption><span class="dk-av" aria-hidden="true">J</span><span class="dk-rev-name">Johan Larsson</span></figcaption>
-          </figure>
-        </div>
-      </section>
 
       <!-- KUNDRESAN: hela projektet i fyra kapitel med projektportalen som följer med.
            Stil: src/klaro-journey.css, beteende: src/klaro-journey.js. Portalvyerna är dekorativa (aria-hidden);
@@ -2223,7 +2208,7 @@
     setTimeout(function () { revealEls.forEach(function (el) { el.classList.add('is-visible'); }); }, 1800);
   }
 
-  /* ---------- Mörkt kapitel (kundomdömen och kundresan): sidans bakgrund och reveal ---------- */
+  /* ---------- Mörkt kapitel (kundresan): sidans bakgrund och reveal ---------- */
   (function () {
     var dk = document.getElementById('dk');
     if (!dk) return;
