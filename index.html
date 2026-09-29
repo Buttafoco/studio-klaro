@@ -1325,8 +1325,10 @@
     background:linear-gradient(180deg,rgba(220,238,255,0),#DCEEFF 72%);}
   .kj-asc-streaks{display:none;}
   /* Nästa del maskas under uppstigningen och tonar in först när resan har landat (desktop och mobil) */
-  .kj-sky-js .kr{transition:opacity .45s ease;}
-  .kj-sky-js:not(.is-landed) .kr{opacity:0;}
+  /* visibility i stället för opacity: den stora resan under ritas inte alls medan den är dold (inte heller när
+     färdlinjen uppdateras under glidet), och visas utan övergång strax efter landningen – den ligger då under
+     fönstrets nederkant, så ingen stor yta behöver tonas in samtidigt som molnen landar */
+  .kj-sky-js .kr:not(.kr-ready){visibility:hidden;}
   /* Vindstreck längs kanterna. Lagret är fixerat mot fönstret medan resan pågår (.is-rising på scenen): scenen
      glider själv upp i början, och i dokumentet skulle strecken då följa med uppåt. Relativt fönstret rör de sig
      bara nedåt, efter samma progress (--t) som molnen. Framför himlen och molnen, bakom rubriken (z-index 1 < 2).
@@ -1345,7 +1347,9 @@
   .kj-sky-js .kj-asc-bg,.kj-sky-js .kj-asc-ground,.kj-sky-js .kj-asc-layer{display:block;}
   .kj-sky-js .kj-asc > *{--k:clamp(0, (var(--t,1) - var(--a,0)) / (var(--b,1) - var(--a,0)), 1);}
   /* Egna kompositlager bara medan resan pågår */
-  .kj-ascent.is-rising .kj-asc > *{will-change:transform,opacity;}
+  .kj-ascent.is-rising .kj-asc > *,
+  .kj-ascent.is-rising .kj-head .kj-eyebrow,.kj-ascent.is-rising .kj-head .kj-h2,
+  .kj-ascent.is-rising .kj-head .kj-h2 span,.kj-ascent.is-rising .kj-head .kj-lead{will-change:transform,opacity;}
   .kj-sky-js .kj-asc-fog{--a:.15;--b:.6;opacity:var(--k);}
   /* Himmelslagret går 20svh upp över scenen och börjar genomskinligt där – ingen kant medan scenen syns delvis */
   /* Klipp vid scenens underkant och sidor (molnbäddens platta underkanter får inte sticka ut under scenen),
@@ -4089,6 +4093,7 @@
       vh = window.innerHeight;
     }
     var streaks = sky.querySelector('.kj-asc-streaks');
+    var kr = sky.querySelector('.kr');
     function setT(t) {
       scene.style.setProperty('--t', t.toFixed(4));
       // Scenens överkant i fönstret, ur cachad position och scrollY (ingen layoutmätning)
@@ -4170,7 +4175,13 @@
     // ---------- Färden ----------
     function finish() {                  // slutläge + upplåsning; säker att anropa när som helst
       cancelAnimationFrame(raf);
-      if (state !== 'done') { state = 'done'; setT(1); scene.classList.remove('is-rising'); sky.classList.add('is-landed'); startIdea(); }
+      if (state !== 'done') {
+        state = 'done'; setT(1); sky.classList.add('is-landed'); startIdea();
+        // Inget tungt i själva landningsbildrutan: nästa del (under fönstret) visas strax efter, och
+        // kompositlagren rivs först när rubriken och molnen stått still en stund
+        setTimeout(function () { if (kr) kr.classList.add('kr-ready'); }, 120);
+        setTimeout(function () { scene.classList.remove('is-rising'); }, 900);
+      }
       unlock();
     }
     // Idékapitlet: skissen ritas en gång per sidvisning, när uppstigningen landat och scrollen släppts (ingen låsning).
