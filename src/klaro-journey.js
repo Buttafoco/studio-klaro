@@ -1,389 +1,244 @@
 /* ==========================================================================
-   Studio Klaro – kundresan på startsidan (#processen). Stil: src/klaro-journey.css.
-   - Aktivt kapitel väljs med IntersectionObserver (ett smalt band mitt i viewporten),
-     inga tillståndsuppdateringar per scroll-event.
-   - ≥1024px: portalvyerna flyttas från kapitlen in i det sticky portalfönstret och
-     byts när aktivt kapitel ändras. Under 1024px ligger de kvar i sina kapitel och
-     spelar sin intoning en gång när kapitlet syns.
-   - Progresslinjen mellan 01–04: en transform per bildruta via rAF, och bara medan
-     sektionen syns.
-   - Reducerad rörelse hanteras i CSS (slutlägen direkt, inga förskjutningar).
+   Studio Klaro – molnresan på startsidan (#processen). Stil: src/klaro-journey.css.
+   Efter uppstigningen (skriptet sist i index.html – den enda delen som tillfälligt pausar scrollen) styrs
+   allt av scrollen:
+   - Färdlinjen byggs som en SVG-bana från landningens lösa linje, genom framtidsbilderna, bryggan och de tre
+     stoppen, mitt genom den mörknande himlen och fram till liveindikatorn. Banan mäts bara vid storleksändring;
+     vid scroll räknas ritad längd fram ur en förberäknad tabell (y → längd) – inga layoutmätningar per bildruta.
+   - Desktop: framtidsbilderna byts i en sticky scen (data-f -1…2) efter hur långt man scrollat genom den.
+     Mobil och statiskt: varje framtidsbild och varje stopp tänds när linjen når dess nod.
+   - Himlens färg är en gradient i dokumentet; molnen sjunker och ljuspunkterna tänds efter --n (0→1).
+   - När linjen når live: indikatorn tänds, webbplatsen blir fullt synlig och en svag ljusimpuls går genom linjen.
+   Reducerad rörelse: ingen sticky scen, linjen visas färdig och allt syns direkt.
    ========================================================================== */
 (function () {
-  var root = document.getElementById('processen');
-  if (!root || !root.classList.contains('kj') || !('IntersectionObserver' in window)) return;
-
-  var list = root.querySelector('.kj-chapters');
-  var chapters = Array.prototype.slice.call(root.querySelectorAll('.kj-ch'));
-  var views = chapters.map(function (ch) { return ch.querySelector('.kj-view'); });
-  var bodies = chapters.map(function (ch) { return ch.querySelector('.kj-frame-body'); });
-  var frames = chapters.map(function (ch) { return ch.querySelector('.kj-frame'); });
-  var nodes = chapters.map(function (ch) { return ch.querySelector('.kj-node'); });
-  var portal = root.querySelector('.kj-portal');
-  var viewport = portal.querySelector('.kj-viewport');
-  var phases = Array.prototype.slice.call(portal.querySelectorAll('.kj-phases li'));
-  var rail = root.querySelector('.kj-rail');
-  var fill = rail.querySelector('.kj-rail-fill');
-  var splitMq = window.matchMedia('(min-width: 1024px)');
-  var THEMES = ['start', 'build', 'launch', 'care'];
-  var active = 0;
-  var split = false;
-  var started = false; // vyernas intoningar startar först när berättelsen syns
-
-  root.classList.add('kj-js');
-
-  function setActive(i) {
-    active = i;
-    chapters.forEach(function (ch, n) {
-      ch.classList.toggle('is-active', n === i);
-      ch.classList.toggle('is-done', n < i);
-    });
-    phases.forEach(function (p, n) {
-      p.classList.toggle('is-current', n === i);
-      p.classList.toggle('is-done', n < i);
-    });
-    portal.setAttribute('data-theme', THEMES[i]);
-    if (split) {
-      // is-cur styr vilken vy som syns, is-on startar vyns intoning
-      views.forEach(function (v, n) {
-        v.classList.toggle('is-cur', n === i);
-        v.classList.toggle('is-on', started && n === i);
-        v.classList.toggle('is-past', n < i);
-      });
-      if (started) portal.classList.add('kj-logo-in');
-    }
-  }
-
-  // Vyerna flyttas mellan kapitlen (staplat) och portalfönstret (delat) utan att klonas
-  function layout() {
-    split = splitMq.matches;
-    root.classList.toggle('kj--split', split);
-    views.forEach(function (v, n) {
-      var host = split ? viewport : bodies[n];
-      if (v.parentNode !== host) host.appendChild(v);
-      v.classList.remove('is-on', 'is-cur', 'is-past');
-      if (!split && chapters[n].classList.contains('is-seen')) v.classList.add('is-on');
-    });
-    setActive(active);
-    measure();
-  }
-
-  // Aktivt kapitel: det kapitel som korsar ett smalt band strax ovanför mitten
-  var crossing = {};
-  var bandIo = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { crossing[chapters.indexOf(e.target)] = e.isIntersecting; });
-    for (var n = chapters.length - 1; n >= 0; n--) {
-      if (crossing[n]) { if (n !== active) setActive(n); break; }
-    }
-  }, { rootMargin: '-45% 0px -54% 0px' });
-
-  // Staplat läge: kapitlets vy spelar sin intoning en gång när den syns
-  var seenIo = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      var n = frames.indexOf(e.target);
-      chapters[n].classList.add('is-seen');
-      e.target.classList.add('kj-logo-in');
-      if (!split) views[n].classList.add('is-on');
-      seenIo.unobserve(e.target);
-    });
-  }, { threshold: 0.35 });
-
-  chapters.forEach(function (ch) { bandIo.observe(ch); });
-  frames.forEach(function (f) { seenIo.observe(f); });
-
-  // Progresslinjen: mäts vid storleksändring, fylls med scrollen medan sektionen syns
-  var railTop = 0, railH = 1, ticking = false, inView = false;
-  function measure() {
-    var base = list.getBoundingClientRect().top;
-    var a = nodes[0].getBoundingClientRect(), b = nodes[nodes.length - 1].getBoundingClientRect();
-    railTop = a.top + a.height / 2 - base;
-    railH = Math.max(1, b.top + b.height / 2 - base - railTop);
-    rail.style.top = railTop + 'px';
-    rail.style.height = railH + 'px';
-    paint();
-  }
-  function paint() {
-    ticking = false;
-    var top = list.getBoundingClientRect().top + railTop;
-    var p = (window.innerHeight * 0.5 - top) / railH;
-    fill.style.setProperty('--kj-p', (p < 0 ? 0 : p > 1 ? 1 : p).toFixed(4));
-  }
-  function onScroll() { if (inView && !ticking) { ticking = true; requestAnimationFrame(paint); } }
-
-  new IntersectionObserver(function (entries) {
-    inView = entries[0].isIntersecting;
-    if (inView) onScroll();
-  }).observe(list);
-  // Intoningarna startar när berättelsen har kommit en bit in i viewporten
-  var startIo = new IntersectionObserver(function (entries) {
-    if (!entries[0].isIntersecting) return;
-    started = true;
-    setActive(active);
-    startIo.disconnect();
-  }, { rootMargin: '0px 0px -35% 0px' });
-  startIo.observe(list);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  if ('ResizeObserver' in window) new ResizeObserver(function () { measure(); }).observe(list);
-  else window.addEventListener('resize', measure, { passive: true });
-
-  if (splitMq.addEventListener) splitMq.addEventListener('change', layout);
-  else if (splitMq.addListener) splitMq.addListener(layout);
-  layout();
-})();
-
-/* ---------- Slutdestinationen (#kj-dest) ----------
-   Linjen byggs som en SVG-bana genom nodernas faktiska mittpunkter: från kapitel 04:s nod, förbi
-   inledningen, genom de sex stoppen och till Live; därefter grenar till sidovägen och Klaro Care.
-   Banan byggs om vid storleksändring (rAF-strypt). Ritningen startar en gång per sidvisning när
-   inledningen når ~68 % ned i viewporten (IntersectionObserver) och fortsätter sedan av sig själv med
-   requestAnimationFrame: ~3,2 s enligt en mjuk tidsplan per etapp (se KEY_T), oberoende av scrollen. En lysande
-   punkt följer spetsen, varje stopp tänds när linjen når det och LIVE tänds sist. Scrollar besökaren
-   förbi en spets som redan har synts ritas linjen ikapp snabbare. Reducerad rörelse: allt visas direkt. */
-(function () {
-  var kd = document.getElementById('kj-dest');
-  if (!kd || !('IntersectionObserver' in window)) return;
-
-  var svg = kd.querySelector('.kd-svg');
-  var main = kd.querySelector('.kd-main');
-  var glow = kd.querySelector('.kd-glow');
-  var bOpt = kd.querySelector('.kd-branch--opt');
-  var bCare = kd.querySelector('.kd-branch--care');
-  var intro = kd.querySelector('.kd-intro');
-  var stops = Array.prototype.slice.call(kd.querySelectorAll('.kd-stop'));
-  var dots = stops.map(function (s) { return s.querySelector('.kd-dot'); });
-  var live = kd.querySelector('.kd-live-dot');
-  var fOpt = kd.querySelector('.kd-fork--opt .kd-fdot');
-  var fCare = kd.querySelector('.kd-fork--care .kd-fdot');
-  var railNodes = document.querySelectorAll('#processen .kj-node');
-  var lastNode = railNodes[railNodes.length - 1];
-  var btn = kd.querySelector('.kd-fork-btn');
-  var panel = document.getElementById(btn.getAttribute('aria-controls'));
+  var kr = document.querySelector('#processen .kr');
+  if (!kr) return;
+  var svg = kr.querySelector('.kr-route');
+  var main = svg.querySelector('.kr-main'), glow = svg.querySelector('.kr-glow'), pulse = svg.querySelector('.kr-pulse');
+  var tip = svg.querySelector('.kr-tip'), grad = svg.querySelector('#kr-grad');
+  var exit = document.querySelector('#processen .kj-idea-exit');
+  var kf = kr.querySelector('.kf');
+  var items = Array.prototype.slice.call(kf.querySelectorAll('.kf-item'));
+  var bridge = kr.querySelector('.kr-intro-main');
+  var stops = Array.prototype.slice.call(kr.querySelectorAll('.kr-stop'));
+  var night = kr.querySelector('.kr-night');
+  var destHead = kr.querySelector('.kr-dest-head');
+  var live = kr.querySelector('.kr-live'), liveDot = kr.querySelector('.kr-live-dot');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var wide = window.matchMedia('(min-width: 1024px)');
   var small = window.matchMedia('(max-width: 760px)');
-  var probe = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  var head = kd.querySelector('.kd-head');
-  var DRAW_MS = 3200;
-  var total = 1, at = [];  // banans längd och varje stopps position längs den
-  var prog = 0;            // ritad andel 0–1 (tillstånd som överlever ombyggnad vid storleksändring)
-  var started = false, finished = false;
 
-  kd.classList.add('kd-js');
-  svg.appendChild(probe);
-  probe.setAttribute('fill', 'none');
+  var total = 1, N = 0, ys = [], xs = [], marks = [];
+  var krTop = 0, kfTop = 0, kfH = 1, nightTop = 0, nightH = 1, nightMidY = 0, headTop = 0;
+  var still = false, stick = false, f = null, headIn = false, isLive = false, tipOn = false, tipNight = false;
+  var lastLen = -1, lastN = -1;
 
-  // Sidovägen: stängd från start (öppen utan JS), aria-expanded + inert på panelen
-  function setOpen(open) {
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    panel.inert = !open;
+  kr.classList.add('kr-js');
+
+  function mode() {
+    still = reduce.matches;
+    stick = wide.matches && !still;
+    kf.classList.toggle('kf--stick', stick);
+    if (!stick) { kf.setAttribute('data-f', '2'); f = null; }
   }
-  setOpen(false);
-  btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
 
-  function center(el, base) {
+  function rel(el, base) {
     var r = el.getBoundingClientRect();
     return { x: r.left + r.width / 2 - base.left, y: r.top + r.height / 2 - base.top };
   }
-  // Mjuk kurva med lodräta tangenter mellan två punkter
+  // Mjuk kurva med lodräta tangenter: y växer alltid längs banan (krävs för tabellen y → längd)
   function curve(a, b) {
     var m = (b.y - a.y) / 2;
     return ' C ' + a.x + ' ' + (a.y + m) + ' ' + b.x + ' ' + (b.y - m) + ' ' + b.x + ' ' + b.y;
   }
-  function lengthOf(d) { probe.setAttribute('d', d); return probe.getTotalLength(); }
-
-  // Tidsplan för ritningen. Banan är ojämn: infarten från kapitel 04 förbi inledningen är över hälften
-  // av längden, stoppen ligger tätt därefter. En easing på hela längden skulle därför klumpa ihop stoppen
-  // och lämna en lång, seg sista etapp. I stället får varje etapp sin tid – infarten ~30 %, stopp 1–6 med
-  // jämna mellanrum, LIVE sist – och punkterna binds ihop med en monoton kubisk kurva (Fritsch–Carlson),
-  // så att farten ändras mjukt utan ryck och bromsar in lugnt mot LIVE.
-  var KEY_T = [0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1];
-  var timeline = function (t) { return t; }; // (eget namn – schedule() bygger om banorna)
-  function makeSchedule(ys) {
-    var xs = KEY_T, n = xs.length, d = [], m = [], i;
-    for (i = 0; i < n - 1; i++) d.push((ys[i + 1] - ys[i]) / (xs[i + 1] - xs[i]));
-    m[0] = d[0] * 1.4;          // lugn men tydlig start
-    m[n - 1] = d[n - 2] * 0.2;  // mjuk ankomst till LIVE
-    for (i = 1; i < n - 1; i++) m[i] = d[i - 1] * d[i] <= 0 ? 0 : (d[i - 1] + d[i]) / 2;
-    for (i = 0; i < n - 1; i++) {
-      if (d[i] === 0) { m[i] = m[i + 1] = 0; continue; }
-      var a2 = m[i] / d[i], b2 = m[i + 1] / d[i], h2 = a2 * a2 + b2 * b2;
-      if (h2 > 9) { var k = 3 / Math.sqrt(h2); m[i] = k * a2 * d[i]; m[i + 1] = k * b2 * d[i]; }
-    }
-    return function (t) {
-      if (t <= 0) return 0;
-      if (t >= 1) return 1;
-      for (var j = 0; j < n - 1 && t > xs[j + 1]; j++);
-      var h = xs[j + 1] - xs[j], u = (t - xs[j]) / h, u2 = u * u, u3 = u2 * u;
-      return (2 * u3 - 3 * u2 + 1) * ys[j] + (u3 - 2 * u2 + u) * h * m[j] +
-        (-2 * u3 + 3 * u2) * ys[j + 1] + (u3 - u2) * h * m[j + 1];
-    };
+  function lengthAtY(y) {
+    if (y <= ys[0]) return 0;
+    if (y >= ys[N]) return total;
+    var lo = 0, hi = N;
+    while (hi - lo > 1) { var mid = (lo + hi) >> 1; if (ys[mid] <= y) lo = mid; else hi = mid; }
+    var t = (y - ys[lo]) / Math.max(0.001, ys[hi] - ys[lo]);
+    return (lo + t) / N * total;
   }
-
-  // Visa ritad andel: linje, glöd, spets och de stopp linjen har nått
-  function render(p) {
-    var len = total * p;
-    main.style.strokeDashoffset = glow.style.strokeDashoffset = total - len;
-    if (head) {
-      var pt = main.getPointAtLength(len);
-      head.setAttribute('transform', 'translate(' + pt.x + ' ' + pt.y + ')');
-    }
-    for (var i = 0; i < at.length; i++) {
-      if (len >= at[i] - 1 && !stops[i].classList.contains('is-on')) stops[i].classList.add('is-on');
-    }
-  }
-  function arrive() {
-    finished = true;
-    prog = 1;
-    render(1);
-    if (head) head.classList.remove('is-on');
-    kd.classList.add('is-live');
-    bOpt.style.strokeDashoffset = 0;
-    if (!reduce.matches) confetti();
-  }
-
-  // Avslutande konfetti från LIVE-punkten: ~22 små partiklar (Klaro-blå, LIVE-grön, vitt, lite ljusblått)
-  // som skjuts mjukt uppåt och utåt, singlar ned en bit och tonar bort på ~1,6–2 s. Bara transform/opacity
-  // via Web Animations, absolut positionerat (ingen layoutförskjutning), aria-hidden, pointer-events: none,
-  // och tas bort ur DOM när den är klar. Körs bara från arrive(), dvs. en gång när linjen når LIVE.
-  function confetti() {
-    var map = kd.querySelector('.kd-map');
-    if (!map || !live || typeof Element.prototype.animate !== 'function') return;
-    var mr = map.getBoundingClientRect(), lr = live.getBoundingClientRect();
-    var box = document.createElement('div');
-    box.className = 'kd-confetti';
-    box.setAttribute('aria-hidden', 'true');
-    box.style.left = (lr.left + lr.width / 2 - mr.left) + 'px';
-    box.style.top = (lr.top + lr.height / 2 - mr.top) + 'px';
-    map.appendChild(box);
-
-    var narrow = small.matches;
-    var COLORS = ['#146EF5', '#146EF5', '#146EF5', '#43A866', '#43A866', '#43A866', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#9CC3FF'];
-    var SHAPES = ['rect', 'rect', 'rect', 'streak', 'streak', 'dot'];
-    var rnd = function (a, b) { return a + Math.random() * (b - a); };
-    var anims = [];
-    for (var i = 0; i < 22; i++) {
-      var el = document.createElement('i');
-      var shape = SHAPES[i % SHAPES.length];
-      el.className = 'kd-cf kd-cf--' + shape;
-      el.style.background = COLORS[(i * 7) % COLORS.length];
-      var sz = rnd(0.8, 1.25);
-      if (shape === 'rect') { el.style.width = (6 * sz) + 'px'; el.style.height = (3.2 * sz) + 'px'; }
-      else if (shape === 'streak') { el.style.width = (1.6 * sz) + 'px'; el.style.height = (9 * sz) + 'px'; }
-      else { el.style.width = el.style.height = (4.2 * sz) + 'px'; }
-      box.appendChild(el);
-
-      // Kon uppåt och ut åt sidorna; på mobil ligger punkten vid vänsterkanten, så konen vänds åt höger
-      var ang = (narrow ? rnd(-100, -15) : rnd(-165, -15)) * Math.PI / 180;
-      var dist = narrow ? rnd(55, 120) : rnd(70, 165);
-      var x1 = Math.cos(ang) * dist, y1 = Math.sin(ang) * dist;
-      var x2 = x1 * rnd(1.1, 1.3) + rnd(-10, 10), y2 = y1 + rnd(45, 95);
-      var r0 = rnd(0, 180), r1 = r0 + rnd(-220, 220), r2 = r1 + rnd(-160, 160);
-      var dur = rnd(1600, 2000);
-      anims.push(el.animate([
-        { transform: 'translate(-50%,-50%) translate(0,0) rotate(' + r0 + 'deg) scale(.5)', opacity: 0, easing: 'cubic-bezier(0.16,1,0.3,1)' },
-        { transform: 'translate(-50%,-50%) translate(' + x1 * 0.35 + 'px,' + y1 * 0.35 + 'px) rotate(' + (r0 + (r1 - r0) * 0.3) + 'deg) scale(1)', opacity: 1, offset: 0.08, easing: 'cubic-bezier(0.16,1,0.3,1)' },
-        { transform: 'translate(-50%,-50%) translate(' + x1 + 'px,' + y1 + 'px) rotate(' + r1 + 'deg) scale(1)', opacity: 1, offset: 0.42, easing: 'cubic-bezier(0.45,0,0.7,1)' },
-        { transform: 'translate(-50%,-50%) translate(' + x2 + 'px,' + y2 + 'px) rotate(' + r2 + 'deg) scale(.9)', opacity: 0 }
-      ], { duration: dur, delay: rnd(0, 90), fill: 'both' }));
-    }
-    var done = false;
-    var clean = function () { if (!done) { done = true; box.remove(); } };
-    Promise.all(anims.map(function (a) { return a.finished; })).then(clean, clean);
-    setTimeout(clean, 2600); // säkerhetsnät om en animation avbryts
+  function pointAt(len) {
+    var i = len / total * N, lo = Math.floor(i), t = i - lo;
+    if (lo >= N) return { x: xs[N], y: ys[N] };
+    return { x: xs[lo] + (xs[lo + 1] - xs[lo]) * t, y: ys[lo] + (ys[lo + 1] - ys[lo]) * t };
   }
 
   function build() {
     pending = false;
-    var base = kd.getBoundingClientRect();
+    var base = kr.getBoundingClientRect();
     if (!base.width) return;
+    var sy = window.scrollY || window.pageYOffset;
+    krTop = base.top + sy;
     svg.setAttribute('width', base.width);
     svg.setAttribute('height', base.height);
+    svg.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);
 
-    var s = lastNode && lastNode.offsetParent ? center(lastNode, base) : { x: 22, y: 0 };
-    if (lastNode && lastNode.offsetParent) s.y += lastNode.offsetHeight / 2;
-    var bend = { x: s.x, y: intro.getBoundingClientRect().bottom - base.top + 24 };
-    var d = 'M ' + s.x + ' ' + s.y + ' L ' + bend.x + ' ' + bend.y;
-    var prev = bend;
-    at = [];
-    dots.forEach(function (dot) {
-      var p = center(dot, base);
-      d += curve(prev, p); prev = p;
-      at.push(lengthOf(d));
+    var pts = [], nodeMarks = [];
+    // En nod med ett "rakt ned förbi texten"-steg, så att linjen aldrig korsar innehållet
+    function addNode(node, textEl, target) {
+      var p = rel(node, base);
+      pts.push(p);
+      nodeMarks.push({ y: p.y, node: node, target: target });
+      var tb = textEl.getBoundingClientRect().bottom - base.top;
+      pts.push({ x: p.x, y: Math.max(p.y + 1, tb + 28) });
+    }
+    if (exit && exit.offsetParent) pts.push(rel(exit, base));
+    var bridgeNode = bridge.querySelector('.kr-node');
+    var gx = rel(bridgeNode, base).x;
+    var kr0 = kf.getBoundingClientRect();
+    kfTop = kr0.top + sy; kfH = Math.max(1, kr0.height);
+    if (stick) {
+      // Sticky scen: linjen går lodrätt längs vänsterkanten genom hela scenen
+      pts.push({ x: gx, y: kr0.top - base.top + 40 });
+      pts.push({ x: gx, y: kr0.bottom - base.top - 40 });
+    } else {
+      items.forEach(function (it) { addNode(it.querySelector('.kr-node'), it, it); });
+    }
+    addNode(bridgeNode, bridge, null);
+    stops.forEach(function (s) {
+      // Portalscenen före Lanseringen: linjen passerar lodrätt längs vänsterkanten, aldrig genom texten
+      var prev = s.previousElementSibling;
+      if (prev && prev.classList.contains('kr-ps')) {
+        var pr = prev.getBoundingClientRect();
+        pts.push({ x: gx, y: pr.top - base.top - 12 });
+        pts.push({ x: gx, y: pr.bottom - base.top + 12 });
+      }
+      addNode(s.querySelector('.kr-node'), s.querySelector('.kr-stop-txt'), s);
     });
-    var L = center(live, base);
-    d += curve(prev, L);
-    total = lengthOf(d);
-    timeline = makeSchedule([0].concat(at.map(function (x) { return x / total; }), [1]));
-    main.setAttribute('d', d);
-    glow.setAttribute('d', d);
+    var nr = night.getBoundingClientRect();
+    nightTop = nr.top + sy; nightH = Math.max(1, nr.height);
+    var mid = { x: base.width * (small.matches ? 0.5 : 0.56), y: nr.top - base.top + nr.height * 0.52 };
+    var L = rel(liveDot, base);
+    var hr = destHead.getBoundingClientRect();
+    headTop = hr.top + sy;
+    pts.push(mid);
+    pts.push({ x: L.x, y: Math.max(mid.y + 1, hr.top - base.top - 36) });
+    pts.push(L);
+    for (var k = 1; k < pts.length; k++) if (pts[k].y <= pts[k - 1].y) pts[k].y = pts[k - 1].y + 1;
+
+    var d = 'M ' + pts[0].x + ' ' + pts[0].y;
+    for (var j = 1; j < pts.length; j++) {
+      var a = pts[j - 1], b = pts[j];
+      d += Math.abs(a.x - b.x) < 0.5 ? ' L ' + b.x + ' ' + b.y : curve(a, b);
+    }
+    main.setAttribute('d', d); glow.setAttribute('d', d); pulse.setAttribute('d', d);
+    total = main.getTotalLength() || 1;
+    N = Math.min(1600, Math.max(240, Math.ceil(total / 6)));
+    ys = []; xs = [];
+    for (var s = 0; s <= N; s++) {
+      var pt = main.getPointAtLength(total * s / N);
+      xs.push(pt.x); ys.push(pt.y);
+    }
+    for (var m = 1; m <= N; m++) if (ys[m] < ys[m - 1]) ys[m] = ys[m - 1];
+    // Rensa tillstånd från en tidigare byggd bana (t.ex. byte mellan sticky och linjärt)
+    marks.forEach(function (mk) { mk.node.classList.remove('is-on'); if (mk.target) mk.target.classList.remove('is-reached'); });
+    marks = nodeMarks.map(function (mk) { mk.at = lengthAtY(mk.y); mk.on = false; return mk; });
+    nightMidY = mid.y;
+
+    // Linjen går från Klaro-blå till ljust blå genom den mörknande himlen
+    grad.setAttribute('y1', nr.top - base.top + nr.height * 0.3);
+    grad.setAttribute('y2', nr.top - base.top + nr.height * 0.9);
     main.style.strokeDasharray = glow.style.strokeDasharray = total + ' ' + total;
-
-    var o = center(fOpt, base), k = center(fCare, base);
-    var dOpt = 'M ' + L.x + ' ' + L.y + curve(L, o);
-    bOpt.setAttribute('d', dOpt);
-    var optLen = lengthOf(dOpt);
-    bOpt.style.strokeDasharray = optLen + ' ' + optLen;
-    bOpt.style.strokeDashoffset = finished ? 0 : optLen;
-    // Staplat (mobil): Care ligger under sidovägen, så den prickade grenen fortsätter därifrån
-    var from = Math.abs(k.x - o.x) < 30 && k.y > o.y ? o : L;
-    bCare.setAttribute('d', 'M ' + from.x + ' ' + from.y + curve(from, k));
-
-    render(prog); // behåller ritad andel vid storleksändring (0 = helt dold, 1 = klar)
+    lastLen = -1; lastN = -1;
+    paint();
   }
-
   var pending = false;
   function schedule() { if (!pending) { pending = true; requestAnimationFrame(build); } }
 
-  // Ritningen: tidsstyrd med rAF. Normal takt ger ~3,2 s; om spetsen hamnat ovanför viewporten
-  // (besökaren har scrollat förbi) går tiden fortare så att linjen hinner ikapp.
-  function draw() {
-    if (started) return;
-    started = true;
-    if (reduce.matches) { arrive(); return; }
-    if (head) head.classList.add('is-on');
-    var elapsed = 0, last = null, tipSeen = false;
-    function frame(now) {
-      if (finished) return;
-      if (last === null) last = now;
-      var dt = Math.min(64, now - last); last = now;
-      var speed = 1;
-      if (head) {
-        // Ikapp bara när spetsen redan har synts och besökaren sedan scrollat förbi den – inte i början,
-        // när linjen startar vid kapitel 04:s nod ovanför viewporten.
-        var r = head.getBoundingClientRect();
-        if (r.top > 0 && r.bottom < window.innerHeight) tipSeen = true;
-        else if (tipSeen && r.bottom < window.innerHeight * 0.15) speed = 3.5;
-      }
-      elapsed += dt * speed;
-      var t = Math.min(1, elapsed / DRAW_MS);
-      prog = Math.max(prog, timeline(t)); // aldrig bakåt, även om banan byggs om under ritningen
-      render(prog);
-      if (t >= 1) { arrive(); return; }
-      requestAnimationFrame(frame);
+  function paint() {
+    ticking = false;
+    if (!N) return;
+    var sy = window.scrollY || window.pageYOffset, vh = window.innerHeight;
+    var len = still ? total : lengthAtY(sy + vh * (small.matches ? 0.66 : 0.6) - krTop);
+
+    // Framtidsbilderna i sticky-scenen: skiss tills scenen nått halvvägs upp, sedan en bild per tredjedel
+    if (stick) {
+      var p = (sy - kfTop) / Math.max(1, kfH - vh);
+      var nf = sy + vh * 0.5 < kfTop ? -1 : p < 1 / 3 ? 0 : p < 2 / 3 ? 1 : 2;
+      if (nf !== f) { f = nf; kf.setAttribute('data-f', String(nf)); }
     }
-    requestAnimationFrame(frame);
+
+    if (Math.abs(len - lastLen) > 0.25) {
+      lastLen = len;
+      main.style.strokeDashoffset = glow.style.strokeDashoffset = total - len;
+      var showTip = !still && len > 2 && len < total - 2;
+      if (showTip !== tipOn) { tipOn = showTip; tip.classList.toggle('is-on', showTip); }
+      if (showTip) {
+        var pt = pointAt(len);
+        tip.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ')');
+        var nt = pt.y > nightMidY - nightH * 0.2;
+        if (nt !== tipNight) { tipNight = nt; tip.classList.toggle('is-night', nt); }
+      }
+      // Noder, framtidsbilder och stopp tänds när linjen når dem – och släcks igen om man scrollar tillbaka
+      for (var i = 0; i < marks.length; i++) {
+        var on = len >= marks[i].at - 1;
+        if (on !== marks[i].on) {
+          marks[i].on = on;
+          marks[i].node.classList.toggle('is-on', on);
+          if (marks[i].target) marks[i].target.classList.toggle('is-reached', on);
+        }
+      }
+      if (!isLive && len >= total - 1.5) arrive();
+    }
+
+    var n = still ? 1 : Math.min(1, Math.max(0, (sy + vh - nightTop) / (nightH + vh * 0.55)));
+    if (Math.abs(n - lastN) > 0.002) { lastN = n; night.style.setProperty('--n', n.toFixed(3)); }
+
+    // "När vi är framme" kommer fram först när den mörka himlen är etablerad (en gång)
+    if (!headIn && (still || sy + vh * 0.8 > headTop)) { headIn = true; destHead.classList.add('is-in'); }
   }
 
-  build();
-  if (reduce.matches) draw();
-  else {
-    // Start när inledningen (eller något senare i resan) når ~68 % ned i viewporten. Om besökaren redan
-    // har passerat sektionen (t.ex. återställd scrollposition längre ned) startar den när den syns igen.
-    var io = new IntersectionObserver(function (entries) {
-      for (var i = 0; i < entries.length; i++) {
-        if (entries[i].isIntersecting) { draw(); io.disconnect(); return; }
-      }
-    }, { rootMargin: '0px 0px -32% 0px' });
-    io.observe(intro);
-    io.observe(kd.querySelector('.kd-map'));
+  // Ankomsten: liveindikatorn tänds, webbplatsen blir fullt synlig och en svag ljusimpuls löper in i punkten
+  function arrive() {
+    isLive = true;
+    live.classList.add('is-live');
+    if (still || typeof pulse.animate !== 'function') return;
+    var P = 64, from = Math.max(0, total - 520);
+    pulse.style.strokeDasharray = P + ' ' + (total + P);
+    pulse.animate([
+      { strokeDashoffset: -from, opacity: 0 },
+      { opacity: 0.9, offset: 0.25 },
+      { strokeDashoffset: -(total - P), opacity: 0 }
+    ], { duration: 1300, easing: 'cubic-bezier(0.4,0,0.2,1)', fill: 'forwards' });
   }
+
+  var ticking = false;
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }
+
+  mode();
+  build();
+  window.addEventListener('scroll', onScroll, { passive: true });
   if ('ResizeObserver' in window) {
     var ro = new ResizeObserver(schedule);
-    ro.observe(kd);
-    // Kapitlen ovanför kan byta höjd (t.ex. delat/staplat läge) och flytta startpunkten
-    ro.observe(document.querySelector('#processen .kj-story'));
+    ro.observe(kr);
+    var scene = document.querySelector('#processen .kj-ascent');
+    if (scene) ro.observe(scene); // landningens linje flyttas om scenen byter höjd
   } else window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('load', schedule);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  [reduce, wide, small].forEach(function (mq) {
+    function change() { mode(); schedule(); }
+    if (mq.addEventListener) mq.addEventListener('change', change);
+    else if (mq.addListener) mq.addListener(change);
+  });
+})();
+
+/* ---------- Efter resan: sidovägen "Anpassas efter din resa" ----------
+   Stängd från start med JS (öppen utan JS); aria-expanded på knappen och inert på panelen. */
+(function () {
+  var btn = document.querySelector('#processen .ka-fork-btn');
+  if (!btn) return;
+  var panel = document.getElementById(btn.getAttribute('aria-controls'));
+  function setOpen(open) {
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (panel) panel.inert = !open;
+  }
+  setOpen(false);
+  btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
 })();
 
 /* ---------- Övergången till kontaktsektionen (#kontakt) ----------

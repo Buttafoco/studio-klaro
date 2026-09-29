@@ -328,14 +328,14 @@
   html.dk-on .page-fade-wrap{opacity:0;}
   .page-fade{position:absolute;inset:0;background:#fff;opacity:0;will-change:opacity;}
   body.dk-anim{transition:background-color 1.1s cubic-bezier(0.4,0,0.2,1);}
-  html.dk-on body{background:#1D1C1A;}
+  html.dk-on body{background:#0B1733;}
   body.dk-anim #kontakt{transition:opacity .9s ease;}
   html.dk-on #kontakt{opacity:0;}
   .dk{--dk-ease:cubic-bezier(0.22,1,0.36,1);--dk-ink:#0F172A;--dk-mute:#52657A;--dk-line:rgba(15,23,42,0.1);--dk-surf:rgba(255,255,255,0.4);--dk-accent:#146EF5;--dk-page:var(--sk-canvas);
     --dk-full:calc(100vw - var(--sbw,0px));width:var(--dk-full);margin:var(--dk-lead) 0 0 calc(50% - var(--dk-full) / 2);padding:var(--sp-chapter) 0 var(--dk-pb);overflow-x:clip;color:var(--dk-ink);
     transition:--dk-ink 1.1s ease,--dk-mute 1.1s ease,--dk-line 1.1s ease,--dk-surf 1.1s ease,--dk-accent 1.1s ease,--dk-page 1.1s ease;}
-  html.dk-on .dk,.dk:not(.dk-js){--dk-ink:#F4F1EA;--dk-mute:#ABA59B;--dk-line:rgba(244,241,234,0.1);--dk-surf:rgba(244,241,234,0.035);--dk-accent:#8AB6FF;--dk-page:#1D1C1A;}
-  .dk:not(.dk-js){background:#1D1C1A;}
+  html.dk-on .dk,.dk:not(.dk-js){--dk-ink:#EEF2FA;--dk-mute:#A7B3CA;--dk-line:rgba(238,242,250,0.12);--dk-surf:rgba(238,242,250,0.04);--dk-accent:#8AB6FF;--dk-page:#0B1733;}
+  .dk:not(.dk-js){background:#0B1733;}
   .dk-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
   .dk-eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dk-accent);margin-bottom:18px;}
   .dk-h3{font-size:clamp(24px,2.4vw,32px);font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin:0;color:var(--dk-ink);}
@@ -664,8 +664,11 @@
   }
   /* Branschkarusell */
   /* Sektionen bryter ut ur sidans maxbredd (1440 px) och går kant i kant; --sbw = scrollbarens bredd (sätts i JS) */
-  .ind{--ind-full:calc(100vw - var(--sbw,0px));width:var(--ind-full);margin:0 0 0 calc(50% - var(--ind-full) / 2);padding-top:calc(var(--sp-chapter) + 8px); /* +8px: kompenserar karusellens egen toppadding/skugga */--ind-w:min(1320px,74%);--ind-gap:28px;--ind-ease:cubic-bezier(0.25,0.8,0.25,1);}
-  .ind-track{list-style:none;margin:0;padding:12px calc(50% - var(--ind-w) / 2) 20px;display:flex;gap:var(--ind-gap);overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;position:relative;outline:none;cursor:grab;}
+  .ind{--ind-full:calc(100vw - var(--sbw,0px));width:var(--ind-full);margin:0 0 0 calc(50% - var(--ind-full) / 2);/* Eget kapitel: luft ovanför (--ind-above, minus spårets toppadding --ind-pt) och under. Under karusellen ger nästa
+     sektion redan --sp-chapter (räknat med 20 px spårpadding); --ind-below fyller bara upp till önskat avstånd med
+     padding (aldrig negativ marginal). --ind-pb är spårets bottenpadding: stor nog för kortens skugga + svävning, så
+     att skuggan aldrig klipps av spårets overflow – det var den klippta skuggan som syntes som en skarv. */--ind-above:clamp(120px,9.5vw,144px);--ind-below:clamp(148px,11.5vw,168px);--ind-pt:14px;--ind-pb:40px;padding-top:calc(var(--ind-above) - var(--ind-pt));padding-bottom:max(0px,calc(var(--ind-below) - var(--sp-chapter) - (var(--ind-pb) - 20px)));--ind-gap:24px;--ind-w:clamp(350px,24.5vw,370px);--ind-s1:.86;--ind-s2:.79;--ind-ease:cubic-bezier(0.25,0.8,0.25,1);}
+  .ind-track{list-style:none;margin:0;padding:var(--ind-pt) calc(50% - var(--ind-w) / 2) var(--ind-pb);display:flex;gap:var(--ind-gap);overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;position:relative;outline:none;cursor:grab;}
   /* Med kloner i ändarna (JS) behövs ingen sidopadding – klonerna fyller ut istället */
   .ind-track.has-clones{padding-left:0;padding-right:0;}
   .ind-track::-webkit-scrollbar{display:none;width:0;height:0;}
@@ -678,25 +681,147 @@
   .ind-track.no-anim .ind-card,.ind-track.no-anim .ind-card *{transition:none!important;}
   .ind-track.is-dragging .ind-card{pointer-events:none;}
   .ind-item{flex:0 0 var(--ind-w);scroll-snap-align:center;}
-  .ind-card{position:relative;display:block;aspect-ratio:23/10;border-radius:28px;overflow:hidden;color:#fff;text-decoration:none;isolation:isolate;background:#0F172A;box-shadow:0 10px 30px rgba(15,23,42,0.08);transition:transform .55s var(--ind-ease),opacity .55s var(--ind-ease);}
-  /* Kort före och efter det aktiva: hela kortet (bild, mockup och text) skalas till 70 % och tonas lätt ned,
-     centrerat vertikalt mot huvudkortet. Förskjutningen (15 % = halva krympningen) håller kanten mot
-     huvudkortet på plats, så att mellanrummet är detsamma som --ind-gap. Bara transform/opacity – ingen
-     layoutförändring när ett kort blir aktivt. */
-  .ind-item.is-before .ind-card{transform:translateX(15%) scale(.7);opacity:.85;}
-  .ind-item.is-after .ind-card{transform:translateX(-15%) scale(.7);opacity:.85;}
-  .ind-card:focus-visible{outline:3px solid #146EF5;outline-offset:4px;}
-  .ind-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s var(--ind-ease);}
-  .ind-card:hover .ind-bg{transform:scale(1.02);}
-  .ind-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(9,14,28,.8) 0%,rgba(9,14,28,.5) 22%,rgba(9,14,28,.1) 42%,rgba(9,14,28,0) 55%);}
-  .ind-row{position:absolute;left:clamp(20px,2vw,28px);right:clamp(20px,2vw,28px);bottom:clamp(20px,2vw,28px);display:flex;align-items:flex-end;justify-content:flex-start;gap:clamp(24px,3vw,44px);}
-  .ind-devices{flex:0 0 25%;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));transition:transform .55s var(--ind-ease);}
-  .ind-devices > img{display:block;width:100%;height:auto;}
-  .ind-card:hover .ind-devices{transform:translateY(-4px);}
-  .ind-body{flex:0 1 400px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;}
-  .ind-tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:6px 12px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
-  .ind-name{font-size:clamp(22px,2vw,30px);font-weight:800;line-height:1.08;letter-spacing:-0.02em;margin:0;color:#fff;text-wrap:balance;}
-  .ind-text{font-size:15px;line-height:1.5;color:#DCE4EF;font-weight:500;}
+  /* Svävning: korten vilar på långsamt rörliga moln. Rörelsen ligger på listelementet (kortet har redan sin
+     skala/förskjutning), bara translateY och bara transform – karusellen läser positioner från layouten, så snäpp,
+     drag och autoplay påverkas inte. Mittkortet svävar ~6 px, sidokorten ~3 px; amplituden (--ind-float, registrerad
+     med @property) glider mjukt över när aktivt kort byts. Olika längd och startfördröjning per kort = aldrig i takt.
+     Pausas under drag/swipe och är helt avstängd vid reducerad rörelse. */
+  @property --ind-float{syntax:'<length>';inherits:false;initial-value:3px;}
+  .ind-item{--ind-float:3px;will-change:transform;transition:--ind-float .6s cubic-bezier(0.33,1,0.68,1);
+    animation:indFloat var(--ifd,6s) cubic-bezier(0.37,0,0.63,1) var(--ifdl,0s) infinite;}
+  .ind-item.is-active{--ind-float:6px;}
+  @keyframes indFloat{
+    0%,100%{transform:translate3d(0,calc(var(--ind-float) * .5),0);}
+    50%{transform:translate3d(0,calc(var(--ind-float) * -.5),0);}
+  }
+  .ind-item:nth-child(6n+1){--ifd:5.6s;--ifdl:-1.1s;}
+  .ind-item:nth-child(6n+2){--ifd:6.4s;--ifdl:-3.9s;}
+  .ind-item:nth-child(6n+3){--ifd:5.1s;--ifdl:-2.4s;}
+  .ind-item:nth-child(6n+4){--ifd:6.8s;--ifdl:-5.2s;}
+  .ind-item:nth-child(6n+5){--ifd:5.9s;--ifdl:-.4s;}
+  .ind-item:nth-child(6n){--ifd:6.2s;--ifdl:-4.6s;}
+  .ind-track.is-dragging .ind-item,.ind-track.is-touching .ind-item{animation-play-state:paused;}
+  /* Branschkort – kreativa Studio Klaro-affischer: ett tydligt aktivt kort i mitten, sidokorten skalade (--ind-s)
+     och lätt nedtonade, och karusellen fortsätter utanför fönstret så att nästa/föregående kort anas.
+     Kortet är en blå scen: mörkare blått upptill bär den vita texten, ljusare dimma nedtill bär illustrationen.
+     Rubrik och text ligger kompakt uppe till vänster; illustrationen fyller nedre halvan med ett diskret
+     webbfragment (mobil eller webbläsare) bakom, som kopplar objektet till webbdesign. CTA nere till vänster. */
+  .ind-card{position:relative;display:grid;grid-template-rows:auto minmax(0,1fr) auto;row-gap:12px;
+    --ind-h:clamp(450px,32vw,475px);height:var(--ind-h);box-sizing:border-box;padding:28px 26px 22px;
+    border-radius:32px;overflow:hidden;isolation:isolate;color:#fff;text-decoration:none;
+    /* Textzonen (övre ~42 %) håller #4371C0 eller mörkare → vit text minst 4.5:1; därefter ljusnar scenen */
+    background:linear-gradient(180deg,#3D6ABA 0%,#4371C0 42%,#6893D5 54%,#97B6E6 66%,#C2D6F2 78%,#E0EAF9 90%,#EDF3FC 100%);
+    /* Skuggan når ~28 px under kortet (16 + 32 − 20) och ryms därmed i spårets bottenpadding (--ind-pb) även när kortet svävar */
+    box-shadow:0 16px 32px -20px rgba(40,80,150,.42),inset 0 0 0 1px rgba(255,255,255,.22);
+    transform-origin:50% 50%;
+    transition:transform .52s cubic-bezier(0.33,1,0.68,1),opacity .52s cubic-bezier(0.33,1,0.68,1);}
+  /* Sidokorten: grannarna skalas till --ind-s1, korten längre bort till --ind-s2 och tonas ned mer. Alla flyttas in
+     mot mitten så att det synliga mellanrummet blir exakt --ind-gap (--dir/--steps sätts i JS). Förskjutningen för
+     kort k steg bort är k − ½ − s1 − (k − 2)·s2 − s2/2 kortbredder, förenklat nedan. Bara transform/opacity. */
+  .ind-item:not(.is-active) .ind-card{opacity:.62;
+    transform:translateX(calc(var(--dir,0) * (var(--steps,2) * (1 - var(--ind-s2)) - .5 - var(--ind-s1) + 1.5 * var(--ind-s2)) * 100%)) scale(var(--ind-s2));}
+  .ind-item.is-near .ind-card{opacity:.86;
+    transform:translateX(calc(var(--dir,0) * (1 - var(--ind-s1)) * 50%)) scale(var(--ind-s1));}
+  /* Ljus: ett svagt ljus uppifrån och ett vitt glöd bakom illustrationen; lätt dimma nedtill */
+  .ind-card::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(110% 45% at 20% -5%,rgba(255,255,255,.14),transparent 60%),
+      radial-gradient(70% 40% at 60% 72%,rgba(255,255,255,.5),rgba(255,255,255,.14) 50%,transparent 75%);}
+  .ind-card::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;
+    background:linear-gradient(0deg,rgba(237,243,252,.8) 0%,rgba(237,243,252,.35) 12%,transparent 26%);}
+  /* Allt i samma kolumn: text, scen och CTA i var sin rad */
+  .ind-copy,.ind-stage,.ind-cta.klaro-button{grid-column:1;}
+  .ind-copy{grid-row:1;position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:10px;max-width:21em;}
+  .ind-name{margin:0;max-width:13ch;font-size:clamp(26px,2vw,30px);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:#fff;text-wrap:balance;}
+  .ind-text{font-size:15px;line-height:1.45;font-weight:600;color:#fff;opacity:.92;}
+  /* Illustration + webbfragment: bara mellanraden, högst ~45 % av kortets höjd; lite högre kontrast och skärpa */
+  .ind-stage{position:relative;grid-row:2;align-self:center;height:100%;display:flex;align-items:center;justify-content:center;min-height:0;max-height:calc(var(--ind-h) * .45);perspective:1200px;
+    margin:0 -26px;}
+  .ind-parallax,.ind-drift,.ind-bob{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:0;}
+  .ind-parallax{position:relative;z-index:1;transition:transform .6s cubic-bezier(0.33,1,0.68,1);}
+  .ind-obj{display:block;width:var(--ow,100%);max-width:none;height:auto;max-height:100%;flex:none;overflow:visible;
+    transform:translateX(var(--ox,0%));filter:contrast(1.12) saturate(1.12) drop-shadow(0 26px 28px rgba(40,80,150,.22));}
+  .ind-card--frisor{--ow:88%;--ox:8%;}
+  .ind-card--salong{--ow:66%;--ox:-10%;}
+  .ind-card--restaurang{--ow:78%;--ox:-4%;}
+  .ind-card--butik{--ow:68%;--ox:10%;}
+  .ind-card--fotograf{--ow:78%;--ox:-8%;}
+  .ind-card--konsult{--ow:78%;--ox:12%;}
+  /* Webbfragmentet: en liten mobil- eller webbläsarvy bakom objektet – dekorativt, ljust och stilla */
+  .ind-frag{position:absolute;z-index:0;left:var(--fl,auto);right:var(--fr,auto);top:var(--ft,6%);transform:rotate(var(--frot,0deg));
+    box-sizing:border-box;background:#F4F8FE;box-shadow:0 20px 34px -22px rgba(30,60,120,.4);opacity:.8;
+    font-family:'Manrope',system-ui,sans-serif;color:var(--sk-ink);text-align:left;line-height:1.1;}
+  .ind-frag--phone{width:23%;aspect-ratio:9/17.5;border-radius:18px;padding:5px;}
+  .ind-frag--web{width:46%;aspect-ratio:16/10.4;border-radius:12px;overflow:hidden;}
+  .if-notch{position:absolute;left:50%;top:9px;width:28%;height:5px;transform:translateX(-50%);border-radius:9px;background:#C9D8EF;}
+  .ind-frag--phone .if-body{height:100%;border-radius:14px;padding:20px 9px 10px;}
+  .if-bar{display:flex;gap:4px;height:14px;align-items:center;padding:0 9px;background:#E6EEFA;}
+  .if-bar i{width:5px;height:5px;border-radius:50%;background:#B7CBEA;}
+  .if-body{box-sizing:border-box;display:flex;flex-direction:column;gap:6px;padding:10px 12px 12px;background:#fff;height:calc(100% - 14px);}
+  .if-body b{font-size:10px;font-weight:800;letter-spacing:-.01em;}
+  .if-sub{font-size:8.5px;font-weight:700;color:#6E8CC0;}
+  .if-l{display:block;height:5px;border-radius:3px;background:#E3EBF8;}
+  .if-l--s{width:62%;}
+  .if-body em{margin-top:auto;align-self:flex-start;font-style:normal;font-size:8px;font-weight:800;color:#fff;background:#6F98DE;padding:5px 9px;border-radius:999px;}
+  .ind-card--frisor{--fl:7%;--ft:8%;--frot:-6deg;}
+  .ind-card--salong{--fr:4%;--ft:4%;--frot:4deg;}
+  .ind-card--restaurang{--fr:7%;--ft:4%;--frot:6deg;}
+  .ind-card--butik{--fl:4%;--ft:6%;--frot:-4deg;}
+  .ind-card--fotograf{--fr:3%;--ft:2%;--frot:3deg;}
+  .ind-card--konsult{--fl:6%;--ft:6%;--frot:-6deg;}
+  /* CTA: vit knapp i loggans lätt vågiga form, centrerad längst ned. Bredden följer texten (inline-flex + fit-content,
+     samma sidopadding på alla), aldrig bredare än kortets yta, alltid på en rad och alltid samma höjd.
+     Formen deformeras inte när bredden ändras: masken är tre lager – två ändar med fasta proportioner (auto 100%) och
+     ett mittparti med en mjuk våg som bara sträcks i sidled (höjd och vågamplitud ändras aldrig). Skarvarna mellan
+     ändar och mitt är vågräta, så de möts utan knäck oavsett bredd. Mittpartiet begränsas till ytan mellan ändarna
+     via ::before:s padding + mask-clip/origin: content-box (ändarna överlappar det ~1,6 px, så ingen springa syns).
+     Inga upprepade maskbitar – de gav synliga hårfina skarvar när korten skalas. */
+  .ind-cta.klaro-button{grid-row:3;position:relative;z-index:2;justify-self:center;align-self:end;
+    --klaro-fill:#fff;--klaro-ink:var(--sk-ink);
+    display:inline-flex;width:fit-content;max-width:100%;box-sizing:border-box;height:48px;min-height:48px;padding:0 30px;gap:12px;
+    font-size:14px;white-space:nowrap;filter:drop-shadow(0 10px 18px rgba(40,80,150,.2));}
+  .ind-cta.klaro-button::before{--cap:32px;padding:0 var(--cap);box-sizing:border-box;
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 100'%3E%3Cpath d='M60 9C45 9 22 10 11 25C1 39 1 62 9 76C19 91 45 91 60 91Z'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 100'%3E%3Cpath d='M0 9C15 9 38 8 49 21C59 35 59 60 52 75C44 90 15 91 0 91Z'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='none'%3E%3Cpath d='M0 9C40 9 60 5 100 6.5C140 8 160 9 200 9V91C160 91 140 95 100 94C60 93 40 91 0 91Z'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 100'%3E%3Cpath d='M60 9C45 9 22 10 11 25C1 39 1 62 9 76C19 91 45 91 60 91Z'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 100'%3E%3Cpath d='M0 9C15 9 38 8 49 21C59 35 59 60 52 75C44 90 15 91 0 91Z'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='none'%3E%3Cpath d='M0 9C40 9 60 5 100 6.5C140 8 160 9 200 9V91C160 91 140 95 100 94C60 93 40 91 0 91Z'/%3E%3C/svg%3E");
+    -webkit-mask-position:left center,right center,center;mask-position:left center,right center,center;
+    -webkit-mask-size:auto 100%,auto 100%,100% 100%;mask-size:auto 100%,auto 100%,100% 100%;
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-origin:border-box,border-box,content-box;mask-origin:border-box,border-box,content-box;
+    -webkit-mask-clip:border-box,border-box,content-box;mask-clip:border-box,border-box,content-box;}
+  .ind-cta.klaro-button:hover{animation:none;}
+  .ind-cta.klaro-button > span{display:inline-block;transition:transform .45s cubic-bezier(0.33,1,0.68,1);}
+  .ind-card:hover .ind-cta.klaro-button > span,.ind-card:focus-visible .ind-cta.klaro-button > span{transform:translateX(3px);}
+  /* Hela kortet är länken: tydlig fokusring för tangentbord */
+  .ind-card:focus-visible{outline:3px solid var(--sk-blue);outline-offset:5px;}
+
+  /* Svävrörelsen – två lager som rör sig oberoende, så att banan aldrig upprepar sig mekaniskt:
+     .ind-drift  sidled + en aning perspektiv (rotateY): driver ut, landar, driver lite till – och samma väg tillbaka
+     .ind-bob    några pixlar upp/ned + cirka ±1° rotation, i en annan takt
+     Varje delsträcka har mjuk ease-in-out; mellanstationen (≈58 % / 45 %) ger "float → drift → settle → drift back"
+     och gör rörelsen asymmetrisk. Olika längd och negativ fördröjning per kort = aldrig i takt. Bara transform. */
+  .ind-drift{will-change:transform;transform-style:preserve-3d;
+    animation:indDrift var(--dd,7.2s) cubic-bezier(0.45,0.05,0.55,0.95) var(--ddl,0s) infinite alternate;}
+  .ind-bob{will-change:transform;
+    animation:indBob var(--bd,5.4s) cubic-bezier(0.45,0.05,0.55,0.95) var(--bdl,0s) infinite alternate;}
+  @keyframes indDrift{
+    0%{transform:translate3d(-12px,0,0) rotateY(-3deg);}
+    58%{transform:translate3d(9px,0,0) rotateY(2deg);}
+    100%{transform:translate3d(14px,0,0) rotateY(3deg);}
+  }
+  @keyframes indBob{
+    0%{transform:translate3d(0,5px,0) rotate(-.9deg);}
+    45%{transform:translate3d(0,-3px,0) rotate(.3deg);}
+    100%{transform:translate3d(0,-7px,0) rotate(.9deg);}
+  }
+  .ind-card--frisor{--dd:7.2s;--ddl:-1.2s;--bd:5.4s;--bdl:-3s;}
+  .ind-card--salong{--dd:6.6s;--ddl:-4s;--bd:5.9s;--bdl:-.8s;}
+  .ind-card--restaurang{--dd:7.8s;--ddl:-2.6s;--bd:5.1s;--bdl:-2s;}
+  .ind-card--butik{--dd:6.9s;--ddl:-5.1s;--bd:6.3s;--bdl:-4.4s;}
+  .ind-card--fotograf{--dd:7.5s;--ddl:-.4s;--bd:5.6s;--bdl:-3.7s;}
+  .ind-card--konsult{--dd:6.3s;--ddl:-3.3s;--bd:6s;--bdl:-1.5s;}
+
+  /* Hover (bara mus): illustrationen lyfts 5 px och CTA-pilen flyttas lätt åt höger – ingen zoom, studs eller parallax */
+  @media (hover:hover) and (pointer:fine){
+    .ind-card:hover .ind-parallax{transform:translate3d(0,-5px,0);}
+  }
 
   /* Dator + telefon i CSS för webbkoncepten (samma proportioner som de riktiga mockup-bilderna) */
   .dv{position:relative;display:block;width:100%;aspect-ratio:1017/580;container-type:inline-size;}
@@ -739,26 +864,28 @@
   .sera-m em{align-self:flex-start;font-style:normal;font-family:'Manrope',sans-serif;font-size:.95cqw;font-weight:700;background:#8E3B2E;padding:.7cqw 1.4cqw;border-radius:999px;}
 
   @media (prefers-reduced-motion: reduce){
-    .ind-card,.ind-bg,.ind-devices{transition:none;}
-    .ind-card:hover .ind-bg{transform:none;}
+    .ind-card,.ind-parallax,.ind-cta.klaro-button > span{transition:none;}
+    .ind-drift,.ind-bob,.ind-item{animation:none;}
+    .ind-item{transition:none;}
+    .ind-card:hover .ind-parallax{transform:none;}
   }
+  /* Surfplatta/mindre laptop: aktivt kort i mitten, grannarna tydligt synliga */
   @media (max-width:1024px){
-    .ind{--ind-w:80%;--ind-gap:18px;}
-    .ind-text{font-size:14px;}
-    .ind-devices{flex-basis:30%;}
+    .ind{--ind-gap:22px;--ind-w:min(360px,46%);--ind-s1:.86;--ind-s2:.79;}
   }
-  /* Mobil: mockupen centrerad i mitten, text och fullbredds-CTA i kortets nederdel */
+  /* Mobil: ett huvudkort åt gången med en liten antydan av nästa; lägre kort, CTA nästan i full bredd */
   @media (max-width:700px){
-    .ind{--ind-w:86%;--ind-gap:8px;}
-    .ind-card{aspect-ratio:auto;height:min(470px,calc(100svh - 170px));min-height:420px;border-radius:26px;}
-    /* Stående beskärning: ansiktena ligger långt till höger i fotograf- och restaurangbilden */
-    .ind-card--fotograf .ind-bg{object-position:74% 38%!important;}
-    .ind-card--restaurang .ind-bg{object-position:70% 36%!important;}
-    .ind-shade{background:linear-gradient(0deg,rgba(9,14,28,.92) 0%,rgba(9,14,28,.78) 40%,rgba(9,14,28,.15) 66%,rgba(9,14,28,0) 78%);}
-    .ind-row{left:18px;right:18px;bottom:18px;flex-direction:column;align-items:stretch;gap:16px;}
-    .ind-devices{flex:none;width:64%;align-self:center;}
-    .ind-body{flex:none;gap:10px;}
-    .ind-text{font-size:15px;}
+    /* ~84 px luft ovanför; under ger nästa sektions --sp-chapter (96 px på mobil) redan rätt avstånd */
+    .ind{--ind-above:84px;--ind-pb:26px;padding-bottom:0;--ind-gap:10px;--ind-w:calc(100% - 40px);--ind-s1:.94;--ind-s2:.9;}
+    /* Mindre skugga (~20 px under kortet) så att den ryms i den lägre bottenpaddingen även när kortet svävar */
+    .ind-card{height:auto;min-height:440px;grid-template-rows:auto minmax(190px,1fr) auto;row-gap:14px;padding:28px 22px 22px;border-radius:32px;
+      box-shadow:0 12px 24px -16px rgba(40,80,150,.42),inset 0 0 0 1px rgba(255,255,255,.22);}
+    .ind-name{font-size:clamp(27px,7.4vw,30px);}
+    .ind-stage{max-height:none;margin:0 -22px;}
+    /* Samma innehållsanpassade knapp; texten krymper marginellt på smala skärmar innan den skulle behöva brytas */
+    .ind-cta.klaro-button{font-size:clamp(13px,3.7vw,14px);padding:0 clamp(22px,7vw,30px);}
+    .ind-frag--phone{width:24%;}
+    .ind-frag--web{width:46%;}
   }
   /* Responsiv mobilanpassning */
   @media (max-width:820px){
@@ -1154,6 +1281,120 @@
 <link rel="stylesheet" href="/src/page-transition.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/klaro-journey.css">
+<!-- Kundresan som himmel: en automatisk, filmisk uppstigning – marknivå → genom molnen → klar himmel – som spelas en
+     gång per sidvisning när scenen kommer in i bild (IntersectionObserver startar tidslinjen i skriptet sist i body).
+     Allt rör sig med transform/opacity efter en enda variabel, --t (0→1 över ~2,7 s, 2,2 s på mobil), satt på .kj-sky.
+     Scenen har alltid samma reserverade höjd (ingen layout shift, ingen sticky, scrollen påverkas aldrig).
+     Utan JS och vid reducerad rörelse saknas .kj-sky-js: den färdiga himlen, molnbädden och rubriken syns direkt. -->
+<style>
+  /* ---------- Himlen bakom resan ---------- */
+  .kj-sky{position:relative;--asc-h:min(100svh,860px);}
+  .kj-sky::before{content:'';position:absolute;z-index:-1;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;
+    top:calc(-1 * (var(--sp-chapter) + var(--dk-lead,32px)));bottom:0;
+    background:linear-gradient(180deg,rgba(220,238,255,0) 0,rgba(220,238,255,.7) 120px,#DCEEFF 240px,#DCEEFF 100%);}
+  /* Med animation: himlen under scenen börjar där scenen slutar, har scenens slutfärg och tonar fram i takt med
+     uppstigningen – så att ingen kant syns mot scenen, varken före, under eller efter färden */
+  .kj-sky.kj-sky-js::before{top:var(--asc-h);opacity:clamp(0, (var(--t,1) - .15) / .45, 1);background:#DCEEFF;}
+
+  /* Scrollpausen under uppstigningen: overflow hidden på <html>, men stabil gutter så att sidans bredd inte ändras */
+  html.kj-lock{overflow:hidden;scrollbar-gutter:stable;}
+
+  /* ---------- Scenen – basläge = slutläget ---------- */
+  .kj-ascent{position:relative;}
+  /* Minsta höjd (inte fast): scenen rymmer visionskapitlet och får växa om innehållet kräver det (t.ex. mobil) */
+  .kj-ascent-pin{position:relative;min-height:var(--asc-h);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:clamp(100px,12svh,120px) 0 clamp(72px,9svh,110px);}
+  .kj-ascent-pin .kj-head{position:relative;z-index:2;}
+  .kj-asc{position:absolute;inset:0 auto 0 50%;width:100vw;transform:translateX(-50%);pointer-events:none;overflow:hidden;}
+  .kj-asc *{pointer-events:none;}
+  .kj-asc-bg,.kj-asc-ground{display:none;}
+  .kj-asc-layer{position:absolute;inset:0;}
+  .kj-cl{position:absolute;left:var(--x);top:var(--yy);width:var(--w);height:auto;display:block;fill:url(#kj-cloud-fill);}
+  .kj-asc-layer--1,.kj-asc-layer--2,.kj-asc-layer--3{display:none;}
+  /* Molnbädden längst ned: slutlägets mjuka bas */
+  .kj-asc-base{top:auto;height:clamp(150px,18vw,260px);bottom:0;opacity:.9;}
+  .kj-asc-base .kj-cl{top:auto;bottom:calc(var(--yy) - 100%);}
+
+  /* ---------- Med animation: tidslinjen ----------
+     Varje lager räknar sin delprogress --k ur --t i sitt fönster --a…--b; bara --t skrivs per bildruta. */
+  .kj-sky-js .kj-asc-bg,.kj-sky-js .kj-asc-ground,.kj-sky-js .kj-asc-layer{display:block;}
+  .kj-sky-js .kj-asc > *{--k:clamp(0, (var(--t,1) - var(--a,0)) / (var(--b,1) - var(--a,0)), 1);will-change:transform,opacity;}
+  /* Himmelslagret går 20svh upp över scenen och börjar genomskinligt där – ingen kant medan scenen syns delvis */
+  .kj-sky-js .kj-asc{overflow:visible;overflow-x:clip;}
+  /* 20–60 %: från den omgivande sidans färg till Studio Klaros ljusblå, med ett svagt ljus uppifrån */
+  .kj-sky-js .kj-asc-bg{position:absolute;left:0;right:0;top:-20svh;bottom:0;--a:.15;--b:.6;opacity:var(--k);
+    background:radial-gradient(90% 40% at 50% 20svh,rgba(255,255,255,.5),transparent 70%),
+      linear-gradient(180deg,rgba(211,232,255,0) 0,#D3E8FF 20svh,#DCEEFF 60%,#E3F1FF 100%);}
+  /* 0–35 %: marknivå – en ljus horisontdimma nära nederkanten glider mjukt nedåt ut ur bild när färden börjar */
+  .kj-sky-js .kj-asc-ground{position:absolute;left:0;right:0;bottom:-6svh;height:46svh;--a:.12;--b:.4;
+    background:radial-gradient(70% 90% at 50% 100%,rgba(255,255,255,.95),rgba(255,255,255,.55) 38%,rgba(255,255,255,0) 72%),
+      linear-gradient(0deg,rgba(220,238,255,.55),rgba(220,238,255,0) 55%);
+    transform:translate3d(0,calc(var(--k) * var(--k) * 70svh),0);opacity:calc(1 - var(--k));}
+  /* 18–68 %: passerande molnlager kommer in ovanifrån och glider nedåt förbi kameran (mjuk in/ut-acceleration).
+     Närmare lager: större, snabbare (kortare fönster), tätare och växer en aning – kameran passerar genom dem. */
+  .kj-sky-js .kj-asc-layer--1,.kj-sky-js .kj-asc-layer--2,.kj-sky-js .kj-asc-layer--3{
+    --e:calc(var(--k) * var(--k) * (3 - 2 * var(--k)));
+    transform:translate3d(0,calc((var(--y0) + (var(--y1) - var(--y0)) * var(--e)) * 1svh),0) scale(calc(1 + var(--g,0) * var(--e)));
+    opacity:calc(var(--o) * min(1, var(--k) / .18, (1 - var(--k)) / .22));transform-origin:50% 50%;}
+  .kj-sky-js .kj-asc-layer--1{--a:.18;--b:.68;--y0:-60;--y1:95;--o:.5;--g:.03;}
+  .kj-sky-js .kj-asc-layer--2{--a:.22;--b:.66;--y0:-80;--y1:120;--o:.68;--g:.06;}
+  .kj-sky-js .kj-asc-layer--3{--a:.28;--b:.62;--y0:-110;--y1:150;--o:.76;--g:.12;}
+  /* 55–85 %: molnbädden glider ned mot nederkanten och bromsar mjukt in, som en hiss som landar */
+  .kj-sky-js .kj-asc-base{--a:.55;--b:.85;transform:translate3d(0,calc((1 - var(--k)) * (1 - var(--k)) * -58svh),0);opacity:calc(.9 * min(1, var(--k) / .3));}
+  /* Efter landningen: en mycket långsam drift i molnbädden så att himlen fortsätter kännas levande */
+  .kj-sky-js.is-landed .kj-asc-base .kj-cl{animation:kjBaseDrift 16s cubic-bezier(0.45,0.05,0.55,0.95) infinite alternate;}
+  .kj-sky-js.is-landed .kj-asc-base .kj-cl:nth-child(2){animation-duration:19s;animation-delay:-6s;}
+  .kj-sky-js.is-landed .kj-asc-base .kj-cl:nth-child(3){animation-duration:22s;animation-delay:-11s;}
+  @keyframes kjBaseDrift{from{transform:translate3d(-10px,2px,0);}to{transform:translate3d(12px,-3px,0);}}
+  /* 66–100 %: eyebrow, rubrikens två rader var för sig och sist ingressen – högst 20 px uppåt och mjuk opacity */
+  .kj-sky-js .kj-head .kj-eyebrow,.kj-sky-js .kj-head .kj-h2,.kj-sky-js .kj-head .kj-h2 span,.kj-sky-js .kj-head .kj-lead{
+    --k:clamp(0, (var(--t,1) - var(--a)) / .1, 1);--e:calc(1 - (1 - var(--k)) * (1 - var(--k)));
+    opacity:var(--k);transform:translate3d(0,calc((1 - var(--e)) * 20px),0);}
+  .kj-sky-js .kj-head .kj-eyebrow{--a:.66;}
+  .kj-sky-js .kj-head .kj-h2{--a:.8;}
+  .kj-sky-js .kj-head .kj-h2 span{--a:.86;}
+  .kj-sky-js .kj-head .kj-lead{--a:.9;}
+
+  /* ---------- 1. Framtidsbilden: stor redaktionell typografi, mycket himmel och en lös blå linje ----------
+     Basläget är slutläget (utan JS och vid reducerad rörelse). Med animation (.kj-sky-js) ritas linjen när
+     uppstigningen landat (.is-play); .is-done visar slutläget direkt. Linjen lämnar nedtill (.kj-idea-exit). */
+  .kj-idea{position:relative;z-index:2;width:min(1100px,100%);display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .kj-idea .kj-idea-text{max-width:1000px;margin:0;}
+  .kj-idea-text .kj-h2{font-size:clamp(42px,6.2vw,92px);line-height:1;letter-spacing:-0.045em;margin-bottom:28px;}
+  .kj-idea-text .kj-lead{margin:0 auto;max-width:560px;font-size:clamp(17px,1.4vw,20px);}
+  .kj-idea-art{position:relative;width:clamp(84px,8vw,110px);margin-top:clamp(28px,4svh,48px);}
+  .kj-idea-exit{position:absolute;left:50%;top:100%;width:2px;height:2px;margin:-1px 0 0 -1px;pointer-events:none;}
+  .ki-svg{display:block;width:100%;height:auto;overflow:visible;}
+  .ki-line{--io:1;fill:none;stroke:#146EF5;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+  .ki-scribble{opacity:.6;}
+
+  .kj-sky-js .kj-idea:not(.is-done) .ki-draw{stroke-dasharray:1;stroke-dashoffset:1;opacity:0;}
+  .kj-sky-js .kj-idea:not(.is-done) .ki-scribble{stroke-dasharray:1;stroke-dashoffset:1;opacity:0;}
+  .kj-sky-js .kj-idea.is-play:not(.is-done) .ki-draw{animation:kiDraw var(--u,.8s) cubic-bezier(0.45,0.05,0.3,1) var(--d,0s) both;}
+  .kj-sky-js .kj-idea.is-play:not(.is-done) .ki-scribble{animation:kiScribble 2.4s cubic-bezier(0.45,0.05,0.3,1) both;}
+  @keyframes kiDraw{0%{stroke-dashoffset:1;opacity:0;}3%{opacity:var(--io,1);}100%{stroke-dashoffset:0;opacity:var(--io,1);}}
+  @keyframes kiScribble{0%{stroke-dashoffset:1;opacity:0;}2%{opacity:1;}42%{stroke-dashoffset:0;opacity:1;}70%{opacity:1;}100%{stroke-dashoffset:0;opacity:.6;}}
+
+  /* ---------- Mobil: kortare uppstigning, två passerande lager, idén staplad ---------- */
+  @media (max-width:760px){
+    .kj-sky{--asc-h:min(92svh,720px);}
+    .kj-sky-js .kj-asc-layer--1{display:none;}
+    .kj-sky-js .kj-asc-layer--2{--y0:-60;--y1:95;--g:.04;}
+    .kj-sky-js .kj-asc-layer--3{--y0:-80;--y1:110;--g:.08;}
+    .kj-asc-layer--2 .kj-cl{--w:78vw !important;}
+    .kj-asc-layer--3 .kj-cl{--w:110vw !important;}
+    .kj-asc-base .kj-cl{--w:80vw !important;}
+    .kj-asc-base .kj-cl:nth-child(1){--x:-30% !important;}
+    .kj-asc-base .kj-cl:nth-child(3){--x:48% !important;}
+    .kj-asc-base{height:clamp(120px,34vw,170px);}
+    .kj-ascent-pin{padding:clamp(90px,14svh,120px) 0 18svh;}
+    .kj-idea-text .kj-h2{font-size:clamp(36px,10.4vw,48px);}
+    .kj-idea-art{width:76px;margin-top:32px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .kj-sky-js .kj-asc-base .kj-cl,.kj-idea *{animation:none !important;}
+  }
+</style>
 <link rel="stylesheet" href="/src/site-header.css">
 <!-- Knappsystemet (primary/secondary i loggans form) ligger i src/klaro-button.css; här bara startsidans egna delar. -->
 <link rel="stylesheet" href="/src/klaro-button.css">
@@ -1285,9 +1526,8 @@
     <div class="wz-shell" data-wz-mount="dock"></div>
   </aside>
 
-  <!-- BRANSCHER (horisontell karusell med scroll snap). Återställd från tidigare version.
-       Bakgrundsbilderna är AI-genererade branschexempel (märkta "Branschexempel"), inte kundprojekt;
-       de riktiga projekten visas i #portfolio. -->
+  <!-- BRANSCHER (horisontell karusell med scroll snap, tre kort i bild på desktop). Varje kort är en liten scen med
+       ett illustrerat objekt per bransch (inline-SVG); de riktiga projekten visas i #portfolio. -->
   <section id="branscher" class="ind" aria-labelledby="ind-title">
     <h2 id="ind-title" class="sr-only">Branschexempel</h2>
 
@@ -1295,107 +1535,202 @@
       <ul id="ind-track" class="ind-track" tabindex="0" aria-label="Branscher – använd piltangenterna för att bläddra">
         <li class="ind-item">
           <a class="ind-card ind-card--frisor" href="/hemsida-frisor-stockholm">
-            <img class="ind-bg" src="/branscher/frisor-barber-1672.webp" srcset="/branscher/frisor-barber-960.webp 960w, /branscher/frisor-barber-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 40%;">
-            <span class="ind-shade" aria-hidden="true"></span>
-            <span class="ind-row">
-              <span class="ind-devices">
-                <img src="/branscher/chairman-devices.webp" alt="Hemsidan som Studio Klaro byggt för The Chairman Barber i Vasastan, visad på dator och mobil" width="1017" height="580" loading="lazy" decoding="async" draggable="false">
-              </span>
-              <span class="ind-body">
-                <span class="ind-tag">Branschexempel</span>
-                <h3 class="ind-name">Frisör &amp; barberare</h3>
-                <span class="ind-text">Fyll fler stolar med tydlig information och enkel bokning.</span>
-              </span>
+            <span class="ind-copy">
+              <h3 class="ind-name">Frisör &amp; barberare</h3>
+              <span class="ind-text">Fyll fler stolar med tydlig information och enkel bokning.</span>
             </span>
+            <span class="ind-stage" aria-hidden="true">
+              <span class="ind-frag ind-frag--phone"><span class="if-notch"></span><span class="if-body"><b>Barberaren</b><span class="if-l"></span><span class="if-l if-l--s"></span><span class="if-sub">Klippning</span><em>Boka tid</em></span></span>
+              <span class="ind-parallax"><span class="ind-drift"><span class="ind-bob">
+                <svg class="ind-obj" viewBox="0 0 420 260" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="ind-frisor-ba" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#D7E3F5"/><stop offset="1" stop-color="#9CB2D9"/></linearGradient>
+                    <linearGradient id="ind-frisor-bb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDF3FB"/><stop offset=".6" stop-color="#B9CAE7"/><stop offset="1" stop-color="#7E96C3"/></linearGradient>
+                    <linearGradient id="ind-frisor-h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#DDE8F7"/><stop offset="1" stop-color="#A9C0E4"/></linearGradient>
+                    <radialGradient id="ind-frisor-pin" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#8FA6D0"/></radialGradient>
+                  </defs>
+                  <g transform="rotate(-14 210 130)">
+                    <ellipse cx="80" cy="88" rx="46" ry="31" fill="none" stroke="url(#ind-frisor-h)" stroke-width="15"/>
+                    <ellipse cx="80" cy="172" rx="46" ry="31" fill="none" stroke="url(#ind-frisor-h)" stroke-width="15"/>
+                    <path d="M122 102 C146 113 162 121 186 127" fill="none" stroke="url(#ind-frisor-h)" stroke-width="15" stroke-linecap="round"/>
+                    <path d="M122 158 C146 147 162 139 186 133" fill="none" stroke="url(#ind-frisor-h)" stroke-width="15" stroke-linecap="round"/>
+                    <path d="M168 138 C230 150 330 158 412 155 C374 144 262 132 184 124 Z" fill="url(#ind-frisor-bb)"/>
+                    <path d="M168 122 C230 110 330 102 412 105 C374 116 262 128 184 136 Z" fill="url(#ind-frisor-ba)"/>
+                    <path d="M194 123 C262 113 342 106 406 106" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".9"/>
+                    <circle cx="186" cy="130" r="12" fill="url(#ind-frisor-pin)" stroke="#7E96C3" stroke-width="1.5"/>
+                    <circle cx="186" cy="130" r="3.5" fill="#7E98C6"/>
+                  </g>
+                </svg>
+              </span></span></span>
+            </span>
+            <span class="ind-cta klaro-button klaro-button--light">Se hemsidor för frisörer <span aria-hidden="true">→</span></span>
           </a>
         </li>
         <li class="ind-item">
           <a class="ind-card ind-card--salong" href="/hemsida-skonhetssalong-stockholm">
-            <img class="ind-bg" src="/branscher/salong-salon-1672.webp" srcset="/branscher/salong-salon-960.webp 960w, /branscher/salong-salon-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 38%;">
-            <span class="ind-shade" aria-hidden="true"></span>
-            <span class="ind-row">
-              <span class="ind-devices">
-                <span class="dv dv--salong" role="img" aria-label="Illustrerat webbkoncept för en skönhetssalong med behandlingar, priser och bokningsknapp, visat på dator och mobil">
-                  <span class="dv-lap" aria-hidden="true"><span class="dv-lid"><span class="dv-screen"><span class="cs-page"><span class="cs-nav"><b>Salongen</b><span>Behandlingar</span><span>Om oss</span><em>Boka tid</em></span><span class="cs-t">Tid för dig.</span><span class="cs-s">Ansiktsbehandlingar, fransar och bryn i lugn miljö.</span><span class="cs-list"><span><b>Ansiktsbehandling</b><i>60 min · 895 kr</i></span><span><b>Fransförlängning</b><i>90 min · 1 195 kr</i></span><span><b>Brynstyling</b><i>30 min · 395 kr</i></span></span></span></span></span><span class="dv-base"></span></span>
-                  <span class="dv-phone" aria-hidden="true"><span class="dv-pscreen"><span class="cs-page cs-m"><span class="cs-nav"><b>Salongen</b><span class="cs-burger"></span></span><span class="cs-t">Tid för dig.</span><span class="cs-s">Ansiktsbehandlingar, fransar och bryn.</span><em class="cs-btn">Boka tid</em><span class="cs-list"><span><b>Ansiktsbehandling</b><i>60 min · 895 kr</i></span><span><b>Fransförlängning</b><i>90 min · 1 195 kr</i></span></span></span></span></span>
-                </span>
-              </span>
-              <span class="ind-body">
-                <span class="ind-tag">Branschexempel</span>
-                <h3 class="ind-name">Salong &amp; skönhet</h3>
-                <span class="ind-text">Gör behandlingarna lätta att förstå och tiden enkel att boka.</span>
-              </span>
+            <span class="ind-copy">
+              <h3 class="ind-name">Salong &amp; skönhet</h3>
+              <span class="ind-text">Gör behandlingarna lätta att förstå och tiden enkel att boka.</span>
             </span>
+            <span class="ind-stage" aria-hidden="true">
+              <span class="ind-frag ind-frag--web"><span class="if-bar"><i></i><i></i><i></i></span><span class="if-body"><b>Salongen</b><span class="if-sub">Behandlingar</span><span class="if-l"></span><span class="if-l if-l--s"></span><em>Boka</em></span></span>
+              <span class="ind-parallax"><span class="ind-drift"><span class="ind-bob">
+                <svg class="ind-obj" viewBox="0 0 420 300" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="ind-salong-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".97"/><stop offset=".55" stop-color="#E4EDFA"/><stop offset="1" stop-color="#AFC4E7"/></linearGradient>
+                    <linearGradient id="ind-salong-l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9DBBEC" stop-opacity=".55"/><stop offset="1" stop-color="#5E8AD6" stop-opacity=".75"/></linearGradient>
+                    <linearGradient id="ind-salong-b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D6E3F6"/><stop offset="1" stop-color="#8FAEDD"/></linearGradient>
+                    <linearGradient id="ind-salong-c" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#B3C6E6"/></linearGradient>
+                  </defs>
+                  <g transform="rotate(9 210 160)">
+                    <rect x="184" y="10" width="52" height="64" rx="26" fill="url(#ind-salong-b)"/>
+                    <rect x="168" y="68" width="84" height="34" rx="11" fill="url(#ind-salong-c)"/>
+                    <rect x="186" y="98" width="48" height="14" fill="#D5E2F5"/>
+                    <rect x="136" y="108" width="148" height="184" rx="44" fill="url(#ind-salong-g)" stroke="#fff" stroke-opacity=".85" stroke-width="2"/>
+                    <path d="M140 188 H280 V246 C280 270 262 288 238 288 H182 C158 288 140 270 140 246 Z" fill="url(#ind-salong-l)"/>
+                    <rect x="164" y="146" width="92" height="62" rx="11" fill="#fff" opacity=".95"/>
+                    <rect x="180" y="164" width="60" height="8" rx="4" fill="#7E98C6"/>
+                    <rect x="189" y="181" width="42" height="5" rx="2.5" fill="#9CB2D9"/>
+                    <rect x="150" y="126" width="12" height="134" rx="6" fill="#fff" opacity=".8"/>
+                  </g>
+                  <path d="M342 118 C342 118 324 142 324 154 A18 18 0 0 0 360 154 C360 142 342 118 342 118 Z" fill="url(#ind-salong-g)" stroke="#fff" stroke-opacity=".9" stroke-width="1.5"/>
+                  <path d="M368 186 C368 186 360 197 360 202 A8 8 0 0 0 376 202 C376 197 368 186 368 186 Z" fill="#E4EDFA" stroke="#fff" stroke-width="1"/>
+                </svg>
+              </span></span></span>
+            </span>
+            <span class="ind-cta klaro-button klaro-button--light">Se hemsidor för salonger <span aria-hidden="true">→</span></span>
           </a>
         </li>
         <li class="ind-item">
           <a class="ind-card ind-card--restaurang" href="/hemsida-restaurang-stockholm">
-            <img class="ind-bg" src="/branscher/restaurang-waiter-1640.webp" srcset="/branscher/restaurang-waiter-960.webp 960w, /branscher/restaurang-waiter-1640.webp 1640w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 36%;">
-            <span class="ind-shade" aria-hidden="true"></span>
-            <span class="ind-row">
-              <span class="ind-devices">
-                <span class="dv dv--sera" role="img" aria-label="Webbkonceptet SERA – en fiktiv italiensk restaurang på Södermalm – visat på dator och mobil">
-                  <span class="dv-lap" aria-hidden="true"><span class="dv-lid"><span class="dv-screen"><img src="/demo/sera-media/sera-preview-1100.webp" alt="" loading="lazy" decoding="async" draggable="false"></span></span><span class="dv-base"></span></span>
-                  <span class="dv-phone" aria-hidden="true"><span class="dv-pscreen"><img src="/demo/sera-media/hero-768.webp" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:38% 50%;"><span class="sera-m"><span class="sera-m-logo">Sera</span><span class="sera-m-t">SERA — italiensk restaurang på Södermalm</span><em>Boka bord</em></span></span></span>
-                </span>
-              </span>
-              <span class="ind-body">
-                <span class="ind-tag">Branschexempel</span>
-                <h3 class="ind-name">Restaurang &amp; café</h3>
-                <span class="ind-text">Visa känslan, menyn och vägen till bokning.</span>
-              </span>
+            <span class="ind-copy">
+              <h3 class="ind-name">Restaurang &amp; café</h3>
+              <span class="ind-text">Visa känslan, menyn och vägen till bokning.</span>
             </span>
+            <span class="ind-stage" aria-hidden="true">
+              <span class="ind-frag ind-frag--phone"><span class="if-notch"></span><span class="if-body"><b>Trattoria</b><span class="if-l"></span><span class="if-l if-l--s"></span><span class="if-sub">Meny</span><em>Boka bord</em></span></span>
+              <span class="ind-parallax"><span class="ind-drift"><span class="ind-bob">
+                <svg class="ind-obj" viewBox="0 0 420 290" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="ind-restaurang-p" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#E6EEFA"/><stop offset="1" stop-color="#AFC3E6"/></linearGradient>
+                    <linearGradient id="ind-restaurang-s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C3D4EE"/></linearGradient>
+                    <radialGradient id="ind-restaurang-k" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#E4CDB6"/><stop offset="1" stop-color="#B8977B"/></radialGradient>
+                  </defs>
+                  <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".75">
+                    <path d="M172 78 C160 58 186 46 172 20"/><path d="M206 70 C194 48 222 36 206 8"/><path d="M240 78 C228 58 254 46 240 22"/>
+                  </g>
+                  <g transform="rotate(-5 210 190)">
+                    <ellipse cx="206" cy="248" rx="178" ry="36" fill="url(#ind-restaurang-s)"/>
+                    <ellipse cx="206" cy="242" rx="112" ry="18" fill="#C9D8F0"/>
+                    <path d="M312 140 C372 132 378 214 302 212" fill="none" stroke="url(#ind-restaurang-p)" stroke-width="22" stroke-linecap="round"/>
+                    <path d="M94 124 H318 L302 218 C298 240 274 254 250 254 H162 C138 254 114 240 110 218 Z" fill="url(#ind-restaurang-p)"/>
+                    <path d="M101 166 H311 L308 180 H104 Z" fill="#9BBBEC"/>
+                    <ellipse cx="206" cy="124" rx="112" ry="23" fill="#fff"/>
+                    <ellipse cx="206" cy="126" rx="98" ry="17" fill="url(#ind-restaurang-k)"/>
+                    <ellipse cx="184" cy="121" rx="38" ry="5" fill="#F3E6D8" opacity=".7"/>
+                  </g>
+                </svg>
+              </span></span></span>
+            </span>
+            <span class="ind-cta klaro-button klaro-button--light">Se hemsidor för restauranger <span aria-hidden="true">→</span></span>
           </a>
         </li>
         <li class="ind-item">
           <a class="ind-card ind-card--butik" href="#kontakt">
-            <img class="ind-bg" src="/branscher/butik-shop-1672.webp" srcset="/branscher/butik-shop-960.webp 960w, /branscher/butik-shop-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 40%;">
-            <span class="ind-shade" aria-hidden="true"></span>
-            <span class="ind-row">
-              <span class="ind-devices">
-                <img src="/branscher/itreon-devices.webp" alt="Itreon Market – B2B-marknadsplatsen som Studio Klaro designat och utvecklat, visad på dator och mobil" width="1017" height="580" loading="lazy" decoding="async" draggable="false">
-              </span>
-              <span class="ind-body">
-                <span class="ind-tag">Branschexempel</span>
-                <h3 class="ind-name">Butik &amp; e-handel</h3>
-                <span class="ind-text">Gör produkter enkla att upptäcka och köpa.</span>
-              </span>
+            <span class="ind-copy">
+              <h3 class="ind-name">Butik &amp; e-handel</h3>
+              <span class="ind-text">Gör produkter enkla att upptäcka och köpa.</span>
             </span>
+            <span class="ind-stage" aria-hidden="true">
+              <span class="ind-frag ind-frag--web"><span class="if-bar"><i></i><i></i><i></i></span><span class="if-body"><b>Butiken</b><span class="if-sub">Nyheter</span><span class="if-l"></span><span class="if-l if-l--s"></span><em>Till kassan</em></span></span>
+              <span class="ind-parallax"><span class="ind-drift"><span class="ind-bob">
+                <svg class="ind-obj" viewBox="0 0 420 310" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="ind-butik-f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#DCE7F7"/></linearGradient>
+                    <linearGradient id="ind-butik-sd" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C6D6EF"/><stop offset="1" stop-color="#94ACD6"/></linearGradient>
+                    <linearGradient id="ind-butik-h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#A9C0E4"/></linearGradient>
+                  </defs>
+                  <g transform="rotate(-8 210 170)">
+                    <path d="M176 96 C176 36 262 36 262 96" fill="none" stroke="#B7CBEA" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M300 90 L344 110 L350 280 L306 302 Z" fill="url(#ind-butik-sd)"/>
+                    <path d="M110 90 H300 L306 302 H104 Z" fill="url(#ind-butik-f)"/>
+                    <path d="M110 90 H300 L302 118 H108 Z" fill="#D3E0F4"/>
+                    <path d="M166 104 C166 40 248 40 248 104" fill="none" stroke="url(#ind-butik-h)" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="166" cy="108" r="5" fill="#9CB2D9"/><circle cx="248" cy="108" r="5" fill="#9CB2D9"/>
+                    <circle cx="206" cy="206" r="30" fill="#86ABE8"/>
+                    <path d="M192 206 L202 216 L221 196" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                </svg>
+              </span></span></span>
+            </span>
+            <span class="ind-cta klaro-button klaro-button--light">Prata om din butik <span aria-hidden="true">→</span></span>
           </a>
         </li>
         <li class="ind-item">
           <a class="ind-card ind-card--fotograf" href="/hemsida-fotograf">
-            <img class="ind-bg" src="/branscher/fotograf-studio-1672.webp" srcset="/branscher/fotograf-studio-960.webp 960w, /branscher/fotograf-studio-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:58% 38%;">
-            <span class="ind-shade" aria-hidden="true"></span>
-            <span class="ind-row">
-              <span class="ind-devices">
-                <img src="/branscher/galleri86-devices.webp" alt="Hemsidan som Studio Klaro byggt för Galleri86 på Södermalm, visad på dator och mobil" width="1017" height="580" loading="lazy" decoding="async" draggable="false">
-              </span>
-              <span class="ind-body">
-                <span class="ind-tag">Branschexempel</span>
-                <h3 class="ind-name">Fotograf &amp; kreatör</h3>
-                <span class="ind-text">Låt arbetet stå i centrum och gör det enkelt att ta kontakt.</span>
-              </span>
+            <span class="ind-copy">
+              <h3 class="ind-name">Fotograf &amp; kreatör</h3>
+              <span class="ind-text">Låt arbetet stå i centrum och gör det enkelt att ta kontakt.</span>
             </span>
+            <span class="ind-stage" aria-hidden="true">
+              <span class="ind-frag ind-frag--web"><span class="if-bar"><i></i><i></i><i></i></span><span class="if-body"><b>Studio</b><span class="if-sub">Portfolio</span><span class="if-l"></span><span class="if-l if-l--s"></span><em>Kontakt</em></span></span>
+              <span class="ind-parallax"><span class="ind-drift"><span class="ind-bob">
+                <svg class="ind-obj" viewBox="0 0 420 290" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="ind-fotograf-b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#E1EBF8"/><stop offset="1" stop-color="#B3C8E8"/></linearGradient>
+                    <linearGradient id="ind-fotograf-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#8FA3C4"/></linearGradient>
+                    <radialGradient id="ind-fotograf-g" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#E4EFFF"/><stop offset=".5" stop-color="#8FB4EE"/><stop offset="1" stop-color="#4D78C4"/></radialGradient>
+                  </defs>
+                  <g transform="rotate(-7 210 150)">
+                    <path d="M150 70 L168 38 C171 33 176 30 182 30 H238 C244 30 249 33 252 38 L270 70 Z" fill="url(#ind-fotograf-b)"/>
+                    <rect x="44" y="64" width="332" height="192" rx="38" fill="url(#ind-fotograf-b)"/>
+                    <rect x="44" y="64" width="332" height="40" rx="38" fill="#fff" opacity=".5"/>
+                    <rect x="80" y="50" width="46" height="20" rx="8" fill="#9BBBEC"/>
+                    <rect x="302" y="86" width="46" height="24" rx="8" fill="#E6EEFA"/>
+                    <circle cx="210" cy="166" r="86" fill="url(#ind-fotograf-r)"/>
+                    <circle cx="210" cy="166" r="72" fill="#C9D9F1"/>
+                    <circle cx="210" cy="166" r="55" fill="url(#ind-fotograf-g)"/>
+                    <circle cx="210" cy="166" r="22" fill="#3E66AE"/>
+                    <ellipse cx="186" cy="141" rx="17" ry="10" fill="#fff" opacity=".72" transform="rotate(-32 186 141)"/>
+                    <circle cx="238" cy="193" r="5" fill="#fff" opacity=".4"/>
+                  </g>
+                </svg>
+              </span></span></span>
+            </span>
+            <span class="ind-cta klaro-button klaro-button--light">Se hemsidor för fotografer <span aria-hidden="true">→</span></span>
           </a>
         </li>
         <li class="ind-item">
           <a class="ind-card ind-card--konsult" href="#kontakt">
-            <img class="ind-bg" src="/branscher/konsult-office-1672.webp" srcset="/branscher/konsult-office-960.webp 960w, /branscher/konsult-office-1672.webp 1672w" sizes="(max-width:700px) 90vw, min(1500px, 88vw)" alt="" loading="lazy" decoding="async" draggable="false" style="object-position:55% 38%;">
-            <span class="ind-shade" aria-hidden="true"></span>
-            <span class="ind-row">
-              <span class="ind-devices">
-                <span class="dv dv--konsult" role="img" aria-label="Illustrerat webbkoncept för ett konsultföretag med tjänster och knapp för att boka samtal, visat på dator och mobil">
-                  <span class="dv-lap" aria-hidden="true"><span class="dv-lid"><span class="dv-screen"><span class="cs-page"><span class="cs-nav"><b>Byrån</b><span>Tjänster</span><span>Om oss</span><em>Boka samtal</em></span><span class="cs-t">Tydliga beslut. Mätbara resultat.</span><span class="cs-s">Strategi och ekonomi för växande småföretag.</span><span class="cs-list"><span><b>Strategi</b><i>Affärsplan och mål</i></span><span><b>Ekonomi</b><i>Budget och prognos</i></span><span><b>Process</b><i>Från idé till plan</i></span></span></span></span></span><span class="dv-base"></span></span>
-                  <span class="dv-phone" aria-hidden="true"><span class="dv-pscreen"><span class="cs-page cs-m"><span class="cs-nav"><b>Byrån</b><span class="cs-burger"></span></span><span class="cs-t">Tydliga beslut. Mätbara resultat.</span><span class="cs-s">Strategi och ekonomi för småföretag.</span><em class="cs-btn">Boka samtal</em><span class="cs-list"><span><b>Strategi</b><i>Affärsplan och mål</i></span><span><b>Ekonomi</b><i>Budget och prognos</i></span></span></span></span></span>
-                </span>
-              </span>
-              <span class="ind-body">
-                <span class="ind-tag">Branschexempel</span>
-                <h3 class="ind-name">Konsult &amp; tjänsteföretag</h3>
-                <span class="ind-text">Förklara värdet tydligt och omvandla besökare till förfrågningar.</span>
-              </span>
+            <span class="ind-copy">
+              <h3 class="ind-name">Konsult &amp; tjänsteföretag</h3>
+              <span class="ind-text">Förklara värdet tydligt och omvandla besökare till förfrågningar.</span>
             </span>
+            <span class="ind-stage" aria-hidden="true">
+              <span class="ind-frag ind-frag--phone"><span class="if-notch"></span><span class="if-body"><b>Byrån</b><span class="if-l"></span><span class="if-l if-l--s"></span><span class="if-sub">Tjänster</span><em>Boka samtal</em></span></span>
+              <span class="ind-parallax"><span class="ind-drift"><span class="ind-bob">
+                <svg class="ind-obj" viewBox="0 0 420 300" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="ind-konsult-pp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#DDE8F8"/></linearGradient>
+                  </defs>
+                  <g transform="rotate(-9 210 150) skewX(-5)">
+                    <rect x="104" y="50" width="252" height="216" rx="20" fill="#A9BFE4" opacity=".55"/>
+                    <rect x="88" y="34" width="252" height="216" rx="20" fill="url(#ind-konsult-pp)"/>
+                    <rect x="112" y="60" width="92" height="12" rx="6" fill="#8FAEDD"/>
+                    <rect x="112" y="82" width="148" height="8" rx="4" fill="#B6C9EA"/>
+                    <g fill="#E3ECF9">
+                      <rect x="112" y="112" width="34" height="28" rx="8"/><rect x="154" y="112" width="34" height="28" rx="8"/><rect x="196" y="112" width="34" height="28" rx="8"/><rect x="238" y="112" width="34" height="28" rx="8"/><rect x="280" y="112" width="34" height="28" rx="8"/>
+                      <rect x="112" y="148" width="34" height="28" rx="8"/><rect x="154" y="148" width="34" height="28" rx="8"/><rect x="238" y="148" width="34" height="28" rx="8"/><rect x="280" y="148" width="34" height="28" rx="8"/>
+                      <rect x="112" y="184" width="34" height="28" rx="8"/><rect x="154" y="184" width="34" height="28" rx="8"/><rect x="196" y="184" width="34" height="28" rx="8"/><rect x="238" y="184" width="34" height="28" rx="8"/>
+                    </g>
+                    <rect x="196" y="148" width="34" height="28" rx="8" fill="#86ABE8"/>
+                    <path d="M205 162 L211 168 L222 156" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M340 206 V230 C340 241 331 250 320 250 H296 Z" fill="#C3D4EE"/>
+                  </g>
+                </svg>
+              </span></span></span>
+            </span>
+            <span class="ind-cta klaro-button klaro-button--light">Prata om ditt företag <span aria-hidden="true">→</span></span>
           </a>
         </li>
       </ul>
@@ -1590,226 +1925,250 @@
 
       <!-- Kundomdömen: riktiga omdömen från kunder, inga länkar till externa plattformar -->
 
-      <!-- KUNDRESAN: hela projektet i fyra kapitel med projektportalen som följer med.
-           Stil: src/klaro-journey.css, beteende: src/klaro-journey.js. Portalvyerna är dekorativa (aria-hidden);
-           allt viktigt finns i kapitlens text. ≥1024px flyttas vyerna in i det sticky portalfönstret. -->
+      <!-- MOLNRESAN: kundens framtidsbild → vad en bra hemsida förändrar → Studio Klaros roll → en kort gemensam
+           resa → live. Stil: src/klaro-journey.css, beteende: src/klaro-journey.js. Illustrationer och portalvyn är
+           dekorativa (aria-hidden); allt viktigt finns i texten. -->
       <section id="processen" class="kj" aria-labelledby="kj-title">
         <div class="kj-inner">
-          <header class="kj-head" id="projektportal" data-reveal data-wz-dock-clear>
-            <p class="kj-eyebrow">Hela vägen tillsammans</p>
-            <h2 id="kj-title" class="kj-h2">Vi bygger inte bara din hemsida. <span>Vi bygger den tillsammans.</span></h2>
-            <p class="kj-lead">I projektportalen samlar vi material, versioner och feedback. Du ser vad som händer, kan påverka längs vägen och vi går inte live förrän vi båda är nöjda.</p>
-          </header>
-
-          <div class="kj-story" data-wz-dock-clear>
-            <div class="kj-chapters">
-              <div class="kj-rail" aria-hidden="true"><span class="kj-rail-fill"></span></div>
-              <ol class="kj-ch-list">
-
-              <!-- 01 Starten -->
-              <li class="kj-ch" id="kj-ch-1">
-                <span class="kj-node" aria-hidden="true">01</span>
-                <p class="kj-kicker">Starten</p>
-                <h3>Vi börjar med samma bild.</h3>
-                <div class="kj-frame" data-theme="start" aria-hidden="true">
-                  <div class="kj-top">
-                    <span class="kj-brand"><span class="kj-logo" data-wait><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span><span class="kj-logo-ph">Din logotyp</span></span><span class="kj-duo" aria-hidden="true"><span class="kj-duo-line"><i></i></span><span class="kj-duo-sk">SK</span></span>
-                    <span class="kj-frame-phase">Start</span>
-                  </div>
-                  <div class="kj-frame-body">
-                    <div class="kj-view" data-view="0">
-                      <div class="kj-msg kj-up kj-m-sec">
-                        <span class="kj-av">SK</span>
-                        <div class="kj-msg-b">
-                          <div class="kj-msg-h">Studio Klaro <span>Välkommen</span></div>
-                          <p>Välkommen in i ditt projekt! Här samlar vi material, versioner och nästa steg. Börja med det du redan har – resten reder vi ut tillsammans.</p>
-                        </div>
-                      </div>
-                      <div class="kj-card kj-mat kj-up kj-m-sec" style="--d:1">
-                        <div class="kj-row"><span class="kj-label">Material för start</span><span class="kj-pill kj-swap"><span class="a">1 av 3 delar klara</span><span class="b">2 av 3 delar klara</span></span></div>
-                        <div class="kj-meter"><i style="--w:.67"></i></div>
-                        <ul class="kj-list">
-                          <li class="kj-upl-row is-done"><span class="kj-chk"></span><span class="kj-upl">Logotyp<span class="kj-meter"><i></i></span></span><em>logotyp.svg</em></li>
-                          <li class="is-done"><span class="kj-chk"></span>Texter om företaget<em>Inskickat</em></li>
-                          <li><span class="kj-chk"></span>Bilder och inspiration<em>Väntar</em></li>
-                        </ul>
-                      </div>
-                      <div class="kj-next kj-up" style="--d:2">
-                        <div><span class="kj-label">Nästa steg</span><b>Skicka in material</b></div>
-                        <span class="kj-btn">Ladda upp <span>→</span></span>
-                      </div>
-                    </div>
-                  </div>
+          <!-- Molnresan: ett enda sammanhängande kapitel med kunden som huvudperson. Uppstigningen genom molnen landar i
+               framtidsbilden; därefter tre framtidsbilder, Studio Klaros roll, en kort gemensam resa (portalen en gång),
+               en himmel som mörknar och "När vi är framme" med den färdiga webbplatsen. Uppstigningen styrs av skriptet sist i index.html (den enda
+               scrollpausen); resten styrs av scrollen i src/klaro-journey.js. Utan JS och vid reducerad rörelse:
+               en statisk berättelse där allt syns direkt. -->
+          <div class="kj-sky">
+          <div class="kj-ascent">
+            <div class="kj-ascent-pin">
+              <div class="kj-asc" aria-hidden="true">
+                <svg width="0" height="0" style="position:absolute"><defs><linearGradient id="kj-cloud-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity=".62"/></linearGradient></defs></svg>
+                <div class="kj-asc-bg"></div>
+                <div class="kj-asc-ground"></div>
+                <div class="kj-asc-layer kj-asc-layer--1">
+                  <svg class="kj-cl" style="--x:4%;--w:22vw;--yy:18%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+                  <svg class="kj-cl" style="--x:66%;--w:18vw;--yy:52%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
                 </div>
-                <p>Du delar det du redan har och berättar vart du vill. Vi hjälper dig att reda ut resten.</p>
-                <div class="kj-next-hint" aria-hidden="true">Nästa: 02 Bygget</div>
-              </li>
-
-              <!-- 02 Bygget -->
-              <li class="kj-ch" id="kj-ch-2">
-                <span class="kj-node" aria-hidden="true">02</span>
-                <p class="kj-kicker">Bygget</p>
-                <h3>Du följer med medan sidan växer fram.</h3>
-                <div class="kj-frame" data-theme="build" aria-hidden="true">
-                  <div class="kj-top">
-                    <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span><span class="kj-duo" aria-hidden="true"><span class="kj-duo-line"><i></i></span><span class="kj-duo-sk">SK</span></span>
-                    <span class="kj-frame-phase">Bygge</span>
-                  </div>
-                  <div class="kj-frame-body">
-                    <div class="kj-view" data-view="1">
-                      <div class="kj-okbar kj-up kj-m-sec"><span class="kj-chk is-done"></span>Designgrund godkänd<span>Färg, typsnitt och uttryck</span></div>
-                      <div class="kj-grid">
-                        <div class="kj-card kj-up kj-m-sec" style="--d:1">
-                          <span class="kj-label">Versioner</span>
-                          <ul class="kj-vers">
-                            <li class="is-new"><span class="kj-vtag">V2</span><div><b>Version 2</b><span>Publicerad i dag</span></div><span class="kj-pill">Ny</span></li>
-                            <li><span class="kj-vtag">V1</span><div><b>Version 1</b><span>Granskad</span></div></li>
-                          </ul>
-                          <div class="kj-thumb"><i class="w60"></i><i class="w40"></i><b></b><span><i></i><i></i><i></i></span></div>
-                        </div>
-                        <div class="kj-col">
-                          <div class="kj-card kj-up kj-m-sec" style="--d:2">
-                            <span class="kj-label">Vad har ändrats?</span>
-                            <ul class="kj-changes">
-                              <li>Startsidan har uppdaterats</li>
-                              <li>Tjänsterna har fått tydligare struktur</li>
-                              <li>Mobilvyn är redo att granskas</li>
-                            </ul>
-                          </div>
-                          <div class="kj-card kj-up" style="--d:3">
-                            <span class="kj-label">Feedback · Version 2</span>
-                            <div class="kj-input">Skriv din återkoppling …</div>
-                            <div class="kj-row"><span class="kj-pill kj-pill--dot">Din återkoppling behövs</span><span class="kj-btn">Skicka</span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="kj-asc-layer kj-asc-layer--2">
+                  <svg class="kj-cl" style="--x:-6%;--w:40vw;--yy:30%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+                  <svg class="kj-cl" style="--x:58%;--w:44vw;--yy:8%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
                 </div>
-                <p>Vi visar nya versioner löpande. Du kommenterar direkt och ser vad som har förändrats.</p>
-                <div class="kj-next-hint" aria-hidden="true">Nästa: 03 Lanseringen</div>
-              </li>
-
-              <!-- 03 Lanseringen -->
-              <li class="kj-ch" id="kj-ch-3">
-                <span class="kj-node" aria-hidden="true">03</span>
-                <p class="kj-kicker">Lanseringen</p>
-                <h3>Vi går live tillsammans.</h3>
-                <div class="kj-frame" data-theme="launch" aria-hidden="true">
-                  <div class="kj-top">
-                    <span class="kj-brand"><span class="kj-logo"><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span></span><span class="kj-duo" aria-hidden="true"><span class="kj-duo-line"><i></i></span><span class="kj-duo-sk">SK</span></span>
-                    <span class="kj-frame-phase">Lansering</span>
-                  </div>
-                  <div class="kj-frame-body">
-                    <div class="kj-view" data-view="2">
-                      <div class="kj-launch kj-up">
-                        <div class="kj-row">
-                          <div><span class="kj-label">Status</span><span class="kj-launch-st kj-swap"><span class="a">Redo för lansering</span><span class="b"><i class="kj-dot"></i>Live</span></span></div>
-                          <span class="kj-addr"><i class="kj-dot"></i>www.dittforetag.se</span>
-                        </div>
-                        <div class="kj-meter"><i></i></div>
-                        <div class="kj-launch-meta"><span>Slutgodkänd</span><span>Publicerad</span></div>
-                      </div>
-                      <div class="kj-card kj-up kj-m-sec" style="--d:1">
-                        <span class="kj-label">Checklista inför lansering</span>
-                        <ul class="kj-list">
-                          <li class="is-done"><span class="kj-chk kj-chk--ok"></span>Gemensamt slutgodkännande<em>Klart</em></li>
-                          <li class="is-done"><span class="kj-chk kj-chk--ok"></span>Domän bekräftad<em>dittforetag.se</em></li>
-                          <li class="is-done kj-tick-late"><span class="kj-chk kj-chk--ok"></span>DNS och åtkomst ordnad<em>Klart</em></li>
-                          <li class="is-done kj-tick-late"><span class="kj-chk kj-chk--ok"></span>SSL och länkar kontrollerade<em>Klart</em></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                <div class="kj-asc-layer kj-asc-layer--3">
+                  <svg class="kj-cl" style="--x:-14%;--w:66vw;--yy:24%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+                  <svg class="kj-cl" style="--x:46%;--w:70vw;--yy:40%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
                 </div>
-                <p>När allt känns rätt kontrollerar vi helheten, kopplar tekniken och publicerar.</p>
-              </li>
-              </ol>
-            </div>
-
-            <!-- Sticky portalfönster (≥1024px): vyerna ovan flyttas hit av src/klaro-journey.js -->
-            <div class="kj-stage" aria-hidden="true">
-              <div class="kj-portal" data-theme="start">
-                <div class="kj-bar"><i></i><i></i><i></i><em>Studio Klaro · Projektportal</em></div>
-                <div class="kj-top">
-                  <span class="kj-brand"><span class="kj-logo" data-wait><svg viewBox="0 0 26 26"><rect class="kj-mark-bg" width="26" height="26" rx="8"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle class="kj-mark-dot" cx="13" cy="7.2" r="2"/></svg>Ditt företag</span><span class="kj-logo-ph">Din logotyp</span></span><span class="kj-duo" aria-hidden="true"><span class="kj-duo-line"><i></i></span><span class="kj-duo-sk">SK</span></span>
-                  <ol class="kj-phases"><li class="is-current">Start</li><li>Bygge</li><li>Lansering</li></ol>
+                <div class="kj-asc-layer kj-asc-base">
+                  <svg class="kj-cl" style="--x:-10%;--w:46vw;--yy:58%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+                  <svg class="kj-cl" style="--x:30%;--w:48vw;--yy:66%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+                  <svg class="kj-cl" style="--x:64%;--w:50vw;--yy:56%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
                 </div>
-                <div class="kj-viewport"></div>
+              </div>
+              <!-- 1. Framtidsbilden: där uppstigningen landar. Stor typografi, mycket himmel och bara en lös blå linje som
+                   ritas när uppstigningen landat (.is-play → .is-done) och blir resans färdlinje. -->
+              <div class="kj-idea" data-wz-dock-clear>
+                <header class="kj-head kj-idea-text">
+                  <p class="kj-eyebrow">Det du ser framför dig</p>
+                  <h2 id="kj-title" class="kj-h2">En hemsida som känns <span>lika bra som företaget bakom den.</span></h2>
+                  <p class="kj-lead">Inte bara snyggare. Tydligare, mer genomtänkt och enklare för rätt människor att välja.</p>
+                </header>
+                <div class="kj-idea-art">
+                  <svg class="ki-svg" viewBox="0 0 120 150" aria-hidden="true" focusable="false">
+                    <path class="ki-scribble ki-line" pathLength="1" d="M44 30C30 8 76 4 78 28C80 50 46 54 48 34C50 16 84 18 72 44"/>
+                    <path class="ki-draw ki-line" style="--d:1s;--u:1.1s" pathLength="1" d="M72 44C64 62 60 84 60 150"/>
+                  </svg>
+                  <span class="kj-idea-exit" aria-hidden="true"></span>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Slutdestinationen: resans linje fortsätter från kapitel 04 genom det som alltid ingår och landar i Live.
-               Därefter grenar: "Anpassas efter din resa" (expanderbar) och Klaro Care (valfritt). Linjen ritas av
-               src/klaro-journey.js utifrån nodernas positioner; utan JS visas innehållet utan linje. -->
-          <div class="kd" id="kj-dest">
-            <svg class="kd-svg" aria-hidden="true" focusable="false">
-              <path class="kd-path kd-glow"></path><path class="kd-path kd-main"></path>
-              <g class="kd-head"><circle class="kd-head-halo" r="11"></circle><circle class="kd-head-core" r="4"></circle></g>
-              <path class="kd-path kd-branch kd-branch--opt"></path><path class="kd-path kd-branch kd-branch--care"></path>
+          <!-- Kapitel 2–5: resan. Färdlinjen (SVG) byggs och ritas av src/klaro-journey.js. -->
+          <div class="kr">
+            <svg class="kr-route" aria-hidden="true" focusable="false">
+              <defs><linearGradient id="kr-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#146EF5"/><stop offset="1" stop-color="#A9C8FF"/></linearGradient></defs>
+              <path class="kr-glow"/><path class="kr-main"/><path class="kr-pulse"/>
+              <g class="kr-tip"><circle class="kr-tip-halo" r="11"/><circle class="kr-tip-core" r="4.5"/></g>
             </svg>
 
-            <header class="kd-intro">
-              <p class="kd-eyebrow">När vi är framme</p>
-              <h3 class="kd-h">Din hemsida är live. <span>Men du har inte byggt den ensam.</span></h3>
-              <p class="kd-lead">Vi håller ihop projektet från första materialet till publicering. Du ser vägen framåt, får hjälp i varje steg och står till slut med en hemsida som är redo att användas – och som är din.</p>
-            </header>
-
-            <div class="kd-map">
-              <h4 class="kd-k" id="kd-always"><span>Detta ingår alltid</span></h4>
-              <ol class="kd-stops" aria-labelledby="kd-always">
-                <li class="kd-stop" style="--dx:0px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">01</span><h5>Unik design</h5><p>Formgiven efter företaget – inte en färdig mall.</p><span class="kd-ok">Ingår</span></div></li>
-                <li class="kd-stop" style="--dx:34px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">02</span><h5>Mobilanpassning</h5><p>Samma genomtänkta upplevelse på alla skärmar.</p><span class="kd-ok">Ingår</span></div></li>
-                <li class="kd-stop" style="--dx:-18px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">03</span><h5>Grundläggande SEO</h5><p>Struktur och innehåll som sökmotorer kan förstå.</p><span class="kd-ok">Ingår</span></div></li>
-                <li class="kd-stop" style="--dx:40px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">04</span><h5>Projektportal</h5><p>Material, versioner och återkoppling samlat.</p><span class="kd-ok">Ingår</span></div></li>
-                <li class="kd-stop" style="--dx:6px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">05</span><h5>Publicering</h5><p>Vi kontrollerar och publicerar tillsammans.</p><span class="kd-ok">Ingår</span></div></li>
-                <li class="kd-stop" style="--dx:-26px"><span class="kd-dot" aria-hidden="true"></span><div class="kd-txt"><span class="kd-n" aria-hidden="true">06</span><h5>Löpande avstämningar</h5><p>Du vet vad som händer och vad nästa steg är.</p><span class="kd-ok">Ingår</span></div></li>
-              </ol>
-
-              <div class="kd-live">
-                <span class="kd-live-dot" aria-hidden="true"></span>
-                <div class="kd-live-txt">
-                  <p class="kd-live-st"><span class="kd-live-pip" aria-hidden="true"></span>Live</p>
-                  <p class="kd-live-sub">Din hemsida är publicerad</p>
-                  <p class="kd-live-url">www.dittforetag.se</p>
-                  <ul class="kd-live-checks">
-                    <li>Alla kontroller genomförda</li>
-                    <li>Hemsidan tillhör dig</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="kd-forks">
-                <div class="kd-fork kd-fork--opt">
-                  <span class="kd-fdot" aria-hidden="true"></span>
-                  <p class="kd-fork-k">Anpassas efter din resa</p>
-                  <button type="button" class="kd-fork-btn" aria-expanded="true" aria-controls="kd-opt-panel">
-                    <span>Beroende på upplägg · 5 delar</span><span class="kd-fork-ic" aria-hidden="true"></span>
-                  </button>
-                  <div class="kd-fork-panel" id="kd-opt-panel">
-                    <div class="kd-fork-in">
-                      <ul class="kd-opts">
-                        <li style="--i:0"><b>Kontaktformulär</b><span>Professionell · Komplett närvaro</span></li>
-                        <li style="--i:1"><b>Domänkoppling</b><span>Professionell · Komplett närvaro</span></li>
-                        <li style="--i:2"><b>Google Företagsprofil och Analytics</b><span>Professionell · Komplett närvaro</span></li>
-                        <li style="--i:3"><b>Lokal SEO-start</b><span>Komplett närvaro</span></li>
-                        <li style="--i:4"><b>Professionell mejladress</b><span>Komplett närvaro</span></li>
-                      </ul>
-                      <p class="kd-opts-note">Domän, mejl och andra externa tjänster betalas separat. <a href="/priser">Jämför uppläggen <span aria-hidden="true">→</span></a></p>
-                    </div>
+            <!-- 2. Tre framtidsbilder. Desktop: en sticky scen där webbplatsen till höger växer fram (data-f sätts av JS).
+                 Mobil/statiskt: linjärt, varje bild med ett eget litet fragment. -->
+            <div class="kf" data-f="-1" data-wz-dock-clear>
+              <div class="kf-stick">
+                <div class="kf-texts">
+                  <div class="kf-item kf-item--0">
+                    <span class="kr-node" aria-hidden="true"></span>
+                    <h3 class="kf-h">En hemsida du är stolt över att visa.</h3>
+                    <p class="kf-p">Ett uttryck som känns som ditt företag – inte som en färdig mall eller någon annans idé.</p>
+                    <div class="kf-frag kf-f0" aria-hidden="true"><i class="kf-f0-logo"></i><span class="kf-f0-aa">Aa<i>Aa</i></span><span class="kf-f0-pal"><i style="background:#146EF5"></i><i style="background:#9CC3FF"></i><i style="background:#EFE3CC"></i><i style="background:#0F172A"></i></span></div>
+                  </div>
+                  <div class="kf-item kf-item--1">
+                    <span class="kr-node" aria-hidden="true"></span>
+                    <h3 class="kf-h">Rätt människor känner direkt: <span>det här är för mig.</span></h3>
+                    <p class="kf-p">Besökaren förstår vem du hjälper, vad du erbjuder och varför den ska välja just dig.</p>
+                    <div class="kf-frag kf-f1" aria-hidden="true"><span class="kf-pill">Vem du hjälper</span><span class="kf-pill">Vad du erbjuder</span><span class="kf-pill">Varför just du</span></div>
+                  </div>
+                  <div class="kf-item kf-item--2">
+                    <span class="kr-node" aria-hidden="true"></span>
+                    <h3 class="kf-h">Nästa steg känns självklart.</h3>
+                    <p class="kf-p">Boka, köpa eller ta kontakt – utan att behöva leta, tveka eller fråga hur.</p>
+                    <div class="kf-frag kf-f2" aria-hidden="true"><span class="kf-f2-btn">Boka tid</span><span class="kf-f2-time">Välj tid <b>Tor 14:00</b></span><span class="kf-f2-done">Bokat – vi ses på torsdag</span></div>
                   </div>
                 </div>
-
-                <div class="kd-fork kd-fork--care">
-                  <span class="kd-fdot" aria-hidden="true"></span>
-                  <p class="kd-fork-k">Valfritt nästa kapitel</p>
-                  <p class="kd-care-t">Klaro Care</p>
-                  <p class="kd-care-p">Fortsatt hjälp med mindre ändringar, support och förbättringar – bara om du vill. Hemsidan är redan färdig, och den är din även utan Klaro Care.</p>
+                <div class="kf-canvas" aria-hidden="true">
+                  <svg class="kf-sketch" viewBox="0 0 600 470" preserveAspectRatio="none"><rect x="36" y="20" width="480" height="330" rx="16" stroke-dasharray="5 7"/><path d="M62 104C86 88 110 118 136 100S184 92 210 104"/><path d="M62 132C96 124 130 140 176 130"/><path d="M372 96C392 76 452 80 462 110C472 142 440 176 404 170C372 164 356 124 372 96Z" stroke-dasharray="4 6"/><path d="M64 196C78 186 96 204 112 192"/></svg>
+                  <div class="kf-frame">
+                    <div class="kf-top"><i class="kf-logo"></i><i class="kf-name"></i><span class="kf-nav"><i></i><i></i><i></i></span><i class="kf-cta"></i></div>
+                    <div class="kf-hero"><div class="kf-hero-txt"><i class="kf-h1"></i><i class="kf-h1 kf-h1--b"></i><i class="kf-tx"></i><i class="kf-tx kf-tx--b"></i><span class="kf-btn">Boka tid</span></div><i class="kf-img"></i></div>
+                    <div class="kf-slots">
+                      <div class="kf-slot"><span class="kf-chip">Vem du hjälper</span><i class="kf-sl"></i><i class="kf-sl kf-sl--b"></i></div>
+                      <div class="kf-slot"><span class="kf-chip">Vad du erbjuder</span><i class="kf-sl"></i><i class="kf-sl kf-sl--b"></i></div>
+                      <div class="kf-slot"><span class="kf-chip">Varför just du</span><i class="kf-sl"></i><i class="kf-sl kf-sl--b"></i></div>
+                    </div>
+                  </div>
+                  <div class="kf-style"><span class="kf-aa">Aa<i>Aa</i></span><span class="kf-pal"><i style="background:#146EF5"></i><i style="background:#9CC3FF"></i><i style="background:#EFE3CC"></i><i style="background:#0F172A"></i></span></div>
+                  <svg class="kf-path" viewBox="0 0 600 470" preserveAspectRatio="none"><path pathLength="1" d="M92 228C92 300 250 330 356 330M470 372C470 396 420 396 400 412"/></svg>
+                  <div class="kf-pick"><span class="kf-pick-h">Välj en tid</span><span class="kf-times"><i>Tor 10:00</i><i class="is-sel">Tor 14:00</i></span></div>
+                  <div class="kf-done"><span class="kf-done-ic"></span><span><b>Bokat!</b> Vi ses på torsdag.</span></div>
                 </div>
-
               </div>
+            </div>
 
+            <!-- 3. Studio Klaros roll -->
+            <header class="kr-intro" data-wz-dock-clear>
+              <p class="kr-close">Du behöver inte veta exakt hur det ska se ut. <span>Det är där vi kommer in.</span></p>
+              <div class="kr-intro-main">
+                <span class="kr-node" aria-hidden="true"></span>
+                <p class="kj-eyebrow">Från idé till verklighet</p>
+                <h3 class="kj-h2">Du visar vart du vill. <span>Vi hjälper dig hela vägen dit.</span></h3>
+                <p class="kj-lead">Vi lyssnar, formar och bygger tillsammans med dig – tills hemsidan känns rätt och är redo att göra sitt jobb.</p>
+              </div>
+            </header>
+
+            <!-- 4. Resan tillsammans: tre korta stopp, projektportalen en gång som trygghetsbevis -->
+            <div class="kr-steps" data-wz-dock-clear>
+              <ol class="kr-stops">
+                <li class="kr-stop">
+                  <div class="kr-stop-txt">
+                    <span class="kr-node" aria-hidden="true"></span>
+                    <p class="kr-kicker">Starten</p>
+                    <h4>Vi lär känna företaget, kunderna och det du vill uppnå.</h4>
+                  </div>
+                </li>
+                <li class="kr-stop">
+                  <div class="kr-stop-txt">
+                    <span class="kr-node" aria-hidden="true"></span>
+                    <p class="kr-kicker">Bygget</p>
+                    <h4>Du ser hemsidan växa fram och påverkar medan vi bygger.</h4>
+                  </div>
+                </li>
+                <li class="kr-ps" id="projektportal">
+                  <div class="kr-ps-txt">
+                    <p class="kj-eyebrow">Allt samlat på ett ställe</p>
+                    <h4>Du behöver aldrig undra vad som händer.</h4>
+                    <p>I projektportalen ser du nästa steg, delar material och lämnar feedback när det passar dig.</p>
+                  </div>
+                  <div class="kp" aria-hidden="true">
+                    <div class="kp-top"><span class="kp-brand"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="8" fill="#0F172A"/><path d="M7 18c2-5.5 4-8 6-8s4 2.5 6 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="13" cy="7.2" r="2" fill="#6FA8FF"/></svg>Ditt företag</span><em>Projektportal</em></div>
+                    <div class="kp-body">
+                      <ol class="kp-ph"><li class="is-done">Start</li><li class="is-cur">Bygge</li><li>Lansering</li></ol>
+                      <div class="kp-card"><div><span class="kp-label">Nästa steg</span><b>Titta på version 2</b></div><span class="kp-btn">Öppna</span></div>
+                      <div class="kp-card"><span class="kp-thumb"></span><div><span class="kp-label">Senaste version</span><b>Version 2 · i dag</b></div></div>
+                      <div class="kp-card"><span class="kp-input">Skriv din feedback …</span><span class="kp-btn">Skicka</span></div>
+                    </div>
+                  </div>
+                </li>
+                <li class="kr-stop">
+                  <div class="kr-stop-txt">
+                    <span class="kr-node" aria-hidden="true"></span>
+                    <p class="kr-kicker">Lanseringen</p>
+                    <h4>Vi finslipar, kopplar tekniken och går live tillsammans.</h4>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <!-- Kapitel 4 – himlen förändras: från ljus himmel till djupblått; molnen sjunker undan som silhuetter -->
+            <div class="kr-night" aria-hidden="true" data-wz-dock-clear>
+              <div class="kr-sky">
+                <svg class="kr-ncl" style="--x:-8%;--y:5%;--w:min(40vw,560px);--f:#F4F9FF;--o:.9;--s:50px" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+                <svg class="kr-ncl kr-ncl--wide" style="--x:64%;--y:22%;--w:min(40vw,580px);--f:#A4BBE4;--o:.85;--s:100px" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+                <svg class="kr-ncl" style="--x:4%;--y:42%;--w:min(46vw,620px);--f:#4E68A3;--o:.85;--s:140px" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+                <svg class="kr-ncl kr-ncl--wide" style="--x:58%;--y:60%;--w:min(40vw,560px);--f:#1A2D63;--o:.9;--s:110px" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+                <i class="kr-star" style="--x:12%;--y:58%;--r:2px;--so:0.5"></i><i class="kr-star" style="--x:81%;--y:52%;--r:2px;--so:0.45"></i><i class="kr-star" style="--x:36%;--y:70%;--r:1.5px;--so:0.6"></i><i class="kr-star" style="--x:67%;--y:74%;--r:2.5px;--so:0.55"></i><i class="kr-star" style="--x:20%;--y:86%;--r:2px;--so:0.7"></i><i class="kr-star" style="--x:90%;--y:83%;--r:1.5px;--so:0.6"></i><i class="kr-star" style="--x:52%;--y:91%;--r:2px;--so:0.5"></i><i class="kr-star" style="--x:6%;--y:96%;--r:1.5px;--so:0.5"></i><i class="kr-star" style="--x:74%;--y:97%;--r:2px;--so:0.65"></i>
+              </div>
+            </div>
+
+            <!-- Kapitel 5 – när vi är framme: färdlinjen slutar i liveindikatorn -->
+            <div class="kr-dest" id="kj-dest" data-wz-dock-clear>
+              <div class="kr-sky" aria-hidden="true"><i class="kr-star" style="--x:9%;--y:6%;--r:2px;--so:0.55"></i><i class="kr-star" style="--x:88%;--y:4%;--r:1.5px;--so:0.5"></i><i class="kr-star" style="--x:62%;--y:12%;--r:2px;--so:0.4"></i><i class="kr-star" style="--x:30%;--y:3%;--r:1.5px;--so:0.45"></i><i class="kr-star" style="--x:95%;--y:22%;--r:2px;--so:0.35"></i></div>
+              <header class="kr-dest-head">
+                <p class="kj-eyebrow">När vi är framme</p>
+                <h3 class="kr-dest-h">Hemsidan är live. <span>Och den känns som din.</span></h3>
+                <p class="kr-dest-lead">Redo att visas, användas och växa med företaget. Du har varit med hela vägen – och hemsidan är din när vi är klara.</p>
+              </header>
+              <div class="kr-live">
+                <div class="kr-live-status">
+                  <span class="kr-live-dot" aria-hidden="true"></span>
+                  <p class="kr-live-st">Live</p>
+                  <p class="kr-live-url">www.dittforetag.se</p>
+                  <ul class="kr-live-checks">
+                    <li>Redo för dina kunder</li>
+                    <li>Byggd för alla skärmar</li>
+                    <li>Din att äga och utveckla</li>
+                  </ul>
+                </div>
+                <div class="kr-shot" aria-hidden="true">
+                  <div class="kr-browser">
+                    <div class="kr-browser-bar"><i></i><i></i><i></i><span class="kr-url"><svg viewBox="0 0 12 12"><rect x="2" y="5.2" width="8" height="5.6" rx="1.4" fill="#3A4A62"/><path d="M4 5.4V4a2 2 0 0 1 4 0v1.4" fill="none" stroke="#3A4A62" stroke-width="1.3"/></svg>www.dittforetag.se</span></div>
+                    <svg class="kr-site" viewBox="0 0 240 180" focusable="false">
+                      <defs><linearGradient id="kr-site-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BCD6FF"/><stop offset="1" stop-color="#EAF3FF"/></linearGradient></defs>
+                      <circle cx="16" cy="13" r="4.5" fill="#146EF5"/><rect x="25" y="10.5" width="28" height="5" rx="2.5" fill="#0F172A" opacity=".85"/>
+                      <rect x="146" y="11.5" width="16" height="3" rx="1.5" fill="#0F172A" opacity=".25"/><rect x="168" y="11.5" width="16" height="3" rx="1.5" fill="#0F172A" opacity=".25"/><rect x="190" y="11.5" width="14" height="3" rx="1.5" fill="#0F172A" opacity=".25"/>
+                      <rect x="210" y="8.5" width="22" height="9" rx="4.5" fill="#146EF5"/>
+                      <g><rect x="10" y="26" width="220" height="74" rx="10" fill="#EAF3FF"/><rect x="22" y="40" width="98" height="8" rx="4" fill="#0F172A"/><rect x="22" y="53" width="72" height="8" rx="4" fill="#0F172A"/><rect x="22" y="68" width="86" height="3" rx="1.5" fill="#0F172A" opacity=".3"/><rect x="22" y="74" width="72" height="3" rx="1.5" fill="#0F172A" opacity=".3"/><path fill="#146EF5" d="M22 88C21 83 26 81 33 81C42 82 52 80 60 81C65 82 67 85 66 89C65 93 61 95 55 94C46 94 38 95 30 95C25 94 22 92 22 88Z"/><path fill="url(#kr-site-g)" d="M154 40C160 30 196 28 210 38C222 46 220 76 214 86C206 98 180 100 166 94C152 88 148 72 149 60C150 52 150 46 154 40Z"/><circle cx="198" cy="50" r="6" fill="#fff"/><rect x="10" y="112" width="68" height="44" rx="8" fill="#fff" stroke="#0F172A" stroke-opacity=".1"/><rect x="18" y="121" width="30" height="4" rx="2" fill="#0F172A" opacity=".75"/><rect x="18" y="130" width="50" height="3" rx="1.5" fill="#0F172A" opacity=".25"/><rect x="18" y="136" width="38" height="3" rx="1.5" fill="#0F172A" opacity=".25"/><circle cx="24" cy="147" r="3.5" fill="#146EF5" opacity=".85"/><rect x="86" y="112" width="68" height="44" rx="8" fill="#fff" stroke="#0F172A" stroke-opacity=".1"/><rect x="94" y="121" width="30" height="4" rx="2" fill="#0F172A" opacity=".75"/><rect x="94" y="130" width="50" height="3" rx="1.5" fill="#0F172A" opacity=".25"/><rect x="94" y="136" width="38" height="3" rx="1.5" fill="#0F172A" opacity=".25"/><circle cx="100" cy="147" r="3.5" fill="#146EF5" opacity=".85"/><rect x="162" y="112" width="68" height="44" rx="8" fill="#fff" stroke="#0F172A" stroke-opacity=".1"/><rect x="170" y="121" width="30" height="4" rx="2" fill="#0F172A" opacity=".75"/><rect x="170" y="130" width="50" height="3" rx="1.5" fill="#0F172A" opacity=".25"/><rect x="170" y="136" width="38" height="3" rx="1.5" fill="#0F172A" opacity=".25"/><circle cx="176" cy="147" r="3.5" fill="#146EF5" opacity=".85"/></g>
+                      <g><rect x="10" y="166" width="220" height="7" rx="3.5" fill="#0F172A" opacity=".07"/></g>
+
+                    </svg>
+                  </div>
+                  <div class="kr-phone"><svg viewBox="0 0 54 104" focusable="false"><defs><linearGradient id="kr-ph-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BCD6FF"/><stop offset="1" stop-color="#EAF3FF"/></linearGradient></defs><rect width="54" height="104" fill="#fff"/><circle cx="10" cy="10" r="2.6" fill="#146EF5"/><rect x="7" y="20" width="36" height="5" rx="2.5" fill="#0F172A"/><rect x="7" y="28" width="26" height="5" rx="2.5" fill="#0F172A"/><rect x="7" y="39" width="40" height="28" rx="7" fill="url(#kr-ph-g)"/><rect x="7" y="73" width="26" height="8" rx="4" fill="#146EF5"/><rect x="7" y="88" width="38" height="2.5" rx="1.25" fill="#0F172A" opacity=".25"/><rect x="7" y="94" width="28" height="2.5" rx="1.25" fill="#0F172A" opacity=".25"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div><!-- /kj-sky -->
+
+          <!-- Efter resan (utanför molnresan): det som alltid ingår, sidovägen och Klaro Care -->
+          <div class="ka">
+            <h3 class="ka-k" id="ka-always">Detta ingår alltid</h3>
+            <ul class="ka-list" aria-labelledby="ka-always">
+              <li><h4>Unik design</h4><p>Formgiven efter företaget – inte en färdig mall.</p></li>
+              <li><h4>Mobilanpassning</h4><p>Samma genomtänkta upplevelse på alla skärmar.</p></li>
+              <li><h4>Grundläggande SEO</h4><p>Struktur och innehåll som sökmotorer kan förstå.</p></li>
+              <li><h4>Projektportal</h4><p>Material, versioner och återkoppling samlat.</p></li>
+              <li><h4>Publicering</h4><p>Vi kontrollerar och publicerar tillsammans.</p></li>
+              <li><h4>Löpande avstämningar</h4><p>Du vet vad som händer och vad nästa steg är.</p></li>
+            </ul>
+            <div class="ka-forks">
+              <div class="ka-fork">
+                <p class="ka-fork-k">Anpassas efter din resa</p>
+                <button type="button" class="ka-fork-btn" aria-expanded="true" aria-controls="ka-opt-panel">
+                  <span>Beroende på upplägg · 5 delar</span><span class="ka-fork-ic" aria-hidden="true"></span>
+                </button>
+                <div class="ka-fork-panel" id="ka-opt-panel">
+                  <div class="ka-fork-in">
+                    <ul class="ka-opts">
+                      <li style="--i:0"><b>Kontaktformulär</b><span>Professionell · Komplett närvaro</span></li>
+                      <li style="--i:1"><b>Domänkoppling</b><span>Professionell · Komplett närvaro</span></li>
+                      <li style="--i:2"><b>Google Företagsprofil och Analytics</b><span>Professionell · Komplett närvaro</span></li>
+                      <li style="--i:3"><b>Lokal SEO-start</b><span>Komplett närvaro</span></li>
+                      <li style="--i:4"><b>Professionell mejladress</b><span>Komplett närvaro</span></li>
+                    </ul>
+                    <p class="ka-opts-note">Domän, mejl och andra externa tjänster betalas separat. <a href="/priser">Jämför uppläggen <span aria-hidden="true">→</span></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="ka-fork">
+                <p class="ka-fork-k">Valfritt nästa kapitel</p>
+                <p class="ka-care-t">Klaro Care</p>
+                <p class="ka-care-p">Fortsatt hjälp med mindre ändringar, support och förbättringar – bara om du vill. Hemsidan är redan färdig, och den är din även utan Klaro Care.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -2208,6 +2567,7 @@
     var dk = document.getElementById('dk');
     if (!dk) return;
     var root = document.documentElement;
+    var dkStart = document.getElementById('kj-dest');
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     // Reveal: varje element tonar in en gång när det når viewporten; element som kommer in samtidigt staggas
@@ -2243,8 +2603,10 @@
       // kapitlets slut når ~75 % av höjden, så att kontaktsektionen under inte står osynlig i en tom mörk yta.
       // CTA:n under är dold i mörkt läge och tonar in i takt med att sidan ljusnar igen.
       if (!still) {
+        // Kundresan ligger i en ljus himmel (.kj-sky): mörkret börjar först vid "När vi är framme" (#kj-dest)
         var r = dk.getBoundingClientRect();
-        root.classList.toggle('dk-on', r.top < vh * 0.55 && r.bottom > vh * 0.75);
+        var start = dkStart ? dkStart.getBoundingClientRect().top : r.top;
+        root.classList.toggle('dk-on', start < vh * 0.55 && r.bottom > vh * 0.75);
       }
     }
 
@@ -2898,6 +3260,10 @@
         all[k].classList.toggle('is-active', k === i);
         all[k].classList.toggle('is-before', k < i);
         all[k].classList.toggle('is-after', k > i);
+        all[k].classList.toggle('is-near', Math.abs(k - i) === 1);
+        // Riktning och avstånd till det aktiva kortet: CSS skalar sidokorten och flyttar in dem mot mitten
+        all[k].style.setProperty('--dir', k < i ? 1 : k > i ? -1 : 0);
+        all[k].style.setProperty('--steps', Math.abs(k - i));
       }
     }
     // Flytta ett helt varv (±n kort) utan animation. Klonerna ser identiska ut, så inget syns.
@@ -2987,9 +3353,10 @@
       });
     }, { passive: true });
     indTrack.addEventListener('scrollend', onSettle);
-    indTrack.addEventListener('touchstart', function () { touching = true; stopAnim(); pending = null; }, { passive: true });
-    indTrack.addEventListener('touchend', function () { touching = false; }, { passive: true });
-    indTrack.addEventListener('touchcancel', function () { touching = false; }, { passive: true });
+    // is-touching pausar kortens svävning (CSS) medan besökaren swipar
+    indTrack.addEventListener('touchstart', function () { touching = true; indTrack.classList.add('is-touching'); stopAnim(); pending = null; }, { passive: true });
+    indTrack.addEventListener('touchend', function () { touching = false; indTrack.classList.remove('is-touching'); }, { passive: true });
+    indTrack.addEventListener('touchcancel', function () { touching = false; indTrack.classList.remove('is-touching'); }, { passive: true });
     indTrack.addEventListener('wheel', function () { stopAnim(); pending = null; }, { passive: true });
     window.addEventListener('resize', function () { if (active !== -1) goTo(active, true); });
 
@@ -3600,6 +3967,182 @@
     window.addEventListener('resize', onScroll, { passive: true });
     window.addEventListener('load', onScroll);
     update();
+  })();
+</script>
+<!-- Kundresan som himmel: automatisk uppstigning med en kort, avsiktlig scrollpaus.
+     Första gången besökaren själv scrollar nedåt och scenens topp når fönstrets topp stannar scrollen där (sparad
+     position), kamerafärden spelas (--t 0→1 på .kj-sky, 2,2 s / 1,8 s på mobil, mjuk start och landning) och scrollen
+     släpps samma bildruta som ingressen är fullt synlig. Låset:
+       - blockerar wheel, touchmove och scrolltangenter (Space, Page Up/Down, pilar, Home/End) – aldrig Tab/fokus,
+       - håller overflow hidden på <html> med scrollbar-gutter: stable (ingen breddändring) och lägger tillbaka sidan på
+         den sparade positionen om något ändå flyttar den (t.ex. kvarvarande tröghet på iOS),
+       - släpps alltid efter högst 2,5 s (failsafe), och direkt vid Escape, klick på ankarlänk, fokus utanför scenen,
+         dold flik, pagehide, hashchange/popstate och när sidan återställs från bakåt/framåt-cachen.
+     Spelas en gång per sidvisning. Laddas sidan förbi scenen (t.ex. via ankarlänk längre ned) visas slutläget direkt;
+     laddas den vid scenen (#processen) spelas färden utan lås. Vid reducerad rörelse: ingen färd och inget lås.
+     Därefter ritas idén en gång; resten av molnresan styrs av scrollen i src/klaro-journey.js. -->
+<script>
+  (function () {
+    var sky = document.querySelector('.kj-sky');
+    if (!sky || !window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var scene = sky.querySelector('.kj-ascent');
+    if (!scene) return;
+    var root = document.documentElement;
+    sky.classList.add('kj-sky-js');
+    sky.style.setProperty('--t', '0');
+
+    var mobile = matchMedia('(max-width:760px)').matches;
+    var DUR = mobile ? 1800 : 2200, MAX_LOCK = 2500;
+    var state = 'idle';                  // idle → playing → done (en gång per sidvisning)
+    var sceneTop = 0, vh = window.innerHeight;
+    var locked = false, lockY = 0, lockStart = 0, failsafe = 0, raf = 0, t0 = 0, lastY = window.scrollY || window.pageYOffset;
+    var keyboardNav = false;             // besökaren navigerar med Tab – lås aldrig då
+
+    function y() { return window.scrollY || window.pageYOffset; }
+    function measure() {
+      sceneTop = scene.getBoundingClientRect().top + y();
+      vh = window.innerHeight;
+    }
+    function setT(t) { sky.style.setProperty('--t', t.toFixed(4)); }
+    function ease(x) { return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+
+    // ---------- Låset ----------
+    var SCROLL_KEYS = { ' ': 1, Spacebar: 1, PageDown: 1, PageUp: 1, ArrowDown: 1, ArrowUp: 1, Home: 1, End: 1 };
+    function isField(el) { return el && (el.isContentEditable || /^(input|textarea|select)$/i.test(el.tagName)); }
+    function block(e) { e.preventDefault(); }
+    function onKey(e) {
+      if (e.key === 'Escape') { finish(); return; }
+      if (SCROLL_KEYS[e.key] && !isField(e.target)) e.preventDefault();
+    }
+    // Sidan har scroll-behavior: smooth – alla programmatiska flyttar måste vara omedelbara
+    function jump(top) { window.scrollTo({ top: top, left: 0, behavior: 'instant' }); }
+    function hold() { if (locked && Math.abs(y() - lockY) > 1) jump(lockY); }
+    // Har scrollens egen tröghet hunnit en bit förbi scenens topp: glid mjukt tillbaka dit (~0,25 s, bromsande),
+    // så att scenen alltid står som helskärm – aldrig ett abrupt hopp. Mindre avvikelser än 2 px lämnas orörda.
+    var alignRaf = 0;
+    function align(target) {
+      var from = y(), dist = target - from, a0 = 0;
+      if (Math.abs(dist) < 2) return;
+      cancelAnimationFrame(alignRaf);
+      (function frame(now) {
+        if (!a0) a0 = now;
+        var k = Math.min(1, (now - a0) / 250), e = 1 - Math.pow(1 - k, 3);
+        lockY = Math.round(from + dist * e);
+        jump(lockY);
+        if (k < 1 && locked) alignRaf = requestAnimationFrame(frame);
+      })(performance.now());
+    }
+    function lock(atY) {
+      if (locked) return;
+      locked = true;
+      lockStart = performance.now();
+      lockY = typeof atY === 'number' ? atY : y();
+      root.classList.add('kj-lock');
+      window.addEventListener('wheel', block, { passive: false });
+      window.addEventListener('touchmove', block, { passive: false });
+      window.addEventListener('keydown', onKey, true);
+      window.addEventListener('scroll', hold, { passive: true });
+      failsafe = setTimeout(finish, MAX_LOCK);
+      // Tröghet förbi scenens topp (högst en halv skärm, se reached()): glid tillbaka till den
+      if (sceneTop - lockY < -1) align(Math.round(sceneTop));
+    }
+    function unlock() {
+      if (!locked) return;
+      locked = false;
+      clearTimeout(failsafe);
+      cancelAnimationFrame(alignRaf);
+      window.removeEventListener('wheel', block, { passive: false });
+      window.removeEventListener('touchmove', block, { passive: false });
+      window.removeEventListener('keydown', onKey, true);
+      window.removeEventListener('scroll', hold, { passive: true });
+      root.classList.remove('kj-lock');
+      if (Math.abs(y() - lockY) > 1) jump(lockY);
+    }
+
+    // ---------- Färden ----------
+    function finish() {                  // slutläge + upplåsning; säker att anropa när som helst
+      cancelAnimationFrame(raf);
+      if (state !== 'done') { state = 'done'; setT(1); sky.classList.add('is-landed'); startIdea(); }
+      unlock();
+    }
+    // Idékapitlet: skissen ritas en gång per sidvisning, när uppstigningen landat och scrollen släppts (ingen låsning).
+    // Syns kapitlet inte vid landningen, eller scrollar besökaren vidare, visas den färdiga formen direkt (.is-done).
+    function startIdea() {
+      var idea = sky.querySelector('.kj-idea');
+      if (!idea || idea.classList.contains('is-play') || idea.classList.contains('is-done')) return;
+      var r = idea.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) { idea.classList.add('is-done'); return; }
+      setTimeout(function () {                       // efter upplåsningen (unlock kan justera scrollen en sista gång)
+        var y0 = y(), endTimer = setTimeout(end, 2600);
+        function onS() { if (Math.abs(y() - y0) > 140) end(); }
+        function end() { clearTimeout(endTimer); window.removeEventListener('scroll', onS); idea.classList.add('is-done'); }
+        idea.classList.add('is-play');
+        window.addEventListener('scroll', onS, { passive: true });
+      }, 60);
+    }
+    function step(now) {
+      if (!t0) t0 = now;
+      var x = Math.min(1, (now - t0) / DUR);
+      setT(ease(x));
+      // Dubbel säkring utöver timern (som kan strypas): aldrig längre lås än MAX_LOCK
+      if (x < 1 && !(locked && now - lockStart >= MAX_LOCK)) raf = requestAnimationFrame(step); else finish();
+    }
+    function play(withLock, atY) {
+      if (state !== 'idle') return;
+      state = 'playing';
+      if (withLock && !keyboardNav) lock(atY);
+      raf = requestAnimationFrame(step);
+    }
+
+    // ---------- Utlösning: bara när besökaren själv scrollar nedåt in i scenen ----------
+    function reached(top) { return top <= 1 && top > -vh * 0.5; }   // scenens topp har nått fönstrets topp
+    function onWheel(e) {
+      if (state !== 'idle' || e.deltaY <= 0) return;
+      var d = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? vh : 1);
+      var top = sceneTop - y();
+      // Steget skulle passera scenens topp: stanna exakt där (samma riktning som besökaren redan rör sig) och lås
+      if (top > 1 && top - d <= 1) { e.preventDefault(); jump(sceneTop); play(true, sceneTop); }
+    }
+    function onScroll() {
+      var cur = y(), down = cur > lastY;
+      lastY = cur;
+      // Nära scenen: mät om (t.ex. introt förskjuter sidan några px efter första mätningen) – bara i den zonen
+      if (state === 'idle' && Math.abs(sceneTop - cur) < vh * 1.5) sceneTop = scene.getBoundingClientRect().top + cur;
+      if (state === 'idle' && down && reached(sceneTop - cur)) play(true);
+      // Snabb scroll förbi hela scenen (t.ex. en lång svepning): visa slutläget direkt, utan lås
+      else if (state === 'idle' && sceneTop - cur < -vh * 0.5) finish();
+    }
+
+    // ---------- Start: laddas sidan redan vid eller förbi scenen fångas besökaren aldrig ----------
+    function init() {
+      measure();
+      var top = sceneTop - y();
+      if (top < -vh * 0.25) finish();               // redan förbi (ankarlänk längre ned, återställd scroll)
+      else if (top <= vh * 0.25) play(false);        // landar vid scenen (#processen): spela utan lås
+    }
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', measure, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(document.body);
+    if (document.readyState === 'complete') init(); else window.addEventListener('load', init);
+
+    // ---------- Allt som ska avsluta färden och släppa scrollen direkt ----------
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Tab') keyboardNav = true;
+      if (e.key === 'Escape' && state === 'playing') finish();
+    });
+    document.addEventListener('pointerdown', function () { keyboardNav = false; }, { passive: true });
+    document.addEventListener('focusin', function (e) { if (locked && !scene.contains(e.target)) finish(); });
+    document.addEventListener('click', function (e) {
+      if (locked && e.target.closest && e.target.closest('a[href*="#"]')) finish();
+    }, true);
+    document.addEventListener('visibilitychange', function () { if (document.hidden) finish(); });
+    window.addEventListener('pagehide', finish);
+    window.addEventListener('hashchange', finish);
+    window.addEventListener('popstate', finish);
+    window.addEventListener('pageshow', function (e) { if (e.persisted) finish(); });
+    // Destroy-krok (om sektionen tas bort dynamiskt)
+    sky.klaroAscent = { destroy: finish, finish: finish };
   })();
 </script>
 </body>
