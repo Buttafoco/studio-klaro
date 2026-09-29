@@ -1321,7 +1321,7 @@
   .kj-asc-base{top:auto;height:clamp(150px,18vw,260px);bottom:0;opacity:.9;}
   .kj-asc-base .kj-cl{top:auto;bottom:calc(var(--yy) - 100%);}
   /* Mjuk övergång vid scenens underkant: molnbädden tonar ut i himlens färg – ingen rak skarv mot nästa yta */
-  .kj-asc-fog{position:absolute;left:0;right:0;bottom:-2px;height:clamp(70px,10vw,150px);pointer-events:none;
+  .kj-asc-fog{position:absolute;left:0;right:0;bottom:0;height:clamp(70px,10vw,150px);pointer-events:none;
     background:linear-gradient(180deg,rgba(220,238,255,0),#DCEEFF 72%);}
   .kj-asc-streaks{display:none;}
   /* Nästa del maskas under uppstigningen och tonar in först när resan har landat (desktop och mobil) */
@@ -1341,6 +1341,10 @@
     opacity:calc(min(.9, var(--so,.5) * 1.45) * min(1, var(--k) / .06, (1 - var(--k)) / .35));
     transform:translate3d(0,calc(var(--k) * var(--sd)),0);}
   .kj-ascent.is-rising .kj-streak{will-change:transform,opacity;}
+  /* Touch: scenen glider upp med webbläsarens egen mjuka scroll, så strecken kan ligga kvar i scenen */
+  @media (hover:none) and (pointer:coarse){
+    .kj-ascent.is-rising .kj-asc-streaks{position:absolute;clip-path:none;}
+  }
 
   /* ---------- Med animation: tidslinjen ----------
      Varje lager räknar sin delprogress --k ur --t i sitt fönster --a…--b; bara --t skrivs per bildruta. */
@@ -1349,16 +1353,19 @@
   /* Egna kompositlager bara medan resan pågår */
   /* .is-primed sätts redan när scenen närmar sig (IntersectionObserver), så att lagren skapas och rastreras medan
      besökaren fortfarande scrollar – inte i samma bildruta som uppstigningen startar. Tas bort efter landningen. */
-  .kj-ascent.is-primed .kj-asc > *,
+  .kj-ascent.is-primed .kj-asc > *,.kj-ascent.is-primed .kj-asc-bg,.kj-ascent.is-primed::after,
   .kj-ascent.is-primed .kj-head .kj-eyebrow,.kj-ascent.is-primed .kj-head .kj-h2,
   .kj-ascent.is-primed .kj-head .kj-h2 span,.kj-ascent.is-primed .kj-head .kj-lead{will-change:transform,opacity;}
   .kj-sky-js .kj-asc-fog{--a:.15;--b:.6;opacity:var(--k);}
   /* Himmelslagret går 20svh upp över scenen och börjar genomskinligt där – ingen kant medan scenen syns delvis */
   /* Klipp vid scenens underkant och sidor (molnbäddens platta underkanter får inte sticka ut under scenen),
      men låt himmelslagret gå upp över scenen */
-  .kj-sky-js .kj-asc{overflow:visible;clip-path:inset(-30svh 0 -2px 0);}
+  /* Molnbehållaren klipps med overflow:hidden (billig rektangulär klippning – clip-path med rörliga lager inuti
+     tvingar Safari till maskrendering). Himmelslagret, som går 20svh upp över scenen, ligger därför utanför den. */
+  .kj-sky-js .kj-asc{overflow:hidden;}
   /* 20–60 %: från den omgivande sidans färg till Studio Klaros ljusblå, med ett svagt ljus uppifrån */
-  .kj-sky-js .kj-asc-bg{position:absolute;left:0;right:0;top:-20svh;bottom:0;--a:.15;--b:.6;opacity:var(--k);
+  .kj-sky-js .kj-asc-bg{position:absolute;left:50%;width:100vw;transform:translateX(-50%);top:-20svh;bottom:0;pointer-events:none;
+    --k:clamp(0, (var(--t,1) - .15) / .45, 1);opacity:var(--k);
     background:radial-gradient(90% 40% at 50% 20svh,rgba(255,255,255,.5),transparent 70%),
       linear-gradient(180deg,rgba(211,232,255,0) 0,#D3E8FF 20svh,#DCEEFF 60%,#DCEEFF 100%);}
   /* 0–35 %: marknivå – en ljus horisontdimma nära nederkanten glider mjukt nedåt ut ur bild när färden börjar */
@@ -1982,9 +1989,9 @@
           <div class="kj-sky">
           <div class="kj-ascent">
             <div class="kj-ascent-pin">
+              <div class="kj-asc-bg" aria-hidden="true"></div>
               <div class="kj-asc" aria-hidden="true">
                 <svg width="0" height="0" style="position:absolute"><defs><linearGradient id="kj-cloud-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity=".62"/></linearGradient></defs></svg>
-                <div class="kj-asc-bg"></div>
                 <div class="kj-asc-ground"></div>
                 <div class="kj-asc-layer kj-asc-layer--1">
                   <svg class="kj-cl" style="--x:4%;--w:22vw;--yy:18%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
@@ -4095,6 +4102,10 @@
     scene.style.setProperty('--t', '0');
 
     var mobileMq = matchMedia('(max-width:760px)');
+    // Touch (iPhone m.fl.): inget scrollås och ingen programmatisk scroll per bildruta – det krockar med iOS
+    // tröghetsscroll och ger ryck. Scenen glider i stället upp med webbläsarens egen mjuka scroll (ett anrop,
+    // körs av kompositorn), och resan spelas som vanligt.
+    var touch = matchMedia('(hover: none) and (pointer: coarse)').matches;
     var mobile = mobileMq.matches;
     // Samma rörelsesystem på desktop och mobil. Starten och varaktigheten är separerade: resan börjar i nästa
     // bildruta efter triggern (ingen väntan, T0 hoppar över tidslinjens tomma inledning), medan själva färden
@@ -4124,7 +4135,7 @@
     function setT(t) {
       scene.style.setProperty('--t', t.toFixed(4));
       // Scenens överkant i fönstret, ur cachad position och scrollY (ingen layoutmätning)
-      if (streaks) streaks.style.setProperty('--vt', Math.max(0, Math.round(sceneTop - y())) + 'px');
+      if (streaks && !touch) streaks.style.setProperty('--vt', Math.max(0, Math.round(sceneTop - y())) + 'px');
     }
     // cubic-bezier(.25,.2,.65,.95): tydlig men mjuk startfart (ingen krypstart, ingen skjuts – toppfarten är
     // bara ~1,3× medelfarten), jämn fart genom mitten (~60 % av vägen vid halva tiden) och en lång, mjuk
@@ -4199,6 +4210,13 @@
       if (Math.abs(y() - lockY) > 1) jump(lockY);
     }
 
+    // Touch: ett enda mjukt scrollanrop upp till scenens topp (webbläsaren sköter det, avbryts naturligt om
+    // besökaren själv tar över)
+    function glideNative() {
+      var top = Math.round(sceneTop);
+      if (Math.abs(top - y()) > 2) window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
+    }
+
     // ---------- Färden ----------
     function finish() {                  // slutläge + upplåsning; säker att anropa när som helst
       cancelAnimationFrame(raf);
@@ -4257,9 +4275,13 @@
       var cur = y(), down = cur > lastY;
       lastY = cur;
       // sceneTop hålls aktuell av measure() (ResizeObserver på body och resize) – ingen layoutläsning här
-      if (state === 'idle' && down && reached(sceneTop - cur)) play(true);
+      if (state === 'idle' && down && reached(sceneTop - cur)) {
+        if (touch) { play(false); glideNative(); } else play(true);
+      }
       // Snabb scroll förbi hela scenen (t.ex. en lång svepning): visa slutläget direkt, utan lås
       else if (state === 'idle' && sceneTop - cur < -vh * 0.5) finish();
+      // Touch: scrollar besökaren själv vidare förbi scenen medan resan pågår visas slutläget direkt
+      else if (touch && state === 'playing' && sceneTop - cur < -vh * 0.35) finish();
     }
 
     // ---------- Start: laddas sidan redan vid eller förbi scenen fångas besökaren aldrig ----------
