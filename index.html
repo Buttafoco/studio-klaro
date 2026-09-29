@@ -1288,13 +1288,19 @@
      Utan JS och vid reducerad rörelse saknas .kj-sky-js: den färdiga himlen, molnbädden och rubriken syns direkt. -->
 <style>
   /* ---------- Himlen bakom resan ---------- */
-  .kj-sky{position:relative;--asc-h:min(100svh,860px);}
+  /* Scenen fyller fönstrets höjd på alla skärmar (växer om innehållet kräver mer) */
+  .kj-sky{position:relative;--asc-h:100svh;}
   .kj-sky::before{content:'';position:absolute;z-index:-1;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;
     top:calc(-1 * (var(--sp-chapter) + var(--dk-lead,32px)));bottom:0;
     background:linear-gradient(180deg,rgba(220,238,255,0) 0,rgba(220,238,255,.7) 120px,#DCEEFF 240px,#DCEEFF 100%);}
-  /* Med animation: himlen under scenen börjar där scenen slutar, har scenens slutfärg och tonar fram i takt med
-     uppstigningen – så att ingen kant syns mot scenen, varken före, under eller efter färden */
-  .kj-sky.kj-sky-js::before{top:var(--asc-h);opacity:clamp(0, (var(--t,1) - .15) / .45, 1);background:#DCEEFF;}
+  /* Med animation: himlen under scenen börjar där scenen slutar och har scenens slutfärg. Under färden täcks
+     ytan av scenens eget ::after (tonar i takt med --t på scenen); efter landningen tar ::before över i samma färg.
+     --t skrivs bara på scenen (.kj-ascent) – aldrig på hela .kj-sky, vars stora underträd annars skulle
+     stilberäknas om varje bildruta. */
+  .kj-sky.kj-sky-js::before{top:calc(var(--asc-h) - 2px);opacity:0;background:#DCEEFF;}
+  .kj-sky.kj-sky-js.is-landed::before{opacity:1;}
+  .kj-sky-js:not(.is-landed) .kj-ascent::after{content:'';position:absolute;top:100%;left:50%;width:100vw;height:100vh;
+    transform:translateX(-50%);pointer-events:none;background:#DCEEFF;opacity:clamp(0, (var(--t,0) - .15) / .45, 1);}
 
   /* Scrollpausen under uppstigningen: overflow hidden på <html>, men stabil gutter så att sidans bredd inte ändras */
   html.kj-lock{overflow:hidden;scrollbar-gutter:stable;}
@@ -1314,17 +1320,41 @@
   /* Molnbädden längst ned: slutlägets mjuka bas */
   .kj-asc-base{top:auto;height:clamp(150px,18vw,260px);bottom:0;opacity:.9;}
   .kj-asc-base .kj-cl{top:auto;bottom:calc(var(--yy) - 100%);}
+  /* Mjuk övergång vid scenens underkant: molnbädden tonar ut i himlens färg – ingen rak skarv mot nästa yta */
+  .kj-asc-fog{position:absolute;left:0;right:0;bottom:-2px;height:clamp(70px,10vw,150px);pointer-events:none;
+    background:linear-gradient(180deg,rgba(220,238,255,0),#DCEEFF 72%);}
+  .kj-asc-streaks{display:none;}
+  /* Nästa del maskas under uppstigningen och tonar in först när resan har landat (desktop och mobil) */
+  .kj-sky-js .kr{transition:opacity .45s ease;}
+  .kj-sky-js:not(.is-landed) .kr{opacity:0;}
+  /* Vindstreck längs kanterna. Lagret är fixerat mot fönstret medan resan pågår (.is-rising på scenen): scenen
+     glider själv upp i början, och i dokumentet skulle strecken då följa med uppåt. Relativt fönstret rör de sig
+     bara nedåt, efter samma progress (--t) som molnen. Framför himlen och molnen, bakom rubriken (z-index 1 < 2).
+     Djup: streck längre bort är kortare, svagare och rör sig kortare sträcka. Bara transform och opacity. */
+  .kj-ascent.is-rising .kj-asc-streaks{display:block;position:fixed;inset:0;z-index:1;overflow:hidden;pointer-events:none;
+    clip-path:inset(var(--vt,0px) 0 0 0);}   /* aldrig över föregående sektion medan scenen glider upp */
+  .kj-streak{position:absolute;left:var(--x);top:var(--y);width:2px;height:var(--h);border-radius:2px;
+    background:linear-gradient(180deg,rgba(20,110,245,0),rgba(20,110,245,.8) 65%,rgba(255,255,255,.95));
+    --k:clamp(0, (var(--t,0) - var(--a)) / (var(--b) - var(--a)), 1);
+    opacity:calc(min(.9, var(--so,.5) * 1.45) * min(1, var(--k) / .06, (1 - var(--k)) / .35));
+    transform:translate3d(0,calc(var(--k) * var(--sd)),0);}
+  .kj-ascent.is-rising .kj-streak{will-change:transform,opacity;}
 
   /* ---------- Med animation: tidslinjen ----------
      Varje lager räknar sin delprogress --k ur --t i sitt fönster --a…--b; bara --t skrivs per bildruta. */
   .kj-sky-js .kj-asc-bg,.kj-sky-js .kj-asc-ground,.kj-sky-js .kj-asc-layer{display:block;}
-  .kj-sky-js .kj-asc > *{--k:clamp(0, (var(--t,1) - var(--a,0)) / (var(--b,1) - var(--a,0)), 1);will-change:transform,opacity;}
+  .kj-sky-js .kj-asc > *{--k:clamp(0, (var(--t,1) - var(--a,0)) / (var(--b,1) - var(--a,0)), 1);}
+  /* Egna kompositlager bara medan resan pågår */
+  .kj-ascent.is-rising .kj-asc > *{will-change:transform,opacity;}
+  .kj-sky-js .kj-asc-fog{--a:.15;--b:.6;opacity:var(--k);}
   /* Himmelslagret går 20svh upp över scenen och börjar genomskinligt där – ingen kant medan scenen syns delvis */
-  .kj-sky-js .kj-asc{overflow:visible;overflow-x:clip;}
+  /* Klipp vid scenens underkant och sidor (molnbäddens platta underkanter får inte sticka ut under scenen),
+     men låt himmelslagret gå upp över scenen */
+  .kj-sky-js .kj-asc{overflow:visible;clip-path:inset(-30svh 0 -2px 0);}
   /* 20–60 %: från den omgivande sidans färg till Studio Klaros ljusblå, med ett svagt ljus uppifrån */
   .kj-sky-js .kj-asc-bg{position:absolute;left:0;right:0;top:-20svh;bottom:0;--a:.15;--b:.6;opacity:var(--k);
     background:radial-gradient(90% 40% at 50% 20svh,rgba(255,255,255,.5),transparent 70%),
-      linear-gradient(180deg,rgba(211,232,255,0) 0,#D3E8FF 20svh,#DCEEFF 60%,#E3F1FF 100%);}
+      linear-gradient(180deg,rgba(211,232,255,0) 0,#D3E8FF 20svh,#DCEEFF 60%,#DCEEFF 100%);}
   /* 0–35 %: marknivå – en ljus horisontdimma nära nederkanten glider mjukt nedåt ut ur bild när färden börjar */
   .kj-sky-js .kj-asc-ground{position:absolute;left:0;right:0;bottom:-6svh;height:46svh;--a:.12;--b:.4;
     background:radial-gradient(70% 90% at 50% 100%,rgba(255,255,255,.95),rgba(255,255,255,.55) 38%,rgba(255,255,255,0) 72%),
@@ -1342,10 +1372,14 @@
   /* 55–85 %: molnbädden glider ned mot nederkanten och bromsar mjukt in, som en hiss som landar */
   .kj-sky-js .kj-asc-base{--a:.55;--b:.85;transform:translate3d(0,calc((1 - var(--k)) * (1 - var(--k)) * -58svh),0);opacity:calc(.9 * min(1, var(--k) / .3));}
   /* Efter landningen: en mycket långsam drift i molnbädden så att himlen fortsätter kännas levande */
-  .kj-sky-js.is-landed .kj-asc-base .kj-cl{animation:kjBaseDrift 16s cubic-bezier(0.45,0.05,0.55,0.95) infinite alternate;}
-  .kj-sky-js.is-landed .kj-asc-base .kj-cl:nth-child(2){animation-duration:19s;animation-delay:-6s;}
-  .kj-sky-js.is-landed .kj-asc-base .kj-cl:nth-child(3){animation-duration:22s;animation-delay:-11s;}
-  @keyframes kjBaseDrift{from{transform:translate3d(-10px,2px,0);}to{transform:translate3d(12px,-3px,0);}}
+  /* Driften börjar exakt i landningsläget (0 → en liten förskjutning → tillbaka) utan negativ fördröjning, så att
+     molnen aldrig hoppar när resan landar. Molnbädden behåller sitt kompositlager efter landningen (den fortsätter
+     röra sig) – annars kan lagerbytet ge ett litet ryck. */
+  .kj-sky-js .kj-asc-base,.kj-sky-js .kj-asc-base .kj-cl{will-change:transform;}
+  .kj-sky-js.is-landed .kj-asc-base .kj-cl{animation:kjBaseDrift 18s cubic-bezier(0.45,0.05,0.55,0.95) infinite;--dx:12px;--dy:-3px;}
+  .kj-sky-js.is-landed .kj-asc-base .kj-cl:nth-child(2){animation-duration:21s;--dx:-10px;--dy:2px;}
+  .kj-sky-js.is-landed .kj-asc-base .kj-cl:nth-child(3){animation-duration:24s;--dx:9px;--dy:-2px;}
+  @keyframes kjBaseDrift{0%,100%{transform:translate3d(0,0,0);}50%{transform:translate3d(var(--dx),var(--dy),0);}}
   /* 66–100 %: eyebrow, rubrikens två rader var för sig och sist ingressen – högst 20 px uppåt och mjuk opacity */
   .kj-sky-js .kj-head .kj-eyebrow,.kj-sky-js .kj-head .kj-h2,.kj-sky-js .kj-head .kj-h2 span,.kj-sky-js .kj-head .kj-lead{
     --k:clamp(0, (var(--t,1) - var(--a)) / .1, 1);--e:calc(1 - (1 - var(--k)) * (1 - var(--k)));
@@ -1377,7 +1411,11 @@
 
   /* ---------- Mobil: kortare uppstigning, två passerande lager, idén staplad ---------- */
   @media (max-width:760px){
-    .kj-sky{--asc-h:min(92svh,720px);}
+    /* Scenen fyller hela skärmen (lvh: även när webbläsarens verktygsfält är infällt) – inget av nästa
+       innehåll syns nedtill medan scenen står i bild */
+    .kj-sky{--asc-h:100vh;}
+    @supports (height:100lvh){ .kj-sky{--asc-h:100lvh;} }
+    .kj-streak:nth-child(n+8){display:none;}
     .kj-sky-js .kj-asc-layer--1{display:none;}
     .kj-sky-js .kj-asc-layer--2{--y0:-60;--y1:95;--g:.04;}
     .kj-sky-js .kj-asc-layer--3{--y0:-80;--y1:110;--g:.08;}
@@ -1636,7 +1674,7 @@
           </a>
         </li>
         <li class="ind-item">
-          <a class="ind-card ind-card--butik" href="#kontakt">
+          <a class="ind-card ind-card--butik" href="#kontakt" data-ind-contact="Butik &amp; e-handel" data-ind-ph="Berätta kort om din butik och vad du vill förbättra…">
             <span class="ind-copy">
               <h3 class="ind-name">Butik &amp; e-handel</h3>
               <span class="ind-text">Gör produkter enkla att upptäcka och köpa.</span>
@@ -1701,7 +1739,7 @@
           </a>
         </li>
         <li class="ind-item">
-          <a class="ind-card ind-card--konsult" href="#kontakt">
+          <a class="ind-card ind-card--konsult" href="#kontakt" data-ind-contact="Konsult &amp; tjänsteföretag" data-ind-ph="Berätta kort om ditt företag, dina tjänster och vad du vill förbättra…">
             <span class="ind-copy">
               <h3 class="ind-name">Konsult &amp; tjänsteföretag</h3>
               <span class="ind-text">Förklara värdet tydligt och omvandla besökare till förfrågningar.</span>
@@ -1959,7 +1997,9 @@
                   <svg class="kj-cl" style="--x:30%;--w:48vw;--yy:66%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
                   <svg class="kj-cl" style="--x:64%;--w:50vw;--yy:56%" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
                 </div>
+                <div class="kj-asc-fog"></div>
               </div>
+              <div class="kj-asc-streaks" aria-hidden="true"><i class="kj-streak" style="--x:4%;--y:10%;--h:58px;--a:.1;--b:.82;--sd:42svh;--so:.6"></i><i class="kj-streak" style="--x:10%;--y:34%;--h:38px;--a:.11;--b:.86;--sd:34svh;--so:.45"></i><i class="kj-streak" style="--x:7%;--y:58%;--h:72px;--a:.1;--b:.84;--sd:48svh;--so:.5"></i><i class="kj-streak" style="--x:92%;--y:16%;--h:46px;--a:.12;--b:.8;--sd:38svh;--so:.55"></i><i class="kj-streak" style="--x:87%;--y:44%;--h:82px;--a:.11;--b:.88;--sd:52svh;--so:.45"></i><i class="kj-streak" style="--x:95%;--y:66%;--h:34px;--a:.13;--b:.83;--sd:30svh;--so:.6"></i><i class="kj-streak" style="--x:13%;--y:78%;--h:50px;--a:.12;--b:.85;--sd:36svh;--so:.4"></i><i class="kj-streak" style="--x:15%;--y:18%;--h:30px;--a:.1;--b:.8;--sd:24svh;--so:.28"></i><i class="kj-streak" style="--x:83%;--y:30%;--h:26px;--a:.14;--b:.86;--sd:22svh;--so:.25"></i><i class="kj-streak" style="--x:2.5%;--y:42%;--h:90px;--a:.11;--b:.84;--sd:56svh;--so:.42"></i><i class="kj-streak" style="--x:97.5%;--y:86%;--h:64px;--a:.13;--b:.82;--sd:44svh;--so:.38"></i><i class="kj-streak" style="--x:85%;--y:74%;--h:28px;--a:.12;--b:.87;--sd:20svh;--so:.26"></i></div>
               <!-- 1. Framtidsbilden: där uppstigningen landar. Stor typografi, mycket himmel och bara en lös blå linje som
                    ritas när uppstigningen landat (.is-play → .is-done) och blir resans färdlinje. -->
               <div class="kj-idea" data-wz-dock-clear>
@@ -2910,6 +2950,7 @@
         'Vad de behöver hjälp med': wz.goal,
         'Kort beskrivning': wz.message
       };
+      if (context) payload['Bransch (vald i branschkarusellen)'] = context;
 
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -2935,6 +2976,15 @@
           errorBox.style.display = 'block';
         });
     }
+    // Bransch från branschkarusellen (kort utan egen branschsida): visas som platshållare i textfältet och
+    // skickas med förfrågan. Besökarens egen text skrivs aldrig över.
+    var context = '';
+    root.klaroLead = {
+      setContext: function (label, placeholder) {
+        context = label || '';
+        if (placeholder) messageInput.setAttribute('placeholder', placeholder);
+      }
+    };
     // Speglingens gränssnitt: sätter värden utan att flytta fokus eller skicka något
     var peer = {
       key: key,
@@ -3210,17 +3260,14 @@
     var n = real.length;
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    // Visuell kopia av ett kort: samma utseende, men utan länk, rubrik, id, alt-texter eller fokusbara
-    // element, och dold för hjälpmedel. Den finns bara för att fylla ut loopen.
+    // Visuell kopia av ett kort för loopen: samma utseende och samma riktiga länk som originalet (så att en
+    // klon som står i mitten fungerar precis som kortet den kopierar), men utan rubrik, id, alt-texter och
+    // tabbstopp, och dold för hjälpmedel – tangentbord och skärmläsare använder bara de riktiga korten.
     function makeClone(src) {
       var li = src.cloneNode(true);
       li.classList.add('ind-clone');
       li.setAttribute('aria-hidden', 'true');
-      var link = li.querySelector('a.ind-card');
-      var card = document.createElement('div');
-      card.className = link.className;
-      while (link.firstChild) card.appendChild(link.firstChild);
-      link.parentNode.replaceChild(card, link);
+      li.querySelector('a.ind-card').setAttribute('tabindex', '-1');
       li.querySelectorAll('h3').forEach(function (h) {
         var span = document.createElement('span');
         span.className = h.className;
@@ -3424,12 +3471,45 @@
       indTrack.classList.remove('is-dragging');
       if (d.moved) goTo(nearest());
     });
-    // Klick efter ett drag öppnar inte länken; klick på ett sidokort (även en klon) centrerar det.
+    // Klick efter ett drag öppnar inte länken. Knappen (CTA) gör alltid sin åtgärd, även i ett sidokort;
+    // klick på resten av ett sidokort (även en klon) centrerar kortet i stället för att öppna det.
     indTrack.addEventListener('click', function (e) {
       if (suppressClick) { e.preventDefault(); e.stopPropagation(); return; }
+      if (e.target.closest('.ind-cta')) return;
+      if (e.detail === 0) return; // Enter/tangentbord: kortet gör alltid sin åtgärd
       var i = all.indexOf(e.target.closest('.ind-item'));
       if (i !== -1 && i !== active) { e.preventDefault(); goTo(i); }
     }, true);
+
+    // Kort utan egen branschsida (href="#kontakt"): mjukt till kontaktformuläret, branschen följer med som
+    // kontext och textfältet får fokus när scrollen stannat. Text som besökaren redan skrivit rörs aldrig.
+    // Lyssnaren ligger på document så att branschanpassningen hinner registrera klicket först.
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var card = e.target.closest && e.target.closest('#ind-track a.ind-card[data-ind-contact]');
+      if (!card) return;
+      var shell = document.querySelector('#kontakt .wz-shell');
+      var mount = document.querySelector('[data-wz-mount="kontakt"]');
+      var field = mount && mount.querySelector('[data-field="message"]');
+      if (!shell || !field) return; // då gäller länkens vanliga #kontakt
+      e.preventDefault();
+      if (mount.klaroLead) mount.klaroLead.setContext(card.getAttribute('data-ind-contact'), card.getAttribute('data-ind-ph'));
+      // Molnresans uppstigning får inte pausa scrollen på vägen ned
+      var sky = document.querySelector('.kj-sky');
+      if (sky && sky.klaroAscent) sky.klaroAscent.finish();
+      shell.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'center' });
+      var t0 = performance.now(), lastY = -1, calm = 0;
+      (function settle() {
+        var y = window.scrollY || window.pageYOffset, r = shell.getBoundingClientRect();
+        calm = Math.abs(y - lastY) < 1 ? calm + 1 : 0;
+        lastY = y;
+        if ((calm >= 4 && r.top < window.innerHeight && r.bottom > 0) || performance.now() - t0 > 3000) {
+          field.focus({ preventScroll: true });
+          return;
+        }
+        setTimeout(settle, 60);
+      })();
+    });
 
     // Automatisk växling åt höger var 7:e sekund. Pausar när besökaren hovrar, har fokus i karusellen,
     // interagerar, när sektionen inte syns, när fliken är dold och helt vid prefers-reduced-motion.
@@ -3989,10 +4069,15 @@
     if (!scene) return;
     var root = document.documentElement;
     sky.classList.add('kj-sky-js');
-    sky.style.setProperty('--t', '0');
+    scene.style.setProperty('--t', '0');
 
-    var mobile = matchMedia('(max-width:760px)').matches;
-    var DUR = mobile ? 1800 : 2200, MAX_LOCK = 2500;
+    var mobileMq = matchMedia('(max-width:760px)');
+    var mobile = mobileMq.matches;
+    // Samma rörelsesystem på desktop och mobil. Starten och varaktigheten är separerade: resan börjar i nästa
+    // bildruta efter triggern (ingen väntan, T0 hoppar över tidslinjens tomma inledning), medan själva färden
+    // är lugn och filmisk (DUR ≈ 2,2 s). Låset släpps alltid senast efter MAX_LOCK.
+    var DUR = 2200, MAX_LOCK = 2800, T0 = 0.1, GLIDE = 900;
+    function trig() { return mobileMq.matches ? 0.42 : 0.38; }   // följer resize och orienteringsbyte
     var state = 'idle';                  // idle → playing → done (en gång per sidvisning)
     var sceneTop = 0, vh = window.innerHeight;
     var locked = false, lockY = 0, lockStart = 0, failsafe = 0, raf = 0, t0 = 0, lastY = window.scrollY || window.pageYOffset;
@@ -4003,8 +4088,28 @@
       sceneTop = scene.getBoundingClientRect().top + y();
       vh = window.innerHeight;
     }
-    function setT(t) { sky.style.setProperty('--t', t.toFixed(4)); }
-    function ease(x) { return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+    var streaks = sky.querySelector('.kj-asc-streaks');
+    function setT(t) {
+      scene.style.setProperty('--t', t.toFixed(4));
+      // Scenens överkant i fönstret, ur cachad position och scrollY (ingen layoutmätning)
+      if (streaks) streaks.style.setProperty('--vt', Math.max(0, Math.round(sceneTop - y())) + 'px');
+    }
+    // cubic-bezier(.25,.2,.65,.95): tydlig men mjuk startfart (ingen krypstart, ingen skjuts – toppfarten är
+    // bara ~1,3× medelfarten), jämn fart genom mitten (~60 % av vägen vid halva tiden) och en lång, mjuk
+    // inbromsning när molnen och slutläget nås
+    var BX1 = .25, BY1 = .2, BX2 = .65, BY2 = .95;
+    function bezier(x) {
+      var t = x;
+      for (var i = 0; i < 8; i++) {
+        var u = 1 - t, cx = 3 * BX1 * t * u * u + 3 * BX2 * t * t * u + t * t * t - x;
+        var dx = 3 * BX1 * u * u + 6 * (BX2 - BX1) * t * u + 3 * (1 - BX2) * t * t;
+        if (Math.abs(dx) < 1e-6) break;
+        t = Math.min(1, Math.max(0, t - cx / dx));
+      }
+      var v = 1 - t;
+      return 3 * BY1 * t * v * v + 3 * BY2 * t * t * v + t * t * t;
+    }
+    function ease(x) { return bezier(x); }
 
     // ---------- Låset ----------
     var SCROLL_KEYS = { ' ': 1, Spacebar: 1, PageDown: 1, PageUp: 1, ArrowDown: 1, ArrowUp: 1, Home: 1, End: 1 };
@@ -4026,7 +4131,9 @@
       cancelAnimationFrame(alignRaf);
       (function frame(now) {
         if (!a0) a0 = now;
-        var k = Math.min(1, (now - a0) / 250), e = 1 - Math.pow(1 - k, 3);
+        // Glid upp från triggerlinjen med samma kurva som färden; korta justeringar efter tröghet går snabbare
+        var k = Math.min(1, (now - a0) / (Math.abs(dist) > vh * 0.1 ? GLIDE : 250));
+        var e = bezier(k);
         lockY = Math.round(from + dist * e);
         jump(lockY);
         if (k < 1 && locked) alignRaf = requestAnimationFrame(frame);
@@ -4043,8 +4150,9 @@
       window.addEventListener('keydown', onKey, true);
       window.addEventListener('scroll', hold, { passive: true });
       failsafe = setTimeout(finish, MAX_LOCK);
-      // Tröghet förbi scenens topp (högst en halv skärm, se reached()): glid tillbaka till den
-      if (sceneTop - lockY < -1) align(Math.round(sceneTop));
+      // Resan startar innan scenen nått toppen: glid mjukt upp dit under resans början.
+      // Tröghet förbi scenens topp (högst en halv skärm, se reached()): glid tillbaka till den.
+      if (Math.abs(sceneTop - lockY) > 1) align(Math.round(sceneTop));
     }
     function unlock() {
       if (!locked) return;
@@ -4062,7 +4170,7 @@
     // ---------- Färden ----------
     function finish() {                  // slutläge + upplåsning; säker att anropa när som helst
       cancelAnimationFrame(raf);
-      if (state !== 'done') { state = 'done'; setT(1); sky.classList.add('is-landed'); startIdea(); }
+      if (state !== 'done') { state = 'done'; setT(1); scene.classList.remove('is-rising'); sky.classList.add('is-landed'); startIdea(); }
       unlock();
     }
     // Idékapitlet: skissen ritas en gång per sidvisning, när uppstigningen landat och scrollen släppts (ingen låsning).
@@ -4083,25 +4191,29 @@
     function step(now) {
       if (!t0) t0 = now;
       var x = Math.min(1, (now - t0) / DUR);
-      setT(ease(x));
+      setT(T0 + (1 - T0) * ease(x));
       // Dubbel säkring utöver timern (som kan strypas): aldrig längre lås än MAX_LOCK
       if (x < 1 && !(locked && now - lockStart >= MAX_LOCK)) raf = requestAnimationFrame(step); else finish();
     }
     function play(withLock, atY) {
       if (state !== 'idle') return;
       state = 'playing';
+      scene.classList.add('is-rising');   // vindstreck + kompositlager bara under färden
       if (withLock && !keyboardNav) lock(atY);
       raf = requestAnimationFrame(step);
     }
 
     // ---------- Utlösning: bara när besökaren själv scrollar nedåt in i scenen ----------
-    function reached(top) { return top <= 1 && top > -vh * 0.5; }   // scenens topp har nått fönstrets topp
+    // Resan startar när scenens topp nått triggerlinjen (~40 % upp i fönstret) – resten av vägen glider scenen
+    // själv upp till toppen medan resan pågår, så det finns ingen lång startsträcka.
+    function reached(top) { return top <= vh * trig() && top > -vh * 0.5; }
     function onWheel(e) {
       if (state !== 'idle' || e.deltaY <= 0) return;
       var d = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? vh : 1);
       var top = sceneTop - y();
-      // Steget skulle passera scenens topp: stanna exakt där (samma riktning som besökaren redan rör sig) och lås
-      if (top > 1 && top - d <= 1) { e.preventDefault(); jump(sceneTop); play(true, sceneTop); }
+      // Hjulsteget skulle passera triggerlinjen: starta direkt härifrån (låset glider upp till scenens topp)
+      var line = vh * trig();
+      if (top > line && top - d <= line) { e.preventDefault(); play(true); }
     }
     function onScroll() {
       var cur = y(), down = cur > lastY;
