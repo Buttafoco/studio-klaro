@@ -744,30 +744,30 @@
 <link rel="stylesheet" href="/src/page-transition.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
+<link rel="stylesheet" href="/src/klaro-button.css">
 </head>
 <body>
 
-<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
-
-  <!-- NAV -->
-  <header class="nav-wrap sh">
-    <div class="nav-capsule sh-bar">
-      <a class="sh-logo" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166"><span class="sh-logo-line" aria-hidden="true"></span></a>
-      <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
-        <ul class="sh-list">
-          <li><a class="sh-link" href="/#processen">Process</a></li>
-          <li><a class="sh-link" href="/#portfolio">Projekt</a></li>
-          <li><a class="sh-link" href="/seo-koll" aria-current="page">SEO</a></li>
-          <li><a class="sh-link" href="/priser">Priser</a></li>
-          <li><a class="sh-link" href="/om">Om</a></li>
-          <li class="sh-cta-item"><a class="sh-cta" data-rhide href="/#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
-        </ul>
-      </nav>
-      <div class="sh-menu" data-rshow style="display:none;">
-        <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
-      </div>
+<!-- NAV – ligger utanför sidans 1440-ram så att headern alltid är lika bred som fönstret -->
+<header class="nav-wrap sh">
+  <div class="nav-capsule sh-bar">
+    <a class="sh-logo sh-logo--klaro" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-studio-klaro.webp" alt="Studio Klaro" width="405" height="200"></a>
+    <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
+      <ul class="sh-list">
+        <li><a class="sh-link" href="/#processen">Process</a></li>
+        <li><a class="sh-link" href="/#portfolio">Projekt</a></li>
+        <li><a class="sh-link" href="/seo-koll" aria-current="page">SEO</a></li>
+        <li><a class="sh-link" href="/priser">Priser</a></li>
+        <li><a class="sh-link" href="/om">Om</a></li>
+        <li class="sh-cta-item"><a class="sh-cta klaro-button klaro-button--primary" data-rhide href="/#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
+      </ul>
+    </nav>
+    <div class="sh-menu" data-rshow style="display:none;">
+      <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
     </div>
-  </header>
+  </div>
+</header>
+<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
 
   <main>
 
@@ -805,7 +805,7 @@
         <label for="sk-url-input" class="sr-only">Webbadress</label>
         <div class="sk-input-group">
           <input id="sk-url-input" name="url" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://dittforetag.se" class="sk-input">
-          <button type="submit" id="sk-submit-btn" class="btn-lift sk-submit-btn">Analysera min hemsida →</button>
+          <button type="submit" id="sk-submit-btn" class="sk-submit-btn klaro-button klaro-button--primary">Analysera min hemsida →</button>
         </div>
         <div id="sk-field-error" class="sk-field-error" role="alert" style="display:none;"></div>
       </form>
@@ -1036,8 +1036,8 @@
       </div>
 
       <a class="sf-mark" href="/" aria-label="Studio Klaro – till startsidan">
-        <span class="sf-mark-text">studio klaro</span>
-        <span class="sf-line" aria-hidden="true"></span>
+        <span class="sf-mark-row sf-mark-studio" aria-hidden="true"></span>
+        <span class="sf-mark-row sf-mark-klaro" aria-hidden="true"></span>
       </a>
 
       <div class="sf-bottom">
@@ -1448,8 +1448,8 @@
       '<h2 class="skr-err-title">' + esc(copy.title) + '</h2>' +
       '<p class="skr-err-text">' + esc(copy.text) + '</p>' +
       '<div class="skr-err-actions">' +
-        '<button type="button" class="skr-btn" data-sk-retry>Försök igen</button>' +
-        '<a class="skr-btn skr-btn--ghost" href="/#kontakt">Kontakta oss</a>' +
+        '<button type="button" class="skr-btn klaro-button klaro-button--primary" data-sk-retry>Försök igen</button>' +
+        '<a class="skr-btn skr-btn--ghost klaro-button klaro-button--secondary" href="/#kontakt">Kontakta oss</a>' +
       '</div>';
     errorEl.style.display = 'block';
     if (liveMsg) liveMsg.textContent = copy.title + '. ' + copy.text;
@@ -2010,7 +2010,7 @@
     return (
       '<div class="skr-partial">' +
         '<p>Vi kunde analysera större delen av hemsidan, men några kontroller gick inte att slutföra.</p>' +
-        '<button type="button" class="skr-btn skr-btn--ghost" data-sk-retry>Försök kontrollera igen</button>' +
+        '<button type="button" class="skr-btn skr-btn--ghost klaro-button klaro-button--secondary" data-sk-retry>Försök kontrollera igen</button>' +
       '</div>'
     );
   }
@@ -2025,7 +2025,7 @@
           '<label for="sk-lead-email" class="sr-only">E-postadress</label>' +
           '<div class="sk-input-group">' +
             '<input id="sk-lead-email" name="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="din@email.se" class="sk-input">' +
-            '<button type="submit" id="sk-lead-submit" class="btn-lift sk-submit-btn">Visa hela analysen</button>' +
+            '<button type="submit" id="sk-lead-submit" class="sk-submit-btn klaro-button klaro-button--primary">Visa hela analysen</button>' +
           '</div>' +
           '<div class="sk-hp-field" aria-hidden="true">' +
             '<label for="sk-lead-website">Webbplats</label>' +
@@ -2226,8 +2226,8 @@
           '<h3 class="skr-h2">Vi kan gå igenom det viktigaste tillsammans.</h3>' +
           '<p class="skr-next-text">Få hjälp att prioritera förbättringarna och se vad som kan göra hemsidan tydligare för både kunder och sökmotorer.</p>' +
           '<div class="skr-next-actions">' +
-            '<button type="button" id="sk-interest-yes" class="skr-btn">Få en gratis genomgång</button>' +
-            '<button type="button" class="skr-btn skr-btn--ghost" data-sk-again>Analysera en annan hemsida</button>' +
+            '<button type="button" id="sk-interest-yes" class="skr-btn klaro-button klaro-button--primary">Få en gratis genomgång</button>' +
+            '<button type="button" class="skr-btn skr-btn--ghost klaro-button klaro-button--secondary" data-sk-again>Analysera en annan hemsida</button>' +
           '</div>' +
         '</div>' +
         '<div id="sk-interest-form-wrap" class="sk-interest-form-wrap" style="display:none;">' +
@@ -2255,7 +2255,7 @@
               '<input id="sk-interest-website" name="website" type="text" tabindex="-1" autocomplete="off">' +
             '</div>' +
             '<div id="sk-interest-error" class="sk-field-error" role="alert" style="display:none;"></div>' +
-            '<button type="submit" id="sk-interest-submit" class="btn-lift sk-submit-btn sk-interest-submit-btn">Skicka intresse</button>' +
+            '<button type="submit" id="sk-interest-submit" class="sk-submit-btn sk-interest-submit-btn klaro-button klaro-button--primary">Skicka intresse</button>' +
           '</form>' +
         '</div>' +
         '<div id="sk-interest-success" class="sk-interest-success" role="status" tabindex="-1" style="display:none;">' +

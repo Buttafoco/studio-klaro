@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Studio Klaro – knappsystem (alla sidor). Mjuk, organisk och lätt asymmetrisk silhuett som den nya loggan.
+   Primary:   .klaro-button.klaro-button--primary   – blå med vit text.
+   Secondary: .klaro-button.klaro-button--secondary – vit yta, svart text och svart organisk kontur.
+   Hover ändrar inga färger: knappen gör bara en subtil gelé-studs (hela knappen, text inräknad).
+   Formen ritas som en SVG-mask i ::before (secondary: ::after är den vita insidan, så konturen blir kvar).
+
+   Knapparna har ofta äldre klasser och inline-stilar kvar (t.ex. .fr-btn, .px-btn, style="background:…").
+   Därför nollställs deras yta med !important på dubblerad klass, och sidornas lyft vid hover skrivs över
+   med högre specificitet. Transform får inte vara !important – då skulle den stoppa gelé-animationen.
+   ========================================================================== */
+.klaro-button{
+  --klaro-fill:#146EF5;--klaro-ink:#fff;--klaro-surface:#fff;
+  --klaro-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 268' preserveAspectRatio='none'%3E%3Cpath d='M22 138C10 58 96 10 214 14C318 18 372 36 468 32C590 26 706 8 838 16C950 24 996 84 988 144C980 206 928 250 818 246C722 242 664 226 568 234C478 242 404 258 282 254C148 250 34 222 22 138Z'/%3E%3C/svg%3E");
+  position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  box-sizing:border-box;min-height:48px;padding:14px 28px;
+  font-family:'Manrope',system-ui,sans-serif;font-weight:700;line-height:1.2;text-decoration:none;white-space:nowrap;cursor:pointer;
+  transform-origin:50% 100%;-webkit-tap-highlight-color:transparent;}
+.klaro-button.klaro-button,.klaro-button.klaro-button:hover,.klaro-button.klaro-button:focus{
+  background:transparent!important;border:0!important;border-radius:999px!important;box-shadow:none!important;color:var(--klaro-ink)!important;}
+.klaro-button--secondary{--klaro-fill:#0F0D0E;--klaro-ink:#0F0D0E;}
+
+.klaro-button::before{content:'';position:absolute;inset:-4px -5px;z-index:-2;background:var(--klaro-fill);
+  -webkit-mask:var(--klaro-mask) center / 100% 100% no-repeat;mask:var(--klaro-mask) center / 100% 100% no-repeat;}
+.klaro-button--secondary::after{content:'';position:absolute;inset:-2px -3px;z-index:-1;background:var(--klaro-surface);
+  -webkit-mask:var(--klaro-mask) center / 100% 100% no-repeat;mask:var(--klaro-mask) center / 100% 100% no-repeat;}
+
+/* Hover: bara gelé-studsen. Sidornas egna lyft (translateY) och pilrörelser stängs av. */
+.klaro-button:hover{animation:klaroJelly .65s cubic-bezier(0.37,0,0.63,1);}
+.klaro-button.klaro-button.klaro-button:hover{transform:none;}
+.klaro-button.klaro-button.klaro-button:active{transform:scale(.98);}
+.klaro-button.klaro-button:hover span{transform:none;}
+@keyframes klaroJelly{0%,100%{transform:none;}22%{transform:scale(1.04,.93);}42%{transform:scale(.98,1.04);}62%{transform:scale(1.015,.98);}82%{transform:scale(.997,1.006);}}
+
+.klaro-button.klaro-button:focus-visible{outline:3px solid #146EF5;outline-offset:5px;}
+.klaro-button:disabled,.klaro-button[aria-disabled="true"]{cursor:default;animation:none;}
+
+/* Lead-dockans pilknapp (startsidan, portfolio) är en rund ikon: behåller sin blå cirkel – blob-formen blir skev på 44 px */
+[data-wz-mount="dock"] .wz-next.klaro-button.klaro-button,.wz-dock .wz-next.klaro-button.klaro-button{background:var(--klaro-fill)!important;border-radius:50%!important;min-height:0;}
+[data-wz-mount="dock"] .wz-next.klaro-button::before,.wz-dock .wz-next.klaro-button::before{content:none;}
+
+/* Headerns CTA (src/site-header.css): samma knapp, lite lägre */
+.sh .sh-cta.klaro-button{min-height:44px;padding:12px 28px;font-size:14.5px;}
+.sh .sh-cta.klaro-button .sh-cta-arrow{transform:none;}
+
+@media (prefers-reduced-motion: reduce){ .klaro-button:hover{animation:none;} }

@@ -345,30 +345,30 @@
 <link rel="stylesheet" href="/src/page-transition.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
+<link rel="stylesheet" href="/src/klaro-button.css">
 </head>
 <body>
 
-<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
-
-  <!-- NAV -->
-  <header class="nav-wrap sh">
-    <div class="nav-capsule sh-bar">
-      <a class="sh-logo" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166"><span class="sh-logo-line" aria-hidden="true"></span></a>
-      <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
-        <ul class="sh-list">
-          <li><a class="sh-link" href="/#processen">Process</a></li>
-          <li><a class="sh-link" href="/#portfolio">Projekt</a></li>
-          <li><a class="sh-link" href="/seo-koll">SEO</a></li>
-          <li><a class="sh-link" href="/priser">Priser</a></li>
-          <li><a class="sh-link" href="/om">Om</a></li>
-          <li class="sh-cta-item"><a class="sh-cta" data-rhide href="/#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
-        </ul>
-      </nav>
-      <div class="sh-menu" data-rshow style="display:none;">
-        <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
-      </div>
+<!-- NAV – ligger utanför sidans 1440-ram så att headern alltid är lika bred som fönstret -->
+<header class="nav-wrap sh">
+  <div class="nav-capsule sh-bar">
+    <a class="sh-logo sh-logo--klaro" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-studio-klaro.webp" alt="Studio Klaro" width="405" height="200"></a>
+    <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
+      <ul class="sh-list">
+        <li><a class="sh-link" href="/#processen">Process</a></li>
+        <li><a class="sh-link" href="/#portfolio">Projekt</a></li>
+        <li><a class="sh-link" href="/seo-koll">SEO</a></li>
+        <li><a class="sh-link" href="/priser">Priser</a></li>
+        <li><a class="sh-link" href="/om">Om</a></li>
+        <li class="sh-cta-item"><a class="sh-cta klaro-button klaro-button--primary" data-rhide href="/#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
+      </ul>
+    </nav>
+    <div class="sh-menu" data-rshow style="display:none;">
+      <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
     </div>
-  </header>
+  </div>
+</header>
+<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
 
   <main>
 
@@ -383,8 +383,8 @@
     <h1 data-rhero-h1 style="font-size:42px;line-height:1.18;font-weight:800;color:#0F172A;margin:0 0 20px;letter-spacing:-0.01em;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">Hemsidor för skönhetssalonger i Stockholm</h1>
     <p style="font-size:17px;line-height:1.6;color:#52657A;margin:0 0 32px;font-weight:500;max-width:620px;margin-left:auto;margin-right:auto;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;">Få en professionell, mobilanpassad hemsida som visar behandlingar, priser och känsla — och gör det enkelt för kunder att boka tid.</p>
     <div data-rrow data-rbtnfull style="display:flex;justify-content:center;gap:14px;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.32s forwards;">
-      <a href="/#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få en gratis genomgång</a>
-      <a href="/portfolio" class="btn-lift lift-ghost" style="background:#fff;color:#0F172A;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;border:1px solid rgba(15,23,42,0.08);">Se tidigare arbeten</a>
+      <a href="/#kontakt" class="klaro-button klaro-button--primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få en gratis genomgång</a>
+      <a href="/portfolio" class="klaro-button klaro-button--secondary" style="background:#fff;color:#0F172A;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;border:1px solid rgba(15,23,42,0.08);">Se tidigare arbeten</a>
     </div>
   </section>
 
@@ -602,7 +602,7 @@
         <div style="font-size:14px;color:#fff;">✓ Publicering</div>
         <div style="font-size:14px;color:#fff;">✓ Löpande feedback och gemensamma avstämningar inom avtalad omfattning</div>
       </div>
-      <a href="/#kontakt" class="btn-lift lift-dark" style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.35);">Få en gratis genomgång</a>
+      <a href="/#kontakt" class="klaro-button klaro-button--primary" style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.35);">Få en gratis genomgång</a>
     </div>
     <p style="font-size:13px;color:#52657A;margin:16px 0 0;text-align:center;">Har salongen flera medarbetare, behandlingskategorier eller behov av fler sidor tar vi fram ett anpassat förslag.</p>
   </section>
@@ -664,7 +664,7 @@
     <div data-reveal style="background:#fff;border-radius:28px;padding:64px 40px;text-align:center;box-shadow:0 20px 50px rgba(15,23,42,0.08);border-top:6px solid #146EF5;">
       <h2 data-rcta-h2 style="font-size:30px;font-weight:800;color:#0F172A;margin:0 0 16px;line-height:1.3;max-width:600px;margin-left:auto;margin-right:auto;">Se hur er salongs nya hemsida skulle kunna se ut</h2>
       <p style="font-size:15px;color:#52657A;margin:0 0 30px;font-weight:500;max-width:520px;margin-left:auto;margin-right:auto;">Berätta kort om salongen så tar vi fram en personlig mockup av startsidan. Kostnadsfritt och utan köpkrav.</p>
-      <a href="/#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få en gratis genomgång</a>
+      <a href="/#kontakt" class="klaro-button klaro-button--primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få en gratis genomgång</a>
     </div>
   </section>
 
@@ -720,8 +720,8 @@
       </div>
 
       <a class="sf-mark" href="/" aria-label="Studio Klaro – till startsidan">
-        <span class="sf-mark-text">studio klaro</span>
-        <span class="sf-line" aria-hidden="true"></span>
+        <span class="sf-mark-row sf-mark-studio" aria-hidden="true"></span>
+        <span class="sf-mark-row sf-mark-klaro" aria-hidden="true"></span>
       </a>
 
       <div class="sf-bottom">

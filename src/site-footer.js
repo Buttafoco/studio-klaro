@@ -1,4 +1,4 @@
-/* Studio Klaro – gemensam footer: signaturens understreck ritas en gång när det syns,
+/* Studio Klaro – gemensam footer: signaturen studsar upp en gång när den syns och vickar vid hover,
    och "Tillbaka till toppen" scrollar mjukt (direkt vid reducerad rörelse). */
 (function () {
   var footer = document.querySelector('.sf');
@@ -14,6 +14,19 @@
       io.disconnect();
     }, { threshold: 0.6 });
     io.observe(mark);
+  }
+
+  // Gelé-vick vid hover: klassen tas bort först när animationen spelat klart, så den aldrig hackar av
+  if (mark && !reduce) {
+    var rows = mark.querySelectorAll('.sf-mark-row');
+    var last = rows[rows.length - 1];
+    var jelly = function () {
+      if (!mark.classList.contains('is-drawn') || mark.classList.contains('is-jelly')) return;
+      mark.classList.add('is-jelly');
+    };
+    mark.addEventListener('mouseenter', jelly);
+    mark.addEventListener('focus', jelly);
+    if (last) last.addEventListener('animationend', function () { mark.classList.remove('is-jelly'); });
   }
 
   var toTop = footer.querySelector('[data-sf-top]');

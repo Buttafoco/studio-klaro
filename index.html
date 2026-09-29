@@ -44,7 +44,6 @@
   /* Footern (gemensam src/site-footer.css) får startsidans kapitelavstånd */
   html .sf{margin-top:var(--sp-chapter);}
   /* Headern och mobilmenyn (src/site-header.css, src/mobile-nav.css) på startsidans blå canvas */
-  html .sh{--sh-bg:rgba(220,238,255,0.96);--sh-line:rgba(15,23,42,0.1);}
   html:root{--mnav-bg:#DCEEFF;}
   /* Extra skydd mot sidledsscroll (clip skapar ingen scrollbehållare, så sticky-menyn påverkas inte) */
   html,body{max-width:100%;overflow-x:clip;}
@@ -767,8 +766,9 @@
   .lc-end{margin-top:48px;padding-top:32px;border-top:1px solid rgba(74,91,112,0.12);display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap;}
   .lc-note{font-size:18px;font-weight:700;color:#0F172A;margin:0;}
   .lc-actions{display:flex;align-items:center;gap:12px 24px;flex-wrap:wrap;}
-  .lc-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.26);transition:transform .2s cubic-bezier(0.22,1,0.36,1),box-shadow .2s cubic-bezier(0.22,1,0.36,1);}
-  .lc-btn:hover{color:#fff;transform:translateY(-2px);box-shadow:0 14px 28px rgba(20,110,245,0.34);}
+  /* Utseendet kommer från knappsystemet (.klaro-button--primary) */
+  .lc-btn{min-height:50px;font-size:15px;padding:15px 30px;}
+  .lc-btn:hover{color:#fff;}
   .lc-btn:focus-visible,.lc-mail:focus-visible{outline:2px solid #0F172A;outline-offset:3px;}
   .lc-mail{display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:700;color:#146EF5;text-decoration:none;}
   .lc-mail:hover{text-decoration:underline;}
@@ -802,7 +802,6 @@
   }
   @media (prefers-reduced-motion: reduce){
     .lc-js .lc-check::before,.lc-js .lc-check svg,.lc-js .lc-text,.lc-js .lc-end{transition:none!important;}
-    .lc-btn:hover{transform:none;}
   }
 </style>
 <script type="application/ld+json">
@@ -1054,18 +1053,21 @@
      Varumärkesintro som visas en gång per flik (sessionStorage "studio-klaro-intro-seen-v1"): när startsidan
      öppnas i en ny flik eller ett nytt fönster – inte vid omladdning, bakåt/framåt eller intern navigering. Ligger kvar tills både minimitiden (2 s) har gått och sidan är färdigladdad,
      och crossfadar sedan till startsidan, som redan är renderad bakom (.ki-page). /?intro=1 tvingar fram den för test. -->
-<link rel="preload" as="image" href="logo-klaro.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/logo-sf-studio.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/logo-sf-klaro.webp" fetchpriority="high">
 <style>
   .ki{display:none;}
   html.ki-play{overflow:hidden;scrollbar-gutter:stable;}
   html.ki-play .ki{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;height:100vh;height:100dvh;z-index:9999;background:var(--sk-canvas);touch-action:none;transition:opacity .55s cubic-bezier(0.22,1,0.36,1);}
-  .ki-mark{--ki-w:240px;position:relative;width:var(--ki-w);opacity:0;}
-  /* Loggan beskärs ovanför sitt eget understreck; strecket ritas i stället exakt där det ligger i bilden */
-  .ki-logo{display:block;width:100%;height:auto;clip-path:inset(0 0 17% 0);}
-  .ki-line{position:absolute;left:33.97%;top:87.95%;width:34.92%;height:6.03%;border-radius:1px;background:#146EF5;transform-origin:left center;transform:scaleX(0);}
+  /* Nya rundade loggan i två rader ("studio" / "klaro"), samma masker och studs som footerns signatur (src/site-footer.css) */
+  .ki-mark{--ki-w:240px;display:flex;flex-direction:column;width:var(--ki-w);color:#0F0D0E;}
+  .ki-row{display:block;width:100%;background:currentColor;transform-origin:50% 100%;opacity:0;
+    -webkit-mask:var(--m) center / 100% 100% no-repeat;mask:var(--m) center / 100% 100% no-repeat;}
+  .ki-row-studio{--m:url("/logo-sf-studio.webp");aspect-ratio:1400 / 296;}
+  .ki-row-klaro{--m:url("/logo-sf-klaro.webp");aspect-ratio:1400 / 399;}
   /* Animationerna startar först när loggan är avkodad (ki-go), så hela förloppet syns även på långsam uppkoppling */
-  html.ki-go .ki-mark{animation:kiIn .9s cubic-bezier(0.22,1,0.36,1) both;}
-  html.ki-go .ki-line{animation:kiLine 1.1s cubic-bezier(0.65,0,0.35,1) .55s both;}
+  html.ki-go .ki-row{animation:kiBounce 1.1s cubic-bezier(0.34,1.56,0.64,1) both,kiFade .45s ease both;}
+  html.ki-go .ki-row-klaro{animation-delay:.13s;}
   html.ki-out .ki{opacity:0;}
   /* Startsidan ligger färdigrenderad men osynlig bakom introt och tonar in samtidigt som introt tonar ut.
      Förflyttningen görs med translate (inte transform) på barnen, så befintliga transforms lämnas orörda
@@ -1074,13 +1076,14 @@
   html.ki-play .ki-page > :not(.wz-dock){translate:0 10px;}
   html.ki-out .ki-page{opacity:1;transition:opacity .55s cubic-bezier(0.22,1,0.36,1);}
   html.ki-out .ki-page > :not(.wz-dock){translate:none;transition:translate .55s cubic-bezier(0.22,1,0.36,1);}
-  @keyframes kiIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
-  @keyframes kiLine{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+  /* Headern ligger utanför .ki-page men tonar in tillsammans med sidan */
+  html.ki-play .nav-wrap.sh{opacity:0;}
+  html.ki-out .nav-wrap.sh{opacity:1;transition:opacity .55s cubic-bezier(0.22,1,0.36,1);}
+  @keyframes kiBounce{from{transform:translateY(45%) scale(.94,.8);}to{transform:none;}}
   @keyframes kiFade{from{opacity:0;}to{opacity:1;}}
   @media (max-width:600px){ .ki-mark{--ki-w:184px;} }
   /* Reducerad rörelse: samma minimitid, men bara diskreta toningar och crossfade – ingen förflyttning eller ritning */
-  html.ki-reduce.ki-go .ki-mark{animation:kiFade .6s ease both;}
-  html.ki-reduce .ki-line{animation:none;transform:none;}
+  html.ki-reduce.ki-go .ki-row{animation:kiFade .6s ease both;}
   html.ki-reduce .ki-page > :not(.wz-dock){translate:none;}
 </style>
 <script>
@@ -1112,13 +1115,30 @@
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/klaro-journey.css">
 <link rel="stylesheet" href="/src/site-header.css">
+<!-- Knappsystemet (primary/secondary i loggans form) ligger i src/klaro-button.css; här bara startsidans egna delar. -->
+<link rel="stylesheet" href="/src/klaro-button.css">
+<style>
+  .klaro-button{font-size:14.5px;}
+  .klaro-button > span{display:inline-block;}
+  [data-wz-mount="hero"] .wz-next.klaro-button{padding:16px 32px;}
+  .wz-prompt-actions{display:flex;align-items:center;gap:12px;flex:none;}
+  /* Formulärets steg 2 och "bli kontaktad"-panelen */
+  .wz-submit.klaro-button{min-height:50px;padding:15px 32px;font-size:15px;}
+  .wz-callback-toggle.klaro-button{font-size:13.5px;padding:14px 22px;}
+  /* Utan pil på heroformulärets "Starta gratis" (dock och kontaktsektionen behåller sina) */
+  [data-wz-mount="hero"] .wz-prompt-actions .klaro-button > span{display:none;}
+  @media (max-width:700px){
+    .wz-prompt-actions{display:grid;grid-template-columns:1fr;width:100%;gap:10px;}
+    [data-wz-mount="hero"] .klaro-button{width:100%;padding-left:16px;padding-right:16px;}
+  }
+</style>
 </head>
 <body>
 <!-- ===== KlaroIntro – markup. Dekorativ, visas bara när <html> har klassen ki-play. ===== -->
 <div class="ki" id="klaro-intro" aria-hidden="true">
   <div class="ki-mark">
-    <img class="ki-logo" src="logo-klaro.webp" alt="" width="630" height="166">
-    <span class="ki-line"></span>
+    <span class="ki-row ki-row-studio"></span>
+    <span class="ki-row ki-row-klaro"></span>
   </div>
 </div>
 <script>
@@ -1151,8 +1171,10 @@
       root.classList.add('ki-go');
       setTimeout(function () { minDone = true; check(); }, MIN);
     }
-    var img = el.querySelector('img');
-    if (img && img.decode) img.decode().then(go, go); else go();
+    var srcs = ['/logo-sf-studio.webp', '/logo-sf-klaro.webp'];
+    if ('decode' in Image.prototype) {
+      Promise.all(srcs.map(function (u) { var i = new Image(); i.src = u; return i.decode(); })).then(go, go);
+    } else go();
     setTimeout(go, 600);
 
     // Sidan räknas som redo när load har skett och typsnitten är klara
@@ -1168,27 +1190,26 @@
 </script>
 <!-- ===== KlaroIntro – slut (body) ===== -->
 
-<div class="ki-page" style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
-
-  <!-- NAV -->
-  <header class="nav-wrap sh">
-    <div class="nav-capsule sh-bar">
-      <a class="sh-logo" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166"><span class="sh-logo-line" aria-hidden="true"></span></a>
-      <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
-        <ul class="sh-list">
-          <li><a class="sh-link" href="#processen">Process</a></li>
-          <li><a class="sh-link" href="#portfolio">Projekt</a></li>
-          <li><a class="sh-link" href="/seo-koll">SEO</a></li>
-          <li><a class="sh-link" href="/priser">Priser</a></li>
-          <li><a class="sh-link" href="/om">Om</a></li>
-          <li class="sh-cta-item"><a class="sh-cta" data-rhide href="#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
-        </ul>
-      </nav>
-      <div class="sh-menu" data-rshow style="display:none;">
-        <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
-      </div>
+<!-- NAV – ligger utanför sidans 1440-ram så att headern alltid är lika bred som fönstret -->
+<header class="nav-wrap sh">
+  <div class="nav-capsule sh-bar">
+    <a class="sh-logo sh-logo--klaro" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-studio-klaro.webp" alt="Studio Klaro" width="405" height="200"></a>
+    <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
+      <ul class="sh-list">
+        <li><a class="sh-link" href="#processen">Process</a></li>
+        <li><a class="sh-link" href="#portfolio">Projekt</a></li>
+        <li><a class="sh-link" href="/seo-koll">SEO</a></li>
+        <li><a class="sh-link" href="/priser">Priser</a></li>
+        <li><a class="sh-link" href="/om">Om</a></li>
+        <li class="sh-cta-item"><a class="sh-cta klaro-button klaro-button--primary" data-rhide href="#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
+      </ul>
+    </nav>
+    <div class="sh-menu" data-rshow style="display:none;">
+      <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="ki-page" style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
 
   <!-- HERO – centrerad: rubrik → ingress → formulär → trygghetssignaler. Stil: .hc i sidans stilblock.
        Intoningen ligger inline (fadeUp) så att sidövergången (src/page-transition.css) hoppar över den vid intern navigering.
@@ -1792,7 +1813,9 @@
           <div id="wz-prompt-error" class="wz-prompt-error" role="alert"></div>
           <div id="wz-prompt-bar" class="wz-prompt-bar">
             <div id="wz-prompt-hint" class="wz-prompt-hint">Några rader räcker – du får personlig återkoppling.</div>
-            <button type="button" id="wz-next" class="wz-next btn-lift lift-primary" aria-controls="wz-expand" aria-expanded="false">Få konkreta idéer <span aria-hidden="true">→</span></button>
+            <div class="wz-prompt-actions">
+              <button type="button" id="wz-next" class="wz-next klaro-button klaro-button--primary" aria-controls="wz-expand" aria-expanded="false">Få konkreta idéer <span aria-hidden="true">→</span></button>
+            </div>
           </div>
 
           <!-- Steg 2: kontaktuppgifter -->
@@ -1826,8 +1849,8 @@
 
                 <div id="wz-error" aria-live="polite" style="font-size:13px;color:#D64545;font-weight:600;margin-bottom:14px;display:none;"></div>
                 <div id="wz-btnrow" class="wz-btnrow" style="display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
-                  <button type="button" id="wz-callback-toggle" class="wz-callback-toggle" style="background:transparent;border:1.5px solid rgba(15,23,42,0.15);color:#0F172A;font-size:13px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;font-family:inherit;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Bli kontaktad istället</button>
-                  <button type="submit" id="wz-submit" class="wz-submit btn-next" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 24px rgba(20,110,245,0.3);font-family:inherit;">Få min gratis genomgång →</button>
+                  <button type="button" id="wz-callback-toggle" class="wz-callback-toggle klaro-button klaro-button--secondary">Bli kontaktad istället</button>
+                  <button type="submit" id="wz-submit" class="wz-submit klaro-button klaro-button--primary">Få min gratis genomgång →</button>
                 </div>
                 <div id="wz-form-note" class="wz-form-note">
                   <div style="text-align:right;font-size:12px;color:#52657A;line-height:1.5;">Vi återkommer personligt så snart vi kan.</div>
@@ -1854,7 +1877,7 @@
             <input id="wz-cb-company" type="text" placeholder="Företag (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
             <input id="wz-cb-website" type="url" placeholder="Hemsida (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
             <div id="wz-callback-error" style="font-size:13px;color:#FF8A8A;font-weight:600;display:none;">Fyll i namn, e-post och telefonnummer.</div>
-            <button type="submit" id="wz-callback-submit" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:12px;border:none;white-space:nowrap;cursor:pointer;align-self:flex-start;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Skicka</button>
+            <button type="submit" id="wz-callback-submit" class="klaro-button klaro-button--primary" style="align-self:flex-start;">Skicka</button>
           </div>
         </form>
       </div>
@@ -1977,7 +2000,7 @@
       <div class="lc-end">
         <p class="lc-note">Om du tvekar på någon av dem, börjar vi där.</p>
         <div class="lc-actions">
-          <a class="lc-btn" href="#kontakt" data-lc-cta>Se vad vi skulle förbättra <span aria-hidden="true">→</span></a>
+          <a class="lc-btn klaro-button klaro-button--primary" href="#kontakt" data-lc-cta>Se vad vi skulle förbättra <span aria-hidden="true">→</span></a>
           <a class="lc-mail" href="mailto:hej@studioklaro.se">Eller mejla hej@studioklaro.se</a>
         </div>
       </div>
@@ -2060,8 +2083,8 @@
       </div>
 
       <a class="sf-mark" href="/" aria-label="Studio Klaro – till startsidan">
-        <span class="sf-mark-text">studio klaro</span>
-        <span class="sf-line" aria-hidden="true"></span>
+        <span class="sf-mark-row sf-mark-studio" aria-hidden="true"></span>
+        <span class="sf-mark-row sf-mark-klaro" aria-hidden="true"></span>
       </a>
 
       <div class="sf-bottom">

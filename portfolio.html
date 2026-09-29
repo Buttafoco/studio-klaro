@@ -364,30 +364,30 @@
 <link rel="stylesheet" href="/src/page-transition.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
+<link rel="stylesheet" href="/src/klaro-button.css">
 </head>
 <body>
 
-<div style="max-width:1320px;width:100%;margin:0 auto;position:relative;">
-
-  <!-- NAV -->
-  <header class="nav-wrap sh">
-    <div class="nav-capsule sh-bar">
-      <a class="sh-logo" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-klaro.webp" alt="Studio Klaro" width="630" height="166"><span class="sh-logo-line" aria-hidden="true"></span></a>
-      <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
-        <ul class="sh-list">
-          <li><a class="sh-link" href="/#processen">Process</a></li>
-          <li><a class="sh-link" href="/#portfolio">Projekt</a></li>
-          <li><a class="sh-link" href="/seo-koll">SEO</a></li>
-          <li><a class="sh-link" href="/priser">Priser</a></li>
-          <li><a class="sh-link" href="/om">Om</a></li>
-          <li class="sh-cta-item"><a class="sh-cta" data-rhide href="#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
-        </ul>
-      </nav>
-      <div class="sh-menu" data-rshow style="display:none;">
-        <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
-      </div>
+<!-- NAV – ligger utanför sidans ram så att headern alltid är lika bred som fönstret -->
+<header class="nav-wrap sh">
+  <div class="nav-capsule sh-bar">
+    <a class="sh-logo sh-logo--klaro" href="/" aria-label="Studio Klaro – till startsidan"><img src="logo-studio-klaro.webp" alt="Studio Klaro" width="405" height="200"></a>
+    <nav class="sh-nav" aria-label="Huvudmeny" data-rnav>
+      <ul class="sh-list">
+        <li><a class="sh-link" href="/#processen">Process</a></li>
+        <li><a class="sh-link" href="/#portfolio">Projekt</a></li>
+        <li><a class="sh-link" href="/seo-koll">SEO</a></li>
+        <li><a class="sh-link" href="/priser">Priser</a></li>
+        <li><a class="sh-link" href="/om">Om</a></li>
+        <li class="sh-cta-item"><a class="sh-cta klaro-button klaro-button--primary" data-rhide href="#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
+      </ul>
+    </nav>
+    <div class="sh-menu" data-rshow style="display:none;">
+      <button id="mnav-toggle" class="mnav-toggle" type="button" aria-expanded="false" aria-controls="mnav"><span class="mnav-label">Meny</span><span class="mnav-lines" aria-hidden="true"><i></i><i></i></span></button>
     </div>
-  </header>
+  </div>
+</header>
+<div style="max-width:1320px;width:100%;margin:0 auto;position:relative;">
 
   <main>
 
@@ -403,8 +403,8 @@
       <h1 data-rhero style="font-size:52px;line-height:1.12;font-weight:800;color:#0F172A;margin:0 0 22px;letter-spacing:-0.01em;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">Ditt arbete förtjänar mer än en PDF.</h1>
       <p style="max-width:600px;margin:0 auto 34px;font-size:17px;line-height:1.6;color:#52657A;font-weight:500;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;">Vi bygger moderna portfolios för designers, fotografer, kreatörer och studenter – redo att skickas till nästa arbetsgivare, kund eller uppdrag.</p>
       <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:14px;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.32s forwards;">
-        <a href="#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Skapa min portfolio</a>
-        <a href="#ingar" class="btn-lift lift-ghost" style="background:#fff;color:#0F172A;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;border:1px solid rgba(15,23,42,0.12);">Se vad som ingår</a>
+        <a href="#kontakt" class="klaro-button klaro-button--primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Skapa min portfolio</a>
+        <a href="#ingar" class="klaro-button klaro-button--secondary" style="background:#fff;color:#0F172A;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;border:1px solid rgba(15,23,42,0.12);">Se vad som ingår</a>
       </div>
     </div>
 
@@ -523,7 +523,7 @@
           <div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">Case Studies</div>
           <div style="font-size:13px;font-weight:700;color:#e8edf5;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:6px 13px;border-radius:20px;text-transform:uppercase;">Process</div>
         </div>
-        <a href="https://www.danilobuttafoco.se" target="_blank" rel="noopener noreferrer" class="btn-lift lift-primary" style="display:inline-block;margin-top:14px;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:26px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Besök hemsidan</a>
+        <a href="https://www.danilobuttafoco.se" target="_blank" rel="noopener noreferrer" class="klaro-button klaro-button--primary" style="display:inline-block;margin-top:14px;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:26px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Besök hemsidan</a>
       </div>
       <div data-rimg style="height:560px;margin:-56px -56px -56px 0;">
         <img src="/db-portfolio.webp" alt="Exempel på en portfolio-webbplats byggd av Studio Klaro" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:transparent;">
@@ -583,7 +583,7 @@
           <div style="font-size:13px;color:#fff;font-weight:600;">✓ Domänkoppling</div>
           <div style="font-size:13px;color:#fff;font-weight:600;">✓ Löpande feedback och gemensamma avstämningar inom avtalad omfattning</div>
         </div>
-        <a href="#kontakt" class="btn-lift lift-primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Skapa min portfolio</a>
+        <a href="#kontakt" class="klaro-button klaro-button--primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Skapa min portfolio</a>
         <div style="font-size:12px;color:#8296B0;margin-top:22px;">Behöver du något mer avancerat? Vi bygger även större, helt skräddarsydda portfolios från 4 995 kr.</div>
       </div>
     </div>
@@ -700,7 +700,7 @@
           <div id="wz-prompt-error" class="wz-prompt-error" role="alert"></div>
           <div id="wz-prompt-bar" class="wz-prompt-bar">
             <div id="wz-prompt-hint" class="wz-prompt-hint">Några rader räcker – du får personlig återkoppling.</div>
-            <button type="button" id="wz-next" class="wz-next btn-lift lift-primary" aria-controls="wz-expand" aria-expanded="false">Få konkreta idéer <span aria-hidden="true">→</span></button>
+            <button type="button" id="wz-next" class="wz-next klaro-button klaro-button--primary" aria-controls="wz-expand" aria-expanded="false">Få konkreta idéer <span aria-hidden="true">→</span></button>
           </div>
 
           <!-- Steg 2: kontaktuppgifter -->
@@ -734,8 +734,8 @@
 
                 <div id="wz-error" aria-live="polite" style="font-size:13px;color:#D64545;font-weight:600;margin-bottom:14px;display:none;"></div>
                 <div id="wz-btnrow" class="wz-btnrow" style="display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
-                  <button type="button" id="wz-callback-toggle" class="wz-callback-toggle" style="background:transparent;border:1.5px solid rgba(15,23,42,0.15);color:#0F172A;font-size:13px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;font-family:inherit;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Bli kontaktad istället</button>
-                  <button type="submit" id="wz-submit" class="wz-submit btn-next" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 24px rgba(20,110,245,0.3);font-family:inherit;">Få min gratis genomgång →</button>
+                  <button type="button" id="wz-callback-toggle" class="wz-callback-toggle klaro-button klaro-button--secondary" style="background:transparent;border:1.5px solid rgba(15,23,42,0.15);color:#0F172A;font-size:13px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;font-family:inherit;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Bli kontaktad istället</button>
+                  <button type="submit" id="wz-submit" class="wz-submit klaro-button klaro-button--primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 24px rgba(20,110,245,0.3);font-family:inherit;">Få min gratis genomgång →</button>
                 </div>
                 <div id="wz-form-note" class="wz-form-note">
                   <div style="text-align:right;font-size:12px;color:#52657A;line-height:1.5;">Vi återkommer personligt så snart vi kan.</div>
@@ -762,7 +762,7 @@
             <input id="wz-cb-company" type="text" placeholder="Företag (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
             <input id="wz-cb-website" type="url" placeholder="Hemsida (valfritt)" style="background:#1B2A44;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;">
             <div id="wz-callback-error" style="font-size:13px;color:#FF8A8A;font-weight:600;display:none;">Fyll i namn, e-post och telefonnummer.</div>
-            <button type="submit" id="wz-callback-submit" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:12px;border:none;white-space:nowrap;cursor:pointer;align-self:flex-start;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Skicka</button>
+            <button type="submit" id="wz-callback-submit" class="klaro-button klaro-button--primary" style="background:#146EF5;color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:12px;border:none;white-space:nowrap;cursor:pointer;align-self:flex-start;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1);">Skicka</button>
           </div>
         </form>
       </div>
@@ -821,8 +821,8 @@
       </div>
 
       <a class="sf-mark" href="/" aria-label="Studio Klaro – till startsidan">
-        <span class="sf-mark-text">studio klaro</span>
-        <span class="sf-line" aria-hidden="true"></span>
+        <span class="sf-mark-row sf-mark-studio" aria-hidden="true"></span>
+        <span class="sf-mark-row sf-mark-klaro" aria-hidden="true"></span>
       </a>
 
       <div class="sf-bottom">
