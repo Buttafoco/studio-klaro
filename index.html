@@ -1347,9 +1347,11 @@
   .kj-sky-js .kj-asc-bg,.kj-sky-js .kj-asc-ground,.kj-sky-js .kj-asc-layer{display:block;}
   .kj-sky-js .kj-asc > *{--k:clamp(0, (var(--t,1) - var(--a,0)) / (var(--b,1) - var(--a,0)), 1);}
   /* Egna kompositlager bara medan resan pågår */
-  .kj-ascent.is-rising .kj-asc > *,
-  .kj-ascent.is-rising .kj-head .kj-eyebrow,.kj-ascent.is-rising .kj-head .kj-h2,
-  .kj-ascent.is-rising .kj-head .kj-h2 span,.kj-ascent.is-rising .kj-head .kj-lead{will-change:transform,opacity;}
+  /* .is-primed sätts redan när scenen närmar sig (IntersectionObserver), så att lagren skapas och rastreras medan
+     besökaren fortfarande scrollar – inte i samma bildruta som uppstigningen startar. Tas bort efter landningen. */
+  .kj-ascent.is-primed .kj-asc > *,
+  .kj-ascent.is-primed .kj-head .kj-eyebrow,.kj-ascent.is-primed .kj-head .kj-h2,
+  .kj-ascent.is-primed .kj-head .kj-h2 span,.kj-ascent.is-primed .kj-head .kj-lead{will-change:transform,opacity;}
   .kj-sky-js .kj-asc-fog{--a:.15;--b:.6;opacity:var(--k);}
   /* Himmelslagret går 20svh upp över scenen och börjar genomskinligt där – ingen kant medan scenen syns delvis */
   /* Klipp vid scenens underkant och sidor (molnbäddens platta underkanter får inte sticka ut under scenen),
@@ -2638,6 +2640,15 @@
     }
     setMode();
 
+    // Positionerna i dokumentet mäts bara när något ändrar storlek – varje scrollbildruta räknar sedan bara med
+    // scrollY (ingen getBoundingClientRect per bildruta, ingen tvingad layout mitt i scrollen)
+    var startY = 0, bottomY = 0, measured = false;
+    function measure() {
+      var sy = window.scrollY || window.pageYOffset, r = dk.getBoundingClientRect();
+      startY = (dkStart ? dkStart.getBoundingClientRect().top : r.top) + sy;
+      bottomY = r.bottom + sy;
+      measured = true;
+    }
     function update() {
       ticking = false;
       var vh = window.innerHeight;
@@ -2648,16 +2659,18 @@
       // CTA:n under är dold i mörkt läge och tonar in i takt med att sidan ljusnar igen.
       if (!still) {
         // Kundresan ligger i en ljus himmel (.kj-sky): mörkret börjar först vid "När vi är framme" (#kj-dest)
-        var r = dk.getBoundingClientRect();
-        var start = dkStart ? dkStart.getBoundingClientRect().top : r.top;
-        root.classList.toggle('dk-on', start < vh * 0.55 && r.bottom > vh * 0.75);
+        if (!measured) measure();
+        var sy = window.scrollY || window.pageYOffset;
+        root.classList.toggle('dk-on', startY - sy < vh * 0.55 && bottomY - sy > vh * 0.75);
       }
     }
 
     var ticking = false;
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    function onResize() { measured = false; onScroll(); }
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(onResize).observe(document.body);
     if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', function () { setMode(); update(); });
     update();
   })();
@@ -4036,20 +4049,26 @@
     if (!fade) return;
     var dk = document.querySelector('.dk');
     var ticking = false;
+    // Processkapitlets position mäts bara vid storleksändring – scrollen räknar sedan bara med scrollY
+    var dkTop = null;
+    function measure() { dkTop = dk ? dk.getBoundingClientRect().top + (window.scrollY || window.pageYOffset) : null; }
     function update() {
       ticking = false;
       var vh = window.innerHeight, y = window.scrollY || window.pageYOffset;
       var start = vh * 0.15;
+      if (dk && dkTop === null) measure();
       // Helt vitt när processkapitlets överkant är ungefär en halv skärm under fönstrets överkant
-      var end = dk ? dk.getBoundingClientRect().top + y - vh * 0.5 : document.documentElement.scrollHeight * 0.35;
+      var end = dk ? dkTop - vh * 0.5 : document.documentElement.scrollHeight * 0.35;
       var t = Math.min(1, Math.max(0, (y - start) / Math.max(1, end - start)));
       t = t * t * (3 - 2 * t);
       fade.style.opacity = t.toFixed(3);
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    function onResize() { dkTop = null; onScroll(); }
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    window.addEventListener('load', onScroll);
+    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('load', onResize);
+    if ('ResizeObserver' in window) new ResizeObserver(onResize).observe(document.body);
     update();
   })();
 </script>
@@ -4093,6 +4112,14 @@
       vh = window.innerHeight;
     }
     var streaks = sky.querySelector('.kj-asc-streaks');
+    // Förbered kompositlagren när scenen är inom ungefär en skärmhöjd (före triggern)
+    var primeIo = null;
+    if ('IntersectionObserver' in window) {
+      primeIo = new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting && state === 'idle') scene.classList.add('is-primed');
+      }, { rootMargin: '0px 0px 60% 0px' });
+      primeIo.observe(scene);
+    }
     var kr = sky.querySelector('.kr');
     function setT(t) {
       scene.style.setProperty('--t', t.toFixed(4));
@@ -4180,7 +4207,7 @@
         // Inget tungt i själva landningsbildrutan: nästa del (under fönstret) visas strax efter, och
         // kompositlagren rivs först när rubriken och molnen stått still en stund
         setTimeout(function () { if (kr) kr.classList.add('kr-ready'); }, 120);
-        setTimeout(function () { scene.classList.remove('is-rising'); }, 900);
+        setTimeout(function () { scene.classList.remove('is-rising', 'is-primed'); if (primeIo) primeIo.disconnect(); }, 900);
       }
       unlock();
     }
@@ -4209,7 +4236,7 @@
     function play(withLock, atY) {
       if (state !== 'idle') return;
       state = 'playing';
-      scene.classList.add('is-rising');   // vindstreck + kompositlager bara under färden
+      scene.classList.add('is-primed', 'is-rising');   // vindstreck (+ lagren om de inte redan förberetts)
       if (withLock && !keyboardNav) lock(atY);
       raf = requestAnimationFrame(step);
     }
@@ -4229,8 +4256,7 @@
     function onScroll() {
       var cur = y(), down = cur > lastY;
       lastY = cur;
-      // Nära scenen: mät om (t.ex. introt förskjuter sidan några px efter första mätningen) – bara i den zonen
-      if (state === 'idle' && Math.abs(sceneTop - cur) < vh * 1.5) sceneTop = scene.getBoundingClientRect().top + cur;
+      // sceneTop hålls aktuell av measure() (ResizeObserver på body och resize) – ingen layoutläsning här
       if (state === 'idle' && down && reached(sceneTop - cur)) play(true);
       // Snabb scroll förbi hela scenen (t.ex. en lång svepning): visa slutläget direkt, utan lås
       else if (state === 'idle' && sceneTop - cur < -vh * 0.5) finish();
