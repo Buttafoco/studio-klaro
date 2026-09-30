@@ -472,42 +472,36 @@
      (New Spirit Condensed – lokalt trialtest, se @font-face vid .hc) */
   .bento-head{margin:0 0 var(--sp-head);text-align:left;}
   .bento-h2,.faq-title{font-family:"New Spirit Condensed Trial",serif;font-style:italic;font-weight:500;font-size:clamp(44px,4.2vw,68px);color:#0F172A;margin:0;line-height:1;letter-spacing:-0.02em;max-width:11em;text-wrap:balance;}
-  .bento-grid{display:grid;grid-template-columns:1fr 1.22fr 1fr;grid-template-rows:auto auto;gap:22px;}
-  /* Korten: vita, mjukt organiska hörn (lätt asymmetriska som loggan och knapparna). Ingen grå ram – kanten bärs av
-     en hårfin blåton och en diskret, blåtonad skugga. */
-  .bento-card{position:relative;display:flex;flex-direction:column;background:#fff;border:0;border-radius:36px 30px 38px 32px / 32px 38px 30px 36px;padding:26px 28px 30px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.07),0 1px 2px rgba(15,23,42,0.03),0 22px 44px -26px rgba(20,110,245,0.22);overflow:hidden;color:#0F172A;text-decoration:none;min-width:0;}
-  .bento-card:nth-child(2n){border-radius:30px 38px 32px 36px / 38px 32px 36px 30px;}
-  .bento .bento-card[data-reveal]{transform:translateY(14px);}
+  /* Resultatkorten: fyra lugna, kompakta kort i ett 2 × 2-grid (ca 40/60) direkt under projekten. Vita vid första
+     anblick med en lätt himmelsblå fade nedtill (sidans canvasfärg, kraftigt utspädd), samma hörnradie på alla,
+     ingen ram – bara en hårfin blåton och en diskret blåtonad skugga för separation. */
+  .bento-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);grid-auto-rows:auto;gap:20px;}
+  .bento-card{position:relative;display:flex;flex-direction:column;min-width:0;padding:18px 22px 20px;border-radius:26px;color:#0F172A;
+    background:linear-gradient(180deg,#FFFFFF 0%,color-mix(in srgb,var(--sk-canvas) 18%,#FFFFFF) 60%,color-mix(in srgb,var(--sk-canvas) 50%,#FFFFFF) 100%);
+    box-shadow:inset 0 0 0 1px rgba(20,110,245,0.06),0 1px 2px rgba(15,23,42,0.03),0 12px 28px -20px rgba(20,110,245,0.28);}
+  /* Försiktig intoning (fördröjning per kort sköts av reveal-skriptet) */
+  /* Identitetsillustrationen i det kompakta kortet: lite mer höjd och smalare palett/typografikort så att de inte täcker varandra */
+  .bento-card--brand .bc-art{min-height:176px;}
+  .bento-card--brand .bs-palette{width:38%;padding:10px;}
+  .bento-card--brand .bs-brandcard{left:26%;width:44%;padding:12px;}
+  .bento .bento-card[data-reveal]{transform:translateY(10px);}
   .bento .bento-card[data-reveal].is-visible{transform:none;}
-  .bento-card--seo{grid-column:2;grid-row:1 / span 2;background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 42%,#F4F9FF 100%);box-shadow:inset 0 0 0 1px rgba(20,110,245,0.09),0 1px 2px rgba(15,23,42,0.03),0 30px 60px -30px rgba(20,110,245,0.30);}
-  .bento-card--brand{grid-column:1;grid-row:1;}
-  .bento-card--booking{grid-column:1;grid-row:2;}
-  .bento-card--rating{grid-column:3;grid-row:1;}
-  .bento-card--leads{grid-column:3;grid-row:2;}
-  .bc-art{position:relative;flex:1 1 auto;min-height:206px;margin-bottom:24px;}
-  /* Mjukt blått ljus bakom varje illustration (liten, aldrig ett bakgrundsfält); position/storlek varierar per kort */
-  .bc-art::before{content:'';position:absolute;left:var(--glow-x,50%);top:var(--glow-y,50%);width:var(--glow-w,78%);aspect-ratio:1.3;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(20,110,245,var(--glow-a,0.09)),rgba(141,187,255,0.05) 55%,rgba(141,187,255,0));pointer-events:none;z-index:0;}
-  .bc-chart > :not(.sr-only),.cx > :not(.sr-only),.lf-wrap > :not(.sr-only){position:relative;z-index:1;}
-  .bc-stack::before{--glow-x:46%;--glow-y:52%;--glow-w:92%;}
-  .bc-bookings::before{--glow-x:58%;--glow-y:46%;--glow-w:84%;--glow-a:0.08;}
-  .lf-wrap::before{--glow-x:40%;--glow-y:34%;--glow-w:90%;--glow-a:0.07;}
-  .bc-chart::before{--glow-x:78%;--glow-y:38%;--glow-w:70%;--glow-a:0.07;}
+  @media (prefers-reduced-motion: reduce){
+    .bento .bento-card[data-reveal]{opacity:1;transform:none;transition:none;}
+  }
+  .bc-art{position:relative;flex:1 1 auto;min-height:164px;margin-bottom:14px;}
   .bc-body{flex:none;}
-  .bc-title{font-size:20px;font-weight:800;line-height:1.22;letter-spacing:-0.015em;margin:0 0 8px;color:#0F172A;text-wrap:balance;}
-  .bc-text{font-size:14.5px;line-height:1.6;color:#52657A;margin:0;font-weight:500;text-wrap:pretty;}
-  .bento-card--seo .bc-title{font-size:26px;letter-spacing:-0.02em;}
-  .bento-card--seo .bc-text{font-size:15.5px;max-width:440px;}
+  .bc-title{font-size:18px;font-weight:800;line-height:1.25;letter-spacing:-0.015em;margin:0 0 5px;color:#0F172A;text-wrap:balance;}
+  .bc-text{font-size:14px;line-height:1.55;color:#52657A;margin:0;font-weight:500;text-wrap:pretty;}
   .bc-pill{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.04em;padding:6px 11px;border-radius:999px;}
   .bc-pill--muted{color:#2F4A6E;background:#EEF5FF;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.12);}
   .bc-pill--muted::before{content:'';width:6px;height:6px;border-radius:50%;background:#146EF5;opacity:.7;}
 
   /* Synlighet: linjediagram */
-  .bc-chart{display:flex;flex-direction:column;min-height:380px;}
-  .bc-chart-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
-  .bc-chips{display:flex;gap:6px;}
-  .bc-chips span{font-size:11px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.08);padding:5px 10px;border-radius:999px;}
+  .bc-chart{display:flex;flex-direction:column;min-height:0;}
+  .bc-chart-top{display:flex;align-items:center;margin-bottom:6px;}
   /* Interaktiv graf (kc = KPI-chart). --kx/--ky = aktiv position i px, satta i JS. */
-  .kc-plot{position:relative;flex:1 1 auto;min-height:240px;cursor:grab;touch-action:pan-y;outline:none;border-radius:14px;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;}
+  .kc-plot{position:relative;flex:1 1 auto;min-height:110px;cursor:grab;touch-action:pan-y;outline:none;border-radius:14px;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;}
   .kc-plot.is-dragging{cursor:grabbing;}
   .kc-plot:focus-visible{box-shadow:0 0 0 3px rgba(20,110,245,0.35);}
   .kc-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
@@ -517,11 +511,11 @@
   .kc-dot--event::after{content:'';position:absolute;left:50%;top:-13px;width:7px;height:7px;margin-left:-3.5px;background:#146EF5;border:1.5px solid #fff;border-radius:2px;transform:rotate(45deg);box-shadow:0 1px 3px rgba(20,110,245,0.35);}
   .kc-guide{position:absolute;left:0;top:0;bottom:0;width:0;border-left:1.5px dashed rgba(20,110,245,0.35);transform:translateX(var(--kx,0px));pointer-events:none;}
   .kc-active{position:absolute;left:0;top:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;border:3px solid #146EF5;box-sizing:border-box;box-shadow:0 0 0 6px rgba(20,110,245,0.14);transform:translate(var(--kx,0px),var(--ky,0px));pointer-events:none;}
-  .kc-tip{position:absolute;left:0;top:0;display:flex;flex-direction:column;min-width:112px;background:#0F172A;color:#fff;padding:10px 14px 11px;border-radius:16px 14px 16px 14px;box-shadow:0 14px 30px -8px rgba(15,23,42,0.28);transform:translate(var(--tx,0px),var(--ty,0px));pointer-events:none;white-space:nowrap;}
+  .kc-tip{position:absolute;left:0;top:0;display:flex;flex-direction:column;min-width:104px;background:#0F172A;color:#fff;padding:8px 12px 9px;border-radius:16px 14px 16px 14px;box-shadow:0 14px 30px -8px rgba(15,23,42,0.28);transform:translate(var(--tx,0px),var(--ty,0px));pointer-events:none;white-space:nowrap;}
   .kc-tip-m{font-size:12px;font-weight:700;color:#B7C6DB;}
-  .kc-tip-v{font-size:24px;font-weight:800;line-height:1.1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;}
+  .kc-tip-v{font-size:21px;font-weight:800;line-height:1.1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;}
   .kc-tip-l{font-size:11px;font-weight:600;color:#8FA6C2;}
-  .kc-tip-e{font-size:11.5px;font-weight:700;color:#8DBBFF;margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.1);}
+  .kc-tip-e{font-size:11.5px;font-weight:700;color:#8DBBFF;margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,0.1);}
   .kc-tip-e:empty{display:none;}
   /* Pil mot punkten; --ax = pilens x inom tooltipen */
   .kc-tip::after{content:'';position:absolute;left:var(--ax,50%);width:10px;height:10px;margin-left:-5px;background:#0F172A;border-radius:2px;transform:rotate(45deg);}
@@ -529,9 +523,10 @@
   .kc-tip[data-side="below"]::after{top:-4px;}
   .kc-event{position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:2px;max-width:170px;background:#fff;border:0;border-left:3px solid #146EF5;border-radius:12px;padding:7px 10px 8px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.12),0 10px 22px -8px rgba(20,110,245,0.25);transform:translate(var(--ex,0px),var(--ey,0px));opacity:0;pointer-events:none;transition:opacity .3s ease;}
   .kc-event.is-on{opacity:1;}
+  .bento-card--seo .kc-event{display:none;}
   .kc-event-k{font-size:9.5px;font-weight:800;letter-spacing:.08em;color:#146EF5;}
   .kc-event-t{font-size:12px;font-weight:700;color:#0F172A;line-height:1.3;white-space:normal;}
-  .kc-months{position:relative;height:16px;margin-top:10px;font-size:11px;font-weight:600;color:#8296B0;}
+  .kc-months{position:relative;height:16px;margin-top:8px;font-size:11px;font-weight:600;color:#8296B0;}
   .kc-months span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;}
   /* Mjuk rörelse mellan månader (släpp, tangentbord). Under dragning/hover följer markören direkt. */
   .kc-plot.is-snapping .kc-active,.kc-plot.is-snapping .kc-guide{transition:transform .38s cubic-bezier(0.25,0.8,0.25,1);}
@@ -598,66 +593,19 @@
     .vi .vi-v,.vi .bs-card,.vi .bs-hero,.vi .bs-sw,.vi .bs-btn{transition:none;}
   }
 
-  /* Bokningar */
-  .bc-bookings .bk{position:absolute;z-index:1;display:flex;flex-direction:column;gap:6px;background:#fff;border:0;border-radius:20px 18px 20px 16px;padding:14px 16px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.08),0 18px 34px -16px rgba(20,110,245,0.30),0 2px 6px rgba(15,23,42,0.04);width:72%;box-sizing:border-box;transition:transform 1s cubic-bezier(0.22,1,0.36,1),opacity .7s ease;}
-  .bk--back{right:2%;top:4%;transform:rotate(5deg) translate(4px,-3px);background:linear-gradient(160deg,#F5F9FF,#EDF4FF);}
-  .bk--front{left:2%;bottom:6%;transform:rotate(-4deg) translate(-3px,3px);}
-  /* Innan kortet syns (bara med JS och utan reducerad rörelse): korten ligger lite lägre och osynliga, och
-     anländer sedan en i taget när kortet tonas in */
-  @media (scripting: enabled) and (prefers-reduced-motion: no-preference){
-    .bento-card--booking:not(.is-visible) .bk{opacity:0;}
-    .bento-card--booking:not(.is-visible) .bk--back{transform:rotate(2deg) translate(10px,22px);}
-    .bento-card--booking:not(.is-visible) .bk--front{transform:rotate(-1deg) translate(-6px,30px);}
-    .bento-card--booking.is-visible .bk--back{transition-delay:.35s;}
-    .bento-card--booking.is-visible .bk--front{transition-delay:.6s;}
-  }
-  .bk-when{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#146EF5;}
-  .bk-what{font-size:15px;font-weight:800;color:#0F172A;}
-  .bk-meta{display:flex;gap:6px;align-items:center;}
-  .bk-tag{font-size:11px;font-weight:700;color:#52657A;background:#F1F5FB;padding:4px 9px;border-radius:999px;}
-  .bk-status{font-size:11px;font-weight:700;color:#146EF5;background:rgba(20,110,245,0.1);padding:4px 9px;border-radius:999px;}
-
-  /* Kundupplevelse: 5,0 som målbild */
-  .bc-kicker{display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:#146EF5;margin-bottom:6px;}
-  .cx{display:flex;flex-direction:column;justify-content:center;gap:14px;}
-  .bento-card--rating .bc-art.cx{min-height:176px;gap:12px;}
-  .cx::before{--glow-x:22%;--glow-y:26%;--glow-w:88%;--glow-a:0.08;}
-  .cx-goal{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#146EF5;background:#EEF5FF;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.14);padding:6px 11px;border-radius:999px;}
-  .cx-goal svg{width:12px;height:12px;}
-  .cx-score{position:relative;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .cx-num{font-size:52px;font-weight:800;line-height:.95;letter-spacing:-0.04em;color:#0F172A;font-variant-numeric:tabular-nums;}
-  .cx-meta{display:flex;flex-direction:column;gap:6px;}
-  .cx-of{font-size:13px;font-weight:700;color:#52657A;}
-  .cx-stars{display:flex;gap:3px;filter:drop-shadow(0 3px 6px rgba(232,169,42,0.22));}
-  .cx-stars svg{width:22px;height:22px;fill:#E8A92A;transition:fill .45s ease,transform .45s cubic-bezier(0.25,0.8,0.25,1),opacity .45s ease;}
-  .cx-factors{position:relative;list-style:none;margin:0;padding:14px 0 0;display:flex;flex-direction:column;gap:7px;border-top:1px dashed rgba(20,110,245,0.18);}
-  .cx-factors li{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:#334155;transition:opacity .5s ease,transform .5s cubic-bezier(0.25,0.8,0.25,1);}
-  .cx-ic{flex:none;width:20px;height:20px;border-radius:50%;background:rgba(20,110,245,0.09);color:#146EF5;display:flex;align-items:center;justify-content:center;}
-  /* Intro (bara när JS kör): stjärnorna släckta, faktorerna dolda */
-  .cx.cx-pre .cx-stars svg{fill:#E4E8EF;transform:scale(.86);}
-  .cx.cx-pre .cx-factors li{opacity:0;transform:translateY(6px);}
-  .cx.cx-run .cx-stars svg:nth-child(1){transition-delay:.25s;}
-  .cx.cx-run .cx-stars svg:nth-child(2){transition-delay:.42s;}
-  .cx.cx-run .cx-stars svg:nth-child(3){transition-delay:.59s;}
-  .cx.cx-run .cx-stars svg:nth-child(4){transition-delay:.76s;}
-  .cx.cx-run .cx-stars svg:nth-child(5){transition-delay:.93s;}
-  .cx.cx-run .cx-factors li:nth-child(1){transition-delay:1.35s;}
-  .cx.cx-run .cx-factors li:nth-child(2){transition-delay:1.5s;}
-  .cx.cx-run .cx-factors li:nth-child(3){transition-delay:1.65s;}
-  @media (prefers-reduced-motion: reduce){
-    .cx-stars svg,.cx-factors li{transition:none;}
-  }
+  /* Eyebrow i kortets textdel */
+  .bc-kicker{display:block;font-size:10px;font-weight:800;letter-spacing:.1em;color:#146EF5;margin-bottom:4px;}
 
   /* Kontaktflöde: nya händelser faller in överst, äldre flyttas ned och tonas bort */
-  .lf-wrap{display:flex;align-items:center;}
-  .lf{--lf-h:54px;--lf-gap:10px;position:relative;width:100%;height:calc(var(--lf-h) * 3 + var(--lf-gap) * 2);overflow:visible;}
-  .lf-item{position:absolute;left:0;right:0;top:0;height:var(--lf-h);box-sizing:border-box;display:flex;align-items:center;gap:11px;background:#fff;border:0;border-radius:18px 16px 18px 15px;padding:0 14px 0 11px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.08),0 6px 16px -8px rgba(20,110,245,0.20);transform:translateY(calc(var(--slot, 0) * (var(--lf-h) + var(--lf-gap))));transition:transform .7s cubic-bezier(0.22,1,0.36,1),opacity .55s ease,box-shadow 1.2s ease;}
+  .lf-wrap{display:flex;align-items:center;justify-content:center;}
+  .lf{--lf-h:44px;--lf-gap:8px;position:relative;width:100%;max-width:440px;height:calc(var(--lf-h) * 3 + var(--lf-gap) * 2);overflow:visible;}
+  .lf-item{position:absolute;left:0;right:0;top:0;height:var(--lf-h);box-sizing:border-box;display:flex;align-items:center;gap:11px;background:#fff;border:0;border-radius:14px;padding:0 12px 0 8px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.08),0 6px 16px -8px rgba(20,110,245,0.20);transform:translateY(calc(var(--slot, 0) * (var(--lf-h) + var(--lf-gap))));transition:transform .7s cubic-bezier(0.22,1,0.36,1),opacity .55s ease,box-shadow 1.2s ease;}
   .lf-item[data-slot="-1"]{opacity:0;}
   .lf-item[data-slot="1"]{opacity:.82;}
   .lf-item[data-slot="2"]{opacity:.55;}
   .lf-item[data-slot="3"]{opacity:0;}
   .lf-item.is-new{box-shadow:inset 0 0 0 1px rgba(20,110,245,0.16),0 14px 28px -10px rgba(20,110,245,0.32);}
-  .lf-ic{flex:none;width:32px;height:32px;border-radius:11px 9px 11px 9px;transition:background-color .6s ease,color .6s ease;background:#F1F5FB;color:#52657A;display:flex;align-items:center;justify-content:center;}
+  .lf-ic{flex:none;width:28px;height:28px;border-radius:9px;transition:background-color .6s ease,color .6s ease;background:#F1F5FB;color:#52657A;display:flex;align-items:center;justify-content:center;}
   .lf-item[data-slot="0"] .lf-ic{background:linear-gradient(150deg,#EAF2FF,#D6E7FF);color:#146EF5;}
   .lf-ic svg{width:16px;height:16px;}
   .lf-tx{display:flex;flex-direction:column;min-width:0;flex:1;}
@@ -668,21 +616,71 @@
     .lf-item{transition:none;}
   }
 
-  /* Tablet: synlighetskortet över hela bredden, övriga i 2 × 2 */
+  /* Mobilanpassad: samma förenklade hemsida som desktop, surfplatta och mobil. Dekorativ (role="img" + aria-label).
+     Intro en gång (bara med JS och utan reducerad rörelse): datorn står först i mitten, flyttar ut till sin plats,
+     sedan anländer surfplattan och mobilen – och varje enhets knapp (nästa steg) tänds i tur och ordning. */
+  .rs{--rs-ease:cubic-bezier(0.22,1,0.36,1);}
+  .rs-dev{position:absolute;z-index:1;display:flex;flex-direction:column;gap:4px;background:#fff;box-sizing:border-box;padding:6px;border-radius:14px 12px 14px 12px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.10),0 16px 32px -14px rgba(20,110,245,0.30),0 2px 6px rgba(15,23,42,0.04);transition:transform 1s var(--rs-ease),opacity .7s ease;}
+  .rs-desk{left:0;top:5%;width:68%;height:72%;}
+  .rs-tab{left:54%;top:22%;width:28%;height:72%;}
+  .rs-pho{left:81%;top:36%;width:16%;height:60%;padding:4px;border-radius:12px 10px 12px 10px;}
+  .rs-dots{display:flex;gap:3px;padding:0 2px;}
+  .rs-dots i{width:4px;height:4px;border-radius:50%;background:#C9DCF8;}
+  .rs-scr{flex:1;min-height:0;display:flex;flex-direction:column;gap:5px;padding:6px;border-radius:9px 8px 9px 8px;background:linear-gradient(180deg,#F7FAFF,#EEF5FF);overflow:hidden;}
+  .rs-pho .rs-scr{padding:5px 4px;gap:4px;border-radius:8px;}
+  .rs-nav{display:flex;align-items:center;gap:4px;flex:none;}
+  .rs-logo{width:14px;height:5px;border-radius:3px;background:#0F172A;opacity:.85;margin-right:auto;}
+  .rs-menu{width:18px;height:3px;border-radius:2px;background:#C9D6E8;}
+  .rs-burger{display:none;width:7px;height:5px;border-top:1.5px solid #52657A;border-bottom:1.5px solid #52657A;box-sizing:border-box;}
+  .rs-cta{width:14px;height:5px;border-radius:999px;background:#146EF5;}
+  .rs-hero{flex:1;min-height:0;display:flex;gap:6px;}
+  .rs-copy{flex:1;display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;}
+  .rs-l{display:block;height:3px;border-radius:2px;background:#C9D6E8;}
+  .rs-l--h{height:5px;background:#0F172A;opacity:.82;}
+  .rs-w70{width:70%;}
+  .rs-btn{display:block;width:44%;height:7px;margin-top:3px;border-radius:999px;background:#146EF5;transition:background-color .6s ease,box-shadow .6s ease;}
+  .rs-img{flex:1;border-radius:7px 6px 7px 6px;background:radial-gradient(120% 90% at 70% 20%,#8DBBFF 0%,#BCD6FF 45%,#E1EDFF 100%);}
+  .rs-tiles{flex:none;display:flex;gap:4px;height:16%;}
+  .rs-tiles i{flex:1;border-radius:5px;background:#fff;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.10);}
+  /* Surfplatta: bild överst, text under, två kolumner */
+  .rs-tab .rs-hero{flex-direction:column;}
+  .rs-tab .rs-img{flex:1.1;}
+  .rs-tab .rs-tiles i:nth-child(3){display:none;}
+  .rs-tab .rs-menu{width:10px;}
+  /* Mobil: en kolumn, hamburgermeny, knapp över hela bredden */
+  .rs-pho .rs-hero{flex-direction:column;gap:4px;}
+  .rs-pho .rs-menu,.rs-pho .rs-cta,.rs-pho .rs-tiles{display:none;}
+  .rs-pho .rs-burger{display:block;}
+  .rs-pho .rs-logo{width:11px;height:4px;}
+  .rs-pho .rs-btn{width:100%;height:6px;}
+  .rs-pho .rs-l--h{height:4px;}
+  .rs-notch{align-self:center;width:30%;height:3px;border-radius:2px;background:#DCE7F7;flex:none;}
+  /* Intro */
+  .rs.rs-pre .rs-desk{transform:translateX(24%);}
+  .rs.rs-pre .rs-tab{opacity:0;transform:translate(10px,18px);}
+  .rs.rs-pre .rs-pho{opacity:0;transform:translate(8px,24px);}
+  .rs.rs-pre .rs-btn{background:#C9DCF8;}
+  .rs.rs-run .rs-desk{transition-delay:.15s;}
+  .rs.rs-run .rs-tab{transition-delay:.75s;}
+  .rs.rs-run .rs-pho{transition-delay:1.3s;}
+  .rs.rs-run .rs-desk .rs-btn{transition-delay:.7s;}
+  .rs.rs-run .rs-tab .rs-btn{transition-delay:1.35s;}
+  .rs.rs-run .rs-pho .rs-btn{transition-delay:1.9s;}
+  @media (prefers-reduced-motion: reduce){
+    .rs-dev,.rs-btn{transition:none;}
+  }
+
+  /* Tablet: 2 × 2 med lika breda kolumner */
   @media (max-width:1024px){
     .bento-grid{grid-template-columns:1fr 1fr;}
-    .bento-card--seo{grid-column:1 / -1;grid-row:auto;}
-    .bento-card--brand,.bento-card--booking,.bento-card--rating,.bento-card--leads{grid-column:auto;grid-row:auto;}
-    .bc-chart{min-height:320px;}
   }
-  /* Mobil: en kolumn i DOM-ordning (synlighet först) */
+  /* Mobil: en kolumn i DOM-ordning (första intryck, synlighet, mobilanpassad, nästa steg) */
   @media (max-width:640px){
     .bento-h2,.faq-title{font-size:clamp(36px,10vw,44px);}
-    .bento-grid{grid-template-columns:1fr;gap:16px;}
-    .bento-card,.bento-card:nth-child(2n){padding:22px 22px 26px;border-radius:30px 26px 32px 28px / 28px 32px 26px 30px;}
-    .bc-art{min-height:176px;}
-    .bc-chart{min-height:260px;}
-    .bento-card--seo .bc-title{font-size:21px;}
+    .bento-grid{grid-template-columns:1fr;gap:14px;}
+    .bento-card{padding:16px 16px 18px;border-radius:22px;}
+    .bc-art{min-height:150px;margin-bottom:12px;}
+    .kc-plot{min-height:150px;}
   }
   /* Branschkarusell */
   /* Sektionen bryter ut ur sidans maxbredd (1440 px) och går kant i kant; --sbw = scrollbarens bredd (sätts i JS) */
@@ -1867,132 +1865,123 @@
     </section>
 
     <div class="bento-grid">
-      <!-- Synlighet (stort mittenkort). Står först i DOM:en = först i läsordningen och på mobil. -->
-      <article class="bento-card bento-card--seo" data-reveal>
-        <div class="bc-art bc-chart">
-          <div class="bc-chart-top" aria-hidden="true">
-            <span class="bc-pill bc-pill--muted">Illustrativ utveckling</span>
-            <span class="bc-chips"><span>Google</span><span>Maps</span><span>AI-sök</span></span>
-          </div>
-          <!-- Interaktiv graf: dra, hovra eller använd piltangenterna. Värdena är illustrativa, inte kundresultat. -->
-          <div class="kc-plot" id="kc-plot" role="slider" tabindex="0" aria-label="Illustrativt synlighetsindex per månad" aria-valuemin="1" aria-valuemax="9" aria-valuenow="9" aria-valuetext="September, synlighetsindex 76" data-points="[{&quot;m&quot;: &quot;Januari&quot;, &quot;v&quot;: 18, &quot;e&quot;: &quot;Ny webbplats publicerad&quot;}, {&quot;m&quot;: &quot;Februari&quot;, &quot;v&quot;: 25, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Mars&quot;, &quot;v&quot;: 34, &quot;e&quot;: &quot;Google-profil optimerad&quot;}, {&quot;m&quot;: &quot;April&quot;, &quot;v&quot;: 30, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Maj&quot;, &quot;v&quot;: 44, &quot;e&quot;: &quot;Lokala tjänstesidor lanserade&quot;}, {&quot;m&quot;: &quot;Juni&quot;, &quot;v&quot;: 53, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Juli&quot;, &quot;v&quot;: 49, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Augusti&quot;, &quot;v&quot;: 68, &quot;e&quot;: &quot;Innehåll och SEO uppdaterat&quot;}, {&quot;m&quot;: &quot;September&quot;, &quot;v&quot;: 76, &quot;e&quot;: &quot;&quot;}]">
-            <svg class="kc-svg" viewBox="0 0 600 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <defs>
-                <linearGradient id="kc-area-fill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#146EF5" stop-opacity="0.18"/>
-                  <stop offset="0.6" stop-color="#8DBBFF" stop-opacity="0.07"/>
-                  <stop offset="1" stop-color="#8DBBFF" stop-opacity="0"/>
-                </linearGradient>
-                <linearGradient id="kc-line-grad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stop-color="#8DBBFF"/>
-                  <stop offset="0.45" stop-color="#4D8FF8"/>
-                  <stop offset="1" stop-color="#146EF5"/>
-                </linearGradient>
-                <clipPath id="kc-clip"><rect class="kc-clip-rect" x="0" y="0" width="600" height="300"/></clipPath>
-              </defs>
-              <g stroke="#146EF5" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="2 5">
-                <line x1="0" y1="50" x2="600" y2="50" vector-effect="non-scaling-stroke"/><line x1="0" y1="120" x2="600" y2="120" vector-effect="non-scaling-stroke"/><line x1="0" y1="190" x2="600" y2="190" vector-effect="non-scaling-stroke"/><line x1="0" y1="260" x2="600" y2="260" vector-effect="non-scaling-stroke"/>
-              </g>
-              <g clip-path="url(#kc-clip)">
-                <path class="kc-area" d="M30.0,237.8 C52.5,230.7 75.0,224.6 97.5,216.6 C120.0,208.5 142.5,189.3 165.0,189.3 C187.5,189.3 210.0,201.4 232.5,201.4 C255.0,201.4 277.5,170.6 300.0,159.0 C322.5,147.4 345.0,131.8 367.5,131.8 C390.0,131.8 412.5,143.9 435.0,143.9 C457.5,143.9 480.0,100.0 502.5,86.3 C525.0,72.7 547.5,70.2 570.0,62.1 L570.0,300 L30.0,300 Z" fill="url(#kc-area-fill)"/>
-                <path class="kc-line" d="M30.0,237.8 C52.5,230.7 75.0,224.6 97.5,216.6 C120.0,208.5 142.5,189.3 165.0,189.3 C187.5,189.3 210.0,201.4 232.5,201.4 C255.0,201.4 277.5,170.6 300.0,159.0 C322.5,147.4 345.0,131.8 367.5,131.8 C390.0,131.8 412.5,143.9 435.0,143.9 C457.5,143.9 480.0,100.0 502.5,86.3 C525.0,72.7 547.5,70.2 570.0,62.1" fill="none" stroke="url(#kc-line-grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-              </g>
-            </svg>
-            <span class="kc-guide" aria-hidden="true"></span>
-            <span class="kc-dots" aria-hidden="true"><span class="kc-dot kc-dot--event" style="left:5.000%;top:79.257%;"></span><span class="kc-dot" style="left:16.250%;top:72.190%;"></span><span class="kc-dot kc-dot--event" style="left:27.500%;top:63.105%;"></span><span class="kc-dot" style="left:38.750%;top:67.143%;"></span><span class="kc-dot kc-dot--event" style="left:50.000%;top:53.010%;"></span><span class="kc-dot" style="left:61.250%;top:43.924%;"></span><span class="kc-dot" style="left:72.500%;top:47.962%;"></span><span class="kc-dot kc-dot--event" style="left:83.750%;top:28.781%;"></span><span class="kc-dot" style="left:95.000%;top:20.705%;"></span></span>
-            <span class="kc-active" aria-hidden="true"></span>
-            <span class="kc-tip" aria-hidden="true"><span class="kc-tip-m">September</span><b class="kc-tip-v">76</b><span class="kc-tip-l">Synlighetsindex</span><span class="kc-tip-e"></span></span>
-            <span class="kc-event" aria-hidden="true"><span class="kc-event-k">HÄNDELSE</span><b class="kc-event-t"></b></span>
-          </div>
-          <div class="kc-months" aria-hidden="true"><span style="left:5.000%;">Jan</span><span style="left:16.250%;">Feb</span><span style="left:27.500%;">Mars</span><span style="left:38.750%;">April</span><span style="left:50.000%;">Maj</span><span style="left:61.250%;">Juni</span><span style="left:72.500%;">Juli</span><span style="left:83.750%;">Aug</span><span style="left:95.000%;">Sep</span></div>
-          <ul class="sr-only"><li>Januari: synlighetsindex 18. Händelse: Ny webbplats publicerad.</li><li>Februari: synlighetsindex 25.</li><li>Mars: synlighetsindex 34. Händelse: Google-profil optimerad.</li><li>April: synlighetsindex 30.</li><li>Maj: synlighetsindex 44. Händelse: Lokala tjänstesidor lanserade.</li><li>Juni: synlighetsindex 53.</li><li>Juli: synlighetsindex 49.</li><li>Augusti: synlighetsindex 68. Händelse: Innehåll och SEO uppdaterat.</li><li>September: synlighetsindex 76.</li></ul>
-        </div>
-        <div class="bc-body">
-          <h3 class="bc-title">Synlighet som går att följa</h3>
-          <p class="bc-text">En stabil grund för Google, Maps och AI-sök – byggd för att rätt kunder ska kunna hitta dig.</p>
-        </div>
-      </article>
-
-      <!-- Visuellt uttryck -->
+      <!-- Ett starkare första intryck -->
       <article class="bento-card bento-card--brand" data-reveal>
         <div class="bc-art bc-stack vi" data-id="0" role="img" aria-label="Illustration: en webbvy, en färgpalett och ett typografikort som växlar mellan fyra visuella identiteter.">
-          <span class="bs-card bs-web" aria-hidden="true">
-            <span class="bs-bar"><i></i><i></i><i></i></span>
-            <span class="bs-hero">
-              <span class="vi-stack vi-h"><span class="vi-v" data-v="0">Välkommen</span><span class="vi-v" data-v="1">Välkommen</span><span class="vi-v" data-v="2">Välkommen</span><span class="vi-v" data-v="3">Välkommen</span></span>
-              <em></em>
-              <span class="bs-btn"></span>
-            </span>
-            <span class="bs-lines"><i></i><i></i></span>
+        <span class="bs-card bs-web" aria-hidden="true">
+          <span class="bs-bar"><i></i><i></i><i></i></span>
+          <span class="bs-hero">
+            <span class="vi-stack vi-h"><span class="vi-v" data-v="0">Välkommen</span><span class="vi-v" data-v="1">Välkommen</span><span class="vi-v" data-v="2">Välkommen</span><span class="vi-v" data-v="3">Välkommen</span></span>
+            <em></em>
+            <span class="bs-btn"></span>
           </span>
-          <span class="bs-card bs-palette" aria-hidden="true">
-            <span class="bs-sw bs-sw1"></span><span class="bs-sw bs-sw2"></span><span class="bs-sw bs-sw3"></span><span class="bs-sw bs-sw4"></span>
-            <span class="bs-cap">Färgpalett</span>
-          </span>
-          <span class="bs-card bs-brandcard" aria-hidden="true">
-            <svg width="30" height="20" viewBox="0 0 40 26"><circle class="bs-logo-a" cx="13" cy="13" r="11"/><circle class="bs-logo-b" cx="27" cy="13" r="11"/></svg>
-            <span class="vi-stack bs-aa"><span class="vi-v" data-v="0">Aa</span><span class="vi-v" data-v="1">Aa</span><span class="vi-v" data-v="2">Aa</span><span class="vi-v" data-v="3">Aa</span></span>
-            <span class="vi-stack bs-cap"><span class="vi-v" data-v="0">Modern &amp; professionell</span><span class="vi-v" data-v="1">Varm &amp; redaktionell</span><span class="vi-v" data-v="2">Naturlig &amp; lugn</span><span class="vi-v" data-v="3">Kreativ &amp; uttrycksfull</span></span>
-          </span>
-        </div>
+          <span class="bs-lines"><i></i><i></i></span>
+        </span>
+        <span class="bs-card bs-palette" aria-hidden="true">
+          <span class="bs-sw bs-sw1"></span><span class="bs-sw bs-sw2"></span><span class="bs-sw bs-sw3"></span><span class="bs-sw bs-sw4"></span>
+          <span class="bs-cap">Färgpalett</span>
+        </span>
+        <span class="bs-card bs-brandcard" aria-hidden="true">
+          <svg width="30" height="20" viewBox="0 0 40 26"><circle class="bs-logo-a" cx="13" cy="13" r="11"/><circle class="bs-logo-b" cx="27" cy="13" r="11"/></svg>
+          <span class="vi-stack bs-aa"><span class="vi-v" data-v="0">Aa</span><span class="vi-v" data-v="1">Aa</span><span class="vi-v" data-v="2">Aa</span><span class="vi-v" data-v="3">Aa</span></span>
+          <span class="vi-stack bs-cap"><span class="vi-v" data-v="0">Modern &amp; professionell</span><span class="vi-v" data-v="1">Varm &amp; redaktionell</span><span class="vi-v" data-v="2">Naturlig &amp; lugn</span><span class="vi-v" data-v="3">Kreativ &amp; uttrycksfull</span></span>
+        </span>
+      </div>
         <div class="bc-body">
           <h3 class="bc-title">Ett starkare första intryck</h3>
           <p class="bc-text">Ett sammanhållet visuellt uttryck gör företaget lättare att känna igen och lita på.</p>
         </div>
       </article>
 
-      <!-- Bokningar -->
-      <article class="bento-card bento-card--booking" data-reveal>
-        <div class="bc-art bc-bookings" role="img" aria-label="Illustrativa exempel på två bokningar: en kostnadsfri genomgång på torsdag klockan 11 och en ny bokning på onsdag klockan 14.">
-          <span class="bk bk--back" aria-hidden="true">
-            <span class="bk-when">Onsdag · 14:00</span>
-            <span class="bk-what">Ny bokning</span>
-            <span class="bk-meta"><span class="bk-tag">Hemsida</span></span>
-          </span>
-          <span class="bk bk--front" aria-hidden="true">
-            <span class="bk-when"><svg width="14" height="14" viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 6.5h13M5 1v3M11 1v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Torsdag · 11:00</span>
-            <span class="bk-what">Kostnadsfri genomgång</span>
-            <span class="bk-meta"><span class="bk-tag">30 min</span><span class="bk-status">Bekräftad</span></span>
-          </span>
+      <!-- Synlighet (övre högra kortet). Värdena är illustrativa. -->
+      <article class="bento-card bento-card--seo" data-reveal>
+        <div class="bc-art bc-chart">
+        <div class="bc-chart-top" aria-hidden="true">
+          <span class="bc-pill bc-pill--muted">Illustrativ utveckling</span>
         </div>
+        <!-- Interaktiv graf: dra, hovra eller använd piltangenterna. Värdena är illustrativa, inte kundresultat. -->
+        <div class="kc-plot" id="kc-plot" role="slider" tabindex="0" aria-label="Illustrativt synlighetsindex per månad" aria-valuemin="1" aria-valuemax="9" aria-valuenow="9" aria-valuetext="September, synlighetsindex 76" data-points="[{&quot;m&quot;: &quot;Januari&quot;, &quot;v&quot;: 18, &quot;e&quot;: &quot;Ny webbplats publicerad&quot;}, {&quot;m&quot;: &quot;Februari&quot;, &quot;v&quot;: 25, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Mars&quot;, &quot;v&quot;: 34, &quot;e&quot;: &quot;Google-profil optimerad&quot;}, {&quot;m&quot;: &quot;April&quot;, &quot;v&quot;: 30, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Maj&quot;, &quot;v&quot;: 44, &quot;e&quot;: &quot;Lokala tjänstesidor lanserade&quot;}, {&quot;m&quot;: &quot;Juni&quot;, &quot;v&quot;: 53, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Juli&quot;, &quot;v&quot;: 49, &quot;e&quot;: &quot;&quot;}, {&quot;m&quot;: &quot;Augusti&quot;, &quot;v&quot;: 68, &quot;e&quot;: &quot;Innehåll och SEO uppdaterat&quot;}, {&quot;m&quot;: &quot;September&quot;, &quot;v&quot;: 76, &quot;e&quot;: &quot;&quot;}]">
+          <svg class="kc-svg" viewBox="0 0 600 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="kc-area-fill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#146EF5" stop-opacity="0.18"/>
+                <stop offset="0.6" stop-color="#8DBBFF" stop-opacity="0.07"/>
+                <stop offset="1" stop-color="#8DBBFF" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="kc-line-grad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#8DBBFF"/>
+                <stop offset="0.45" stop-color="#4D8FF8"/>
+                <stop offset="1" stop-color="#146EF5"/>
+              </linearGradient>
+              <clipPath id="kc-clip"><rect class="kc-clip-rect" x="0" y="0" width="600" height="300"/></clipPath>
+            </defs>
+            <g stroke="#146EF5" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="2 5">
+              <line x1="0" y1="50" x2="600" y2="50" vector-effect="non-scaling-stroke"/><line x1="0" y1="120" x2="600" y2="120" vector-effect="non-scaling-stroke"/><line x1="0" y1="190" x2="600" y2="190" vector-effect="non-scaling-stroke"/><line x1="0" y1="260" x2="600" y2="260" vector-effect="non-scaling-stroke"/>
+            </g>
+            <g clip-path="url(#kc-clip)">
+              <path class="kc-area" d="M30.0,237.8 C52.5,230.7 75.0,224.6 97.5,216.6 C120.0,208.5 142.5,189.3 165.0,189.3 C187.5,189.3 210.0,201.4 232.5,201.4 C255.0,201.4 277.5,170.6 300.0,159.0 C322.5,147.4 345.0,131.8 367.5,131.8 C390.0,131.8 412.5,143.9 435.0,143.9 C457.5,143.9 480.0,100.0 502.5,86.3 C525.0,72.7 547.5,70.2 570.0,62.1 L570.0,300 L30.0,300 Z" fill="url(#kc-area-fill)"/>
+              <path class="kc-line" d="M30.0,237.8 C52.5,230.7 75.0,224.6 97.5,216.6 C120.0,208.5 142.5,189.3 165.0,189.3 C187.5,189.3 210.0,201.4 232.5,201.4 C255.0,201.4 277.5,170.6 300.0,159.0 C322.5,147.4 345.0,131.8 367.5,131.8 C390.0,131.8 412.5,143.9 435.0,143.9 C457.5,143.9 480.0,100.0 502.5,86.3 C525.0,72.7 547.5,70.2 570.0,62.1" fill="none" stroke="url(#kc-line-grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+            </g>
+          </svg>
+          <span class="kc-guide" aria-hidden="true"></span>
+          <span class="kc-dots" aria-hidden="true"><span class="kc-dot kc-dot--event" style="left:5.000%;top:79.257%;"></span><span class="kc-dot" style="left:16.250%;top:72.190%;"></span><span class="kc-dot kc-dot--event" style="left:27.500%;top:63.105%;"></span><span class="kc-dot" style="left:38.750%;top:67.143%;"></span><span class="kc-dot kc-dot--event" style="left:50.000%;top:53.010%;"></span><span class="kc-dot" style="left:61.250%;top:43.924%;"></span><span class="kc-dot" style="left:72.500%;top:47.962%;"></span><span class="kc-dot kc-dot--event" style="left:83.750%;top:28.781%;"></span><span class="kc-dot" style="left:95.000%;top:20.705%;"></span></span>
+          <span class="kc-active" aria-hidden="true"></span>
+          <span class="kc-tip" aria-hidden="true"><span class="kc-tip-m">September</span><b class="kc-tip-v">76</b><span class="kc-tip-l">Synlighetsindex</span><span class="kc-tip-e"></span></span>
+          <span class="kc-event" aria-hidden="true"><span class="kc-event-k">HÄNDELSE</span><b class="kc-event-t"></b></span>
+        </div>
+        <div class="kc-months" aria-hidden="true"><span style="left:5.000%;">Jan</span><span style="left:16.250%;">Feb</span><span style="left:27.500%;">Mars</span><span style="left:38.750%;">April</span><span style="left:50.000%;">Maj</span><span style="left:61.250%;">Juni</span><span style="left:72.500%;">Juli</span><span style="left:83.750%;">Aug</span><span style="left:95.000%;">Sep</span></div>
+        <ul class="sr-only"><li>Januari: synlighetsindex 18. Händelse: Ny webbplats publicerad.</li><li>Februari: synlighetsindex 25.</li><li>Mars: synlighetsindex 34. Händelse: Google-profil optimerad.</li><li>April: synlighetsindex 30.</li><li>Maj: synlighetsindex 44. Händelse: Lokala tjänstesidor lanserade.</li><li>Juni: synlighetsindex 53.</li><li>Juli: synlighetsindex 49.</li><li>Augusti: synlighetsindex 68. Händelse: Innehåll och SEO uppdaterat.</li><li>September: synlighetsindex 76.</li></ul>
+      </div>
         <div class="bc-body">
-          <h3 class="bc-title">Enklare bokningar</h3>
-          <p class="bc-text">Låt kunder boka, köpa eller ta kontakt direkt från hemsidan.</p>
+          <h3 class="bc-title">Synlighet som går att följa</h3>
+          <p class="bc-text">En stabil grund för Google, Maps och AI-sök – byggd för att rätt kunder ska kunna hitta dig.</p>
         </div>
       </article>
 
-      <!-- Kundupplevelse: aspirerande KPI – vad en tydlig hemsida skapar förutsättningar för (inget löfte, inga recensioner). -->
-      <article class="bento-card bento-card--rating" data-reveal>
-        <div class="bc-art cx">
-          <span class="cx-goal" aria-hidden="true"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.8" fill="currentColor"/></svg>Målbild</span>
-          <div class="cx-score">
-            <span class="cx-num" aria-hidden="true">5,0</span>
-            <span class="cx-meta" aria-hidden="true"><span class="cx-stars"><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg></span><span class="cx-of">av 5 stjärnor</span></span>
-            <span class="sr-only">Målbild: 5,0 av 5 stjärnor.</span>
-          </div>
-          <ul class="cx-factors">
-            <li><span class="cx-ic" aria-hidden="true"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tydlig information</li>
-            <li><span class="cx-ic" aria-hidden="true"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Enkel bokning</li>
-            <li><span class="cx-ic" aria-hidden="true"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Smidig kontakt</li>
-          </ul>
-        </div>
+      <!-- Mobilanpassad: samma förenklade hemsida i tre format. Dekorativ illustration, ingen mätdata. -->
+      <article class="bento-card bento-card--devices" data-reveal>
+        <div class="bc-art rs" role="img" aria-label="Illustration: samma förenklade hemsida visad på dator, surfplatta och mobil, där innehållet anpassas efter skärmen.">
+        <span class="rs-dev rs-desk" aria-hidden="true">
+          <span class="rs-dots"><i></i><i></i><i></i></span>
+          <span class="rs-scr">
+            <span class="rs-nav"><i class="rs-logo"></i><i class="rs-menu"></i><i class="rs-menu"></i><i class="rs-menu"></i><i class="rs-cta"></i></span>
+            <span class="rs-hero"><span class="rs-copy"><i class="rs-l rs-l--h"></i><i class="rs-l rs-l--h rs-w70"></i><i class="rs-l"></i><i class="rs-l rs-w70"></i><b class="rs-btn"></b></span><span class="rs-img"></span></span>
+            <span class="rs-tiles"><i></i><i></i><i></i></span>
+          </span>
+        </span>
+        <span class="rs-dev rs-tab" aria-hidden="true">
+          <span class="rs-scr">
+            <span class="rs-nav"><i class="rs-logo"></i><i class="rs-menu"></i><i class="rs-cta"></i></span>
+            <span class="rs-hero"><span class="rs-img"></span><span class="rs-copy"><i class="rs-l rs-l--h"></i><i class="rs-l rs-l--h rs-w70"></i><i class="rs-l"></i><b class="rs-btn"></b></span></span>
+            <span class="rs-tiles"><i></i><i></i><i></i></span>
+          </span>
+        </span>
+        <span class="rs-dev rs-pho" aria-hidden="true">
+          <span class="rs-notch"></span>
+          <span class="rs-scr">
+            <span class="rs-nav"><i class="rs-logo"></i><i class="rs-burger"></i></span>
+            <span class="rs-hero"><span class="rs-img"></span><span class="rs-copy"><i class="rs-l rs-l--h"></i><i class="rs-l rs-l--h rs-w70"></i><i class="rs-l"></i><b class="rs-btn"></b></span></span>
+          </span>
+        </span>
+      </div>
         <div class="bc-body">
-          <span class="bc-kicker">KUNDUPPLEVELSE</span>
-          <h3 class="bc-title">Bygg för en femstjärnig kundupplevelse</h3>
-          <p class="bc-text">En tydlig hemsida och en smidig kundresa skapar bättre förutsättningar för nöjda kunder och starka omdömen.</p>
+          <span class="bc-kicker">MOBILANPASSAD</span>
+          <h3 class="bc-title">Samma upplevelse på varje skärm.</h3>
+          <p class="bc-text">Innehåll, struktur och nästa steg anpassas för mobil, surfplatta och desktop.</p>
         </div>
       </article>
 
-      <!-- Kontakt och leads -->
+      <!-- Enklare vägar till nästa steg: bokning, köp och kontakt i ett kort -->
       <article class="bento-card bento-card--leads" data-reveal>
         <div class="bc-art lf-wrap">
-          <p class="sr-only">Illustration: nya bokningar, förfrågningar och beställningar från olika typer av småföretag.</p>
-          <!-- Dekorativt flöde. De tre första händelserna är förrenderade; JS tar över och animerar. -->
-          <div class="lf" aria-hidden="true"><div class="lf-item" data-slot="0" style="--slot:0;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M2.5 4.5h11v9a1.5 1.5 0 0 1-1.5 1.5H4a1.5 1.5 0 0 1-1.5-1.5z M2.5 7.5h11 M5.5 2.5v3 M10.5 2.5v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny bokning</b><span>Klippning bokad</span></span><span class="lf-t">nu</span></div><div class="lf-item" data-slot="1" style="--slot:1;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M3 5.5h10l-.8 8.5H3.8z M5.8 5.5V4.5a2.2 2.2 0 0 1 4.4 0v1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny beställning</b><span>En produkt har beställts</span></span><span class="lf-t">8 min</span></div><div class="lf-item" data-slot="2" style="--slot:2;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M5 2v5.5M3.5 2v3.5a1.5 1.5 0 0 0 3 0V2M5 7.5V14M11.5 2c-1.4.6-2 2.3-2 4.5V9h2V14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny bordsbokning</b><span>Bord för fyra personer</span></span><span class="lf-t">nu</span></div></div>
-        </div>
+        <p class="sr-only">Illustration: nya bokningar, förfrågningar och beställningar som kommer in till olika typer av småföretag.</p>
+        <!-- Dekorativt flöde. De tre första händelserna är förrenderade; JS tar över och animerar. -->
+        <div class="lf" aria-hidden="true"><div class="lf-item" data-slot="0" style="--slot:0;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M2.5 4.5h11v9a1.5 1.5 0 0 1-1.5 1.5H4a1.5 1.5 0 0 1-1.5-1.5z M2.5 7.5h11 M5.5 2.5v3 M10.5 2.5v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny bokning</b><span>Klippning bokad</span></span><span class="lf-t">nu</span></div><div class="lf-item" data-slot="1" style="--slot:1;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M2.5 5.5h2.2l1.2-1.8h4.2l1.2 1.8h2.2v7.5h-11z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="9" r="2.3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><span class="lf-tx"><b>Ny förfrågan</b><span>Fotografering till bröllop</span></span><span class="lf-t">5 min</span></div><div class="lf-item" data-slot="2" style="--slot:2;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M3 5.5h10l-.8 8.5H3.8z M5.8 5.5V4.5a2.2 2.2 0 0 1 4.4 0v1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny beställning</b><span>En produkt har beställts</span></span><span class="lf-t">8 min</span></div></div>
+      </div>
         <div class="bc-body">
-          <h3 class="bc-title">Tydligare vägar till kontakt</h3>
-          <p class="bc-text">Gör nästa steg enkelt när kundens intresse är som störst.</p>
+          <span class="bc-kicker">TYDLIGA KUNDVÄGAR</span>
+          <h3 class="bc-title">Enklare vägar till nästa steg</h3>
+          <p class="bc-text">Gör det enkelt att boka, köpa eller ta kontakt när intresset är som störst.</p>
         </div>
       </article>
     </div>
@@ -3894,22 +3883,22 @@
     }
   })();
 
-  /* ---------- Kundupplevelse (bento): målbilden står fast (ingen uppräkning), stjärnor tänds, faktorer tonas in – en gång ---------- */
-  var cxWrap = document.querySelector('.bento-card--rating .cx');
-  if (cxWrap && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) (function () {
-    cxWrap.classList.add('cx-pre');
-    var cxIO = new IntersectionObserver(function (entries) {
+  /* ---------- Mobilanpassad (bento): dator → surfplatta → mobil anländer en gång, sedan vila ---------- */
+  var rsWrap = document.querySelector('.bento-card--devices .rs');
+  if (rsWrap && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) (function () {
+    rsWrap.classList.add('rs-pre');
+    var rsIO = new IntersectionObserver(function (entries) {
       if (!entries[0].isIntersecting) return;
-      cxIO.disconnect();
-      cxWrap.classList.add('cx-run');
-      void cxWrap.offsetWidth;
-      cxWrap.classList.remove('cx-pre');
-      setTimeout(function () { cxWrap.classList.remove('cx-run'); }, 2400);
+      rsIO.disconnect();
+      rsWrap.classList.add('rs-run');
+      void rsWrap.offsetWidth;
+      rsWrap.classList.remove('rs-pre');
+      setTimeout(function () { rsWrap.classList.remove('rs-run'); }, 2800);
     }, { threshold: 0.5 });
-    cxIO.observe(cxWrap);
+    rsIO.observe(rsWrap);
   })();
 
-  /* ---------- Kontaktflöde (bento "Tydligare vägar till kontakt") ----------
+  /* ---------- Kontaktflöde (bento "Enklare vägar till nästa steg") ----------
      Dekorativt och dolt för skärmläsare. Fast ordning (ingen slump), ett nytt kort ungefär var tredje sekund,
      bara när kortet syns och fliken är aktiv. Vid prefers-reduced-motion: tre statiska kort. */
   var lfBox = document.querySelector('.bento-card--leads .lf');
@@ -3923,12 +3912,11 @@
     };
     // Blandad men fast ordning mellan verksamheterna.
     var EVENTS = [
-      { t: 'Ny bokning', s: 'Klippning bokad', when: 'nu', ic: 'cal' },          // frisör
-      { t: 'Ny beställning', s: 'En produkt har beställts', when: '8 min', ic: 'bag' }, // butik
-      { t: 'Ny bordsbokning', s: 'Bord för fyra personer', when: 'nu', ic: 'cutlery' }, // restaurang
-      { t: 'Nytt möte', s: 'Kostnadsfritt samtal bokat', when: '12 min', ic: 'phone' }, // konsult
-      { t: 'Ny behandling', s: 'Ansiktsbehandling bokad', when: '2 min', ic: 'cal' },   // salong
-      { t: 'Ny förfrågan', s: 'Fotografering till bröllop', when: '5 min', ic: 'camera' } // fotograf
+      { t: 'Ny bokning', s: 'Klippning bokad', when: 'nu', ic: 'cal' },                  // frisör
+      { t: 'Ny förfrågan', s: 'Fotografering till bröllop', when: '5 min', ic: 'camera' }, // fotograf
+      { t: 'Ny beställning', s: 'En produkt har beställts', when: '8 min', ic: 'bag' },    // butik
+      { t: 'Bordsbokning', s: 'Bord för fyra i kväll', when: '2 min', ic: 'cutlery' },     // restaurang
+      { t: 'Bokat samtal', s: 'Kostnadsfri genomgång', when: '12 min', ic: 'phone' }      // konsult
     ];
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -3972,7 +3960,7 @@
       clearTimeout(timer);
       timer = null;
       if (reduceMotion.matches || !visible || document.hidden) return;
-      timer = setTimeout(step, 2800);
+      timer = setTimeout(step, 3600);
     }
     document.addEventListener('visibilitychange', schedule);
     if ('IntersectionObserver' in window) {
@@ -3981,6 +3969,9 @@
         schedule();
       }, { threshold: 0.3 }).observe(lfBox);
     }
+    // Sidan lämnas (eller läggs i bfcache): stoppa timern; pageshow startar om den om kortet syns.
+    window.addEventListener('pagehide', function () { clearTimeout(timer); timer = null; });
+    window.addEventListener('pageshow', function (e) { if (e.persisted) schedule(); });
   })();
 
   /* ---------- "Ett starkare första intryck": identiteterna växlar i fast ordning ungefär var fjärde sekund ----------
@@ -4007,6 +3998,8 @@
         schedule();
       }, { threshold: 0.3 }).observe(viEl);
     }
+    window.addEventListener('pagehide', function () { clearTimeout(timer); timer = null; });
+    window.addEventListener('pageshow', function (e) { if (e.persisted) schedule(); });
   })();
 
   /* ---------- Portfolio: kontinuerligt projektband ----------
