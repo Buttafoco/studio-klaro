@@ -473,22 +473,33 @@
   .bento-head{margin:0 0 var(--sp-head);text-align:left;}
   .bento-h2,.faq-title{font-family:"New Spirit Condensed Trial",serif;font-style:italic;font-weight:500;font-size:clamp(44px,4.2vw,68px);color:#0F172A;margin:0;line-height:1;letter-spacing:-0.02em;max-width:11em;text-wrap:balance;}
   .bento-grid{display:grid;grid-template-columns:1fr 1.22fr 1fr;grid-template-rows:auto auto;gap:22px;}
-  .bento-card{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(15,23,42,0.06);border-radius:28px;padding:22px 26px 26px;box-shadow:0 1px 2px rgba(15,23,42,0.03);overflow:hidden;color:#0F172A;text-decoration:none;min-width:0;}
+  /* Korten: vita, mjukt organiska hörn (lätt asymmetriska som loggan och knapparna). Ingen grå ram – kanten bärs av
+     en hårfin blåton och en diskret, blåtonad skugga. */
+  .bento-card{position:relative;display:flex;flex-direction:column;background:#fff;border:0;border-radius:36px 30px 38px 32px / 32px 38px 30px 36px;padding:26px 28px 30px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.07),0 1px 2px rgba(15,23,42,0.03),0 22px 44px -26px rgba(20,110,245,0.22);overflow:hidden;color:#0F172A;text-decoration:none;min-width:0;}
+  .bento-card:nth-child(2n){border-radius:30px 38px 32px 36px / 38px 32px 36px 30px;}
   .bento .bento-card[data-reveal]{transform:translateY(14px);}
   .bento .bento-card[data-reveal].is-visible{transform:none;}
-  .bento-card--seo{grid-column:2;grid-row:1 / span 2;background:linear-gradient(180deg,#FFFFFF 0%,#F6FAFF 100%);}
+  .bento-card--seo{grid-column:2;grid-row:1 / span 2;background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 42%,#F4F9FF 100%);box-shadow:inset 0 0 0 1px rgba(20,110,245,0.09),0 1px 2px rgba(15,23,42,0.03),0 30px 60px -30px rgba(20,110,245,0.30);}
   .bento-card--brand{grid-column:1;grid-row:1;}
   .bento-card--booking{grid-column:1;grid-row:2;}
   .bento-card--rating{grid-column:3;grid-row:1;}
   .bento-card--leads{grid-column:3;grid-row:2;}
-  .bc-art{position:relative;flex:1 1 auto;min-height:206px;margin-bottom:18px;}
+  .bc-art{position:relative;flex:1 1 auto;min-height:206px;margin-bottom:24px;}
+  /* Mjukt blått ljus bakom varje illustration (liten, aldrig ett bakgrundsfält); position/storlek varierar per kort */
+  .bc-art::before{content:'';position:absolute;left:var(--glow-x,50%);top:var(--glow-y,50%);width:var(--glow-w,78%);aspect-ratio:1.3;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(20,110,245,var(--glow-a,0.09)),rgba(141,187,255,0.05) 55%,rgba(141,187,255,0));pointer-events:none;z-index:0;}
+  .bc-chart > :not(.sr-only),.cx > :not(.sr-only),.lf-wrap > :not(.sr-only){position:relative;z-index:1;}
+  .bc-stack::before{--glow-x:46%;--glow-y:52%;--glow-w:92%;}
+  .bc-bookings::before{--glow-x:58%;--glow-y:46%;--glow-w:84%;--glow-a:0.08;}
+  .lf-wrap::before{--glow-x:40%;--glow-y:34%;--glow-w:90%;--glow-a:0.07;}
+  .bc-chart::before{--glow-x:78%;--glow-y:38%;--glow-w:70%;--glow-a:0.07;}
   .bc-body{flex:none;}
-  .bc-title{font-size:19px;font-weight:800;line-height:1.25;letter-spacing:-0.01em;margin:0 0 6px;color:#0F172A;}
-  .bc-text{font-size:14.5px;line-height:1.55;color:#52657A;margin:0;font-weight:500;}
-  .bento-card--seo .bc-title{font-size:24px;}
+  .bc-title{font-size:20px;font-weight:800;line-height:1.22;letter-spacing:-0.015em;margin:0 0 8px;color:#0F172A;text-wrap:balance;}
+  .bc-text{font-size:14.5px;line-height:1.6;color:#52657A;margin:0;font-weight:500;text-wrap:pretty;}
+  .bento-card--seo .bc-title{font-size:26px;letter-spacing:-0.02em;}
   .bento-card--seo .bc-text{font-size:15.5px;max-width:440px;}
-  .bc-pill{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.04em;padding:5px 10px;border-radius:999px;}
-  .bc-pill--muted{color:#52657A;background:#F1F5FB;border:1px solid rgba(15,23,42,0.06);}
+  .bc-pill{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.04em;padding:6px 11px;border-radius:999px;}
+  .bc-pill--muted{color:#2F4A6E;background:#EEF5FF;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.12);}
+  .bc-pill--muted::before{content:'';width:6px;height:6px;border-radius:50%;background:#146EF5;opacity:.7;}
 
   /* Synlighet: linjediagram */
   .bc-chart{display:flex;flex-direction:column;min-height:380px;}
@@ -501,12 +512,12 @@
   .kc-plot:focus-visible{box-shadow:0 0 0 3px rgba(20,110,245,0.35);}
   .kc-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
   .kc-dots{position:absolute;inset:0;pointer-events:none;}
-  .kc-dot{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;border:2px solid rgba(20,110,245,0.55);box-sizing:border-box;transition:opacity .35s ease,transform .35s ease;}
+  .kc-dot{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;border:2px solid rgba(20,110,245,0.55);box-sizing:border-box;box-shadow:0 2px 6px rgba(20,110,245,0.18);transition:opacity .45s ease,transform .5s cubic-bezier(0.22,1,0.36,1);}
   /* Händelsemånader: liten blå romb snett ovanför punkten */
   .kc-dot--event::after{content:'';position:absolute;left:50%;top:-13px;width:7px;height:7px;margin-left:-3.5px;background:#146EF5;border:1.5px solid #fff;border-radius:2px;transform:rotate(45deg);box-shadow:0 1px 3px rgba(20,110,245,0.35);}
   .kc-guide{position:absolute;left:0;top:0;bottom:0;width:0;border-left:1.5px dashed rgba(20,110,245,0.35);transform:translateX(var(--kx,0px));pointer-events:none;}
   .kc-active{position:absolute;left:0;top:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;border:3px solid #146EF5;box-sizing:border-box;box-shadow:0 0 0 6px rgba(20,110,245,0.14);transform:translate(var(--kx,0px),var(--ky,0px));pointer-events:none;}
-  .kc-tip{position:absolute;left:0;top:0;display:flex;flex-direction:column;min-width:112px;background:#0F172A;color:#fff;padding:10px 14px 11px;border-radius:14px;box-shadow:0 10px 24px rgba(15,23,42,0.18);transform:translate(var(--tx,0px),var(--ty,0px));pointer-events:none;white-space:nowrap;}
+  .kc-tip{position:absolute;left:0;top:0;display:flex;flex-direction:column;min-width:112px;background:#0F172A;color:#fff;padding:10px 14px 11px;border-radius:16px 14px 16px 14px;box-shadow:0 14px 30px -8px rgba(15,23,42,0.28);transform:translate(var(--tx,0px),var(--ty,0px));pointer-events:none;white-space:nowrap;}
   .kc-tip-m{font-size:12px;font-weight:700;color:#B7C6DB;}
   .kc-tip-v{font-size:24px;font-weight:800;line-height:1.1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;}
   .kc-tip-l{font-size:11px;font-weight:600;color:#8FA6C2;}
@@ -516,7 +527,7 @@
   .kc-tip::after{content:'';position:absolute;left:var(--ax,50%);width:10px;height:10px;margin-left:-5px;background:#0F172A;border-radius:2px;transform:rotate(45deg);}
   .kc-tip[data-side="above"]::after{bottom:-4px;}
   .kc-tip[data-side="below"]::after{top:-4px;}
-  .kc-event{position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:2px;max-width:170px;background:#fff;border:1px solid rgba(20,110,245,0.18);border-left:3px solid #146EF5;border-radius:10px;padding:7px 10px 8px;box-shadow:0 6px 16px rgba(15,23,42,0.08);transform:translate(var(--ex,0px),var(--ey,0px));opacity:0;pointer-events:none;transition:opacity .3s ease;}
+  .kc-event{position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:2px;max-width:170px;background:#fff;border:0;border-left:3px solid #146EF5;border-radius:12px;padding:7px 10px 8px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.12),0 10px 22px -8px rgba(20,110,245,0.25);transform:translate(var(--ex,0px),var(--ey,0px));opacity:0;pointer-events:none;transition:opacity .3s ease;}
   .kc-event.is-on{opacity:1;}
   .kc-event-k{font-size:9.5px;font-weight:800;letter-spacing:.08em;color:#146EF5;}
   .kc-event-t{font-size:12px;font-weight:700;color:#0F172A;line-height:1.3;white-space:normal;}
@@ -559,7 +570,7 @@
   .vi[data-id="0"] .vi-v[data-v="0"],.vi[data-id="1"] .vi-v[data-v="1"],.vi[data-id="2"] .vi-v[data-v="2"],.vi[data-id="3"] .vi-v[data-v="3"]{opacity:1;transform:none;}
   .vi .bs-card,.vi .bs-hero,.vi .bs-bar,.vi .bs-bar i,.vi .bs-lines i,.vi .bs-hero em,.vi .bs-btn,.vi .bs-sw,.vi .vi-h,.vi .bs-aa,.vi .bs-cap{transition:background-color .8s var(--vi-ease),border-color .8s var(--vi-ease),color .8s var(--vi-ease);}
   .vi .bs-logo-a,.vi .bs-logo-b{transition:fill .8s var(--vi-ease);}
-  .bc-stack .bs-card{position:absolute;background:#fff;border:1px solid rgba(15,23,42,0.08);border-radius:16px;box-shadow:0 10px 24px rgba(15,23,42,0.08);}
+  .bc-stack .bs-card{position:absolute;z-index:1;background:#fff;border:1px solid rgba(20,110,245,0.08);border-radius:18px 16px 18px 16px;box-shadow:0 16px 32px -14px rgba(20,110,245,0.28),0 2px 6px rgba(15,23,42,0.04);}
   .bc-stack .bs-web{left:4%;top:6%;width:58%;height:70%;transform:rotate(-7deg);overflow:hidden;display:flex;flex-direction:column;background:var(--vi-surface);}
   .bs-bar{display:flex;gap:4px;padding:8px 10px;background:var(--vi-tint);}
   .bs-bar i{width:6px;height:6px;border-radius:50%;background:var(--vi-soft);}
@@ -571,7 +582,7 @@
   .bs-lines i{display:block;height:5px;border-radius:3px;background:var(--vi-tint);}
   .bs-lines i:last-child{width:60%;}
   .bc-stack .bs-palette{right:3%;top:2%;width:44%;padding:12px;transform:rotate(6deg);display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
-  .bs-sw{aspect-ratio:1;border-radius:8px;border:1px solid rgba(15,23,42,0.06);}
+  .bs-sw{aspect-ratio:1;border-radius:9px 7px 9px 7px;border:1px solid rgba(15,23,42,0.06);box-shadow:0 3px 8px -3px rgba(15,23,42,0.18);}
   .bs-sw1{background:var(--vi-ink);}
   .bs-sw2{background:var(--vi-accent);transition-delay:.08s !important;}
   .bs-sw3{background:var(--vi-soft);transition-delay:.16s !important;}
@@ -588,11 +599,18 @@
   }
 
   /* Bokningar */
-  .bc-bookings .bk{position:absolute;display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid rgba(15,23,42,0.08);border-radius:18px;padding:14px 16px;box-shadow:0 10px 24px rgba(15,23,42,0.08);width:72%;box-sizing:border-box;transition:transform .9s cubic-bezier(0.22,1,0.36,1) .3s;}
-  .bk--back{right:2%;top:4%;transform:rotate(5deg);background:#F7FAFE;}
-  .bk--front{left:2%;bottom:6%;transform:rotate(-4deg);}
-  .bento-card.is-visible .bk--back{transform:rotate(5deg) translate(4px,-3px);}
-  .bento-card.is-visible .bk--front{transform:rotate(-4deg) translate(-3px,3px);}
+  .bc-bookings .bk{position:absolute;z-index:1;display:flex;flex-direction:column;gap:6px;background:#fff;border:0;border-radius:20px 18px 20px 16px;padding:14px 16px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.08),0 18px 34px -16px rgba(20,110,245,0.30),0 2px 6px rgba(15,23,42,0.04);width:72%;box-sizing:border-box;transition:transform 1s cubic-bezier(0.22,1,0.36,1),opacity .7s ease;}
+  .bk--back{right:2%;top:4%;transform:rotate(5deg) translate(4px,-3px);background:linear-gradient(160deg,#F5F9FF,#EDF4FF);}
+  .bk--front{left:2%;bottom:6%;transform:rotate(-4deg) translate(-3px,3px);}
+  /* Innan kortet syns (bara med JS och utan reducerad rörelse): korten ligger lite lägre och osynliga, och
+     anländer sedan en i taget när kortet tonas in */
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference){
+    .bento-card--booking:not(.is-visible) .bk{opacity:0;}
+    .bento-card--booking:not(.is-visible) .bk--back{transform:rotate(2deg) translate(10px,22px);}
+    .bento-card--booking:not(.is-visible) .bk--front{transform:rotate(-1deg) translate(-6px,30px);}
+    .bento-card--booking.is-visible .bk--back{transition-delay:.35s;}
+    .bento-card--booking.is-visible .bk--front{transition-delay:.6s;}
+  }
   .bk-when{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#146EF5;}
   .bk-what{font-size:15px;font-weight:800;color:#0F172A;}
   .bk-meta{display:flex;gap:6px;align-items:center;}
@@ -602,13 +620,17 @@
   /* Kundupplevelse: 5,0 som målbild */
   .bc-kicker{display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:#146EF5;margin-bottom:6px;}
   .cx{display:flex;flex-direction:column;justify-content:center;gap:14px;}
-  .bento-card--rating .bc-art.cx{min-height:176px;}
-  .cx::before{content:'';position:absolute;left:-30px;top:-40px;width:260px;height:220px;background:radial-gradient(closest-side,rgba(232,169,42,0.10),rgba(232,169,42,0));pointer-events:none;}
-  .cx-score{position:relative;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
-  .cx-num{font-size:54px;font-weight:800;line-height:.95;letter-spacing:-0.04em;color:#0F172A;font-variant-numeric:tabular-nums;min-width:2.1ch;}
-  .cx-stars{display:flex;gap:4px;}
-  .cx-stars svg{width:24px;height:24px;fill:#E8A92A;transition:fill .45s ease,transform .45s cubic-bezier(0.25,0.8,0.25,1),opacity .45s ease;}
-  .cx-factors{position:relative;list-style:none;margin:0;padding:12px 0 0;display:flex;flex-direction:column;gap:6px;border-top:1px solid rgba(15,23,42,0.07);}
+  .bento-card--rating .bc-art.cx{min-height:176px;gap:12px;}
+  .cx::before{--glow-x:22%;--glow-y:26%;--glow-w:88%;--glow-a:0.08;}
+  .cx-goal{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#146EF5;background:#EEF5FF;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.14);padding:6px 11px;border-radius:999px;}
+  .cx-goal svg{width:12px;height:12px;}
+  .cx-score{position:relative;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .cx-num{font-size:52px;font-weight:800;line-height:.95;letter-spacing:-0.04em;color:#0F172A;font-variant-numeric:tabular-nums;}
+  .cx-meta{display:flex;flex-direction:column;gap:6px;}
+  .cx-of{font-size:13px;font-weight:700;color:#52657A;}
+  .cx-stars{display:flex;gap:3px;filter:drop-shadow(0 3px 6px rgba(232,169,42,0.22));}
+  .cx-stars svg{width:22px;height:22px;fill:#E8A92A;transition:fill .45s ease,transform .45s cubic-bezier(0.25,0.8,0.25,1),opacity .45s ease;}
+  .cx-factors{position:relative;list-style:none;margin:0;padding:14px 0 0;display:flex;flex-direction:column;gap:7px;border-top:1px dashed rgba(20,110,245,0.18);}
   .cx-factors li{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:#334155;transition:opacity .5s ease,transform .5s cubic-bezier(0.25,0.8,0.25,1);}
   .cx-ic{flex:none;width:20px;height:20px;border-radius:50%;background:rgba(20,110,245,0.09);color:#146EF5;display:flex;align-items:center;justify-content:center;}
   /* Intro (bara när JS kör): stjärnorna släckta, faktorerna dolda */
@@ -629,14 +651,14 @@
   /* Kontaktflöde: nya händelser faller in överst, äldre flyttas ned och tonas bort */
   .lf-wrap{display:flex;align-items:center;}
   .lf{--lf-h:54px;--lf-gap:10px;position:relative;width:100%;height:calc(var(--lf-h) * 3 + var(--lf-gap) * 2);overflow:visible;}
-  .lf-item{position:absolute;left:0;right:0;top:0;height:var(--lf-h);box-sizing:border-box;display:flex;align-items:center;gap:11px;background:#fff;border:1px solid rgba(15,23,42,0.07);border-radius:16px;padding:0 14px 0 11px;box-shadow:0 4px 14px rgba(15,23,42,0.05);transform:translateY(calc(var(--slot, 0) * (var(--lf-h) + var(--lf-gap))));transition:transform .55s cubic-bezier(0.34,1.22,0.64,1),opacity .45s ease,box-shadow .9s ease;}
+  .lf-item{position:absolute;left:0;right:0;top:0;height:var(--lf-h);box-sizing:border-box;display:flex;align-items:center;gap:11px;background:#fff;border:0;border-radius:18px 16px 18px 15px;padding:0 14px 0 11px;box-shadow:inset 0 0 0 1px rgba(20,110,245,0.08),0 6px 16px -8px rgba(20,110,245,0.20);transform:translateY(calc(var(--slot, 0) * (var(--lf-h) + var(--lf-gap))));transition:transform .7s cubic-bezier(0.22,1,0.36,1),opacity .55s ease,box-shadow 1.2s ease;}
   .lf-item[data-slot="-1"]{opacity:0;}
   .lf-item[data-slot="1"]{opacity:.82;}
   .lf-item[data-slot="2"]{opacity:.55;}
   .lf-item[data-slot="3"]{opacity:0;}
-  .lf-item.is-new{box-shadow:0 10px 24px rgba(15,23,42,0.09);}
-  .lf-ic{flex:none;width:32px;height:32px;border-radius:10px;background:#F1F5FB;color:#52657A;display:flex;align-items:center;justify-content:center;}
-  .lf-item[data-slot="0"] .lf-ic{background:rgba(20,110,245,0.09);color:#146EF5;}
+  .lf-item.is-new{box-shadow:inset 0 0 0 1px rgba(20,110,245,0.16),0 14px 28px -10px rgba(20,110,245,0.32);}
+  .lf-ic{flex:none;width:32px;height:32px;border-radius:11px 9px 11px 9px;transition:background-color .6s ease,color .6s ease;background:#F1F5FB;color:#52657A;display:flex;align-items:center;justify-content:center;}
+  .lf-item[data-slot="0"] .lf-ic{background:linear-gradient(150deg,#EAF2FF,#D6E7FF);color:#146EF5;}
   .lf-ic svg{width:16px;height:16px;}
   .lf-tx{display:flex;flex-direction:column;min-width:0;flex:1;}
   .lf-tx b{font-size:12.5px;font-weight:800;color:#0F172A;line-height:1.3;}
@@ -657,7 +679,7 @@
   @media (max-width:640px){
     .bento-h2,.faq-title{font-size:clamp(36px,10vw,44px);}
     .bento-grid{grid-template-columns:1fr;gap:16px;}
-    .bento-card{padding:18px 20px 22px;border-radius:26px;}
+    .bento-card,.bento-card:nth-child(2n){padding:22px 22px 26px;border-radius:30px 26px 32px 28px / 28px 32px 26px 30px;}
     .bc-art{min-height:176px;}
     .bc-chart{min-height:260px;}
     .bento-card--seo .bc-title{font-size:21px;}
@@ -1857,17 +1879,23 @@
             <svg class="kc-svg" viewBox="0 0 600 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
               <defs>
                 <linearGradient id="kc-area-fill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#146EF5" stop-opacity="0.16"/>
-                  <stop offset="1" stop-color="#146EF5" stop-opacity="0"/>
+                  <stop offset="0" stop-color="#146EF5" stop-opacity="0.18"/>
+                  <stop offset="0.6" stop-color="#8DBBFF" stop-opacity="0.07"/>
+                  <stop offset="1" stop-color="#8DBBFF" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="kc-line-grad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#8DBBFF"/>
+                  <stop offset="0.45" stop-color="#4D8FF8"/>
+                  <stop offset="1" stop-color="#146EF5"/>
                 </linearGradient>
                 <clipPath id="kc-clip"><rect class="kc-clip-rect" x="0" y="0" width="600" height="300"/></clipPath>
               </defs>
-              <g stroke="#0F172A" stroke-opacity="0.07" stroke-width="1">
+              <g stroke="#146EF5" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="2 5">
                 <line x1="0" y1="50" x2="600" y2="50" vector-effect="non-scaling-stroke"/><line x1="0" y1="120" x2="600" y2="120" vector-effect="non-scaling-stroke"/><line x1="0" y1="190" x2="600" y2="190" vector-effect="non-scaling-stroke"/><line x1="0" y1="260" x2="600" y2="260" vector-effect="non-scaling-stroke"/>
               </g>
               <g clip-path="url(#kc-clip)">
                 <path class="kc-area" d="M30.0,237.8 C52.5,230.7 75.0,224.6 97.5,216.6 C120.0,208.5 142.5,189.3 165.0,189.3 C187.5,189.3 210.0,201.4 232.5,201.4 C255.0,201.4 277.5,170.6 300.0,159.0 C322.5,147.4 345.0,131.8 367.5,131.8 C390.0,131.8 412.5,143.9 435.0,143.9 C457.5,143.9 480.0,100.0 502.5,86.3 C525.0,72.7 547.5,70.2 570.0,62.1 L570.0,300 L30.0,300 Z" fill="url(#kc-area-fill)"/>
-                <path class="kc-line" d="M30.0,237.8 C52.5,230.7 75.0,224.6 97.5,216.6 C120.0,208.5 142.5,189.3 165.0,189.3 C187.5,189.3 210.0,201.4 232.5,201.4 C255.0,201.4 277.5,170.6 300.0,159.0 C322.5,147.4 345.0,131.8 367.5,131.8 C390.0,131.8 412.5,143.9 435.0,143.9 C457.5,143.9 480.0,100.0 502.5,86.3 C525.0,72.7 547.5,70.2 570.0,62.1" fill="none" stroke="#146EF5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+                <path class="kc-line" d="M30.0,237.8 C52.5,230.7 75.0,224.6 97.5,216.6 C120.0,208.5 142.5,189.3 165.0,189.3 C187.5,189.3 210.0,201.4 232.5,201.4 C255.0,201.4 277.5,170.6 300.0,159.0 C322.5,147.4 345.0,131.8 367.5,131.8 C390.0,131.8 412.5,143.9 435.0,143.9 C457.5,143.9 480.0,100.0 502.5,86.3 C525.0,72.7 547.5,70.2 570.0,62.1" fill="none" stroke="url(#kc-line-grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
               </g>
             </svg>
             <span class="kc-guide" aria-hidden="true"></span>
@@ -1936,9 +1964,10 @@
       <!-- Kundupplevelse: aspirerande KPI – vad en tydlig hemsida skapar förutsättningar för (inget löfte, inga recensioner). -->
       <article class="bento-card bento-card--rating" data-reveal>
         <div class="bc-art cx">
+          <span class="cx-goal" aria-hidden="true"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.8" fill="currentColor"/></svg>Målbild</span>
           <div class="cx-score">
             <span class="cx-num" aria-hidden="true">5,0</span>
-            <span class="cx-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg></span>
+            <span class="cx-meta" aria-hidden="true"><span class="cx-stars"><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6L10 14.6l-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg></span><span class="cx-of">av 5 stjärnor</span></span>
             <span class="sr-only">Målbild: 5,0 av 5 stjärnor.</span>
           </div>
           <ul class="cx-factors">
@@ -1949,7 +1978,7 @@
         </div>
         <div class="bc-body">
           <span class="bc-kicker">KUNDUPPLEVELSE</span>
-          <h3 class="bc-title">Bygg för femstjärniga omdömen</h3>
+          <h3 class="bc-title">Bygg för en femstjärnig kundupplevelse</h3>
           <p class="bc-text">En tydlig hemsida och en smidig kundresa skapar bättre förutsättningar för nöjda kunder och starka omdömen.</p>
         </div>
       </article>
@@ -3865,28 +3894,17 @@
     }
   })();
 
-  /* ---------- Kundupplevelse (bento): 5,0 räknas upp, stjärnor tänds, faktorer tonas in – en gång ---------- */
+  /* ---------- Kundupplevelse (bento): målbilden står fast (ingen uppräkning), stjärnor tänds, faktorer tonas in – en gång ---------- */
   var cxWrap = document.querySelector('.bento-card--rating .cx');
   if (cxWrap && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) (function () {
-    var num = cxWrap.querySelector('.cx-num');
     cxWrap.classList.add('cx-pre');
-    num.textContent = '0,0';
     var cxIO = new IntersectionObserver(function (entries) {
       if (!entries[0].isIntersecting) return;
       cxIO.disconnect();
       cxWrap.classList.add('cx-run');
       void cxWrap.offsetWidth;
       cxWrap.classList.remove('cx-pre');
-      var DUR = 1150, start = null;
-      var step = function (now) {
-        if (start === null) start = now;
-        var t = Math.min(1, (now - start) / DUR);
-        var e = 1 - Math.pow(1 - t, 3);
-        num.textContent = (Math.round(e * 50) / 10).toFixed(1).replace('.', ',');
-        if (t < 1) requestAnimationFrame(step);
-        else setTimeout(function () { cxWrap.classList.remove('cx-run'); }, 1200);
-      };
-      requestAnimationFrame(step);
+      setTimeout(function () { cxWrap.classList.remove('cx-run'); }, 2400);
     }, { threshold: 0.5 });
     cxIO.observe(cxWrap);
   })();
