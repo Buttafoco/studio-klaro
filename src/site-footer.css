@@ -63,8 +63,9 @@
 .sf-bottom a{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:var(--sf-mute);text-decoration:none;transition:color .2s ease;}
 .sf-bottom a:hover,.sf-bottom a:focus-visible{color:var(--sf-ink);}
 .sf-totop{margin-left:auto;}
-.sf-totop span{display:inline-block;transition:transform .25s var(--sf-ease);}
-.sf-totop:hover span,.sf-totop:focus-visible span{transform:translateY(-3px);}
+.sf-totop-short{display:none;}
+.sf-totop-arrow{display:inline-block;transition:transform .25s var(--sf-ease);}
+.sf-totop:hover .sf-totop-arrow,.sf-totop:focus-visible .sf-totop-arrow{transform:translateY(-3px);}
 
 @media (max-width:1024px){
   .sf-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
@@ -79,11 +80,19 @@
   .sf-contact{grid-column:1 / -1;}
   .sf-list a,.sf-list span{min-height:44px;}
   .sf-mark{margin-top:52px;}
-  .sf-bottom{margin-top:28px;gap:0 20px;}
+  /* Copyright, cookies och "till toppen" på samma rad även på mobilen */
+  .sf-bottom{margin-top:28px;flex-wrap:nowrap;gap:0 14px;font-size:12px;white-space:nowrap;}
+}
+@media (max-width:400px){
+  .sf-totop-long{display:none;}
+  .sf-totop-short{display:inline;}
+}
+@media (max-width:369px){
+  .sf-bottom{flex-wrap:wrap;}
 }
 @media (prefers-reduced-motion: reduce){
-  .sf-mail::after,.sf-mail-arrow,.sf-totop span,.sf-list a,.sf-list a::before{transition:none;}
-  .sf-mail:hover .sf-mail-arrow,.sf-mail:focus-visible .sf-mail-arrow,.sf-totop:hover span{transform:none;}
+  .sf-mail::after,.sf-mail-arrow,.sf-totop-arrow,.sf-list a,.sf-list a::before{transition:none;}
+  .sf-mail:hover .sf-mail-arrow,.sf-mail:focus-visible .sf-mail-arrow,.sf-totop:hover .sf-totop-arrow{transform:none;}
   .sf-js .sf-mark-row{opacity:1;transform:none;transition:none;}
   .sf-mark.is-jelly .sf-mark-row{animation:none;}
 }
