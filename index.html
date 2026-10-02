@@ -1239,13 +1239,17 @@
 <!-- ===== KlaroIntro – början. Ta bort detta block och blocket i <body> för att stänga av. =====
      Varumärkesintro som visas en gång per flik (sessionStorage "studio-klaro-intro-seen-v1"): när startsidan
      öppnas i en ny flik eller ett nytt fönster – inte vid omladdning, bakåt/framåt eller intern navigering. Ligger kvar tills både minimitiden (2 s) har gått och sidan är färdigladdad,
-     och crossfadar sedan till startsidan, som redan är renderad bakom (.ki-page). /?intro=1 tvingar fram den för test. -->
+     och övergår sedan till startsidan, som redan är renderad bakom: loggan flyger till headerns logga medan ytan tonar bort.
+     /?intro=1 tvingar fram den för test. -->
 <link rel="preload" as="image" href="/logo-sf-studio.webp" fetchpriority="high">
 <link rel="preload" as="image" href="/logo-sf-klaro.webp" fetchpriority="high">
 <style>
   .ki{display:none;}
   html.ki-play{overflow:hidden;scrollbar-gutter:stable;}
-  html.ki-play .ki{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;height:100vh;height:100dvh;z-index:9999;background:var(--sk-canvas);touch-action:none;transition:opacity .55s cubic-bezier(0.22,1,0.36,1);}
+  html.ki-play .ki{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;height:100vh;height:100dvh;z-index:9999;touch-action:none;}
+  /* Ytan ligger i ett eget lager, så att den kan tona bort medan loggan (som ligger ovanpå) flyger till headern */
+  .ki-bg{position:absolute;inset:0;background:var(--sk-canvas);}
+  .ki-mark{position:relative;transform-origin:0 0;}
   /* Nya rundade loggan i två rader ("studio" / "klaro"), samma masker och studs som footerns signatur (src/site-footer.css) */
   .ki-mark{--ki-w:240px;display:flex;flex-direction:column;width:var(--ki-w);color:#0F0D0E;}
   .ki-row{display:block;width:100%;background:currentColor;transform-origin:50% 100%;opacity:0;
@@ -1255,23 +1259,20 @@
   /* Animationerna startar först när loggan är avkodad (ki-go), så hela förloppet syns även på långsam uppkoppling */
   html.ki-go .ki-row{animation:kiBounce 1.1s cubic-bezier(0.34,1.56,0.64,1) both,kiFade .45s ease both;}
   html.ki-go .ki-row-klaro{animation-delay:.13s;}
-  html.ki-out .ki{opacity:0;}
-  /* Startsidan ligger färdigrenderad men osynlig bakom introt och tonar in samtidigt som introt tonar ut.
-     Förflyttningen görs med translate (inte transform) på barnen, så befintliga transforms lämnas orörda
-     och den fasta formulärraden (.wz-dock) inte får en ny referensram. */
-  html.ki-play .ki-page{opacity:0;will-change:opacity;}
-  html.ki-play .ki-page > :not(.wz-dock){translate:0 10px;}
-  html.ki-out .ki-page{opacity:1;transition:opacity .55s cubic-bezier(0.22,1,0.36,1);}
-  html.ki-out .ki-page > :not(.wz-dock){translate:none;transition:translate .55s cubic-bezier(0.22,1,0.36,1);}
-  /* Headern ligger utanför .ki-page men tonar in tillsammans med sidan */
+  /* Övergången (ki-out): loggan hittar hem. Startsidan ligger färdigrenderad bakom ytan hela tiden; skriptet i <body>
+     flyttar loggan med FLIP till headerns logga, tonar ytan och tonar in hero och menyn (Web Animations API). */
   html.ki-play .nav-wrap.sh{opacity:0;}
-  html.ki-out .nav-wrap.sh{opacity:1;transition:opacity .55s cubic-bezier(0.22,1,0.36,1);}
+  html.ki-out .nav-wrap.sh{opacity:1;}
+  /* Rubrikens färgsvep startar sin fördröjning först när sidan visas */
+  html.ki-play .hw::after{animation-play-state:paused;}
+  /* Reducerad rörelse: ingen flygande logga, bara en kort crossfade */
+  html.ki-reduce .ki{transition:opacity .18s ease;}
+  html.ki-reduce.ki-out .ki{opacity:0;}
   @keyframes kiBounce{from{transform:translateY(45%) scale(.94,.8);}to{transform:none;}}
   @keyframes kiFade{from{opacity:0;}to{opacity:1;}}
   @media (max-width:600px){ .ki-mark{--ki-w:184px;} }
   /* Reducerad rörelse: samma minimitid, men bara diskreta toningar och crossfade – ingen förflyttning eller ritning */
   html.ki-reduce.ki-go .ki-row{animation:kiFade .6s ease both;}
-  html.ki-reduce .ki-page > :not(.wz-dock){translate:none;}
 </style>
 <script>
   (function () {
@@ -1490,6 +1491,7 @@
 <div class="page-fade-wrap" aria-hidden="true"><div class="page-fade" id="page-fade"></div></div>
 <!-- ===== KlaroIntro – markup. Dekorativ, visas bara när <html> har klassen ki-play. ===== -->
 <div class="ki" id="klaro-intro" aria-hidden="true">
+  <span class="ki-bg"></span>
   <div class="ki-mark">
     <span class="ki-row ki-row-studio"></span>
     <span class="ki-row ki-row-klaro"></span>
@@ -1500,21 +1502,104 @@
     var root = document.documentElement, el = document.getElementById('klaro-intro');
     if (!el) return;
     if (!root.classList.contains('ki-play')) { el.remove(); return; }
-    var MIN = 2000, FADE = 550, MAX = 10000;       // minsta visningstid, crossfade, yttersta gräns
+    var MIN = 2000, MAX = 10000;                    // minsta visningstid, yttersta gräns
+    var REST = 120, PREP = 120, FLY = 740, BG = 700, FADE_RM = 180;   // övergången efter laddningen (ms)
+    var EASE = 'cubic-bezier(0.22,1,0.36,1)';
+    var GLIDE = 'cubic-bezier(0.45,0,0.15,1)';     // flygningen och ytan: startar mjukt ur vilan, lång lugn landning
+    var reduce = root.classList.contains('ki-reduce');
     var started = false, minDone = false, loaded = false, leaving = false, done = false;
+    var anims = [], inerted = [], headerImg = null;
 
-    function end() {
+    // Bakom overlayn: ingen tabbfokus (scrollen är redan låst via html.ki-play)
+    function lockFocus() {
+      if (done) return;
+      Array.prototype.forEach.call(document.body.children, function (n) {
+        if (n === el || n.inert || /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(n.tagName)) return;
+        n.inert = true; inerted.push(n);
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lockFocus); else lockFocus();
+
+    function anim(node, frames, opts) {
+      if (!node || !node.animate) return null;
+      var a = node.animate(frames, opts); anims.push(a); return a;
+    }
+    // Slutläget sätts direkt som stil; animationerna (fill: backwards) visar startläget fram till sin start
+    function settle(node) { node.style.animation = 'none'; node.style.opacity = '1'; node.style.transform = 'none'; }
+
+    // abort = sidan lämnas: avsluta allt direkt i slutläget
+    function end(abort) {
       if (done) return;
       done = true;
+      if (abort) anims.forEach(function (a) { try { a.finish(); } catch (e) {} });   // hero och meny i slutläget
+      if (headerImg) headerImg.style.opacity = '';  // den riktiga loggan tar över i samma bildruta som kopian försvinner
+      inerted.forEach(function (n) { n.inert = false; });
       root.classList.remove('ki-play', 'ki-go', 'ki-out', 'ki-reduce');   // låser upp scroll
       el.remove();
+      window.removeEventListener('resize', onResize);
     }
+    var flyW = 0;
+    function onResize() { if (innerWidth !== flyW) end(true); }  // ny bredd mitt i flygningen: målet stämmer inte längre
+
     function leave() {
       if (leaving) return;
       leaving = true;
-      root.classList.add('ki-out');                 // crossfade; overlayn blockerar klick och scroll tills den är borta
-      el.addEventListener('transitionend', function (e) { if (e.target === el && e.propertyName === 'opacity') end(); });
-      setTimeout(end, FADE + 100);                  // säkerhetsnät om transitionend uteblir
+      var hero = ['.hc-h1', '.hc-lead', '.hero-form'].map(function (s) { return document.querySelector(s); }).filter(Boolean);
+      var header = document.querySelector('.nav-wrap.sh');
+      headerImg = header && header.querySelector('.sh-logo img');
+      var menu = header ? Array.prototype.filter.call(header.querySelectorAll('.sh-list > li, .mnav-toggle'),
+        function (n) { return n.getClientRects().length; }) : [];   // bara synliga: länkarna på desktop, "Meny" på mobilen
+
+      if (reduce || !headerImg || !el.animate) {
+        // Kort crossfade: sidan och headern står redan i slutläget bakom ytan
+        hero.forEach(settle);
+        root.classList.add('ki-out');
+        el.addEventListener('transitionend', function (e) { if (e.target === el) end(); });
+        setTimeout(end, FADE_RM + 80);
+        return;
+      }
+
+      // Kort vila innan rörelsen; positionerna mäts först nu, så de stämmer även om fönstret ändrats under laddningen
+      setTimeout(function () {
+        if (done) return;
+        var mark = el.querySelector('.ki-mark');
+        var from = mark.getBoundingClientRect(), to = headerImg.getBoundingClientRect();
+        if (!from.width || !to.width) { end(); return; }
+        var sx = to.width / from.width, sy = to.height / from.height;
+        var lift = 'translate(' + (-from.width * .015) + 'px,' + (-from.height * .015) + 'px) scale(1.03)';
+        var home = 'translate(' + (to.left - from.left) + 'px,' + (to.top - from.top) + 'px) scale(' + sx + ',' + sy + ')';
+
+        headerImg.style.opacity = '0';              // den riktiga loggan väntar osynlig tills kopian är framme
+        var total = PREP + FLY;
+        var fly = anim(mark, [
+          { transform: 'none', easing: 'cubic-bezier(0.33,0,0.2,1)' },
+          { offset: PREP / total, transform: lift, easing: GLIDE },
+          { transform: home }
+        ], { duration: total, fill: 'forwards' });
+
+        // Ytan tonar bort och glider försiktigt uppåt under förflyttningen
+        anim(el.querySelector('.ki-bg'), [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-4vh)' }],
+          { duration: BG, delay: PREP, easing: GLIDE, fill: 'both' });
+
+        // Hero: rubrik → ingress → formulär (totalt 160 ms isär), under den sista delen av rörelsen
+        hero.forEach(function (n, i) {
+          settle(n);
+          anim(n, [
+            { opacity: 0, transform: 'translateY(20px)', filter: 'blur(3.5px)' },
+            { opacity: 1, transform: 'none', filter: 'blur(0)' }
+          ], { duration: 640, delay: PREP + 270 + i * 80, easing: EASE, fill: 'backwards' });
+        });
+        // Menyn tonar in mycket lätt, 40 ms isär
+        menu.forEach(function (n, i) {
+          anim(n, [{ opacity: 0 }, { opacity: 1 }], { duration: 480, delay: PREP + 300 + i * 40, easing: EASE, fill: 'backwards' });
+        });
+
+        root.classList.add('ki-out');               // headern visas, med loggan dold och menyn i startläget
+        flyW = innerWidth;
+        window.addEventListener('resize', onResize);
+        fly.onfinish = function () { end(); };
+        setTimeout(end, total + 250);               // säkerhetsnät om onfinish uteblir
+      }, REST);
     }
     function check() { if (minDone && loaded) leave(); }
 
@@ -1539,7 +1624,7 @@
     if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready);
 
     setTimeout(leave, MAX);                         // säkerhetsnät om load aldrig kommer
-    window.addEventListener('pagehide', end);
+    window.addEventListener('pagehide', function () { end(true); });
   })();
 </script>
 <!-- ===== KlaroIntro – slut (body) ===== -->
