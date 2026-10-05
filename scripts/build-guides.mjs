@@ -81,7 +81,7 @@ $index('script[type="application/ld+json"]').each((i, el) => {
 if (siteNodes.length !== 2) throw new Error('hittade inte Organization och WebSite i index.html');
 
 /* ---------- Gemensam sidmall ---------- */
-function page({ url, title, description, ogType, ogImage, ogImageAlt, graph, extraHead = '', body, footerCurrent = false, scripts = '' }) {
+function page({ url, title, description, ogType, ogImage, ogImageAlt, graph, extraHead = '', extraCss = '', body, footerCurrent = false, scripts = '' }) {
   const ogTitle = title.replace(/ \| Studio Klaro$/, '');
   const foot = footerCurrent ? footer.replace('<a href="/guider">', '<a href="/guider" aria-current="page">') : footer;
   return `<!DOCTYPE html>
@@ -127,7 +127,7 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@graph': [...siteNodes, ..
 <link rel="stylesheet" href="/src/site-footer.css">
 <link rel="stylesheet" href="/src/lead-dock.css">
 <link rel="stylesheet" href="/src/guide.css">
-</head>
+${extraCss}</head>
 <body>
 
 <!-- NAV – ligger utanför sidans 1440-ram så att headern alltid är lika bred som fönstret -->
@@ -158,26 +158,30 @@ const crumbs = (items) => ({
 });
 
 /* ---------- /guider ---------- */
+// Kategorier räknas fram ur de publicerade guidernas metadata – en kategori utan guider visas aldrig.
+const slugify = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 function hubPage() {
-  // Huvudinslaget: guiden markerad med featured: true, annars den nyaste
+  // Ordning: guiden markerad med featured: true först, därefter nyast först
   const featured = guides.find((g) => g.featured) || guides[0];
-  const rest = guides.filter((g) => g !== featured);
-  const list = rest.length ? `
-  <section class="gl" aria-labelledby="gl-title">
-    <h2 id="gl-title" class="gl-title">Fler guider</h2>
-    <ul class="gl-list">
-${rest.map((g, i) => `      <li class="gl-item">
-        <div class="gl-text">
-          ${meta(g)}
-          <h3 class="gl-h"><a href="${g.path}">${esc(g.title)}</a></h3>
-          <p class="gl-teaser">${esc(g.teaser)}</p>
-          <p class="gf-more" aria-hidden="true">Läs guiden <span>→</span></p>
-        </div>
-        ${illus(g, `gl${i}`, 'gl-illus')}
-      </li>`).join('\n')}
-    </ul>
-  </section>
-` : '';
+  const ordered = [featured, ...guides.filter((g) => g !== featured)];
+  const categories = [...new Map(ordered.map((g) => [slugify(g.category), g.category])).entries()]
+    .sort((a, b) => a[1].localeCompare(b[1], 'sv'));
+  const count = (n) => `${n} ${n === 1 ? 'guide' : 'guider'}`;
+
+  // Layout efter position bland de synliga: 1 = utvald, 2 = nästa, övriga = rutnät (sätts om av filtret)
+  const pos = (i) => (i === 0 ? 'is-lead' : i === 1 ? 'is-next' : 'is-grid');
+  const card = (g, i) => `      <li class="gk-item ${pos(i)}" data-category="${slugify(g.category)}">
+        <article class="gk" aria-labelledby="gk-${g.slug}">
+          <div class="gk-media">${illus(g, `gk${i}`, 'gk-illus')}</div>
+          <div class="gk-text">
+            ${meta(g)}
+            <h3 id="gk-${g.slug}" class="gk-title"><a class="gk-link" href="${g.path}">${esc(g.title)}</a></h3>
+            <p class="gk-teaser">${esc(g.teaser)}</p>
+            <p class="gk-more" aria-hidden="true">Läs guiden <span>→</span></p>
+          </div>
+        </article>
+      </li>`;
 
   const body = `  <main class="gh-main">
   <div class="g-wrap">
@@ -186,21 +190,26 @@ ${rest.map((g, i) => `      <li class="gl-item">
     </nav>
 
     <header class="gh">
+      <svg class="gh-cloud" viewBox="0 0 200 100" aria-hidden="true" focusable="false"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg>
       <p class="g-eyebrow g-in">Guider från Studio Klaro</p>
-      <h1 class="gh-h1 g-in">Tydligare beslut för din digitala närvaro.</h1>
-      <p class="gh-intro g-in">Korta, konkreta guider som hjälper småföretag att förstå webbdesign, synlighet och hur kunder hittar fram – så att det blir enklare att veta vad hemsidan faktiskt behöver.</p>
+      <h1 class="gh-h1 g-in">Guider för en tydligare digital närvaro.</h1>
+      <p class="gh-intro g-in">Konkreta guider om webbdesign, synlighet och digitala kundvägar – skrivna för småföretag som vill fatta bättre beslut online.</p>
     </header>
 
-    <article class="gf g-in" aria-labelledby="gf-title">
-      ${illus(featured, 'gf', 'gf-illus')}
-      <div class="gf-text">
-        ${meta(featured)}
-        <h2 id="gf-title" class="gf-title"><a class="gf-link" href="${featured.path}">${esc(featured.title)}</a></h2>
-        <p class="gf-teaser">${esc(featured.teaser)}</p>
-        <p class="gf-more" aria-hidden="true">Läs guiden <span>→</span></p>
+    <!-- Biblioteket: kategorifilter (src/guide-library.js) och guiderna. Utan JavaScript visas alla guider och filtret döljs.
+         Filtret arbetar på data-category; en framtida sökning kan använda samma lista och samma synlighetslogik. -->
+    <section class="glib" aria-labelledby="glib-title">
+      <h2 id="glib-title" class="sr-only">Alla guider</h2>
+      <div class="gcat g-in" role="group" aria-label="Filtrera guider efter kategori" data-gcat>
+        <button type="button" class="gcat-btn" aria-pressed="true" data-cat="">Alla guider</button>
+${categories.map(([slug, name]) => `        <button type="button" class="gcat-btn" aria-pressed="false" data-cat="${slug}">${esc(name)}</button>`).join('\n')}
       </div>
-    </article>
-${list}
+      <p class="sr-only" aria-live="polite" data-gcat-status>Visar ${count(ordered.length)}</p>
+      <ol class="gk-list" role="list">
+${ordered.map(card).join('\n')}
+      </ol>
+    </section>
+
     <section class="gc" aria-labelledby="gc-title">
       <h2 id="gc-title" class="gc-title">Osäker på vad din hemsida behöver?</h2>
       <p class="gc-text">Berätta kort om företaget, så återkommer vi med konkreta idéer.</p>
@@ -225,7 +234,7 @@ ${list}
       breadcrumb: { '@id': `${HUB.url}#breadcrumb` },
       mainEntity: {
         '@type': 'ItemList',
-        itemListElement: [featured, ...rest].map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: g.url, name: g.title })),
+        itemListElement: ordered.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: g.url, name: g.title })),
       },
     },
     crumbs([['Hem', `${SITE}/`], ['Guider', HUB.url]]),
@@ -234,6 +243,8 @@ ${list}
   return page({
     url: HUB.url, title: HUB.title, description: HUB.description, ogType: 'website',
     ogImage: featured.ogImage, ogImageAlt: featured.ogImageAlt, graph, body, footerCurrent: true,
+    extraCss: '<link rel="stylesheet" href="/src/guide-library.css">\n<noscript><style>.gcat{display:none!important;}</style></noscript>\n',
+    scripts: '<script type="module" src="/src/guide-library.js"></script>\n',
   });
 }
 

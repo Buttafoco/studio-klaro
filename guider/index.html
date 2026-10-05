@@ -160,6 +160,8 @@
 <link rel="stylesheet" href="/src/site-footer.css">
 <link rel="stylesheet" href="/src/lead-dock.css">
 <link rel="stylesheet" href="/src/guide.css">
+<link rel="stylesheet" href="/src/guide-library.css">
+<noscript><style>.gcat{display:none!important;}</style></noscript>
 </head>
 <body>
 
@@ -191,19 +193,31 @@
     </nav>
 
     <header class="gh">
+      <svg class="gh-cloud" viewBox="0 0 200 100" aria-hidden="true" focusable="false"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg>
       <p class="g-eyebrow g-in">Guider från Studio Klaro</p>
-      <h1 class="gh-h1 g-in">Tydligare beslut för din digitala närvaro.</h1>
-      <p class="gh-intro g-in">Korta, konkreta guider som hjälper småföretag att förstå webbdesign, synlighet och hur kunder hittar fram – så att det blir enklare att veta vad hemsidan faktiskt behöver.</p>
+      <h1 class="gh-h1 g-in">Guider för en tydligare digital närvaro.</h1>
+      <p class="gh-intro g-in">Konkreta guider om webbdesign, synlighet och digitala kundvägar – skrivna för småföretag som vill fatta bättre beslut online.</p>
     </header>
 
-    <article class="gf g-in" aria-labelledby="gf-title">
-      <div class="g-illus gf-illus" role="img" aria-label="Illustration av en hemsida som samlar årets trender: stor typografi med en handritad understrykning, kort text, en organisk knapp med muspekare, en mobilvy med tydliga val och en snabbhetsmätare."><svg class="g-illus-svg" viewBox="0 0 640 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <!-- Biblioteket: kategorifilter (src/guide-library.js) och guiderna. Utan JavaScript visas alla guider och filtret döljs.
+         Filtret arbetar på data-category; en framtida sökning kan använda samma lista och samma synlighetslogik. -->
+    <section class="glib" aria-labelledby="glib-title">
+      <h2 id="glib-title" class="sr-only">Alla guider</h2>
+      <div class="gcat g-in" role="group" aria-label="Filtrera guider efter kategori" data-gcat>
+        <button type="button" class="gcat-btn" aria-pressed="true" data-cat="">Alla guider</button>
+        <button type="button" class="gcat-btn" aria-pressed="false" data-cat="webbdesign">Webbdesign</button>
+      </div>
+      <p class="sr-only" aria-live="polite" data-gcat-status>Visar 2 guider</p>
+      <ol class="gk-list" role="list">
+      <li class="gk-item is-lead" data-category="webbdesign">
+        <article class="gk" aria-labelledby="gk-webbdesign-2026-8-trender-som-faktiskt-spelar-roll">
+          <div class="gk-media"><div class="g-illus gk-illus" role="img" aria-label="Illustration av en hemsida som samlar årets trender: stor typografi med en handritad understrykning, kort text, en organisk knapp med muspekare, en mobilvy med tydliga val och en snabbhetsmätare."><svg class="g-illus-svg" viewBox="0 0 640 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs>
-    <path id="gf-cloud" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/>
+    <path id="gk0-cloud" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/>
   </defs>
   <path class="gi-blob" d="M58 214C40 118 118 38 252 42C352 45 424 26 526 50C614 70 632 162 616 244C600 334 524 400 402 392C302 386 238 406 148 394C66 383 74 306 58 214Z"/>
-  <use class="gi-cloud" href="#gf-cloud" transform="translate(462 18) scale(.6)"/>
-  <use class="gi-cloud" href="#gf-cloud" transform="translate(4 300) scale(.5)"/>
+  <use class="gi-cloud" href="#gk0-cloud" transform="translate(462 18) scale(.6)"/>
+  <use class="gi-cloud" href="#gk0-cloud" transform="translate(4 300) scale(.5)"/>
 
   <g>
     <rect class="gi-shadow" x="74" y="80" width="404" height="276" rx="22"/>
@@ -245,32 +259,24 @@
     <rect class="gt-bar" x="350" y="342" width="100" height="8" rx="4"/>
     <rect class="gt-bar-fill" x="350" y="342" width="86" height="8" rx="4"/>
   </g>
-</svg></div>
-      <div class="gf-text">
-        <p class="g-meta"><span>Webbdesign</span><span>8 min läsning</span><span><time datetime="2026-10-05">5 oktober 2026</time></span></p>
-        <h2 id="gf-title" class="gf-title"><a class="gf-link" href="/guider/webbdesign-2026-8-trender-som-faktiskt-spelar-roll">Webbdesign 2026: 8 trender som faktiskt spelar roll</a></h2>
-        <p class="gf-teaser">Mindre mallkänsla, kortare text och mer mänsklighet. Åtta trender som är värda att följa – och varför du inte behöver följa alla.</p>
-        <p class="gf-more" aria-hidden="true">Läs guiden <span>→</span></p>
-      </div>
-    </article>
-
-  <section class="gl" aria-labelledby="gl-title">
-    <h2 id="gl-title" class="gl-title">Fler guider</h2>
-    <ul class="gl-list">
-      <li class="gl-item">
-        <div class="gl-text">
-          <p class="g-meta"><span>Webbdesign</span><span>6 min läsning</span><span><time datetime="2026-10-05">5 oktober 2026</time></span></p>
-          <h3 class="gl-h"><a href="/guider/3-misstag-pa-din-hemsida-som-kan-fa-dig-att-tappa-kunder">3 misstag på din hemsida som kan få dig att tappa kunder</a></h3>
-          <p class="gl-teaser">Tre vanliga hinder som gör det svårare för kunder att förstå, välja och ta nästa steg – och vad du kan göra åt dem.</p>
-          <p class="gf-more" aria-hidden="true">Läs guiden <span>→</span></p>
-        </div>
-        <div class="g-illus gl-illus" role="img" aria-label="Illustration av en hemsida med tre markerade problem: en allmän rubrik utan konkret erbjudande, tre likadana knappar som tävlar om uppmärksamheten och en mobilversion där allt bara har krympts."><svg class="g-illus-svg" viewBox="0 0 640 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+</svg></div></div>
+          <div class="gk-text">
+            <p class="g-meta"><span>Webbdesign</span><span>8 min läsning</span><span><time datetime="2026-10-05">5 oktober 2026</time></span></p>
+            <h3 id="gk-webbdesign-2026-8-trender-som-faktiskt-spelar-roll" class="gk-title"><a class="gk-link" href="/guider/webbdesign-2026-8-trender-som-faktiskt-spelar-roll">Webbdesign 2026: 8 trender som faktiskt spelar roll</a></h3>
+            <p class="gk-teaser">Mindre mallkänsla, kortare text och mer mänsklighet. Åtta trender som är värda att följa – och varför du inte behöver följa alla.</p>
+            <p class="gk-more" aria-hidden="true">Läs guiden <span>→</span></p>
+          </div>
+        </article>
+      </li>
+      <li class="gk-item is-next" data-category="webbdesign">
+        <article class="gk" aria-labelledby="gk-3-misstag-pa-din-hemsida-som-kan-fa-dig-att-tappa-kunder">
+          <div class="gk-media"><div class="g-illus gk-illus" role="img" aria-label="Illustration av en hemsida med tre markerade problem: en allmän rubrik utan konkret erbjudande, tre likadana knappar som tävlar om uppmärksamheten och en mobilversion där allt bara har krympts."><svg class="g-illus-svg" viewBox="0 0 640 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs>
-    <path id="gl0-cloud" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/>
+    <path id="gk1-cloud" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/>
   </defs>
   <path class="gi-blob" d="M58 214C40 118 118 38 252 42C352 45 424 26 526 50C614 70 632 162 616 244C600 334 524 400 402 392C302 386 238 406 148 394C66 383 74 306 58 214Z"/>
-  <use class="gi-cloud gi-cloud--a" href="#gl0-cloud" transform="translate(470 24) scale(.62)"/>
-  <use class="gi-cloud gi-cloud--b" href="#gl0-cloud" transform="translate(6 316) scale(.5)"/>
+  <use class="gi-cloud gi-cloud--a" href="#gk1-cloud" transform="translate(470 24) scale(.62)"/>
+  <use class="gi-cloud gi-cloud--b" href="#gk1-cloud" transform="translate(6 316) scale(.5)"/>
 
   <g class="gi-browser">
     <rect class="gi-shadow" x="74" y="80" width="404" height="276" rx="22"/>
@@ -309,10 +315,17 @@
   <g class="gi-mark gi-mark--1"><circle cx="70" cy="186" r="18"/><text x="70" y="187">1</text></g>
   <g class="gi-mark gi-mark--2"><circle cx="380" cy="256" r="18"/><text x="380" y="257">2</text></g>
   <g class="gi-mark gi-mark--3"><circle cx="442" cy="216" r="18"/><text x="442" y="217">3</text></g>
-</svg></div>
+</svg></div></div>
+          <div class="gk-text">
+            <p class="g-meta"><span>Webbdesign</span><span>6 min läsning</span><span><time datetime="2026-10-05">5 oktober 2026</time></span></p>
+            <h3 id="gk-3-misstag-pa-din-hemsida-som-kan-fa-dig-att-tappa-kunder" class="gk-title"><a class="gk-link" href="/guider/3-misstag-pa-din-hemsida-som-kan-fa-dig-att-tappa-kunder">3 misstag på din hemsida som kan få dig att tappa kunder</a></h3>
+            <p class="gk-teaser">Tre vanliga hinder som gör det svårare för kunder att förstå, välja och ta nästa steg – och vad du kan göra åt dem.</p>
+            <p class="gk-more" aria-hidden="true">Läs guiden <span>→</span></p>
+          </div>
+        </article>
       </li>
-    </ul>
-  </section>
+      </ol>
+    </section>
 
     <section class="gc" aria-labelledby="gc-title">
       <h2 id="gc-title" class="gc-title">Osäker på vad din hemsida behöver?</h2>
@@ -388,6 +401,7 @@
   </footer>
 
 </div>
+<script type="module" src="/src/guide-library.js"></script>
 <script type="module" src="/src/guide.js"></script>
 <script type="module" src="/src/site-footer.js"></script>
 <script type="module" src="/src/mobile-nav.js"></script>

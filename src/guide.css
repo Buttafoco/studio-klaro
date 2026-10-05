@@ -86,50 +86,7 @@ main{overflow-x:clip;}
 .gi-mark--3{animation-delay:.75s;}
 .pt-fast .gi-mark,html.pt-internal-settled .gi-mark{animation:none;}
 
-/* ---------- /guider ---------- */
-.gh{padding:72px 0 0;}
-.gh-h1{font-weight:800;font-size:clamp(44px,6.2vw,88px);line-height:1.02;letter-spacing:-0.035em;color:var(--g-ink);margin:0;max-width:14ch;text-wrap:balance;}
-.gh-intro{font-size:19px;line-height:1.65;font-weight:500;color:var(--g-mute);margin:32px 0 0;max-width:54ch;}
-
-/* Huvudinslaget: illustration och rubrik bär designen – inget kort. Hela ytan är klickbar via rubriklänken. */
-.gf{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:64px;align-items:center;margin-top:112px;padding-top:56px;border-top:1px solid var(--g-line);}
-.gf-illus{transition:transform .6s var(--g-ease);}
-.gf:hover .gf-illus{transform:translateY(-6px) rotate(-.6deg);}
-.gf-title{font-weight:800;font-size:clamp(30px,3.4vw,46px);line-height:1.1;letter-spacing:-0.025em;margin:18px 0 0;text-wrap:balance;}
-.gf-link{color:var(--g-ink);text-decoration:none;}
-.gf-link::after{content:'';position:absolute;inset:0;z-index:1;border-radius:24px;}
-.gf-link:hover{color:var(--g-ink);}
-.gf-link:focus-visible{outline:none;}
-.gf-link:focus-visible::after{outline:2px solid var(--g-ink);outline-offset:8px;}
-.gf-teaser{font-size:18px;line-height:1.65;font-weight:500;color:var(--g-mute);margin:20px 0 0;max-width:44ch;}
-.gf-more{display:inline-flex;align-items:center;gap:8px;margin:28px 0 0;font-size:16px;font-weight:800;color:var(--g-blue-ink);}
-.gf-more span{transition:transform .3s var(--g-ease);}
-.gf:hover .gf-more span{transform:translateX(5px);}
-.gf:hover .gf-title a{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;text-decoration-color:rgba(20,110,245,0.45);}
-
-/* Fler guider: redaktionell lista med tunna avdelare (visas först när det finns fler än en guide) */
-.gl{margin-top:120px;}
-.gl-title{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g-blue-ink);margin:0 0 24px;}
-.gl-list{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--g-line);}
-.gl-item{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:48px;align-items:center;padding:40px 0;border-top:1px solid var(--g-line);}
-.gl-illus{transition:transform .6s var(--g-ease);}
-.gl-item:hover .gl-illus{transform:translateY(-4px) rotate(-.6deg);}
-.gl-item:hover .gf-more span{transform:translateX(5px);}
-.gl-item .gf-more{margin-top:18px;font-size:15px;}
-.gl-h{font-size:clamp(22px,2.2vw,28px);font-weight:800;line-height:1.2;letter-spacing:-0.02em;margin:12px 0 8px;}
-.gl-h a{color:var(--g-ink);text-decoration:none;}
-.gl-h a::after{content:'';position:absolute;inset:0;z-index:1;}
-.gl-h a:focus-visible{outline:none;}
-.gl-h a:focus-visible::after{outline:2px solid var(--g-ink);outline-offset:4px;border-radius:16px;}
-.gl-h a:hover{text-decoration:underline;}
-.gl-teaser{margin:0;font-size:16px;line-height:1.6;color:var(--g-mute);max-width:60ch;}
-
-/* Lugn avslutning */
-.gc{margin-top:clamp(120px,12vw,180px);text-align:center;}
-.gc-title{font-weight:800;font-size:clamp(32px,4vw,52px);line-height:1.08;letter-spacing:-0.03em;color:var(--g-ink);margin:0 auto;max-width:18ch;text-wrap:balance;}
-.gc-text{font-size:18px;line-height:1.65;font-weight:500;color:var(--g-mute);margin:20px auto 0;max-width:46ch;}
-.gc-actions{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:14px 28px;margin-top:36px;}
-.gc-btn{min-height:52px;font-size:16px;padding:15px 30px;}
+/* Samlingssidan /guider har egna stilar i src/guide-library.css */
 
 /* ---------- Artikeln ---------- */
 .ga-hero{padding-bottom:0;}
@@ -346,11 +303,8 @@ main{overflow-x:clip;}
 
 /* ---------- Responsivt ---------- */
 @media (max-width:1024px){
-  .gf{grid-template-columns:minmax(0,1fr);gap:40px;}
   .ga-hero-grid{grid-template-columns:minmax(0,1fr);gap:0;}
-  .gl-item{grid-template-columns:minmax(0,1fr) 200px;gap:28px;}
   .ga-illus{max-width:640px;}
-  .gf-illus{max-width:640px;}
   .ga-layout{grid-template-columns:minmax(0,1fr);gap:0;margin-top:80px;}
   .ga-body{grid-column:1;max-width:720px;}
   .g-toc{grid-column:1;grid-row:auto;position:static;max-width:720px;margin-bottom:72px;padding:24px 0;border-top:1px solid var(--g-line);border-bottom:1px solid var(--g-line);}
@@ -360,10 +314,6 @@ main{overflow-x:clip;}
 }
 @media (max-width:640px){
   .g-wrap{padding:0 16px;}
-  .gh{padding-top:48px;}
-  .gh-intro{font-size:17px;margin-top:24px;}
-  .gf{margin-top:72px;padding-top:40px;}
-  .gf-teaser{font-size:17px;}
   .ga-hero .g-eyebrow{margin-top:40px;}
   .ga-lead{margin-top:24px;}
   .ga-illus{margin-top:48px;}
@@ -372,8 +322,6 @@ main{overflow-x:clip;}
   .ga-body h3{margin-top:44px;}
   .g-qs li{gap:16px;padding:14px 0 14px 22px;}
   .g-compare-grid,.g-phones-grid,.g-flow-grid,.g-weigh{grid-template-columns:minmax(0,1fr);}
-  .gl-item{grid-template-columns:minmax(0,1fr);gap:20px;padding:32px 0;}
-  .gl-illus{order:-1;max-width:360px;}
   .g-stack-list li{grid-template-columns:minmax(0,1fr) 96px;gap:12px;font-size:11px;}
   .g-type-stage{padding:28px 22px;}
   .g-devices-grid{grid-template-columns:minmax(0,1fr) 150px;gap:16px;padding:24px 16px;border-radius:24px;}
@@ -384,14 +332,10 @@ main{overflow-x:clip;}
   .g-phones-grid{gap:36px;padding:32px 16px 24px;border-radius:24px;}
   .g-paths > div{grid-template-columns:minmax(0,1fr);gap:4px;}
   .g-quiet{margin-left:0;}
-  .gc-actions{flex-direction:column;}
-  .gc-btn{width:100%;}
 }
 
 @media (prefers-reduced-motion: reduce){
   .g-in,.gi-mark,.nav-capsule{animation:none!important;opacity:1!important;transform:none!important;}
-  .gf-illus,.gl-illus,.gf-more span,.g-toc a{transition:none;}
+  .g-toc a{transition:none;}
   .gt-bar-fill,.gt-scribble{animation:none!important;}
-  .gl-item:hover .gl-illus,.gl-item:hover .gf-more span{transform:none;}
-  .gf:hover .gf-illus,.gf:hover .gf-more span{transform:none;}
 }
