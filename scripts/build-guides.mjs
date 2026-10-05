@@ -159,15 +159,21 @@ const crumbs = (items) => ({
 
 /* ---------- /guider ---------- */
 function hubPage() {
-  const [featured, ...rest] = guides;
+  // Huvudinslaget: guiden markerad med featured: true, annars den nyaste
+  const featured = guides.find((g) => g.featured) || guides[0];
+  const rest = guides.filter((g) => g !== featured);
   const list = rest.length ? `
   <section class="gl" aria-labelledby="gl-title">
     <h2 id="gl-title" class="gl-title">Fler guider</h2>
     <ul class="gl-list">
-${rest.map((g) => `      <li class="gl-item">
-        ${meta(g)}
-        <h3 class="gl-h"><a href="${g.path}">${esc(g.title)}</a></h3>
-        <p class="gl-teaser">${esc(g.teaser)}</p>
+${rest.map((g, i) => `      <li class="gl-item">
+        <div class="gl-text">
+          ${meta(g)}
+          <h3 class="gl-h"><a href="${g.path}">${esc(g.title)}</a></h3>
+          <p class="gl-teaser">${esc(g.teaser)}</p>
+          <p class="gf-more" aria-hidden="true">Läs guiden <span>→</span></p>
+        </div>
+        ${illus(g, `gl${i}`, 'gl-illus')}
       </li>`).join('\n')}
     </ul>
   </section>
@@ -219,7 +225,7 @@ ${list}
       breadcrumb: { '@id': `${HUB.url}#breadcrumb` },
       mainEntity: {
         '@type': 'ItemList',
-        itemListElement: guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: g.url, name: g.title })),
+        itemListElement: [featured, ...rest].map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: g.url, name: g.title })),
       },
     },
     crumbs([['Hem', `${SITE}/`], ['Guider', HUB.url]]),
