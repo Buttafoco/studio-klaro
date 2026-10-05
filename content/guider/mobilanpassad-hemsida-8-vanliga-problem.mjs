@@ -1,4 +1,4 @@
-// Guide: Därför tappar du kunder på mobilen utan att märka det
+// Guide: Mobilanpassad hemsida: 8 vanliga problem att kontrollera
 //
 // Metadata och innehåll för en guide. Sidan byggs av scripts/build-guides.mjs (gemensam mall för alla guider).
 // Lästid och innehållsförteckning räknas fram automatiskt: varje <h2> behöver ett id, och data-toc ger en
@@ -12,18 +12,17 @@ const G = {
 const tick = '<span class="g-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 12.5l3.2 3.2L17 9"/></svg></span>';
 
 export default {
-  slug: 'darfor-tappar-du-kunder-pa-mobilen',
-  title: 'Därför tappar du kunder på mobilen utan att märka det',
-  seoTitle: 'Därför tappar du kunder på mobilen | Studio Klaro',
-  description: 'Åtta vanliga anledningar till att företag tappar kunder på mobilen – från otydlig hierarki och små knappar till långa formulär och popup-rutor.',
+  slug: 'mobilanpassad-hemsida-8-vanliga-problem',
+  title: 'Mobilanpassad hemsida: 8 vanliga problem att kontrollera',
+  seoTitle: 'Mobilanpassad hemsida: 8 vanliga problem | Studio Klaro',
+  description: 'Kontrollera åtta vanliga problem som kan göra företagets hemsida svårare att använda på mobilen – från innehåll och knappar till formulär och prestanda.',
   teaser: 'Hemsidan kan se bra ut på datorn och ändå kosta dig kunder i mobilen. Åtta problem som är lätta att missa – och hur du hittar dem.',
   category: 'Webbdesign',
   eyebrow: 'Mobilupplevelse',
   lead: 'Din hemsida kan se riktigt bra ut på datorn och ändå kosta dig kunder på mobilen. Det räcker inte att sidan får plats på en mobilskärm – den behöver fungera bra där också. Och problemen är inte alltid uppenbara.',
   author: 'Studio Klaro',
   published: '2026-10-05',
-  modified: '2026-10-05',
-  ogImage: '/guider/mobilen-og.jpg',
+  ogImage: '/guider/mobilanpassad-hemsida-og.jpg',
   ogImageAlt: 'Illustration av en hemsida som ser bra ut på datorn, bredvid en mobil där rutor och små knappar täcker innehållet.',
   illustrationLabel: 'Illustration av en hemsida som ser bra ut på datorn, bredvid samma sida i en mobil där en popup, en cookie-ruta och en chattikon täcker innehållet, knapparna är små och sidan fortfarande laddar.',
   illustration,

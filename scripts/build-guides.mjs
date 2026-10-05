@@ -53,7 +53,9 @@ for (const file of fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith('.mjs') 
     ...guide,
     url: `${SITE}/guider/${guide.slug}`,
     path: `/guider/${guide.slug}`,
-    modified: guide.modified || guide.published,
+    // dateModified bara när guiden faktiskt har uppdaterats efter publiceringen
+    updated: guide.modified && guide.modified !== guide.published ? guide.modified : null,
+    lastmod: guide.modified || guide.published,
     words,
     minutes: Math.max(1, Math.round(words / WORDS_PER_MINUTE)),
     toc,
@@ -61,6 +63,17 @@ for (const file of fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith('.mjs') 
 }
 // Nyast först
 guides.sort((a, b) => b.published.localeCompare(a.published));
+
+// Kategorier: gemensam lista i content/guider/_kategorier.mjs (ordning och slug). Varje guide måste höra till en av dem.
+const CATEGORIES = (await import(pathToFileURL(path.join(CONTENT_DIR, '_kategorier.mjs')).href)).default;
+for (const g of guides) {
+  const cat = CATEGORIES.find((c) => c.name === g.category);
+  if (!cat) throw new Error(`${g.slug}: okänd kategori "${g.category}" – lägg till den i content/guider/_kategorier.mjs`);
+  g.categorySlug = cat.slug;
+}
+// Samma publiceringsdatum: ordna efter kategoriernas ordning, därefter filnamn
+const catIndex = (g) => CATEGORIES.findIndex((c) => c.slug === g.categorySlug);
+guides.sort((a, b) => b.published.localeCompare(a.published) || catIndex(a) - catIndex(b) || a.slug.localeCompare(b.slug));
 
 /* ---------- Delar som hämtas från befintliga sidor ---------- */
 const om = read('om.html');
@@ -81,8 +94,7 @@ $index('script[type="application/ld+json"]').each((i, el) => {
 if (siteNodes.length !== 2) throw new Error('hittade inte Organization och WebSite i index.html');
 
 /* ---------- Gemensam sidmall ---------- */
-function page({ url, title, description, ogType, ogImage, ogImageAlt, graph, extraHead = '', extraCss = '', body, footerCurrent = false, scripts = '' }) {
-  const ogTitle = title.replace(/ \| Studio Klaro$/, '');
+function page({ url, title, ogTitle = title.replace(/ \| Studio Klaro$/, ''), description, ogType, ogImage, ogImageAlt, graph, extraHead = '', extraCss = '', body, footerCurrent = false, scripts = '' }) {
   const foot = footerCurrent ? footer.replace('<a href="/guider">', '<a href="/guider" aria-current="page">') : footer;
   return `<!DOCTYPE html>
 <html lang="sv">
@@ -158,23 +170,20 @@ const crumbs = (items) => ({
 });
 
 /* ---------- /guider ---------- */
-// Kategorier räknas fram ur de publicerade guidernas metadata – en kategori utan guider visas aldrig.
-const slugify = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-
 function hubPage() {
   // Ordning: guiden markerad med featured: true först, därefter nyast först
   const featured = guides.find((g) => g.featured) || guides[0];
   const ordered = [featured, ...guides.filter((g) => g !== featured)];
-  const categories = [...new Map(ordered.map((g) => [slugify(g.category), g.category])).entries()]
-    .sort((a, b) => a[1].localeCompare(b[1], 'sv'));
+  // Bara kategorier med minst en publicerad guide, i ordningen från _kategorier.mjs
+  const categories = CATEGORIES.filter((c) => guides.some((g) => g.categorySlug === c.slug));
   const count = (n) => `${n} ${n === 1 ? 'guide' : 'guider'}`;
 
   // Layout efter position bland de synliga (samma regel i src/guide-library.js, som sätter om den vid filtrering):
-  // 1 = utvald. Är det högst två guider kvar visas de som stora rader med växlande sida, annars i ett rutnät.
-  // Rutnätets kolumner: tre, eller två när antalet går jämnt upp i två men inte i tre (så att inget kort blir ensamt)
-  const cols = (n) => ((n - 1) % 3 !== 0 && (n - 1) % 2 === 0 ? 2 : 3);
-  const pos = (i, n) => (i === 0 ? 'is-lead' : n - 1 <= 2 ? (i === 2 ? 'is-next is-flip' : 'is-next') : 'is-grid');
-  const card = (g, i) => `      <li class="gk-item ${pos(i, ordered.length)}" data-category="${slugify(g.category)}">
+  // den första är utvald, övriga ligger i ett rutnät. Rutnätet har tre kolumner, eller två när antalet går jämnt
+  // upp i två men inte i tre – så att inget kort blir ensamt på en rad.
+  const cols = (n) => { const k = n - 1; return k % 3 === 0 ? 3 : k % 2 === 0 || k === 1 ? 2 : 3; };
+  const pos = (i) => (i === 0 ? 'is-lead' : 'is-grid');
+  const card = (g, i) => `      <li class="gk-item ${pos(i)}" data-category="${g.categorySlug}">
         <article class="gk" aria-labelledby="gk-${g.slug}">
           <div class="gk-media">${illus(g, `gk${i}`, 'gk-illus')}</div>
           <div class="gk-text">
@@ -202,10 +211,10 @@ function hubPage() {
     <!-- Biblioteket: kategorifilter (src/guide-library.js) och guiderna. Utan JavaScript visas alla guider och filtret döljs.
          Filtret arbetar på data-category; en framtida sökning kan använda samma lista och samma synlighetslogik. -->
     <section class="glib" aria-labelledby="glib-title">
-      <h2 id="glib-title" class="sr-only">Alla guider</h2>
+      <h2 id="glib-title" class="sr-only">Guidebiblioteket</h2>
       <div class="gcat g-in" role="group" aria-label="Filtrera guider efter kategori" data-gcat>
         <button type="button" class="gcat-btn" aria-pressed="true" data-cat="">Alla guider</button>
-${categories.map(([slug, name]) => `        <button type="button" class="gcat-btn" aria-pressed="false" data-cat="${slug}">${esc(name)}</button>`).join('\n')}
+${categories.map((c) => `        <button type="button" class="gcat-btn" aria-pressed="false" data-cat="${c.slug}">${esc(c.name)}</button>`).join('\n')}
       </div>
       <p class="sr-only" aria-live="polite" data-gcat-status>Visar ${count(ordered.length)}</p>
       <ol class="gk-list" role="list" data-cols="${cols(ordered.length)}">
@@ -252,13 +261,19 @@ ${ordered.map(card).join('\n')}
 }
 
 /* ---------- /guider/<slug> ---------- */
+// Två andra guider: först samma kategori, sedan i bibliotekets ordning
+function related(g) {
+  const others = guides.filter((o) => o !== g);
+  return [...others.filter((o) => o.categorySlug === g.categorySlug), ...others.filter((o) => o.categorySlug !== g.categorySlug)].slice(0, 2);
+}
+
 function articlePage(g) {
   const tocList = g.toc.map((t) => `<li><a href="#${t.id}">${esc(t.label)}</a></li>`).join('');
   const body = `  <main class="ga-main">
   <article class="ga" aria-labelledby="ga-title">
     <header class="ga-hero g-wrap">
       <nav class="g-crumbs" aria-label="Brödsmulor">
-        <ol><li><a href="/guider">Guider</a></li><li><span>${esc(g.category)}</span></li></ol>
+        <ol><li><a href="/guider">Guider</a></li><li><a href="/guider?kategori=${g.categorySlug}">${esc(g.category)}</a></li></ol>
       </nav>
       <div class="ga-hero-grid">
         <div class="ga-hero-text">
@@ -282,6 +297,20 @@ ${g.body.trim()}
     </div>
   </article>
 
+  <!-- Läs vidare: två andra guider, i första hand från samma kategori -->
+  <section class="ga-more g-wrap" aria-labelledby="ga-more-title">
+    <h2 id="ga-more-title" class="ga-more-title">Läs vidare</h2>
+    <ul class="ga-more-list">
+${related(g).map((r) => `      <li class="ga-more-item">
+        <p class="g-meta"><span>${esc(r.category)}</span><span>${r.minutes} min läsning</span></p>
+        <h3 class="ga-more-h"><a class="ga-more-link" href="${r.path}">${esc(r.title)}</a></h3>
+        <p class="ga-more-teaser">${esc(r.teaser)}</p>
+        <p class="gk-more" aria-hidden="true">Läs guiden <span>→</span></p>
+      </li>`).join('\n')}
+    </ul>
+    <p class="ga-more-all"><a class="g-textlink" href="/guider">Alla guider <span aria-hidden="true">→</span></a></p>
+  </section>
+
   <!-- Avslutning med sidans formulär (samma formulär som på startsidan, src/lead-dock.js) -->
   <section class="ga-cta" id="kontakt-guide" aria-labelledby="ga-cta-title">
     <div class="g-wrap">
@@ -292,7 +321,7 @@ ${g.body.trim()}
         <div class="wz-shell" data-wz-mount="guide"></div>
         <noscript><p class="ga-cta-noscript"><a class="klaro-button klaro-button--primary" href="/#kontakt">Få konkreta idéer <span aria-hidden="true">→</span></a></p></noscript>
       </div>
-      <p class="ga-cta-alt"><a class="g-textlink" href="mailto:hej@studioklaro.se">Eller mejla hej@studioklaro.se</a></p>
+      <p class="ga-cta-alt"><a class="g-textlink" href="mailto:hej@studioklaro.se">Eller mejla hej@studioklaro.se</a><a class="g-textlink" href="/priser">Se priser och upplägg</a><a class="g-textlink" href="/#processen">Så går ett projekt till</a></p>
     </div>
   </section>
   </main>`;
@@ -317,7 +346,7 @@ ${g.body.trim()}
       description: g.description,
       image: `${SITE}${g.ogImage}`,
       datePublished: g.published,
-      dateModified: g.modified,
+      ...(g.updated ? { dateModified: g.updated } : {}),
       author: { '@id': `${SITE}/#business` },
       publisher: { '@id': `${SITE}/#business` },
       isPartOf: { '@id': `${SITE}/#website` },
@@ -331,12 +360,11 @@ ${g.body.trim()}
   ];
 
   const extraHead = `<meta property="article:published_time" content="${g.published}">
-<meta property="article:modified_time" content="${g.modified}">
-<meta property="article:section" content="${esc(g.category)}">
+${g.updated ? `<meta property="article:modified_time" content="${g.updated}">\n` : ''}<meta property="article:section" content="${esc(g.category)}">
 `;
 
   return page({
-    url: g.url, title: g.seoTitle, description: g.description, ogType: 'article',
+    url: g.url, title: g.seoTitle, ogTitle: g.title, description: g.description, ogType: 'article',
     ogImage: g.ogImage, ogImageAlt: g.ogImageAlt, graph, extraHead, body,
     scripts: '<script type="module" src="/src/lead-dock.js"></script>\n',
   });
@@ -344,10 +372,10 @@ ${g.body.trim()}
 
 /* ---------- Sitemap och llms.txt ---------- */
 function withSitemap(xml) {
-  const lastmod = guides.map((g) => g.modified).sort().at(-1);
+  const lastmod = guides.map((g) => g.lastmod).sort().at(-1);
   const entry = (loc, mod, priority) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${mod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
   const block = ['  <!-- guider:start – genereras av scripts/build-guides.mjs -->',
-    entry(HUB.url, lastmod, '0.7'), ...guides.map((g) => entry(g.url, g.modified, '0.7')),
+    entry(HUB.url, lastmod, '0.7'), ...guides.map((g) => entry(g.url, g.lastmod, '0.7')),
     '  <!-- guider:end -->'].join('\n');
   const re = /  <!-- guider:start[\s\S]*?<!-- guider:end -->/;
   return re.test(xml) ? xml.replace(re, block) : xml.replace('</urlset>', block + '\n</urlset>');

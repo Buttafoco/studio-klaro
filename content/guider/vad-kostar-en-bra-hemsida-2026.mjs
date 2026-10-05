@@ -13,12 +13,11 @@ export default {
   seoTitle: 'Vad kostar en bra hemsida 2026? | Studio Klaro',
   description: 'Vad kostar en hemsida för ett företag 2026? Ungefärliga prisnivåer, vad som påverkar priset, hur du jämför offerter och vad det kostar efter lansering.',
   teaser: 'Från några tusenlappar till över 100 000 kronor. Vad som faktiskt påverkar priset – och hur du jämför två offerter utan att bara titta på totalsumman.',
-  category: 'Planering',
+  category: 'Priser & upplägg',
   eyebrow: 'Hemsidans kostnad',
   lead: 'Det korta svaret: allt från några tusenlappar till över 100 000 kronor. Den mer intressanta frågan är vad just ditt företag behöver – och vad som faktiskt påverkar priset. Här går vi igenom båda.',
   author: 'Studio Klaro',
   published: '2026-10-05',
-  modified: '2026-10-05',
   ogImage: '/guider/kostnad-og.jpg',
   ogImageAlt: 'Illustration av en hemsida med en organisk prislapp, en prisstege i fyra steg och en offert med bockar.',
   illustrationLabel: 'Illustration av en hemsida med en organisk prislapp, en liten prisstege i fyra steg från bygga själv till skräddarsytt och en offert där några rader är avbockade.',
@@ -155,7 +154,7 @@ export default {
     <li>${tick}<h3>Google kan förstå sidan</h3><p>Det finns en bra teknisk grund för SEO, indexering och struktur.</p></li>
     <li>${tick}<h3>Den känns som ditt företag</h3><p>Inte som en mall där bara logotypen har bytts ut.</p></li>
   </ul>
-  <p>Vi går igenom flera av punkterna mer i detalj i guiderna om <a href="/guider/darfor-tappar-du-kunder-pa-mobilen">mobilen</a> och om <a href="/guider/varfor-syns-inte-mitt-foretag-pa-google">att synas på Google</a>.</p>
+  <p>Vi går igenom flera av punkterna mer i detalj i guiderna om <a href="/guider/mobilanpassad-hemsida-8-vanliga-problem">mobilen</a> och om <a href="/guider/varfor-syns-inte-mitt-foretag-pa-google">att synas på Google</a>.</p>
 </section>
 
 <section class="ga-sec" aria-labelledby="efter-lansering">

@@ -16,7 +16,6 @@ export default {
   lead: 'En hemsida kan se professionell ut och ändå göra det onödigt svårt för kunden att förstå, välja och ta nästa steg. Här är tre vanliga misstag – och vad du kan göra åt dem.',
   author: 'Studio Klaro',
   published: '2026-10-05',
-  modified: '2026-10-05',
   ogImage: '/guider/3-misstag-og.jpg',
   ogImageAlt: 'Illustration av en hemsida med tre markerade problem: en otydlig rubrik, flera likvärdiga knappar och en trång mobilversion.',
   illustrationLabel: 'Illustration av en hemsida med tre markerade problem: en allmän rubrik utan konkret erbjudande, tre likadana knappar som tävlar om uppmärksamheten och en mobilversion där allt bara har krympts.',

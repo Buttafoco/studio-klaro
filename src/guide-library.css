@@ -1,9 +1,9 @@
 /* ==========================================================================
    Studio Klaro – guidebiblioteket (/guider). Laddas efter src/guide.css och använder dess variabler
    (--g-*), metarad, länkar och fokuslägen. Kort hero → kategorirad → guiderna → avslutning.
-   Guidernas layout styrs av position bland de synliga: .is-lead (utvald, störst), .is-next (stora rader,
-   .is-flip byter sida – används när högst två guider följer) och .is-grid (övriga i ett responsivt rutnät). Klasserna sätts om av src/guide-library.js
-   när filtret ändras, så sidan fungerar oförändrad när fler guider publiceras.
+   Den första synliga guiden är utvald (.is-lead), övriga ligger i ett rutnät (.is-grid) med två eller tre
+   kolumner (data-cols på listan). Klasserna sätts om av src/guide-library.js när filtret ändras, så sidan
+   fungerar oförändrad när fler guider publiceras.
    ========================================================================== */
 
 /* ---------- Hero: kort och redaktionell ---------- */
@@ -29,42 +29,51 @@
 .gcat-btn:focus-visible{outline:2px solid var(--g-ink);outline-offset:3px;border-radius:999px;}
 
 /* ---------- Guiderna ---------- */
-.gk-list{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:72px 32px;}
+.gk-list{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:32px;row-gap:0;}
 .gk-list[data-cols="2"]{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;}
+.gk-item{position:relative;min-width:0;}
 .gk-item[hidden]{display:none;}
-.gk-item.is-lead,.gk-item.is-next{grid-column:1 / -1;}
-.gk{position:relative;display:grid;gap:24px;align-content:start;}
-/* Illustrationen ligger på en mjuk, organiskt rundad ljusblå yta */
-.gk-media{background:var(--g-sky);border-radius:48px 36px 52px 32px / 40px 52px 36px 48px;padding:20px 24px;transition:transform .5s var(--g-ease);}
+.gk{position:relative;}
+/* Illustrationen: samma proportion (3:2) på alla guider, på en mjuk, organiskt rundad ljusblå yta */
+.gk-media{display:flex;align-items:center;justify-content:center;aspect-ratio:3 / 2;padding:5% 6%;background:var(--g-sky);border-radius:48px 36px 52px 32px / 40px 52px 36px 48px;overflow:hidden;transition:transform .5s var(--g-ease);}
+.gk-media .g-illus{width:100%;}
 .gk-text{min-width:0;}
-.gk-title{font-weight:800;font-size:clamp(21px,1.9vw,25px);line-height:1.18;letter-spacing:-0.02em;margin:14px 0 0;text-wrap:balance;}
+.gk-title{font-weight:800;font-size:clamp(21px,1.9vw,25px);line-height:1.18;letter-spacing:-0.02em;margin:10px 0 0;text-wrap:balance;}
 .gk-link{color:var(--g-ink);text-decoration:none;}
 .gk-link:hover{color:var(--g-ink);}
-/* Hela guiden är klickbar via rubriklänken – med ett tydligt fokusläge runt hela ytan */
-.gk-link::after{content:'';position:absolute;inset:-10px;z-index:1;border-radius:32px;}
+/* Hela guiden är klickbar via rubriklänken (en riktig länk per guide) – med ett tydligt fokusläge runt hela ytan */
+.gk-link::after{content:'';position:absolute;inset:-12px;z-index:1;border-radius:32px;}
 .gk-link:focus-visible{outline:none;}
 .gk-link:focus-visible::after{outline:2px solid var(--g-ink);outline-offset:2px;}
-.gk-teaser{font-size:16px;line-height:1.6;font-weight:500;color:var(--g-mute);margin:12px 0 0;max-width:46ch;}
-.gk-more{display:inline-flex;align-items:center;gap:8px;margin:20px 0 0;font-size:15px;font-weight:800;color:var(--g-blue-ink);}
-.gk-more span{transition:transform .3s var(--g-ease);}
+.gk-teaser{font-size:16px;line-height:1.6;font-weight:500;color:var(--g-mute);margin:10px 0 0;max-width:46ch;}
+.gk-more{display:inline-flex;align-items:center;gap:8px;margin:18px 0 0;font-size:15px;font-weight:800;color:var(--g-blue-ink);}
+.gk-more span{display:inline-block;transition:transform .3s var(--g-ease);}
+/* Hover: illustrationen lyfter lite och pilen glider – bara transform, ingen layoutförskjutning */
 .gk:hover .gk-media{transform:translateY(-4px);}
 .gk:hover .gk-more span{transform:translateX(5px);}
 .gk:hover .gk-title a{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:rgba(20,110,245,0.45);}
 
-/* Utvald: störst, illustration och text sida vid sida */
-.is-lead .gk{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;align-items:center;}
-.is-lead .gk-media{padding:32px 36px;}
-.is-lead .gk-title{font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.03em;margin-top:18px;}
-.is-lead .gk-teaser{font-size:18px;margin-top:18px;}
+/* Utvald: större bildyta, illustration och text sida vid sida, avgränsad från rutnätet med en tunn linje */
+.gk-item.is-lead{grid-column:1 / -1;margin-bottom:72px;padding-bottom:72px;border-bottom:1px solid var(--g-line);}
+.is-lead .gk{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;align-items:center;}
+.is-lead .gk-media{padding:5% 7%;}
+.is-lead .gk-title{font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.03em;margin-top:16px;}
+.is-lead .gk-teaser{font-size:18px;margin-top:16px;}
 .is-lead .gk-more{font-size:16px;margin-top:28px;}
 
-/* Nästa: något mindre, text först och illustrationen till höger – ger sidan en redaktionell rytm */
-.is-next .gk{grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:56px;align-items:center;padding-top:72px;border-top:1px solid var(--g-line);}
-.is-next .gk-media{order:2;}
-.is-next .gk-title{font-size:clamp(26px,2.6vw,36px);line-height:1.12;letter-spacing:-0.025em;}
-.is-next .gk-teaser{font-size:17px;}
-.is-next.is-flip .gk{grid-template-columns:minmax(0,.85fr) minmax(0,1fr);}
-.is-next.is-flip .gk-media{order:0;}
+/* Rutnätet: varje guide delar rader med sina grannar (subgrid) – bild, metarad, rubrik, ingress och länk – så att
+   metaraden startar på samma höjd och ingress och länk ligger i linje även när rubrikerna har olika antal rader. */
+.gk-item.is-grid{display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:0;margin-bottom:64px;}
+.is-grid .gk{grid-row:1 / -1;display:grid;grid-template-rows:subgrid;row-gap:0;}
+.is-grid .gk-text{display:contents;}
+.is-grid .g-meta{margin-top:22px;align-self:start;}
+.is-grid .gk-more{align-self:end;}
+@supports not (grid-template-rows:subgrid){
+  .gk-item.is-grid{display:block;}
+  .is-grid .gk{display:flex;flex-direction:column;height:100%;}
+  .is-grid .gk-text{display:flex;flex-direction:column;flex:1;}
+  .is-grid .gk-more{margin-top:auto;padding-top:18px;}
+}
 
 /* Kort intoning när filtret visar en guide (bara opacity/transform) */
 @keyframes gkIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
@@ -79,23 +88,21 @@
 
 /* ---------- Responsivt ---------- */
 @media (max-width:1024px){
-  .gk-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:64px 28px;}
+  .gk-list,.gk-list[data-cols="2"]{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px;}
   .is-lead .gk{grid-template-columns:minmax(0,1fr);gap:28px;}
   .is-lead .gk-media{max-width:680px;}
-  .is-next .gk{grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:36px;padding-top:64px;}
-  .is-next.is-flip .gk{grid-template-columns:minmax(0,.8fr) minmax(0,1fr);}
 }
 @media (max-width:640px){
   .gh{padding-top:40px;}
   .gh-intro{font-size:17px;margin-top:20px;}
   .gh-cloud{top:24px;right:0;width:96px;opacity:.75;}
   .gcat{margin:32px -16px 0;padding:6px 16px;}
-  .gk-list,.gk-list[data-cols="2"]{grid-template-columns:minmax(0,1fr);gap:56px;margin-top:36px;}
-  .gk{gap:20px;}
-  .is-lead .gk-media,.gk-media{padding:16px 18px;border-radius:36px 28px 40px 26px / 30px 40px 28px 36px;}
-  .is-lead .gk-teaser,.is-next .gk-teaser{font-size:16px;}
-  .is-next .gk,.is-next.is-flip .gk{grid-template-columns:minmax(0,1fr);gap:20px;padding-top:48px;}
-  .is-next .gk-media{order:0;}
+  .gk-list,.gk-list[data-cols="2"]{grid-template-columns:minmax(0,1fr);margin-top:36px;}
+  .gk-item.is-lead{margin-bottom:48px;padding-bottom:48px;}
+  .is-lead .gk{gap:20px;}
+  .gk-item.is-grid{margin-bottom:52px;}
+  .gk-media,.is-lead .gk-media{border-radius:36px 28px 40px 26px / 30px 40px 28px 36px;}
+  .is-lead .gk-teaser{font-size:16px;}
   .gc{padding:48px 22px;border-radius:28px;}
   .gc-actions{flex-direction:column;}
   .gc-btn{width:100%;}

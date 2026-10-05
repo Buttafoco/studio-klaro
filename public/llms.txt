@@ -39,10 +39,10 @@ Fakta från webbplatsen:
 
 - [Guider](https://studioklaro.se/guider): Guider om webbdesign, synlighet och digitala kundvägar för småföretag
 - [3 misstag på din hemsida som kan få dig att tappa kunder](https://studioklaro.se/guider/3-misstag-pa-din-hemsida-som-kan-fa-dig-att-tappa-kunder): Upptäck tre vanliga misstag på företagshemsidor och hur du gör det enklare för rätt kunder att förstå, välja och ta nästa steg.
-- [Därför tappar du kunder på mobilen utan att märka det](https://studioklaro.se/guider/darfor-tappar-du-kunder-pa-mobilen): Åtta vanliga anledningar till att företag tappar kunder på mobilen – från otydlig hierarki och små knappar till långa formulär och popup-rutor.
-- [Vad kostar en bra hemsida 2026?](https://studioklaro.se/guider/vad-kostar-en-bra-hemsida-2026): Vad kostar en hemsida för ett företag 2026? Ungefärliga prisnivåer, vad som påverkar priset, hur du jämför offerter och vad det kostar efter lansering.
-- [Varför syns inte mitt företag på Google?](https://studioklaro.se/guider/varfor-syns-inte-mitt-foretag-pa-google): Tio vanliga anledningar till att ett företag inte syns på Google – och vad du kan göra åt dem, från Search Console och tydliga sidor till lokal synlighet.
+- [Mobilanpassad hemsida: 8 vanliga problem att kontrollera](https://studioklaro.se/guider/mobilanpassad-hemsida-8-vanliga-problem): Kontrollera åtta vanliga problem som kan göra företagets hemsida svårare att använda på mobilen – från innehåll och knappar till formulär och prestanda.
 - [Webbdesign 2026: 8 trender som faktiskt spelar roll](https://studioklaro.se/guider/webbdesign-2026-8-trender-som-faktiskt-spelar-roll): Åtta webbdesigntrender för 2026 som faktiskt spelar roll för företag – från egen identitet och kortare text till mobilen och prestanda.
+- [Varför syns inte mitt företag på Google?](https://studioklaro.se/guider/varfor-syns-inte-mitt-foretag-pa-google): Tio vanliga anledningar till att ett företag inte syns på Google – och vad du kan göra åt dem, från Search Console och tydliga sidor till lokal synlighet.
+- [Vad kostar en bra hemsida 2026?](https://studioklaro.se/guider/vad-kostar-en-bra-hemsida-2026): Vad kostar en hemsida för ett företag 2026? Ungefärliga prisnivåer, vad som påverkar priset, hur du jämför offerter och vad det kostar efter lansering.
 
 ## Om Studio Klaro
 

@@ -18,7 +18,6 @@ export default {
   lead: 'Webbdesign förändras snabbt, men ditt företag behöver inte bygga om hemsidan varje gång en ny trend dyker upp. 2026 handlar mindre om en viss stil och mer om tydlighet, identitet, användarupplevelse – och att våga kännas mänsklig.',
   author: 'Studio Klaro',
   published: '2026-10-05',
-  modified: '2026-10-05',
   featured: true,
   ogImage: '/guider/webbdesign-2026-og.jpg',
   ogImageAlt: 'Illustration av en hemsida med stor typografi, en handritad understrykning, en mobilvy med tydliga val och en snabbhetsmätare.',
