@@ -937,6 +937,28 @@
   }
 
   /* ---------- En sista koll – avslutning före footern ---------- */
+  /* Guide-puff: en tunn redaktionell rad mellan FAQ och "En sista koll". Hela raden är klickbar via länken. */
+  .gp{max-width:1140px;margin:clamp(72px,6vw,88px) auto 0;padding:0 20px;box-sizing:border-box;}
+  .gp-row{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr) auto;align-items:center;gap:20px 48px;padding:32px 0;border-top:1px solid rgba(15,23,42,0.12);border-bottom:1px solid rgba(15,23,42,0.12);}
+  .gp-label{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin:0;font-size:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#0F5AD1;}
+  .gp-dots{display:flex;}
+  .gp-dots i{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#146EF5;border:2px solid #fff;color:#fff;font-style:normal;font-size:11px;font-weight:800;letter-spacing:0;}
+  .gp-dots i + i{margin-left:-6px;}
+  .gp-title{font-size:clamp(22px,2.2vw,28px);font-weight:800;line-height:1.2;letter-spacing:-0.02em;color:#0F172A;margin:0 0 8px;text-wrap:balance;}
+  .gp-desc{font-size:16px;line-height:1.6;font-weight:500;color:#52657A;margin:0;max-width:58ch;}
+  .gp-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:15px;font-weight:800;color:#0F5AD1;text-decoration:none;white-space:nowrap;}
+  .gp-link::after{content:'';position:absolute;inset:0;}
+  .gp-link span{transition:transform .3s cubic-bezier(0.22,1,0.36,1);}
+  .gp-row:hover .gp-link span{transform:translateX(4px);}
+  .gp-row:hover .gp-title{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:rgba(20,110,245,0.4);}
+  .gp-link:focus-visible{outline:none;}
+  .gp-link:focus-visible::after{outline:2px solid #146EF5;outline-offset:6px;border-radius:12px;}
+  @media (max-width:820px){
+    .gp-row{grid-template-columns:minmax(0,1fr);gap:14px;padding:28px 0;}
+    .gp-label{flex-direction:row;align-items:center;}
+  }
+  @media (max-width:640px){ .gp{padding:0 16px;} }
+  @media (prefers-reduced-motion: reduce){ .gp-link span{transition:none;} .gp-row:hover .gp-link span{transform:none;} }
   .lc{max-width:1140px;margin:var(--faq-pad) auto 0;padding:0 20px;}
   .lc-box{background:#fff;border:1px solid rgba(74,91,112,0.12);border-radius:36px;padding:72px 64px 64px;box-shadow:0 1px 2px rgba(15,23,42,0.03);}
   .lc-eyebrow{font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;}
@@ -2552,6 +2574,18 @@
     <p class="faq-foot"><a class="faq-contact" href="#kontakt">Hittar du inte svaret? Skriv till oss <span aria-hidden="true">→</span></a></p>
   </section>
 
+  <!-- GUIDE-PUFF – kompakt redaktionell rad mellan FAQ och "En sista koll" (inget kort). Guiderna: /guider -->
+  <section class="gp" aria-labelledby="gp-title">
+    <div class="gp-row">
+      <p class="gp-label"><span class="gp-dots" aria-hidden="true"><i>1</i><i>2</i><i>3</i></span>Guide · Webbdesign</p>
+      <div class="gp-body">
+        <h2 id="gp-title" class="gp-title">3 misstag på din hemsida som kan få dig att tappa kunder</h2>
+        <p class="gp-desc">Tre vanliga hinder som gör det svårare för kunder att förstå, välja och ta nästa steg – och vad du kan göra åt dem.</p>
+      </div>
+      <a class="gp-link" href="/guider/3-misstag-pa-din-hemsida-som-kan-fa-dig-att-tappa-kunder" aria-describedby="gp-title">Läs guiden <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
   <!-- EN SISTA KOLL – ersätter den generiska CTA-remsan före footern -->
   <section class="lc" id="sista-koll" aria-labelledby="lc-title">
     <div class="lc-box">
@@ -2623,6 +2657,7 @@
             <li><a href="/#portfolio">Case</a></li>
             <li><a href="/priser">Priser</a></li>
             <li><a href="/seo-koll">SEO</a></li>
+            <li><a href="/guider">Guider</a></li>
             <li><a href="/om">Om</a></li>
           </ul>
         </nav>

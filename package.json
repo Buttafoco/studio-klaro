@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node scripts/check-seo.mjs && node --test \"tests/*.test.mjs\"",
+    "test": "node scripts/build-guides.mjs --check && node scripts/check-seo.mjs && node --test \"tests/*.test.mjs\"",
     "check:seo:dist": "node scripts/check-seo.mjs dist",
     "dev": "vite",
+    "build:guides": "node scripts/build-guides.mjs",
     "build": "vite build"
   },
   "keywords": [],

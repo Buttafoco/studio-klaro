@@ -1,5 +1,13 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { readdirSync, existsSync } from 'fs';
+
+// Guiderna genereras av scripts/build-guides.mjs till guider/*.html och tas med automatiskt.
+const guidePages = existsSync(resolve(__dirname, 'guider'))
+  ? Object.fromEntries(readdirSync(resolve(__dirname, 'guider'))
+      .filter((f) => f.endsWith('.html'))
+      .map((f) => ['guider-' + f.replace(/\.html$/, ''), resolve(__dirname, 'guider', f)]))
+  : {};
 
 export default defineConfig({
   build: {
@@ -16,6 +24,7 @@ export default defineConfig({
         skonhetssalong: resolve(__dirname, 'hemsida-skonhetssalong-stockholm.html'),
         seoKoll: resolve(__dirname, 'seo-koll.html'),
         seraDemo: resolve(__dirname, 'demo/sera.html'),
+        ...guidePages,
       },
     },
   },

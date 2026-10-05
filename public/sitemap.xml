@@ -54,4 +54,18 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- guider:start – genereras av scripts/build-guides.mjs -->
+  <url>
+    <loc>https://studioklaro.se/guider</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://studioklaro.se/guider/3-misstag-pa-din-hemsida-som-kan-fa-dig-att-tappa-kunder</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- guider:end -->
 </urlset>

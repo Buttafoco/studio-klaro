@@ -35,6 +35,11 @@ Fakta från webbplatsen:
 - [Hemsida för fotografer](https://studioklaro.se/hemsida-fotograf): Bildfokuserade hemsidor och portfolios för fotografer
 - [Portfolio](https://studioklaro.se/portfolio): Portfolios för designers, fotografer, kreatörer, frilansare och studenter
 
+## Guider
+
+- [Guider](https://studioklaro.se/guider): Guider om webbdesign, synlighet och digitala kundvägar för småföretag
+- [3 misstag på din hemsida som kan få dig att tappa kunder](https://studioklaro.se/guider/3-misstag-pa-din-hemsida-som-kan-fa-dig-att-tappa-kunder): Upptäck tre vanliga misstag på företagshemsidor och hur du gör det enklare för rätt kunder att förstå, välja och ta nästa steg.
+
 ## Om Studio Klaro
 
 - [Om oss](https://studioklaro.se/om): Arbetssätt, principer och kompetensområden – webbdesign, UX/UI, utveckling, SEO, visuell identitet och AI-stödda arbetssätt

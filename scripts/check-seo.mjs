@@ -21,6 +21,9 @@ const clean = (s) => String(s || '').replace(/\s+/g, ' ').trim();
 // Sidorna hämtas från Vite-konfigurationen så att listan aldrig glider isär.
 const viteConfig = fs.readFileSync(path.join(ROOT, 'vite.config.js'), 'utf8');
 const pageFiles = [...viteConfig.matchAll(/resolve\(__dirname, '([^']+\.html)'\)/g)].map((m) => m[1]);
+// Guiderna (genererade av scripts/build-guides.mjs) läggs till i Vite-konfigurationen via en katalogläsning.
+const guideDir = path.join(ROOT, 'guider');
+if (fs.existsSync(guideDir)) pageFiles.push(...fs.readdirSync(guideDir).filter((f) => f.endsWith('.html')).sort().map((f) => `guider/${f}`));
 if (!pageFiles.length) fail('vite.config.js', 'hittade inga sidor');
 
 const urlFor = (file) => SITE + '/' + file.replace(/(^|\/)index\.html$/, '').replace(/\.html$/, '');

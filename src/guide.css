@@ -1,0 +1,299 @@
+/* ==========================================================================
+   Studio Klaro – guider (/guider och /guider/<slug>). Sidorna genereras av scripts/build-guides.mjs.
+   Samma språk som resten av sajten: ljusblå canvas (#DCEEFF), Manrope, mörk marin text, accenten #146EF5,
+   organiska former (knappens blob, molnen) och tunna avdelare i stället för kort. Rörelse bara som en kort
+   intoning högst upp och en markering i innehållsförteckningen – inget som stör läsningen.
+   ========================================================================== */
+:root{--g-bg:#DCEEFF;--g-ink:#0F172A;--g-text:#1E2A3D;--g-mute:#4A5B70;--g-soft:#52657A;--g-blue:#146EF5;--g-blue-ink:#0F5AD1;
+  --g-sky:#EAF3FF;--g-line:rgba(15,23,42,0.12);--g-ease:cubic-bezier(0.22,1,0.36,1);
+  --g-blob:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 268' preserveAspectRatio='none'%3E%3Cpath d='M22 138C10 58 96 10 214 14C318 18 372 36 468 32C590 26 706 8 838 16C950 24 996 84 988 144C980 206 928 250 818 246C722 242 664 226 568 234C478 242 404 258 282 254C148 250 34 222 22 138Z'/%3E%3C/svg%3E");}
+
+/* ---------- Bas (samma som övriga sidor) ---------- */
+*{box-sizing:border-box;}
+body{margin:0;background:var(--g-bg);font-family:'Manrope',system-ui,sans-serif;color:var(--g-ink);}
+a{color:var(--g-blue-ink);}
+a:hover{color:#0B4BB3;}
+::selection{background:var(--g-blue);color:#fff;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--g-ink);outline-offset:3px;border-radius:4px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
+.nav-wrap{position:sticky;top:0;z-index:50;}
+.nav-capsule{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:28px 20px;opacity:0;transform:translateY(-18px);animation:fadeUp .6s var(--g-ease) .05s forwards;}
+@media (max-width:820px){
+  [data-rnav]{display:none!important;}
+  [data-rhide]{display:none!important;}
+  [data-rshow]{display:block!important;}
+}
+
+.g-wrap{max-width:1140px;margin:0 auto;padding:0 20px;}
+main{overflow-x:clip;}
+
+/* Kort intoning högst upp (hoppas över vid intern navigering och vid reducerad rörelse) */
+@keyframes gIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.g-in{animation:gIn .7s var(--g-ease) both;}
+.g-in:nth-child(2){animation-delay:.06s;}
+.g-in:nth-child(3){animation-delay:.12s;}
+.g-in:nth-child(4){animation-delay:.18s;}
+.g-in:nth-child(5){animation-delay:.24s;}
+.g-in:nth-child(6){animation-delay:.3s;}
+.pt-fast .g-in,html.pt-internal-settled .g-in{animation:none;}
+
+/* ---------- Gemensamma delar ---------- */
+.g-crumbs{padding-top:16px;font-size:13px;}
+.g-crumbs ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;}
+.g-crumbs li{display:inline-flex;align-items:center;color:var(--g-soft);}
+.g-crumbs li + li::before{content:'/';margin:0 8px;color:#9AAABD;}
+.g-crumbs a{display:inline-flex;align-items:center;min-height:32px;color:var(--g-soft);text-decoration:none;}
+.g-crumbs a:hover{color:var(--g-ink);text-decoration:underline;}
+.g-crumbs li:last-child span{font-weight:600;color:var(--g-mute);}
+
+.g-eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g-blue-ink);margin:0 0 20px;}
+.g-meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;margin:0;font-size:13px;font-weight:600;color:var(--g-soft);}
+.g-meta span + span::before{content:'';display:inline-block;width:4px;height:4px;margin:0 12px 2px;border-radius:50%;background:rgba(82,101,122,0.45);vertical-align:middle;}
+.g-meta span:first-child{color:var(--g-blue-ink);font-weight:800;}
+
+.g-textlink{display:inline-flex;align-items:center;min-height:44px;font-size:14.5px;font-weight:700;color:var(--g-blue-ink);text-decoration:none;}
+.g-textlink:hover{text-decoration:underline;}
+
+/* Illustrationen: inline-SVG med viewBox – fast proportion från start, inget layoutskift */
+.g-illus{position:relative;}
+.g-illus-svg{display:block;width:100%;height:auto;overflow:visible;}
+.gi-blob{fill:#fff;opacity:.55;}
+.gi-cloud{fill:#fff;opacity:.95;}
+.gi-shadow{fill:rgba(15,23,42,0.05);}
+.gi-win{fill:#fff;stroke:rgba(15,23,42,0.08);}
+.gi-dot{fill:rgba(15,23,42,0.14);}
+.gi-url{fill:#F1F4F8;}
+.gi-rule{stroke:rgba(15,23,42,0.06);}
+.gi-ink{fill:var(--g-ink);opacity:.85;}
+.gi-sk{fill:rgba(15,23,42,0.12);}
+.gi-sk--dark{fill:rgba(15,23,42,0.3);}
+.gi-zone{fill:rgba(20,110,245,0.05);stroke:var(--g-blue);stroke-width:1.5;stroke-dasharray:5 6;}
+.gi-vague{font-family:'Manrope',system-ui,sans-serif;font-size:21px;font-weight:800;letter-spacing:-0.02em;fill:#9AAABD;}
+.gi-vague--2{fill:#B4C1D1;}
+.gi-ghost{fill:#fff;stroke:rgba(15,23,42,0.28);stroke-width:1.5;}
+.gi-ghost-t{font-family:'Manrope',system-ui,sans-serif;font-size:11px;font-weight:700;fill:var(--g-mute);text-anchor:middle;}
+.gi-card{fill:#F3F6FA;}
+.gi-phone-body{fill:#fff;stroke:var(--g-ink);stroke-width:6;}
+.gi-tiny-btn{fill:rgba(20,110,245,0.55);}
+.gi-thread{fill:none;stroke:var(--g-blue);stroke-width:2;stroke-linecap:round;stroke-dasharray:2 7;opacity:.7;}
+.gi-mark circle{fill:var(--g-blue);stroke:#fff;stroke-width:4;}
+.gi-mark text{font-family:'Manrope',system-ui,sans-serif;font-size:16px;font-weight:800;fill:#fff;text-anchor:middle;dominant-baseline:central;}
+@keyframes giPop{from{opacity:0;transform:scale(.6);}to{opacity:1;transform:none;}}
+.gi-mark{transform-box:fill-box;transform-origin:center;animation:giPop .5s cubic-bezier(0.34,1.56,0.64,1) both;}
+.gi-mark--1{animation-delay:.45s;}
+.gi-mark--2{animation-delay:.6s;}
+.gi-mark--3{animation-delay:.75s;}
+.pt-fast .gi-mark,html.pt-internal-settled .gi-mark{animation:none;}
+
+/* ---------- /guider ---------- */
+.gh{padding:72px 0 0;}
+.gh-h1{font-weight:800;font-size:clamp(44px,6.2vw,88px);line-height:1.02;letter-spacing:-0.035em;color:var(--g-ink);margin:0;max-width:14ch;text-wrap:balance;}
+.gh-intro{font-size:19px;line-height:1.65;font-weight:500;color:var(--g-mute);margin:32px 0 0;max-width:54ch;}
+
+/* Huvudinslaget: illustration och rubrik bär designen – inget kort. Hela ytan är klickbar via rubriklänken. */
+.gf{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:64px;align-items:center;margin-top:112px;padding-top:56px;border-top:1px solid var(--g-line);}
+.gf-illus{transition:transform .6s var(--g-ease);}
+.gf:hover .gf-illus{transform:translateY(-6px) rotate(-.6deg);}
+.gf-title{font-weight:800;font-size:clamp(30px,3.4vw,46px);line-height:1.1;letter-spacing:-0.025em;margin:18px 0 0;text-wrap:balance;}
+.gf-link{color:var(--g-ink);text-decoration:none;}
+.gf-link::after{content:'';position:absolute;inset:0;z-index:1;border-radius:24px;}
+.gf-link:hover{color:var(--g-ink);}
+.gf-link:focus-visible{outline:none;}
+.gf-link:focus-visible::after{outline:2px solid var(--g-ink);outline-offset:8px;}
+.gf-teaser{font-size:18px;line-height:1.65;font-weight:500;color:var(--g-mute);margin:20px 0 0;max-width:44ch;}
+.gf-more{display:inline-flex;align-items:center;gap:8px;margin:28px 0 0;font-size:16px;font-weight:800;color:var(--g-blue-ink);}
+.gf-more span{transition:transform .3s var(--g-ease);}
+.gf:hover .gf-more span{transform:translateX(5px);}
+.gf:hover .gf-title a{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;text-decoration-color:rgba(20,110,245,0.45);}
+
+/* Fler guider: redaktionell lista med tunna avdelare (visas först när det finns fler än en guide) */
+.gl{margin-top:120px;}
+.gl-title{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g-blue-ink);margin:0 0 24px;}
+.gl-list{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--g-line);}
+.gl-item{position:relative;padding:32px 0;border-top:1px solid var(--g-line);}
+.gl-h{font-size:clamp(22px,2.2vw,28px);font-weight:800;line-height:1.2;letter-spacing:-0.02em;margin:12px 0 8px;}
+.gl-h a{color:var(--g-ink);text-decoration:none;}
+.gl-h a::after{content:'';position:absolute;inset:0;}
+.gl-h a:hover{text-decoration:underline;}
+.gl-teaser{margin:0;font-size:16px;line-height:1.6;color:var(--g-mute);max-width:60ch;}
+
+/* Lugn avslutning */
+.gc{margin-top:clamp(120px,12vw,180px);text-align:center;}
+.gc-title{font-weight:800;font-size:clamp(32px,4vw,52px);line-height:1.08;letter-spacing:-0.03em;color:var(--g-ink);margin:0 auto;max-width:18ch;text-wrap:balance;}
+.gc-text{font-size:18px;line-height:1.65;font-weight:500;color:var(--g-mute);margin:20px auto 0;max-width:46ch;}
+.gc-actions{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:14px 28px;margin-top:36px;}
+.gc-btn{min-height:52px;font-size:16px;padding:15px 30px;}
+
+/* ---------- Artikeln ---------- */
+.ga-hero{padding-bottom:0;}
+.ga-hero .g-eyebrow{margin-top:56px;}
+.ga-h1{font-weight:800;font-size:clamp(40px,5.4vw,74px);line-height:1.04;letter-spacing:-0.035em;color:var(--g-ink);margin:0;max-width:17ch;text-wrap:balance;}
+.ga-lead{font-size:clamp(18px,1.6vw,21px);line-height:1.6;font-weight:500;color:var(--g-mute);margin:32px 0 0;max-width:58ch;}
+.ga-byline{display:flex;flex-wrap:wrap;align-items:center;gap:6px 0;margin:28px 0 0;font-size:14px;font-weight:600;color:var(--g-soft);}
+.ga-byline span + span::before{content:'';display:inline-block;width:4px;height:4px;margin:0 12px 2px;border-radius:50%;background:rgba(82,101,122,0.45);vertical-align:middle;}
+.ga-author{display:inline-flex;align-items:center;gap:10px;color:var(--g-ink);font-weight:800;}
+.ga-author::before{content:'';width:22px;height:14px;background:var(--g-blue);-webkit-mask:var(--g-blob) center / 100% 100% no-repeat;mask:var(--g-blob) center / 100% 100% no-repeat;}
+.ga-hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:center;}
+.ga-h1{font-size:clamp(40px,4.6vw,66px);}
+.ga-illus{margin-top:56px;animation-delay:.3s;}
+
+.ga-layout{display:grid;grid-template-columns:220px minmax(0,720px);justify-content:space-between;gap:64px;margin-top:112px;}
+.ga-layout > *{min-width:0;}
+.ga-body{grid-column:2;}
+
+/* Innehållsförteckning: smal sidokolumn på desktop, i flödet i mobilen */
+.g-toc{grid-column:1;grid-row:1;align-self:start;position:sticky;top:96px;}
+.g-toc-title{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g-mute);margin:0 0 14px;}
+.g-toc ol{list-style:none;margin:0;padding:0;border-left:1.5px solid var(--g-line);}
+.g-toc a{position:relative;display:flex;align-items:center;min-height:40px;padding:6px 0 6px 18px;margin-left:-1.5px;border-left:1.5px solid transparent;font-size:14.5px;font-weight:600;line-height:1.35;color:var(--g-soft);text-decoration:none;transition:color .25s ease,border-color .25s ease;}
+.g-toc a:hover{color:var(--g-ink);}
+.g-toc a.is-active{color:var(--g-ink);border-left-color:var(--g-blue);}
+.g-toc a:focus-visible{outline-offset:0;}
+
+/* Brödtext */
+.ga-sec{scroll-margin-top:100px;}
+.ga-sec + .ga-sec{margin-top:120px;}
+.ga-body h2{scroll-margin-top:100px;font-weight:800;font-size:clamp(28px,3vw,40px);line-height:1.12;letter-spacing:-0.025em;color:var(--g-ink);margin:0 0 28px;text-wrap:balance;}
+.g-h2-n{display:block;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g-blue-ink);margin-bottom:16px;}
+.ga-body h3{font-weight:800;font-size:clamp(20px,1.8vw,23px);line-height:1.25;letter-spacing:-0.015em;color:var(--g-ink);margin:56px 0 16px;}
+.ga-body p{font-size:18px;line-height:1.75;font-weight:500;color:var(--g-text);margin:0 0 22px;}
+.ga-body strong{font-weight:800;color:var(--g-ink);}
+.ga-body a{font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;text-decoration-color:rgba(15,90,209,0.4);}
+.ga-body a:hover{text-decoration-color:currentColor;}
+
+.g-list{list-style:none;margin:0 0 26px;padding:0;}
+.g-list li{position:relative;padding-left:26px;margin:0 0 14px;font-size:18px;line-height:1.7;font-weight:500;color:var(--g-text);}
+.g-list li::before{content:'';position:absolute;left:2px;top:.68em;width:8px;height:8px;border-radius:50%;background:var(--g-blue);}
+
+/* De tre frågorna: stora rader längs en blå tråd */
+.g-qs{list-style:none;margin:36px 0 40px;padding:0 0 0 2px;counter-reset:none;}
+.g-qs li{position:relative;display:flex;align-items:baseline;gap:22px;padding:18px 0 18px 30px;border-left:2px solid rgba(20,110,245,0.25);}
+.g-qs li::before{content:'';position:absolute;left:-7px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--g-bg);border:2px solid var(--g-blue);}
+.g-qs-n{flex:none;font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--g-blue-ink);font-variant-numeric:tabular-nums;}
+.g-qs-t{font-size:clamp(22px,2.4vw,30px);font-weight:800;line-height:1.2;letter-spacing:-0.02em;color:var(--g-ink);}
+
+/* Kontrollfråga: återkommande, lugn markering – en blå linje, ingen ruta */
+.g-check{margin:48px 0 0;padding:4px 0 4px 26px;border-left:3px solid var(--g-blue);}
+.g-check .g-check-label{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g-blue-ink);margin:0 0 10px;}
+.g-check .g-check-q{font-size:clamp(20px,2vw,25px);font-weight:800;line-height:1.3;letter-spacing:-0.015em;color:var(--g-ink);margin:0;text-wrap:balance;}
+
+/* Figurer: tre olika visuella exempel */
+.g-fig{margin:40px 0 44px;}
+.g-fig figcaption{margin-top:16px;font-size:14px;line-height:1.55;font-weight:500;color:var(--g-soft);max-width:60ch;}
+.ga-body .g-mock-label{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g-soft);margin:0 0 10px;}
+
+/* 1 · Före/efter: två små webbläsarfönster */
+.g-compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}
+.g-mock-frame{background:#fff;border-radius:18px;border:1px solid rgba(15,23,42,0.08);overflow:hidden;}
+.g-mock-bar{display:flex;gap:5px;padding:10px 14px;border-bottom:1px solid rgba(15,23,42,0.06);}
+.g-mock-bar i{width:7px;height:7px;border-radius:50%;background:rgba(15,23,42,0.14);}
+.g-mock-body{padding:22px 22px 24px;min-height:220px;display:flex;flex-direction:column;align-items:flex-start;}
+.ga-body .g-mock-h{font-size:21px;font-weight:800;line-height:1.18;letter-spacing:-0.02em;color:var(--g-ink);margin:0 0 10px;}
+.ga-body .g-mock-t{font-size:14px;line-height:1.55;color:var(--g-mute);margin:0 0 18px;}
+.g-mock--before .g-mock-frame{background:#F7F9FC;}
+.g-mock--before .g-mock-h{color:#6B7F99;}
+.g-mock-h mark{background:linear-gradient(transparent 62%,rgba(20,110,245,0.22) 62%);color:inherit;padding:0 1px;}
+.g-mock-btn{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding:10px 18px;font-size:13px;font-weight:700;color:#fff;white-space:nowrap;}
+.g-mock-btn::before{content:'';position:absolute;inset:-2px -3px;z-index:-1;background:var(--g-blue);-webkit-mask:var(--g-blob) center / 100% 100% no-repeat;mask:var(--g-blob) center / 100% 100% no-repeat;}
+.g-mock-btn--plain{color:var(--g-mute);padding:0;margin-top:auto;font-size:13px;text-decoration:underline;text-underline-offset:3px;}
+.g-mock-btn--plain::before{content:none;}
+.g-mock-keys{display:flex;gap:18px;margin:12px 0 0!important;font-size:12px!important;font-weight:800!important;color:var(--g-blue-ink)!important;}
+.g-mock-keys span::before{content:'';display:inline-block;width:14px;height:5px;margin-right:6px;border-radius:2px;background:rgba(20,110,245,0.3);vertical-align:middle;}
+
+/* 2 · Knapphierarki: två rader ovanpå varandra */
+.g-cta-demo{border-top:1px solid var(--g-line);border-bottom:1px solid var(--g-line);}
+.g-cta-row{padding:24px 0;}
+.g-cta-demo figcaption{margin:0;padding:0 0 22px;}
+.g-cta-row + .g-cta-row{border-top:1px dashed rgba(15,23,42,0.14);}
+.g-cta-stage{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;}
+.g-ghost{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1.5px solid rgba(15,23,42,0.22);border-radius:999px;font-size:14px;font-weight:700;color:var(--g-mute);background:#fff;}
+.g-mock-btn--lg{margin:0;padding:14px 28px;font-size:15px;}
+.g-quiet{font-size:14px;font-weight:700;color:var(--g-blue-ink);margin-left:14px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(15,90,209,0.35);}
+
+/* Olika verksamheter: rader med tunna avdelare */
+.g-paths{margin:8px 0 0;padding:0;border-bottom:1px solid var(--g-line);}
+.g-paths > div{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:20px;padding:16px 0;border-top:1px solid var(--g-line);}
+.g-paths dt{font-size:15px;font-weight:800;color:var(--g-ink);}
+.g-paths dd{margin:0;font-size:16px;line-height:1.5;font-weight:500;color:var(--g-text);}
+
+/* 3 · Två telefoner */
+.g-phones-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding:36px 24px 28px;border-radius:32px;background:var(--g-sky);}
+.g-phone-col{display:flex;flex-direction:column;align-items:center;}
+.g-phone{position:relative;display:flex;flex-direction:column;gap:7px;width:min(100%,200px);aspect-ratio:9/17;padding:26px 14px 16px;border:7px solid var(--g-ink);border-radius:32px;background:#fff;overflow:hidden;}
+.g-phone-notch{position:absolute;left:50%;top:8px;width:46px;height:7px;margin-left:-23px;border-radius:4px;background:var(--g-ink);}
+.g-pl{display:block;height:4px;border-radius:2px;background:rgba(15,23,42,0.13);}
+.g-pl--nav{width:40%;height:5px;margin-bottom:6px;background:rgba(15,23,42,0.5);}
+.g-pl--h{height:6px;background:rgba(15,23,42,0.35);}
+.g-pl--short{width:62%;}
+.g-pcols{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:6px 0;}
+.g-pcols i{display:block;height:44px;border-radius:5px;background:#F1F4F8;}
+.g-pbtn-sm{display:block;width:38px;height:12px;margin-top:auto;border-radius:6px;background:rgba(20,110,245,0.55);}
+.g-pnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.g-pnav b{display:block;width:42px;height:7px;border-radius:4px;background:var(--g-ink);}
+.g-pnav em{font-style:normal;font-size:11px;font-weight:800;color:var(--g-ink);}
+.g-ph{display:block;font-size:19px;font-weight:800;line-height:1.12;letter-spacing:-0.02em;color:var(--g-ink);}
+.g-pt{display:block;font-size:12px;line-height:1.45;font-weight:500;color:var(--g-mute);}
+.g-pinfo{display:block;font-size:10.5px;font-weight:700;color:var(--g-blue-ink);}
+.g-pthumb{position:relative;display:block;margin:auto -14px -16px;padding:22px 14px 16px;background:radial-gradient(120% 100% at 50% 100%,rgba(20,110,245,0.12),rgba(20,110,245,0) 70%);}
+.g-mock-btn--block{display:flex;justify-content:center;margin:0;padding:11px 10px;font-size:12.5px;}
+.ga-body .g-phone-cap{margin:18px 0 0;max-width:30ch;text-align:center;font-size:14px;line-height:1.5;color:var(--g-mute);}
+.g-phone-cap strong{display:block;margin-bottom:4px;font-size:15px;}
+.g-phone--copy{opacity:.92;}
+
+/* Checklista och avslutande mening */
+.g-checklist{list-style:none;margin:32px 0 0;padding:0;border-bottom:1px solid var(--g-line);}
+.g-checklist li{display:flex;align-items:center;gap:18px;padding:18px 0;border-top:1px solid var(--g-line);font-size:clamp(18px,1.8vw,21px);font-weight:800;line-height:1.35;letter-spacing:-0.01em;color:var(--g-ink);}
+.g-tick{flex:none;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--g-blue);}
+.g-tick svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+.ga-body .g-closing{margin:64px 0 40px;font-size:clamp(26px,3vw,38px);font-weight:800;line-height:1.18;letter-spacing:-0.025em;color:var(--g-ink);text-wrap:balance;}
+
+/* CTA med sidans formulär */
+.ga-cta{margin-top:clamp(120px,12vw,180px);text-align:center;}
+.ga-cta-title{font-weight:800;font-size:clamp(32px,4.2vw,56px);line-height:1.08;letter-spacing:-0.03em;color:var(--g-ink);margin:0 auto;max-width:18ch;text-wrap:balance;}
+.ga-cta-text{font-size:18px;line-height:1.65;font-weight:500;color:var(--g-mute);margin:20px auto 0;max-width:50ch;}
+.ga-cta-form{max-width:720px;margin:44px auto 0;text-align:left;}
+.ga-cta-noscript{text-align:center;}
+.ga-cta-alt{margin:18px 0 0;}
+
+/* ---------- Responsivt ---------- */
+@media (max-width:1024px){
+  .gf{grid-template-columns:minmax(0,1fr);gap:40px;}
+  .ga-hero-grid{grid-template-columns:minmax(0,1fr);gap:0;}
+  .ga-illus{max-width:640px;}
+  .gf-illus{max-width:640px;}
+  .ga-layout{grid-template-columns:minmax(0,1fr);gap:0;margin-top:80px;}
+  .ga-body{grid-column:1;max-width:720px;}
+  .g-toc{grid-column:1;grid-row:auto;position:static;max-width:720px;margin-bottom:72px;padding:24px 0;border-top:1px solid var(--g-line);border-bottom:1px solid var(--g-line);}
+  .g-toc ol{border-left:0;}
+  .g-toc a{padding-left:0;margin-left:0;border-left:0;}
+  .g-toc a.is-active{color:var(--g-soft);}
+}
+@media (max-width:640px){
+  .g-wrap{padding:0 16px;}
+  .gh{padding-top:48px;}
+  .gh-intro{font-size:17px;margin-top:24px;}
+  .gf{margin-top:72px;padding-top:40px;}
+  .gf-teaser{font-size:17px;}
+  .ga-hero .g-eyebrow{margin-top:40px;}
+  .ga-lead{margin-top:24px;}
+  .ga-illus{margin-top:48px;}
+  .ga-sec + .ga-sec{margin-top:88px;}
+  .ga-body p,.g-list li{font-size:17px;}
+  .ga-body h3{margin-top:44px;}
+  .g-qs li{gap:16px;padding:14px 0 14px 22px;}
+  .g-compare-grid,.g-phones-grid{grid-template-columns:minmax(0,1fr);}
+  .g-mock-body{min-height:0;}
+  .g-mock-btn--plain,.g-mock-btn{margin-top:4px;}
+  .g-phones-grid{gap:36px;padding:32px 16px 24px;border-radius:24px;}
+  .g-paths > div{grid-template-columns:minmax(0,1fr);gap:4px;}
+  .g-quiet{margin-left:0;}
+  .gc-actions{flex-direction:column;}
+  .gc-btn{width:100%;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .g-in,.gi-mark,.nav-capsule{animation:none!important;opacity:1!important;transform:none!important;}
+  .gf-illus,.gf-more span,.g-toc a{transition:none;}
+  .gf:hover .gf-illus,.gf:hover .gf-more span{transform:none;}
+}
