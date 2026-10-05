@@ -169,9 +169,10 @@ function hubPage() {
     .sort((a, b) => a[1].localeCompare(b[1], 'sv'));
   const count = (n) => `${n} ${n === 1 ? 'guide' : 'guider'}`;
 
-  // Layout efter position bland de synliga: 1 = utvald, 2 = nästa, övriga = rutnät (sätts om av filtret)
-  const pos = (i) => (i === 0 ? 'is-lead' : i === 1 ? 'is-next' : 'is-grid');
-  const card = (g, i) => `      <li class="gk-item ${pos(i)}" data-category="${slugify(g.category)}">
+  // Layout efter position bland de synliga (samma regel i src/guide-library.js, som sätter om den vid filtrering):
+  // 1 = utvald. Är det högst två guider kvar visas de som stora rader med växlande sida, annars i ett rutnät.
+  const pos = (i, n) => (i === 0 ? 'is-lead' : n - 1 <= 2 ? (i === 2 ? 'is-next is-flip' : 'is-next') : 'is-grid');
+  const card = (g, i) => `      <li class="gk-item ${pos(i, ordered.length)}" data-category="${slugify(g.category)}">
         <article class="gk" aria-labelledby="gk-${g.slug}">
           <div class="gk-media">${illus(g, `gk${i}`, 'gk-illus')}</div>
           <div class="gk-text">

@@ -10,17 +10,23 @@
   var items = Array.prototype.slice.call(document.querySelectorAll('.gk-item'));
   var status = document.querySelector('[data-gcat-status]');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var POS = ['is-lead', 'is-next'];
+  // Samma regel som i scripts/build-guides.mjs: 1 = utvald; högst två kvar = stora rader med växlande sida; annars rutnät
+  function pos(i, n) {
+    if (i === 0) return ['is-lead'];
+    if (n - 1 <= 2) return i === 2 ? ['is-next', 'is-flip'] : ['is-next'];
+    return ['is-grid'];
+  }
 
   function apply(cat, opts) {
+    var matches = items.filter(function (li) { return !cat || li.getAttribute('data-category') === cat; });
     var shown = 0;
     items.forEach(function (li) {
-      var match = !cat || li.getAttribute('data-category') === cat;
+      var match = matches.indexOf(li) > -1;
       var wasHidden = li.hidden;
       li.hidden = !match;
-      li.classList.remove('is-lead', 'is-next', 'is-grid', 'is-entering');
+      li.classList.remove('is-lead', 'is-next', 'is-flip', 'is-grid', 'is-entering');
       if (!match) return;
-      li.classList.add(POS[shown] || 'is-grid');
+      li.classList.add.apply(li.classList, pos(shown, matches.length));
       if (wasHidden && opts.animate && !reduce) {
         void li.offsetWidth; // starta om intoningen
         li.classList.add('is-entering');

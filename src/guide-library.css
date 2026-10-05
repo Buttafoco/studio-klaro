@@ -1,8 +1,8 @@
 /* ==========================================================================
    Studio Klaro – guidebiblioteket (/guider). Laddas efter src/guide.css och använder dess variabler
    (--g-*), metarad, länkar och fokuslägen. Kort hero → kategorirad → guiderna → avslutning.
-   Guidernas layout styrs av position bland de synliga: .is-lead (utvald, störst), .is-next (nästa,
-   något mindre) och .is-grid (övriga i ett responsivt rutnät). Klasserna sätts om av src/guide-library.js
+   Guidernas layout styrs av position bland de synliga: .is-lead (utvald, störst), .is-next (stora rader,
+   .is-flip byter sida – används när högst två guider följer) och .is-grid (övriga i ett responsivt rutnät). Klasserna sätts om av src/guide-library.js
    när filtret ändras, så sidan fungerar oförändrad när fler guider publiceras.
    ========================================================================== */
 
@@ -62,6 +62,8 @@
 .is-next .gk-media{order:2;}
 .is-next .gk-title{font-size:clamp(26px,2.6vw,36px);line-height:1.12;letter-spacing:-0.025em;}
 .is-next .gk-teaser{font-size:17px;}
+.is-next.is-flip .gk{grid-template-columns:minmax(0,.85fr) minmax(0,1fr);}
+.is-next.is-flip .gk-media{order:0;}
 
 /* Kort intoning när filtret visar en guide (bara opacity/transform) */
 @keyframes gkIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
@@ -80,6 +82,7 @@
   .is-lead .gk{grid-template-columns:minmax(0,1fr);gap:28px;}
   .is-lead .gk-media{max-width:680px;}
   .is-next .gk{grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:36px;padding-top:64px;}
+  .is-next.is-flip .gk{grid-template-columns:minmax(0,.8fr) minmax(0,1fr);}
 }
 @media (max-width:640px){
   .gh{padding-top:40px;}
@@ -90,7 +93,7 @@
   .gk{gap:20px;}
   .is-lead .gk-media,.gk-media{padding:16px 18px;border-radius:36px 28px 40px 26px / 30px 40px 28px 36px;}
   .is-lead .gk-teaser,.is-next .gk-teaser{font-size:16px;}
-  .is-next .gk{grid-template-columns:minmax(0,1fr);gap:20px;padding-top:48px;}
+  .is-next .gk,.is-next.is-flip .gk{grid-template-columns:minmax(0,1fr);gap:20px;padding-top:48px;}
   .is-next .gk-media{order:0;}
   .gc{padding:48px 22px;border-radius:28px;}
   .gc-actions{flex-direction:column;}
