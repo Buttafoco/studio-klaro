@@ -9,7 +9,19 @@ const guidePages = existsSync(resolve(__dirname, 'guider'))
       .map((f) => ['guider-' + f.replace(/\.html$/, ''), resolve(__dirname, 'guider', f)]))
   : {};
 
+// Lokalt (vite dev/preview): /guider ska ge guider/index.html som på Vercel, inte startsidan.
+const guideIndex = (req, res, next) => {
+  if (/^\/guider\/?(\?|#|$)/.test(req.url)) req.url = req.url.replace(/^\/guider\/?/, '/guider/index.html');
+  next();
+};
+const guideRoutes = {
+  name: 'guide-routes',
+  configureServer(server) { server.middlewares.use(guideIndex); },
+  configurePreviewServer(server) { server.middlewares.use(guideIndex); },
+};
+
 export default defineConfig({
+  plugins: [guideRoutes],
   build: {
     rollupOptions: {
       input: {
