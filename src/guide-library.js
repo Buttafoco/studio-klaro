@@ -17,8 +17,13 @@
     return ['is-grid'];
   }
 
+  var list = document.querySelector('.gk-list');
+  // Samma regel som i generatorn: två kolumner när antalet i rutnätet går jämnt upp i två men inte i tre
+  function cols(n) { return (n - 1) % 3 !== 0 && (n - 1) % 2 === 0 ? 2 : 3; }
+
   function apply(cat, opts) {
     var matches = items.filter(function (li) { return !cat || li.getAttribute('data-category') === cat; });
+    if (list) list.setAttribute('data-cols', String(cols(matches.length)));
     var shown = 0;
     items.forEach(function (li) {
       var match = matches.indexOf(li) > -1;

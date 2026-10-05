@@ -30,6 +30,7 @@
 
 /* ---------- Guiderna ---------- */
 .gk-list{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:72px 32px;}
+.gk-list[data-cols="2"]{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;}
 .gk-item[hidden]{display:none;}
 .gk-item.is-lead,.gk-item.is-next{grid-column:1 / -1;}
 .gk{position:relative;display:grid;gap:24px;align-content:start;}
@@ -89,7 +90,7 @@
   .gh-intro{font-size:17px;margin-top:20px;}
   .gh-cloud{top:24px;right:0;width:96px;opacity:.75;}
   .gcat{margin:32px -16px 0;padding:6px 16px;}
-  .gk-list{grid-template-columns:minmax(0,1fr);gap:56px;margin-top:36px;}
+  .gk-list,.gk-list[data-cols="2"]{grid-template-columns:minmax(0,1fr);gap:56px;margin-top:36px;}
   .gk{gap:20px;}
   .is-lead .gk-media,.gk-media{padding:16px 18px;border-radius:36px 28px 40px 26px / 30px 40px 28px 36px;}
   .is-lead .gk-teaser,.is-next .gk-teaser{font-size:16px;}

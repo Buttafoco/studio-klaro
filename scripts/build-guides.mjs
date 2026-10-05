@@ -171,6 +171,8 @@ function hubPage() {
 
   // Layout efter position bland de synliga (samma regel i src/guide-library.js, som sätter om den vid filtrering):
   // 1 = utvald. Är det högst två guider kvar visas de som stora rader med växlande sida, annars i ett rutnät.
+  // Rutnätets kolumner: tre, eller två när antalet går jämnt upp i två men inte i tre (så att inget kort blir ensamt)
+  const cols = (n) => ((n - 1) % 3 !== 0 && (n - 1) % 2 === 0 ? 2 : 3);
   const pos = (i, n) => (i === 0 ? 'is-lead' : n - 1 <= 2 ? (i === 2 ? 'is-next is-flip' : 'is-next') : 'is-grid');
   const card = (g, i) => `      <li class="gk-item ${pos(i, ordered.length)}" data-category="${slugify(g.category)}">
         <article class="gk" aria-labelledby="gk-${g.slug}">
@@ -206,7 +208,7 @@ function hubPage() {
 ${categories.map(([slug, name]) => `        <button type="button" class="gcat-btn" aria-pressed="false" data-cat="${slug}">${esc(name)}</button>`).join('\n')}
       </div>
       <p class="sr-only" aria-live="polite" data-gcat-status>Visar ${count(ordered.length)}</p>
-      <ol class="gk-list" role="list">
+      <ol class="gk-list" role="list" data-cols="${cols(ordered.length)}">
 ${ordered.map(card).join('\n')}
       </ol>
     </section>

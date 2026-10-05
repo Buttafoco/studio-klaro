@@ -459,6 +459,77 @@ main{overflow-x:clip;}
 .g-ov--cookie u{flex:1;height:26px;border-radius:999px;background:#fff;}
 .g-ov--cookie u + u{background:var(--g-blue);}
 
+
+/* ---------- Exempel i prisguiden ---------- */
+/* Illustrationens egna delar: prislapp, prisstege och offert */
+.gp-string{fill:none;stroke:var(--g-ink);stroke-width:1.5;opacity:.5;}
+.gp-tag-body{fill:var(--g-blue);}
+.gp-hole{fill:#fff;}
+.gp-kr{font-family:'Manrope',system-ui,sans-serif;font-size:34px;font-weight:800;letter-spacing:-0.02em;fill:#fff;text-anchor:middle;}
+.gp-tag{transform-box:fill-box;transform-origin:30% 0;animation:gpSwing 4s ease-in-out infinite;}
+@keyframes gpSwing{0%,100%{transform:rotate(0);}50%{transform:rotate(-2.5deg);}}
+.pt-fast .gp-tag,html.pt-internal-settled .gp-tag{animation:none;}
+.gp-step{fill:var(--g-sky);}
+.gp-step--on{fill:var(--g-blue);}
+.gp-paper{fill:#fff;stroke:rgba(15,23,42,0.08);}
+.gp-check{fill:#22A35E;}
+.gp-check--open{fill:none;stroke:rgba(15,23,42,0.25);stroke-width:1.5;}
+.gp-check-i{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* Numrerade underrubriker (faktorerna) */
+.g-h3-n{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:12px;border-radius:50%;background:var(--g-blue);color:#fff;font-size:14px;font-weight:800;vertical-align:2px;}
+
+/* Prisstegen: fyra nivåer som trappsteg */
+.g-ladder-list{list-style:none;margin:0;padding:28px 24px 22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:end;border-radius:28px;background:#fff;border:1px solid rgba(15,23,42,0.08);}
+.g-ladder-list li{display:flex;flex-direction:column;justify-content:flex-end;height:260px;}
+.g-ladder-bar{display:block;height:var(--h);margin-bottom:14px;border-radius:16px 16px 10px 10px;background:var(--g-sky);}
+.g-ladder-list li:nth-child(2) .g-ladder-bar{background:var(--g-blue);}
+.g-ladder-list b{font-size:14.5px;font-weight:800;line-height:1.25;color:var(--g-ink);}
+.g-ladder-list em{font-style:normal;margin-top:4px;font-size:13.5px;font-weight:700;color:var(--g-blue-ink);font-variant-numeric:tabular-nums;}
+
+/* Offerten som är för bra för att vara sann */
+.g-offer-card{position:relative;max-width:420px;padding:24px 26px 20px;border-radius:24px 30px 22px 28px;background:#fff;border:1px solid rgba(15,23,42,0.08);transform:rotate(-1deg);}
+.g-offer-card ul{list-style:none;margin:6px 0 0;padding:0;}
+.g-offer-card li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(15,23,42,0.12);font-size:15.5px;font-weight:700;color:var(--g-ink);}
+.g-offer-card li::before{content:'';width:16px;height:16px;flex:none;border-radius:50%;background:var(--g-sky) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F5AD1' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 12.5l3.2 3.2L17 9'/%3E%3C/svg%3E") center / 12px no-repeat;}
+.ga-body .g-offer-total{display:flex;align-items:baseline;justify-content:space-between;margin:14px 0 0;font-size:14px;font-weight:700;color:var(--g-soft);}
+.g-offer-total b{font-size:28px;font-weight:800;letter-spacing:-0.02em;color:var(--g-ink);}
+.g-offer-total em{position:absolute;right:-18px;bottom:-18px;display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:#FFD66B;border:3px solid #fff;font-style:normal;font-size:26px;font-weight:800;color:var(--g-ink);transform:rotate(8deg);}
+
+/* Vad frisören behöver – och inte */
+.g-need-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start;}
+.g-need-col{padding:22px 24px;border-radius:26px;background:#fff;border:1px solid rgba(15,23,42,0.08);}
+.g-need-col ul{list-style:none;margin:0;padding:0;}
+.g-need-col li{padding:8px 0;border-bottom:1px solid rgba(15,23,42,0.06);font-size:16px;font-weight:700;color:var(--g-ink);}
+.g-need-col--not{background:transparent;border-style:dashed;}
+.g-need-col--not li{color:#7D8DA3;text-decoration:line-through;text-decoration-color:rgba(125,141,163,0.6);font-weight:600;}
+.g-need-col .g-mock-btn--block{margin-top:16px;padding:13px 10px;font-size:14px;}
+
+/* Förväntningar med bock i stället för nummer */
+.g-steps--check li{counter-increment:none;}
+.g-steps--check li::before{content:none;}
+.g-steps--check .g-tick{position:absolute;left:2px;top:20px;}
+
+/* Räkneexempel: totalkostnad */
+.g-total-card{max-width:520px;padding:22px 26px;border-radius:24px;background:#fff;border:1px solid rgba(15,23,42,0.08);}
+.g-total-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid rgba(15,23,42,0.07);font-size:15.5px;font-weight:600;color:var(--g-mute);font-variant-numeric:tabular-nums;}
+.g-total-row b{color:var(--g-ink);font-weight:800;white-space:nowrap;}
+.g-total-row--sum{border-top:2px solid var(--g-ink);font-size:18px;font-weight:800;color:var(--g-ink);}
+.g-total-row--sum b{font-size:22px;color:var(--g-blue-ink);}
+
+/* Jämförelsetabell för två offerter */
+.g-table-wrap{border-radius:24px;background:#fff;border:1px solid rgba(15,23,42,0.08);overflow:hidden;}
+.g-quote-table table{width:100%;border-collapse:collapse;font-size:15px;}
+.g-quote-table thead th{padding:14px 18px;text-align:left;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--g-soft);background:var(--g-sky);}
+.g-quote-table tbody th{padding:14px 18px;text-align:left;font-weight:700;color:var(--g-ink);}
+.g-quote-table tbody tr + tr > *{border-top:1px solid rgba(15,23,42,0.07);}
+.g-quote-table td{width:22%;padding:10px 18px;}
+.g-quote-table td::before{content:'';display:block;height:24px;border-radius:8px;border:1.5px dashed rgba(15,23,42,0.16);}
+.g-quote-table th:not(:first-child),.g-quote-table td{border-left:1px solid rgba(15,23,42,0.07);}
+
+/* Studio Klaros paket */
+.g-paths--price dd b{display:inline-block;min-width:130px;margin-right:8px;font-weight:800;color:var(--g-blue-ink);font-variant-numeric:tabular-nums;}
+
 /* ---------- Responsivt ---------- */
 @media (max-width:1024px){
   .ga-hero-grid{grid-template-columns:minmax(0,1fr);gap:0;}
@@ -493,6 +564,14 @@ main{overflow-x:clip;}
   .g-steps li{padding-left:56px;}
   .g-thumb-grid,.g-menus-grid,.g-forms-grid{grid-template-columns:minmax(0,1fr);}
   .g-hunt-list li:nth-child(n){margin-left:0;}
+  .g-ladder-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px;padding:22px 18px;}
+  .g-ladder-list li{height:190px;}
+  .g-need-grid{grid-template-columns:minmax(0,1fr);}
+  .g-offer-card{transform:none;margin-right:18px;}
+  .g-quote-table table{font-size:14px;}
+  .g-quote-table tbody th,.g-quote-table thead th{padding:12px;}
+  .g-quote-table td{width:18%;padding:8px 10px;}
+  .g-paths--price dd b{display:block;margin:0 0 2px;}
   .g-mock-body{min-height:0;}
   .g-mock-btn--plain,.g-mock-btn{margin-top:4px;}
   .g-phones-grid{gap:36px;padding:32px 16px 24px;border-radius:24px;}
@@ -503,5 +582,5 @@ main{overflow-x:clip;}
 @media (prefers-reduced-motion: reduce){
   .g-in,.gi-mark,.nav-capsule{animation:none!important;opacity:1!important;transform:none!important;}
   .g-toc a{transition:none;}
-  .gt-bar-fill,.gt-scribble,.gs-pin,.gm-spin{animation:none!important;}
+  .gt-bar-fill,.gt-scribble,.gs-pin,.gm-spin,.gp-tag{animation:none!important;}
 }
