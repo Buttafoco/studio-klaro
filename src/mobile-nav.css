@@ -25,7 +25,9 @@ html.mnav-open .mnav-lines i:last-child{transform:translateY(-2.75px) rotate(-45
   /* Öppen meny: sidan bakom står still på exakt samma position */
   html.mnav-lock{overflow:hidden;}
   /* Headern ligger stabilt ovanpå ytan */
-  html.mnav-active .nav-wrap{z-index:2147482001;}
+  /* .sh.nav-wrap.scrolled (site-header.css) sätter z-index:50 – högre specificitet krävs här, annars täcker
+     panelen headern (logga och "Stäng") så fort man har scrollat */
+  html.mnav-active .nav-wrap,html.mnav-active .sh.nav-wrap.scrolled{z-index:2147482001;}
   html.mnav-leaving .nav-wrap{opacity:0;transition:opacity .22s ease;}
 }
 
