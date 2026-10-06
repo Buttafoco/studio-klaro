@@ -262,9 +262,17 @@ function init() {
   // Anropas av sidornas formulärkod först när en förfrågan har tagits emot.
   // Tar bara ett formulärnamn – aldrig några fältvärden.
   // formLocation (valfri) anger var på sidan formuläret satt, t.ex. 'hero' eller 'kontakt'.
-  window.klaroTrackLead = function (formName, formLocation) {
+  // experiment (valfri) är ett A/B-tests parametrar (t.ex. experiment_name/experiment_variant/form_type).
+  // De läggs bara till med godkänd Statistik; själva generate_lead skickas som tidigare via Consent Mode.
+  window.klaroTrackLead = function (formName, formLocation, experiment) {
     const params = { form_name: String(formName || 'kontaktformular').slice(0, 40) };
     if (formLocation) params.form_location = String(formLocation).slice(0, 40);
+    if (experiment && consent && consent.analytics) {
+      Object.keys(experiment).forEach((k) => {
+        const v = experiment[k];
+        if (typeof v === 'string' && !(k in params)) params[k] = v.slice(0, 40);
+      });
+    }
     gtag('event', 'generate_lead', params);
     if (consent && consent.marketing && window.__klaroMetaPixel === 'active') {
       window.fbq('track', 'Lead');

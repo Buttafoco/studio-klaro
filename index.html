@@ -2815,7 +2815,8 @@
      Varianten sätts när formuläret klonas in (före första målningen av knappen) – inget textbyte i efterhand.
      Integritet: varianten sparas i localStorage (sk_ab_hero_cta_v1, 90 dagar) bara när Statistik är godkänd,
      och raderas om samtycket dras tillbaka. Utan samtycke lottas 50/50 per sidvisning och inget sparas eller skickas.
-     Event går via window.klaroTrackEvent (src/analytics.js), som bara skickar med godkänd Statistik.
+     Trattevent går via window.klaroTrackEvent (src/analytics.js), som bara skickar med godkänd Statistik.
+     Konverteringen är generate_lead (klaroTrackLead), som får A/B-parametrarna – inget eget lead-event.
      Inga fältvärden skickas – bara experimentnamn, variant och var formuläret satt.
      QA: ?ab_hero=A eller ?ab_hero=B tvingar en variant för sidvisningen (sparas inte, skickar inga event). */
   var HERO_AB = (function () {
@@ -2861,7 +2862,13 @@
       Object.keys(extra || {}).forEach(function (k) { params[k] = extra[k]; });
       if (window.klaroTrackEvent(eventName, params) && onlyOnce) sent[eventName] = true;
     }
-    return { label: LABELS[variant], track: track };
+    // A/B-parametrar till generate_lead (enda lead-eventet). Läggs bara till med godkänd Statistik
+    // (kontrolleras i klaroTrackLead); en tvingad QA-variant får inga parametrar.
+    function leadParams(formType) {
+      if (forced) return null;
+      return { experiment_name: NAME, experiment_variant: variant, form_type: formType };
+    }
+    return { label: LABELS[variant], track: track, leadParams: leadParams };
   })();
 
   /* ---------- Contact form ---------- */
@@ -3035,8 +3042,7 @@
         .then(function (r) {
           return r.json().then(function (d) {
             if (r.ok && d && d.success) {
-              if (window.klaroTrackLead) window.klaroTrackLead('bli_kontaktad', key);
-              HERO_AB.track('lead_form_submitted', { form_location: key, form_type: 'bli_kontaktad' });
+              if (window.klaroTrackLead) window.klaroTrackLead('bli_kontaktad', key, HERO_AB.leadParams('bli_kontaktad'));
             }
           }, function () {});
         })
@@ -3157,8 +3163,7 @@
         .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
         .then(function (res) {
           if (res.ok && res.data.success) {
-            if (window.klaroTrackLead) window.klaroTrackLead('kontakt_genomgang', key);
-            HERO_AB.track('lead_form_submitted', { form_location: key, form_type: 'genomgang' });
+            if (window.klaroTrackLead) window.klaroTrackLead('kontakt_genomgang', key, HERO_AB.leadParams('genomgang'));
             if (WZ_SHARED_KEYS.indexOf(key) !== -1) { WZ_STATE.submitting = false; WZ_STATE.done = true; }
             showSuccess();
             wzEachPeer(peer, function (o) { o.showDone(); });

@@ -14,18 +14,23 @@ Startsidans hero-knapp i formulärets steg 1. Allt annat (H1, ingress, formulär
 - Drar besökaren tillbaka samtycket raderas varianten.
 - QA: `?ab_hero=A` / `?ab_hero=B` tvingar en variant för sidvisningen, sparas inte och skickar inga event.
 
-## Event i GA4 (endast med godkänd Statistik)
+## Event i GA4
 
-Alla har `experiment_name = hero_cta_v1` och `experiment_variant = A|B`. Inga fältvärden eller persondata skickas.
+Trattens tre event skickas bara med godkänd Statistik. Konverteringen är sajtens vanliga `generate_lead`
+(viktig händelse, oförändrat Consent Mode-beteende och Meta Pixel) – det finns inget separat lead-event,
+så varje inskick räknas en gång. A/B-parametrarna läggs på `generate_lead` bara när Statistik är godkänd.
+Alla A/B-event har `experiment_name = hero_cta_v1` och `experiment_variant = A|B`. Inga fältvärden eller persondata skickas.
 
 | Event | När | Extra parametrar |
 |---|---|---|
 | `hero_cta_clicked` | Klick på hero-knappen (en gång per sidvisning) | – |
 | `hero_form_started` | Första inmatningen i hero-formuläret (en gång per sidvisning) | – |
 | `hero_step_2_opened` | Steg 2 öppnas från heron (en gång per sidvisning) | – |
-| `lead_form_submitted` | Lyckat inskick från startsidans formulär | `form_location` (hero/kontakt/dock), `form_type` (genomgang/bli_kontaktad) |
+| `generate_lead` | Lyckat inskick (hela sajten). På startsidan, med Statistik godkänd, även A/B-parametrarna | `form_name`, `form_location` (hero/kontakt/dock), `form_type` (genomgang/bli_kontaktad) |
 
-`lead_form_submitted` skickas från alla startsidans formulär, eftersom hero och kontaktsektionen delar utkast – en besökare kan börja i heron och skicka längre ner. Primärt resultat = alla inskick per variant; filtrera på `form_location = hero` för en snävare bild.
+A/B-parametrarna sätts på `generate_lead` från alla startsidans formulär, eftersom hero och kontaktsektionen delar utkast – en besökare kan börja i heron och skicka längre ner. Primärt resultat = `generate_lead` med `experiment_name = hero_cta_v1`, per variant; filtrera på `form_location = hero` för en snävare bild. `generate_lead` utan `experiment_name` (andra sidor, eller utan samtycke) ingår inte i testet.
+
+Fram till 2026-10-06 fanns även ett separat `lead_form_submitted`; det är borttaget och ska inte användas i analysen.
 
 ## Läsa resultaten (manuellt, efter 3–4 veckor)
 
@@ -34,7 +39,7 @@ Engångsinställning i GA4 → Admin → Custom definitions → *Create custom d
 Dimensioner samlar bara data från den dag de skapas – gör det innan testet startar.
 
 Sedan: Explore → Free form. Rader: `experiment_variant`. Värden: *Event count* och *Total users*.
-Filter: `experiment_name` exactly matches `hero_cta_v1`, `Event name` = något av de fyra eventen ovan.
+Filter: `experiment_name` exactly matches `hero_cta_v1`, `Event name` = `generate_lead` eller något av trattens tre event.
 
 Jämför per variant: inskick (primärt), samt steg 2 / påbörjat / klick. Räkna konvertering mot antal användare med `hero_cta_clicked` eller mot sidvisningar av `/`. Ingen automatisk vinnare – med låg trafik krävs ofta längre tid än 4 veckor för en säker skillnad.
 
