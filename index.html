@@ -1476,7 +1476,12 @@
   [data-wz-mount="hero"] .wz-next.klaro-button{padding:16px 32px;}
   .wz-prompt-actions{display:flex;align-items:center;gap:12px;flex:none;}
   /* Formulärets steg 2 och "bli kontaktad"-panelen */
-  .wz-submit.klaro-button{min-height:50px;padding:15px 32px;font-size:15px;}
+  /* Formen smalnar av mot höger: lite mer luft på pilsidan så att "→" inte hamnar i kurvan */
+  .wz-submit.klaro-button{min-height:50px;padding:15px 38px 15px 34px;font-size:15px;}
+  /* Fullbredd (≤820 px): texten ska alltid rymmas innanför paddingen – typsnittet krymper något under ~375 px */
+  @media (max-width:820px){
+    .wz-submit.klaro-button{padding-left:16px;padding-right:20px;font-size:clamp(13.5px,2.73vw + 4.77px,15px);}
+  }
   .wz-callback-toggle.klaro-button{font-size:13.5px;padding:14px 22px;}
   /* Utan pil på heroformulärets "Starta gratis" (dock och kontaktsektionen behåller sina) */
   [data-wz-mount="hero"] .wz-prompt-actions .klaro-button > span{display:none;}
