@@ -271,6 +271,20 @@ function init() {
     }
   };
 
+  // Experiment-/trattevent (t.ex. startsidans hero-A/B-test). Skickas BARA när Statistik är godkänd –
+  // utan samtycke skickas ingenting alls, inte heller Consent Modes cookielösa pingar.
+  // Endast korta strängvärden går igenom; anroparen får aldrig skicka fältvärden eller persondata.
+  window.klaroTrackEvent = function (eventName, params) {
+    if (!consent || !consent.analytics) return false;
+    const safe = {};
+    Object.keys(params || {}).forEach((k) => {
+      const v = params[k];
+      if (typeof v === 'string' || typeof v === 'number') safe[k] = String(v).slice(0, 40);
+    });
+    gtag('event', String(eventName).slice(0, 40), safe);
+    return true;
+  };
+
   // Spåra visningar av kundcase.
   const caseMatch = location.pathname.match(/\/case-([^/]+?)(?:\.html)?$/);
   if (caseMatch) {
@@ -345,6 +359,8 @@ function init() {
     if (choice.marketing) enableMetaPixel();
     else if (previous && previous.marketing) disableMetaPixel();
     hideBanner();
+    // Låter sidans egen kod reagera på valet (t.ex. spara eller radera A/B-testets variant).
+    document.dispatchEvent(new CustomEvent('klaro:consent', { detail: { analytics: choice.analytics, marketing: choice.marketing } }));
   }
 
   function hideBanner() {

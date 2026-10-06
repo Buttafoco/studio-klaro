@@ -7,22 +7,22 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<title>Webbyrå Stockholm för småföretag | Studio Klaro</title>
-<meta name="description" content="Webbyrå i Stockholm som bygger moderna, snabba hemsidor för småföretag – till fast pris. Följ projektet från start till lansering i din projektportal.">
+<title>Webbyrå i Stockholm för småföretag | Studio Klaro</title>
+<meta name="description" content="Studio Klaro bygger hemsidor för småföretag i Stockholm – med tydlig design, SEO och enkla vägar till bokning, köp eller kontakt.">
 <link rel="canonical" href="https://studioklaro.se/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Studio Klaro">
 <meta property="og:locale" content="sv_SE">
-<meta property="og:title" content="Webbyrå Stockholm för småföretag | Studio Klaro">
-<meta property="og:description" content="Webbyrå i Stockholm för småföretag – moderna hemsidor till fast pris. Följ hela projektet i din egen projektportal, från projektstart till lansering.">
+<meta property="og:title" content="Webbyrå i Stockholm för småföretag | Studio Klaro">
+<meta property="og:description" content="Studio Klaro bygger hemsidor för småföretag i Stockholm – med tydlig design, SEO och enkla vägar till bokning, köp eller kontakt.">
 <meta property="og:url" content="https://studioklaro.se/">
 <meta property="og:image" content="https://studioklaro.se/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Hemsida som Studio Klaro har byggt för The Chairman Barber i Vasastan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Webbyrå Stockholm för småföretag | Studio Klaro">
-<meta name="twitter:description" content="Webbyrå i Stockholm för småföretag – moderna hemsidor till fast pris. Följ hela projektet i din egen projektportal, från projektstart till lansering.">
+<meta name="twitter:title" content="Webbyrå i Stockholm för småföretag | Studio Klaro">
+<meta name="twitter:description" content="Studio Klaro bygger hemsidor för småföretag i Stockholm – med tydlig design, SEO och enkla vägar till bokning, köp eller kontakt.">
 <meta name="twitter:image" content="https://studioklaro.se/og-cover.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2804,6 +2804,60 @@
     });
   })();
 
+  /* ---------- A/B-test: hero-CTA:ns text (hero_cta_v1) ----------
+     Endast knapptexten i hero-formulärets steg 1 skiljer: A "Starta gratis" (kontroll), B "Få konkreta idéer".
+     Varianten sätts när formuläret klonas in (före första målningen av knappen) – inget textbyte i efterhand.
+     Integritet: varianten sparas i localStorage (sk_ab_hero_cta_v1, 90 dagar) bara när Statistik är godkänd,
+     och raderas om samtycket dras tillbaka. Utan samtycke lottas 50/50 per sidvisning och inget sparas eller skickas.
+     Event går via window.klaroTrackEvent (src/analytics.js), som bara skickar med godkänd Statistik.
+     Inga fältvärden skickas – bara experimentnamn, variant och var formuläret satt.
+     QA: ?ab_hero=A eller ?ab_hero=B tvingar en variant för sidvisningen (sparas inte, skickar inga event). */
+  var HERO_AB = (function () {
+    var NAME = 'hero_cta_v1';
+    var KEY = 'sk_ab_hero_cta_v1';
+    var DAY = 864e5;
+    var LABELS = { A: 'Starta gratis', B: 'Få konkreta idéer' };
+    function hasConsent() {
+      try {
+        var c = JSON.parse(localStorage.getItem('sk_consent_v1') || 'null');
+        return !!c && c.value === 'granted' && Date.now() - c.ts <= 365 * DAY;
+      } catch (e) { return false; }
+    }
+    function read() {
+      try {
+        var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+        if (s && LABELS[s.v] && Date.now() - s.ts < 90 * DAY) return s.v;
+      } catch (e) {}
+      return null;
+    }
+    function save(v) { try { localStorage.setItem(KEY, JSON.stringify({ v: v, ts: Date.now() })); } catch (e) {} }
+    function clear() { try { localStorage.removeItem(KEY); } catch (e) {} }
+
+    var forced = (location.search.match(/[?&]ab_hero=([AB])(?:&|$)/) || [])[1] || null;
+    var consented = hasConsent();
+    var stored = consented ? read() : null;
+    if (!consented) clear();
+    var variant = forced || stored || (Math.random() < 0.5 ? 'A' : 'B');
+    if (consented && !forced && !stored) save(variant);
+    document.documentElement.setAttribute('data-ab-hero', variant);
+
+    // Samtycke ges eller dras tillbaka under sidvisningen: spara varianten som visas just nu, eller radera den.
+    document.addEventListener('klaro:consent', function (e) {
+      if (e.detail && e.detail.analytics) { if (!forced && !read()) save(variant); }
+      else clear();
+    });
+
+    var sent = {};
+    function track(eventName, extra, onlyOnce) {
+      if (forced || !window.klaroTrackEvent) return;
+      if (onlyOnce && sent[eventName]) return;
+      var params = { experiment_name: NAME, experiment_variant: variant };
+      Object.keys(extra || {}).forEach(function (k) { params[k] = extra[k]; });
+      if (window.klaroTrackEvent(eventName, params) && onlyOnce) sent[eventName] = true;
+    }
+    return { label: LABELS[variant], track: track };
+  })();
+
   /* ---------- Contact form ---------- */
   // Klistra in din access key från web3forms.com (mejlas till hej@studioklaro.se).
   // Så länge den är tom skickas inget – formuläret visar då ett tydligt felmeddelande.
@@ -2836,8 +2890,9 @@
         if (v) el.setAttribute(attr, v.split(/\s+/).map(function (id) { return id + '-' + key; }).join(' '));
       });
     });
-    // Hero-instansen har en egen CTA-text (pilen ligger kvar); dock och kontaktsektionen behåller mallens text
-    if (key === 'hero') frag.querySelector('.wz-next').firstChild.nodeValue = 'Starta gratis ';
+    // Hero-instansen har en egen CTA-text från A/B-testet (pil-spannet ligger kvar, dolt i heron som tidigare);
+    // dock och kontaktsektionen behåller mallens text
+    if (key === 'hero') frag.querySelector('.wz-next').firstChild.nodeValue = HERO_AB.label + ' ';
     mount.appendChild(frag);
     initLeadForm(mount, key);
   }
@@ -2891,10 +2946,14 @@
       }
       setPromptInvalid(false);
       promptError.textContent = '';
+      if (key === 'hero' && !formExpanded) HERO_AB.track('hero_step_2_opened', null, true);
       revealForm();
       nameInput.focus();
     }
-    nextBtn.addEventListener('click', goToStep2);
+    nextBtn.addEventListener('click', function () {
+      if (key === 'hero') HERO_AB.track('hero_cta_clicked', null, true);
+      goToStep2();
+    });
     // Cmd/Ctrl + Enter i prompten tar en vidare, som i en chatt. Vanlig Enter ger radbrytning.
     messageInput.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' && (e.metaKey || e.ctrlKey) && !formExpanded) {
@@ -2969,7 +3028,10 @@
       })
         .then(function (r) {
           return r.json().then(function (d) {
-            if (r.ok && d && d.success && window.klaroTrackLead) window.klaroTrackLead('bli_kontaktad', key);
+            if (r.ok && d && d.success) {
+              if (window.klaroTrackLead) window.klaroTrackLead('bli_kontaktad', key);
+              HERO_AB.track('lead_form_submitted', { form_location: key, form_type: 'bli_kontaktad' });
+            }
           }, function () {});
         })
         .then(function () { ok(); })
@@ -2977,7 +3039,9 @@
     });
 
     root.querySelectorAll('.wz-input').forEach(function (input) {
-      input.addEventListener('input', function () {
+      input.addEventListener('input', function (e) {
+        // Speglade värden från kontaktsektionen är syntetiska event (isTrusted false) och räknas inte
+        if (key === 'hero' && e.isTrusted) HERO_AB.track('hero_form_started', null, true);
         wz[input.getAttribute('data-field')] = input.value;
         input.classList.remove('wz-invalid');
         errorBox.style.display = 'none';
@@ -3088,6 +3152,7 @@
         .then(function (res) {
           if (res.ok && res.data.success) {
             if (window.klaroTrackLead) window.klaroTrackLead('kontakt_genomgang', key);
+            HERO_AB.track('lead_form_submitted', { form_location: key, form_type: 'genomgang' });
             if (WZ_SHARED_KEYS.indexOf(key) !== -1) { WZ_STATE.submitting = false; WZ_STATE.done = true; }
             showSuccess();
             wzEachPeer(peer, function (o) { o.showDone(); });
