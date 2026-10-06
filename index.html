@@ -92,7 +92,8 @@
   /* Progressiv formulärexpansion: steg 2 fälls ut när prompten skickats vidare */
   .wz-expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.38s cubic-bezier(0.22,1,0.36,1);}
   .wz-expand.wz-open{grid-template-rows:1fr;}
-  .wz-expand-inner{overflow:hidden;opacity:0;transform:translateY(-10px);transition:opacity 0.32s ease-out,transform 0.32s ease-out;}
+  /* Klipper bara på höjden (för hopfällningen): sidled får knapparnas organiska form (::before, 5 px utanför boxen) synas */
+  .wz-expand-inner{min-height:0;clip-path:inset(0 -12px);opacity:0;transform:translateY(-10px);transition:opacity 0.32s ease-out,transform 0.32s ease-out;}
   .wz-expand.wz-open .wz-expand-inner{opacity:1;transform:translateY(0);}
   @media (prefers-reduced-motion: reduce){
     .wz-expand{transition:none;}
