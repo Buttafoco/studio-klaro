@@ -1,0 +1,354 @@
+// Guide: Därför är en bra mobilupplevelse så viktig för din hemsida
+//
+// Metadata och innehåll för en guide. Sidan byggs av scripts/build-guides.mjs (gemensam mall för alla guider).
+// Lästid och innehållsförteckning räknas fram automatiskt: varje <h2> behöver ett id, och data-toc ger en
+// kortare etikett i innehållsförteckningen. Påståenden om Google länkar till Googles egen dokumentation.
+
+const ext = (href, text) => `<a href="${href}" rel="noopener">${text}</a>`;
+const G = {
+  mobileFirst: 'https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing',
+  pageExperience: 'https://developers.google.com/search/docs/appearance/page-experience',
+};
+const tick = '<span class="g-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 12.5l3.2 3.2L17 9"/></svg></span>';
+
+export default {
+  slug: 'darfor-ar-en-bra-mobilupplevelse-viktig-for-din-hemsida',
+  title: 'Därför är en bra mobilupplevelse så viktig för din hemsida',
+  seoTitle: 'Därför är en bra mobilupplevelse så viktig | Studio Klaro',
+  description: 'Mobilen är ofta kundens första möte med företaget. Så skiljer sig en hemsida som bara fungerar i mobilen från en som är designad för den.',
+  teaser: 'Det räcker inte att hemsidan fungerar i mobilen – den behöver vara bra där. Om första intrycket, tummen, formulären och ett enkelt test du kan göra själv.',
+  category: 'Webbdesign',
+  eyebrow: 'Mobilupplevelse',
+  lead: 'När företag pratar om sin hemsida utgår de fortfarande ofta från hur den ser ut på en dator. Men många av dina kunder kommer aldrig att uppleva den så. De hittar dig i mobilen – och där behöver sidan inte bara fungera. Den behöver vara bra.',
+  author: 'Studio Klaro',
+  published: '2026-10-07',
+  ogImage: '/guider/mobilupplevelse-og.jpg',
+  ogImageAlt: 'Illustration av en tydlig mobilsida med en stor bokningsknapp framför en datorversion av samma hemsida.',
+  illustrationLabel: 'Illustration av en datorversion av en hemsida i bakgrunden och samma sida i en mobil i förgrunden: tydlig rubrik, en stor knapp för att boka tid där tummen trycker, genvägar för att ringa och hitta hit som leder till en karta, och en mätare som visar att sidan laddar snabbt.',
+  illustration,
+  cta: {
+    title: 'Hur fungerar din hemsida på mobilen?',
+    text: 'Vi tittar på allt från navigation och struktur till tydlighet, prestanda och hur enkelt det är att ta nästa steg. Få en gratis genomgång av din hemsida, så ser vi vad som fungerar i dag och vad som kan förbättras.',
+  },
+  body: `
+<section class="ga-sec" aria-labelledby="inledning">
+  <h2 id="inledning" data-toc="Där kunden hittar dig">Kunden möter inte samma hemsida som du</h2>
+  <p>En hemsida granskas ofta på en stor skärm. Där finns mycket plats, en tydlig navigation, snygga bilder och animationer. Men så möter många kunder aldrig sidan. De hittar dig i stället i mobilen:</p>
+  <ul class="g-list">
+    <li><span>på väg till jobbet</span></li>
+    <li><span>i soffan</span></li>
+    <li><span>efter en rekommendation från en vän</span></li>
+    <li><span>efter en snabb sökning på Google när de behöver hjälp med något just nu</span></li>
+  </ul>
+  <p>Det gör mobilversionen till en av de viktigaste delarna av hela hemsidan. Och det räcker inte längre att sidan bara <strong>fungerar</strong> i mobilen.</p>
+  <p class="g-closing">Den behöver vara bra där.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="forsta-motet">
+  <h2 id="forsta-motet" data-toc="Det första mötet">Mobilen är ofta kundens första möte med företaget</h2>
+  <p>Tänk dig att någon får höra talas om ditt företag. Det första personen gör är kanske att ta upp telefonen och googla företagsnamnet. Inom några sekunder har de fått ett första intryck. Känns sidan långsam, svårläst, rörig, gammal eller jobbig att navigera, påverkar det också hur företaget uppfattas.</p>
+  <p>Kunden gör sällan skillnad på de här två tankarna:</p>
+  <figure class="g-fig g-words">
+    <div class="g-words-row g-words-row--before">
+      <p class="g-mock-label">Det egentliga problemet</p>
+      <p class="g-words-q">”Deras mobilversion är dåligt optimerad.”</p>
+    </div>
+    <div class="g-words-row g-words-row--after">
+      <p class="g-mock-label">Det kunden tänker</p>
+      <p class="g-words-q">”Det här företaget känns inte särskilt professionellt.”</p>
+    </div>
+    <figcaption>Hemsidan blir en del av varumärket – oavsett vilken skärm den visas på.</figcaption>
+  </figure>
+</section>
+
+<section class="ga-sec" aria-labelledby="desktop">
+  <h2 id="desktop" data-toc="Desktop räddar inte mobilen">En bra datorversion räddar inte en dålig mobilversion</h2>
+  <p>Det går att ha en fantastisk hemsida på datorn och samtidigt en ganska dålig hemsida i mobilen. Det är ett vanligt misstag. Sidan byggs först för en stor skärm och anpassas sedan för mobilen genom att rubrikerna görs mindre, sektionerna staplas, bilderna krymps och navigationen läggs bakom en menyikon.</p>
+  <p>Tekniskt fungerar allt. Men upplevelsen kan fortfarande vara dålig.</p>
+  <figure class="g-fig g-phones">
+    <div class="g-phones-grid">
+      <div class="g-phone-col">
+        <div class="g-phone g-phone--copy" aria-hidden="true">
+          <span class="g-phone-notch"></span>
+          <span class="g-pl g-pl--nav"></span>
+          <span class="g-pl g-pl--h"></span><span class="g-pl g-pl--h g-pl--short"></span>
+          <span class="g-pl"></span><span class="g-pl"></span><span class="g-pl g-pl--short"></span>
+          <span class="g-pcols"><i></i><i></i><i></i></span>
+          <span class="g-pl"></span><span class="g-pl g-pl--short"></span>
+          <span class="g-pbtn-sm"></span>
+        </div>
+        <p class="g-phone-cap"><strong>Bara mindre</strong> Allt från datorn får plats, men i samma ordning – och knappen hamnar längst ned.</p>
+      </div>
+      <div class="g-phone-col">
+        <div class="g-phone" aria-hidden="true">
+          <span class="g-phone-notch"></span>
+          <span class="g-pnav"><b></b><em>Meny</em></span>
+          <span class="g-ph">Nytt badrum i Uppsala</span>
+          <span class="g-pt">Fast pris efter hembesök. Start inom fyra veckor.</span>
+          <span class="g-pinfo">Ring 018-12 34 56 · Svar samma dag</span>
+          <span class="g-pthumb"><span class="g-mock-btn g-mock-btn--block">Få offert</span></span>
+        </div>
+        <p class="g-phone-cap"><strong>Designad för mobilen</strong> Erbjudandet först, läsbar text och nästa steg där tummen når.</p>
+      </div>
+    </div>
+    <figcaption>Påhittat exempel. En mobilversion behöver ibland designas annorlunda – inte bara mindre.</figcaption>
+  </figure>
+  <p>Vi går igenom fler sådana fallgropar i guiden <a href="/guider/mobilanpassad-hemsida-8-vanliga-problem">Mobilanpassad hemsida: 8 vanliga problem att kontrollera</a>.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="mindre-tid">
+  <h2 id="mindre-tid" data-toc="Mindre tid på mobilen">På mobilen har du mindre tid på dig</h2>
+  <p>Den som sitter framför en dator är kanske beredd att utforska hemsidan lite mer. I mobilen går det ofta betydligt snabbare. Besökaren vill kanske bara veta:</p>
+  <ol class="g-qs">
+    <li><span class="g-qs-n" aria-hidden="true">01</span><span class="g-qs-t">Vad erbjuder ni?</span></li>
+    <li><span class="g-qs-n" aria-hidden="true">02</span><span class="g-qs-t">Vad kostar det?</span></li>
+    <li><span class="g-qs-n" aria-hidden="true">03</span><span class="g-qs-t">Var finns ni?</span></li>
+    <li><span class="g-qs-n" aria-hidden="true">04</span><span class="g-qs-t">Kan jag boka?</span></li>
+    <li><span class="g-qs-n" aria-hidden="true">05</span><span class="g-qs-t">Hur kontaktar jag er?</span></li>
+  </ol>
+  <p>Är svaren svåra att hitta är det väldigt enkelt att gå tillbaka till Google och välja nästa företag. Därför blir tydlighet extra viktigt i mobilen.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="viktigast-forst">
+  <h2 id="viktigast-forst" data-toc="Det viktigaste först">Det viktigaste måste komma först</h2>
+  <p>På en datorskärm kan kunden se mycket information samtidigt. I mobilen ser personen kanske bara en rubrik, några rader text och en knapp. Det gör prioriteringen viktig.</p>
+  <dl class="g-paths">
+    <div><dt>Restaurang</dt><dd>Boka bord · Se menyn · Hitta hit</dd></div>
+    <div><dt>Frisör</dt><dd>Boka tid · Se priser · Hitta salongen</dd></div>
+    <div><dt>Tjänsteföretag</dt><dd>Se tjänster · Se tidigare projekt · Få offert</dd></div>
+  </dl>
+  <p>Den bästa mobilversionen är därför inte alltid den som visar exakt samma innehåll i exakt samma ordning som på datorn.</p>
+  <p class="g-closing">Det är den som hjälper besökaren snabbast.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="enkelhet">
+  <h2 id="enkelhet" data-toc="Enkelhet och friktion">Mobil design handlar mycket om enkelhet</h2>
+  <p>På en liten skärm blir små problem snabbt stora. Var för sig känns de kanske obetydliga:</p>
+  <figure class="g-fig g-hunt">
+    <ol class="g-hunt-list">
+      <li><span>En knapp som är lite för liten</span></li>
+      <li><span>En meny med för många alternativ</span></li>
+      <li><span>Ett formulär med tio fält</span></li>
+      <li><span>En rubrik som tar upp nästan hela skärmen</span></li>
+      <li><span>En popup som täcker innehållet</span></li>
+    </ol>
+    <figcaption>Tillsammans skapar de friktion – och friktion får kunden att skjuta upp nästa steg.</figcaption>
+  </figure>
+  <p>Friktion gör det svårare för kunden att göra det du faktiskt vill: kontakta dig, boka, köpa, ringa eller begära offert.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="knappar">
+  <h2 id="knappar" data-toc="Knappar för fingret">Knappar måste fungera med fingret</h2>
+  <p>På datorn använder vi en exakt muspekare. I telefonen använder vi tummen. Det låter självklart, men många hemsidor är fortfarande byggda med väldigt små klickytor:</p>
+  <ul class="g-list">
+    <li><span>textlänkar som ligger för nära varandra</span></li>
+    <li><span>ikoner som är svåra att träffa</span></li>
+    <li><span>små kryss för att stänga popup-rutor</span></li>
+    <li><span>rullgardinsmenyer som kräver för mycket precision</span></li>
+  </ul>
+  <p>Behöver besökaren försöka flera gånger för att trycka på rätt sak har designen gjort något onödigt svårt. Bra mobil design ska kännas självklar.</p>
+  <aside class="g-check" aria-label="Kontrollfråga">
+    <p class="g-check-label">Kontrollfråga</p>
+    <p class="g-check-q">Kan du använda hela din hemsida med en hand – utan att sikta?</p>
+  </aside>
+</section>
+
+<section class="ga-sec" aria-labelledby="hastighet">
+  <h2 id="hastighet" data-toc="Hastighet i mobilen">Hastighet märks extra mycket på mobilen</h2>
+  <p>En tung hemsida kan kännas helt okej på snabbt wifi. Men kunden öppnar den kanske via mobilnätet. Då spelar varje stor bild, video och animation roll. En långsam sida kan ge ett dåligt första intryck innan personen ens har hunnit se innehållet.</p>
+  <p>Design och prestanda går därför hand i hand. En effekt är bara värdefull om den tillför mer än den kostar i:</p>
+  <ul class="g-list">
+    <li><span>laddningstid</span></li>
+    <li><span>prestanda</span></li>
+    <li><span>användarupplevelse</span></li>
+  </ul>
+  <p>Google ${ext(G.pageExperience, 'lyfter fram')} både laddning, stabilitet och hur väl sidan fungerar på mobila enheter som delar av en bra sidupplevelse. Vill du se hur din sida klarar grunderna kan du göra en <a href="/seo-koll">kostnadsfri SEO-koll</a>.</p>
+  <p class="g-closing">En modern hemsida ska inte bara se snabb ut. Den ska kännas snabb.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="kontakt">
+  <h2 id="kontakt" data-toc="Enkel kontakt">Kontakt ska vara enklare på mobilen – inte svårare</h2>
+  <p>Mobilen har faktiskt flera fördelar. Besökaren kan ringa direkt, öppna kartan, skicka ett mejl, boka eller skicka ett formulär – utan att byta enhet. Problemet uppstår när hemsidan inte utnyttjar det.</p>
+  <dl class="g-paths">
+    <div><dt>Telefonnummer</dt><dd>Går att trycka på och ringer direkt.</dd></div>
+    <div><dt>Adress</dt><dd>Länkar till en karta med vägbeskrivning.</dd></div>
+    <div><dt>Bokning</dt><dd>En knapp som är lätt att hitta, var på sidan du än är.</dd></div>
+    <div><dt>Kontaktformulär</dt><dd>Kräver inte mer än det som faktiskt behövs.</dd></div>
+  </dl>
+  <p>Att göra ett telefonnummer tryckbart är ofta en enda rad kod:</p>
+  <figure class="g-fig g-code">
+    <pre><code>&lt;a href="<mark>tel:+4618123456</mark>"&gt;018-12 34 56&lt;/a&gt;</code></pre>
+    <figcaption>Med tel: öppnar telefonen samtalet direkt – kunden behöver inte kopiera numret.</figcaption>
+  </figure>
+  <p>Ju enklare nästa steg är, desto mindre anledning har kunden att skjuta upp det.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="formular">
+  <h2 id="formular" data-toc="Formulär i mobilen">Formulär blir snabbt jobbiga på mobilen</h2>
+  <p>På en dator är det relativt enkelt att fylla i många fält. I mobilen betyder varje extra fråga mer scroll, skrivande, tangentbord, val och klick. Fundera därför på vad du verkligen behöver veta vid första kontakten.</p>
+  <figure class="g-fig g-need">
+    <div class="g-need-grid">
+      <div class="g-need-col g-need-col--not">
+        <p class="g-mock-label">Kan vänta till nästa steg</p>
+        <ul><li>Företagsnamn</li><li>Organisationsnummer</li><li>Telefonnummer</li><li>Budget</li><li>Deadline</li><li>Adress</li><li>Projektstorlek</li></ul>
+      </div>
+      <div class="g-need-col">
+        <p class="g-mock-label">Räcker vid första kontakten</p>
+        <ul><li>Namn</li><li>E-post</li><li>Vad behöver du hjälp med?</li></ul>
+        <span class="g-mock-btn g-mock-btn--block" aria-hidden="true">Skicka</span>
+      </div>
+    </div>
+    <figcaption>Allt till vänster kan vara bra att veta – men det mesta går att ta när ni väl har fått kontakt.</figcaption>
+  </figure>
+</section>
+
+<section class="ga-sec" aria-labelledby="google">
+  <h2 id="google" data-toc="Google och mobilen">Google bryr sig också om mobilen</h2>
+  <p>Mobilupplevelsen är inte bara viktig för kunden. Google ${ext(G.mobileFirst, 'använder mobilversionen')} av webbplatsens innehåll när sidor indexeras och rankas. Därför är det inte särskilt klokt att behandla mobilversionen som en sekundär version av hemsidan.</p>
+  <ul class="g-list">
+    <li><span>Det viktigaste innehållet bör finnas även i mobilen.</span></li>
+    <li><span>Sidan ska gå att navigera.</span></li>
+    <li><span>Google ska kunna förstå samma verksamhet oavsett vilken enhet sidan visas på.</span></li>
+  </ul>
+  <p>Mer om hur Google hittar och förstår din hemsida finns i guiden <a href="/guider/varfor-syns-inte-mitt-foretag-pa-google">Varför syns inte mitt företag på Google?</a></p>
+</section>
+
+<section class="ga-sec" aria-labelledby="svart-att-se">
+  <h2 id="svart-att-se" data-toc="Svårt att se själv">En dålig mobilupplevelse är svår att upptäcka som företagare</h2>
+  <p>Det här är kanske en av de största utmaningarna. Du besöker antagligen inte hemsidan på samma sätt som en potentiell kund. Du vet redan var tjänsterna finns, hur menyn fungerar, vilken knapp man ska trycka på, vad företaget gör och hur man kontaktar er.</p>
+  <p>Kunden vet inget av det. En hemsida kan därför kännas självklar för den som arbetar med den varje dag och samtidigt vara förvirrande för någon som besöker den för första gången.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="mobiltest">
+  <h2 id="mobiltest" data-toc="Gör ett mobiltest">Ett enkelt mobiltest du kan göra själv</h2>
+  <p>Ta fram telefonen och öppna din hemsida. Föreställ dig sedan att du aldrig tidigare har hört talas om företaget. Försök att svara på:</p>
+  <ul class="g-weigh">
+    <li><span>Förstår jag direkt vad företaget gör?</span></li>
+    <li><span>Kan jag hitta företagets viktigaste tjänster?</span></li>
+    <li><span>Kan jag enkelt kontakta företaget?</span></li>
+    <li><span>Är texten enkel att läsa?</span></li>
+    <li><span>Är knapparna lätta att trycka på?</span></li>
+    <li><span>Är navigationen tydlig?</span></li>
+    <li><span>Känns sidan snabb?</span></li>
+    <li><span>Finns något som stör eller täcker innehållet?</span></li>
+    <li><span>Är nästa steg tydligt?</span></li>
+  </ul>
+  <p class="g-closing">Måste du leta efter något är det troligt att kunden också behöver göra det.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="responsiv">
+  <h2 id="responsiv" data-toc="Mer än responsiv">Responsiv design är bara början</h2>
+  <p>I dag bör i princip varje modern hemsida vara responsiv. Men responsiv betyder bara att layouten anpassar sig efter olika skärmstorlekar. Det betyder inte automatiskt att upplevelsen är bra.</p>
+  <figure class="g-fig g-words">
+    <div class="g-words-row g-words-row--before">
+      <p class="g-mock-label">Responsiv</p>
+      <p class="g-words-q">”Sidan fungerar på mobilen.”</p>
+    </div>
+    <div class="g-words-row g-words-row--after">
+      <p class="g-mock-label">Genomtänkt</p>
+      <p class="g-words-q">”Sidan är designad för mobilen.”</p>
+    </div>
+    <figcaption>Skillnaden syns sällan i en skärmdump – men den märks när någon använder sidan.</figcaption>
+  </figure>
+  <h3>En bra mobilversion tar hänsyn till</h3>
+  <ul class="g-checklist">
+    <li>${tick}Innehållets ordning</li>
+    <li>${tick}Navigationen</li>
+    <li>${tick}Klickytorna</li>
+    <li>${tick}Textstorleken</li>
+    <li>${tick}Formulären</li>
+    <li>${tick}Hastigheten</li>
+    <li>${tick}Vad kunden sannolikt vill göra</li>
+  </ul>
+  <p class="g-closing">Det är där skillnaden märks.</p>
+</section>
+
+<section class="ga-sec" aria-labelledby="inte-en-extraversion">
+  <h2 id="inte-en-extraversion" data-toc="Inte en extraversion">Mobilen är inte längre en extraversion av hemsidan</h2>
+  <p>För många företag är mobilversionen den viktigaste versionen. Det är där kunden först hittar företaget – och ofta där hela beslutet tas:</p>
+  <ol class="g-steps">
+    <li><h3>Hittar företaget</h3></li>
+    <li><h3>Jämför alternativen</h3></li>
+    <li><h3>Läser recensioner</h3></li>
+    <li><h3>Kollar priser</h3></li>
+    <li><h3>Hittar adressen</h3></li>
+    <li><h3>Bestämmer sig för att ta nästa steg – eller inte</h3></li>
+  </ol>
+  <p>Därför bör mobilupplevelsen inte bli något man tittar på sist i projektet. Den bör vara en del av designen från början.</p>
+  <p class="g-closing">En hemsida ska inte bara vara snygg på en stor skärm. Den ska fungera när kunden faktiskt behöver den.</p>
+</section>
+`,
+};
+
+// Hero-illustration: datorversionen i bakgrunden och samma hemsida i mobilen i förgrunden – tydlig rubrik, en stor
+// knapp där tummen trycker, genvägar för att ringa och hitta hit (som leder till en karta) och en snabb laddning.
+// Inline-SVG med viewBox: inget layoutskift.
+function illustration(idp = 'gb') {
+  return `<svg class="g-illus-svg" viewBox="0 0 640 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="${idp}-cloud" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/>
+    <clipPath id="${idp}-screen"><rect x="300" y="46" width="184" height="348" rx="26"/></clipPath>
+    <clipPath id="${idp}-map"><rect x="508" y="238" width="112" height="120" rx="20"/></clipPath>
+  </defs>
+  <path class="gi-blob" d="M58 214C40 118 118 38 252 42C352 45 424 26 526 50C614 70 632 162 616 244C600 334 524 400 402 392C302 386 238 406 148 394C66 383 74 306 58 214Z"/>
+  <use class="gi-cloud" href="#${idp}-cloud" transform="translate(490 24) scale(.52)"/>
+  <use class="gi-cloud" href="#${idp}-cloud" transform="translate(10 322) scale(.46)"/>
+
+  <g class="gb-desk">
+    <rect class="gi-shadow" x="44" y="104" width="300" height="214" rx="20"/>
+    <rect class="gi-win" x="40" y="94" width="300" height="214" rx="20"/>
+    <circle class="gi-dot" cx="60" cy="114" r="3.5"/><circle class="gi-dot" cx="72" cy="114" r="3.5"/><circle class="gi-dot" cx="84" cy="114" r="3.5"/>
+    <line class="gi-rule" x1="40" y1="130" x2="340" y2="130"/>
+    <rect class="gi-ink" x="60" y="144" width="42" height="7" rx="3.5"/>
+    <rect class="gi-sk" x="196" y="146" width="22" height="4" rx="2"/><rect class="gi-sk" x="224" y="146" width="22" height="4" rx="2"/>
+    <rect class="gi-sk" x="60" y="168" width="130" height="10" rx="5"/><rect class="gi-sk" x="60" y="186" width="96" height="10" rx="5"/>
+    <rect class="gi-sk" x="60" y="208" width="110" height="5" rx="2.5"/><rect class="gi-sk" x="60" y="219" width="84" height="5" rx="2.5"/>
+    <rect class="gi-card" x="186" y="164" width="96" height="70" rx="12"/>
+    <rect class="gi-card" x="60" y="252" width="68" height="34" rx="10"/><rect class="gi-card" x="136" y="252" width="68" height="34" rx="10"/><rect class="gi-card" x="212" y="252" width="68" height="34" rx="10"/>
+  </g>
+
+  <g>
+    <rect class="gi-shadow" x="298" y="50" width="196" height="360" rx="34"/>
+    <rect class="gi-phone-body" x="294" y="40" width="196" height="360" rx="34"/>
+    <g clip-path="url(#${idp}-screen)">
+      <rect class="gi-ink" x="318" y="72" width="40" height="8" rx="4"/>
+      <path class="gb-menu" d="M452 71h16M452 77h16M452 83h10"/>
+      <rect class="gi-ink" x="318" y="104" width="146" height="13" rx="6.5"/>
+      <rect class="gi-ink" x="318" y="124" width="104" height="13" rx="6.5"/>
+      <rect class="gi-sk" x="318" y="150" width="144" height="5" rx="2.5"/><rect class="gi-sk" x="318" y="161" width="118" height="5" rx="2.5"/>
+      <rect class="gt-pbtn" x="318" y="182" width="148" height="42" rx="21"/>
+      <text class="gb-btn-t" x="378" y="203">Boka tid</text>
+      <rect class="gt-ptile" x="318" y="240" width="148" height="34" rx="12"/>
+      <circle class="gb-ico" cx="336" cy="257" r="8"/><path class="gb-ico-i" d="M333 253.5c0 4 2.5 7 6.5 7"/>
+      <text class="gt-ptile-t" x="352" y="261">Ring oss</text><path class="gb-chev" d="M452 253l4 4-4 4"/>
+      <rect class="gt-ptile" x="318" y="282" width="148" height="34" rx="12"/>
+      <circle class="gb-ico" cx="336" cy="299" r="8"/><circle class="gb-ico-dot" cx="336" cy="298" r="2.6"/>
+      <text class="gt-ptile-t" x="352" y="303">Hitta hit</text><path class="gb-chev" d="M452 295l4 4-4 4"/>
+      <rect class="gt-ptile" x="318" y="324" width="148" height="34" rx="12"/>
+      <circle class="gb-ico" cx="336" cy="341" r="8"/><path class="gb-ico-i" d="M332.5 341h7M336 337.5v7"/>
+      <text class="gt-ptile-t" x="352" y="345">Se priser</text><path class="gb-chev" d="M452 337l4 4-4 4"/>
+      <rect class="gi-sk" x="318" y="372" width="120" height="5" rx="2.5"/>
+    </g>
+    <circle class="gm-ok" cx="478" cy="50" r="16"/><path class="gm-ok-tick" d="M471 50l5 5 9-10"/>
+  </g>
+
+  <g class="gb-tap"><circle class="gb-tap-r" cx="444" cy="203" r="12"/><circle class="gb-tap-r gb-tap-r--2" cx="444" cy="203" r="22"/></g>
+
+  <path class="gi-thread" d="M468 299C486 299 492 290 506 286"/>
+  <rect class="gi-shadow" x="512" y="246" width="112" height="120" rx="20"/>
+  <g clip-path="url(#${idp}-map)">
+    <rect class="gs-map" x="508" y="238" width="112" height="120"/>
+    <path class="gs-road" d="M508 312C540 302 570 328 620 316M556 238C562 280 548 320 568 358M508 270C548 276 580 256 620 264"/>
+    <path class="gs-water" d="M586 358C592 336 610 328 620 320L620 358Z"/>
+  </g>
+  <rect class="gs-map-frame" x="508" y="238" width="112" height="120" rx="20"/>
+  <g class="gs-pin"><path d="M562 262c-12 0-21 9-21 20 0 15 21 33 21 33s21-18 21-33c0-11-9-20-21-20z"/><circle cx="562" cy="282" r="7"/></g>
+
+  <g>
+    <rect class="gt-speed-card" x="506" y="128" width="118" height="54" rx="18"/>
+    <path class="gt-bolt" d="M530 140l-10 16h9l-4 14 13-19h-9l5-11z"/>
+    <rect class="gt-bar" x="552" y="152" width="56" height="8" rx="4"/>
+    <rect class="gt-bar-fill" x="552" y="152" width="50" height="8" rx="4"/>
+  </g>
+</svg>`;
+}

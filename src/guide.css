@@ -550,6 +550,26 @@ main{overflow-x:clip;}
 /* Studio Klaros paket */
 .g-paths--price dd b{display:inline-block;min-width:130px;margin-right:8px;font-weight:800;color:var(--g-blue-ink);font-variant-numeric:tabular-nums;}
 
+/* ---------- Exempel i mobilupplevelseguiden ---------- */
+/* Illustrationens egna delar: datorn i bakgrunden, mobilens meny, knapptext, genvägar och tumtrycket */
+.gb-desk{opacity:.7;}
+.gb-menu{fill:none;stroke:var(--g-ink);stroke-width:2.2;stroke-linecap:round;}
+.gb-btn-t{font-family:'Manrope',system-ui,sans-serif;font-size:14px;font-weight:800;fill:#fff;text-anchor:middle;dominant-baseline:central;}
+.gb-ico{fill:var(--g-blue);}
+.gb-ico-i{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;}
+.gb-ico-dot{fill:#fff;}
+.gb-chev{fill:none;stroke:var(--g-soft);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.gb-tap-r{fill:none;stroke:var(--g-ink);stroke-width:2;opacity:.55;}
+.gb-tap-r--2{opacity:.22;}
+@keyframes gbTap{0%,55%,100%{transform:scale(1);}70%{transform:scale(.86);}}
+.gb-tap{transform-box:fill-box;transform-origin:center;animation:gbTap 2.6s var(--g-ease) .8s infinite;}
+
+/* Text direkt efter en lista med verksamheter */
+.ga-body .g-paths + p{margin-top:28px;}
+
+/* Friktion: fem små problem som glider allt längre bort */
+.g-hunt-list li:nth-child(5){margin-left:24%;}
+
 /* ---------- Responsivt ---------- */
 @media (max-width:1024px){
   .ga-hero-grid{grid-template-columns:minmax(0,1fr);gap:0;}
@@ -605,5 +625,5 @@ main{overflow-x:clip;}
   .g-in,.gi-mark,.nav-capsule{animation:none!important;opacity:1!important;transform:none!important;}
   .g-toc a,.ga-more .gk-more span{transition:none;}
   .ga-more-item:hover .gk-more span{transform:none;}
-  .gt-bar-fill,.gt-scribble,.gs-pin,.gm-spin,.gp-tag{animation:none!important;}
+  .gt-bar-fill,.gt-scribble,.gs-pin,.gm-spin,.gp-tag,.gb-tap{animation:none!important;}
 }
