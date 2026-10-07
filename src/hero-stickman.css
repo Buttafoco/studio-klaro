@@ -55,3 +55,56 @@
 .hs-bob{will-change:transform;}
 .hs-bob.is-bobbing{animation:hsCloudBob 1.6s ease-in-out infinite alternate;}
 @keyframes hsCloudBob{from{transform:translateY(0)}to{transform:translateY(-4px)}}
+
+/* Första besöket: gubben hänger i loggan när den flyger till headern (eget lager ovanför KlaroIntro och headern) */
+.hs-sky{position:fixed;inset:0;z-index:10000;pointer-events:none;transition:opacity .3s ease;}
+.hs-sky.is-gone{opacity:0;}
+.hs-sky .hs-y{will-change:transform;}
+/* Hänger: armarna sträckta i ett V ovanför huvudet (händerna i y≈2, se HY i skriptet), benen dinglar */
+.hs-hang .hs-arm-l{transform:rotate(148deg) scaleY(1.32);}
+.hs-hang .hs-arm-r{transform:rotate(-148deg) scaleY(1.32);}
+.hs-hang .hs-thigh-l{transform:rotate(4deg);}
+.hs-hang .hs-thigh-r{transform:rotate(-6deg);}
+.hs-hang .hs-shin-l{transform:rotate(8deg);}
+.hs-hang .hs-shin-r{transform:rotate(14deg);}
+/* Drar ner loggan / tar sats bakåt: knäna upp */
+.hs-tug .hs-thigh-l{transform:rotate(-62deg);}
+.hs-tug .hs-thigh-r{transform:rotate(-48deg);}
+.hs-tug .hs-shin-l,.hs-tug .hs-shin-r{transform:rotate(95deg);}
+.hs-tug .hs-body{transform:translateY(-2px);transition:transform .18s ease-out;}
+/* Framsvingen: benen sparkar fram */
+.hs-kick .hs-thigh-l{transform:rotate(-58deg);}
+.hs-kick .hs-thigh-r{transform:rotate(-44deg);}
+.hs-kick .hs-shin-l,.hs-kick .hs-shin-r{transform:rotate(12deg);}
+
+/* Klick på loggan: gubben skriver i textfältet med en penna */
+.hs-fig .hs-pen line{stroke-linecap:butt;}
+.hs-fig .hs-pen .hs-pen-edge{stroke:#0F172A;stroke-width:5.4;stroke-linecap:round;}
+.hs-fig .hs-pen .hs-pen-body{stroke:#FFC83D;stroke-width:3.4;}
+.hs-fig .hs-pen .hs-pen-rubber{stroke:#F58BA6;stroke-width:3.4;}
+.hs-pen-wood{fill:#F3D7A6;stroke:#0F172A;stroke-width:1;stroke-linejoin:round;}
+.hs-pen-lead{fill:#0F172A;}
+.hs-pen{opacity:0;transform:rotate(-30deg) scale(.4);transition:transform .32s cubic-bezier(0.34,1.56,0.64,1),opacity .2s ease;}
+.hs-haspen .hs-pen{opacity:1;transform:none;}
+/* Skrivställning: höger arm uppåt-framåt mot raden ovanför huvudet, vänster arm lite framåt */
+.hs-pen-ready .hs-arm-r{transform:rotate(-141deg);}
+.hs-pen-ready .hs-arm-l{transform:rotate(-12deg);}
+/* Skriver: handen och pennan klottrar, benen tar små steg */
+.hs-write .hs-arm-r{animation:hsScribble .15s ease-in-out infinite alternate;}
+.hs-write .hs-pen{animation:hsScribblePen .15s ease-in-out infinite alternate;}
+.hs-write .hs-thigh-l{animation:hsThigh var(--cyc) linear infinite;}
+.hs-write .hs-thigh-r{animation:hsThigh var(--cyc) linear calc(var(--cyc) / -2) infinite;}
+.hs-write .hs-shin-l{animation:hsShin var(--cyc) linear infinite;}
+.hs-write .hs-shin-r{animation:hsShin var(--cyc) linear calc(var(--cyc) / -2) infinite;}
+@keyframes hsScribble{from{transform:rotate(-145deg)}to{transform:rotate(-137deg)}}
+@keyframes hsScribblePen{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+/* Vinkar när han är klar */
+.hs-wave-up .hs-arm-r{animation:hsWave .45s ease-in-out infinite alternate;}
+/* Den handskrivna hälsningen: bokstäverna dyker upp där pennspetsen är */
+.hs-note{position:absolute;left:0;top:0;z-index:2;pointer-events:none;white-space:nowrap;color:#146EF5;letter-spacing:.01em;transition:opacity .4s ease;}
+.hs-note span{display:inline-block;white-space:pre;opacity:0;transform:translateY(2px) scale(.7);transform-origin:0 80%;transition:opacity .12s ease,transform .18s cubic-bezier(0.34,1.56,0.64,1);}
+.hs-note span.on{opacity:1;transform:none;}
+.hs-note.is-gone{opacity:0;}
+/* Exempeltexterna i fältet göms medan gubben skriver */
+.wz-typing.hs-writing .wz-typing-ov,.wz-typing.hs-writing .wz-typing-label{opacity:0;}
+.wz-typing.hs-writing .wz-input.wz-prompt::placeholder{color:transparent;}

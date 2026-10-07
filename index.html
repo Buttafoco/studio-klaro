@@ -1577,8 +1577,18 @@
         var home = 'translate(' + (to.left - from.left) + 'px,' + (to.top - from.top) + 'px) scale(' + sx + ',' + sy + ')';
 
         headerImg.style.opacity = '0';              // den riktiga loggan väntar osynlig tills kopian är framme
-        var total = PREP + FLY;
-        var fly = anim(mark, [
+        // Hero-gubben (src/hero-stickman.js) kan hänga med: loggan stannar då en bit ovanför sin plats och dras ner av honom
+        var HOLD = 240, PULL = 480, OV = 16, ride = false;
+        try { ride = typeof window.__hsRide === 'function' && window.__hsRide({ mark: mark, logo: headerImg, pullAt: PREP + FLY + HOLD, end: PREP + FLY + HOLD + PULL }) === true; } catch (e) {}
+        var total = PREP + FLY + (ride ? HOLD + PULL : 0);
+        var high = 'translate(' + (to.left - from.left) + 'px,' + (to.top - from.top - OV) + 'px) scale(' + sx + ',' + sy + ')';
+        var fly = anim(mark, ride ? [
+          { transform: 'none', easing: 'cubic-bezier(0.33,0,0.2,1)' },
+          { offset: PREP / total, transform: lift, easing: GLIDE },
+          { offset: (PREP + FLY) / total, transform: high },
+          { offset: (PREP + FLY + HOLD) / total, transform: high, easing: 'cubic-bezier(0.34,1.8,0.64,1)' },
+          { transform: home }
+        ] : [
           { transform: 'none', easing: 'cubic-bezier(0.33,0,0.2,1)' },
           { offset: PREP / total, transform: lift, easing: GLIDE },
           { transform: home }
