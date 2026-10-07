@@ -621,6 +621,7 @@
 <!-- Sidövergång (src/page-transition.*): intern ankomst – placeras på tidigare scrollposition före första bildrutan -->
 <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');var c=document.documentElement.classList;c.add('pt-arrive','pt-fast');if(sessionStorage.getItem('pt-cover')){sessionStorage.removeItem('pt-cover');c.add('pt-cover');setTimeout(function(){c.remove('pt-cover','pt-cover-out');},3000);}var ptY=sessionStorage.getItem('pt-y');sessionStorage.removeItem('pt-y');if(ptY&&!location.hash){window.__ptY=+ptY;c.add('pt-hold');setTimeout(function(){c.remove('pt-hold');},1000);}}}catch(e){}</script>
 <link rel="stylesheet" href="/src/page-transition.css">
+<link rel="stylesheet" href="/src/cloud-buddy.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
 <link rel="stylesheet" href="/src/klaro-button.css">
@@ -1467,5 +1468,6 @@
 <script type="module" src="/src/site-footer.js"></script>
 <script type="module" src="/src/mobile-nav.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
+<script type="module" src="/src/cloud-buddy.js"></script>
 </body>
 </html>

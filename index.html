@@ -1301,6 +1301,7 @@
 <!-- Sidövergång (src/page-transition.*): intern ankomst – placeras på tidigare scrollposition före första bildrutan -->
 <script>try{if(sessionStorage.getItem('pt-arrive')){sessionStorage.removeItem('pt-arrive');var c=document.documentElement.classList;c.add('pt-arrive','pt-fast');if(sessionStorage.getItem('pt-cover')){sessionStorage.removeItem('pt-cover');c.add('pt-cover');setTimeout(function(){c.remove('pt-cover','pt-cover-out');},3000);}var ptY=sessionStorage.getItem('pt-y');sessionStorage.removeItem('pt-y');if(ptY&&!location.hash){window.__ptY=+ptY;c.add('pt-hold');setTimeout(function(){c.remove('pt-hold');},1000);}}}catch(e){}</script>
 <link rel="stylesheet" href="/src/page-transition.css">
+<link rel="stylesheet" href="/src/cloud-buddy.css">
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/klaro-journey.css">
 <link rel="stylesheet" href="/src/hero-stickman.css">
@@ -4232,6 +4233,7 @@
 <script type="module" src="/src/hero-stickman.js"></script>
 <script type="module" src="/src/industry-personalize.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
+<script type="module" src="/src/cloud-buddy.js"></script>
 <!-- Bakgrundstoning – opacity på det vita lagret följer scrollen (0 i heron → 1 strax före processkapitlet).
      Smoothstep-kurva för en mjuk, atmosfärisk övergång; max en uppdatering per bildruta. -->
 <script>

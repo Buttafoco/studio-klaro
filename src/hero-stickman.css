@@ -1,60 +1,8 @@
+@import './stickman.css';
 /* Hero-gubben: en streckgubbe går längs hero-formulärets överkant, hoppar upp på ett moln och flyger iväg.
    Rent dekorativ (aria-hidden, inga klick), spelas en gång per sidvisning. Logik: src/hero-stickman.js. */
 .hs-stage{position:absolute;inset:0;z-index:3;pointer-events:none;transition:opacity .3s ease;}
 .hs-stage.is-gone{opacity:0;}
-.hs-x,.hs-cloud{position:absolute;left:0;top:0;will-change:transform;}
-.hs-y{will-change:transform;}
-.hs-fig{display:block;overflow:visible;}
-.hs-fig line,.hs-fig circle{stroke:#0F172A;stroke-width:2.6;stroke-linecap:round;fill:none;}
-.hs-fig .hs-head{fill:#fff;}
-/* Lemmarna roterar kring sin led (gruppens origo) */
-.hs-limb{transform-origin:0 0;transition:transform .22s cubic-bezier(0.33,1,0.68,1);}
-/* Grundställning: benen lite isär, armarna en bit ut från kroppen */
-.hs-thigh-l{transform:rotate(9deg);}
-.hs-thigh-r{transform:rotate(-9deg);}
-.hs-arm-l{transform:rotate(20deg);}
-.hs-arm-r{transform:rotate(-20deg);}
-
-/* Gångcykel: en cykel = ett steg med varje ben; slutar i neutralt läge så att stoppet blir mjukt */
-.hs-walk .hs-thigh-l{animation:hsThigh var(--cyc) linear infinite;}
-.hs-walk .hs-thigh-r{animation:hsThigh var(--cyc) linear calc(var(--cyc) / -2) infinite;}
-.hs-walk .hs-shin-l{animation:hsShin var(--cyc) linear infinite;}
-.hs-walk .hs-shin-r{animation:hsShin var(--cyc) linear calc(var(--cyc) / -2) infinite;}
-.hs-walk .hs-arm-l{animation:hsArm var(--cyc) linear calc(var(--cyc) / -2) infinite;}
-.hs-walk .hs-arm-r{animation:hsArm var(--cyc) linear infinite;}
-.hs-walk .hs-body{animation:hsBob calc(var(--cyc) / 2) ease-in-out infinite;}
-@keyframes hsThigh{0%{transform:rotate(0)}25%{transform:rotate(-26deg)}50%{transform:rotate(0)}75%{transform:rotate(24deg)}100%{transform:rotate(0)}}
-@keyframes hsShin{0%{transform:rotate(30deg)}25%{transform:rotate(4deg)}50%{transform:rotate(0)}75%{transform:rotate(8deg)}100%{transform:rotate(30deg)}}
-@keyframes hsArm{0%{transform:rotate(0)}25%{transform:rotate(-22deg)}50%{transform:rotate(0)}75%{transform:rotate(22deg)}100%{transform:rotate(0)}}
-@keyframes hsBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.4px)}}
-
-/* Inför hoppet: böjer på knäna, armarna bakåt */
-.hs-crouch .hs-body{transform:translateY(3px);transition:transform .18s ease-out;}
-.hs-crouch .hs-thigh-l,.hs-crouch .hs-thigh-r{transform:rotate(-30deg);}
-.hs-crouch .hs-shin-l,.hs-crouch .hs-shin-r{transform:rotate(55deg);}
-.hs-crouch .hs-arm-l,.hs-crouch .hs-arm-r{transform:rotate(35deg);}
-/* I luften: armarna upp, benen indragna */
-.hs-air .hs-thigh-l{transform:rotate(-55deg);}
-.hs-air .hs-thigh-r{transform:rotate(-35deg);}
-.hs-air .hs-shin-l,.hs-air .hs-shin-r{transform:rotate(70deg);}
-.hs-air .hs-arm-l{transform:rotate(-150deg);}
-.hs-air .hs-arm-r{transform:rotate(-130deg);}
-/* Sittande på molnet: låren framåt, underbenen hänger */
-.hs-sit .hs-thigh-l,.hs-sit .hs-thigh-r{transform:rotate(-82deg);}
-.hs-sit .hs-shin-l,.hs-sit .hs-shin-r{transform:rotate(80deg);}
-.hs-sit .hs-thigh-r{transform:rotate(-74deg);}
-.hs-sit .hs-arm-l{transform:rotate(-20deg);}
-.hs-sit .hs-arm-r{transform:rotate(-30deg);}
-/* Vinkar under flygningen */
-.hs-wave .hs-arm-r{animation:hsWave .5s ease-in-out infinite alternate;}
-@keyframes hsWave{from{transform:rotate(-150deg)}to{transform:rotate(-115deg)}}
-
-.hs-cloud svg{display:block;width:100%;height:auto;overflow:visible;}
-.hs-cloud path{fill:#fff;}
-.hs-puff{filter:drop-shadow(0 8px 14px rgba(20,110,245,0.16));}
-.hs-bob{will-change:transform;}
-.hs-bob.is-bobbing{animation:hsCloudBob 1.6s ease-in-out infinite alternate;}
-@keyframes hsCloudBob{from{transform:translateY(0)}to{transform:translateY(-4px)}}
 
 /* Första besöket: gubben hänger i loggan när den flyger till headern (eget lager ovanför KlaroIntro och headern) */
 .hs-sky{position:fixed;inset:0;z-index:10000;pointer-events:none;transition:opacity .3s ease;}
