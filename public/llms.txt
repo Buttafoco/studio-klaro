@@ -14,7 +14,7 @@ Fakta från webbplatsen:
   - Startklar – från 7 900 kr. One-page-hemsida. Vanlig leveranstid cirka 1–2 veckor (7–10 arbetsdagar).
   - Professionell – från 13 900 kr. Upp till fem sidor. Vanlig leveranstid cirka 2–4 veckor.
   - Komplett närvaro – från 22 900 kr. Upp till åtta sidor. Tidsplanen anpassas efter projektets omfattning.
-- Exempel på kundcase på webbplatsen: The Chairman Barber (barbershop i Vasastan), Galleri86 (galleri på Södermalm) och Itreon Market (digital B2B-marknadsplats). Övriga exempel på branschsidorna, till exempel SERA, Trattoria Nord och ELIN STUDIO, är fiktiva verksamheter som bara illustrerar hur en hemsida kan se ut.
+- Exempel på kundcase på webbplatsen: The Chairman Barber (barbershop i Vasastan), Galleri86 (galleri på Södermalm) och Itreon Market (digital B2B-marknadsplats). Konceptprojektet SKIKT (arkitektstudio) är ett eget demoprojekt, inte ett kunduppdrag. Övriga exempel på branschsidorna, till exempel SERA, Trattoria Nord och ELIN STUDIO, är fiktiva verksamheter som bara illustrerar hur en hemsida kan se ut.
 - Portfolio-hemsidor från 2 995 kr; större, skräddarsydda portfolios från 4 995 kr.
 - Klaro Flex: lägre startkostnad och resten fördelat över 12 månader, med Klaro Care inkluderat under perioden.
 - Klaro Care: valfri service efter lansering för 499 kr/mån exkl. moms – hosting, teknisk drift, mindre uppdateringar och support via mejl. Ingen inlåsning.
@@ -34,6 +34,7 @@ Fakta från webbplatsen:
 - [Hemsida för skönhetssalong i Stockholm](https://studioklaro.se/hemsida-skonhetssalong-stockholm): Hemsidor för skönhetssalonger med behandlingar, priser och bokningslänk
 - [Hemsida för fotografer](https://studioklaro.se/hemsida-fotograf): Bildfokuserade hemsidor och portfolios för fotografer
 - [Portfolio](https://studioklaro.se/portfolio): Portfolios för designers, fotografer, kreatörer, frilansare och studenter
+- [Konceptprojekt: SKIKT](https://studioklaro.se/case-skikt): Konceptprojekt – hemsida för en arkitektstudio i Stockholm med projektarkiv, redaktionell typografi och mobilupplevelse (inte ett publicerat kunduppdrag)
 
 ## Guider
 

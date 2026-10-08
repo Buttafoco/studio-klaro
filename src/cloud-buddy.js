@@ -20,6 +20,7 @@ import { NS, makeFigure, makeCloud } from './stickman.js';
     '/priser': 'peek',
     '/portfolio': 'doze',
     '/case-galleri86': 'side',
+    '/case-skikt': 'side',
     '/hemsida-frisor-stockholm': 'walk',
     '/hemsida-restaurang-stockholm': 'soccer',
     '/hemsida-fotograf': 'photo',

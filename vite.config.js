@@ -30,6 +30,7 @@ export default defineConfig({
         frisor: resolve(__dirname, 'hemsida-frisor-stockholm.html'),
         portfolio: resolve(__dirname, 'portfolio.html'),
         caseGalleri86: resolve(__dirname, 'case-galleri86.html'),
+        caseSkikt: resolve(__dirname, 'case-skikt.html'),
         priser: resolve(__dirname, 'priser.html'),
         restaurang: resolve(__dirname, 'hemsida-restaurang-stockholm.html'),
         fotograf: resolve(__dirname, 'hemsida-fotograf.html'),
