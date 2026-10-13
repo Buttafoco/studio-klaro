@@ -1,2 +1,8 @@
 node_modules
 dist
+
+# Hemligheter och lokal Vercel-konfiguration
+.env
+.env.*
+!.env.example
+.vercel
