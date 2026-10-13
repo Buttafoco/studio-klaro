@@ -20,5 +20,8 @@
         { "key": "X-Robots-Tag", "value": "noindex, follow" }
       ]
     }
+  ],
+  "crons": [
+    { "path": "/api/cron/gsc-sync", "schedule": "30 6 * * *" }
   ]
 }
