@@ -49,8 +49,8 @@ Vercel Cron (1 gång/dygn)
 |---|---|
 | `GSC_SITE_URL` | `sc-domain:studioklaro.se` |
 | `GCP_PROJECT_NUMBER` | Projektnummer för *Studio Klaro SEO* (IAM & Admin → Settings) |
-| `GCP_WORKLOAD_IDENTITY_POOL_ID` | t.ex. `vercel` |
-| `GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID` | t.ex. `vercel` |
+| `GCP_WORKLOAD_IDENTITY_POOL_ID` | `studio-klaro-vercel` |
+| `GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID` | `studio-klaro-vercel` |
 | `GCP_SERVICE_ACCOUNT_EMAIL` | `studio-klaro-gsc@studio-klaro-seo.iam.gserviceaccount.com` |
 | `ANALYTICS_DATABASE_URL` | Poolerns anslutningssträng som `analytics_writer` (steg 1) |
 | `ANALYTICS_DATABASE_CA` | **Obligatorisk.** Supabase rot-CA i PEM-format (steg 1.7) |
@@ -102,8 +102,8 @@ OIDC-token som Google växlar mot en kortlivad access-token.
 1. **APIs & Services → Library:** aktivera *Security Token Service API* och
    *IAM Service Account Credentials API* (Search Console API är redan aktivt).
 2. **IAM & Admin → Workload Identity Federation → Create pool**
-   - Namn/ID: `vercel`.
-   - Provider: *OpenID Connect (OIDC)*, namn/ID `vercel`.
+   - Namn/ID: `studio-klaro-vercel`.
+   - Provider: *OpenID Connect (OIDC)*, namn/ID `studio-klaro-vercel`.
    - **Issuer URL:** `https://oidc.vercel.com/<TEAM_SLUG>` (team-slug = sökvägen i din Vercel-URL).
    - **Audience:** *Allowed audiences* → `https://vercel.com/<TEAM_SLUG>`.
    - **Attribute mapping:** `google.subject` = `assertion.sub`.
@@ -111,7 +111,7 @@ OIDC-token som Google växlar mot en kortlivad access-token.
      `assertion.sub == "owner:<TEAM_SLUG>:project:<VERCEL_PROJEKT>:environment:production"`
 3. **IAM & Admin → Service Accounts →** `studio-klaro-gsc@…` → **Permissions →
    Grant access:** ny principal
-   `principal://iam.googleapis.com/projects/<PROJEKTNUMMER>/locations/global/workloadIdentityPools/vercel/subject/owner:<TEAM_SLUG>:project:<VERCEL_PROJEKT>:environment:production`
+   `principal://iam.googleapis.com/projects/<PROJEKTNUMMER>/locations/global/workloadIdentityPools/studio-klaro-vercel/subject/owner:<TEAM_SLUG>:project:<VERCEL_PROJEKT>:environment:production`
    med rollen **Workload Identity User** (`roles/iam.workloadIdentityUser`).
    Preview-deployar får därmed ingen åtkomst.
 4. Servicekontot behöver **inga** projektroller. Åtkomsten till datan ges av
