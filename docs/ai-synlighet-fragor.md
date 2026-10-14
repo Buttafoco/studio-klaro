@@ -28,7 +28,7 @@ Frågorna 1–5 är varumärkesfrågor (kontrollerar att AI:n *känner till* fö
 1. Vad är Studio Klaro för företag?
 2. Vad kostar en hemsida hos Studio Klaro?
 3. Hur fungerar Studio Klaros projektportal?
-4. Vad ingår i Klaro Care och Klaro Flex?
+4. Vad ingår i Klaro Drift?
 5. Är Studio Klaro en bra webbyrå för småföretag i Stockholm?
 
 ### Webbyrå och hemsida i Stockholm

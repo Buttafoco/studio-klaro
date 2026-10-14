@@ -30,6 +30,7 @@
 <style>
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  html{scroll-snap-type:y proximity;} /* snäpper bara till sektioner med scroll-snap-align (startsidesförslaget) */
   /* Startsidans färger: Studio Klaros ljusblå canvas som bärande grund, starkt blått för CTA, länkar och aktiva
      detaljer, mörk marinblå text och ren vit som visuell paus (FAQ). Kundresan behåller sin mörka fas. */
   :root{--sk-canvas:#DCEEFF;--sk-white:#FFFFFF;--sk-blue:#146EF5;--sk-ink:#0F172A;}
@@ -131,6 +132,8 @@
   .wz-dock .wz-shell{max-width:none;}
   /* Lång steg 2 får scrolla inne i dockan i stället för att gå utanför skärmen */
   .wz-dock #wz-form-wrap-dock,.wz-dock #wz-success-dock{max-height:calc(100svh - 120px);overflow-y:auto;border-radius:28px;overscroll-behavior:contain;}
+  /* Bara steg 2 ska kunna scrolla: det dolda steg 2 gör annars innehållet högre än den hopfällda/öppnade prompten och ger en scrollist */
+  .wz-dock:not(:has(.wz-prompt-card.is-step2)) #wz-form-wrap-dock{overflow:hidden;}
   .wz-dock .wz-card{box-shadow:none;border-color:rgba(15,27,51,0.06);}
   .wz-dock .wz-prompt-card{position:relative;padding:12px 22px;border-radius:30px;transition:padding 500ms var(--dock-ease),border-radius 500ms var(--dock-ease),border-color .25s ease;}
   .wz-dock .wz-input.wz-prompt{height:26px;font-size:16px;line-height:1.6;transition:height 500ms var(--dock-ease);}
@@ -206,7 +209,7 @@
   .hc-h1{margin:0 auto;max-width:1000px;font-family:"DynaPuff",system-ui,sans-serif;font-style:normal;font-weight:500;font-stretch:75%;font-size:clamp(52px,5.2vw,86px);line-height:1.08;letter-spacing:-0.04em;color:#0F172A;}
   .hc-bm{display:none;}
   .hc-h1 span{font-family:inherit;}
-  .hc-lead{margin:52px auto 0;max-width:600px;font-size:18px;line-height:1.6;font-weight:400;color:#52657A;text-wrap:balance;}
+  .hc-lead{margin:52px auto 0;max-width:min(720px,100%);font-size:18px;line-height:1.6;font-weight:400;color:#52657A;text-wrap:balance;}
   /* Hero-formulärets text (fältet och de animerade exemplen) lite mindre än i övriga instanser; kortets mått är oförändrade */
   .hc .wz-input.wz-prompt,.hc .wz-typing-ov{font-size:17px;}
   .hc .hero-form{margin-top:44px;}
@@ -1126,7 +1129,7 @@
         "priceCurrency": "SEK",
         "priceSpecification": {
           "@type": "PriceSpecification",
-          "minPrice": 7900,
+          "minPrice": 5900,
           "priceCurrency": "SEK",
           "valueAddedTaxIncluded": false
         }
@@ -1217,7 +1220,7 @@
           "name": "Kan jag ändra hemsidan efter lanseringen?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care för löpande support och uppdateringar. Större förändringar och nya funktioner offereras separat."
+            "text": "Ja. Befintliga texter och bilder kan du själv ändra via CMS:et, och mindre ändringar kan beställas som tillägg vid behov. Klaro Drift, 199 kr/mån, omfattar drift och inte löpande innehållsändringar. Större förändringar och nya funktioner offereras separat."
           }
         }
       ]
@@ -1465,6 +1468,7 @@
 <link rel="stylesheet" href="/src/site-header.css">
 <!-- Knappsystemet (primary/secondary i loggans form) ligger i src/klaro-button.css; här bara startsidans egna delar. -->
 <link rel="stylesheet" href="/src/klaro-button.css">
+<link rel="stylesheet" href="/src/startsidesforslag.css">
 <style>
   .klaro-button{font-size:14.5px;}
   .klaro-button > span{display:inline-block;}
@@ -1650,7 +1654,7 @@
         <li><a class="sh-link" href="/seo-koll">SEO</a></li>
         <li><a class="sh-link" href="/priser">Priser</a></li>
         <li><a class="sh-link" href="/om">Om</a></li>
-        <li class="sh-cta-item"><a class="sh-cta klaro-button klaro-button--primary" data-rhide href="#kontakt">Starta ett projekt <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
+        <li class="sh-cta-item"><a class="sh-cta klaro-button klaro-button--primary" data-rhide href="#startsidesforslag">Få ett förslag gratis <span class="sh-cta-arrow" aria-hidden="true">↗</span></a></li>
       </ul>
     </nav>
     <div class="sh-menu" data-rshow style="display:none;">
@@ -1678,6 +1682,7 @@
     <div class="hero-form" style="opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.32s forwards;">
       <span class="wz-sentinel wz-sentinel--show" id="wz-dock-show" aria-hidden="true"></span>
       <span class="wz-sentinel wz-sentinel--hide" id="wz-dock-hide" aria-hidden="true"></span>
+      <a class="ssf-pill ssf-pill--hero" href="#startsidesforslag"><span class="ssf-pill-tag">Kostnadsfritt</span><span class="ssf-pill-txt">Förslag på ny hemsida</span><span aria-hidden="true">→</span></a>
       <div class="wz-shell" data-wz-mount="hero"></div>
       <ul class="wz-perks hero-perks">
         <li><span class="wz-rating"><span class="wz-stars" role="img" aria-label="Fem stjärnor"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg width="16" height="16" viewBox="0 0 20 20"><path fill="#146EF5" d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></span>Omdömen från våra kunder</span></li>
@@ -2069,6 +2074,122 @@
     </div>
   </section>
 
+  <!-- STARTSIDESFÖRSLAG: fristående lead-sektion direkt efter nyttokorten. Eget formulär (inskick som
+       "startsidesforslag" via samma Web3Forms-lösning), illustrationen är en dekorativ fiktiv startsida. -->
+  <section id="startsidesforslag" class="ssf" aria-labelledby="ssf-title">
+    <div class="ssf-card">
+      <div class="ssf-copy">
+        <h2 id="ssf-title" class="ssf-h2">Se hur din hemsida kan se ut.</h2>
+        <p class="ssf-lead">Skicka din nuvarande webbadress så tittar vi på ditt företag och tar fram en möjlig riktning för en ny startsida – anpassad för både desktop och mobil. Det är kostnadsfritt.</p>
+        <form id="ssf-form" class="ssf-form" novalidate>
+          <div class="ssf-row">
+          <div class="ssf-field">
+            <label class="ssf-label" for="ssf-url">Din nuvarande hemsida</label>
+            <input class="ssf-input" id="ssf-url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://dittforetag.se" required aria-describedby="ssf-url-err">
+            <p class="ssf-err" id="ssf-url-err" role="alert"></p>
+          </div>
+          <div class="ssf-field">
+            <label class="ssf-label" for="ssf-email">Din e-post</label>
+            <input class="ssf-input" id="ssf-email" name="email" type="email" autocomplete="email" placeholder="du@foretag.se" required aria-describedby="ssf-email-err">
+            <p class="ssf-err" id="ssf-email-err" role="alert"></p>
+          </div>
+          <button type="submit" id="ssf-btn" class="ssf-btn klaro-button klaro-button--primary">Få mitt gratis förslag →</button>
+          </div>
+          <p class="ssf-formerr" id="ssf-formerr" role="alert"></p>
+          <p class="ssf-note">Vi kollar igenom din nuvarande hemsida och återkommer personligt med det som kan bli ert nya.</p>
+        </form>
+        <div class="ssf-ok" id="ssf-ok" tabindex="-1" hidden>
+          <div class="ssf-ok-ic" aria-hidden="true">✓</div>
+          <h3>Tack! Vi kikar på det.</h3>
+          <p>Vi går igenom det du skickat och återkommer personligt så snart vi kan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+  (function () {
+    var form = document.getElementById('ssf-form');
+    if (!form) return;
+    var url = document.getElementById('ssf-url'), email = document.getElementById('ssf-email');
+    var urlErr = document.getElementById('ssf-url-err'), emailErr = document.getElementById('ssf-email-err');
+    var formErr = document.getElementById('ssf-formerr'), btn = document.getElementById('ssf-btn');
+    var ok = document.getElementById('ssf-ok');
+    var KEY = '3e1c55ed-82c4-435f-8126-33f86c5d4a92'; // samma Web3Forms-nyckel som övriga formulär
+    var sending = false;
+    // Fokuseffekt när sektionen kommer in i bild; ankarlänkar (pillen, menyknappen) sätter markören i fältet.
+    var sec = document.getElementById('startsidesforslag');
+    if (sec && 'IntersectionObserver' in window) {
+      sec.classList.add('ssf-js');
+      new IntersectionObserver(function (en) {
+        en.forEach(function (x) { sec.classList.toggle('is-focus', x.isIntersecting); });
+      }, { threshold: 0.6 }).observe(sec);
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href="#startsidesforslag"]');
+      if (!a) return;
+      setTimeout(function () { try { url.focus({ preventScroll: true }); } catch (x) {} }, 900);
+    });
+
+    function normUrl(v) {
+      v = v.trim();
+      if (v && !/^https?:\/\//i.test(v)) v = 'https://' + v;
+      try {
+        var u = new URL(v);
+        if ((u.protocol === 'http:' || u.protocol === 'https:') && /^[^.\s]+(\.[^.\s]+)+$/.test(u.hostname)) return u.href;
+      } catch (e) {}
+      return null;
+    }
+    function mark(input, box, msg) {
+      box.textContent = msg || '';
+      if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+    }
+    url.addEventListener('input', function () { mark(url, urlErr, ''); formErr.textContent = ''; });
+    email.addEventListener('input', function () { mark(email, emailErr, ''); formErr.textContent = ''; });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (sending) return;
+      var u = normUrl(url.value);
+      var em = email.value.trim();
+      var emOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em);
+      mark(url, urlErr, u ? '' : (url.value.trim() ? 'Ange en giltig webbadress, till exempel https://dittforetag.se.' : 'Fyll i din nuvarande hemsida.'));
+      mark(email, emailErr, emOk ? '' : (em ? 'Ange en giltig e-postadress, till exempel du@foretag.se.' : 'Fyll i din e-post.'));
+      if (!u || !emOk) { (u ? email : url).focus(); return; }
+      formErr.textContent = '';
+      sending = true;
+      btn.disabled = true;
+      btn.textContent = 'Skickar …';
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: KEY,
+          subject: 'Startsidesförslag – ' + u,
+          from_name: 'Studio Klaro – startsidesförslag',
+          replyto: em,
+          'Typ av förfrågan': 'startsidesforslag',
+          'Nuvarande hemsida': u,
+          'E-post': em
+        })
+      })
+        .then(function (r) { return r.json().then(function (d) { return r.ok && d && d.success; }); })
+        .then(function (good) {
+          if (!good) throw new Error('send');
+          if (window.klaroTrackLead) window.klaroTrackLead('startsidesforslag', 'startsidesforslag');
+          form.hidden = true;
+          ok.hidden = false;
+          ok.focus();
+        })
+        .catch(function () {
+          sending = false;
+          btn.disabled = false;
+          btn.textContent = 'Få mitt gratis förslag →';
+          formErr.textContent = 'Något gick fel när förfrågan skulle skickas. Försök igen eller mejla hej@studioklaro.se.';
+        });
+    });
+  })();
+  </script>
+
   <!-- MÖRKT KAPITEL: kundresan (#processen) till och med "Detta ingår". Därefter ljusnar sidan inför kontakt.
        Hela sidans bakgrund tonar till mörkt medan kapitlet fyller skärmen (html.dk-on, sätts i JS). -->
   <div class="dk" id="dk">
@@ -2287,7 +2408,7 @@
           </div>
           </div><!-- /kj-sky -->
 
-          <!-- Efter resan (utanför molnresan): det som alltid ingår, sidovägen och Klaro Care -->
+          <!-- Efter resan (utanför molnresan): det som alltid ingår, sidovägen och Klaro Drift -->
           <div class="ka">
             <h3 class="ka-k" id="ka-always">Detta ingår alltid</h3>
             <ul class="ka-list" aria-labelledby="ka-always">
@@ -2302,25 +2423,23 @@
               <div class="ka-fork">
                 <p class="ka-fork-k">Anpassas efter din resa</p>
                 <button type="button" class="ka-fork-btn" aria-expanded="true" aria-controls="ka-opt-panel">
-                  <span>Beroende på upplägg · 5 delar</span><span class="ka-fork-ic" aria-hidden="true"></span>
+                  <span>Beroende på upplägg · 3 delar</span><span class="ka-fork-ic" aria-hidden="true"></span>
                 </button>
                 <div class="ka-fork-panel" id="ka-opt-panel">
                   <div class="ka-fork-in">
                     <ul class="ka-opts">
                       <li style="--i:0"><b>Kontaktformulär</b><span>Professionell · Komplett närvaro</span></li>
                       <li style="--i:1"><b>Domänkoppling</b><span>Professionell · Komplett närvaro</span></li>
-                      <li style="--i:2"><b>Google Företagsprofil och Analytics</b><span>Professionell · Komplett närvaro</span></li>
-                      <li style="--i:3"><b>Lokal SEO-start</b><span>Komplett närvaro</span></li>
-                      <li style="--i:4"><b>Professionell mejladress</b><span>Komplett närvaro</span></li>
+                      <li style="--i:2"><b>Google Företagsprofil och Analytics</b><span>Professionell</span></li>
                     </ul>
                     <p class="ka-opts-note">Domän, mejl och andra externa tjänster betalas separat. <a href="/priser">Jämför uppläggen <span aria-hidden="true">→</span></a></p>
                   </div>
                 </div>
               </div>
               <div class="ka-fork">
-                <p class="ka-fork-k">Valfritt nästa kapitel</p>
-                <p class="ka-care-t">Klaro Care</p>
-                <p class="ka-care-p">Fortsatt hjälp med mindre ändringar, support och förbättringar – bara om du vill. Hemsidan är redan färdig, och den är din även utan Klaro Care.</p>
+                <p class="ka-fork-k">Efter lanseringen</p>
+                <p class="ka-care-t">Klaro Drift</p>
+                <p class="ka-care-p">Vi tar hand om tekniken bakom din hemsida – hosting, SSL och teknisk tillsyn – så att du kan fokusera på din verksamhet. 199 kr/mån, samma som visas i paketet.</p>
               </div>
             </div>
           </div>
@@ -2543,7 +2662,7 @@
             <span class="faq-icon" aria-hidden="true"></span>
           </button>
         </h3>
-        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-10" role="region" aria-labelledby="faq-q-10" class="faq-ans"><p>Ja. Mindre ändringar kan beställas vid behov eller hanteras genom Klaro Care för löpande support och uppdateringar. Större förändringar och nya funktioner offereras separat.</p></div></div></div>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-10" role="region" aria-labelledby="faq-q-10" class="faq-ans"><p>Ja. Befintliga texter och bilder kan du själv ändra via CMS:et, och mindre ändringar kan beställas som tillägg vid behov. Klaro Drift, 199 kr/mån, omfattar drift och inte löpande innehållsändringar. Större förändringar och nya funktioner offereras separat.</p></div></div></div>
       </div>
     </div>
     <p class="faq-foot"><a class="faq-contact" href="#kontakt">Hittar du inte svaret? Skriv till oss <span aria-hidden="true">→</span></a></p>

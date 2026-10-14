@@ -120,7 +120,7 @@ for (const file of pageFiles) {
 // Innehåll som tidigare var motsägelsefullt: /priser är source of truth.
 const CONTENT_FILES = [...pageFiles, 'public/llms.txt'].filter((f) => fs.existsSync(path.join(ROOT, f)));
 const FORBIDDEN = [
-  [/19 ?900 kr/, 'gammalt pris för Komplett närvaro (ska vara från 22 900 kr)'],
+  [/19 ?900 kr/, 'gammalt pris för Komplett närvaro (ska vara från 18 900 kr)'],
   [/(\d|en|ett|två|tre) (korrekturrund|korrigeringsrund)/i,'fast antal korrekturrundor (ska vara löpande feedback inom avtalad omfattning)'],
   [/08:00–17:00|mån–fre 08/i, 'gamla tider (ska vara vardagar 09–17)'],
   [/Klart inom 7–10 arbetsdagar|Ett vanligt (frisör|restaurang|salongs)?projekt blir normalt klart inom 7–10/, 'generellt löfte om 7–10 arbetsdagar för alla projekt'],
@@ -145,7 +145,7 @@ for (const file of CONTENT_FILES) {
   });
 }
 const priser = fs.readFileSync(path.join(target, 'priser.html'), 'utf8');
-for (const price of ['7 900 kr', '13 900 kr', '22 900 kr']) {
+for (const price of ['5 900 kr', '12 900 kr', '18 900 kr']) {
   if (!priser.includes(price)) fail('priser.html', `saknar ${price} – kontrollera att övriga sidor följer /priser`);
 }
 

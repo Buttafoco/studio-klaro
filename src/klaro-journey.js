@@ -243,7 +243,7 @@
 
 /* ---------- Övergången till kontaktsektionen (#kontakt) ----------
    Den visade projektresan är klar – nu kan besökarens egen börja. En kort linje lämnar LIVE-punkten,
-   går rakt ned mellan grenarna (inte genom Klaro Care) och gör en mjuk båge till startpunkten
+   går rakt ned mellan grenarna (inte genom Klaro Drift) och gör en mjuk båge till startpunkten
    "Ditt första steg". På mobil: en kort lodrät anslutning. En gång per sidvisning, när ~22 % av sektionen
    syns (IntersectionObserver, kopplas bort direkt): linjen ritas (rAF, ~0,7 s på desktop, ~0,4 s på mobil)
    och samtidigt glider innehållet upp i tre steg (se .kx-in i klaro-journey.css). Fokus i formuläret visar allt direkt. Reducerad rörelse: direkt. */
