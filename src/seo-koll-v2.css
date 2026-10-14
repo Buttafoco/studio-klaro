@@ -158,3 +158,6 @@
 @media (max-width:640px){
   .scene.scene::before{top:-55px;height:56px;background-size:760px 56px,950px 54px,100% 100%;}
 }
+
+/* Den fullbreda molnbakgrunden (100vw) ska aldrig ge horisontell scroll när det finns en rullningslist */
+main{overflow-x:clip;}

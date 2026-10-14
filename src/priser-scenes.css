@@ -37,3 +37,25 @@
   .pj-scene::before{top:-55px;height:56px;background-size:760px 56px,950px 54px,100% 100%;}
   .px-extra{padding:36px 0;}
 }
+
+/* Drivande moln i heron (samma form och rörelse som på startsidan och SEO-sidan) */
+.px-hero{position:relative;isolation:isolate;overflow-x:clip;}
+.px-hero .px-wrap{position:relative;z-index:1;}
+.pr-clouds{position:absolute;z-index:-1;top:-80px;bottom:-40px;left:0;right:0;overflow:hidden;pointer-events:none;}
+.pr-cloud-track{position:absolute;left:0;top:var(--y);width:var(--w);opacity:var(--o);will-change:transform;animation:prWind var(--d) linear var(--dl) infinite;}
+.pr-cloud{display:block;width:100%;height:auto;fill:#fff;transform-origin:50% 70%;animation:prFloat var(--fd) cubic-bezier(.45,0,.55,1) var(--fdl,0s) infinite alternate;}
+.pr-cloud--1{--y:110px;--w:clamp(170px,22vw,320px);--o:.5;--d:150s;--dl:-32s;--fd:14s;--fdl:-5s;--fy:-7px;--fs:1.025;}
+.pr-cloud--2{--y:300px;--w:clamp(150px,19vw,280px);--o:.45;--d:176s;--dl:-118s;--fd:17s;--fdl:-11s;--fy:6px;--fs:1.02;}
+.pr-cloud--3{--y:470px;--w:clamp(110px,13vw,200px);--o:.36;--d:205s;--dl:-64s;--fd:12s;--fdl:-3s;--fy:-5px;--fs:1.018;}
+.pr-cloud--4{--y:560px;--w:clamp(90px,10vw,160px);--o:.3;--d:240s;--dl:-178s;--fd:19s;--fdl:-8s;--fy:4px;--fs:1.012;}
+.pr-cloud--5{--y:60px;--w:clamp(70px,7vw,120px);--o:.25;--d:265s;--dl:-21s;--fd:21s;--fdl:-14s;--fy:-3px;--fs:1.01;}
+@keyframes prWind{from{transform:translate3d(-115%,0,0);}to{transform:translate3d(100vw,0,0);}}
+@keyframes prFloat{from{transform:translateY(0) scale(1);}to{transform:translateY(var(--fy,-5px)) scale(var(--fs,1.02));}}
+@media (max-width:760px){
+  .pr-clouds{top:-40px;}
+  .pr-cloud--1{--y:30px;--w:160px;--o:.45;--d:95s;--dl:-20s;}
+  .pr-cloud--2{--y:340px;--w:170px;--o:.38;--d:115s;--dl:-78s;}
+  .pr-cloud--3{--y:520px;--w:115px;--o:.32;--d:140s;--dl:-50s;}
+  .pr-cloud--4,.pr-cloud--5{display:none;}
+}
+@media (prefers-reduced-motion:reduce){.pr-cloud-track,.pr-cloud{animation-play-state:paused;}}
