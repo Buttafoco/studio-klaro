@@ -1,0 +1,29 @@
+/* SEO-koll: lokalmenyn ersätter huvudmenyn när hero-formuläret scrollats förbi (bara på /seo-koll). */
+.sln{position:fixed;z-index:60;top:12px;left:50%;width:min(880px,calc(100% - 32px));box-sizing:border-box;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 10px 8px 24px;
+  background:rgba(255,255,255,.88);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);
+  border:1px solid rgba(15,23,42,.1);border-radius:26px;box-shadow:0 10px 26px -16px rgba(15,23,42,.35);
+  opacity:0;visibility:hidden;transform:translate(-50%,-14px);pointer-events:none;
+  transition:opacity .3s ease,transform .45s cubic-bezier(.22,1,.36,1),visibility 0s linear .45s;}
+.sln.is-on{opacity:1;visibility:visible;transform:translate(-50%,0);pointer-events:auto;transition:opacity .3s ease,transform .45s cubic-bezier(.22,1,.36,1),visibility 0s;}
+.sln-title{margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em;color:#0F172A;}
+.sln-actions{display:flex;align-items:center;gap:8px;}
+.sln-link,.sln-cta{display:inline-flex;align-items:center;min-height:34px;padding:0 16px;border-radius:999px;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap;cursor:pointer;font-family:inherit;}
+.sln-link{color:#0F172A;background:transparent;border:1.5px solid rgba(15,23,42,.45);transition:background-color .2s ease,border-color .2s ease;}
+.sln-link:hover{background:rgba(15,23,42,.05);border-color:#0F172A;}
+.sln-cta{color:#fff;background:#146EF5;border:0;transition:background-color .2s ease;}
+.sln-cta:hover{background:#0F5AD1;}
+.sln-link:focus-visible,.sln-cta:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
+@media (max-width:640px){
+  .sln{padding:7px 8px 7px 18px;border-radius:22px;}
+  .sln-title{font-size:17px;}
+  .sln-link{display:none;}
+  .sln-cta{padding:0 14px;font-size:13.5px;}
+}
+@media (prefers-reduced-motion:reduce){.sln,.sln.is-on{transition:none;}}
+
+/* Huvudmenyn lämnar plats åt lokalmenyn (headerns reserverade höjd ändras inte, så inget hoppar) */
+html.sln-active .sh.nav-wrap{opacity:0;visibility:hidden;transform:translateY(-100%);pointer-events:none;
+  transition:opacity .25s ease,transform .4s cubic-bezier(.22,1,.36,1),visibility 0s linear .4s;}
+.sh.nav-wrap{transition:opacity .25s ease,transform .4s cubic-bezier(.22,1,.36,1),visibility 0s;}
+@media (prefers-reduced-motion:reduce){.sh.nav-wrap,html.sln-active .sh.nav-wrap{transition:none;}}

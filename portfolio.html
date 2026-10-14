@@ -353,6 +353,7 @@
 }
 </script>
 <link rel="stylesheet" href="/src/lead-dock.css">
+<link rel="stylesheet" href="/src/sent-cloud.css">
 <script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
 <!-- Utan JavaScript: visa scroll-reveal-sektioner, FAQ-svar och dolda paneler direkt. -->
@@ -681,7 +682,7 @@
 
     <!-- SUCCESS -->
     <div id="wz-success" class="wz-card" style="display:none;text-align:center;animation:fadeUp .5s cubic-bezier(0.22,1,0.36,1);">
-      <div style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#146EF5,#3B8CFF);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;margin:12px auto 24px;box-shadow:0 10px 24px rgba(20,110,245,0.35);" aria-hidden="true">✓</div>
+      <div class="sc-scene" aria-hidden="true"><svg class="sc-cl sc-cl--s1" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-cl sc-cl--s2" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-cl sc-cl--big" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-check" viewBox="0 0 48 48"><path d="M12.5 25.5l8 8 15-17.5"/></svg></div>
       <h3 id="wz-success-title" tabindex="-1" style="font-size:24px;font-weight:800;color:#0F172A;margin:0 0 14px;line-height:1.3;outline:none;">Tack! Vi kikar på det.</h3>
       <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 24px;">Vi går igenom det du skickat och återkommer personligt så snart vi kan.</p>
       <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px;" aria-hidden="true">
@@ -749,7 +750,7 @@
 
       <div id="wz-callback-panel" style="overflow:hidden;max-height:0;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1);">
         <div id="wz-callback-success" style="display:none;background:#0F172A;border-radius:16px;padding:36px;margin-top:16px;text-align:center;">
-          <div style="width:52px;height:52px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px;">✓</div>
+          <div class="sc-scene sc-scene--sm" aria-hidden="true"><svg class="sc-cl sc-cl--s1" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-cl sc-cl--s2" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-cl sc-cl--big" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-check" viewBox="0 0 48 48"><path d="M12.5 25.5l8 8 15-17.5"/></svg></div>
           <div style="font-size:19px;font-weight:800;color:#fff;margin-bottom:8px;">Tack, <span id="wz-callback-succ-name"></span>!</div>
           <div style="font-size:14px;color:#B8C6DC;line-height:1.6;">Vi har tagit emot din förfrågan och kontaktar dig inom en timme under vardagar 09–17.</div>
         </div>

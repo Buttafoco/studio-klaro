@@ -206,7 +206,7 @@
     .hc-cloud--4,.hc-cloud--5{display:none;}
   }
   @media (prefers-reduced-motion: reduce){ .hc-cloud-track,.hc-cloud{animation-play-state:paused;} }
-  .hc-h1{margin:0 auto;max-width:1000px;font-family:"DynaPuff",system-ui,sans-serif;font-style:normal;font-weight:500;font-stretch:75%;font-size:clamp(52px,5.2vw,86px);line-height:1.08;letter-spacing:-0.04em;color:#0F172A;}
+  .hc-h1{margin:0 auto;max-width:1000px;font-family:"DynaPuff",system-ui,sans-serif;font-style:normal;font-weight:500;font-stretch:75%;font-size:clamp(56px,5.6vw,93px);line-height:1.08;letter-spacing:-0.04em;color:#0F172A;}
   .hc-bm{display:none;}
   .hc-h1 span{font-family:inherit;}
   .hc-lead{margin:52px auto 0;max-width:min(720px,100%);font-size:18px;line-height:1.6;font-weight:400;color:#52657A;text-wrap:balance;}
@@ -241,7 +241,7 @@
   /* Mobil: samma tre rader, storleken följer bredden (42–54 px) så att längsta raden alltid ryms */
   @media (max-width:760px){
     .hc{margin-top:28px;padding:24px 16px 0;}
-    .hc-h1{font-size:clamp(38px,calc((100vw - 32px) / 8.6),50px);line-height:1.1;letter-spacing:-0.02em;}
+    .hc-h1{font-size:clamp(40px,calc((100vw - 32px) / 8.2),52px);line-height:1.1;letter-spacing:-0.02em;}
     .hc-lead{margin-top:24px;font-size:16px;}
     .hc .wz-input.wz-prompt,.hc .wz-typing-ov{font-size:16px;}
     .hc .hero-form{margin-top:28px;}
@@ -1469,6 +1469,7 @@
 <!-- Knappsystemet (primary/secondary i loggans form) ligger i src/klaro-button.css; här bara startsidans egna delar. -->
 <link rel="stylesheet" href="/src/klaro-button.css">
 <link rel="stylesheet" href="/src/startsidesforslag.css">
+<link rel="stylesheet" href="/src/sent-cloud.css">
 <style>
   .klaro-button{font-size:14.5px;}
   .klaro-button > span{display:inline-block;}
@@ -1912,7 +1913,7 @@
        Alla illustrationer är UI-exempel: inga verkliga siffror, kunder eller resultat. -->
   <section id="tjansten" class="bento" aria-labelledby="bento-title">
     <div class="bento-head" data-reveal>
-      <h2 id="bento-title" class="bento-h2">En hemsida som arbetar för företaget.</h2>
+      <h2 id="bento-title" class="bento-h2">Ett urval av det vi har gett form.</h2>
     </div>
 
     <!-- UTVALDA PROJEKT – projektbandet som modulens stora översta rad, direkt ovanför KPI-korten.
@@ -1974,104 +1975,6 @@
         </nav>
       </div>
     </section>
-
-    <div class="bento-grid">
-      <!-- Ett starkare första intryck -->
-      <article class="bento-card bento-card--brand" data-reveal>
-        <div class="bc-art bc-stack vi" data-id="0" role="img" aria-label="Illustration: en webbvy, en färgpalett och ett identitetskort för ett påhittat företag, Ditt företag, som formas steg för steg efter verksamhetens logga, stil och kunder.">
-        <span class="bs-card bs-web" aria-hidden="true">
-          <span class="bs-bar"><i></i><i></i><i></i></span>
-          <span class="bs-hero">
-            <span class="vi-stack vi-h"><span class="vi-v" data-v="0">Ditt företag</span><span class="vi-v" data-v="1">Ditt företag</span><span class="vi-v" data-v="2">Ditt företag</span><span class="vi-v" data-v="3">Ditt företag</span></span>
-            <em></em>
-            <span class="bs-btn"></span>
-          </span>
-          <span class="bs-lines"><i></i><i></i></span>
-          <span class="bs-tag bs-tag--in"><b>3</b>Dina kunder</span>
-        </span>
-        <span class="bs-card bs-palette" aria-hidden="true">
-          <span class="bs-sw bs-sw1"></span><span class="bs-sw bs-sw2"></span><span class="bs-sw bs-sw3"></span><span class="bs-sw bs-sw4"></span>
-          <span class="bs-tag"><b>2</b>Din stil</span>
-        </span>
-        <span class="bs-card bs-brandcard" aria-hidden="true">
-          <svg width="30" height="20" viewBox="0 0 40 26"><circle class="bs-logo-a" cx="13" cy="13" r="11"/><circle class="bs-logo-b" cx="27" cy="13" r="11"/></svg>
-          <span class="vi-stack bs-aa"><span class="vi-v" data-v="0">Ditt företag</span><span class="vi-v" data-v="1">Ditt företag</span><span class="vi-v" data-v="2">Ditt företag</span><span class="vi-v" data-v="3">Ditt företag</span></span>
-          <span class="vi-stack bs-cap"><span class="vi-v" data-v="0">Modern &amp; professionell</span><span class="vi-v" data-v="1">Varm &amp; redaktionell</span><span class="vi-v" data-v="2">Naturlig &amp; lugn</span><span class="vi-v" data-v="3">Kreativ &amp; uttrycksfull</span></span>
-          <span class="bs-tag"><b>1</b>Din logga</span>
-        </span>
-      </div>
-        <div class="bc-body">
-          <p class="bc-eyebrow">Utgår från ditt företag</p>
-          <h3 class="bc-title">Det ska kännas som du.</h3>
-          <p class="bc-text">Vi börjar med ditt erbjudande, dina kunder och vad du vill att de ska känna – sedan formar vi uttrycket runt det.</p>
-        </div>
-      </article>
-
-      <!-- Bli lättare att hitta: enkel process, inga mätvärden. Dekorativ illustration. -->
-      <article class="bento-card bento-card--seo" data-reveal>
-        <div class="bc-art fd" role="img" aria-label="Illustration: tydligare struktur gör företaget lättare att hitta i Google, Maps och AI-sök, vilket ger fler rätt besökare.">
-          <ol class="fd-steps" aria-hidden="true">
-            <li class="fd-step"><span class="fd-n">1</span><span class="fd-t">Tydligare struktur</span></li>
-            <li class="fd-step"><span class="fd-n">2</span><span class="fd-t">Lättare att hitta</span></li>
-            <li class="fd-step fd-step--goal"><span class="fd-n">3</span><span class="fd-t">Fler rätt besökare</span></li>
-          </ol>
-          <div class="fd-src" aria-hidden="true">
-            <span class="fd-chip"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Google</span>
-            <span class="fd-chip"><svg viewBox="0 0 16 16"><path d="M8 14.5s4.5-4.2 4.5-7.7a4.5 4.5 0 0 0-9 0C3.5 10.3 8 14.5 8 14.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="6.8" r="1.6" fill="currentColor"/></svg>Maps</span>
-            <span class="fd-chip"><svg viewBox="0 0 16 16"><path d="M8 1.5l1.5 4.2 4.2 1.5-4.2 1.5L8 12.9 6.5 8.7 2.3 7.2l4.2-1.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 11.5v3M11.5 13h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>AI-sök</span>
-          </div>
-        </div>
-        <div class="bc-body">
-          <h3 class="bc-title">Bli lättare att hitta</h3>
-          <p class="bc-text">Struktur och innehåll byggs för Google, Maps och AI-sök så att rätt kunder lättare kan upptäcka dig.</p>
-        </div>
-      </article>
-
-      <!-- Mobilanpassad: samma förenklade hemsida i tre format. Dekorativ illustration, ingen mätdata. -->
-      <article class="bento-card bento-card--devices" data-reveal>
-        <div class="bc-art rs" role="img" aria-label="Illustration: samma förenklade hemsida visad på dator, surfplatta och mobil, där innehållet anpassas efter skärmen.">
-        <span class="rs-dev rs-desk" aria-hidden="true">
-          <span class="rs-dots"><i></i><i></i><i></i></span>
-          <span class="rs-scr">
-            <span class="rs-nav"><i class="rs-logo"></i><i class="rs-menu"></i><i class="rs-menu"></i><i class="rs-menu"></i><i class="rs-cta"></i></span>
-            <span class="rs-hero"><span class="rs-copy"><i class="rs-l rs-l--h"></i><i class="rs-l rs-l--h rs-w70"></i><i class="rs-l"></i><i class="rs-l rs-w70"></i><b class="rs-btn"></b></span><span class="rs-img"></span></span>
-            <span class="rs-tiles"><i></i><i></i><i></i></span>
-          </span>
-        </span>
-        <span class="rs-dev rs-tab" aria-hidden="true">
-          <span class="rs-scr">
-            <span class="rs-nav"><i class="rs-logo"></i><i class="rs-menu"></i><i class="rs-cta"></i></span>
-            <span class="rs-hero"><span class="rs-img"></span><span class="rs-copy"><i class="rs-l rs-l--h"></i><i class="rs-l rs-l--h rs-w70"></i><i class="rs-l"></i><b class="rs-btn"></b></span></span>
-            <span class="rs-tiles"><i></i><i></i><i></i></span>
-          </span>
-        </span>
-        <span class="rs-dev rs-pho" aria-hidden="true">
-          <span class="rs-notch"></span>
-          <span class="rs-scr">
-            <span class="rs-nav"><i class="rs-logo"></i><i class="rs-burger"></i></span>
-            <span class="rs-hero"><span class="rs-img"></span><span class="rs-copy"><i class="rs-l rs-l--h"></i><i class="rs-l rs-l--h rs-w70"></i><i class="rs-l"></i><b class="rs-btn"></b></span></span>
-          </span>
-        </span>
-      </div>
-        <div class="bc-body">
-          <h3 class="bc-title">Fungera på varje skärm</h3>
-          <p class="bc-text">Samma tydlighet och känsla på mobil, surfplatta och dator.</p>
-        </div>
-      </article>
-
-      <!-- Enklare vägar till nästa steg: bokning, köp och kontakt i ett kort -->
-      <article class="bento-card bento-card--leads" data-reveal>
-        <div class="bc-art lf-wrap">
-        <p class="sr-only">Illustration: nya bokningar, förfrågningar och beställningar som kommer in till olika typer av småföretag.</p>
-        <!-- Dekorativt flöde. De tre första händelserna är förrenderade; JS tar över och animerar. -->
-        <div class="lf" aria-hidden="true"><div class="lf-item" data-slot="0" style="--slot:0;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M2.5 4.5h11v9a1.5 1.5 0 0 1-1.5 1.5H4a1.5 1.5 0 0 1-1.5-1.5z M2.5 7.5h11 M5.5 2.5v3 M10.5 2.5v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny bokning</b><span>Klippning bokad</span></span><span class="lf-t">nu</span></div><div class="lf-item" data-slot="1" style="--slot:1;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M2.5 5.5h2.2l1.2-1.8h4.2l1.2 1.8h2.2v7.5h-11z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="9" r="2.3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><span class="lf-tx"><b>Ny förfrågan</b><span>Fotografering till bröllop</span></span><span class="lf-t">5 min</span></div><div class="lf-item" data-slot="2" style="--slot:2;"><span class="lf-ic"><svg viewBox="0 0 16 16"><path d="M3 5.5h10l-.8 8.5H3.8z M5.8 5.5V4.5a2.2 2.2 0 0 1 4.4 0v1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lf-tx"><b>Ny beställning</b><span>En produkt har beställts</span></span><span class="lf-t">8 min</span></div></div>
-      </div>
-        <div class="bc-body">
-          <h3 class="bc-title">Göra nästa steg enkelt</h3>
-          <p class="bc-text">Tydliga vägar till bokning, köp eller kontakt när intresset är som störst.</p>
-        </div>
-      </article>
-    </div>
   </section>
 
   <!-- STARTSIDESFÖRSLAG: fristående lead-sektion direkt efter nyttokorten. Eget formulär (inskick som
@@ -2097,9 +2000,19 @@
           </div>
           <p class="ssf-formerr" id="ssf-formerr" role="alert"></p>
           <p class="ssf-note">Vi kollar igenom din nuvarande hemsida och återkommer personligt med det som kan bli ert nya.</p>
+          <ul class="ssf-perks">
+            <li>En riktning för din startsida</li>
+            <li>Ett förslag för desktop och mobil</li>
+            <li>Personlig återkoppling från oss</li>
+          </ul>
         </form>
         <div class="ssf-ok" id="ssf-ok" tabindex="-1" hidden>
-          <div class="ssf-ok-ic" aria-hidden="true">✓</div>
+          <div class="ssf-cloud" aria-hidden="true">
+          <svg class="ssf-cl ssf-cl--s1" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+          <svg class="ssf-cl ssf-cl--s2" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+          <svg class="ssf-cl ssf-cl--big" viewBox="0 0 200 100"><use href="#hc-cloud-shape"/></svg>
+          <svg class="ssf-cloud-check" viewBox="0 0 48 48" fill="none" stroke="#146EF5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 25.5l8 8 15-17.5"/></svg>
+        </div>
           <h3>Tack! Vi kikar på det.</h3>
           <p>Vi går igenom det du skickat och återkommer personligt så snart vi kan.</p>
         </div>
@@ -2176,9 +2089,17 @@
         .then(function (good) {
           if (!good) throw new Error('send');
           if (window.klaroTrackLead) window.klaroTrackLead('startsidesforslag', 'startsidesforslag');
-          form.hidden = true;
-          ok.hidden = false;
-          ok.focus();
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var showOk = function () {
+            form.hidden = true;
+            ok.hidden = false;
+            sec.classList.add('is-sent');
+            void ok.offsetWidth;
+            ok.classList.add('is-in');
+            ok.focus({ preventScroll: true });
+          };
+          if (reduce) { showOk(); }
+          else { form.classList.add('is-leaving'); setTimeout(showOk, 320); }
         })
         .catch(function () {
           sending = false;
@@ -2475,7 +2396,7 @@
 
     <!-- SUCCESS -->
     <div id="wz-success" class="wz-card" style="display:none;text-align:center;animation:fadeUp .5s cubic-bezier(0.22,1,0.36,1);">
-      <div style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#146EF5,#3B8CFF);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;margin:12px auto 24px;box-shadow:0 10px 24px rgba(20,110,245,0.35);" aria-hidden="true">✓</div>
+      <div class="sc-scene" aria-hidden="true"><svg class="sc-cl sc-cl--s1" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-cl sc-cl--s2" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-cl sc-cl--big" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-check" viewBox="0 0 48 48"><path d="M12.5 25.5l8 8 15-17.5"/></svg></div>
       <h3 id="wz-success-title" tabindex="-1" style="font-size:24px;font-weight:800;color:#0F172A;margin:0 0 14px;line-height:1.3;outline:none;">Tack! Vi kikar på det.</h3>
       <p style="font-size:15px;color:#52657A;line-height:1.6;margin:0 0 24px;">Vi går igenom det du skickat och återkommer personligt så snart vi kan.</p>
       <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px;" aria-hidden="true">
@@ -2545,7 +2466,7 @@
 
       <div id="wz-callback-panel" style="overflow:hidden;max-height:0;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1);">
         <div id="wz-callback-success" style="display:none;background:#0F172A;border-radius:16px;padding:36px;margin-top:16px;text-align:center;">
-          <div style="width:52px;height:52px;border-radius:50%;background:#146EF5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px;">✓</div>
+          <div class="sc-scene sc-scene--sm" aria-hidden="true"><svg class="sc-cl sc-cl--s1" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-cl sc-cl--s2" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-cl sc-cl--big" viewBox="0 0 200 100"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg><svg class="sc-check" viewBox="0 0 48 48"><path d="M12.5 25.5l8 8 15-17.5"/></svg></div>
           <div style="font-size:19px;font-weight:800;color:#fff;margin-bottom:8px;">Tack, <span id="wz-callback-succ-name"></span>!</div>
           <div style="font-size:14px;color:#B8C6DC;line-height:1.6;">Vi har tagit emot din förfrågan och kontaktar dig inom en timme under vardagar 09–17.</div>
         </div>

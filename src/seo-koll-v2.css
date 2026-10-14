@@ -1,0 +1,160 @@
+/* SEO-koll v2: samma uttryck som startsidan – himmelsblå grund, drivande moln, mjuka former och mycket luft.
+   Överstyr de äldre hero-/sektionsreglerna i seo-koll.html; analys- och rapportstilarna är orörda. */
+
+/* ---------- Hero ---------- */
+.skh.skh-v2{position:relative;isolation:isolate;max-width:1100px;min-height:0;display:block;margin:0 auto;padding:clamp(40px,6vw,96px) 20px clamp(64px,8vw,120px);text-align:center;}
+.skh-v2 .skh-content{position:relative;z-index:1;}
+.skh-v2 .skh-eyebrow{font-size:12.5px;letter-spacing:.14em;margin-bottom:18px;}
+.skh-v2 .skh-h1{font-size:clamp(40px,6vw,80px);line-height:1.04;letter-spacing:-0.035em;max-width:900px;margin:0 auto 22px;}
+.skh-v2 .skh-lead{font-size:clamp(16px,1.5vw,19px);max-width:640px;margin:0 auto 30px;}
+.skh-v2 .skh-form{margin:0 auto;}
+.skh-v2 .skh-trust{margin-top:22px;}
+
+/* Moln i heron (samma form och rörelse som på startsidan) */
+.sk-clouds{position:absolute;z-index:-1;top:-80px;bottom:-40px;left:50%;width:100vw;transform:translateX(-50%);overflow:hidden;pointer-events:none;}
+.sk-cloud-track{position:absolute;left:0;top:var(--y);width:var(--w);opacity:var(--o);will-change:transform;animation:skWind var(--d) linear var(--dl) infinite;}
+.sk-cloud{display:block;width:100%;height:auto;fill:#fff;transform-origin:50% 70%;animation:skFloat var(--fd) cubic-bezier(.45,0,.55,1) var(--fdl,0s) infinite alternate;}
+.sk-cloud--1{--y:120px;--w:clamp(170px,22vw,320px);--o:.5;--d:150s;--dl:-32s;--fd:14s;--fdl:-5s;--fy:-7px;--fs:1.025;}
+.sk-cloud--2{--y:300px;--w:clamp(150px,19vw,280px);--o:.45;--d:176s;--dl:-118s;--fd:17s;--fdl:-11s;--fy:6px;--fs:1.02;}
+.sk-cloud--3{--y:480px;--w:clamp(110px,13vw,200px);--o:.36;--d:205s;--dl:-64s;--fd:12s;--fdl:-3s;--fy:-5px;--fs:1.018;}
+.sk-cloud--4{--y:560px;--w:clamp(90px,10vw,160px);--o:.3;--d:240s;--dl:-178s;--fd:19s;--fdl:-8s;--fy:4px;--fs:1.012;}
+.sk-cloud--5{--y:60px;--w:clamp(70px,7vw,120px);--o:.25;--d:265s;--dl:-21s;--fd:21s;--fdl:-14s;--fy:-3px;--fs:1.01;}
+@keyframes skWind{from{transform:translate3d(-115%,0,0);}to{transform:translate3d(100vw,0,0);}}
+@keyframes skFloat{from{transform:translateY(0) scale(1);}to{transform:translateY(var(--fy,-5px)) scale(var(--fs,1.02));}}
+@media (max-width:760px){
+  .sk-clouds{top:-40px;}
+  .sk-cloud--1{--y:30px;--w:160px;--o:.45;--d:95s;--dl:-20s;}
+  .sk-cloud--2{--y:340px;--w:170px;--o:.38;--d:115s;--dl:-78s;}
+  .sk-cloud--3{--y:520px;--w:115px;--o:.32;--d:140s;--dl:-50s;}
+  .sk-cloud--4,.sk-cloud--5{display:none;}
+}
+@media (prefers-reduced-motion:reduce){.sk-cloud-track,.sk-cloud{animation-play-state:paused;}}
+
+/* USP-pill ovanför URL-fältet */
+@property --sk-a{syntax:'<angle>';inherits:false;initial-value:0deg;}
+.sk-pill{position:relative;display:inline-flex;align-items:center;gap:12px;margin:0 0 20px;padding:5px 16px 5px 5px;border-radius:999px;background:rgba(255,255,255,.78);border:1.5px solid rgba(20,110,245,.22);font-size:15px;font-weight:600;color:#0F172A;}
+.sk-pill::before{content:"";position:absolute;inset:-1.5px;padding:1.5px;border-radius:inherit;pointer-events:none;
+  background:conic-gradient(from var(--sk-a),rgba(20,110,245,0) 0deg,rgba(20,110,245,0) 220deg,#8EC5FF 290deg,#146EF5 345deg,rgba(20,110,245,0) 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:sk-spin 3.2s linear infinite;}
+.sk-pill-tag{padding:7px 14px;border-radius:999px;background:linear-gradient(135deg,#146EF5,#6C8CFF);color:#fff;font-size:14px;font-weight:700;}
+@keyframes sk-spin{to{--sk-a:360deg;}}
+@media (prefers-reduced-motion:reduce){.sk-pill::before{animation:none;--sk-a:300deg;}}
+@media (max-width:520px){.sk-pill{max-width:100%;box-sizing:border-box;font-size:13px;gap:8px;padding-right:12px;text-align:left;line-height:1.3;}.sk-pill-tag{flex:none;padding:6px 11px;font-size:12.5px;}}
+
+/* ---------- Gemensamt för sektionerna efter heron ---------- */
+.skv2-sec{max-width:1100px;margin:0 auto;padding:clamp(72px,9vw,128px) 20px 0;}
+.skv2-head{text-align:center;max-width:720px;margin:0 auto clamp(36px,5vw,56px);}
+.skv2-eyebrow{margin:0 0 14px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#146EF5;}
+.skv2-h2{margin:0;font-size:clamp(30px,4vw,52px);line-height:1.08;font-weight:800;letter-spacing:-0.03em;color:#0F172A;text-wrap:balance;}
+.skv2-lead{margin:16px auto 0;max-width:600px;font-size:17px;line-height:1.6;font-weight:500;color:#52657A;text-wrap:pretty;}
+
+/* ---------- Tre principer ---------- */
+.skp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,56px);}
+.skp-item{position:relative;padding-top:26px;}
+.skp-item::before{content:"";position:absolute;left:0;top:0;width:44px;height:5px;border-radius:3px;background:#146EF5;}
+.skp-word{margin:0 0 12px;font-size:clamp(40px,5vw,64px);font-weight:800;line-height:1;letter-spacing:-0.04em;color:#0F172A;}
+.skp-text{margin:0;max-width:30ch;font-size:17px;line-height:1.6;font-weight:500;color:#52657A;text-wrap:pretty;}
+
+/* ---------- Fördjupning: lugna, expanderbara delar ---------- */
+.skd{max-width:860px;margin:0 auto;border-top:1px solid rgba(15,23,42,.12);}
+.skd-item{border-bottom:1px solid rgba(15,23,42,.12);}
+.skd-item summary{list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:24px 0;cursor:pointer;font-size:clamp(20px,2vw,25px);font-weight:600;letter-spacing:-0.02em;line-height:1.25;color:#4A5B70;transition:color .25s ease;}
+.skd-item summary::-webkit-details-marker{display:none;}
+.skd-item summary:hover,.skd-item[open] summary{color:#0F172A;}
+.skd-item summary:focus-visible{outline:2px solid #146EF5;outline-offset:4px;border-radius:6px;}
+.skd-ic{position:relative;flex:none;width:22px;height:22px;margin-top:.2em;transition:transform .35s cubic-bezier(.22,1,.36,1);}
+.skd-ic::before,.skd-ic::after{content:"";position:absolute;left:0;top:10px;width:22px;height:1.5px;border-radius:1px;background:currentColor;}
+.skd-ic::after{transform:rotate(90deg);}
+.skd-item[open] .skd-ic{transform:rotate(45deg);}
+.skd-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:center;padding:0 0 28px;}
+.skd-body p{margin:0;font-size:16.5px;line-height:1.65;font-weight:500;color:#52657A;}
+.skd-body .skb-ill{margin:0;min-height:150px;background:#fff;}
+
+/* ---------- Efter analysen ---------- */
+.ska{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,56px);}
+.ska-item h3{margin:0 0 10px;font-size:clamp(20px,2vw,24px);font-weight:800;letter-spacing:-0.02em;color:#0F172A;}
+.ska-item p{margin:0;max-width:34ch;font-size:16.5px;line-height:1.65;font-weight:500;color:#52657A;}
+.ska-dot{display:block;width:12px;height:12px;margin-bottom:16px;border-radius:50%;background:#146EF5;}
+.ska-item:nth-child(1) .ska-dot{background:#22A35E;}
+.ska-item:nth-child(2) .ska-dot{background:#EAA026;}
+
+/* ---------- Kundresan ---------- */
+.skv{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:clamp(12px,2vw,24px);align-items:stretch;}
+.skv-step{display:flex;flex-direction:column;background:#fff;border-radius:30px 26px 30px 26px;padding:26px 24px 28px;box-shadow:0 22px 44px -26px rgba(20,110,245,.4),0 2px 8px rgba(15,23,42,.04);}
+.skv-vis{min-height:120px;margin-bottom:20px;border-radius:20px;background:linear-gradient(180deg,#EAF4FF,#F6FAFF);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px;}
+.skv-step h3{margin:0 0 6px;font-size:20px;font-weight:800;letter-spacing:-0.02em;color:#0F172A;}
+.skv-step p{margin:0;font-size:15px;line-height:1.55;font-weight:500;color:#52657A;}
+.skv-arrow{align-self:center;color:#146EF5;font-size:28px;font-weight:700;line-height:1;}
+.skv-search{width:100%;max-width:220px;padding:9px 14px;border-radius:999px;background:#fff;font-size:13.5px;font-weight:600;color:#4A5B70;box-shadow:0 6px 14px -8px rgba(15,23,42,.3);text-align:left;}
+.skv-chips,.skv-acts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
+.skv-chips span{padding:5px 12px;border-radius:999px;background:#fff;font-size:12.5px;font-weight:700;color:#0F5AD1;}
+.skv-acts span{padding:8px 16px;border-radius:999px;background:#146EF5;font-size:13.5px;font-weight:700;color:#fff;}
+.skv-acts span:nth-child(n+2){background:#fff;color:#0F5AD1;}
+.skv-co{width:100%;max-width:220px;padding:14px 16px;border-radius:16px;background:#fff;box-shadow:0 8px 18px -10px rgba(15,23,42,.35);text-align:left;}
+.skv-co b{display:block;font-size:14px;color:#0F172A;}
+.skv-co i{display:block;height:6px;margin-top:8px;border-radius:3px;background:#DCE8F7;}
+.skv-co i + i{width:62%;}
+.skv-note{margin:18px 0 0;text-align:center;font-size:13px;font-weight:600;color:#6B7C92;}
+
+@media (max-width:900px){
+  .skp,.ska{grid-template-columns:minmax(0,1fr);}
+  .skp-text,.ska-item p{max-width:none;}
+  .skd-body{grid-template-columns:minmax(0,1fr);}
+  .skv{grid-template-columns:minmax(0,1fr);}
+  .skv-arrow{transform:rotate(90deg);justify-self:center;}
+}
+@media (max-width:520px){.sk-pill > span:nth-child(2){flex:1 1 auto;min-width:0;}.sk-pill > span:last-child{flex:none;}}
+
+/* ================= Layoutrytm: varje del är en egen scen ================= */
+.skv2-sec{max-width:none;margin:0;padding:clamp(72px,9vw,136px) max(20px,calc((100% - 1100px) / 2));position:relative;}
+.skh.skh-v2{padding-bottom:clamp(88px,11vw,160px);}
+.scene{position:relative;}
+.scene::before{content:"";position:absolute;left:0;right:0;top:-39px;height:40px;pointer-events:none;background-repeat:repeat-x;background-size:400px 40px;background-position:bottom left;}
+.scene--white{background:#fff;}
+.scene--white::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 40V30C0 14 26 12 38 22C46 4 86 2 98 22C110 6 150 6 160 24C172 12 206 12 216 26C228 2 276 2 290 24C302 12 336 14 346 26C362 14 400 16 400 30V40Z%22 fill=%22%23ffffff%22/%3E%3C/svg%3E");}
+.scene--tint{background:#E4F0FF;}
+.scene--tint::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 40V30C0 14 26 12 38 22C46 4 86 2 98 22C110 6 150 6 160 24C172 12 206 12 216 26C228 2 276 2 290 24C302 12 336 14 346 26C362 14 400 16 400 30V40Z%22 fill=%22%23E4F0FF%22/%3E%3C/svg%3E");background-position:bottom 120px;}
+.scene--white2{background:#fff;}
+.scene--white2::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 40V30C0 14 26 12 38 22C46 4 86 2 98 22C110 6 150 6 160 24C172 12 206 12 216 26C228 2 276 2 290 24C302 12 336 14 346 26C362 14 400 16 400 30V40Z%22 fill=%22%23ffffff%22/%3E%3C/svg%3E");background-position:bottom 230px;}
+.scene--sky{background:#D6E9FF;}
+.scene--sky::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 40V30C0 14 26 12 38 22C46 4 86 2 98 22C110 6 150 6 160 24C172 12 206 12 216 26C228 2 276 2 290 24C302 12 336 14 346 26C362 14 400 16 400 30V40Z%22 fill=%22%23D6E9FF%22/%3E%3C/svg%3E");background-position:bottom 60px;}
+@media (max-width:640px){
+  .skv2-sec{padding-top:72px;padding-bottom:80px;}
+  .scene::before{top:-27px;height:28px;background-size:280px 28px;}
+}
+
+/* Hittas / Förstås / Väljs: ikon, ord och text – inga kort */
+.skp-item{padding-top:0;}
+.skp-item::before{display:none;}
+.skp-ic{display:flex;align-items:center;justify-content:center;width:56px;height:56px;margin-bottom:22px;border-radius:50% 46% 52% 48%;background:#EAF3FF;}
+.skp-ic svg{width:28px;height:28px;}
+
+/* Fördjupning: luftiga rader utan hårda linjer */
+.skd{border:0;display:grid;gap:12px;}
+.skd-item{border:0;background:#fff;border-radius:28px 26px 28px 26px;box-shadow:0 16px 34px -26px rgba(20,110,245,.5);}
+.skd-item summary{padding:22px 26px;}
+.skd-body{padding:0 26px 26px;}
+
+/* Resultat: ren, avskalad yta */
+.ska-dot{box-shadow:0 0 0 6px rgba(20,110,245,.1);}
+.scene--white2 .skv2-head{margin-bottom:clamp(44px,6vw,72px);}
+
+/* Kundresan: en sammanhängande berättelse på ljusblå helbredd */
+.scene--sky .skv{position:relative;background:rgba(255,255,255,.6);border-radius:48px 42px 48px 42px;padding:clamp(22px,3.5vw,44px);box-shadow:0 30px 60px -40px rgba(20,110,245,.45);}
+.scene--sky .skv-step{background:none;box-shadow:none;padding:6px 6px 8px;}
+.scene--sky .skv-vis{background:#fff;box-shadow:0 14px 28px -20px rgba(20,110,245,.5);}
+.scene--sky .skv-arrow{font-size:30px;opacity:.9;}
+.scene--sky .skv-note{margin-top:22px;}
+.scene--sky::after{content:"";position:absolute;right:max(16px,calc((100% - 1100px) / 2));top:clamp(36px,5vw,64px);width:clamp(90px,12vw,170px);aspect-ratio:2/1;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 100%22%3E%3Cpath fill=%22%23fff%22 d=%22M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z%22/%3E%3C/svg%3E") center/contain no-repeat;opacity:.7;pointer-events:none;}
+@media (max-width:900px){.scene--sky .skv{border-radius:34px;}}
+
+/* ===== Mjukare, mer organisk molnövergång (ersätter de jämna halvcirklarna) ===== */
+.scene.scene::before{top:-79px;height:80px;background-repeat:repeat-x,repeat-x,no-repeat;background-size:1200px 80px,1500px 78px,100% 100%;}
+.scene.scene--white::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22 fill=%22%23ffffff%22 fill-opacity=%221%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill=%22%23ffffff%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 70%,rgba(255,255,255,.9) 100%);background-position:bottom left 0px,bottom left -420px,0 0;}
+.scene.scene--tint::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22 fill=%22%23E4F0FF%22 fill-opacity=%221%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill=%22%23E4F0FF%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(228,240,255,0) 0%,rgba(228,240,255,.55) 70%,rgba(228,240,255,.9) 100%);background-position:bottom left -260px,bottom left -700px,0 0;}
+.scene.scene--white2::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22 fill=%22%23ffffff%22 fill-opacity=%221%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill=%22%23ffffff%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 70%,rgba(255,255,255,.9) 100%);background-position:bottom left -520px,bottom left -90px,0 0;}
+.scene.scene--sky::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22 fill=%22%23D6E9FF%22 fill-opacity=%221%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill=%22%23D6E9FF%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(214,233,255,0) 0%,rgba(214,233,255,.55) 70%,rgba(214,233,255,.9) 100%);background-position:bottom left -140px,bottom left -610px,0 0;}
+@media (max-width:640px){
+  .scene.scene::before{top:-55px;height:56px;background-size:760px 56px,950px 54px,100% 100%;}
+}

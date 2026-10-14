@@ -1,0 +1,25 @@
+/* Tack-animation för alla formulär: ett moln stiger upp, bocken ritas och texten glider in.
+   Animationerna startar av sig själva när kvittot visas (display none → block). */
+.sc-scene{--u:1px;position:relative;width:min(100%,calc(300*var(--u)));height:calc(150*var(--u));margin:0 auto 6px;}
+.sc-scene--sm{--u:.62px;}
+.sc-cl{position:absolute;display:block;height:auto;fill:#fff;opacity:0;filter:drop-shadow(0 calc(16*var(--u)) calc(22*var(--u)) rgba(20,110,245,.22));will-change:transform,opacity;}
+.sc-cl--big{left:50%;bottom:calc(6*var(--u));width:calc(210*var(--u));margin-left:calc(-105*var(--u));animation:sc-rise 1s cubic-bezier(.34,1.35,.64,1) .05s forwards,sc-bob 5s ease-in-out 1.3s infinite alternate;}
+.sc-cl--s1{left:0;top:calc(18*var(--u));width:calc(96*var(--u));animation:sc-drift-l 1.1s cubic-bezier(.22,1,.36,1) .25s forwards,sc-bob 6.5s ease-in-out 1.6s infinite alternate-reverse;}
+.sc-cl--s2{right:0;top:calc(52*var(--u));width:calc(76*var(--u));animation:sc-drift-r 1.1s cubic-bezier(.22,1,.36,1) .4s forwards,sc-bob 5.5s ease-in-out 1.8s infinite alternate;}
+.sc-check{position:absolute;left:50%;bottom:calc(33*var(--u));width:calc(56*var(--u));height:calc(56*var(--u));margin-left:calc(-27*var(--u));opacity:0;fill:none;stroke:#146EF5;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;animation:sc-fade .2s ease .8s forwards,sc-bob 5s ease-in-out 1.3s infinite alternate;}
+.sc-check path{stroke-dasharray:46;stroke-dashoffset:46;animation:sc-draw .5s cubic-bezier(.4,0,.2,1) .85s forwards;}
+.sc-scene ~ h3,.sc-scene ~ p,.sc-scene ~ div{opacity:0;animation:sc-up .55s cubic-bezier(.22,1,.36,1) .9s forwards;}
+.sc-scene ~ p,.sc-scene ~ div + div{animation-delay:1.05s;}
+@keyframes sc-rise{0%{opacity:0;transform:translateY(calc(90*var(--u))) scale(.6);}60%{opacity:1;}100%{opacity:1;transform:none;}}
+@keyframes sc-drift-l{0%{opacity:0;transform:translate(-40px,30px) scale(.7);}100%{opacity:.85;transform:none;}}
+@keyframes sc-drift-r{0%{opacity:0;transform:translate(40px,30px) scale(.7);}100%{opacity:.7;transform:none;}}
+@keyframes sc-bob{from{transform:translateY(0);}to{transform:translateY(-6px);}}
+@keyframes sc-fade{to{opacity:1;}}
+@keyframes sc-draw{to{stroke-dashoffset:0;}}
+@keyframes sc-up{from{transform:translateY(8px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){
+  .sc-cl,.sc-check,.sc-scene ~ h3,.sc-scene ~ p,.sc-scene ~ div{opacity:1;animation:none!important;}
+  .sc-cl--s1{opacity:.85;}.sc-cl--s2{opacity:.7;}
+  .sc-check path{stroke-dashoffset:0;animation:none!important;}
+}
+.wz-card .sc-cl{fill:#EAF3FF;}

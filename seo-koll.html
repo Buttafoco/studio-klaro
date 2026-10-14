@@ -733,7 +733,7 @@
     .skr-acc-meta{display:none;}
   }
 </style>
-<script>(function(){var d=document.documentElement;if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("skh-js","skh-pre","skh-hide","sk-rv-js");setTimeout(function(){if(!d.classList.contains("skh-ready"))d.classList.remove("skh-pre","skh-hide","sk-rv-js");},3500);}})();</script>
+<script>(function(){var d=document.documentElement;if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("sk-rv-js");}})();</script>
 <link rel="stylesheet" href="/src/lead-dock.css">
 <script type="module" src="/src/analytics.js"></script>
 <script type="module" src="/src/speed-insights.js"></script>
@@ -748,6 +748,8 @@
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
 <link rel="stylesheet" href="/src/klaro-button.css">
+<link rel="stylesheet" href="/src/seo-local-nav.css">
+<link rel="stylesheet" href="/src/seo-koll-v2.css">
 </head>
 <body>
 
@@ -770,41 +772,36 @@
     </div>
   </div>
 </header>
-<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
+<div style="max-width:none;width:100%;margin:0 auto;position:relative;"><!-- fullbredd: scenerna och molnen går ut i fönsterkanten även på bredare skärmar -->
+
+  <!-- Lokalmeny: visas när hero-formuläret scrollats förbi (src/seo-local-nav.css) -->
+  <div class="sln" id="sln" role="region" aria-label="SEO-koll">
+    <p class="sln-title">SEO-koll</p>
+    <div class="sln-actions">
+      <a class="sln-link" href="#sks-how-title">Så fungerar det</a>
+      <a class="sln-cta" href="#sk-url-input" id="sln-cta">Analysera min hemsida</a>
+    </div>
+  </div>
 
   <main>
 
-  <!-- BREADCRUMB -->
-  <nav aria-label="Brödsmulor" style="max-width:1140px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:#8296B0;">
-    <a href="/" style="color:#8296B0;text-decoration:none;">Hem</a><span style="margin:0 6px;color:#C3CEDD;">/</span><span style="color:#52657A;font-weight:600;">SEO-koll</span>
-  </nav>
-
-  <!-- HERO + FORMULÄR: centrerad hero med animerad SEO-mätare (SVG). Mätaren är illustrativ tills en riktig analys gjorts. -->
-  <section class="skh" aria-labelledby="skh-title">
-    <div class="skh-gauge-slot">
-      <div class="skh-gauge" id="skh-gauge" role="img" aria-label="Illustrativ SEO-poäng: 98 av 100">
-        <svg viewBox="0 0 360 360" aria-hidden="true" focusable="false">
-          <defs>
-            <radialGradient id="skh-disc" cx="50%" cy="38%" r="62%">
-              <stop offset="0%" stop-color="#FFFFFF"/>
-              <stop offset="100%" stop-color="#F2F7FD"/>
-            </radialGradient>
-          </defs>
-          <circle cx="180" cy="180" r="176" fill="url(#skh-disc)"/>
-          <path class="skh-track" d="M73.93 286.07 A150 150 0 1 1 286.07 286.07" pathLength="100"/>
-          <path class="skh-arc" id="skh-arc" d="M73.93 286.07 A150 150 0 1 1 286.07 286.07" pathLength="100" stroke-dasharray="98 100"/>
-        </svg>
-        <div class="skh-num" aria-hidden="true"><span id="skh-score">98</span><small>/100</small></div>
-      </div>
-    </div>
-    <div class="skh-cap" id="skh-cap" aria-hidden="true">Illustrativ SEO-poäng</div>
-
+  <!-- HERO: samma uttryck som startsidan. Ingen poäng visas före en verklig analys. -->
+  <section class="skh skh-v2" aria-labelledby="skh-title">
+  <div class="sk-clouds" aria-hidden="true">
+    <svg width="0" height="0" style="position:absolute"><defs><path id="sk-cloud-shape" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></defs></svg>
+    <span class="sk-cloud-track sk-cloud--1"><svg class="sk-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#sk-cloud-shape"/></svg></span>
+    <span class="sk-cloud-track sk-cloud--2"><svg class="sk-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#sk-cloud-shape"/></svg></span>
+    <span class="sk-cloud-track sk-cloud--3"><svg class="sk-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#sk-cloud-shape"/></svg></span>
+    <span class="sk-cloud-track sk-cloud--4"><svg class="sk-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#sk-cloud-shape"/></svg></span>
+    <span class="sk-cloud-track sk-cloud--5"><svg class="sk-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#sk-cloud-shape"/></svg></span>
+  </div>
     <div class="skh-content">
-      <div class="skh-eyebrow skh-in">Kostnadsfri SEO-koll</div>
-      <h1 id="skh-title" class="skh-h1 skh-in">Bli hittad på Google och i AI-sök.</h1>
-      <p class="skh-lead skh-in">Se hur väl din hemsida hjälper Google, Maps och AI-tjänster att förstå ditt företag – och vad du kan förbättra.</p>
+      <div class="skh-eyebrow">Kostnadsfri SEO-koll</div>
+      <h1 id="skh-title" class="skh-h1">Se vad som gör din hemsida lätt att hitta.</h1>
+      <p class="skh-lead">Vi kollar hur väl Google, Maps och AI-sök kan förstå ditt företag – och visar vilka förbättringar som ger mest effekt.</p>
+      <p class="sk-pill"><span class="sk-pill-tag">Kostnadsfritt</span><span>Tydliga förbättringar för din hemsida</span><span aria-hidden="true">→</span></p>
 
-      <form id="sk-form" class="skh-form skh-in" novalidate>
+      <form id="sk-form" class="skh-form" novalidate>
         <label for="sk-url-input" class="sr-only">Webbadress</label>
         <div class="sk-input-group">
           <input id="sk-url-input" name="url" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://dittforetag.se" class="sk-input">
@@ -812,10 +809,10 @@
         </div>
         <div id="sk-field-error" class="sk-field-error" role="alert" style="display:none;"></div>
       </form>
-      <ul class="skh-trust skh-in">
-        <li>Kostnadsfri analys</li>
+      <ul class="skh-trust">
         <li>Svar i klartext</li>
-        <li>Teknik, innehåll och lokal SEO</li>
+        <li>Google, Maps och AI-sök</li>
+        <li>Teknik, innehåll och lokal synlighet</li>
       </ul>
 
       <div id="sk-live-region" aria-live="polite" role="status">
@@ -841,150 +838,106 @@
   <!-- RAPPORT -->
   <div id="sk-report" class="sk-report" style="display:none;"></div>
 
-  <!-- SÅ FUNGERAR DET – tre steg -->
-  <section class="sks-sec" aria-labelledby="sks-how-title">
-    <div class="sks-head sk-rv">
-      <div class="sks-eyebrow">Så fungerar det</div>
-      <h2 id="sks-how-title" class="sks-h2">Vad SEO-kollen gör – och vad du får ut av den</h2>
+  <!-- TRE PRINCIPER -->
+  <section class="skv2-sec scene scene--white" aria-labelledby="sks-how-title">
+    <div class="skv2-head sk-rv">
+      <p class="skv2-eyebrow">Så fungerar det</p>
+      <h2 id="sks-how-title" class="skv2-h2">Tre saker avgör om rätt kund väljer dig.</h2>
     </div>
-    <ol class="sks-steps">
-      <li class="sk-rv"><span class="sks-num">01</span><h3>Skriv in din hemsida</h3><p>Vi börjar med adressen till sidan du vill kontrollera.</p></li>
-      <li class="sk-rv"><span class="sks-num">02</span><h3>Vi granskar helheten</h3><p>Teknik, innehåll, lokal synlighet och hur lätt sidan är att förstå.</p></li>
-      <li class="sk-rv"><span class="sks-num">03</span><h3>Du får tydliga nästa steg</h3><p>Se vad som fungerar och vilka förbättringar som betyder mest.</p></li>
-    </ol>
+    <div class="skp">
+      <article class="skp-item sk-rv"><span class="skp-ic" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="#146EF5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="21" r="10"/><path d="M29 29l9 9"/></svg></span><h3 class="skp-word">Hittas</h3><p class="skp-text">Google, Maps och AI-sök ska kunna upptäcka företaget.</p></article>
+      <article class="skp-item sk-rv"><span class="skp-ic" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="#146EF5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14h24M12 24h24M12 34h14"/></svg></span><h3 class="skp-word">Förstås</h3><p class="skp-text">Tydliga tjänster, rubriker och lokal information gör erbjudandet lätt att tolka.</p></article>
+      <article class="skp-item sk-rv"><span class="skp-ic" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="#146EF5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="14"/><path d="M17.5 24.5l5 5 9-10.5"/></svg></span><h3 class="skp-word">Väljs</h3><p class="skp-text">En snabb mobilupplevelse och tydliga kontaktvägar hjälper rätt kund att ta nästa steg.</p></article>
+    </div>
   </section>
 
-  <!-- VAD VI TITTAR PÅ – bento med enkla gränssnittsillustrationer -->
-  <section class="sks-sec" aria-labelledby="sks-look-title">
-    <div class="sks-head sk-rv">
-      <div class="sks-eyebrow">Vad vi tittar på</div>
-      <h2 id="sks-look-title" class="sks-h2">Det som avgör hur lätt din hemsida är att hitta och förstå</h2>
+  <!-- FÖRDJUPNING: det vi tittar på, som lugna expanderbara delar -->
+  <section class="skv2-sec scene scene--tint" aria-labelledby="sks-look-title">
+    <div class="skv2-head sk-rv">
+      <p class="skv2-eyebrow">Fördjupning</p>
+      <h2 id="sks-look-title" class="skv2-h2">Det här tittar vi på i din SEO-koll</h2>
     </div>
-    <div class="skb">
-      <article class="skb-card skb-card--tech sk-rv">
-        <div class="skb-ill" aria-hidden="true">
+    <div class="skd">
+      <details class="skd-item sk-rv"><summary><span>Teknisk SEO</span><span class="skd-ic" aria-hidden="true"></span></summary><div class="skd-body"><div class="skb-ill" aria-hidden="true">
           <div class="skb-code">
             <div><span class="skb-tag">&lt;title&gt;</span><i style="width:58%"></i><b class="skb-ok">✓</b></div>
             <div><span class="skb-tag">meta description</span><i style="width:44%"></i><b class="skb-ok">✓</b></div>
             <div><span class="skb-tag">canonical</span><i style="width:36%"></i><b class="skb-warn">!</b></div>
             <div><span class="skb-tag">sitemap.xml</span><i style="width:28%"></i><b class="skb-ok">✓</b></div>
           </div>
-        </div>
-        <h3>Teknisk SEO</h3>
-        <p>Titlar, metabeskrivningar, indexering och hur sidan är uppbyggd tekniskt.</p>
-      </article>
-      <article class="skb-card skb-card--content sk-rv">
-        <div class="skb-ill" aria-hidden="true">
+        </div><p>Titlar, metabeskrivningar, indexering och hur sidan är uppbyggd tekniskt.</p></div></details>
+      <details class="skd-item sk-rv"><summary><span>Innehåll och rubrikstruktur</span><span class="skd-ic" aria-hidden="true"></span></summary><div class="skd-body"><div class="skb-ill" aria-hidden="true">
           <div class="skb-outline">
             <div class="skb-h skb-h1"><span>H1</span><i></i></div>
             <div class="skb-h skb-h2"><span>H2</span><i></i></div>
             <div class="skb-h skb-h3"><span>H3</span><i></i></div>
             <div class="skb-h skb-h2"><span>H2</span><i></i></div>
           </div>
-        </div>
-        <h3>Innehåll och rubrikstruktur</h3>
-        <p>Om rubrikerna följer en tydlig ordning och om texten förklarar vad du erbjuder.</p>
-      </article>
-      <article class="skb-card skb-card--local sk-rv">
-        <div class="skb-ill" aria-hidden="true">
+        </div><p>Om rubrikerna följer en tydlig ordning och om texten förklarar vad du erbjuder.</p></div></details>
+      <details class="skd-item sk-rv"><summary><span>Google och lokal SEO</span><span class="skd-ic" aria-hidden="true"></span></summary><div class="skd-body"><div class="skb-ill" aria-hidden="true">
           <div class="skb-map">
             <span class="skb-road skb-road--a"></span><span class="skb-road skb-road--b"></span>
             <span class="skb-pin"></span>
             <div class="skb-place"><strong>Ditt företag</strong><span>Adress · Öppettider</span></div>
           </div>
-        </div>
-        <h3>Google och lokal SEO</h3>
-        <p>Om ort, adress och öppettider går att hitta – viktigt för synlighet i Google och Maps.</p>
-      </article>
-      <article class="skb-card skb-card--ai sk-rv">
-        <div class="skb-ill" aria-hidden="true">
+        </div><p>Om ort, adress och öppettider går att hitta – viktigt för synlighet i Google och Maps.</p></div></details>
+      <details class="skd-item sk-rv"><summary><span>AI-sök och tydlig information</span><span class="skd-ic" aria-hidden="true"></span></summary><div class="skd-body"><div class="skb-ill" aria-hidden="true">
           <div class="skb-chat">
             <div class="skb-q">Vilken frisör nära mig har öppet på lördag?</div>
             <div class="skb-a"><i style="width:92%"></i><i style="width:74%"></i><span class="skb-src">dittforetag.se</span></div>
           </div>
-        </div>
-        <h3>AI-sök och tydlig information</h3>
-        <p>Om informationen är tydlig och strukturerad nog för att AI-tjänster ska kunna förstå ditt företag.</p>
-      </article>
-      <article class="skb-card skb-card--perf sk-rv">
-        <div class="skb-ill" aria-hidden="true">
+        </div><p>Om informationen är tydlig och strukturerad nog för att AI-tjänster ska kunna förstå ditt företag.</p></div></details>
+      <details class="skd-item sk-rv"><summary><span>Prestanda och mobilupplevelse</span><span class="skd-ic" aria-hidden="true"></span></summary><div class="skd-body"><div class="skb-ill" aria-hidden="true">
           <div class="skb-phone"><i></i><i></i><i></i></div>
           <div class="skb-bars">
             <div><span>Laddtid</span><b style="--w:72%"></b></div>
             <div><span>Mobil</span><b style="--w:86%"></b></div>
           </div>
-        </div>
-        <h3>Prestanda och mobilupplevelse</h3>
-        <p>Hur snabbt sidan laddar och hur den fungerar på mobilen.</p>
-      </article>
-      <article class="skb-card skb-card--contact sk-rv">
-        <div class="skb-ill" aria-hidden="true">
+        </div><p>Hur snabbt sidan laddar och hur den fungerar på mobilen.</p></div></details>
+      <details class="skd-item sk-rv"><summary><span>Kontaktuppgifter och kundvägar</span><span class="skd-ic" aria-hidden="true"></span></summary><div class="skd-body"><div class="skb-ill" aria-hidden="true">
           <div class="skb-btns"><span>Ring</span><span>Boka</span><span>Hitta hit</span></div>
-        </div>
-        <h3>Kontaktuppgifter och kundvägar</h3>
-        <p>Om telefon, adress och kontaktvägar är lätta att hitta för den som vill höra av sig.</p>
-      </article>
+        </div><p>Om telefon, adress och kontaktvägar är lätta att hitta för den som vill höra av sig.</p></div></details>
     </div>
   </section>
 
-  <!-- VAD DU FÅR REDA PÅ / VAD RESULTATET BETYDER / VAD DU GÖR SEDAN -->
-  <section class="sks-sec" aria-labelledby="sks-after-title">
-    <div class="sks-head sk-rv">
-      <div class="sks-eyebrow">Efter analysen</div>
-      <h2 id="sks-after-title" class="sks-h2">Ett resultat du kan agera på</h2>
+  <!-- EFTER ANALYSEN -->
+  <section class="skv2-sec scene scene--white2" aria-labelledby="sks-after-title">
+    <div class="skv2-head sk-rv">
+      <p class="skv2-eyebrow">Efter analysen</p>
+      <h2 id="sks-after-title" class="skv2-h2">Ett resultat du kan agera på</h2>
+      <p class="skv2-lead">Du får inget betyg att tolka – du får veta var du står och vad du gör först.</p>
     </div>
-    <div class="sks-after sk-rv">
-      <div>
-        <h3>Vad du får reda på</h3>
-        <p>Ett samlat betyg på hemsidan och en lista med vad som fungerar bra, vad som kan förbättras och vad som behöver åtgärdas – sorterat efter vad som spelar störst roll.</p>
-      </div>
-      <div>
-        <h3>Vad resultatet betyder</h3>
-        <p>En låg poäng betyder inte att hemsidan är trasig. Det betyder att något gör det onödigt svårt för kunder och sökmotorer att hitta och förstå den.</p>
-      </div>
-      <div>
-        <h3>Vad du gör sedan</h3>
-        <p>Flera punkter går att fixa själv eller tillsammans med den som sköter hemsidan. Vill du hellre ha hjälp går vi igenom rapporten med dig.</p>
-      </div>
+    <div class="ska">
+      <article class="ska-item sk-rv"><span class="ska-dot" aria-hidden="true"></span><h3>Det som redan fungerar</h3><p>Vi visar vad som redan hjälper kunder och sökmotorer att hitta och förstå dig.</p></article>
+      <article class="ska-item sk-rv"><span class="ska-dot" aria-hidden="true"></span><h3>Det som begränsar synligheten</h3><p>Vi pekar ut det som gör det onödigt svårt att hittas – utan teknikjargong.</p></article>
+      <article class="ska-item sk-rv"><span class="ska-dot" aria-hidden="true"></span><h3>Det som är viktigast först</h3><p>Förbättringarna sorteras efter effekt, så du vet vad som är värt att göra först.</p></article>
     </div>
   </section>
 
-  <!-- VARFÖR DET SPELAR ROLL – illustrerad sökresa: hittad, förstådd, vald -->
-  <section class="sks-sec sks-sec--last" aria-labelledby="skj-title">
-    <div class="skj">
-      <div class="skj-copy">
-        <div class="sks-eyebrow sk-rv">Varför det spelar roll</div>
-        <h2 id="skj-title" class="skj-h2 sk-rv">När rätt kunder söker ska ditt företag vara lätt att hitta – och lätt att välja.</h2>
-        <p class="skj-lead sk-rv">Bra SEO handlar inte bara om placeringar. Det handlar om att rätt information visas när en potentiell kund behöver den.</p>
-        <ol class="skj-msgs sk-rv">
-          <li data-skj-msg="found"><span class="skj-msg-n">01</span><div><h3>Hittad</h3><p>Teknisk struktur, lokal information och tydligt innehåll ger bättre förutsättningar att synas i Google, Maps och AI-sök.</p></div></li>
-          <li data-skj-msg="understood"><span class="skj-msg-n">02</span><div><h3>Förstådd</h3><p>Tydliga rubriker och relevant information hjälper både sökmotorer och människor att förstå vad företaget erbjuder.</p></div></li>
-          <li data-skj-msg="chosen"><span class="skj-msg-n">03</span><div><h3>Vald</h3><p>En snabb och förtroendeingivande hemsida med tydliga nästa steg gör det enklare att ringa, boka eller ta kontakt.</p></div></li>
-        </ol>
+  <!-- KUNDRESAN: sökning → företaget syns → nästa steg -->
+  <section class="skv2-sec scene scene--sky" aria-labelledby="skj-title">
+    <div class="skv2-head sk-rv">
+      <p class="skv2-eyebrow">Varför det spelar roll</p>
+      <h2 id="skj-title" class="skv2-h2">Från sökning till nästa steg.</h2>
+      <p class="skv2-lead">När rätt information syns där kunden söker blir det enkelt att höra av sig.</p>
+    </div>
+    <div class="skv sk-rv" role="img" aria-label="Illustration: en kund söker, ditt företag syns i Google, Maps och AI-svar, och kunden ringer, bokar eller hittar hit.">
+      <div class="skv-step" aria-hidden="true">
+        <div class="skv-vis"><div class="skv-search">frisör nära mig</div><div class="skv-chips"><span>Google</span><span>Maps</span><span>AI-svar</span></div></div>
+        <h3>Sökning</h3><p>Någon söker efter det du erbjuder.</p>
       </div>
-
-      <div class="skj-vis sk-rv" id="skj-vis" role="img" aria-label="Illustration av en sökresa: en kund söker efter en tjänst, ett företag syns i sökresultat, Maps och AI-svar, informationen om tjänst, område, öppettider och omdömen visas och kunden kan besöka hemsidan, ringa eller boka.">
-        <div class="skj-panel" aria-hidden="true">
-          <span class="skj-tag">Illustration</span>
-          <div class="skj-search"><span class="skj-search-ic"></span><span class="skj-q" id="skj-q">frisör nära mig öppet på lördag</span><span class="skj-caret"></span></div>
-          <div class="skj-surfaces">
-            <div class="skj-surf"><span class="skj-surf-l">Sökresultat</span><i></i><i class="hl"></i><i></i></div>
-            <div class="skj-surf skj-surf--map"><span class="skj-surf-l">Maps</span><span class="skj-mini-map"><b></b></span></div>
-            <div class="skj-surf"><span class="skj-surf-l">AI-svar</span><i></i><i class="hl"></i><i class="short"></i></div>
-          </div>
-          <div class="skj-card">
-            <div class="skj-card-top"><span class="skj-logo"></span><div><strong>Ditt företag</strong><span id="skj-kind">Frisör</span></div></div>
-            <ul class="skj-info">
-              <li><span>Tjänst</span><b id="skj-svc">Klippning och färg</b></li>
-              <li><span>Område</span><b id="skj-area">Nära dig</b></li>
-              <li><span>Öppettider</span><b id="skj-open">Öppet på lördag</b></li>
-              <li><span>Omdömen</span><b class="skj-stars">★★★★★</b></li>
-            </ul>
-            <div class="skj-actions"><span>Besök hemsidan</span><span>Ring</span><span>Boka</span></div>
-          </div>
-        </div>
+      <span class="skv-arrow" aria-hidden="true">→</span>
+      <div class="skv-step" aria-hidden="true">
+        <div class="skv-vis"><div class="skv-co"><b>Ditt företag</b><i></i><i></i></div></div>
+        <h3>Ditt företag syns</h3><p>Rätt information visas i Google, Maps och AI-svar.</p>
+      </div>
+      <span class="skv-arrow" aria-hidden="true">→</span>
+      <div class="skv-step" aria-hidden="true">
+        <div class="skv-vis"><div class="skv-acts"><span>Ring</span><span>Boka</span><span>Hitta hit</span></div></div>
+        <h3>Kunden tar nästa steg</h3><p>Ring, boka eller hitta hit – utan att behöva fundera.</p>
       </div>
     </div>
+    <p class="skv-note">Illustrativt exempel</p>
   </section>
 
   </main>
@@ -1054,208 +1007,11 @@
 </div>
 
 <script>
-/* ---------- SEO-mätaren i heron ----------
-   Intro (en gång): stor mätare 0 → 98 med färgskifte, kort paus, krymper och flyttar upp; innehållet smyger in.
-   Därefter lugn loop i slutläget (håll → töm → räkna upp igen, ca 9,5 s) som pausas när formuläret har fokus
-   eller innehåll och när fliken är dold. En riktig analys stoppar demon och visar det verkliga värdet.
-   Styrs från analysskriptet via window.skGauge. Vid reducerad rörelse: statiskt slutläge. */
-(function () {
-  var root = document.documentElement;
-  var sec = document.querySelector('.skh');
-  if (!sec) return;
-  var gauge = document.getElementById('skh-gauge');
-  var arc = document.getElementById('skh-arc');
-  var scoreEl = document.getElementById('skh-score');
-  var cap = document.getElementById('skh-cap');
-  var slot = sec.querySelector('.skh-gauge-slot');
-  var input = document.getElementById('sk-url-input');
-  var ins = Array.prototype.slice.call(sec.querySelectorAll('.skh-in'));
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var DEMO = 98;
-
-  // Färg längs skalan: röd/orange → varm gul → mjuk grön
-  var STOPS = [[0, [224, 72, 58]], [36, [238, 122, 48]], [48, [234, 160, 38]], [66, [226, 176, 40]], [76, [96, 180, 88]], [100, [34, 163, 94]]];
-  function colorAt(v) {
-    for (var i = 1; i < STOPS.length; i++) {
-      if (v <= STOPS[i][0]) {
-        var a = STOPS[i - 1], b = STOPS[i], t = (v - a[0]) / (b[0] - a[0]);
-        return a[1].map(function (c, k) { return Math.round(c + (b[1][k] - c) * t); });
-      }
-    }
-    return STOPS[STOPS.length - 1][1];
-  }
-  function rgb(c, a) { return a == null ? 'rgb(' + c.join(',') + ')' : 'rgba(' + c.join(',') + ',' + a + ')'; }
-  // Mörkare variant av bågens färg för siffran, så att även gul och grön har god kontrast mot vitt
-  function inkOf(c) { return c.map(function (x) { return Math.round(x * 0.72 + 18 * 0.28); }); }
-
-  function render(v, neutral) {
-    var c = neutral ? [150, 165, 186] : colorAt(v);
-    arc.setAttribute('stroke-dasharray', Math.max(0.001, v).toFixed(2) + ' 100');
-    gauge.style.setProperty('--g-color', rgb(c));
-    gauge.style.setProperty('--g-glow', rgb(c, 0.28));
-    gauge.style.setProperty('--g-ink', neutral ? '#6B7F99' : rgb(inkOf(c)));
-    if (!neutral) scoreEl.textContent = Math.round(v);
-  }
-
-  // cubic-bezier(0.3, 0.1, 0.2, 1): lugn start så att färgskiftet hinner synas, bromsar mjukt in mot slutet
-  function bezier(x1, y1, x2, y2) {
-    function c(a, b, t) { return 3 * a * t * (1 - t) * (1 - t) + 3 * b * t * t * (1 - t) + t * t * t; }
-    return function (x) {
-      var lo = 0, hi = 1, t = x;
-      for (var i = 0; i < 24; i++) { t = (lo + hi) / 2; if (c(x1, x2, t) < x) lo = t; else hi = t; }
-      return c(y1, y2, t);
-    };
-  }
-  var easeOut = bezier(0.3, 0.1, 0.2, 1);
-  function easeInOut(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
-
-  // ----- Tidslinje som bara går framåt när den inte är pausad -----
-  var phases = [], pi = 0, pt = 0, last = 0, raf = 0, stopped = false, introDone = false;
-  function paused() {
-    return document.hidden || (introDone && (document.activeElement === input || (input && input.value.trim() !== '')));
-  }
-  function frame(now) {
-    raf = 0;
-    var dt = last ? Math.min(50, now - last) : 16;
-    last = now;
-    if (stopped) return;
-    if (paused() && introDone && phases === LOOP && pi !== 0) {
-      // Pausad mitt i en uppräkning: lägg mätaren i sitt lugna slutläge
-      render(DEMO); pi = 0; pt = 0;
-    }
-    if (!paused()) {
-      pt += dt;
-      var ph = phases[pi];
-      if (ph.tick) ph.tick(Math.min(1, pt / ph.d));
-      if (pt >= ph.d) {
-        pt = 0;
-        pi++;
-        if (pi >= phases.length) { pi = 0; phases = LOOP; }
-        if (phases[pi].start) phases[pi].start();
-      }
-    }
-    raf = requestAnimationFrame(frame);
-  }
-  function run(list) {
-    phases = list; pi = 0; pt = 0; last = 0; stopped = false;
-    if (phases[0].start) phases[0].start();
-    if (!raf) raf = requestAnimationFrame(frame);
-  }
-  function halt() { stopped = true; if (raf) cancelAnimationFrame(raf); raf = 0; }
-
-  // ----- Geometri för det stora läget -----
-  function bigState() {
-    var small = window.innerWidth <= 600;
-    var big = small ? Math.min(250, window.innerWidth - 80) : 360;
-    var s = big / 360;
-    var sr = sec.getBoundingClientRect(), gr = slot.getBoundingClientRect();
-    var gy = (sr.top + sr.height / 2) - (gr.top + gr.height / 2);
-    var fin = gr.height;
-    gauge.style.setProperty('--g-y', gy.toFixed(1) + 'px');
-    gauge.style.setProperty('--g-s', s.toFixed(4));
-    cap.style.setProperty('--c-y', (gy + big / 2 - fin / 2).toFixed(1) + 'px');
-  }
-  function smallState() {
-    gauge.style.removeProperty('--g-y');
-    gauge.style.removeProperty('--g-s');
-    cap.style.removeProperty('--c-y');
-  }
-
-  function finishIntro() {
-    if (introDone) return;
-    introDone = true;
-    smallState();
-    root.classList.remove('skh-pre', 'skh-hide');
-  }
-
-  var LOOP = [
-    { d: 6500 },
-    { d: 700, tick: function (p) { render(DEMO * (1 - easeInOut(p))); } },
-    { d: 350 },
-    { d: 2000, tick: function (p) { render(DEMO * easeOut(p)); } }
-  ];
-  var INTRO = [
-    { d: 450, start: function () { render(0); } },
-    { d: 2000, tick: function (p) { render(DEMO * easeOut(p)); } },
-    { d: 450 },
-    { d: 1100, start: function () {
-        // Krymp och flytta upp (CSS-transition 850 ms), innehållet smyger in strax efter
-        ins.forEach(function (el, i) { el.style.setProperty('--in-d', (260 + i * 90) + 'ms'); });
-        smallState();
-        root.classList.remove('skh-pre');
-      },
-      tick: function (p) { if (p >= 1) introDone = true; } }
-  ];
-
-  root.classList.add('skh-ready');
-  if (reduce.matches || !root.classList.contains('skh-js')) {
-    introDone = true;
-    render(DEMO);
-  } else if (input && input.value.trim() !== '') {
-    // Förifylld adress (?url=): hoppa direkt till slutläget, formuläret ska vara synligt
-    render(DEMO); finishIntro(); run(LOOP);
-  } else {
-    bigState();
-    render(0);
-    requestAnimationFrame(function () { root.classList.remove('skh-hide'); });
-    run(INTRO);
-    // Om besökaren hinner fokusera formuläret under introt visas allt direkt
-    sec.addEventListener('focusin', function () { if (!introDone) { finishIntro(); render(DEMO); pi = 0; pt = 0; phases = LOOP; } });
-    window.addEventListener('resize', function () { if (!introDone && root.classList.contains('skh-pre')) bigState(); });
-  }
-
-  // ----- Koppling till den riktiga analysen -----
-  var ILLU = 'Illustrativ SEO-poäng';
-  function countTo(target, dur) {
-    var from = 0, t0 = 0;
-    halt();
-    if (reduce.matches) { render(target); return; }
-    function step(now) {
-      if (!t0) t0 = now;
-      var p = Math.min(1, (now - t0) / dur);
-      render(from + (target - from) * easeOut(p));
-      if (p < 1) raf = requestAnimationFrame(step); else raf = 0;
-    }
-    raf = requestAnimationFrame(step);
-  }
-  window.skGauge = {
-    analysing: function () {
-      halt(); finishIntro();
-      // Neutralt, loopande laddningsläge – ingen siffra och ingen antydd poäng
-      gauge.classList.add('is-busy');
-      gauge.style.setProperty('--g-color', '#7FA9E8');
-      gauge.style.setProperty('--g-glow', 'rgba(127,169,232,0.25)');
-      gauge.style.setProperty('--g-ink', '#3F5E8C');
-      scoreEl.textContent = 'Analyserar';
-      cap.textContent = 'Analys pågår';
-      gauge.setAttribute('aria-label', 'Analysen pågår');
-    },
-    result: function (value, host) {
-      finishIntro();
-      gauge.classList.remove('is-busy');
-      var name = host ? 'SEO-poäng för ' + host : 'SEO-poäng';
-      cap.textContent = name;
-      if (typeof value === 'number') {
-        var v = Math.max(0, Math.min(100, Math.round(value)));
-        gauge.setAttribute('aria-label', name + ': ' + v + ' av 100');
-        countTo(v, 1600);
-      } else {
-        halt();
-        render(0, true);
-        scoreEl.textContent = '–';
-        gauge.setAttribute('aria-label', name + ': kunde inte beräknas');
-      }
-    },
-    reset: function () {
-      finishIntro();
-      gauge.classList.remove('is-busy');
-      cap.textContent = ILLU;
-      gauge.setAttribute('aria-label', ILLU + ': ' + DEMO + ' av 100');
-      render(DEMO);
-      if (!reduce.matches) run(LOOP);
-    }
-  };
-})();
+/* ---------- Koppling mellan analysen och heron ----------
+   Heron har ingen mätare längre: poäng och resultat visas bara i rapporten efter en verklig analys.
+   Analysskriptet anropar fortfarande window.skGauge, så gränssnittet behålls som tomma funktioner. */
+window.skGauge = { analysing: function () {}, result: function () {}, reset: function () {} };
+document.documentElement.classList.add('skh-ready');
 
 /* ---------- Diskret scroll-reveal för sektionerna under heron ---------- */
 (function () {
@@ -2548,5 +2304,27 @@
 <script type="module" src="/src/mobile-nav.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 <script type="module" src="/src/cloud-buddy.js"></script>
+<script>
+(function () {
+  var bar = document.getElementById('sln'), form = document.getElementById('sk-form'), cta = document.getElementById('sln-cta');
+  if (!bar || !form) return;
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var on = form.getBoundingClientRect().bottom < 90;
+    bar.classList.toggle('is-on', on);
+    document.documentElement.classList.toggle('sln-active', on);
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+  cta.addEventListener('click', function (e) {
+    e.preventDefault();
+    var input = document.getElementById('sk-url-input');
+    form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(function () { if (input) input.focus({ preventScroll: true }); }, 600);
+  });
+})();
+</script>
 </body>
 </html>
