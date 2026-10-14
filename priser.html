@@ -700,6 +700,7 @@
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
 <link rel="stylesheet" href="/src/klaro-button.css">
+<link rel="stylesheet" href="/src/priser-scenes.css">
 </head>
 <body>
 
@@ -722,7 +723,7 @@
     </div>
   </div>
 </header>
-<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
+<div style="max-width:none;width:100%;margin:0 auto;position:relative;"><!-- fullbredd: kapitlens bakgrunder och moln går ut i fönsterkanten -->
 
   <!-- BREADCRUMB -->
   <nav aria-label="Brödsmulor" style="max-width:1140px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:#57687C;">
@@ -795,7 +796,7 @@
     </div>
 
     <!-- KLARO CARE + TILLÄGG: samma driftavgift som visas i paketen (inte ett fjärde paket), därefter valfria tillägg -->
-    <section class="pj-extras" id="klaro-care" aria-labelledby="pj-care-title">
+    <section class="pj-extras pj-scene pj-scene--drift" id="klaro-care" aria-labelledby="pj-care-title">
       <div class="pj-wrap">
         <div class="pj-care">
           <div>
@@ -828,7 +829,12 @@
             </ul>
           </div>
         </div>
+      </div>
+    </section>
 
+    <!-- TILLÄGG: eget vitt kapitel efter driften -->
+    <section class="pj-extras pj-scene pj-scene--addons" id="tillval" aria-labelledby="pj-extra-title">
+      <div class="pj-wrap">
         <h2 id="pj-extra-title" class="pj-h2 pj-extra-h">Extra hjälp när du behöver den</h2>
         <p class="pj-text">Vill du utveckla din hemsida eller få hjälp med något nytt? Vi hjälper dig med allt från mindre ändringar till nya funktioner. Du betalar bara för det du behöver.</p>
         <ul class="pj-addons" aria-labelledby="pj-extra-title">
@@ -848,7 +854,7 @@
       </div>
     </section>
 
-    <section class="pj-info" id="praktiskt" aria-labelledby="pj-info-title">
+    <section class="pj-info pj-scene pj-scene--info" id="praktiskt" aria-labelledby="pj-info-title">
       <div class="pj-wrap">
         <header class="pj-info-head">
           <p class="pj-eyebrow">Sista hållplatsen</p>
@@ -908,7 +914,7 @@
     </section>
 
     <!-- Nästa steg – samma formulärkomponent som tidigare (src/lead-dock.js). Förifylls med resan, skickas aldrig automatiskt. -->
-    <section class="pj-contact" id="kontakt" aria-labelledby="pj-contact-title">
+    <section class="pj-contact pj-scene pj-scene--contact" id="kontakt" aria-labelledby="pj-contact-title">
       <div class="pj-wrap pj-contact-grid">
         <div>
           <p class="pj-eyebrow">Nästa steg</p>

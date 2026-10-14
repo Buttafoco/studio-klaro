@@ -1,0 +1,39 @@
+/* /priser: kapitel med full bredd, mjuka molnövergångar och luft – samma princip som /seo-koll.
+   Innehållet ligger kvar i sina befintliga maxbredder (.pj-wrap/.px-wrap). */
+.pj-scene{position:relative;padding-top:clamp(72px,9vw,136px);padding-bottom:clamp(72px,9vw,136px);}
+.pj-scene::before{content:"";position:absolute;left:0;right:0;top:-79px;height:80px;pointer-events:none;background-repeat:repeat-x,repeat-x,no-repeat;background-size:1200px 80px,1500px 78px,100% 100%;}
+.pj-extras.pj-scene{padding-top:clamp(72px,9vw,136px);}
+.pj-info.pj-scene{padding-top:clamp(72px,9vw,136px);}
+.pj-contact.pj-scene{padding-top:clamp(80px,9vw,140px);padding-bottom:clamp(80px,9vw,140px);}
+.pj-scene--drift{background:#D6E9FF;}
+.pj-scene--addons{background:#fff;}
+.pj-scene--info{background:#EEF5FF;}
+.pj-scene--contact{background:#D9EAFF;}
+.pj-scene--addons .pj-extra-h{margin-top:0;}
+.pj-scene--drift::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22 fill=%22%23D6E9FF%22 fill-opacity=%221%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill=%22%23D6E9FF%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(214,233,255,0) 0%,rgba(214,233,255,.55) 70%,rgba(214,233,255,.9) 100%);background-position:bottom left -140px,bottom left -610px,0 0;}
+.pj-scene--addons::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22 fill=%22%23ffffff%22 fill-opacity=%221%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill=%22%23ffffff%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 70%,rgba(255,255,255,.9) 100%);background-position:bottom left -480px,bottom left -60px,0 0;}
+.pj-scene--info::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22 fill=%22%23EEF5FF%22 fill-opacity=%221%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill=%22%23EEF5FF%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(238,245,255,0) 0%,rgba(238,245,255,.55) 70%,rgba(238,245,255,.9) 100%);background-position:bottom left -300px,bottom left -760px,0 0;}
+.pj-scene--contact::before{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22 fill=%22%23D9EAFF%22 fill-opacity=%221%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill=%22%23D9EAFF%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(217,234,255,0) 0%,rgba(217,234,255,.55) 70%,rgba(217,234,255,.9) 100%);background-position:bottom left -60px,bottom left -520px,0 0;}
+
+/* "Behöver du något extra?": lugnt mellanparti med subtil, avvikande ton över hela bredden */
+.px-extra{margin:clamp(56px,7vw,96px) auto 0;padding:clamp(36px,5vw,56px) 0;border-top:0;background:rgba(255,255,255,.5);box-shadow:0 0 0 100vmax rgba(255,255,255,.5);clip-path:inset(0 -100vmax);}
+.px-hero{padding-bottom:clamp(72px,9vw,120px);}
+.px-hero .px-lead{margin-bottom:clamp(40px,5vw,64px);}
+
+/* Information och FAQ: tydlig hierarki */
+.pj-scene--info .pj-info-head{margin-bottom:clamp(28px,4vw,44px);}
+.pj-scene--info .pj-faq-title{margin-top:clamp(56px,7vw,88px);}
+
+/* Tillägg: luftiga rader utan hårda linjer */
+.pj-scene--addons .pj-addons{border-top:0;}
+.pj-scene--addons .pj-addons li{border-bottom:0;padding:20px 22px;margin-bottom:10px;border-radius:24px;background:#F5F9FF;}
+.pj-scene--addons .pj-missing{border-top:0;}
+.pj-scene--drift .pj-care{background:rgba(255,255,255,.7);border:0;box-shadow:0 26px 50px -36px rgba(20,110,245,.45);}
+
+@media (max-width:640px){
+  .pj-scene{padding-top:72px;padding-bottom:80px;}
+  .pj-extras.pj-scene,.pj-info.pj-scene{padding-top:72px;}
+  .pj-contact.pj-scene{padding-top:80px;padding-bottom:80px;}
+  .pj-scene::before{top:-55px;height:56px;background-size:760px 56px,950px 54px,100% 100%;}
+  .px-extra{padding:36px 0;}
+}
