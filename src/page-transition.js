@@ -34,37 +34,14 @@
     focusMain();
   }
 
-  /* ---------- Molnlager (samma moln utgående och ankommande) ---------- */
-  var CLOUD = '<svg viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg>';
-  var POS = [[12,14],[50,8],[88,14],[8,50],[50,48],[92,52],[14,86],[50,92],[86,86]];
-  function makeClouds() {
-    var wrap = document.createElement('div');
-    wrap.className = 'pt-clouds';
-    wrap.setAttribute('aria-hidden', 'true');
-    POS.forEach(function (p, i) {
-      var c = document.createElement('span');
-      var dx = (p[0] - 50) * 2.2, dy = (p[1] - 50) * 2.2;
-      if (p[0] === 50) dx = (i % 2 ? 1 : -1) * 20;
-      c.style.cssText = '--x:' + p[0] + '%;--y:' + p[1] + '%;--w:' + (i % 2 ? 62 : 54) + 'vmax;--dx:' + dx + 'vw;--dy:' + dy + 'vh;--dl:' + (i % 3) * 0.06 + 's';
-      c.innerHTML = CLOUD;
-      wrap.appendChild(c);
-    });
-    return wrap;
-  }
-
   /* ---------- Ankomst från mobilmenyn: panelen som täcker sidan glider upp ---------- */
   if (root.classList.contains('pt-cover')) {
-    document.body.appendChild(makeClouds());
     var coverGone = false;
     var reveal = function () {
       if (coverGone) return;
       coverGone = true;
       root.classList.add('pt-cover-out');
-      setTimeout(function () {
-        root.classList.remove('pt-cover', 'pt-cover-out');
-        var cl = document.querySelector('body > .pt-clouds');
-        if (cl) cl.remove();
-      }, reduce ? 260 : 1100);
+      setTimeout(function () { root.classList.remove('pt-cover', 'pt-cover-out'); }, reduce ? 260 : 700);
     };
     // Två bildrutor efter montering (sidan är målad bakom panelen), med tidsgräns om bildrutorna dröjer
     requestAnimationFrame(function () { requestAnimationFrame(function () { setTimeout(reveal, 60); }); });
@@ -166,34 +143,13 @@
     e.preventDefault();
     if (busy) return;                 // dubbelklick: navigeringen pågår redan
     busy = true;
-    var go = function () {
-      try {
-        sessionStorage.setItem('pt-arrive', '1');
-        if (!reduce) { sessionStorage.setItem('pt-cover', '1'); sessionStorage.removeItem('pt-y'); }
-        else if (!url.hash) sessionStorage.setItem('pt-y', String(Math.round(window.scrollY)));
-      } catch (err) {}
-      location.assign(url.href);      // samma som ett vanligt länkklick: en history-post, korrekt URL
-    };
-    if (reduce) { go(); return; }
-    // Molnridån stiger upp över sidan; nya sidan tar över med samma ridå och glider sedan undan
-    var curtain = document.createElement('div');
-    curtain.className = 'pt-curtain';
-    curtain.setAttribute('aria-hidden', 'true');
-    curtain.appendChild(makeClouds());
-    document.body.appendChild(curtain);
-    curtain.getBoundingClientRect();
-    curtain.classList.add('is-in');
-    var left = false;
-    var leave = function () { if (left) return; left = true; go(); };
-    curtain.addEventListener('transitionend', leave);
-    setTimeout(leave, 650);
+    try {
+      if (!url.hash && !reduce) sessionStorage.setItem('pt-y', String(Math.round(window.scrollY)));
+      sessionStorage.setItem('pt-arrive', '1');
+    } catch (err) {}
+    location.assign(url.href);        // samma som ett vanligt länkklick: en history-post, korrekt URL
   });
 
   // Tillbaka från bfcache (bakåt/framåt): webbläsarens vanliga scrollåterställning gäller
-  window.addEventListener('pageshow', function (e) {
-    if (!e.persisted) return;
-    busy = false;
-    var c = document.querySelector('.pt-curtain');
-    if (c) c.remove();
-  });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) busy = false; });
 })();

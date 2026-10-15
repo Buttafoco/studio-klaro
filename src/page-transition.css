@@ -24,30 +24,13 @@ html.pt-internal-settled [style*="fadeUp"][style*="floaty"] { opacity: 1 !import
 .pt-fast [data-rv], .pt-fast [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
 [data-pt-focus]:focus { outline: none; }
 
-/* Molnövergång: vid klick sveper stora moln in från alla håll och täcker sidan (pt-curtain, skapas i
-   page-transition.js). Nya sidan täcks av samma färg från första bildrutan (pt-cover sätts i <head>),
-   molnen läggs ovanpå (pt-clouds) och driver sedan utåt och avslöjar sidan. Mobilmenyn använder samma pt-cover. */
-html.pt-cover body::after, .pt-curtain {
-  content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
-  background: linear-gradient(170deg,#FFFFFF 0%,#F2F8FF 50%,#E3EFFF 100%);
-}
-html.pt-cover body::after { transition: opacity .6s ease .25s; }
-html.pt-cover-out body::after { opacity: 0; }
-
-.pt-curtain { opacity: 0; transition: opacity .4s ease; }
-.pt-curtain.is-in { opacity: 1; }
-.pt-clouds { position: fixed; inset: 0; z-index: 2147483001; pointer-events: none; overflow: hidden; }
-.pt-curtain .pt-clouds { z-index: auto; }
-.pt-clouds span { position: absolute; left: var(--x); top: var(--y); width: var(--w); aspect-ratio: 2 / 1;
-  margin: calc(var(--w) / -4) 0 0 calc(var(--w) / -2);
-  transform: translate(0,0) scale(1); transition: transform .8s cubic-bezier(0.5,0,0.2,1) var(--dl), opacity .5s ease var(--dl); }
-.pt-clouds svg { display: block; width: 100%; height: 100%; fill: #fff; filter: drop-shadow(0 18px 34px rgba(60,120,200,.18)); }
-/* Utgående: molnen kommer utifrån och in */
-.pt-curtain:not(.is-in) .pt-clouds span { transform: translate(var(--dx), var(--dy)) scale(.7); opacity: 0; }
-.pt-curtain.is-in .pt-clouds span { transition-duration: .6s; }
-/* Ankomst: molnen driver utåt och försvinner */
-html.pt-cover-out .pt-clouds span { transform: translate(var(--dx), var(--dy)) scale(1.15); opacity: 0; transition-duration: .9s, .6s; }
+/* Sidbyte från mobilmenyn (src/mobile-nav.*): menypanelen täcker nya sidan från första bildrutan
+   och glider sedan upp och avslöjar den. pt-cover sätts i <head>, pt-cover-out i page-transition.js. */
+html.pt-cover body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+  background: var(--mnav-bg, linear-gradient(180deg,#FFFFFF 0%,#F2F8FF 46%,#E3EFFF 100%));
+  box-shadow: 0 30px 60px rgba(15,23,42,0.10); transition: transform .62s cubic-bezier(0.22,1,0.36,1); }
+html.pt-cover-out body::after { transform: translateY(calc(-100% - 90px)); }
 @media (prefers-reduced-motion: reduce) {
   html.pt-cover body::after { transition: opacity .22s ease; }
-  .pt-clouds { display: none; }
+  html.pt-cover-out body::after { transform: none; opacity: 0; }
 }
