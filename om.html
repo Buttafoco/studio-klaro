@@ -608,6 +608,49 @@
     [data-rhide]{display:none!important;}
     [data-rshow]{display:block!important;}
   }
+
+  /* ---------- Molnkapitel: samma moln- och kantspråk som /priser och /seo-koll ---------- */
+  .ok .ok-sec,.ok .ok-cta{position:relative;--sc:#fff;padding-top:clamp(72px,8vw,120px);padding-bottom:clamp(72px,8vw,120px);background:var(--sc);}
+  .ok .ok-sec::before,.ok .ok-cta::before{content:"";position:absolute;left:0;right:0;top:-79px;height:80px;pointer-events:none;background:var(--sc);
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 70%,rgba(0,0,0,.9) 100%);mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V58C20 40 60 36 84 48C96 22 152 8 200 28C226 14 270 22 280 44C312 34 352 44 360 62C384 46 440 40 470 54C490 30 560 18 612 36C640 24 690 30 700 52C730 40 790 44 800 64C830 50 880 34 930 44C950 20 1020 6 1074 28C1100 16 1150 24 1160 46C1180 40 1200 46 1200 58V90Z%22/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 90V70C40 56 90 52 120 64C150 30 230 14 292 40C330 26 380 34 396 56C440 44 500 50 520 66C560 24 650 8 724 34C770 20 830 32 850 54C900 42 960 48 990 64C1030 36 1100 30 1150 50C1170 44 1200 52 1200 70V90Z%22 fill-opacity=%220.5%22/%3E%3C/svg%3E"),linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 70%,rgba(0,0,0,.9) 100%);
+    -webkit-mask-repeat:repeat-x,repeat-x,no-repeat;mask-repeat:repeat-x,repeat-x,no-repeat;
+    -webkit-mask-size:1200px 80px,1500px 78px,100% 100%;mask-size:1200px 80px,1500px 78px,100% 100%;
+    -webkit-mask-position:bottom left -140px,bottom left -610px,0 0;mask-position:bottom left -140px,bottom left -610px,0 0;}
+  .ok .ok-parts{--sc:#EEF5FF;}
+  .ok .ok-why{--sc:#D6E9FF;}
+  .ok .ok-pr{--sc:#fff;}
+  .ok .ok-human{--sc:#EEF5FF;}
+  .ok .ok-brief{--sc:#fff;}
+  .ok .ok-cta{--sc:#DCEEFF;padding-top:clamp(110px,12vw,170px);padding-bottom:clamp(100px,11vw,150px);}
+  .ok .ok-why::before{-webkit-mask-position:bottom left -480px,bottom left -60px,0 0;mask-position:bottom left -480px,bottom left -60px,0 0;}
+  .ok .ok-human::before{-webkit-mask-position:bottom left -300px,bottom left -760px,0 0;mask-position:bottom left -300px,bottom left -760px,0 0;}
+  .ok .ok-cta::before{-webkit-mask-position:bottom left -60px,bottom left -520px,0 0;mask-position:bottom left -60px,bottom left -520px,0 0;}
+  .ok .ok-parts-stage{background:var(--sc);}
+  .ok .ok-parts-stage::after{background:linear-gradient(var(--sc),transparent);}
+  .ok .ok-hero{position:relative;padding-bottom:clamp(72px,8vw,120px);}
+
+  /* Drivande moln i heron */
+  .om-clouds{position:absolute;z-index:0;top:-80px;bottom:0;left:0;right:0;overflow:hidden;pointer-events:none;}
+  .om-cloud-track{position:absolute;left:0;top:var(--y);width:var(--w);opacity:var(--o);will-change:transform;animation:omWind var(--d) linear var(--dl) infinite;}
+  .om-cloud{display:block;width:100%;height:auto;fill:#fff;transform-origin:50% 70%;animation:omFloat var(--fd) cubic-bezier(.45,0,.55,1) var(--fdl,0s) infinite alternate;}
+  .om-cloud--1{--y:110px;--w:clamp(170px,22vw,320px);--o:.55;--d:150s;--dl:-32s;--fd:14s;--fdl:-5s;--fy:-7px;--fs:1.025;}
+  .om-cloud--2{--y:330px;--w:clamp(150px,19vw,280px);--o:.5;--d:176s;--dl:-118s;--fd:17s;--fdl:-11s;--fy:6px;--fs:1.02;}
+  .om-cloud--3{--y:560px;--w:clamp(110px,13vw,200px);--o:.4;--d:205s;--dl:-64s;--fd:12s;--fdl:-3s;--fy:-5px;--fs:1.018;}
+  .om-cloud--4{--y:760px;--w:clamp(90px,10vw,160px);--o:.32;--d:240s;--dl:-178s;--fd:19s;--fdl:-8s;--fy:4px;--fs:1.012;}
+  .om-cloud--5{--y:60px;--w:clamp(70px,7vw,120px);--o:.28;--d:265s;--dl:-21s;--fd:21s;--fdl:-14s;--fy:-3px;--fs:1.01;}
+  @keyframes omWind{from{transform:translate3d(-115%,0,0);}to{transform:translate3d(100vw,0,0);}}
+  @keyframes omFloat{from{transform:translateY(0) scale(1);}to{transform:translateY(var(--fy,-5px)) scale(var(--fs,1.02));}}
+  @media (max-width:760px){
+    .ok .ok-sec,.ok .ok-cta{padding-top:64px;padding-bottom:64px;}
+    .ok .ok-cta{padding-top:100px;padding-bottom:90px;}
+    .ok .ok-sec::before,.ok .ok-cta::before{top:-55px;height:56px;-webkit-mask-size:760px 56px,950px 54px,100% 100%;mask-size:760px 56px,950px 54px,100% 100%;}
+    .om-clouds{top:-40px;}
+    .om-cloud--1{--y:30px;--w:160px;--o:.5;--d:95s;--dl:-20s;}
+    .om-cloud--2{--y:420px;--w:170px;--o:.42;--d:115s;--dl:-78s;}
+    .om-cloud--3{--y:700px;--w:115px;--o:.34;--d:140s;--dl:-50s;}
+    .om-cloud--4,.om-cloud--5{display:none;}
+  }
+  @media (prefers-reduced-motion:reduce){.om-cloud-track,.om-cloud{animation-play-state:paused;}}
 </style>
 <script>if(!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){document.documentElement.classList.add("rv-js");setTimeout(function(){var e=document.querySelector("[data-rv].in");if(!e)document.documentElement.classList.remove("rv-js");},3000);}</script>
 <script>if(!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){document.documentElement.classList.add("ok-live");setTimeout(function(){if(!window.__okOn)document.documentElement.classList.remove("ok-live");},3000);}</script>
@@ -647,7 +690,7 @@
     </div>
   </div>
 </header>
-<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
+<div style="max-width:none;width:100%;margin:0 auto;position:relative;">
 
   <!-- BREADCRUMB -->
   <nav aria-label="Brödsmulor" style="max-width:1140px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:#8296B0;">
@@ -660,6 +703,14 @@
 
   <!-- 1 · HERO: fragment från en designprocess som samlas till en helhet -->
   <section class="ok-hero" aria-labelledby="ab-h1">
+    <div class="om-clouds" aria-hidden="true">
+    <svg width="0" height="0" style="position:absolute"><defs><path id="om-cloud-shape" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></defs></svg>
+    <span class="om-cloud-track om-cloud--1"><svg class="om-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#om-cloud-shape"/></svg></span>
+    <span class="om-cloud-track om-cloud--2"><svg class="om-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#om-cloud-shape"/></svg></span>
+    <span class="om-cloud-track om-cloud--3"><svg class="om-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#om-cloud-shape"/></svg></span>
+    <span class="om-cloud-track om-cloud--4"><svg class="om-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#om-cloud-shape"/></svg></span>
+    <span class="om-cloud-track om-cloud--5"><svg class="om-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#om-cloud-shape"/></svg></span>
+    </div>
     <div class="ok-wrap">
       <div class="ab-eyebrow" data-rv>Om Studio Klaro</div>
       <div class="ok-hero-grid">
