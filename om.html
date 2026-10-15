@@ -668,6 +668,7 @@
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
 <link rel="stylesheet" href="/src/klaro-button.css">
+<link rel="stylesheet" href="/src/seo-local-nav.css">
 </head>
 <body>
 
@@ -696,6 +697,15 @@
   <nav aria-label="Brödsmulor" style="max-width:1140px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:#8296B0;">
     <a href="/" style="color:#8296B0;text-decoration:none;">Hem</a><span style="margin:0 6px;color:#C3CEDD;">/</span><span style="color:#52657A;font-weight:600;">Om</span>
   </nav>
+
+  <!-- Lokalmeny: visas när heron scrollats förbi (src/seo-local-nav.css, src/local-nav.js) -->
+  <div class="sln" id="sln" role="region" aria-label="Om oss" data-after=".ok-hero">
+    <p class="sln-title">Om oss</p>
+    <div class="sln-actions">
+      <a class="sln-link" href="#ok-idea-title">Grundtanken</a>
+      <a class="sln-cta" href="/#kontakt">Få en gratis genomgång</a>
+    </div>
+  </div>
 
   <main class="ok" id="ok">
   <!-- Den blå tråden byggs av scrollmotorn (se skriptet längst ner) -->
@@ -1518,6 +1528,7 @@
 <script type="module" src="/src/lead-dock.js"></script>
 <script type="module" src="/src/site-footer.js"></script>
 <script type="module" src="/src/mobile-nav.js"></script>
+<script type="module" src="/src/local-nav.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 <script type="module" src="/src/cloud-buddy.js"></script>
 </body>
