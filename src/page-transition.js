@@ -34,19 +34,37 @@
     focusMain();
   }
 
+  /* ---------- Molnlager (samma moln utgående och ankommande) ---------- */
+  var CLOUD = '<svg viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><path d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></svg>';
+  var POS = [[12,14],[50,8],[88,14],[8,50],[50,48],[92,52],[14,86],[50,92],[86,86]];
+  function makeClouds() {
+    var wrap = document.createElement('div');
+    wrap.className = 'pt-clouds';
+    wrap.setAttribute('aria-hidden', 'true');
+    POS.forEach(function (p, i) {
+      var c = document.createElement('span');
+      var dx = (p[0] - 50) * 2.2, dy = (p[1] - 50) * 2.2;
+      if (p[0] === 50) dx = (i % 2 ? 1 : -1) * 20;
+      c.style.cssText = '--x:' + p[0] + '%;--y:' + p[1] + '%;--w:' + (i % 2 ? 62 : 54) + 'vmax;--dx:' + dx + 'vw;--dy:' + dy + 'vh;--dl:' + (i % 3) * 0.06 + 's';
+      c.innerHTML = CLOUD;
+      wrap.appendChild(c);
+    });
+    return wrap;
+  }
+
   /* ---------- Ankomst från mobilmenyn: panelen som täcker sidan glider upp ---------- */
   if (root.classList.contains('pt-cover')) {
-    try {
-      var pp = sessionStorage.getItem('pt-pos');
-      sessionStorage.removeItem('pt-pos');
-      if (pp) { pp = pp.split(','); root.style.setProperty('--px', pp[0] + 'px'); root.style.setProperty('--py', pp[1] + 'px'); }
-    } catch (err) {}
+    document.body.appendChild(makeClouds());
     var coverGone = false;
     var reveal = function () {
       if (coverGone) return;
       coverGone = true;
       root.classList.add('pt-cover-out');
-      setTimeout(function () { root.classList.remove('pt-cover', 'pt-cover-out'); }, reduce ? 260 : 700);
+      setTimeout(function () {
+        root.classList.remove('pt-cover', 'pt-cover-out');
+        var cl = document.querySelector('body > .pt-clouds');
+        if (cl) cl.remove();
+      }, reduce ? 260 : 1100);
     };
     // Två bildrutor efter montering (sidan är målad bakom panelen), med tidsgräns om bildrutorna dröjer
     requestAnimationFrame(function () { requestAnimationFrame(function () { setTimeout(reveal, 60); }); });
@@ -161,10 +179,7 @@
     var curtain = document.createElement('div');
     curtain.className = 'pt-curtain';
     curtain.setAttribute('aria-hidden', 'true');
-    var px = e.clientX || window.innerWidth / 2, py = e.clientY || window.innerHeight / 2;
-    curtain.style.setProperty('--px', px + 'px');
-    curtain.style.setProperty('--py', py + 'px');
-    try { sessionStorage.setItem('pt-pos', Math.round(px) + ',' + Math.round(py)); } catch (err) {}
+    curtain.appendChild(makeClouds());
     document.body.appendChild(curtain);
     curtain.getBoundingClientRect();
     curtain.classList.add('is-in');
