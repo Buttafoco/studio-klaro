@@ -24,34 +24,26 @@ html.pt-internal-settled [style*="fadeUp"][style*="floaty"] { opacity: 1 !import
 .pt-fast [data-rv], .pt-fast [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
 [data-pt-focus]:focus { outline: none; }
 
-/* Molnridå: vid varje intern länk stiger en ridå med molnkant upp över sidan (pt-curtain, skapas i
-   page-transition.js). Nya sidan täcks av samma ridå från första bildrutan (pt-cover sätts i <head>)
-   och den glider sedan uppåt med molnkanten först och avslöjar sidan. Mobilmenyn använder samma
-   pt-cover, så panelen får samma molnkant. */
+/* Cirkelreveal: vid klick växer en mjuk ljusblå cirkel ut från klickpunkten (pt-curtain, skapas i
+   page-transition.js) och täcker sidan. Nya sidan täcks av samma färg från första bildrutan
+   (pt-cover sätts i <head>) och cirkeln krymper sedan tillbaka mot klickpunkten och avslöjar sidan.
+   Mobilmenyn använder samma pt-cover. */
 html.pt-cover body::after, .pt-curtain {
-  --pt-w1: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 0V32C20 50 60 54 84 42C96 68 152 82 200 62C226 76 270 68 280 46C312 56 352 46 360 28C384 44 440 50 470 36C490 60 560 72 612 54C640 66 690 60 700 38C730 50 790 46 800 26C830 40 880 56 930 46C950 70 1020 84 1074 62C1100 74 1150 66 1160 44C1180 50 1200 44 1200 32V0Z%22/%3E%3C/svg%3E");
-  --pt-w2: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 0V20C40 34 90 38 120 26C150 60 230 76 292 50C330 64 380 56 396 34C440 46 500 40 520 24C560 66 650 82 724 56C770 70 830 58 850 36C900 48 960 42 990 26C1030 54 1100 60 1150 40C1170 46 1200 38 1200 20V0Z%22/%3E%3C/svg%3E");
-  --pt-f1: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cg transform=%22matrix(1 0 0 -1 0 90)%22%3E%3Cpath d=%22M0 0V32C20 50 60 54 84 42C96 68 152 82 200 62C226 76 270 68 280 46C312 56 352 46 360 28C384 44 440 50 470 36C490 60 560 72 612 54C640 66 690 60 700 38C730 50 790 46 800 26C830 40 880 56 930 46C950 70 1020 84 1074 62C1100 74 1150 66 1160 44C1180 50 1200 44 1200 32V0Z%22/%3E%3C/g%3E%3C/svg%3E");
-  --pt-f2: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 90%22 preserveAspectRatio=%22none%22%3E%3Cg transform=%22matrix(1 0 0 -1 0 90)%22%3E%3Cpath d=%22M0 0V20C40 34 90 38 120 26C150 60 230 76 292 50C330 64 380 56 396 34C440 46 500 40 520 24C560 66 650 82 724 56C770 70 830 58 850 36C900 48 960 42 990 26C1030 54 1100 60 1150 40C1170 46 1200 38 1200 20V0Z%22/%3E%3C/g%3E%3C/svg%3E");
-  --pt-bg: var(--mnav-bg, linear-gradient(180deg,#FFFFFF 0%,#F2F8FF 46%,#E3EFFF 100%));
+  content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+  background:
+    radial-gradient(60vmax 40vmax at 20% 15%, rgba(255,255,255,.9), rgba(255,255,255,0) 70%),
+    radial-gradient(50vmax 35vmax at 85% 85%, rgba(255,255,255,.7), rgba(255,255,255,0) 70%),
+    linear-gradient(160deg,#D6E9FF 0%,#EAF3FF 55%,#DCEEFF 100%);
+  clip-path: circle(150vmax at var(--px,50%) var(--py,50%));
+  will-change: clip-path;
 }
-html.pt-cover body::after, .pt-curtain {
-  content: ""; position: fixed; left: 0; right: 0; top: 0; bottom: -90px; z-index: 2147483000; pointer-events: none;
-  background: var(--pt-bg);
-  /* kropp + molnkant längst ned (som på sidans molnkapitel) */
-  -webkit-mask: linear-gradient(#000,#000) 0 0 / 100% calc(100% - 88px) no-repeat, var(--pt-w1) 0 100% / 100% 90px no-repeat, var(--pt-w2) 0 100% / 100% 90px no-repeat;
-  mask: linear-gradient(#000,#000) 0 0 / 100% calc(100% - 88px) no-repeat, var(--pt-w1) 0 100% / 100% 90px no-repeat, var(--pt-w2) 0 100% / 100% 90px no-repeat;
-  will-change: transform;
-}
-html.pt-cover body::after { transition: transform .72s cubic-bezier(0.65,0,0.2,1); }
-html.pt-cover-out body::after { transform: translateY(-100%); }
+html.pt-cover body::after { transition: clip-path .75s cubic-bezier(0.65,0,0.25,1); }
+html.pt-cover-out body::after { clip-path: circle(0px at var(--px,50%) var(--py,50%)); }
 
-/* Utgående ridå: stiger underifrån, molnkanten överst (spegelvänd), täcker hela skärmen */
-.pt-curtain { top: -90px; bottom: 0; transform: translateY(100%); transition: transform .5s cubic-bezier(0.55,0,0.25,1);
-  -webkit-mask: linear-gradient(#000,#000) 0 100% / 100% calc(100% - 88px) no-repeat, var(--pt-f1) 0 0 / 100% 90px no-repeat, var(--pt-f2) 0 0 / 100% 90px no-repeat;
-  mask: linear-gradient(#000,#000) 0 100% / 100% calc(100% - 88px) no-repeat, var(--pt-f1) 0 0 / 100% 90px no-repeat, var(--pt-f2) 0 0 / 100% 90px no-repeat; }
-.pt-curtain.is-in { transform: translateY(0); }
+/* Utgående cirkel: växer från klickpunkten */
+.pt-curtain { clip-path: circle(0px at var(--px,50%) var(--py,50%)); transition: clip-path .55s cubic-bezier(0.55,0,0.25,1); }
+.pt-curtain.is-in { clip-path: circle(150vmax at var(--px,50%) var(--py,50%)); }
 @media (prefers-reduced-motion: reduce) {
   html.pt-cover body::after { transition: opacity .22s ease; }
-  html.pt-cover-out body::after { transform: none; opacity: 0; }
+  html.pt-cover-out body::after { clip-path: none; opacity: 0; }
 }

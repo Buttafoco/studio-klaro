@@ -36,6 +36,11 @@
 
   /* ---------- Ankomst från mobilmenyn: panelen som täcker sidan glider upp ---------- */
   if (root.classList.contains('pt-cover')) {
+    try {
+      var pp = sessionStorage.getItem('pt-pos');
+      sessionStorage.removeItem('pt-pos');
+      if (pp) { pp = pp.split(','); root.style.setProperty('--px', pp[0] + 'px'); root.style.setProperty('--py', pp[1] + 'px'); }
+    } catch (err) {}
     var coverGone = false;
     var reveal = function () {
       if (coverGone) return;
@@ -156,6 +161,10 @@
     var curtain = document.createElement('div');
     curtain.className = 'pt-curtain';
     curtain.setAttribute('aria-hidden', 'true');
+    var px = e.clientX || window.innerWidth / 2, py = e.clientY || window.innerHeight / 2;
+    curtain.style.setProperty('--px', px + 'px');
+    curtain.style.setProperty('--py', py + 'px');
+    try { sessionStorage.setItem('pt-pos', Math.round(px) + ',' + Math.round(py)); } catch (err) {}
     document.body.appendChild(curtain);
     curtain.getBoundingClientRect();
     curtain.classList.add('is-in');
