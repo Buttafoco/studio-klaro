@@ -3,7 +3,7 @@
    beteende i src/site-footer.js. Mörk marinblå, rundad överkant, rundad logga som signatur.
    ========================================================================== */
 .sf{--sf-ink:#fff;--sf-mute:#A9B8CC;--sf-soft:#8FA3BE;--sf-accent:#146EF5;--sf-accent-light:#7FB2FF;--sf-line:rgba(255,255,255,0.1);--sf-ease:cubic-bezier(0.22,1,0.36,1);
-  margin-top:112px;background:#0F172A;color:var(--sf-ink);border-radius:40px 40px 0 0;font-family:'Manrope',system-ui,sans-serif;}
+  margin-top:112px;max-width:1440px;margin-left:auto;margin-right:auto;background:#0F172A;color:var(--sf-ink);border-radius:40px 40px 0 0;font-family:'Manrope',system-ui,sans-serif;}
 .sf *{box-sizing:border-box;}
 .sf-in{max-width:1140px;margin:0 auto;padding:88px 20px 20px;}
 .sf a{color:inherit;}

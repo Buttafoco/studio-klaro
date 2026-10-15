@@ -21,8 +21,8 @@
   var CLOSE_MS = reduce ? 0 : 280;
 
   var ITEMS = [
-    ['Process', '/#processen'],
     ['Projekt', '/#portfolio'],
+    ['Process', '/#processen'],
     ['SEO', '/seo-koll'],
     ['Priser', '/priser'],
     ['Om', '/om']

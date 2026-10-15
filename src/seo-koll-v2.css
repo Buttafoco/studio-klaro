@@ -104,7 +104,7 @@
   .skv{grid-template-columns:minmax(0,1fr);}
   .skv-arrow{transform:rotate(90deg);justify-self:center;}
 }
-@media (max-width:520px){.sk-pill > span:nth-child(2){flex:1 1 auto;min-width:0;}.sk-pill > span:last-child{flex:none;}}
+@media (max-width:520px){.sk-pill > span:nth-child(2){flex:1 1 auto;min-width:0;}}
 
 /* ================= Layoutrytm: varje del är en egen scen ================= */
 .skv2-sec{max-width:none;margin:0;padding:clamp(72px,9vw,136px) max(20px,calc((100% - 1100px) / 2));position:relative;}
