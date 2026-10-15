@@ -700,7 +700,6 @@
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
 <link rel="stylesheet" href="/src/klaro-button.css">
-<link rel="stylesheet" href="/src/seo-local-nav.css">
 <link rel="stylesheet" href="/src/priser-scenes.css">
 </head>
 <body>
@@ -734,14 +733,6 @@
   <!-- PRISRESAN – ett val, sedan en sticky scrollberättelse i fem kapitel för just den resan.
        Allt (behov, pris, omfattning, tema och innehåll) härleds från ett centralt state: selectedJourney.
        Scenens innehåll byggs i JavaScript från PK-datan längre ner; priserna finns också i valknapparna. -->
-  <!-- Lokalmeny: visas när heron scrollats förbi (src/seo-local-nav.css, src/local-nav.js) -->
-  <div class="sln" id="sln" role="region" aria-label="Priser" data-after="#px-hero">
-    <p class="sln-title">Priser</p>
-    <div class="sln-actions">
-      <a class="sln-link" href="#praktiskt">Praktiskt</a>
-      <a class="sln-cta" href="#kontakt">Starta ett projekt</a>
-    </div>
-  </div>
 
   <main class="px" id="px">
     <section class="px-hero" id="px-hero" aria-labelledby="px-h1">
@@ -1822,7 +1813,6 @@
 <script type="module" src="/src/lead-dock.js"></script>
 <script type="module" src="/src/site-footer.js"></script>
 <script type="module" src="/src/mobile-nav.js"></script>
-<script type="module" src="/src/local-nav.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 <script type="module" src="/src/cloud-buddy.js"></script>
 </body>
