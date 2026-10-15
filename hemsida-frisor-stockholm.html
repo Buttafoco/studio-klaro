@@ -56,6 +56,9 @@
   .fr{overflow-x:clip;}
   .fr-wrap{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;}
   .fr-sec{padding-top:170px;scroll-margin-top:96px;}
+  .fr .fr-sec.kz-scene{padding-top:clamp(72px,8vw,120px);padding-bottom:clamp(72px,8vw,120px);}
+  .fr .fr-hero.kz-hero{padding-bottom:90px;}
+  .fr .cw-bridge + .kz-scene{margin-top:110px;}
   .fr-eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ab-blue);margin:0 0 20px;}
   .fr-h2{font-weight:800;font-size:clamp(32px,3.8vw,52px);line-height:1.07;letter-spacing:-0.03em;color:var(--ab-ink);margin:0;max-width:20ch;text-wrap:balance;}
   .fr-lead{font-size:18px;line-height:1.7;color:var(--ab-mute);font-weight:500;margin:22px 0 0;max-width:54ch;}
@@ -123,6 +126,18 @@
   .fr-live-dot{display:inline-flex;align-items:center;gap:8px;}
   .fr-live-dot::before{content:"";width:8px;height:8px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 4px rgba(34,197,94,0.16);}
   .fr-case-actions{margin-top:40px;}
+  /* Case-sammanfattning: kort med djup i stället för platta kolumner */
+  .fr-case-grid{gap:20px;align-items:stretch;}
+  .fr-case-col{position:relative;background:#fff;border-radius:30px 26px 30px 26px;padding:34px 32px 36px;box-shadow:0 22px 46px -30px rgba(20,110,245,.55),0 2px 0 rgba(255,255,255,.9) inset;}
+  .fr-case-col::before{content:"";position:absolute;left:32px;top:0;width:44px;height:4px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,#146EF5,#6C8CFF);}
+  .fr-case-col h3{margin-bottom:16px;}
+  .fr-case-col p{font-size:20px;}
+  .fr-deliv{columns:auto;display:flex;flex-wrap:wrap;gap:8px;}
+  .fr-deliv li{padding:9px 15px;border:0;border-radius:999px;background:#EEF5FF;font-size:14.5px;line-height:1.3;}
+  .fr-facts{margin-top:20px;border-top:0;gap:14px;}
+  .fr-facts > div,.fr-facts > div:first-child{padding:20px 22px 22px;border:0;border-radius:24px;background:rgba(255,255,255,.72);box-shadow:0 16px 36px -28px rgba(20,110,245,.5);}
+  .fr-facts dd{font-size:16.5px;}
+  .fr-case-actions{margin-top:36px;}
 
   /* Klaro-linsen: Studio Klaros ljusa redaktionella ram – The Chairmans värld lever bara inne i bilden */
   .kl-head{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,6fr) minmax(0,3.4fr);column-gap:clamp(24px,3vw,48px);align-items:end;margin-bottom:clamp(40px,4.4vw,64px);}
@@ -486,17 +501,20 @@
   .fr-incl li::before{content:"✓";color:var(--ab-blue);font-weight:800;}
 
   /* 11 · Vanliga frågor */
-  .fr-faq{list-style:none;margin:48px 0 0;padding:0;border-top:1px solid var(--ab-line);max-width:880px;}
-  .fr-faq li{border-bottom:1px solid var(--ab-line);}
+  .fr-faq{list-style:none;margin:48px 0 0;padding:0;border:0;max-width:880px;display:grid;gap:12px;}
+  .fr-faq li{border:0;background:#fff;border-radius:28px 26px 28px 26px;box-shadow:0 16px 34px -26px rgba(20,110,245,.5);}
   .fr-faq h3{margin:0;}
-  .fr-faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:64px;padding:18px 0;background:none;border:0;cursor:pointer;text-align:left;font-family:inherit;font-size:clamp(17px,1.6vw,20px);font-weight:800;letter-spacing:-0.01em;color:var(--ab-ink);}
-  .fr-faq-q::after{content:"";flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(15,23,42,0.18);
-    background:linear-gradient(var(--ab-ink),var(--ab-ink)) center/11px 1.8px no-repeat,linear-gradient(var(--ab-ink),var(--ab-ink)) center/1.8px 11px no-repeat;transition:transform .35s var(--ab-ease),background-size .35s var(--ab-ease);}
-  .fr-faq-q[aria-expanded="true"]::after{transform:rotate(180deg);background-size:11px 1.8px,1.8px 0;}
+  .fr-faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 26px;background:none;border:0;border-radius:inherit;cursor:pointer;text-align:left;font-family:inherit;font-size:clamp(18px,1.9vw,23px);font-weight:600;letter-spacing:-0.02em;line-height:1.25;color:#4A5B70;transition:color .25s ease;}
+  .fr-faq-q:hover,.fr-faq-q[aria-expanded="true"]{color:var(--ab-ink);}
+  .fr-faq-q::after{content:"";flex:none;width:22px;height:22px;background:linear-gradient(currentColor,currentColor) center/22px 1.5px no-repeat,linear-gradient(currentColor,currentColor) center/1.5px 22px no-repeat;transition:transform .35s var(--ab-ease);}
+  .fr-faq-q[aria-expanded="true"]::after{transform:rotate(45deg);}
   .fr-faq-a{display:grid;grid-template-rows:1fr;transition:grid-template-rows .4s var(--ab-ease),opacity .35s ease;}
   .fr-faq-a > div{overflow:hidden;}
-  .fr-faq-a p{margin:0;padding:0 48px 22px 0;font-size:16px;line-height:1.7;color:var(--ab-mute);font-weight:500;max-width:64ch;}
+  .fr-faq-a p{margin:0;padding:0 56px 26px 26px;font-size:16.5px;line-height:1.65;color:var(--ab-mute);font-weight:500;max-width:64ch;}
   .fr-faq-a.is-closed{grid-template-rows:0fr;opacity:0;}
+  [aria-labelledby="fr-faq-title"] .fr-eyebrow,#fr-faq-title{text-align:center;}
+  #fr-faq-title{margin-left:auto;margin-right:auto;}
+  .fr-faq{margin-left:auto;margin-right:auto;}
 
   /* 12 · Avslutning */
   .fr-cta{padding:180px 0 140px;text-align:center;}
@@ -539,6 +557,7 @@
   @media (max-width:760px){
     .fr-wrap{padding:0 16px;}
     .fr-sec{padding-top:110px;}
+    .fr .fr-sec.kz-scene{padding-top:64px;padding-bottom:64px;}
     .fr-hero{padding-top:24px;}
     .fr-h1{font-size:clamp(38px,10.6vw,54px);}
     .fr-hero .fr-lead,.fr-lead{font-size:17px;}
@@ -557,8 +576,9 @@
     .fr-case-col p{font-size:19px;}
     .fr-deliv{columns:1;}
     .fr-facts{grid-template-columns:1fr 1fr;}
-    .fr-facts > div{padding:18px 0 18px 16px;border-bottom:1px solid var(--ab-line);}
-    .fr-facts > div:nth-child(odd){border-left:0;padding-left:0;padding-right:12px;}
+    .fr-facts > div,.fr-facts > div:nth-child(odd){padding:18px 18px 20px;border:0;}
+    .fr-case-col{padding:28px 24px 30px;}
+    .fr-case-col::before{left:24px;}
     .fr-case-actions .fr-btn{width:100%;}
     .fr-jstep{padding:64px 0 0 36px;}
     .cw{--cw-out:26vh;}
@@ -823,6 +843,7 @@
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
 <link rel="stylesheet" href="/src/klaro-button.css">
+<link rel="stylesheet" href="/src/subpage-scenes.css">
 </head>
 <body>
 
@@ -845,7 +866,7 @@
     </div>
   </div>
 </header>
-<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
+<div style="max-width:none;width:100%;margin:0 auto;position:relative;">
 
   <main class="fr" id="fr">
 
@@ -855,7 +876,7 @@
   </nav>
 
   <!-- 1 · HERO -->
-  <section class="fr-hero" aria-labelledby="fr-h1">
+  <section class="fr-hero kz-hero" aria-labelledby="fr-h1"><div class="kz-clouds" aria-hidden="true"><svg width="0" height="0" style="position:absolute"><defs><path id="kz-cloud-shape" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></defs></svg><span class="kz-cloud-track kz-cloud--1"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--2"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--3"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--4"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--5"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span></div>
     <div class="fr-wrap fr-hero-grid">
       <div>
         <p class="fr-eyebrow" data-rv>Webbdesign för frisörer och salonger i Stockholm</p>
@@ -882,7 +903,7 @@
   <!-- 2 · STRUKTURELLA KPI:ER
        Värdena är räknade i den publicerade sidan (thechairmanbarber.se, september 2026).
        Om riktig Analytics-data läggs till senare: byt siffra och text i respektive <li>. -->
-  <section class="fr-sec" aria-labelledby="fr-kpi-title">
+  <section class="fr-sec kz-scene kz-scene--b" aria-labelledby="fr-kpi-title">
     <div class="fr-wrap">
       <p class="fr-eyebrow" data-rv>Resultatöversikt</p>
       <h2 id="fr-kpi-title" class="fr-h2" data-rv>Tydlighet som går att mäta redan i strukturen.</h2>
@@ -913,7 +934,7 @@
   </section>
 
   <!-- 3 · CASET -->
-  <section class="fr-sec" id="the-chairman" aria-labelledby="fr-case-title">
+  <section class="fr-sec kz-scene kz-scene--c" id="the-chairman" aria-labelledby="fr-case-title">
     <div class="fr-wrap">
       <!-- Klaro-linsen: salongens verkliga miljö – och genom Studio Klaros lins, den färdiga digitala upplevelsen -->
       <div class="kl-head">
@@ -1243,7 +1264,7 @@
   </div>
 
   <!-- 8 · VAD BEHÖVER DIN SALONG? (endast vägledande – ingenting skickas eller sparas) -->
-  <section class="fr-sec" id="salongens-behov" aria-labelledby="fr-needs-title">
+  <section class="fr-sec kz-scene kz-scene--b" id="salongens-behov" aria-labelledby="fr-needs-title">
     <div class="fr-wrap fr-needs">
       <div>
         <p class="fr-eyebrow" data-rv>För din salong</p>
@@ -1275,7 +1296,7 @@
   </section>
 
   <!-- 9 · PROCESSEN -->
-  <section class="fr-sec" id="processen" aria-labelledby="fr-proc-title">
+  <section class="fr-sec kz-scene kz-scene--c" id="processen" aria-labelledby="fr-proc-title">
     <div class="fr-wrap">
       <p class="fr-eyebrow" data-rv>Processen</p>
       <h2 id="fr-proc-title" class="fr-h2" data-rv>Från salong till färdig hemsida.</h2>
@@ -1294,7 +1315,7 @@
   </section>
 
   <!-- 10 · PRIS -->
-  <section class="fr-sec" aria-labelledby="fr-price-title">
+  <section class="fr-sec kz-scene" aria-labelledby="fr-price-title">
     <div class="fr-wrap fr-price">
       <div>
         <p class="fr-eyebrow" data-rv>Pris</p>
@@ -1322,7 +1343,7 @@
   </section>
 
   <!-- 11 · VANLIGA FRÅGOR -->
-  <section class="fr-sec" aria-labelledby="fr-faq-title" data-wz-dock-clear>
+  <section class="fr-sec kz-scene kz-scene--b" aria-labelledby="fr-faq-title" data-wz-dock-clear>
     <div class="fr-wrap">
       <p class="fr-eyebrow" data-rv>Vanliga frågor</p>
       <h2 id="fr-faq-title" class="fr-h2" data-rv>Vanliga frågor från frisörer och salonger.</h2>
@@ -1338,17 +1359,25 @@
   </section>
 
   <!-- 12 · AVSLUTNING MED SIDANS FORMULÄR (samma formulär som i dockan, src/lead-dock.js) -->
-  <section class="fr-cta" id="kontakt-salong" aria-labelledby="fr-cta-title">
+  <section class="fr-cta kz-scene kz-scene--end" id="kontakt-salong" aria-labelledby="fr-cta-title">
     <div class="fr-wrap">
-      <p class="fr-eyebrow" data-rv>Nästa steg</p>
-      <h2 id="fr-cta-title" class="fr-h2" data-rv>Hur skulle din salong kännas online?</h2>
-      <p class="fr-lead" data-rv>Berätta kort om salongen så tittar vi på vad som kan bli tydligare – från första intryck till bokad tid.</p>
-      <div class="fr-cta-form" data-rv>
-        <div class="wz-shell" data-wz-mount="salong" data-wz-next-label="Få konkreta idéer för min salong"></div>
+      <div class="kzf" data-kzf-kind="salong-forslag" data-kzf-subject="Förslag för salong">
+      <div class="kzf-card" data-reveal>
+        <h2 class="kzf-h2" id="fr-cta-title">Se hur din hemsida kan se ut.</h2>
+        <p class="kzf-lead">Skicka din nuvarande webbadress så tittar vi på ditt företag och tar fram en möjlig riktning för en ny startsida – anpassad för både desktop och mobil. Det är kostnadsfritt.</p>
+        <form class="kzf-form" novalidate>
+          <div class="kzf-row">
+            <div class="kzf-field"><label class="kzf-label" for="salong-forslag-site">Din nuvarande hemsida</label><input class="kzf-input" id="salong-forslag-site" name="site" type="url" inputmode="url" autocomplete="url" placeholder="https://dittforetag.se" required><p class="kzf-err" data-err="site" role="alert"></p></div>
+            <div class="kzf-field"><label class="kzf-label" for="salong-forslag-email">Din e-post</label><input class="kzf-input" id="salong-forslag-email" name="email" type="email" autocomplete="email" placeholder="du@foretag.se" required><p class="kzf-err" data-err="email" role="alert"></p></div>
+            <button type="submit" class="kzf-btn klaro-button klaro-button--primary">Få mitt gratis förslag →</button>
+          </div>
+          <p class="kzf-formerr" role="alert"></p>
+          <p class="kzf-note">Vi kollar igenom din nuvarande hemsida och återkommer personligt med det som kan bli ert nya.</p>
+        </form>
+        <div class="kzf-ok" tabindex="-1" hidden><h3>Tack! Vi kikar på det.</h3><p>Vi går igenom det du skickat och återkommer personligt så snart vi kan.</p></div>
       </div>
-      <div class="fr-cta-alt" data-rv>
-        <a href="https://www.thechairmanbarber.se" class="fr-link" target="_blank" rel="noopener"><span class="u">Se The Chairman Barber <span aria-hidden="true">↗</span></span><span class="sr-only"> (öppnas i en ny flik)</span></a>
-      </div>
+      <p class="kzf-alt"><a href="https://www.thechairmanbarber.se" target="_blank" rel="noopener"><span>Se The Chairman Barber ↗</span></a></p>
+    </div>
     </div>
   </section>
 
@@ -1970,6 +1999,7 @@
 <script type="module" src="/src/lead-dock.js"></script>
 <script type="module" src="/src/site-footer.js"></script>
 <script type="module" src="/src/mobile-nav.js"></script>
+<script type="module" src="/src/kz-lead.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 <script type="module" src="/src/cloud-buddy.js"></script>
 </body>

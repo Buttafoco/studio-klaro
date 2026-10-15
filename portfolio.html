@@ -56,13 +56,16 @@
   a:focus-visible,button:focus-visible{outline:2px solid #0F172A;outline-offset:2px;}
 
   /* FAQ accordion */
-  .faq-item{border-bottom:1px solid rgba(15,23,42,0.1);padding:20px 0;}
-  .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;padding:0;margin:0;cursor:pointer;font-family:inherit;text-align:left;font-size:16px;font-weight:700;color:#0F172A;}
-  .faq-icon{font-size:20px;color:#146EF5;transition:transform 0.25s ease;flex:none;}
+  .faq-item{margin:0 0 12px;padding:0;border:0;background:#fff;border-radius:28px 26px 28px 26px;box-shadow:0 16px 34px -26px rgba(20,110,245,.5);}
+  .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;background:none;border:none;border-radius:inherit;padding:22px 26px;margin:0;cursor:pointer;font-family:inherit;text-align:left;font-size:clamp(18px,1.9vw,23px);font-weight:600;letter-spacing:-0.02em;line-height:1.3;color:#4A5B70;transition:color .25s ease;}
+  .faq-q:hover,.faq-q[aria-expanded="true"]{color:#0F172A;}
+  .faq-q:focus-visible{outline:2px solid #146EF5;outline-offset:3px;}
+  .faq-icon{flex:none;width:22px;height:22px;font-size:0;color:inherit;background:linear-gradient(currentColor,currentColor) center/22px 1.5px no-repeat,linear-gradient(currentColor,currentColor) center/1.5px 22px no-repeat;transition:transform .35s cubic-bezier(0.22,1,0.36,1);}
   .faq-q[aria-expanded="true"] .faq-icon{transform:rotate(45deg);}
   .faq-rows{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.35s cubic-bezier(0.22,1,0.36,1);}
   .faq-rows > div{overflow:hidden;}
-  .faq-a{font-size:14px;color:#52657A;line-height:1.6;padding-top:12px;}
+  .faq-a{font-size:16.5px;color:#52657A;line-height:1.65;font-weight:500;padding:0 56px 26px 26px;}
+  @media (max-width:640px){.faq-q{padding:18px 20px;}.faq-a{padding:0 20px 22px;}}
 
   /* Scroll-reveal */
   [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1);}
@@ -152,6 +155,27 @@
   }
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
   .wz-shell{text-align:left;}
+
+  /* Projekt-showcase */
+  .pw-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;align-items:start;}
+  .pw-card{display:block;text-decoration:none;color:inherit;background:#fff;border-radius:30px 26px 30px 26px;padding:14px 14px 22px;box-shadow:0 26px 54px -34px rgba(20,110,245,.55),0 0 0 1px rgba(20,110,245,.06);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease;}
+  .pw-card:nth-child(3n+2){margin-top:44px;}
+  .pw-card:hover{transform:translateY(-8px) rotate(-.6deg);box-shadow:0 36px 64px -34px rgba(20,110,245,.7),0 0 0 1px rgba(20,110,245,.12);}
+  .pw-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:18px 18px 0 0;background:#EEF3FA;}
+  .pw-bar i{width:9px;height:9px;border-radius:50%;background:#C9D5E6;}
+  .pw-url{margin-left:8px;font-size:11px;font-weight:700;color:#6A7B91;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pw-shot{display:block;aspect-ratio:16/10;overflow:hidden;border-radius:0 0 18px 18px;background:#0F172A;}
+  .pw-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .9s cubic-bezier(.22,1,.36,1);}
+  .pw-card:hover .pw-shot img{transform:scale(1.07);}
+  .pw-meta{display:block;padding:18px 10px 0;}
+  .pw-tag{display:inline-block;margin-bottom:10px;padding:5px 11px;border-radius:999px;background:#EAF3FF;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#146EF5;}
+  .pw-name{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em;color:#0F172A;}
+  .pw-desc{display:block;margin-top:6px;font-size:14.5px;line-height:1.55;font-weight:500;color:#52657A;}
+  .pw-open{display:inline-flex;margin-top:14px;font-size:14px;font-weight:800;color:#0F172A;}
+  .pw-card:hover .pw-open{color:#146EF5;}
+  @media (max-width:980px){.pw-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.pw-card:nth-child(3n+2){margin-top:0;}.pw-card:nth-child(even){margin-top:36px;}}
+  @media (max-width:640px){.pw-grid{grid-template-columns:1fr;gap:20px;}.pw-card:nth-child(even){margin-top:0;}}
+  #ingar,#kontakt{scroll-margin-top:110px;}
 </style>
 <script type="application/ld+json">
 {
@@ -367,6 +391,7 @@
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
 <link rel="stylesheet" href="/src/klaro-button.css">
+<link rel="stylesheet" href="/src/subpage-scenes.css">
 <link rel="stylesheet" href="/src/seo-local-nav.css">
 </head>
 <body>
@@ -390,7 +415,7 @@
     </div>
   </div>
 </header>
-<div style="max-width:1320px;width:100%;margin:0 auto;position:relative;">
+<div style="max-width:none;width:100%;margin:0 auto;position:relative;">
 
   <!-- Lokalmeny: visas när heron scrollats förbi (src/seo-local-nav.css, src/local-nav.js) -->
   <div class="sln" id="sln" role="region" aria-label="Projekt" data-after="main > section">
@@ -409,7 +434,7 @@
   </nav>
 
   <!-- HERO -->
-  <section data-rpad style="max-width:1140px;margin:40px auto 0;padding:0 20px;position:relative;">
+  <section class="kz-hero" data-rpad><div class="kz-clouds" aria-hidden="true"><svg width="0" height="0" style="position:absolute"><defs><path id="kz-cloud-shape" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></defs></svg><span class="kz-cloud-track kz-cloud--1"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--2"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--3"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--4"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--5"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span></div><div style="max-width:1140px;margin:40px auto 0;padding:0 20px 90px;position:relative;">
     <div style="text-align:center;">
       <p style="display:inline-block;font-size:12px;font-weight:700;color:#B8622C;background:#FBEADD;padding:8px 16px;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase;margin:0 0 24px;opacity:0;animation:fadeUp .6s cubic-bezier(0.22,1,0.36,1) 0.05s forwards;">Portfolio by Studio Klaro</p>
       <h1 data-rhero style="font-size:52px;line-height:1.12;font-weight:800;color:#0F172A;margin:0 0 22px;letter-spacing:-0.01em;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">Ditt arbete förtjänar mer än en PDF.</h1>
@@ -423,25 +448,65 @@
     <!-- floating preview cards -->
     <div data-rfloat style="display:flex;flex-wrap:nowrap;justify-content:center;align-items:flex-start;gap:16px;margin-top:66px;padding:0 20px;">
       <div style="--r:-6deg;width:270px;flex:0 0 270px;background:#fff;border-radius:18px;box-shadow:0 20px 40px rgba(15,23,42,0.12);padding:24px;margin-top:30px;opacity:0;transform:rotate(-6deg);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.5s forwards, floaty 6s ease-in-out 1.2s infinite;z-index:1;">
-        <img src="/ux-designer.webp" alt="Exempel på portfolio för UX-designer" loading="lazy" style="width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:18px;display:block;">
-        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">UX Designer</div>
-        <div style="font-size:12px;color:#8296B0;">Case studies &amp; process</div>
+        <img src="/branscher/shot-galleri-800.webp" alt="Startsidan på Galleri86, en hemsida byggd av Studio Klaro" width="800" height="450" loading="lazy" style="width:100%;height:170px;object-fit:cover;object-position:top;border-radius:12px;margin-bottom:18px;display:block;">
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Galleri86</div>
+        <div style="font-size:12px;color:#8296B0;">Konstgalleri · eget CMS</div>
       </div>
       <div style="--r:2deg;width:290px;flex:0 0 290px;background:#fff;border-radius:18px;box-shadow:0 24px 48px rgba(15,23,42,0.14);padding:26px;opacity:0;transform:rotate(2deg);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.6s forwards, floaty 7s ease-in-out 1.4s infinite;z-index:2;">
-        <img src="/photografer.webp" alt="Exempel på portfolio för fotograf" loading="lazy" style="width:100%;height:190px;object-fit:cover;border-radius:12px;margin-bottom:20px;display:block;">
-        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Fotograf</div>
-        <div style="font-size:12px;color:#8296B0;">Bilddriven portfolio</div>
+        <img src="/branscher/shot-chairman-800.webp" alt="Startsidan på The Chairman Barber, en hemsida byggd av Studio Klaro" width="800" height="450" loading="lazy" style="width:100%;height:190px;object-fit:cover;object-position:top;border-radius:12px;margin-bottom:20px;display:block;">
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">The Chairman Barber</div>
+        <div style="font-size:12px;color:#8296B0;">Barbershop · bokning</div>
       </div>
       <div style="--r:5deg;width:270px;flex:0 0 270px;background:#fff;border-radius:18px;box-shadow:0 20px 40px rgba(15,23,42,0.12);padding:24px;margin-top:36px;opacity:0;transform:rotate(5deg);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.7s forwards, floaty 6.5s ease-in-out 1.6s infinite;z-index:1;">
-        <img src="/creator.webp" alt="Exempel på portfolio för kreatör" loading="lazy" style="width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:18px;display:block;">
-        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">Kreatör</div>
-        <div style="font-size:12px;color:#8296B0;">Din stil, dina idéer</div>
+        <img src="/branscher/shot-skikt-800.jpg" alt="Konceptprojektet SKIKT, en arkitektportfolio av Studio Klaro" width="800" height="450" loading="lazy" style="width:100%;height:170px;object-fit:cover;object-position:top;border-radius:12px;margin-bottom:18px;display:block;">
+        <div style="font-size:15px;font-weight:800;color:#0F172A;margin-bottom:6px;">SKIKT</div>
+        <div style="font-size:12px;color:#8296B0;">Arkitektportfolio · koncept</div>
       </div>
     </div>
-  </section>
+  </div></section>
+
+  <section class="kz-scene kz-scene--b" id="exempel"><div data-rpad style="max-width:1140px;margin:0 auto;padding:0 20px;">
+    <div data-reveal style="max-width:680px;margin:0 auto 52px;text-align:center;">
+      <p style="font-size:12px;font-weight:800;color:#146EF5;text-transform:uppercase;letter-spacing:0.14em;margin:0 0 16px;">Det här har vi skapat</p>
+      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 14px;">Så här ser en Studio Klaro-hemsida ut.</h2>
+      <p style="font-size:17px;line-height:1.65;color:#52657A;font-weight:500;margin:0;">Riktiga projekt, kundcase och egna konceptarbeten. Din portfolio får samma omsorg om struktur, bild och tydlighet.</p>
+    </div>
+    <div class="pw-grid">
+      <a class="pw-card" href="https://www.thechairmanbarber.se" target="_blank" rel="noopener noreferrer" data-reveal>
+        <span class="pw-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pw-url">thechairmanbarber.se</span></span>
+        <span class="pw-shot"><img src="/branscher/shot-chairman-1200.webp" srcset="/branscher/shot-chairman-800.webp 800w, /branscher/shot-chairman-1200.webp 1200w" sizes="(max-width: 820px) 92vw, 360px" alt="Startsidan på The Chairman Barber, ett projekt av Studio Klaro" width="1200" height="675" loading="lazy" decoding="async"></span>
+        <span class="pw-meta"><span class="pw-tag">Hemsida</span><span class="pw-name">The Chairman Barber</span><span class="pw-desc">Barbershop i Vasastan – tydlig bokning och stark känsla.</span><span class="pw-open">Öppna projektet <span aria-hidden="true">↗</span></span></span>
+      </a>
+      <a class="pw-card" href="/case-galleri86" data-reveal>
+        <span class="pw-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pw-url">Galleri86</span></span>
+        <span class="pw-shot"><img src="/branscher/shot-galleri-1200.webp" srcset="/branscher/shot-galleri-800.webp 800w, /branscher/shot-galleri-1200.webp 1200w" sizes="(max-width: 820px) 92vw, 360px" alt="Startsidan på Galleri86, ett projekt av Studio Klaro" width="1200" height="675" loading="lazy" decoding="async"></span>
+        <span class="pw-meta"><span class="pw-tag">Case</span><span class="pw-name">Galleri86</span><span class="pw-desc">Digital galleriyta där konsten får ta plats, med eget CMS.</span><span class="pw-open">Öppna projektet <span aria-hidden="true">↗</span></span></span>
+      </a>
+      <a class="pw-card" href="/demo/sera" data-reveal>
+        <span class="pw-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pw-url">SERA – koncept</span></span>
+        <span class="pw-shot"><img src="/branscher/shot-sera-1200.webp" srcset="/branscher/shot-sera-800.webp 800w, /branscher/shot-sera-1200.webp 1200w" sizes="(max-width: 820px) 92vw, 360px" alt="Startsidan på SERA, ett projekt av Studio Klaro" width="1200" height="675" loading="lazy" decoding="async"></span>
+        <span class="pw-meta"><span class="pw-tag">Koncept</span><span class="pw-name">SERA</span><span class="pw-desc">Italiensk restaurang på Södermalm: meny, bord och stämning.</span><span class="pw-open">Öppna projektet <span aria-hidden="true">↗</span></span></span>
+      </a>
+      <a class="pw-card" href="https://market.itreon.eu" target="_blank" rel="noopener noreferrer" data-reveal>
+        <span class="pw-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pw-url">market.itreon.eu</span></span>
+        <span class="pw-shot"><img src="/branscher/shot-itreon-1200.webp" srcset="/branscher/shot-itreon-800.webp 800w, /branscher/shot-itreon-1200.webp 1200w" sizes="(max-width: 820px) 92vw, 360px" alt="Startsidan på Itreon Market, ett projekt av Studio Klaro" width="1200" height="675" loading="lazy" decoding="async"></span>
+        <span class="pw-meta"><span class="pw-tag">Kundcase</span><span class="pw-name">Itreon Market</span><span class="pw-desc">B2B-marknadsplats för lager, deals och produktgradering.</span><span class="pw-open">Öppna projektet <span aria-hidden="true">↗</span></span></span>
+      </a>
+      <a class="pw-card" href="/case-skikt" data-reveal>
+        <span class="pw-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pw-url">Konceptprojekt · SKIKT</span></span>
+        <span class="pw-shot"><img src="/branscher/shot-skikt-1200.jpg" srcset="/branscher/shot-skikt-800.jpg 800w, /branscher/shot-skikt-1200.jpg 1200w" sizes="(max-width: 820px) 92vw, 360px" alt="Startsidan på SKIKT, ett projekt av Studio Klaro" width="1200" height="675" loading="lazy" decoding="async"></span>
+        <span class="pw-meta"><span class="pw-tag">Koncept</span><span class="pw-name">SKIKT</span><span class="pw-desc">Arkitektstudio med projekten i centrum.</span><span class="pw-open">Öppna projektet <span aria-hidden="true">↗</span></span></span>
+      </a>
+      <a class="pw-card" href="https://f1-lake-delta.vercel.app/" target="_blank" rel="noopener noreferrer" data-reveal>
+        <span class="pw-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pw-url">Konceptprojekt · Rosso Corsa</span></span>
+        <span class="pw-shot"><img src="/branscher/shot-f1-1200.webp" srcset="/branscher/shot-f1-800.webp 800w, /branscher/shot-f1-1200.webp 1200w" sizes="(max-width: 820px) 92vw, 360px" alt="Startsidan på Rosso Corsa, ett projekt av Studio Klaro" width="1200" height="675" loading="lazy" decoding="async"></span>
+        <span class="pw-meta"><span class="pw-tag">Koncept</span><span class="pw-name">Rosso Corsa</span><span class="pw-desc">Formel 1-säsongen som en interaktiv upplevelse.</span><span class="pw-open">Öppna projektet <span aria-hidden="true">↗</span></span></span>
+      </a>
+    </div>
+  </div></section>
 
   <!-- PROBLEM -->
-  <section data-rpad style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+  <section class="kz-scene kz-scene--c"><div data-rpad style="max-width:1140px;margin:0 auto;padding:0 20px;">
     <div data-reveal data-rgrid2 style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
       <div>
         <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 18px;">Din portfolio är ofta ditt första intryck.</h2>
@@ -462,10 +527,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- VEM -->
-  <section data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
+  <section class="kz-scene"><div data-rpad style="max-width:1140px;margin:0 auto;padding:0 20px;">
     <h2 data-reveal style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 40px;text-align:center;">Byggd för människor som skapar.</h2>
     <div data-reveal data-rgrid6 style="display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:auto auto;gap:20px;">
       <div style="grid-row:span 2;background:linear-gradient(160deg,#EDF3FC,#E4ECF9);border-radius:22px;padding:32px;display:flex;flex-direction:column;justify-content:flex-end;min-height:280px;">
@@ -493,10 +558,10 @@
       <div style="font-size:18px;font-weight:800;color:#0F172A;margin-bottom:6px;">Kreatörer</div>
       <div style="font-size:13px;color:#8A5A32;line-height:1.6;">En personlig plats för ditt arbete, din stil och dina idéer.</div>
     </div>
-  </section>
+  </div></section>
 
   <!-- INGÅR -->
-  <section id="ingar" data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;scroll-margin-top:140px;">
+  <section class="kz-scene kz-scene--b" id="ingar"><div data-rpad style="max-width:1140px;margin:0 auto;padding:0 20px;scroll-margin-top:140px;">
     <div data-reveal data-rgrid2 style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
       <div>
         <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 16px;">Allt du behöver för att komma igång.</h2>
@@ -517,10 +582,10 @@
         <span style="background:#EFEFF6;color:#5B4FA6;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;">Löpande feedback och gemensamma avstämningar inom avtalad omfattning</span>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- STILAR -->
-  <section data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
+  <section class="kz-scene kz-scene--c"><div data-rpad style="max-width:1140px;margin:0 auto;padding:0 20px;">
     <div style="text-align:center;margin-bottom:40px;">
       <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 12px;">Din stil. Inte ännu en mall.</h2>
       <p style="font-size:15px;color:#52657A;margin:0;">Du väljer en riktning – varje portfolio anpassas fortfarande efter dig.</p>
@@ -541,10 +606,10 @@
         <img src="/db-portfolio.webp" alt="Exempel på en portfolio-webbplats byggd av Studio Klaro" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:transparent;">
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- PROCESS -->
-  <section data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
+  <section class="kz-scene"><div data-rpad style="max-width:1140px;margin:0 auto;padding:0 20px;">
     <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 48px;text-align:center;">Från material till portfolio.</h2>
     <div data-reveal data-rprocess style="display:flex;gap:0;position:relative;">
       <div data-rprocess-line aria-hidden="true" style="position:absolute;top:22px;left:5%;right:5%;height:2px;background:rgba(20,110,245,0.2);"></div>
@@ -574,10 +639,10 @@
         <div style="font-size:13px;color:#52657A;line-height:1.5;max-width:180px;margin:0 auto;">Vi kopplar domän och går live.</div>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- PRIS -->
-  <section data-rpad style="max-width:900px;margin:110px auto 0;padding:0 20px;">
+  <section class="kz-scene kz-scene--b"><div data-rpad style="max-width:900px;margin:0 auto;padding:0 20px;">
     <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 40px;text-align:center;">En professionell portfolio utan byråpris.</h2>
     <div data-reveal style="background:#0F172A;border-radius:28px;padding:48px;text-align:center;position:relative;overflow:hidden;">
       <div aria-hidden="true" style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(20,110,245,0.25);"></div>
@@ -599,10 +664,10 @@
         <div style="font-size:12px;color:#8296B0;margin-top:22px;">Behöver du något mer avancerat? Vi bygger även större, helt skräddarsydda portfolios från 4 995 kr.</div>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- FÖRE/EFTER -->
-  <section data-rpad style="max-width:1000px;margin:110px auto 0;padding:0 20px;">
+  <section class="kz-scene kz-scene--c"><div data-rpad style="max-width:1000px;margin:0 auto;padding:0 20px;">
     <div data-reveal data-rba style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;">
       <div style="background:#F3F1EC;border-radius:20px;padding:28px;">
         <div style="font-size:12px;font-weight:700;color:#8296B0;text-transform:uppercase;letter-spacing:.04em;margin-bottom:16px;">Innan</div>
@@ -617,38 +682,13 @@
         <div style="font-size:13px;color:#B8C6DC;line-height:1.6;">En personlig portfolio som samlar allt.</div>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- UTVALDA ARBETEN -->
-  <section data-rpad style="max-width:1140px;margin:110px auto 0;padding:0 20px;">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Utvalda arbeten</div>
-      <h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0;">Ett par exempel på vad vi bygger</h2>
-    </div>
-    <div data-rgrid2 style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-      <div data-reveal style="background:#0F172A;border-radius:20px;overflow:hidden;box-shadow:0 16px 36px rgba(15,23,42,0.15);">
-        <img src="/thechairman.webp" alt="Hemsida designad för The Chairman Barber i Stockholm" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:200px;object-fit:cover;object-position:top;display:block;">
-        <div style="padding:28px;">
-          <div style="font-size:11px;font-weight:700;color:#8FC0FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Kundcase · Webbdesign &amp; utveckling</div>
-          <h3 style="font-size:19px;font-weight:800;color:#fff;margin:0 0 10px;">The Chairman Barber</h3>
-          <p style="font-size:13px;color:#B7C6DB;line-height:1.6;margin:0 0 18px;">En ny digital identitet och hemsida för en barbershop i Vasastan — med fokus på en exklusiv känsla, tydlig struktur och en enkel väg till bokning.</p>
-          <a href="https://www.thechairmanbarber.se" target="_blank" rel="noopener noreferrer" style="font-size:14px;font-weight:700;color:#fff;text-decoration:none;">Besök hemsidan →</a>
-        </div>
-      </div>
-      <div data-reveal style="background:#0F172A;border-radius:20px;overflow:hidden;box-shadow:0 16px 36px rgba(15,23,42,0.15);">
-        <img src="/itreon-market.png" alt="Hemsida designad för Itreon Market" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:200px;object-fit:cover;object-position:top;display:block;">
-        <div style="padding:28px;">
-          <div style="font-size:11px;font-weight:700;color:#8FC0FF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Kundcase · UX/UI &amp; webbutveckling</div>
-          <h3 style="font-size:19px;font-weight:800;color:#fff;margin:0 0 10px;">Itreon Market</h3>
-          <p style="font-size:13px;color:#B7C6DB;line-height:1.6;margin:0 0 18px;">En digital B2B-marknadsplats för lager, deals och produktgradering — byggd för att göra stora mängder produktinformation enkel att navigera.</p>
-          <a href="https://market.itreon.eu" target="_blank" rel="noopener noreferrer" style="font-size:14px;font-weight:700;color:#fff;text-decoration:none;">Besök hemsidan →</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- FAQ -->
-  <section data-rpad style="max-width:760px;margin:110px auto 0;padding:0 20px;">
+  <section class="kz-scene"><div data-rpad style="max-width:760px;margin:0 auto;padding:0 20px;">
     <h2 data-reveal style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 36px;text-align:center;">Vanliga frågor</h2>
 
     <div class="faq-item">
@@ -675,15 +715,15 @@
       <button class="faq-q" aria-expanded="false" aria-controls="pf-faq-6">Är detta bara för designers?<span class="faq-icon" aria-hidden="true">+</span></button>
       <div class="faq-rows"><div><div id="pf-faq-6" role="region" class="faq-a">Nej. Tjänsten passar alla som behöver visa sitt arbete visuellt och professionellt.</div></div></div>
     </div>
-  </section>
+  </div></section>
 
   <!-- FINAL CTA -->
-  <section id="kontakt" data-rpad style="max-width:1000px;margin:110px auto 0;padding:0 20px;text-align:center;scroll-margin-top:40px;">
+  <section class="kz-scene kz-scene--end" id="kontakt"><div data-rpad style="max-width:1000px;margin:0 auto;padding:0 20px;text-align:center;scroll-margin-top:40px;">
     <h2 style="font-size:30px;font-weight:800;color:#0F172A;margin:0 0 16px;">Redo att visa vad du faktiskt kan?</h2>
     <p style="font-size:16px;color:#52657A;max-width:520px;margin:0 auto 30px;line-height:1.6;">Skicka ditt material till oss så bygger vi en portfolio du kan vara stolt över att dela.</p>
 
     <div class="wz-shell" data-wz-mount="portfolio"></div>
-  </section>
+  </div></section>
 
 
   <!-- Formulärkomponent för kostnadsfri genomgång. Klonas in i varje [data-wz-mount]

@@ -135,7 +135,7 @@
   }
 
   /* Sektion: SERA live-demo */
-  .rsera-section{background:#171310;width:100vw;margin-left:calc(50% - 50vw);margin-top:100px;padding:100px 0;position:relative;overflow:hidden;}
+  .rsera-section{background:#171310;width:100vw;margin-left:calc(50% - 50vw);margin-top:0;padding:100px 0;position:relative;overflow:hidden;}
   .rsera-section::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 45% at 50% 0%,rgba(217,146,58,0.10),transparent 70%);pointer-events:none;}
   .rsera-inner{max-width:1140px;margin:0 auto;padding:0 20px;position:relative;}
   .rsera-stage{display:block;position:relative;aspect-ratio:16/9;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);background:linear-gradient(160deg,#241C15 0%,#15100C 65%,#0F0B08 100%);box-shadow:0 30px 70px rgba(0,0,0,0.35);transition:opacity .8s cubic-bezier(0.22,1,0.36,1),transform .8s cubic-bezier(0.22,1,0.36,1),border-color .4s cubic-bezier(0.22,1,0.36,1),box-shadow .4s cubic-bezier(0.22,1,0.36,1);}
@@ -376,6 +376,7 @@
 <link rel="stylesheet" href="/src/mobile-nav.css">
 <link rel="stylesheet" href="/src/site-header.css">
 <link rel="stylesheet" href="/src/klaro-button.css">
+<link rel="stylesheet" href="/src/subpage-scenes.css">
 </head>
 <body>
 
@@ -398,7 +399,7 @@
     </div>
   </div>
 </header>
-<div style="max-width:1440px;width:100%;margin:0 auto;position:relative;">
+<div style="max-width:none;width:100%;margin:0 auto;position:relative;">
 
   <main>
 
@@ -408,7 +409,7 @@
   </nav>
 
   <!-- HERO -->
-  <section style="max-width:900px;margin:50px auto 0;text-align:center;padding:0 20px;">
+  <section class="kz-hero"><div class="kz-clouds" aria-hidden="true"><svg width="0" height="0" style="position:absolute"><defs><path id="kz-cloud-shape" d="M42 92C19 92 5 78 9 61C12 47 25 39 38 42C39 23 57 10 77 14C88 2 113 0 126 15C141 6 163 13 167 32C184 32 197 47 193 65C190 81 177 92 160 92Z"/></defs></svg><span class="kz-cloud-track kz-cloud--1"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--2"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--3"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--4"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span><span class="kz-cloud-track kz-cloud--5"><svg class="kz-cloud" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet"><use href="#kz-cloud-shape"/></svg></span></div><div style="max-width:900px;margin:50px auto 0;text-align:center;padding:0 20px 90px;">
     <p style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 16px;opacity:0;animation:fadeUp .6s cubic-bezier(0.22,1,0.36,1) 0.05s forwards;">Webbdesign för restauranger och caféer</p>
     <h1 data-rhero-h1 style="font-size:42px;line-height:1.18;font-weight:800;color:#0F172A;margin:0 0 20px;letter-spacing:-0.01em;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;">Hemsidor för restauranger och caféer i Stockholm</h1>
     <p style="font-size:17px;line-height:1.6;color:#52657A;margin:0 0 32px;font-weight:500;max-width:620px;margin-left:auto;margin-right:auto;opacity:0;transform:translateY(20px);animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;">Få en aptitretande, mobilanpassad hemsida som visar meny, öppettider och stämning — och gör det enkelt för gäster att hitta bord eller boka plats.</p>
@@ -416,10 +417,10 @@
       <a href="/#kontakt" class="klaro-button klaro-button--primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få en gratis genomgång</a>
       <a href="/portfolio" class="klaro-button klaro-button--secondary" style="background:#fff;color:#0F172A;font-size:15px;font-weight:700;padding:14px 26px;border-radius:14px;text-decoration:none;border:1px solid rgba(15,23,42,0.08);">Se tidigare arbeten</a>
     </div>
-  </section>
+  </div></section>
 
   <!-- FÖRDELAR -->
-  <section style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+  <section class="kz-scene kz-scene--b"><div style="max-width:1140px;margin:0 auto;padding:0 20px;">
     <div style="text-align:center;margin-bottom:32px;">
       <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">En hemsida som fyller borden</h2>
     </div>
@@ -440,10 +441,10 @@
         <p style="position:relative;font-size:14px;color:rgba(255,255,255,0.85);line-height:1.6;margin:0;">Bilder på mat och lokal ger samma stämning på hemsidan som när gästen kliver in genom dörren.</p>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- VARFÖR DET SPELAR ROLL -->
-  <section style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+  <section class="kz-scene kz-scene--c"><div style="max-width:1140px;margin:0 auto;padding:0 20px;">
     <div data-rrow style="display:flex;gap:64px;align-items:flex-start;">
       <div data-reveal style="flex:1.15;">
         <p style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 16px;">Byggd för hungriga besökare</p>
@@ -475,10 +476,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- SYNAS LOKALT -->
-  <section style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+  <section class="kz-scene"><div style="max-width:1140px;margin:0 auto;padding:0 20px;">
     <div data-rrow style="display:flex;gap:64px;align-items:flex-start;">
       <div data-reveal class="card-serv rmock-card" style="flex:1;">
         <p class="demo-label" style="display:inline-block;margin:0 0 14px;font-size:11px;font-weight:700;color:#52657A;background:rgba(15,23,42,0.05);border:1px solid rgba(15,23,42,0.1);padding:5px 11px;border-radius:999px;letter-spacing:0.02em;">Illustrativt exempel – fiktiv verksamhet</p>
@@ -526,10 +527,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- SERA LIVE-DEMO -->
-  <section class="rsera-section">
+  <div class="kz-edge" aria-hidden="true"></div><section class="rsera-section">
     <div class="rsera-inner">
       <div data-reveal style="max-width:620px;margin:0 auto 56px;text-align:center;">
         <p style="font-size:12px;font-weight:700;color:#146EF5;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 16px;">Live-demo</p>
@@ -569,7 +570,7 @@
   </section>
 
   <!-- VAD SOM INGÅR -->
-  <section id="tjansten" style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+  <section class="kz-scene kz-scene--b" id="tjansten"><div style="max-width:1140px;margin:0 auto;padding:0 20px;">
     <div style="text-align:center;margin-bottom:48px;">
       <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Allt en restauranghemsida behöver</h2>
     </div>
@@ -607,36 +608,18 @@
         <div style="font-size:14px;font-weight:700;color:#0F172A;">Hjälp med texter</div>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- PROCESS -->
-  <section id="processen" style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
+  <section class="kz-scene kz-scene--c" id="processen"><div style="max-width:1140px;margin:0 auto;padding:0 20px;">
     <div style="text-align:center;margin-bottom:32px;">
       <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Från restaurang till färdig hemsida</h2>
     </div>
-    <div style="position:relative;display:flex;justify-content:space-between;">
-      <div aria-hidden="true" style="position:absolute;top:24px;left:6%;right:6%;height:2px;background:rgba(15,23,42,0.12);"></div>
-      <div data-reveal style="position:relative;flex:1;text-align:center;padding:0 12px;">
-        <div style="width:48px;height:48px;border-radius:50%;background:#0F172A;color:#fff;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:1;">1</div>
-        <div style="font-size:14px;font-weight:700;color:#0F172A;line-height:1.4;">Vi lär känna stället</div>
-      </div>
-      <div data-reveal style="position:relative;flex:1;text-align:center;padding:0 12px;">
-        <div style="width:48px;height:48px;border-radius:50%;background:#0F172A;color:#fff;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:1;">2</div>
-        <div style="font-size:14px;font-weight:700;color:#0F172A;line-height:1.4;">Du skickar meny och bilder</div>
-      </div>
-      <div data-reveal style="position:relative;flex:1;text-align:center;padding:0 12px;">
-        <div style="width:48px;height:48px;border-radius:50%;background:#0F172A;color:#fff;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:1;">3</div>
-        <div style="font-size:14px;font-weight:700;color:#0F172A;line-height:1.4;">Vi designar och bygger</div>
-      </div>
-      <div data-reveal style="position:relative;flex:1;text-align:center;padding:0 12px;">
-        <div style="width:48px;height:48px;border-radius:50%;background:#0F172A;color:#fff;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:1;">4</div>
-        <div style="font-size:14px;font-weight:700;color:#0F172A;line-height:1.4;">Feedback och publicering</div>
-      </div>
-    </div>
-  </section>
+    <ol class="kz-steps"><li class="kz-step" data-reveal><span class="kz-step-n" aria-hidden="true">1</span><span class="kz-step-t">Vi lär känna stället</span></li><li class="kz-step" data-reveal><span class="kz-step-n" aria-hidden="true">2</span><span class="kz-step-t">Du skickar meny och bilder</span></li><li class="kz-step" data-reveal><span class="kz-step-n" aria-hidden="true">3</span><span class="kz-step-t">Vi designar och bygger</span></li><li class="kz-step" data-reveal><span class="kz-step-n" aria-hidden="true">4</span><span class="kz-step-t">Feedback och publicering</span></li></ol>
+  </div></section>
 
   <!-- PRIS -->
-  <section data-rpad style="max-width:600px;margin:100px auto 0;padding:0 20px;">
+  <section class="kz-scene"><div data-rpad style="max-width:600px;margin:0 auto;padding:0 20px;">
     <div style="text-align:center;margin-bottom:40px;">
       <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">En professionell restauranghemsida till fast pris</h2>
     </div>
@@ -659,68 +642,80 @@
       <a href="/#kontakt" class="klaro-button klaro-button--primary" style="display:block;text-align:center;background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px rgba(20,110,245,0.35);">Få en gratis genomgång</a>
     </div>
     <p style="font-size:13px;color:#52657A;margin:16px 0 0;text-align:center;">Har ni flera menyer, avdelningar eller behov av fler sidor tar vi fram ett anpassat förslag.</p>
-  </section>
+  </div></section>
 
   <!-- FAQ -->
-  <section style="max-width:800px;margin:100px auto 0;padding:0 20px;">
+  <section class="kz-scene kz-scene--b"><div style="max-width:800px;margin:0 auto;padding:0 20px;">
     <div style="text-align:center;margin-bottom:44px;">
       <h2 data-rsection-h2 style="font-size:28px;font-weight:800;color:#0F172A;margin:0 0 10px;">Vanliga frågor från restauranger och caféer</h2>
     </div>
     <div data-reveal>
 
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+      <div class="faq-item">
+        <div class="faq-q-row">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-1">Kan hemsidan kopplas till vårt bokningssystem?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-1" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Hemsidan kan länkas till det bordsbokningssystem ni redan använder, så att gäster kan boka direkt från hemsidan.</div></div></div></div>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-1" role="region" class="faq-ans"><div class="faq-a">Ja. Hemsidan kan länkas till det bordsbokningssystem ni redan använder, så att gäster kan boka direkt från hemsidan.</div></div></div></div>
       </div>
 
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+      <div class="faq-item">
+        <div class="faq-q-row">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-2">Kan vi uppdatera menyn själva?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-2" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Mindre ändringar som meny och priser kan du själv göra via CMS:et, eller beställa som tillägg vid behov. Klaro Drift, 199 kr/mån, omfattar drift och inte löpande innehållsändringar.</div></div></div></div>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-2" role="region" class="faq-ans"><div class="faq-a">Mindre ändringar som meny och priser kan du själv göra via CMS:et, eller beställa som tillägg vid behov. Klaro Drift, 199 kr/mån, omfattar drift och inte löpande innehållsändringar.</div></div></div></div>
       </div>
 
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+      <div class="faq-item">
+        <div class="faq-q-row">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-3">Behöver vi ha professionella bilder på maten?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-3" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Det hjälper, men är inget krav. Vi kan arbeta med de bilder ni har och ge råd om vad som är värt att fota om.</div></div></div></div>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-3" role="region" class="faq-ans"><div class="faq-a">Det hjälper, men är inget krav. Vi kan arbeta med de bilder ni har och ge råd om vad som är värt att fota om.</div></div></div></div>
       </div>
 
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+      <div class="faq-item">
+        <div class="faq-q-row">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-4">Kan ni hjälpa till med texterna?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-4" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja. Vi hjälper till att strukturera och formulera texten så att den känns tydlig och aptitretande.</div></div></div></div>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-4" role="region" class="faq-ans"><div class="faq-a">Ja. Vi hjälper till att strukturera och formulera texten så att den känns tydlig och aptitretande.</div></div></div></div>
       </div>
 
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+      <div class="faq-item">
+        <div class="faq-q-row">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-5">Kan ni hjälpa restaurangen synas på Google?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-5" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Ja, paketet inkluderar grundläggande lokal SEO samt koppling till Google Maps och er Google-profil.</div></div></div></div>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-5" role="region" class="faq-ans"><div class="faq-a">Ja, paketet inkluderar grundläggande lokal SEO samt koppling till Google Maps och er Google-profil.</div></div></div></div>
       </div>
 
-      <div class="faq-item" style="margin-bottom:22px;">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+      <div class="faq-item">
+        <div class="faq-q-row">
           <button class="faq-q-btn" aria-expanded="false" aria-controls="faq-ans-6">Hur snabbt kan hemsidan bli klar?</button>
         </div>
-        <div class="faq-rows"><div style="overflow:hidden;"><div id="faq-ans-6" role="region" class="faq-ans"><div style="background:#146EF5;color:#fff;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:16px 16px 16px 4px;max-width:75%;">Startklar, en one-page-hemsida, blir normalt klar inom 7–10 arbetsdagar (cirka 1–2 veckor) efter att materialet skickats in. Behöver ni fler sidor tar Professionell cirka 2–4 veckor, och för Komplett närvaro anpassas tidsplanen efter projektets omfattning.</div></div></div></div>
+        <div class="faq-rows"><div class="faq-clip"><div id="faq-ans-6" role="region" class="faq-ans"><div class="faq-a">Startklar, en one-page-hemsida, blir normalt klar inom 7–10 arbetsdagar (cirka 1–2 veckor) efter att materialet skickats in. Behöver ni fler sidor tar Professionell cirka 2–4 veckor, och för Komplett närvaro anpassas tidsplanen efter projektets omfattning.</div></div></div></div>
       </div>
 
     </div>
-  </section>
+  </div></section>
 
   <!-- AVSLUTANDE CTA -->
-  <section style="max-width:1140px;margin:100px auto 0;padding:0 20px;">
-    <div data-reveal style="background:#fff;border-radius:28px;padding:64px 40px;text-align:center;box-shadow:0 20px 50px rgba(15,23,42,0.08);border-top:6px solid #146EF5;">
-      <h2 data-rcta-h2 style="font-size:30px;font-weight:800;color:#0F172A;margin:0 0 16px;line-height:1.3;max-width:600px;margin-left:auto;margin-right:auto;">Se hur er restaurangs nya hemsida skulle kunna se ut</h2>
-      <p style="font-size:15px;color:#52657A;margin:0 0 30px;font-weight:500;max-width:520px;margin-left:auto;margin-right:auto;">Berätta kort om stället så tar vi fram en personlig mockup av startsidan. Kostnadsfritt och utan köpkrav.</p>
-      <a href="/#kontakt" class="klaro-button klaro-button--primary" style="background:#146EF5;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:14px;text-decoration:none;display:inline-block;box-shadow:0 10px 24px rgba(20,110,245,0.3);">Få en gratis genomgång</a>
+  <section class="kz-scene kz-scene--end"><div style="max-width:1140px;margin:0 auto;padding:0 20px;">
+    <div class="kzf" data-kzf-kind="restaurang-forslag" data-kzf-subject="Förslag för restaurang">
+      <div class="kzf-card" data-reveal>
+        <h2 class="kzf-h2">Se hur din hemsida kan se ut.</h2>
+        <p class="kzf-lead">Skicka din nuvarande webbadress så tittar vi på ditt företag och tar fram en möjlig riktning för en ny startsida – anpassad för både desktop och mobil. Det är kostnadsfritt.</p>
+        <form class="kzf-form" novalidate>
+          <div class="kzf-row">
+            <div class="kzf-field"><label class="kzf-label" for="restaurang-forslag-site">Din nuvarande hemsida</label><input class="kzf-input" id="restaurang-forslag-site" name="site" type="url" inputmode="url" autocomplete="url" placeholder="https://dittforetag.se" required><p class="kzf-err" data-err="site" role="alert"></p></div>
+            <div class="kzf-field"><label class="kzf-label" for="restaurang-forslag-email">Din e-post</label><input class="kzf-input" id="restaurang-forslag-email" name="email" type="email" autocomplete="email" placeholder="du@foretag.se" required><p class="kzf-err" data-err="email" role="alert"></p></div>
+            <button type="submit" class="kzf-btn klaro-button klaro-button--primary">Få mitt gratis förslag →</button>
+          </div>
+          <p class="kzf-formerr" role="alert"></p>
+          <p class="kzf-note">Vi kollar igenom din nuvarande hemsida och återkommer personligt med det som kan bli ert nya.</p>
+        </form>
+        <div class="kzf-ok" tabindex="-1" hidden><h3>Tack! Vi kikar på det.</h3><p>Vi går igenom det du skickat och återkommer personligt så snart vi kan.</p></div>
+      </div>
+      
     </div>
-  </section>
+  </div></section>
 
   </main>
 
@@ -838,6 +833,7 @@
 <script type="module" src="/src/lead-dock.js"></script>
 <script type="module" src="/src/site-footer.js"></script>
 <script type="module" src="/src/mobile-nav.js"></script>
+<script type="module" src="/src/kz-lead.js"></script>
 <script type="module" src="/src/page-transition.js"></script>
 <script type="module" src="/src/cloud-buddy.js"></script>
 </body>
